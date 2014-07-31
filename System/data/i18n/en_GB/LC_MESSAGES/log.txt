@@ -1,0 +1,62 @@
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:260: missing `msgstr' section
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:260:32: syntax error
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:260: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:261: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:322: missing `msgstr' section
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:322:20: syntax error
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:322: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:323: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:359: missing `msgstr' section
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:359:21: syntax error
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:359: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:360: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:421: missing `msgstr' section
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:421:32: syntax error
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:421: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:422: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:426: missing `msgstr' section
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:426:59: syntax error
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:426: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:427: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2519: keyword "wert" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2519: missing `msgstr' section
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2519:97: syntax error
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2520: keyword "wert" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2647: keyword "controller" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2647: missing `msgstr' section
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2647:24: syntax error
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2647: keyword "action" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2648: keyword "controller" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:2648: keyword "action" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:3781: keyword "Sheriff" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:3781: missing `msgstr' section
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:3781:24: syntax error
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:3782: keyword "Sheriff" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:4107: missing `msgstr' section
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:4107:20: syntax error
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:4107: keyword "s" unknown
+16:01:38: /var/folders/SK/SKnYHlDpG2iM9izQWQaYtk+++TI/-Tmp-/poeditReKjDd/input.po:4108: keyword "s" unknown
+16:01:38: /Applications/PHP Entwicklung/Poedit.app/Contents/MacOS/msgmerge: found 38 fatal errors
+16:01:38: Katalogeinträge sind möglicherweise ungültig.
+16:01:38: Aktualisierung fehlgeschlagen. Klicken Sie für weitere Informationen auf 'Details'.
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:261: missing `msgstr' section
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:261:32: syntax error
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:262: keyword "s" unknown
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:323: missing `msgstr' section
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:323:20: syntax error
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:324: keyword "s" unknown
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:360: missing `msgstr' section
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:360:21: syntax error
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:361: keyword "s" unknown
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:422: missing `msgstr' section
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:422:32: syntax error
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:423: keyword "s" unknown
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:427: missing `msgstr' section
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:427:59: syntax error
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:428: keyword "s" unknown
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:906: keyword "Statische" unknown
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:906:18: syntax error
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:907: keyword "Static" unknown
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:2798: keyword "wert" unknown
+16:24:51: /Library/WebServer/Documents/DCMS201/data/i18n/en_GB/LC_MESSAGES/DreamCMS.po:2798:97: syntax error
+16:24:51: /Applications/PHP Entwicklung/Poedit.app/Contents/MacOS/msgfmt: too many errors, aborting

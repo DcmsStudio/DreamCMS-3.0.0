@@ -1,0 +1,48 @@
+<?php
+
+function __add_lang_group($r){
+global $cp, $fct, $adm_skin, $cfg;
+
+	return <<<EOF
+<form  action="admin.php"  method="post" name="addform"><input type="hidden" name="adm" value="language" />
+	<input type="hidden" name="sid" value="{$cp->session_id}" />
+	<input type="hidden" name="action" value="addgroupkey" />
+	<input type="hidden" name="send" value="send" />
+
+    <table class="tblborder" width="99%" cellpadding="3" cellspacing="1" border="0" align="center">
+        <tr class="tableheader">
+            <td colspan="2">Neue Sprachgruppe hinzufügen</td>
+        </tr>
+
+        <tr class="secondrow">
+        	<td width="30%"><b>Sprach Gruppe:</b></td>
+            <td width="70%">{info:lang|groupname}
+                <input type="text" name="groupname" value="" size="30" />
+            </td>
+        </tr>
+
+        <tr class="firstrow">
+        	<td><b>Nummer der Sprach Gruppe:</b><br /><small>Diese Nummer muß eindeutig sein.</small></td>
+            <td>
+                <input type="text" name="newgroupid" value="{$r['groupid']}" size="5" readonly="readonly" />
+            </td>
+        </tr>
+
+        <tr class="secondrow">
+            <td colspan="2" align="center">
+            <input type="submit" value="Speichern" class="button" /> <input type="reset" value="Zurücksetzen" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+EOF;;;}
+
+
+
+
+
+?>
+}
+
+?>

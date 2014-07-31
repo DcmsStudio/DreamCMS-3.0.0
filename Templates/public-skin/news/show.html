@@ -1,0 +1,146 @@
+<cp:extends template="../container" />
+<cp:block name="right_content">
+    <cp:if condition="cfg('news.userating')">
+        <cp:set var="news.voteurl" value="str('/news/rate/', $news.id)"/>
+        <cp:set var="news.dataid" value="$news.id"/>
+        <cp:box template="../cms/box-vote" data="$news" var="vote" class="iif($news.published, ' online-content',' offline-content')"/>
+    </cp:if>
+    <cp:box template="../cms/box-basic" label="trans('News Details')" showlabel="true" class="iif($news.published, ' online-content',' offline-content')">
+        <ul class="meta vertical">
+            <li>
+                {trans('Diese News wurde bisher %s mal gelesen.', $news.hits)}
+            </li>
+            <li>
+                {trans('Kategorie')}
+                <a href="{$news.caturl}" class="cat-link">
+                    {$news.category}
+                </a>
+            </li>
+            <li>
+                {trans('geschrieben am')} {date('d.m.Y, H:i', $news.created)}
+            </li>
+            <li cp:is="$news.modifed > 3600">
+                {trans('geändert am')} {date('d.m.Y, H:i', $news.modifed)}
+            </li>
+            <li cp:is="$news.feed_link">
+                {trans('Quelle')}
+                <a href="{$feed_link}" class="feed-link" target="_blank">
+                    {$news.feed_link}
+                </a>
+            </li>
+        </ul>
+    </cp:box>
+    <cp:box template="../cms/box-relitems" var="itemid" data="$news.id" label="trans('Verwandte News')" showlabel="true" class="iif($news.published, ' online-content',' offline-content')">
+        [modul name="news" run="relnews" limit="6" id="{$itemid}" template=""]
+    </cp:box>
+    <cp:box template="../cms/box-tags" var="tags" data="$news.tags" label="trans('Tags')" showlabel="true" class="tags" />
+    <cp:box template="../cms/box-categories" var="categories" data="$news.categories" label="trans('Kategorien')" showlabel="true" class="category" />
+</cp:block>
+<cp:block name="main_content">
+    <cp:lazyload enable="true"/>
+    <div class="item{iif(user('dashboard') ,iif($news.published, ' online-content',' offline-content'), '')}">
+        <cp:seemodeitem contentid="$news.id" modul="news" edit="action=edit_news&id=%s&edit=1" state="$news.published" publish="action=publish&id=%s">
+            <header class="item-header">
+                <h1>
+                    {seemode($news.title, 'title')}
+                </h1>
+            </header>
+            <div cp:is="cfg('news.usecomments')" class="comments-bubble sprite">
+                <p>
+                    <a href="{$SERVER.REQUEST_URI}#comments-{$news.id}" class="scroll-to-comment">
+                        {$news.commentscounter}
+                        <small>
+                            {trans('Kommentare')}
+                        </small>
+                    </a>
+                </p>
+            </div>
+            {*
+            Extract Footnotes and print content
+            <article class="item-content">
+                <cp:set var="text" value="seemode($news.text, 'content')" />
+                <cp:footnote name="footnotebox" value="$text" auto="false" var="footnotes" template="../footnote" enable="cfg('news.parsefootnotes')" />
+            </article>
+            *}
+            <article class="item-content">
+                {seemode($news.text, 'content')}
+            </article>
+            <cp:likethis enable="cfg('news.enablesocialbuttons')" sharebutton="true" showcount="true" networks="twitter, fb, plusone" />
+            <cp:box data="$news.contentgallery" var="inlinegallery_images" template="../cms/content_gallery"/>
+        </cp:seemodeitem>
+    </div>
+    {*
+    <aside cp:notempty="$footnotes">
+        print Extracted Footnotes
+        <cp:footnote name="footnotebox" />
+    </aside>
+    *}
+    <cp:include template="../pageing" var="document.pageing" data="$news.paging" />
+    <cp:box template="../cms/box-author" var="author" data="$news.author" class="iif($news.published, ' online-content',' offline-content')" />
+    {*
+    <cp:tag name="div" forceclose="true" />
+    <cp:tag name="div" forceclose="true" />
+    <cp:tag name="div" class="fullwidth" />
+    <cp:tag name="div" class="inside" />
+    *}
+    <div class="clear">
+        <!-- -->
+    </div>
+    <cp:lazyload enable="false"/>
+</cp:block>
+<cp:block name="teaser" >
+    <cp:if condition="$news.teaser && !$news.teaserimage">
+        <div class="inside">
+            {$news.teaser}
+        </div>
+    </cp:if>
+    <cp:elseif condition="!$news.teaser && $news.teaserimage">
+        <cp:thumb src="$news.teaserimage" cache="newsteaser" width="910" height="150" chain="newsteaser" quality="80" alt="$news.teaserimagetitle" />
+    </cp:elseif>
+    <cp:elseif condition="$news.teaser && $news.teaserimage">
+        <cp:thumb src="$news.teaserimage" cache="newsteaser" width="910" height="150" chain="newsteaser" quality="80" alt="$news.teaserimagetitle" />
+        <div class="inside">
+            {$news.teaser}
+        </div>
+    </cp:elseif>
+</cp:block>
+<cp:block name="content-footer">
+    <cp:lazyload enable="true"/>
+    <cp:box template="../cms/box-basic" label="trans('Mehr zum Thema %s', $news.cattitle)" showlabel="true">
+        <cp:if condition="$news.cat_id > 0">
+            <cp:provider pname="modul" name="news" run="topnews" order="randum" limit="3" showlabel="false" images="true" template="topnews-3cols" catid="$news.cat_id" />
+        </cp:if>
+        <cp:else>
+            <cp:provider pname="modul" name="news" run="topnews" order="randum" limit="3" showlabel="false" images="true" template="topnews-3cols"/>
+        </cp:else>
+    </cp:box>
+    <div cp:is="cfg('news.usecomments', false)" class="box-comments{iif($news.published, ' online-content',' offline-content')}" id="comments-{$news.id}">
+        {*
+        kommentare anzeigen wenn news einstellung aktiv ist
+        *}
+        <div class="box-comments-inner">
+            {*
+            [modul name="comments" section="news" id="{$news.id}"]
+            *}
+            <cp:provider pname="modul" name="comments" section="news" id="$news.id"/>
+        </div>
+        <div class="clear">
+            <!-- -->
+        </div>
+        {*
+        kommentar formular nur anzeigen wenn benutzer das recht dazu hat
+        *}
+        <div cp:is="hasperm('news/cancommentnews') && $news.can_comment" class="box-comments-form">
+            <cp:set var="globals.news.permissionkey" str:value="news/cancommentnews" />
+            <cp:provider pname="modul" permkey="news/cancommentnews" name="commentform" section="news" id="$news.id" title="escape($news.title, 'htmlall')" location="escape($env.requestUri, 'url')"/>
+        </div>
+        <cp:if condition="!$news.can_comment || !hasperm('news/cancommentnews')">
+            <div class="box-comments-form-disabled">
+                <strong>
+                    {trans('Die Kommentarfunktion wurde deaktiviert')}
+                </strong>
+            </div>
+        </cp:if>
+    </div>
+    <cp:lazyload enable="false"/>
+</cp:block>

@@ -1,0 +1,242 @@
+@CHARSET "UTF-8";
+
+
+.inputS {
+    visibility: hidden!important;
+    width: 0!important;
+    height: 0!important;
+    position: absolute!important;
+    z-index: -1!important;
+}
+
+
+.sbHolder {
+    height: 22px;
+    position: relative;
+    display: inline-block;    
+    background: url('../img/Apple/Core/select/select-l.png') 0 0 no-repeat;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 35px;
+    z-index: 20;
+    margin-right: 10px;
+}
+
+.sbHolder.disabled {
+    opacity: .5;
+}
+
+.sbHolder:focus .sbSelector{
+
+}
+
+.sbSelector{
+    display: block;
+    height: 21px;
+    left: 0;
+    line-height: 22px;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    text-indent: 2px;
+    top: 0;
+    margin-right: 21px;
+    margin-left: 5px;
+    background: url('../img/Apple/Core/select/select-bg.png') 0 0 repeat-x;
+    color: #333;    
+    text-overflow: ellipsis;
+    border-top: 0;
+    border-bottom: 1px solid #787878;
+}
+
+.sbSelector:link, 
+.sbSelector:visited, 
+.sbSelector:hover{
+    outline: none;
+    text-decoration: none;
+}
+
+/* right side */
+.sbToggle{
+    background: url('../img/Apple/Core/select/select-r.png') 100% 0 no-repeat;
+    display: block;
+    height: 22px;
+    outline: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 21px;
+    z-index: 2;
+}
+.sbToggle:hover{
+
+}
+.sbToggleOpen{
+
+}
+.sbToggleOpen:hover{
+
+}
+.sbHolderDisabled{
+    opacity: .5;
+}
+.sbHolderDisabled .sbHolder{
+
+}
+.sbHolderDisabled .sbToggle{
+
+}
+.sbOptions{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 150px;
+    display: inline-block;
+    z-index: 99999;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+
+}
+.sbOptions li{
+
+    display: block;
+    height: 22px;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+}
+.sbOptions a{
+    /*
+    display: block;
+    outline: none;
+    padding: 7px 0 7px 3px;
+    */
+}
+.sbOptions a:link, .sbOptions a:visited{
+
+    text-decoration: none;
+}
+.sbOptions a:hover,
+.sbOptions a:focus,
+.sbOptions a.sbFocus{
+
+}
+.sbOptions li.last a{
+
+}
+.sbOptions .sbDisabled{
+    /*
+        display: block;
+        padding: 7px 0 7px 3px;
+    */
+}
+.sbOptions .sbGroup {
+    border-bottom: dotted 1px #515151;
+    display: block;
+    font-weight: normal;
+    font-style: italic;
+    padding: 3px;
+    
+    cursor: default;
+}
+.sbOptions li:hover .sbGroup {
+    background: transparent!important;
+    color: #fff;
+    
+}
+.sbOptions .sbSub{
+    padding-left: 17px;
+}
+
+
+
+
+
+
+.opt-container {   
+    background: url('../img/Apple/startmenu-bg.png');
+
+    -moz-box-shadow: 0px 3px 20px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0px 3px 20px rgba(0,0,0,0.4);
+    box-shadow:0px 3px 20px rgba(0,0,0,0.4);
+
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    display: inline-table;
+}
+
+
+.opt-container .jspScrollable, .opt-container .jspContainer {
+    background: transparent!important;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.opt-container .jScrollPaneContainer {
+    background: transparent!important;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.opt-container .jspVerticalBar {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+}
+
+
+
+
+
+.opt-container-in {
+   /* width:100%;
+    
+    display: table!important;
+    */
+}
+.opt-container ul {
+
+}
+.opt-container li.selected {
+    background: url('../img/Apple/Core/menu_checkbox_true.png') 4px 3px no-repeat;
+    background-color: #889DB6;
+    color: #fff;
+}
+
+
+
+.opt-container .sbOptions li a {
+    color: #333;
+    display: block;
+    height: 21px !important;
+    line-height: 22px;
+    margin: 0;
+    margin-right: 15px;
+    max-height: 22px;
+    outline: medium none;
+    overflow: hidden;
+
+    padding: 0;
+    padding-left: 22px;    
+    padding-right: 3px;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.opt-container li.selected a {
+    color: #fff!important;
+}
+
+.opt-container li:hover {
+    background-color: #738499;
+}
+.opt-container li:hover a {
+    color: #fff;
+}
+
+
+.opt-container .jScrollPaneTrack {
+    border-radius: 0 4px 4px 0;
+}

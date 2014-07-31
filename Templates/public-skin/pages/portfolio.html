@@ -1,0 +1,158 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+    <cp:if condition="$page.teaser && !$page.teaserimage && $page.useteaser">
+        <div class="inside">
+            {$page.teaser}
+        </div>
+    </cp:if>
+    <cp:elseif condition="!$page.teaser && $page.teaserimage && $page.useteaser">
+        <cp:thumb src="$page.teaserimage" cache="pageteaser" width="910" height="150" chain="newsteaser" quality="80" alt="$page.teaserimagetitle" />
+    </cp:elseif>
+    <cp:elseif condition="$page.teaser && $page.teaserimage && $page.useteaser">
+    <cp:thumb src="$page.teaserimage" cache="pageteaser" width="910" height="150" chain="newsteaser" quality="80" alt="$page.teaserimagetitle" />
+        <div class="inside">
+            {$page.teaser}
+        </div>        
+    </cp:elseif>
+</cp:block>
+
+<cp:block name="right_content">
+    <cp:if condition="$page.userating">
+        <div class="box{iif($page.published, ' online-content', ' offline-content')}">
+            <h3>
+                {trans('Bewertung')}
+            </h3>
+            <div class="rating-box">
+                <div class="vote-bubble sprite">
+                    <h6>
+                        {$page.ratingsum}
+                    </h6>
+                    <small>
+                        {trans('Wertung')}
+                    </small>
+                </div>
+                <div id="rating">
+                </div>
+                [component name="jQueryRating" toObj="rating" stars="5" value="{$page.rating}" votes="{$page.votes}" rating="{iif($page.ratingsum > 0, $page.ratingsum, '0.00')}" url="/page/rate/{$page.id}/"]
+            </div>
+        </div>
+    </cp:if>
+    <cp:if condition="$page.useauthorinfo">
+        <div class="author-box{iif($page.published, ' online-content', ' offline-content')}">
+            <h3>
+                {trans('Über den Author')}
+                <a href="profile/{$page.author.userid}/{suggest($page.author.username, true)}">
+                    {$page.author.username}
+                </a>
+            </h3>
+            <div class="author-box-inner">
+                <div class="bio">
+                    {truncate($page.author.bio, 250, 'a,strong,span')}
+                </div>
+                <div class="photo">
+                    <cp:if condition="$page.author.avatarowner != null">
+                        <img alt="" src="{photo($page.author.userphoto, 'AuthorImageSmall', '')}" title="{escape($page.author.username, 'html')}" border="0" />
+                    </cp:if>
+                    <cp:else>
+                        <img alt="" src="{photo($page.author.userphoto, 'AuthorImageSmall', '')}" title="{escape($page.author.username, 'html')}" border="0" />
+                    </cp:else>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </cp:if>
+    <cp:set var="tags" value="$page.tags" />
+    <cp:include template="../cms/tags" />
+</cp:block>
+<cp:block name="main_content">
+    <!-- potfolio page -->
+    <div class="portfolio item{iif($page.published, ' online-content', ' offline-content')}">
+        <div class="seemcontent">
+            <cp:seemodeitem modul="page" contentid="$page.id" edit="action=edit&amp;id=%s&amp;edit=1" publish="action=publish&amp;id=%s" state="$page.published">
+                <header class="item-header" cp:is="$page.usetitle">
+                    <h1>
+                        {seemode($page.title,'title')}
+                    </h1>
+                </header>
+                
+                <section class="portfolio-header">
+                    <h3>
+                        Infos
+                    </h3>
+                    <div class="portfolio-photo">
+                        <cp:if condition="field('photo', true)">
+                            <img src="[field name='photo']"/>
+                        </cp:if>
+                        
+                    </div>
+                    <div class="portfolio-infos">
+                        <h2 cp:is="field('author', true)">
+                            {field('author')}
+                        </h2>
+                        <div class="portfolio-contact">
+                            {field('contact', trans('keine contact daten') )}
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="about" cp:is="field('about', true)">
+                    <h3>
+                        About
+                    </h3>
+                    {field('about', trans('keine angaben vorhanden') )}
+                </section>
+                
+                <section class="work" cp:is="field('work', true)">
+                    <h3>
+                        Work
+                    </h3>
+                    {field('work', trans('keine angaben vorhanden') )}
+                </section>
+                
+                <article>
+                    {*
+                        Extract Footnotes and print content
+                    *}
+                    <cp:if condition="$page.usefootnotes">
+                        <cp:footnote name="footnote-box" value="seemode($page.content,'content')" auto="true" var="footnotes" template="../footnote" />
+                    </cp:if>
+                    <cp:else>
+                        {seemode($page.content,'content')}
+                    </cp:else>
+                </article>
+                
+                <cp:if condition="$page.usesocialbookmarks">
+                    <cp:likethis sharebutton="true" showcount="true" networks="twitter,fb" />
+                    {*
+                        print Extracted Footnotes
+                    *}
+                </cp:if>
+                
+                <section class="feedback">
+                    <h3>
+                        Feedback
+                    </h3>
+                    <cp:set var="permissionkey" str:value="page/cancommentpages" />
+                    <div class="box-comments{iif($page.published, ' online-content', ' offline-content')}">
+                        <div class="box-comments-inner">
+                            <a name="comments-{$page.id}" id="comments-{$page.id}"></a>
+                            [modul name="comments" section="page" id="{$page.id}"]
+                        </div>
+                        <div class="clear">
+                            <!-- -->
+                        </div>
+                        <div class="box-comments-form">
+                            [modul name="commentform" section="page" id="{$page.id}"]
+                        </div>
+                    </div>
+                </section>
+                
+            </cp:seemodeitem>
+            <cp:if condition="$page.usefootnotes">
+                <cp:footnote name="footnote-box" />
+            </cp:if>
+        </div>
+    </div>
+    <cp:set var="document.pageing" value="$page.paging" />
+    <cp:include template="../pageing" />
+</cp:block>

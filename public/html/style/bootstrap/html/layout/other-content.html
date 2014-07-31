@@ -1,0 +1,48 @@
+<cp:block name="toolbar">
+
+    [save:layoutmodulform{$layoutid}-{$blockdata.id}] [reset:layoutmodulform{$layoutid}-{$blockdata.id}]
+
+</cp:block>
+
+<form action="admin.php" name="layoutmodulform" id="layoutmodulform{$blockdata.id}" method="post">
+    <input type="hidden" name="adm" value="layouter"/>
+    <input type="hidden" name="send" value="send"/>
+    <input type="hidden" name="action" value="editblock"/>
+    <input type="hidden" name="dataid" id="data-id" value="{$blockdata.id}"/>
+    <input type="hidden" name="layoutid" value="{$layoutid}"/>
+    <input type="hidden" name="current" value="{$input.current}"/>
+    <input type="hidden" name="block" value="{$input.block}"/>
+
+
+    <fieldset>
+        <label>{trans('Titel')}</label>
+        <input type="text" name="title" size="65" maxLength="250" value="{escape($blockdata.title)}" class="required"/>
+        <br/>
+        <small>{trans('Der Titel wird nicht im Layout sichtbar sein. Er ist nur für den Layouter von Bedeutung.')}</small>
+    </fieldset>
+
+    <fieldset>
+        <label>{trans('Inhalt')}</label>
+        <cp:editor baseurl="{$cfg.portalurl}" name="content" value="{$blockdata.value}" height="350px"/>
+    </fieldset>
+
+</form>
+
+
+<script type="text/javascript">
+
+    Form.registerForm('layoutmodulform{$layoutid}-{$blockdata.id}', {
+
+        isPopup: true,
+        useToolbar: $('#layoutmodulform{$layoutid}-{$blockdata.id}').parents('.popup:first').find('.popup-toolbar'),
+        contentIdentifierID: 'data-id{$layoutid}',
+        exiturl: '',
+        identifierType: '',
+        forceNoRefresh: true,
+        onAfterSubmit: function (exit, data) {
+            $('#' + Win.windowID).data('layouter').onAfterSubmitBlockEdit(exit, data);
+        }
+    });
+
+</script>
+    

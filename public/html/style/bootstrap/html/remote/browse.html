@@ -1,0 +1,136 @@
+<cp:extends template="../repository"/>
+
+
+<cp:block name="toolbar">
+
+    <cp:if condition="$packagetype">
+        <a href="remote/browse" class="action-button">Packet Browser Index</a>
+        <cp:loop name="navi" key="r">
+            <span class="slash-separator">/</span> <a href="{$r.browse}" class="action-button">{$r.name}</a>
+        </cp:loop>
+
+    </cp:if>
+    <cp:else>
+        <strong>Packet Browser Index</strong>
+    </cp:else>
+    
+    
+    
+</cp:block>
+
+<cp:block name="cssinline">
+<style type="text/css">
+.packagetypes ul, .packagetypes li { 
+    list-style:none; margin:0; padding:0; line-height:18px;
+}
+.packagetypes ul, .packagetypes li a { margin-left: 5px; }
+.packagetypes li span.folder {
+    background: url('{$backendImagePath}folder.png');
+    width:16px; height:16px; display:inline-block; float:left;
+}
+html, body { 
+    margin:0; 
+    padding:0;
+    height:100%;
+}
+#widget-contents {
+    height:100%;
+    display:inline-block;
+}
+    #content {
+    overflow:auto;
+    }
+</style>
+</cp:block>
+
+<cp:block name="content">
+    
+    <cp:if condition="count($packagetypes)">
+    <div class="box description packagetypes">
+        <div class="box-inner">
+            <ul>
+                <cp:loop name="packagetypes" key="r">
+                    <li><span class="folder"></span><a href="remote/browse?browse={$r.browse}">{escape($r.name)}</a></li>
+                </cp:loop>                
+            </ul>
+        </div>
+    </div>
+    </cp:if>
+    <cp:else>
+        
+        <cp:if condition="$request.browse == ''">
+        <div class="box description packagetypes">
+            <div class="box-inner">
+                <ul>
+                    <li><span class="folder"></span><a href="remote/browse?browse=skins">Skins</a></li>
+                    <li><span class="folder"></span><a href="remote/browse?browse=plugin">Plugins</a></li>
+                    <li><span class="folder"></span><a href="remote/browse?browse=component">Komponenten</a></li>
+                    <li><span class="folder"></span><a href="remote/browse?browse=locale">Sprach Packete</a></li>
+                    <li><span class="folder"></span><a href="remote/browse?browse=transformation">Bild Manipulation</a></li>
+                    <li><span class="folder"></span><a href="remote/browse?browse=widget">Dashboard Widgets</a></li>
+                </ul>
+            </div>
+        </div>
+        </cp:if>
+    </cp:else>
+    <cp:if condition="count($packages)">
+        <div class="box">
+            <h2>{$packagetype}</h2>
+            <div class="box-inner" style="padding:0">
+                <table style="width: 100%;margin:0" id="package-table" cellpadding="3" cellspacing="0">
+    </cp:if>
+    <cp:else>
+        <cp:if condition="$request.browse != ''">
+        <div class="box">
+            <h2>{$packagetype}</h2>
+            <div class="box-inner">{trans('Keine Packete vorhanden')}
+            </div>
+        </div>
+        </cp:if>
+    </cp:else>
+                <cp:loop name="packages" key="r">
+                    {cycle('cyclename', 'firstrow,secondrow', 'css')}
+                    <tr class="{$css}">
+                        <td>
+                            <a href="{$client_url}&action=details&type={$r.type}&package={$r.package}&ret={$ret}">{$r.name}</a><br/><small>Version: {$r.version}
+                            
+                            <cp:if condition="$r.author">
+                            | Author: {$r.author}
+                            </cp:if>
+                            <cp:if condition="$r.website">
+                                | Website: <a href="{$r.website}" target="_blank">{$r.website}</a>
+                            </cp:if>
+                            </small>
+                            <cp:if condition="$r.description != ''">
+                                <br/>
+                                <em>
+                                    {$r.description}
+                                </em>
+                            </cp:if>
+                            
+                        </td>
+                    </tr>
+                </cp:loop>
+                
+        <cp:if condition="count($packages)">
+                </table>
+            </div>
+        </div>
+        </cp:if>
+                
+                            
+    <script type="text/javascript">
+    $(function() {
+        // Add 'external' CSS class to all external links
+        $('a.external').click(function(e) {
+            window.open($(this).attr('href'));
+            e.preventDefault();
+            return false;
+        });
+        
+        $('#content').css({
+            height: $(window).height() - 60 +'px',maxHeight: $(window).height()- 60 +'px',minHeight: $(window).height()- 60 +'px'
+        });
+      });
+   </script>  
+</cp:block>

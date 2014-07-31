@@ -1,0 +1,296 @@
+{$toolbar}
+<form method="post" name="pform" id="pform" action="admin.php" onsubmit="">
+    <input type="hidden" name="adm" value="profilefield" />
+    <input type="hidden" name="send" value="send">
+    <input type="hidden" name="action" value="{$request.action}">
+    <input type="hidden" name="sid" value="{$cp->session_id}">
+    <input type="hidden" name="id" value="{$request.id}">
+    
+    
+    
+    <div class="tblborder fl w100">
+        <div class="fl w100">
+            <div class="fl fieldset2">
+                <div>
+                    <fieldset>
+                        <legend>{trans('Profilfeldtitel')}</legend>
+                        {info:profilefield|title}<input type="text" name="title" value="{escape($title, 'quotes')}" size="80" maxlength="100" class="input"/>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Feldtyp')}</legend>
+                        {info:profilefield|type}
+                        
+                        <select name="fieldtype" id="fieldType" onchange="change_field(this.options[this.selectedIndex].value);" class="select">
+                            <option value="text"<cp:if condition="{$fieldtype} == 'text'"> selected="selected"</cp:if>>{trans('einfaches Textfenster')}</option>                        
+                            <option value="checkbox"<cp:if condition="{$fieldtype} == 'checkbox'"> selected="selected"</cp:if>>{trans('Checkbox')}</option>
+                            <option value="date"<cp:if condition="{$fieldtype} ==  'date'"> selected="selected"</cp:if>>{trans('Datumsfeld')}</option>
+                            <option value="singleselect"<cp:if condition="{$fieldtype} == 'singleselect'"> selected="selected"</cp:if>>{trans('Auswahlliste')}</option>
+                            <option value="multiselect"<cp:if condition="{$fieldtype} == 'multiselect'"> selected="selected"</cp:if>>{trans('Auswahlliste mit Mehrfachauswahl')}</option>
+                        </select>
+                    </fieldset>    
+                </div>
+                <fieldset>
+                    <legend>{trans('Beschreibung')}</legend>
+                    {info:profilefield|description}<textarea cols="50" rows="2" name="description" class="textarea">{$description}</textarea>
+                    
+                </fieldset>
+            </div>
+        </div>
+        <div class="fl w100 mb5">
+            <div class="fl fieldset2">
+                <div>
+                    <fieldset>
+                        <legend>{trans('Bei der Registrierung erforderlich?')}</legend>
+                        {info:profilefield|required}
+                        <select name="required" class="select">
+                            <option value="1"<cp:if condition="{$required} == 1"> selected="selected"</cp:if>>{trans('Ja')}</option>
+                            <option value="0"<cp:if condition="{$required} == 0"> selected="selected"</cp:if>>{trans('Nein')}</option>
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Benutzereingabe anzeigen?')}</legend>
+                        {info:profilefield|showinthread}
+                        <select name="showinthread" class="select">
+                            <option value="1"<cp:if condition="{$showinthread} == 1"> selected="selected"</cp:if>>{trans('Ja')}</option>
+                            <option value="0"<cp:if condition="{$showinthread} == 0"> selected="selected"</cp:if>>{trans('Nein')}</option>
+                        </select>
+                        
+                    </fieldset>
+                </div>    
+                <fieldset>
+                    <legend>{trans('Profilfeld verstecken?')}</legend>
+                    {info:profilefield|hidden}
+                    <select name="hidden" class="select">
+                        <option value="1"<cp:if condition="{$hidden} == 1"> selected="selected"</cp:if>>{trans('Ja')}</option>
+                        <option value="0"<cp:if condition="{$hidden} == 0"> selected="selected"</cp:if>>{trans('Nein')}</option>
+                    </select>
+                    
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Ordnungsnummer')}</legend>
+                    {info:profilefield|fieldorder}
+                    <input type="text" size="40" name="fieldorder" value="{escape($fieldorder, 'quotes')}" maxlength="7" class="input">
+                    
+                </fieldset>            
+            </div>
+        </div>
+        
+        <div class="fl w100 mb5" id="usedate">
+            <div class="fl fieldset2">
+                <div>
+                    <fieldset id="f_choicecount">
+                        <legend>{trans('Mehrfachauswahl')}</legend>
+                        {info:profilefield|choicecount}<input type="text" name="choicecount" value="0" maxlength="3" value="{escape($choicecount, 'quotes')}" class="input" />
+                    </fieldset>
+                    
+                    <fieldset id="f_maxlength">
+                        <legend>{trans('Wie lang darf der vom Benutzer eingegebene Text maximal sein?')}</legend>
+                        {info:profilefield|maxlength}
+                        <input type="text" size="40" name="maxlength" value="{escape($maxlength, 'quotes')}" maxlength="5" class="input"/>
+                    </fieldset>
+                    
+                    <fieldset id="f_fieldsize">
+                        <legend>{trans('Wie groß soll das angezeigte Profilfeld sein?')}</legend>
+                        {info:profilefield|fieldsize}
+                        <input type="text" size="40" name="fieldsize" value="{escape($fieldsize, 'quotes')}" maxlength="3" class="input">
+                    </fieldset>                
+                </div>
+                
+                <fieldset id="f_options">
+                    <legend>{trans('Auswahlmöglichkeiten der Auswahlliste/Wert der Checkbox')}</legend>
+                    {info:profilefield|options}
+                    <textarea name="options" rows="6" cols="50" class="textarea">{$options}</textarea>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    
+    
+    <btn>
+        [save:pform] [save_exit:pform] 
+        <input type="reset" value="{trans('Zurücksetzen')}" class="button" /> <input type="button" value="{trans('Abbrechen')}" onclick="history.back();" class="button" />
+    </btn> 
+    
+</form>
+
+<script type="text/javascript">
+
+    add_dirty_flag('pform');
+    register_form_handler('savethis');
+    exiturl = 'admin.php?adm=profilefield&action=view';
+    
+
+$(document).ready(function() {
+    
+    var fieldtype = $('#fieldType option:selected').val();
+
+
+    var maxlength=document.pform.maxlength;
+    var fieldsize=document.pform.fieldsize;
+    var options=document.pform.options;
+    var choicecount=document.pform.choicecount;
+
+    if(fieldtype=="text")
+    {
+        maxlength.disabled=false;
+        fieldsize.disabled=false;
+        
+        options.disabled=true;
+        choicecount.disabled=true;
+        
+        $('#f_maxlength').show();
+        $('#f_fieldsize').show();
+        
+        $('#f_options').hide();
+        $('#f_choicecount').hide();
+        
+        $('#usedate').show();
+    }
+    else if(fieldtype=="date")
+    {
+        maxlength.disabled=true;
+        fieldsize.disabled=true;
+        options.disabled=true;
+        choicecount.disabled=true;
+    
+        
+        $('#usedate').hide();
+    }
+    else if(fieldtype=="checkbox")
+    {
+        maxlength.disabled=true;
+        fieldsize.disabled=true;
+        options.disabled=false;
+        choicecount.disabled=true;
+        
+        
+        $('#f_maxlength').hide();
+        $('#f_fieldsize').hide();
+        
+        $('#f_options').show();
+        $('#f_choicecount').hide();
+        
+        $('#usedate').show();
+    }
+    else if(fieldtype=="singleselect")
+    {
+        maxlength.disabled=true;
+        fieldsize.disabled=true;
+        options.disabled=false;
+        choicecount.disabled=true;
+        
+        $('#f_maxlength').hide();
+        $('#f_fieldsize').hide();
+        
+        $('#f_options').show();
+        $('#f_choicecount').hide();
+        
+        $('#usedate').show();
+    }
+    else if(fieldtype=="multiselect")
+    {
+        maxlength.disabled=true;
+        fieldsize.disabled=true;
+        options.disabled=false;
+        choicecount.disabled=false;
+        
+        $('#f_maxlength').hide();
+        $('#f_fieldsize').hide();
+        
+        $('#f_options').show();
+        $('#f_choicecount').show();
+        
+        $('#usedate').show();
+    }
+    
+});
+
+function change_field(fieldtype)
+{
+    var fieldtype = $('#fieldType option:selected').val();
+    
+    
+    var maxlength=document.pform.maxlength;
+    var fieldsize=document.pform.fieldsize;
+    var options=document.pform.options;
+    var choicecount=document.pform.choicecount;
+
+    if(fieldtype=="text")
+    {
+        maxlength.disabled=false;
+        fieldsize.disabled=false;
+        
+        options.disabled=true;
+        choicecount.disabled=true;
+        
+        $('#f_maxlength').show();
+        $('#f_fieldsize').show();
+        
+        $('#f_options').hide();
+        $('#f_choicecount').hide();
+        
+        $('#usedate').show();
+    }
+    else if(fieldtype=="date")
+    {
+        maxlength.disabled=true;
+        fieldsize.disabled=true;
+        options.disabled=true;
+        choicecount.disabled=true;
+    
+        
+        $('#usedate').hide();
+    }
+    else if(fieldtype=="checkbox")
+    {
+        maxlength.disabled=true;
+        fieldsize.disabled=true;
+        options.disabled=false;
+        choicecount.disabled=true;
+        
+        
+        $('#f_maxlength').hide();
+        $('#f_fieldsize').hide();
+        
+        $('#f_options').show();
+        $('#f_choicecount').hide();
+        
+        $('#usedate').show();
+    }
+    else if(fieldtype=="singleselect")
+    {
+        maxlength.disabled=true;
+        fieldsize.disabled=true;
+        options.disabled=false;
+        choicecount.disabled=true;
+        
+        $('#f_maxlength').hide();
+        $('#f_fieldsize').hide();
+        
+        $('#f_options').show();
+        $('#f_choicecount').hide();
+        
+        $('#usedate').show();
+    }
+    else if(fieldtype=="multiselect")
+    {
+        maxlength.disabled=true;
+        fieldsize.disabled=true;
+        options.disabled=false;
+        choicecount.disabled=false;
+        
+        $('#f_maxlength').hide();
+        $('#f_fieldsize').hide();
+        
+        $('#f_options').show();
+        $('#f_choicecount').show();
+        
+        $('#usedate').show();
+    }
+}
+
+</script>
+

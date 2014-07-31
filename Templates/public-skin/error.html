@@ -1,0 +1,26 @@
+<cp:extends template="container" />
+<cp:block name="main_content">
+    <div class="site-error">
+        <div>
+            <h1 class="decoration">
+                <span class="icon-warning-sign">
+                </span>
+                <cp:if condition="!$errorcode">
+                    {trans('Fehler...')}
+                </cp:if>
+                <cp:else>
+                    {trans('Fehler %s...', $errorcode)}
+                </cp:else>
+            </h1>
+            <cp:if condition="$message != ''">
+                {$message}
+            </cp:if>
+            <cp:else>
+                {trans('Es ist ein Fehler aufgetreten!')}
+            </cp:else>
+        </div>
+    </div>
+    <div class="clear">
+        <!-- -->
+    </div>
+</cp:block>

@@ -1,0 +1,624 @@
+body.seemode {
+
+}
+.analysePoint {
+    position: absolute;
+    z-index: 9999!important;
+    opacity: 0.2;
+    border-radius: 5px;
+    background: #36B;
+}
+/**
+    Dirty Form
+*/
+#seemode-dirty {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: #b94a48;
+    border-bottom: 1px solid #333;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    z-index: 99990;
+}
+#seemode-dirty span {
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    display: block;
+}
+
+#seemode-tooltip {
+    position: absolute;
+    z-index: 100001;
+    left: 0;
+    display: none;
+    background: #EEE;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.6);
+    color: #333;
+    line-height: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+#seemode-tooltip:after {
+    content:"";
+    position: absolute;
+    z-index: 99999;
+    bottom:-5px; /* value = - border-top-width - border-bottom-width */
+    left:6px; /* value = (:before left) + (:before border-left) - (:after border-left) */
+    border-width:5px 5px 0;
+    border-style:solid;
+    border-color:#EEE transparent;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+}
+#seemode-loading-page {
+    background: rgba(51, 51, 51, 0.5);
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+#seemode-loading-pagelabel {
+    position: fixed;
+    display: inline-block;
+    padding: 5px;
+    background: #EEE;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+#seemode-loading-pagelabel > span {
+    line-height: 20px;
+}
+
+
+
+body.seemode .seemode-panel {
+
+    border-top: 1px solid #333;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 99999;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.9);
+    background: #CCC;
+}
+#seemode-panel .ui-resizable-n {
+    cursor: ns-resize;
+}
+body.seemode .seemode-panel #seemode-panel-control { 
+    display: inline-block; 
+    width: 100%;  
+    background: #eeeeee; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2NjY2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-8 */
+
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    border-top: 1px solid #8A8A8A;
+}
+body.seemode .seemode-panel #seemode-panel-control button {
+    font-size: 11px;
+    margin: 0;
+    margin-right: 3px;
+    height: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 20px;
+}
+
+body.seemode .seemode-panel #seemode-panel-control .base-btn {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    margin-right: 3px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-top: 3px;    
+}
+
+body.seemode .seemode-panel #seemode-panel-control .base-spacer {
+    height: 20px;
+    float: left;
+    margin-top: 0px;
+    margin-right: 6px;
+    display: inline-block;
+    width: 1px;
+    border-right: 1px solid #BEBEBE;
+    position: relative;
+    top: 5px;
+}
+
+
+
+#seemode-panel-control .base-btn span {
+    background-image: url('../../../html/img/seemode/seemode-control.png');
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+#seemode-panel-control .toggle-open span,
+#seemode-panel-control .toggle-close span {
+    background-position: 0 0;
+}
+#seemode-panel-control .config span {
+    background-position: -368px 0;
+}
+
+#seemode-panel-control .debug span {
+    background-position: -390px 0;
+}
+#seemode-panel-control .debug.off span {
+    background-position: -411px 0;
+    opacity: 0.8;
+}
+
+#seemode-panel-control .firewall span {
+    background-position: -434px 0;
+}
+#seemode-panel-control .firewall.off span {
+    background-position: -452px 0;
+    opacity: 0.8;
+}
+
+
+
+#seemode-panel-control .clearcache span {
+    background-position: -499px 0;
+}
+#seemode-panel-control .clearcache-full span {
+    background-position: -520px 0;
+}
+
+#seemode-panel-control .pagecache span {
+    background-position: -541px 0;
+}
+
+
+#seemode-panel-control .clickanalyser span {
+    background-position: -476px 0;
+}
+
+
+body.seemode .seemode-panel #seemode-panel-control .base-btn:hover { background-color: #D5D5D5; border: 1px solid #ADABAB; }
+body.seemode .seemode-panel #seemode-panel-control .base-btn.active, 
+body.seemode .seemode-panel #seemode-panel-control .base-btn.active:hover {
+    background-color: #C2CBE0;
+    border: 1px solid #4B6BA0;
+}
+
+
+
+
+
+body.seemode .seemode-panel #seemode-panel-edit {
+    width: 100%; 
+    min-height: 300px;
+    position: relative;
+    top: 0;
+    clear: both;
+    overflow: hidden;
+    display: none;
+    background: #eee;
+}
+body.seemode .seemode-panel #seemode-panel-edit #seemode-content-control {
+    width: 100%;
+    position: relative;
+    top: 0;
+    height: 25px;
+    max-height: 25px;
+    clear: both;
+    overflow: hidden;
+    padding: 0;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    line-height: 25px;
+    border-bottom: 1px solid #8A8A8A;
+    background: #eeeeee; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2NjY2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-8 */
+
+
+}
+body.seemode .seemode-panel #seemode-panel-edit #seemode-content-control button {
+    font-size: 11px;
+    margin: 0;
+    margin-right: 3px;
+
+}
+body.seemode .seemode-panel #seemode-panel-edit #seemode-content-control .button-group-label {
+    display: none;
+}
+
+
+body.seemode .seemode-panel #seemode-panel-left { 
+    position: relative;
+    background: #DDD;
+    width: 250px; 
+    float: left; 
+    box-shadow: 0 0 10px #333;
+}
+
+
+body.seemode .seemode-panel #seemode-panel-left .edit-sections {
+    padding: 0;
+    margin: 0;
+    padding-top: 3px;
+}
+body.seemode .seemode-panel #seemode-panel-left .section-item {
+    height: 18px;
+    line-height: 18px;
+    padding-left: 5px;
+    cursor: pointer;
+
+}
+body.seemode .seemode-panel #seemode-panel-left .section-item.active,
+body.seemode .seemode-panel #seemode-panel-left .section-item:hover {
+    background: #EFEFEF;
+}
+
+
+body.seemode .seemode-panel #seemode-panel-left .edit-sections,
+body.seemode .seemode-panel #seemode-panel-left .config-sections {
+    margin-top: 10px;
+}
+body.seemode .seemode-panel #seemode-panel-left .config-sections ul, 
+body.seemode .seemode-panel #seemode-panel-left .config-sections li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    list-style-image: none;
+}
+body.seemode .seemode-panel #seemode-panel-left .edit-sections > div {
+    line-height: 20px;
+    background: #DDD;
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    border-top: 1px solid rgba(0, 0, 0, 0);
+    padding-left: 10px;
+}
+body.seemode .seemode-panel #seemode-panel-left .config-sections > ul > li {
+    line-height: 20px;
+    background: #DDD;
+    font-weight: bold;
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    border-top: 1px solid rgba(0, 0, 0, 0);
+}
+body.seemode .seemode-panel #seemode-panel-left .config-sections ul:first-child li span:first-child {
+    padding-left: 20px;
+}
+body.seemode .seemode-panel #seemode-panel-left .config-sections ul:first-child li span:first-child em {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url('../../../html/img/seemode/seemode-control.png');
+    background-repeat: no-repeat;
+    background-position: -218px 0;
+    position: absolute;
+    left: 3px;
+}
+
+body.seemode .seemode-panel #seemode-panel-left .config-sections ul:first-child li.open:first-child {
+    background-position: -201px 0;
+}
+
+body.seemode .seemode-panel #seemode-panel-left .config-sections ul ul li {
+    font-weight: normal;
+    padding-left: 16px!important;
+}
+
+
+body.seemode .seemode-panel #seemode-panel-left .edit-sections div.active,
+body.seemode .seemode-panel #seemode-panel-left .config-sections li.open {
+    border-top: 1px solid #8F8E8E;
+    border-bottom: 1px solid #8F8F8F;
+    box-shadow: 20px 0px 5px #F0F0F0;
+    background: #EEE;
+}
+
+
+body.seemode .seemode-panel #seemode-panel-left .config-sections ul ul {
+    background: #EFEFEF;
+    padding-left: 0;
+}
+body.seemode .seemode-panel #seemode-panel-left .config-sections .cfg-btn {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+}
+body.seemode .seemode-panel #seemode-panel-left .config-sections .cfg-btn .cfg-icon {
+    float: left;
+    padding: 0;
+    margin: 0;
+    margin-right: 5px;
+    width: 20px;
+    height: 16px;
+    text-align: center;
+    background-size: 16px 16px!important;
+    background-repeat: no-repeat no-repeat!important;
+    background-position: 50% 50%!important;
+    display: inline-block;
+}
+
+body.seemode .seemode-panel #seemode-panel-left .config-sections ul ul li img {
+    max-height: 16px;
+}
+
+
+
+
+
+body.seemode .seemode-panel #seemode-panel-content { position: relative; background: #EFEFEF; margin-left: 260px; overflow: auto; overflow-x: hidden; padding: 0; }
+body.seemode .seemode-panel #seemode-panel-content .box,
+body.seemode .seemode-panel #seemode-panel-content form {
+    margin: 0!important;
+    padding: 0!important;
+    height: auto;
+    position: absolute;
+    top: 2px;
+    width: 99%;
+}
+
+
+body.seemode .seemode-panel #seemode-panel-content fieldset {
+    vertical-align: top;
+    padding-left: 3px;
+}
+body.seemode .seemode-panel #seemode-panel-content fieldset > div:first-child,
+body.seemode .seemode-panel #seemode-panel-content fieldset > p {
+    vertical-align: top;
+    margin: 0;
+    margin-bottom: 10px!important;
+}
+
+body.seemode .seemode-panel #seemode-panel-content fieldset p > span:first-child,
+body.seemode .seemode-panel #seemode-panel-content fieldset small {
+    display: block!important;
+
+}
+body.seemode .seemode-panel #seemode-panel-content fieldset small { margin-top: 2px }
+body.seemode .seemode-panel #seemode-panel-content fieldset textarea, input, select { margin-bottom: 0!important; }
+
+body.seemode .seemode-panel #seemode-panel-content .infoicon {position: absolute; right: -20px;}
+
+body.seemode .seemode-panel #seemode-panel-content label {
+
+}
+body.seemode .seemode-panel #seemode-panel-content label:hover {
+    color: #069;
+}
+
+body.seemode .seemode-panel #seemode-panel-content input[type=text], 
+body.seemode .seemode-panel #seemode-panel-content input[type=password],
+body.seemode .seemode-panel #seemode-panel-content textarea {
+    width: 99%;
+}
+
+body.seemode .seemode-panel #seemode-panel-content input[name=alias] {
+    width: 25%;
+}
+
+
+
+
+.seemode-content {
+    display: inline-block;
+    right: 0;
+    position: absolute;
+    z-index: 999;
+    margin-top: 4px;
+}
+.seemode-button {
+    position: absolute;
+    display: inline-block;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 20px;
+    background: rgba(51, 51, 51, 0.70);
+    color: #eee;
+    z-index: 110;
+    right: 0;
+    clear: both;
+    cursor: pointer;
+
+
+
+
+}
+.seemode-button:hover,.seemode-button.active  {
+    background: rgba(51, 51, 51, 0.9);
+}
+.seemode-button * {
+    cursor: pointer;
+}
+
+.seemode-actions {
+    display: none;
+    padding: 3px;
+    position: relative;
+    z-index: 100;
+    background: rgba(51, 51, 51, 0.70);
+    top: 18px;
+    right: 0;
+    padding-top: 6px;
+    height: 25px;
+}
+
+.seemode-actions span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 3px;
+    margin-right: 3px;
+    cursor: pointer;
+    background: #333 url('../img/seemode-actions.png') no-repeat;
+    border: 1px solid #888;
+    border-radius: 3px;
+}
+
+.seemode-actions span.edit {
+    background-position: 50% -37px;
+}
+.seemode-actions span.publish {
+    background-position: 50% 0;
+}
+.seemode-actions span.publish.off {
+    background-position: 50% -18px;
+}
+.seemode-actions span.delete {
+    background-position: 50% -63px;
+}
+
+.seemode-item {
+    border: 1px solid transparent;
+    padding: 3px;
+}
+.seemode-item:hover {
+    background: #ffffe0;
+}
+
+
+.seemode-editing {
+    border: 1px dashed #009F00!important;
+    background: #FFFFF9!important;
+}
+
+#seemode_notifier {
+    z-index: 99999;
+    position: fixed;
+    top: 20px!important;
+    left: 20px!important;
+    min-height: 20px;
+    max-height: 100px;
+    width: auto;
+    float: left;
+    color: #FFF;
+    font-size: 12px;
+    overflow: hidden;
+    display: none;
+    background: #222;
+    padding: 6px 12px 6px 6px;
+    font-weight: 700;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+
+
+
+
+body.seemode .seemode-panel #seemode-panel-content input[type=radio], input[type=checkbox] {
+    margin-right: 5px;
+    top: -1px;
+    position: relative;
+}
+
+body.seemode .seemode-panel .contenttags {
+    display: inline-block;
+    width: 100%;
+}
+
+body.seemode .seemode-panel .tag-table {
+    display: inline-block;
+    width: 80%;
+    margin-top: 3px;
+    padding-top: 3px;
+}
+
+body.seemode .seemode-panel .tag-table .content-tag {
+    display: inline-block;
+
+    border: 1px solid #FFBBB0;
+    background: #E9E9E9;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+body.seemode .seemode-panel .tag-table .content-tag > span:first-child {
+    display: inline-block;
+    float: left;
+}
+body.seemode .seemode-panel .tag-table .content-tag .delete-tag {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+    float: right;
+    background: url('../../../html/img/seemode/tag-remove.png') 50% 50% no-repeat;
+    cursor: pointer;
+}
+
+body.seemode .tag-inputs {
+    position: relative;
+}
+body.seemode .tag-inputs input.content-tags {
+    width: 20%!important;
+}
+body.seemode .tag-inputs .addtag-btn {
+    width: 16px;
+    height: 20px;
+    display: inline-block;
+    float: none!important;
+    background: url('../../../html/img/seemode/tag-add.png') 50% 50% no-repeat;
+    margin-top: 3px;
+}
+
+
+
+body.seemode .live-tag-result {
+    display: inline-block;
+    position: absolute;
+    z-index: 999;
+    background: #fff;
+    border: 1px solid #DDDDDD;
+    
+}
+
+body.seemode .live-tag-result .content-tag {
+    padding: 0 5px;
+    margin: 0;
+}
+
+body.seemode .live-tag-result .content-tag:hover {
+    background: #DEDEDE;
+}
+
+
+
+#popup_container * {
+    font-family: arial, verdana!important;
+}
+
+

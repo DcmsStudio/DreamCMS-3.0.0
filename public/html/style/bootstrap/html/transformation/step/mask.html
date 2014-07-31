@@ -1,0 +1,66 @@
+<fieldset>
+    <legend>{trans("Position")}</legend>
+    <select name="params[position]" id="watermark_position">
+        <option value=""{iif($values.position == '', ' selected="selected"', '')}>None</option>
+        <option value="top-left"{iif($values.position == 'top-left', ' selected="selected"', '')}>Top Left</option>
+        <option value="top-right"{iif($values.position == 'top-right', ' selected="selected"', '')}>Top Right</option>
+        <option value="bottom-left"{iif($values.position == 'bottom-left', ' selected="selected"', '')}>Bottom Left</option>
+        <option value="bottom-right"{iif($values.position == 'bottom-right', ' selected="selected"', '')}>Bottom Right</option>
+    </select>        
+</fieldset>
+
+
+
+
+<fieldset>
+    <legend>{trans("Mask")}</legend>
+    <select name="params[mask]" id="mask" onchange="getPreview()">
+        <cp:loop name="masks" key="r">
+            <option value="{$r.mask}"<cp:if condition="$r.mask == $values.mask || ($masks_index == 1 && !$values.mask) "> selected="selected"</cp:if>>{$r.mask}</option>
+        </cp:loop>
+        
+    </select>
+    
+    <label for="resizeing"><input type="checkbox" id="resizeing" name="params[resize]" value="1"{iif($values.resize == 1, ' checked="checked"', '')}/> {trans('Resize Mask to Image Size')}</label>
+    <br/>
+    
+    <p id="bgcolor-selector" style="text-align: center;">
+        {trans("Hintergrund")}: <a href="#" rel="">Transparent</a> | <a href="#" rel="blue">Blau</a> | <a href="#" rel="black">Schwarz</a> | <a href="#" rel="yellow">Gelb</a>
+    </p>
+    
+    <div style="margin-bottom: 10px; min-width: 90px; max-height: 305px; overflow: auto;" id="preview">
+        
+    </div>    
+</fieldset>
+
+
+
+<script type="text/javascript">
+
+
+
+    $(getPreview);
+
+    $(function() {
+        $('#bgcolor-selector a').click(function(e) {
+            $('#preview').css('background-color', ($(this).attr('rel') == '' ? 'transparent' : $(this).attr('rel') ) );
+            e.preventDefault();
+            return false;
+        });
+    });
+
+    function getPreview() {
+        if ($('#mask').val() != '' )
+        {
+            $('#preview').empty().append($("<img>", {src: backendImagePath  + 'loading.gif'}));
+
+            var url = 'admin.php?adm=transform&action=preview&mask='  + $('#mask').val() ;
+            url = url;
+
+            $('#preview').append($("<img>", {src: url}).load(function() {
+                $(this).prev().remove();
+            }));
+         }
+    }
+
+</script>

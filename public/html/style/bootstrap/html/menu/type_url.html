@@ -1,0 +1,13 @@
+
+    <fieldset>
+        <legend>{trans('Url')}</legend>
+        {info:menutypes|url}
+        <input class="required input" type="text" name="url" id="url" value="{escape($link, 'quotes')}" size="40" maxlength="255" />
+
+        <legend>{trans('Beim klicken, öffnen in')}</legend>
+        {info:menutypes|target}
+        <select name="target">
+            <option value="blank"> im neuen Fenster öffnen</option>
+            <option value="top"> im selben Fenster öffnen</option>
+        </select>
+    </fieldset>

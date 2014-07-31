@@ -1,0 +1,56 @@
+<?php
+
+function __comment_list_rows($css, $r){
+global $cp, $cfg, $fct, $adm_skin;
+
+	$r['timestamp'] = date('d.m.Y, H:i', $r['timestamp']);
+
+	if ( $r['userid'] > 0 )
+	{
+		$r['username'] = '<a href="index.php?asid='.$cp->session_id.'&amp;cp=profile&amp;userid='.$r['userid'].'" target="_blank">'.$r['rusername'].'</a>';
+	}
+
+
+	$link = '';
+	if (  HTTP::input('perpage', '!empty' ) ) $link .= "&amp;perpage=".HTTP::input('perpage');
+	if (  HTTP::input('q', '!empty' ) ) $link .= "&amp;q=".HTTP::input('q');
+	if (  HTTP::input('order', '!empty' ) ) $link .= "&amp;order=".HTTP::input('order');
+	if (  HTTP::input('sort', '!empty' ) ) $link .= "&amp;sort=".HTTP::input('sort');
+	if (  HTTP::input('page', '!empty' ) ) $link .= "&amp;page=".HTTP::input('page');
+	if (  HTTP::input('published', '!empty' ) ) $link .= "&amp;published=".HTTP::input('published');
+
+	$r['comment_typelink'] = str_replace('#NUM#', $r['post_id'], $r['comment_typelink']);
+
+
+	$pub_icon = $r['published'] == 1 ? '<img src="images/online.gif" width="16" height="16" alt="deaktivieren" title="deaktivieren"/>' : '<img src="images/offline.gif" width="16" height="16" title="aktivieren" alt="aktivieren" />';
+	
+	$sid = session_id();
+
+	return <<<EOF
+	<tr onmouseover="over(this)" onmouseout="out(this)" class="$css">
+		<td><input type="checkbox" name="ids[]" value="{$r['id']}" class="checkbox"/></td>
+		<td><a href="{$r['comment_typelink']}&amp;asid=$sid#comment_{$r['id']}" target="_blank">{$r['title']}</a></td>
+		<td align="center">{$r['timestamp']}</td>
+		<td>{$r['username']}</td>
+		<td align="center">{$r['ip']}</td>
+		<td align="right">{$r['comment_type']}</td>
+		<td align="center">
+		<a href="javascript:void(0);" onclick="getInfoData('admin.php?adm=comments&sid=$cp->session_id&action=show&id={$r['id']}');"><img src="images/msg_info.gif" width="12" height="12" title="details anzeigen" alt="" /></a> &nbsp;
+		<a href="admin.php?adm=comments&amp;sid=$cp->session_id&amp;action=publish&amp;pub={$r['published']}&amp;id={$r['id']}{$link}">$pub_icon</a> &nbsp;
+		<a href="admin.php?adm=comments&amp;sid=$cp->session_id&amp;action=delete&amp;id={$r['id']}{$link}"><img src="images/delete.gif" alt="Kommentar löschen" title="Kommentar löschen" /></a></td>
+	</tr>
+EOF;
+
+
+}
+
+
+
+
+
+
+ // Class
+
+
+
+?>

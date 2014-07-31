@@ -1,0 +1,142 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+	<div class="controlpanel-tabs">
+		<cp:include template="usercontrol/tabpanel" />
+	</div>
+	<form action="user/avatar" method="post" id="avatar-settings-form">
+		<input type="hidden" name="send" value="send" />
+		<input type="hidden" name="uiqtoken" value="{$session.uiqtoken}" />
+		<input type="hidden" name="imgpath" id="imgpath" value="" />
+		<div class="settings"> <span class="changesettings">
+                    </span>
+
+			 <h3 class="underlined">
+                        {trans('Avatar/Profil Bild')}
+                    </h3>
+
+			<div>
+				<div id="avatar-container">
+					<cp:loop name="avatars" key="r">
+						<div class="img-container{iif($user.avatarid == $r.id, ' current', '')}">
+							<label for="av-{$r.id}">
+								<img src="{$r.src}" alt="" />
+								<input type="radio" value="{$r.id}" name="avatarid" id="av-{$r.id}" cp:on="checked:$user.avatarid == $r.id" parse:checked="checked" />
+							</label>
+						</div>
+					</cp:loop>
+				</div>
+				
+				<cp:include template="pageing" />
+			</div>
+			<fieldset>
+				<legend>{trans('Upload')}</legend>
+				<div id="upload-container"></div>
+				<div id="img-container">
+					<img alt="" src="{photo($user.userphoto, 'AuthorImageLarge', '')}" title="{escape($user.username, 'html')}" border="0" />
+				</div>
+				<div>{trans('Achtung beim Speichern wird dein altes Profilbild automatisch gelöscht!')}</div>
+			</fieldset>
+			<fieldset>
+				<legend>{trans('Upload')}</legend>
+				<cp:loop name="photos" key="r">
+					<img alt="" src="{photo($r.userphoto, 'AuthorImageLarge', '')}" title="{escape($user.username, 'html')}" border="0" />
+				</cp:loop>
+			</fieldset>
+			<p class="tc">
+				<input class="button save-button" type="button" value="{trans('Avatar speichern')}" />
+				<input class="button" type="reset" accesskey="R" value="{trans('Zurücksetzen')}" />
+			</p>
+		</div>
+	</form>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var frontend = true;
+	var session_id = '{$session_id}';
+	var cmsurl = systemUrl + '/';
+	var max_upload_size = "{$uploadsize}";
+	var max_upload_limit = "{$uploadlimit}";
+	/* ]]> */
+	</script>
+	<script type="text/javascript" src="dm/html/js/backend/swfupload/swfupload.js"></script>
+	<script type="text/javascript" src="dm/html/js/backend/upload_frontend.js"></script>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	$(document)
+		.ready(function () {
+		$('#upload-container')
+			.empty();
+		var swfu = upload = null;
+
+		var upload = new DCMS_MultiUploadControl({
+			'control': "upload-container",
+			'adm': "user",
+			'action': "avatar",
+			file_upload_limit: "0",
+			file_queue_limit: "1",
+			'url': "user/avatar",
+			file_type_mask: "*.jpg; *.jpeg; *.gif; *.png",
+			file_types: "*.jpg; *.jpeg; *.gif; *.png",
+
+			'uiqtoken': '{$session.uiqtoken}',
+			'file_type_text': "{trans('Alle Dateien')}",
+			max_file_size: "1 MB",
+			customSettings: {
+				postFunction: function (data) {
+					var img = $('<img/>')
+						.attr('src', 'main/imgpreview/AuthorImageLarge/jpg/' + data.filepath);
+					$('#img-container')
+						.empty()
+						.append(img);
+					$('#imgpath')
+						.val(data.filepath);
+				}
+			}
+		});
+	});
+
+
+	var div = $('<div id="form-message" class="validation"></div>');
+	div.insertBefore($('#avatar-settings-form'));
+	div.hide();
+	$('#avatar-settings-form')
+		.registerFormFE({
+		exit_url: 'user/controlpanel',
+		save: function (exit) {
+			var self = this;
+			post = $('#avatar-settings-form')
+				.serialize();
+
+			$.post('user/avatar', post, function (data) {
+				if (responseIsOk(data)) {
+
+					var button = $('<button/>')
+						.append('Weiter...');
+					$('#form-message')
+						.empty();
+					var span = $('<div/>')
+						.append(data.msg);
+					$('#avatar-settings-form')
+						.hide();
+					$('#form-message')
+						.addClass('success')
+						.append(span)
+						.show();
+					$('#form-message')
+						.addClass('success')
+						.append($('<div/>')
+						.append(button));
+					button.click(function () {
+						document.location.href = 'user/controlpanel'
+					});
+
+				} else {
+					self.error(data);
+				}
+			}, "json");
+
+		}
+	});
+
+	/* ]]> */
+	</script>
+</cp:block>

@@ -1,0 +1,32 @@
+<form action="admin.php" name="catperms" id="catperms" method="post">
+<input type="hidden" name="adm" value="downloads_perm" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="cid" value="{$cp->input[cid]}" />
+
+
+<div class="tl description">
+<b>Zugriffsrechte für Kategorie: $cat_name</b>
+</div>
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="100%">
+   <tr class="tableheader">
+      	<td>Gruppe</td>
+	<td width="15%" align="center">Leserecht</td>
+	<td width="15%" align="center">Kann Hinzufügen</td>
+	<td width="15%" align="center">Kann Bearbeiten</td>
+	<td width="15%" align="center">Kann Löschen</td>
+   </tr>
+
+    $list_groups
+
+    <tr class="firstrow">
+        <td align="center" colspan="5">
+<input type="hidden" name="action" value="savecatperm" />
+<input type="submit" value="Übernehmen" class="button" />
+<input type="reset" value="Zurücksetzen" class="button" />
+<input type="button" value="Abbrechen" class="button" onclick="history.back();" />
+        </td>
+    </tr>
+
+</table>
+</form>

@@ -1,0 +1,73 @@
+<cp:extends template="../container" />
+<cp:block name="read-more">
+    <a href="profile/{$bloguser.userid}/{suggest($bloguser.username,true)}">
+        {trans('mehr')}
+    </a>
+</cp:block>
+<cp:block name="main_content">
+    <div class="item">
+        <header class="item-header">
+            <h1>
+                {seemode($entry.title, 'title')}
+            </h1>
+        </header>
+        <article class="item-content">
+            {$entry.content}
+        </article>
+        <cp:likethis enable="cfg('userblog.enablesocialbuttons', true)" sharebutton="true" showcount="true" networks="twitter, fb, plusone" />
+    </div>
+    <cp:set var="document.pageing" value="$entry.paging" />
+    <cp:include template="../pageing" />
+    <div cp:is="$bloguser.username" class="author-box">
+        <h3>
+            {trans('Über den Author %s', $bloguser.username)}
+        </h3>
+        <div class="author-box-inner">
+            <div class="bio">
+                {truncate($bloguser.bio, 300, 'em,i,b,strong,span' , ' [...]')}
+                <cp:block name="read-more" />
+            </div>
+            <div class="photo">
+                <cp:if condition="$bloguser.avatarowner != null">
+                    <img alt="{escape($bloguser.username, 'html')}" src="{photo($bloguser.userphoto, 'AuthorImageSmall', '')}" title="{escape($bloguser.username, 'html')}" border="0" />
+                </cp:if>
+                <cp:else>
+                    <img alt="{escape($bloguser.username, 'html')}" src="{photo($bloguser.userphoto, 'AuthorImageSmall', '')}" title="{escape($bloguser.username, 'html')}" border="0" />
+                </cp:else>
+            </div>
+        </div>
+    </div>
+    <cp:if condition="$entry.cancomment && cfg('userblog.usecomments', true)">
+        <div class="box-comments" id="comments-{$entry.id}">
+            {*
+            kommentare anzeigen wenn news einstellung aktiv ist
+            *}
+            <div class="box-comments-inner">
+                [modul name="comments" section="userblog" id="{$entry.id}"]
+            </div>
+            <div class="clear">
+                <!-- -->
+            </div>
+            {*
+            kommentar formular nur anzeigen wenn benutzer das recht dazu hat
+            *}
+            <div class="box-comments-form">
+                <cp:set var="permissionkey" str:value="userblog/cancomment" />
+                [modul name="commentform" section="userblog" id="{$entry.id}"]
+            </div>
+        </div>
+    </cp:if>
+</cp:block>
+
+<cp:block name="teaser">
+    <cp:if condition="$entry.teaser && !$entry.teaserimage">
+        <div class="inside">
+            {$entry.teaser}
+        </div>
+    </cp:if>
+    <cp:elseif condition="!$entry.teaser && $entry.teaserimage">
+
+            <cp:thumb src="$entry.teaserimage" width="910" height="150" chain="newsteaser" />
+
+    </cp:elseif>
+</cp:block>

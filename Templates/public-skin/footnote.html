@@ -1,0 +1,14 @@
+<cp:if condition="is_array($footnotes)">
+    <div class="footnotes" id="footnotes-{$footnotes.index}">
+        <h3>{trans('Referenzen')}</h3>
+        <ul>
+            <cp:loop name="footnotes.links" key="r">
+                <li>
+                    {$r.footnoteindex}. <a href="{$r.url}" cp:on="target:$r.extern" parse:target="_blank" name="{$r.footnote}" class="external">{iif($r.title, $r.title, $r.url)}</a>
+                    <small>({$r.url})</small>
+                </li>
+            </cp:loop>
+            
+        </ul>
+    </div>
+</cp:if>

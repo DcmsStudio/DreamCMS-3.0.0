@@ -1,0 +1,128 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+</cp:block>
+<cp:block name="ajaxlist">
+    <ul>
+        <cp:set var="css" value="default" />
+        <cp:loop name="members" key="r">
+            <li class="{cycle('cyclename', 'left,right', 'css')}">
+                <cp:if condition="$viewmode == 'advanced'">
+                    <div class="user-row">
+                        <div class="photo {iif(photo($r.userphoto, 'Memberlist', ''), '', 'no-photo')}">
+                            <img cp:if="photo($r.userphoto, 'Memberlist', '')" alt="" src="{photo($r.userphoto, 'Memberlist', '')}" title="{escape($user.username, 'html')}" border="0" />
+                        </div>
+                        <div class="details">
+                            <span class="header">
+                                <cp:if condition="hasperm('user/canviewotherprofiles')">
+                                    <a href="profile/{$r.userid}/{suggest($r.username, true)}">
+                                        {$r.username}
+                                    </a>
+                                </cp:if>
+                                <cp:else>
+                                    {$r.username}
+                                </cp:else>
+                            </span>
+                            <cp:if condition="$r.name">
+                                {str(', ',trans('Vorname'), ' ',$r.name)}
+                            </cp:if>
+                            
+                            <cp:if condition="$r.usertext != ''">
+                                <p class="mini-bio">
+                                    {truncate($r.usertext, 130, null, '...')}
+                                </p>
+                            </cp:if>
+                            <cp:else>
+                                <p class="mini-bio no-infos">
+                                    {trans('%s hat noch keine Informationen über sich angegeben.', $user.username)}
+                                </p>
+                            </cp:else>
+                        </div>
+                        <div class="user-statistic">
+                            <small>
+                                {trans('Registriert')}: {date('d.m.Y, H:i', $r.regdate)} | {trans('zuletzt online')}: {date('d.m.Y, H:i', $r.lastvisit)}
+                            </small>
+                        </div>
+                    </div>
+                </cp:if>
+            </li>
+        </cp:loop>
+    </ul>
+</cp:block>
+<cp:block name="table-list">
+    <table border="0" width="100%" cellpadding="3" cellspacing="0" class="table table-striped table-hover table-bordered-cols">
+        <thead>
+            <tr>
+                <th width="30%">
+                    {trans('Username')}
+                </th>
+                <th>
+                    {trans('Vorname')}
+                </th>
+                <th width="10%" class="tc">
+                    {trans('Beiträge')}
+                </th>
+                <th width="15%" class="tr">
+                    {trans('Registriert seit')}
+                </th>
+                <th width="15%" class="tr">
+                    {trans('Zuletzt online')}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <cp:loop name="members" key="r">
+                <tr class="{cycle('cyclename', 'even,odd', 'css')}">
+                    <td>
+                        <cp:if condition="hasperm('user/canviewotherprofiles')">
+                            <a href="profile/{$r.userid}/{suggest($r.username, true)}">
+                                {$r.username}
+                            </a>
+                        </cp:if>
+                        <cp:else>
+                            {$r.username}
+                        </cp:else>
+                    </td>
+                    <td>
+                        {$r.name}
+                    </td>
+                    <td class="tc">
+                        {$r.userposts}
+                    </td>
+                    <td class="tr">
+                        {date('d.m.Y', $r.regdate)}
+                    </td>
+                    <td class="tr">
+                        {date('d.m.Y, H:i', $r.lastvisit)}
+                    </td>
+                </tr>
+            </cp:loop>
+            <cp:else>
+                <tr>
+                    <td colspan="4" class="tc">
+                        {trans('Keine Mitglieder vorhanden')}
+                    </td>
+                </tr>
+            </cp:else>
+        </tbody>
+    </table>
+</cp:block>
+<cp:block name="main_content">
+    <div class="box tr">
+        <a href="#" id="view-list">
+            Liste
+        </a>
+        |
+        <a href="#" id="view-advancedlist">
+            erweiterte Liste
+        </a>
+    </div>
+    <div class="box p0" id="ajax-list">
+        <cp:if condition="$viewmode == 'advanced'">
+            <cp:block name="ajaxlist" />
+        </cp:if>
+        <cp:else>
+            <cp:block name="table-list" />
+        </cp:else>
+    </div>
+    <cp:include template="pageing" />
+</cp:block>

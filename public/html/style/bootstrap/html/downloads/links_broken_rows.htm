@@ -1,0 +1,11 @@
+<tr class="$class">
+    <td>{$row['title']} {$row['version']}</td>
+    <td align="center">{$row['sender']}</td>
+    <td align="center">{$row['ip']}</td>
+    <td align="center">
+    <a href="admin.php?adm=downloads&amp;sid={$cp->session_id}&action=edit_link&id=$row[lid]"><img src="newimg/but_edit.gif" alt="Bearbeiten" border="0" /></a> &nbsp;&nbsp;
+    <a href="admin.php?adm=downloads&amp;sid={$cp->session_id}&action=deaktivate_link&id=$row[lid]&ostatus=1"><img src="newimg/icon_ok.gif" alt="Deaktivieren" border="0" /></a> &nbsp;&nbsp;
+    <a href="admin.php?adm=downloads&amp;sid={$cp->session_id}&action=del_link&id=$row[lid]"><img src="newimg/button_delete.gif" alt="Löschen" border="0" /></a>
+    </td>
+    <td><input type="checkbox" value="1" name="lids[{$row['lid']}][{$row['reportid']}]" /></td>
+</tr>

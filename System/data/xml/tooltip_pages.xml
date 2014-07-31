@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooltip>
+  <can_comment title="Kommentare"><![CDATA[Kann diese Seite Kommentiert werden?]]></can_comment>
+  <access title=""><![CDATA[]]></access>
+  <parent title=""><![CDATA[]]></parent>
+  <reset_the_hitcounter title=""><![CDATA[]]></reset_the_hitcounter>
+  <layout title="Layout Template"><![CDATA[Wählen Sie ein Layout Template um den Inhalt der Seite im Frontent darzustellen.]]></layout>
+  <tags title="Tags"><![CDATA[Versehen Sie diese Seite mit einzelnen Tags.]]></tags>
+  <pagelayout title=""><![CDATA[]]></pagelayout>
+  <contentlayout title=""><![CDATA[]]></contentlayout>
+</tooltip>

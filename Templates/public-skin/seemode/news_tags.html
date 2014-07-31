@@ -1,0 +1,13 @@
+<form action="admin.php" id="seemform" method="post">
+    <input type="hidden" name="adm" value="seemode"/>
+    <input type="hidden" name="sub-action" value="save"/>
+    <input type="hidden" name="contentid" value="{$id}"/>
+    <input type="hidden" name="mode" id="seem-mode" value=""/>
+    
+    <fieldset>
+        <legend>{trans('Tags')}</legend>
+        <input type="text" name="keywords" value="{$keywords}" size="40" class="input"/>
+    </fieldset>
+    
+    
+</form>

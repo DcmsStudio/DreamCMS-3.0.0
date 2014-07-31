@@ -1,0 +1,48 @@
+<cp:extends template="../main"/>
+
+<cp:block name="inline-css">
+    <link rel="stylesheet" type="text/css" href="html/style/default/css/grid.css" />
+</cp:block>
+<cp:block name="toolbar">
+
+</cp:block>
+
+<cp:block name="content">
+
+    <div id="usergroups-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+        Application.Grid('usergroups-grid', {$gridJson});
+/*
+        var table = new dcmsGrid('usergroups-grid', {
+            url: 'admin.php?adm=usergroups',
+            currentFilter: {$grid.activeFilter},
+            colModel: {$grid.colModel},
+            gridActions: {$grid.gridActions},
+            sort: '{$grid.sort}',
+            orderby: '{$grid.orderby}',
+            total: {$grid.total},
+            key: 'groupid'
+        });
+*/
+
+        function setDefaultGroup(id)
+        {
+            var icon = $('#load_'+ id ).attr('src');
+            $('#load_'+ id ).attr({'src': $('#load_'+ id ).attr('src').replace(/\/([a-z0-9_]+)\.[a-z0-9_]+$/ig, '/loading.gif')} );
+            $.post('admin.php', 'adm=usergroups&action=setdefault&id='+id, function (data) {
+                if(!responseIsOk(data)) {
+                    $('#load_'+ id ).attr({'src': icon} );
+                    jAlert(data.msg);
+                }
+                else
+                {
+                    // eval(listViewTbl +'.GetAdminList(\'admin.php?adm=usergroups\', true)');
+                }
+            },'json');    
+        }
+
+
+    </script>
+</cp:block>
+

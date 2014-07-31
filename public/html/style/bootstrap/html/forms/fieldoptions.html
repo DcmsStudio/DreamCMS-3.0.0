@@ -1,0 +1,194 @@
+<cp:if condition="in_array('spanlabel', $attributes) || in_array('grouplabel', $attributes)">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Group Label")}:</label>
+            <input type="text" class="form-control" id="spanlabel-{$field.fieldid}" name="spanlabel" value="{$field.spanlabel}" size="70"/>
+
+        </div>
+    </div>
+</cp:if>
+
+
+<cp:if condition="in_array('label', $attributes)">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Label")}:</label>
+            <input type="text" class="form-control required" id="label-{$field.fieldid}" name="label" value="{$field.label}" size="70"/>
+        </div>
+    </div>
+</cp:if>
+
+
+<cp:if condition="in_array('size', $attributes)">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Field Size")}:</label>
+
+            <input type="text" class="form-control" id="size-{$field.fieldid}" name="size" value="{$field.size}" />
+
+        </div>
+    </div>
+</cp:if>
+
+
+<cp:if condition="in_array('maxlength', $attributes)">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Maximale länge der Eingabe")}:</label>
+            <input type="text" class="form-control" id="maxlength-{$field.fieldid}" name="maxlength" value="{iif($field.maxlength, $field.maxlength, '255')}" style="width: 60px"/>
+
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('style', $attributes)">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Field Styles")}:</label>
+            <input data-position="top-left" data-tooltip="{trans('CSS Style Attribut des Feldes')}" type="text" class="form-control" id="style-{$field.fieldid}" name="style" value="{$field.style}" />
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('class', $attributes)">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Field Class")}:</label>
+            <input data-position="top-left" data-tooltip="{trans('CSS Klassen des Feldes')}" type="text" class="form-control" id="class" name="class" value="{$field.class}"/>
+
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('value', $attributes) && $field.type == 'text'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Standart Wert")}:</label>
+            <input type="text" class="form-control" id="value-{$field.fieldid}" name="value" value="{$field.value}"/>
+
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('value', $attributes) && $field.type =='textarea'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Standart Wert")}:</label>
+            <textarea data-position="top-left" data-tooltip="{trans('HTML Code ist nicht erlaubt')}" class="form-control" id="value-{$field.fieldid}" name="value" cols="40" rows="6">{$field.value}</textarea>
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('value', $attributes) && $field.type == 'richtext'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Standart Wert")}:</label>
+            <textarea data-position="top-left" data-tooltip="{trans('HTML Code ist erlaubt')}" class="form-control" id="value-{$field.fieldid}" name="value" cols="40" rows="6">{$field.value}</textarea>
+        </div>
+    </div>
+</cp:if>
+
+
+<cp:if condition="in_array('value', $attributes) && $field.type == 'checkbox'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Standart Wert")}:</label>
+            <input type="text" class="form-control" id="value-{$field.fieldid}" name="value" value="{iif($field.value, $field.value, 'on')}"/>
+
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('value', $attributes) && $field.type == 'datetime'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Datums Format")}:</label>
+            <input data-position="top-left" data-tooltip="{trans('Beispiel Format: YYYY-MM-DD hh:mm:ss')}" type="text" class="form-control" id="value-{$field.fieldid}" name="value" value="{iif($field.value, $field.value, '')}"/>
+        </div>
+    </div>
+</cp:if>
+
+
+<cp:if condition="in_array('value', $attributes) && $field.type == 'hidden'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Wert des versteckten Feldes")}:</label>
+            <input type="text" class="form-control" id="value-{$field.fieldid}" name="value" value="{iif($field.value, $field.value, '')}" size="80"/>
+        </div>
+    </div>
+</cp:if>
+
+
+<cp:if condition="in_array('cols', $attributes) && $field.type == 'textarea'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Spalten")}:</label>
+            <input type="text" class="form-control" id="cols-{$field.fieldid}" name="cols" value="{iif($field.cols, $field.cols, '80')}" style="width: 60px"/>
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('rows', $attributes) && $field.type == 'textarea'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Zeilen")}:</label>
+            <input type="text" class="form-control" id="rows-{$field.fieldid}" name="rows" value="{iif($field.rows, $field.rows, '10')}" style="width: 60px"/>
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('controls', $attributes)">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Feld erforderlich")}:</label>
+            <label for="controls-{$field.fieldid}">
+                <input type="checkbox" id="controls-{$field.fieldid}" name="controls" value="1" cp:on="checked:$field.controls" parse:checked="checked"/> {trans("Dieses Feld ist erforderlich")}</label>
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('checked', $attributes)">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Checked")}:</label>
+            <label for="checked-{$field.fieldid}"><input type="checkbox" id="checked-{$field.fieldid}" name="checked" cp:on="checked:$field.checked" parse:checked="checked"/>{trans("Yes, checkbox is checked by default")}</label>
+
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('multiple', $attributes) && $field.type !='select' && $field.type !='usergroups'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Mehrfach")}:</label>
+            <label for="multiple-{$field.fieldid}"><input type="checkbox" id="multiple-{$field.fieldid}" name="multiple" cp:on="checked:$field.multiple" parse:checked="checked"/>{trans("dieses kann mehrfach verwendet werden")}</label>
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('multiple', $attributes) && $field.type =='usergroups'">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Mehrfachauswahl")}:</label>
+            <label for="multiple-{$field.fieldid}">
+                <input type="checkbox" id="multiple-{$field.fieldid}" name="multiple" cp:on="checked:$field.multiple" parse:checked="checked"/>{trans("Als mehrfach auswahl werden")}</label>
+        </div>
+    </div>
+</cp:if>
+
+<cp:if condition="in_array('values', $attributes)">
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans("Feld Werte")}:</label>
+            <textarea class="form-control required" id="values-{$field.fieldid}" name="values" cols="40" rows="10" style="float:left!important; clear:right!important; width: 400px;max-width: 400px!important; min-width: 400px!important; height: 80px;">{$field.values}</textarea>
+
+            <div style="margin-left:5px;float:left!important;display:inline-block">
+                <span class="note">{trans('Beispiel')}:<br/>value1|label 1|<br/>value2|label 2|checked<br/>value3|label 3|</span>
+            </div>
+        </div>
+    </div>
+</cp:if>
+
+
+
+

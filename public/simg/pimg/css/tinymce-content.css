@@ -1,0 +1,699 @@
+
+
+div.notiz {
+    padding: 20px 30px 15px 30px;
+    background: #FBFBFB;
+    border: 1px solid #DDD;
+    margin: 0px 0px 15px 0px;
+    color: #888 !important;
+    position: relative;
+    
+}
+div.notiz h1:first-child, div.notiz h2:first-child, div.notiz h3:first-child {
+    padding-top: 0;
+    margin-top: 0;
+    line-height: 16px;
+    margin-bottom: 20px;
+}
+div.notiz p {
+    display: inline-block!important;
+    width: 100%!important;
+    height: auto!important;
+}
+
+div.notiz .left {
+    float: left;
+    max-width: 256px;
+    display: inline-block;
+    position: relative;
+}
+
+div.notiz .right {
+    margin: 0;
+    position: relative;
+    margin-left: 180px;
+}
+
+div.notiz.changelog {
+    padding: 10px 10px 15px 10px;
+    background: #fbfbfb;
+    border: 1px solid #ddd;
+    margin: 0px 0px 15px 0px;
+    color: #888 !important;
+}
+div.notiz.changelog h3 {
+
+    color: #888 !important;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0px 0px 10px 0px !important;
+
+}
+div.notiz.changelog ul { 
+    list-style: none!important;
+    background: transparent;
+    margin-left: 15px!important;
+    margin-right: 15px!important;
+}
+
+div.notiz.changelog ul li { color: #333; line-height: 16px; border: 0!important; background-position: 5px 6px!important;}
+
+
+table.standard {
+
+    width: 100%;
+    margin: 0px 0px 15px 0px;
+
+}
+
+
+
+table.standard thead td {
+
+    color: #444 !important;
+    background: #fafafa;
+    font-weight: bold;
+    line-height: 25px !important;
+
+}
+
+table.standard tbody td {
+
+    text-align: left;
+    padding:0px 5px 0px 5px;
+    color: #888 !important;
+    line-height: 18px !important;
+    cursor: default;
+    vertical-align: baseline;
+}
+
+table.standard tbody tr:hover td {
+
+    background: #fafafa;
+
+}
+
+table.spalten-1 tbody tr td {
+
+    width: 100%;
+
+}
+
+table.spalten-2 tbody tr td {
+
+    width: 50%;
+
+}
+
+
+table.tpltags tbody tr td:first-child {
+    width: 25%!important;
+}
+table.tpltags tbody tr td:last-child {
+    width: 75%!important;
+}
+
+table.spalten-3 tbody tr td {
+
+    width: 33%;
+
+}
+
+table.spalten-4 tbody tr td {
+
+    width: 25%;
+
+}
+
+table.spalten-5 tbody tr td {
+
+    width: 20%;
+
+}
+
+
+.codebox {
+    border: 1px solid #eee;
+}
+.codetop {
+    background: #eee;
+    padding: 2px 5px;
+    font-weight: bold;
+}
+
+
+div.code {
+    padding: 0;
+    background: #fbfbfb;
+    font: normal 12px Monospace;
+    line-height: 20px;
+    color: #666;
+    margin: 0px 0px 15px 0px;
+
+}
+.codebox div.code {
+    margin: 0!important;
+}
+div.code .syntaxhighlighter {
+    margin: 0!important;
+}
+
+div.code .syntaxhighlighter .toolbar {
+    padding: 3px 0px 3px 0px !important;
+}
+.syntaxhighlighter .toolbar a.item, 
+.syntaxhighlighter .toolbar .item {
+    margin: 0!important;
+    margin-left: 3px!important;
+    padding-right: 3px;
+    padding-left: 0;
+}
+div.quote {
+    color: #888!important;
+    padding: 0px 0px 0px 15px!important;
+    border: 0!important;
+    border-left: 4px solid #e9e9e9!important;
+    margin-left: 20px!important;
+    margin-right: 20px!important;
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
+
+
+}
+
+a.button, a.button:hover {
+    text-decoration: none ;
+    cursor: pointer ;
+}
+
+a.button.big {
+
+    padding: 7px 15px 7px 15px;
+    font: bold 12px;
+    line-height: 36px;
+    border-radius: 4px;
+    margin: 0 4px 4px 0;
+    white-space: nowrap;
+    width: auto;
+    padding: 4px 4px;
+    cursor: pointer;
+}
+
+a.button.small {
+
+    padding: 5px 7px 5px 7px;
+    font: normal 10px;
+    line-height: 26px;
+    border-radius: 4px;
+    margin: 0 4px 4px 0;
+    white-space: nowrap;
+    width: auto;
+    padding: 4px 4px;
+    cursor: pointer;
+}
+
+
+a.button.button-1 {
+
+    background: #EEE;
+    background: -webkit-linear-gradient(-90deg, #FFF, #EEE) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: -moz-linear-gradient(-90deg, #FFF, #EEE) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #CCC;
+    color: #333;
+}
+
+a.button.button-1:hover {
+    background: #F5F5F5;
+    background: -webkit-linear-gradient(-90deg, #EEE, #F5F5F5) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: -moz-linear-gradient(-90deg, #EEE, #F5F5F5) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #BBB;
+    color: #333;
+
+}
+
+a.button.button-2 {
+
+    background: #333;
+
+}
+
+a.button.button-2:hover {
+
+    background: #8fa620;
+
+}
+
+a.button.button-3 {
+
+    background: #d8d8d8;
+
+}
+
+a.button.button-3:hover {
+
+    background: #8fa620;
+
+}
+
+
+div.split {
+
+    width: 100%;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.split-news div.image {
+
+    width: 40%;
+    min-height: 152px;
+    background: url('../img/tinymce-content/news.png') no-repeat;
+    float: left;
+    overflow: hidden;
+    margin: 0px 15px 0px 0px;
+}
+
+div.split-news div.text {
+
+    width: 57.5%;
+    float: left;
+    overflow: hidden;
+    margin: 0;
+
+}
+/* -[ CONTENT : TEXT : TEMPLATES : SPLIT CONTENT : 2 SPALTEN ]- */
+div.split-2 div.float-1 {
+
+    width: 48.5%;
+    float: left;
+    overflow: hidden;
+    margin: 0px 10px 0px 0px;
+
+}
+
+div.split-2 div.float-2 {
+
+    width: 48.5%;
+    float: left;
+    overflow: hidden;
+    margin: 0;
+
+}
+
+/* -[ CONTENT : TEXT : TEMPLATES : SPLIT CONTENT : 3 SPALTEN ]- */
+div.split-3 div.float-1 {
+
+    width: 31.5%;
+    float: left;
+    overflow: hidden;
+    margin: 0px 10px 0 0;
+
+}
+
+div.split-3 div.float-2 {
+
+    width: 31.8%;
+    float: left;
+    overflow: hidden;
+    margin: 0px 10px 0px 0;
+
+}
+
+div.split-3 div.float-3 {
+
+    width: 31.5%;
+    float: left;
+    overflow: hidden;
+    margin: 0;
+
+}
+
+
+/* -[ CONTENT : TEXT : TEMPLATES : SPLIT CONTENT : 4 SPALTEN ]- */
+
+div.split-4 > div {
+    width: 22%;
+}
+div.split-4 div.float-1 {
+    float: left;
+    overflow: hidden;
+    margin: 0px 10px 0px 0px;
+
+}
+
+div.split-4 div.float-2 {
+    float: left;
+    overflow: hidden;
+    margin: 0px 10px 0px 0px;
+
+}
+
+div.split-4 div.float-3 {
+    float: left;
+    overflow: hidden;
+    margin: 0px 10px 0px 0px;
+
+}
+
+div.split-4 div.float-4 {
+    float: right;
+    overflow: hidden;
+    margin: 0;
+
+}
+
+
+/* -[ CONTENT : TEXT : TEMPLATES : SPLIT CONTENT : 1/1 SPALTEN LINKS ]- */
+
+div.split-5 div.float-1 {
+    width: 57%;
+    float: left;
+    overflow: hidden;
+    margin: 0px 15px 0px 0px;
+    padding-left: 2px;
+}
+
+div.split-5 div.float-2 {
+
+    width: 40%;
+    float: right;
+    overflow: hidden;
+    margin: 0;
+
+}
+
+/* -[ CONTENT : TEXT : TEMPLATES : SPLIT CONTENT : 1/1 SPALTEN RECHTS ]- */
+
+div.split-6 div.float-1 {
+
+    width: 40%;
+    float: left;
+    overflow: hidden;
+    margin: 0px 15px 0px 0px;
+
+}
+
+div.split-6 div.float-2 {
+
+    width: 57.5%;
+    float: left;
+    overflow: hidden;
+    margin: 0;
+
+}
+
+/* -[ CONTENT : TEXT : TEMPLATES : MESSAGES ]- */
+
+div.message {
+
+    color: #444;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    padding: 0px 0px 0px 15px;
+    margin: 0px 0px 15px 0px;
+    position: relative;
+    cursor: default;
+
+}
+
+div.message.okay {
+
+    color: #79906a;
+    border: 1px solid #b3dc82;
+    background: #ebf6e0;
+
+}
+
+div.message.fehler {
+
+    color: #e45959;
+    border: 1px solid #fbc4c4;
+    background: #ffe9e9;
+
+}
+
+div.message.hinweis {
+
+    color: #a2876f;
+    border: 1px solid #ded58a;
+    background: #fbfadd;
+
+}
+
+div.message.info {
+
+    color: #6c91cc;
+    border: 1px solid #b6d7e8;
+    background: #e9f7fe;
+
+}
+
+div.message a.fadeOut {
+
+    width: 28px;
+    height: 28px;
+    display: block;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    cursor: pointer;
+
+}
+
+div.message.okay a.fadeOut {
+
+    background: url('../img/tinymce-content/message.okay.png') no-repeat;
+
+}
+
+div.message.fehler a.fadeOut {
+
+    background: url('../img/tinymce-content/message.fehler.png') no-repeat;
+
+}
+
+div.message.hinweis a.fadeOut {
+
+    background: url('../img/tinymce-content/message.hinweis.png') no-repeat;
+
+}
+
+div.message.info a.fadeOut {
+
+    background: url('../img/tinymce-content/message.info.png') no-repeat;
+
+}
+
+/* -[ CONTENT : TEXT : TEMPLATES : TEXT HEADER ]- */
+
+div.textHeader {
+
+    width: 100%;
+    height: 20px;
+
+    margin: 0px 0px 15px 0px;
+    position: relative;
+
+}
+
+div.textHeader div.border {
+
+    width: 100%;
+    height: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+
+}
+
+div.textHeader div.text {
+    padding: 0px 10px 0px 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+}
+
+div.textHeader div.text.one {
+
+    color: #666;
+
+}
+
+div.textHeader div.text.two {
+    color: #b3b3b3;
+}
+
+div.textHeader div.text.three {
+    color: #8fa620;
+}
+
+div.textHeader div.text.big {
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* -[ CONTENT : TEXT : TEMPLATES : SPECIAL LISTS ]- */
+
+ul.trueList, ul.falseList, ul.iconList {
+
+    margin: 0px 0px 15px 0px !important;
+    padding: 0px;
+
+}
+
+ul.trueList li ul, ul.falseList li ul {
+
+    margin: 0px !important;
+
+}
+
+ul.trueList li, ul.falseList li, ul.iconList li {
+
+    list-style: none;
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+
+}
+
+ul.trueList li {
+
+    background: url('../img/tinymce-content/trueList.png') top left no-repeat;
+
+}
+
+ul.falseList li {
+
+    background: url('../img/tinymce-content/falseList.png') top left no-repeat;
+
+}
+
+ul.iconList li.true {
+
+    background: url('../img/tinymce-content/iconList.true.png') left no-repeat;
+
+}
+
+ul.iconList li.false {
+
+    background: url('../img/tinymce-content/iconList.false.png') left no-repeat;
+
+}
+
+
+.system-requirements {
+    padding: 10px;
+    padding-top: 0;
+    display: block;
+    border: transparent;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.system-requirements .textHeader {
+    margin-top: 10px;
+}
+.system-requirements .textHeader .text.two.big {
+    background: #FDFDFD;
+
+}
+.system-requirements ul li {
+    border: 0!important;
+}
+
+#template-tags thead th:first-child,
+#template-tags tr td:first-child {
+    width: 30%!important;
+}
+#template-tags thead th:last-child,
+#template-tags tr td:last-child {
+    width: 70%!important;
+}
+
+
+
+
+table.documentation thead th,
+table.documentation tbody tr td {
+    width:80px!important;
+    text-align: center;
+    font-size: 12px;
+}
+table.documentation thead th:first-child,
+table.documentation tbody tr td:first-child {
+    width: 30%!important;
+    text-align: left;
+}
+table.documentation thead th:last-child,
+table.documentation tbody tr td:last-child {
+    width: 100%!important;
+    text-align: left;
+}
+
+
+span.checked {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    outline: none;
+    background: transparent url('../img/tinymce-content/trueList.png') top left no-repeat;
+}
+span.unchecked {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    outline: none;
+    background: transparent url('../img/tinymce-content/falseList.png') 2px 0 no-repeat;
+}
+
+
+table.profil {
+
+    width: 100%;
+    border: 0!important;
+}
+
+table.profil td.leer {
+
+    width: 30px;
+    border: 0!important;
+}
+
+table.profil tr td {
+
+    width: 270px;
+    text-align: left;
+    padding: 0px;
+    vertical-align: top;
+    border: 0!important;
+}
+
+table.profil tr td div.image {
+
+    width: 270px;
+    height: 270px;
+    background: url('../images/profil.png') no-repeat;
+    overflow: hidden;
+    position: relative;
+    margin: 0px 0px 10px 0px;
+
+}
+
+table.profil tr td div.image img {
+
+    width: 270px;
+    height: 270px;
+    border: none;
+
+}
+
+table.profil tr td span {
+
+    color: #b3b3b3;
+
+}

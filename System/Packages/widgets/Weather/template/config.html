@@ -1,0 +1,148 @@
+<style>
+
+    #weather-result {
+        height: 100px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        overflow: auto;
+        overflow-x: hidden;
+        display: inline-block;
+        width: 98%;
+    }
+
+    #weather-result .results div {
+        line-height: 20px;
+        display: inline-block;
+        width: 100%;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    #weather-result span:first-child {
+        display: inline-block;
+        width: 80%;
+        float: left;
+    }
+
+    #weather-result span:last-child {
+        display: inline-block;
+        width: 16px;
+        height: 20px;
+        float: right;
+    }
+
+    .current-weather-location {
+        display: inline-block;
+        width: 100%;
+        line-height: 20px;
+    }
+
+</style>
+
+
+<div style="display:inline-block;width: 100%;height: 300px;padding: 5px">
+    <form action="admin.php" method="post" id="weather{$id}">
+        <fieldset>
+            <input type="hidden" id="name" name="name" value="{$name}"/>
+            <input type="hidden" id="wgt-id" name="id" value="{$id}"/>
+            <input type="hidden" id="country-name" name="country" value="{$config.country}"/>
+            <input type="hidden" id="city-name" name="city" value="{$config.city}"/>
+            <input type="hidden" id="location-name" name="config[location]" value="{$config.location}"/>
+
+            <p>
+            <div class="current-weather-location">{trans('Aktueller Ort')}: {$config.city}, {$config.country}</div>
+            <input type="text" id="q" value=""/>
+            <button id="search-weather-location" type="button">{trans('Suchen')}</button>
+            </p>
+
+            <div id="weather-result" style="display: none;">
+                <div class="results"></div>
+            </div>
+
+            <p>
+                <label>Units:</label>
+                <label for="config_units_c">
+                    <input type="radio" style="vertical-align: -2px;" name="config[units]" id="config_units_c" value="c"
+                           cp:on="checked:!$config.units || $config.units == 'c' " parse:checked="checked"/>
+                    {trans('Celsius')}
+                </label>
+
+                <label for="config_units_f">
+                    <input type="radio" style="vertical-align: -2px;" name="config[units]" id="config_units_f" value="f"
+                           cp:on="checked:$config.units == 'f' " parse:checked="checked"/>
+                    {trans('Fahrenheit')}
+                </label>
+            </p>
+
+        </fieldset>
+
+        <p>
+            <button class="widget-save-button pretty-button" type="button"><img
+                    src="{@BACKEND_IMAGE_PATH}buttons/save.png" width="16" height="16" alt=""/>&nbsp;Save
+            </button>
+        </p>
+
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    $( '#content-changes', $('#weather{$id}') ).parent().addClass( 'lastchanges-wg-bg' ).next().addClass( 'lastchanges-wg-bg' );
+
+    var baseVal = $( '#location-name', $('#weather{$id}') ).val();
+
+    $( '#search-weather-location', $('#weather{$id}')).unbind().click( function ( e )
+    {
+        /*
+         if (baseVal == $('#config_location').val())
+         {
+         return;
+         }
+         else
+         {
+         */
+        var id = $('#weather{$id}').find( '#wgt-id' ).val();
+        var widget = $( '#widget-' + id );
+
+        $.get( 'admin.php?adm=widgets&get=weather&id=' + id + '&q=' + $( '#q' , widget).val(), function ( data )
+        {
+
+            if ( data && data.result ) {
+                $( '#weather-result>div:first', widget ).empty();
+
+                if ( data.result.length ) {
+                    for ( var i = 0; i < data.result.length; i++ ) {
+                        var dat = data.result[i];
+                        $( '#weather-result>div:first', widget ).append(
+                                '<div class="row" rel="' + dat.location + '"><span>' + dat.city + ', ' + dat.country + '</span><span></span></div>'
+                        );
+                    }
+                }
+                else {
+                    $( '#weather-result>div:first', widget ).append( 'No result' );
+                }
+
+                $( '#weather-result', widget ).show();
+
+                Tools.scrollBar( $( '#weather-result>div:first', widget ) );
+
+                $( '#weather-result', widget ).find( 'div.row' ).each( function ()
+                {
+                    $( this ).click( function ()
+                    {
+                        var location = $( this ).attr( 'rel' );
+
+                        widget.find( '.current-weather-location' ).text( $( this ).find( 'span:first' ).text() );
+
+                        $( '#location-name', widget ).val( location );
+                        $( '#weather-result', widget ).hide();
+                    } );
+                } );
+            }
+
+        } );
+        // }
+    } );
+
+
+</script>

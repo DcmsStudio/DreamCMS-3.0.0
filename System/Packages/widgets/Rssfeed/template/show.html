@@ -1,0 +1,236 @@
+
+<style>
+    #{$container_id} {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #{$container_id} fieldset,
+    #{$container_id} legend{
+        border: 0;
+    }
+
+
+    #{$container_id} .toggle {
+        width: 100%;
+        display: inline-block;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #{$container_id} .toggle img { float: left; }
+    #{$container_id} .toggle .feed-title {
+        display: inline-block;
+        float: left;
+        width: 70%;
+    }
+    #{$container_id} .toggle .feed-date {
+        display: inline-block;
+        float: right;
+        margin-right: 5px;
+    }
+
+    #{$container_id} p, #{$container_id} ul {margin: 0;padding: 0;}
+
+
+    #{$container_id} .row { position: relative; }
+
+    #{$container_id} .row .feed-title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    #{$container_id} .row .feed-date {
+
+    }
+    #{$container_id} .row .feed-message {
+        padding: 10px;
+    }
+    #{$container_id} .row .feed-readmore {
+        padding: 0 10px;
+    }
+
+    #{$container_id} .row a { }
+
+    #{$container_id} .row .feed-message img {
+        height: auto;
+        width: auto;
+        max-height: 90px;
+        max-width: 90px;
+        float: left;
+        margin: 0;
+        margin-bottom: 5px;
+        margin-right: 5px;
+    }
+    #{$container_id} .row .feed-message a img {
+        float: none;
+        margin: 0;
+    }
+
+    #{$container_id} .row:first-child {
+        border-top: 0;
+    }
+    #{$container_id} .row div { max-width: 100%; overflow: hidden }
+
+    #{$container_id} .feed-msg {
+        display: none;
+    }
+
+    #{$container_id} .feed-overflow {
+        overflow: auto;
+        overflow-x: hidden;
+        display: block;
+        min-height: 250px;
+        max-height: 250px;
+        height: 250px;
+    }
+    #{$container_id} .feed-overflow > div {
+        display: block;
+    }
+    #{$container_id} .feed-overflow .scroll-content {
+        padding-right: 0!important;
+    }
+
+    .wg-header {
+        display: block;
+        padding: 10px;
+        color: #333;
+    }
+
+</style>
+
+
+<div class="rssfeed" id="{$container_id}">
+
+    <div class="wg-header">
+        <small>Feed fetched: {date('d.m.Y', 'H:i:s', $rss_fetched, true)}</small>
+    </div>
+
+    <div class="feed-overflow">
+        <div>
+            <cp:loop name="items" key="r">
+
+                <cp:if condition="$r.content">
+                    <div class="row">
+                        <div class="toggle">
+                            <img src="{@BACKEND_IMAGE_PATH}plus.png" width="16" height="16" alt="" style="vertical-align: -3px;" />
+                            <div class="feed-title">
+                                {$r.title}
+                            </div>
+                            <div class="feed-date">
+                                {$r.date}
+                            </div>
+                        </div>
+                        <div class="feed-msg">
+                            <div class="feed-message">
+                                {$r.content}
+                            </div>
+
+                            <div class="feed-readmore">
+                                <a href="{$r.link}" target="_blank">{trans('Original Artikel anzeigen')}</a>
+                            </div>
+                        </div>
+                    </div>
+                </cp:if>
+                <cp:else>
+                    <div class="row">
+                        <div class="feed-title">
+                            <a href="{$r.link}" target="_blank">{$r.title}</a>
+                        </div>
+                        <div class="feed-date">
+                            {$r.date}
+                        </div>
+                    </div>
+                </cp:else>
+            </cp:loop>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+
+    $('#{$container_id}').parents('.widget-content:first').addClass('{$container_id}bg').next().addClass('{$container_id}bg2');
+    $('#{$container_id}').find('a[rel="external"]').unbind();
+    $('#{$container_id}').find('a[rel="external"]').bind('click', function(e) {
+        e.preventDefault();
+        window.open($(this).attr('href'));
+        return false;
+
+    });
+    $('#{$container_id}').find('.toggle').css({cursor: 'pointer'}).unbind();
+    $('#{$container_id}').find('.toggle').unbind('mouseover').on('mouseover', function() {
+        var src = $('img', $(this)).attr('src');
+
+        src = src.replace('plus-hover', 'plus');
+        src = src.replace('minus-hover', 'minus');
+
+        src = src.replace('plus', 'plus-hover');
+        src = src.replace('minus', 'minus-hover');
+
+
+
+        $('img', $(this)).attr('src', src);
+    });
+
+    $('#{$container_id}').find('.toggle').unbind('mouseleave').on('mouseleave', function() {
+
+        var src = $('img', $(this)).attr('src');
+        src = src.replace('plus-hover', 'plus');
+        src = src.replace('minus-hover', 'minus');
+
+
+
+        $('img', $(this)).attr('src', src);
+    });
+
+    $('#{$container_id}').find('div.feed-message').find('a').each(function(){
+        var text = $(this).text().trim();
+
+        if (text)
+        {
+            if ( $(this).find('img').length ) {
+                $(this).replaceWith($(this).html());
+            }
+            else {
+                $(this).replaceWith($(this).html());
+            }
+        }
+        else {
+            $(this).remove();
+        }
+
+    });
+
+    Tools.scrollBar($('#{$container_id}').find('div.feed-overflow div:first'));
+
+    $('#{$container_id}').find('.toggle').unbind('click').bind('click', function(e) {
+        var idstr = $(this).attr('id');
+        var obj = $(this).next();
+
+        var src = $('img', $(this)).attr('src');
+        src = src.replace('plus-hover', 'plus');
+        src = src.replace('minus-hover', 'minus');
+
+
+        if (!obj.is(':visible'))
+        {
+            src = src.replace('plus', 'minus');
+            $('img', $(this)).attr('src', src);
+            obj.slideToggle(300, function() {
+                Tools.scrollBar($('#{$container_id}').find('div.feed-overflow div:first'));
+            });
+        }
+        else
+        {
+            src = src.replace('minus', 'plus');
+            $('img', $(this)).attr('src', src);
+            obj.slideToggle(300, function() {
+                Tools.scrollBar($('#{$container_id}').find('div.feed-overflow div:first'));
+            });
+        }
+    });
+
+
+</script>

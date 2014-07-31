@@ -1,0 +1,194 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        <button id="add-cat" class="action-button btn_new"><span class="icn"></span><span class="label">{trans('Forum erstellen')}</span></button>
+        <button id="update-order-cat" class="action-button save"><span class="icn"></span><span class="label">{trans('Forum Sortierung speichern')}</span></button>
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+    <div class="sortable-table" id="sortable-forums">
+
+        {$header} 
+        
+        <ul id="forums-grid" class="tree-grid">
+            {$forums}
+        </ul>
+
+    </div>
+
+
+    <script type="text/javascript">
+
+        var newOrderData = "";
+        var parentId = 0;
+        var clearUpdate = false;
+        
+        
+        if (typeof updateForumCatZebra == 'undefined') {
+            function updateForumCatZebra() {
+                updateZebraForTreeGrid($('#sortable-forums'), 'li', 'div.row');
+                
+                /*
+                $('#sortable-forums').find('li').each(function(index) {
+                    $(this).removeClass('zebra');
+                    if (index % 2) {
+                        $(this).addClass('zebra');
+                    }
+                });
+        */
+            }
+
+            function findInvalidItems()
+            {
+                var items = $('#sortable-forums ul.tree-grid>li');
+                $('.red').removeClass('red');
+
+                items.each(function() {
+                    if ($(this).hasClass('row')) {
+                        $(this).addClass('red');
+                    }
+                });
+            }
+
+            function processChildren(parentId) {
+
+                var ulParentID = "cat_" + parentId;
+
+                $('li#' + ulParentID, $('#sortable-forums')).find('li').each(function() {
+
+                    if ($(this).attr("id") != ulParentID)
+                    {
+                        newOrderData = newOrderData + '&forum[' + $(this).attr("id").replace('cat_', '') + "]=" + parentId;
+
+                        //Determine if this child is a containter
+                        if ($(this).find('li').length > 0)
+                        {
+                            //Process the child elements of the container
+                            parentId = $(this).attr("id").replace('cat_', '');
+                            processChildren(parentId);
+                        }
+                    }
+                });  //end of children loop
+
+            } //end of processChildren function
+
+        }
+
+
+        $('#update-order-cat').disableButton();
+        $('#update-order-cat').unbind().click(function(e) {
+            e.preventDefault();
+            parentId = 0;
+            newOrderData = '';
+            newOrderData = $('#forums-grid').nestedSortable('serialize');
+            parentId = 0;
+            findInvalidItems();
+            /*
+             $('ul.tree-grid > li').each(function () {
+             
+             if ($(this).attr("id"))
+             {
+             parentId = $(this).attr('id').replace('cat_', '');
+             newOrderData = newOrderData + '&forum['+ parentId  + "]=" + "0";
+             if ( $(this).find('li').length > 0 )
+             {
+             processChildren( parentId  );
+             }
+             }
+             });
+             */
+            $(this).disableButton();
+            $('#forums-grid td.handle').addClass('updating');
+
+            setTimeout(function() {
+                $.get('admin.php?adm=plugin&plugin=forum&action=reorder&' + newOrderData, {}, function(data) {
+                    if (Tools.responseIsOk(data)) {
+
+                        $('#forums-grid td.handle').removeClass('updating');
+                        newOrderData = '';
+                    }
+                    else {
+
+                        jAlert(data.msg);
+                    }
+                }, 'json');
+            }, 300);
+
+
+        });
+
+
+        $('#add-cat').unbind().click(function(e) {
+            e.preventDefault();
+            openTab({url: 'admin.php?adm=plugin&plugin=forum&action=addforum', obj: this, label: $(this).text()});
+            //document.location.href = 'admin.php?adm=forum&action=edit';
+        });
+
+
+        
+
+
+
+        $('#forums-grid').nestedSortable({
+            disableNesting: '.tree-grid',
+            forcePlaceholderSize: true,
+            forceHelperSize: true,
+            helper: 'clone',
+            handle: 'td.handle',
+            items: 'li',
+            listType: 'ul',
+            opacity: .7,
+            placeholder: 'ui-sortable-placeholder',
+            tabSize: 25,
+            maxLevels: 10,
+            expandOnHover: 500,
+            isTree: true,
+            scroll: false,
+            revert: false,
+            tolerance: 'pointer',
+           // toleranceElement: '> div',
+           toleranceElement: '>.row > table:first',
+            startCollapsed: false,
+            appendTo: 'body',
+            zIndex: 99999,
+            stop: function(event, ui) {
+                /*
+                 newOrderData = '';
+                 parentId= 0;
+                 
+                 
+                 $('ul.sortablerow').find('li:first-child').each(function () {
+                 
+                 if ($(this).attr("id"))
+                 {
+                 parentId = $(this).attr('id').replace('cat_', '');
+                 newOrderData = newOrderData + '&forum['+ parentId  + "]=" + "0";
+                 if ( $(this).has('ul') )
+                 {
+                 processChildren( parentId  );
+                 }
+                 
+                 }
+                 }); */
+
+                newOrderData = '';
+                newOrderData = $('#forums-grid').nestedSortable('serialize');
+                parentId = 0;
+                
+                findInvalidItems();
+                
+                $('#update-order-cat').enableButton();
+
+                updateForumCatZebra();
+            }
+
+        });
+
+        updateForumCatZebra();
+
+    </script>
+
+</cp:block>

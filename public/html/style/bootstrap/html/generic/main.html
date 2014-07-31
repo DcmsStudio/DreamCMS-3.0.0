@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title>DreamCMS {$version} - {iif($pageTitle, $pageTitle, 'Administration')}</title>
+        <meta http-equiv="Content-Language" content="de"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" href="{$js_url}jquery/css/base/jquery.ui.base.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{$backend_css_url}layout.css" type="text/css" />
+        <link rel="stylesheet" href="{$backend_css_url}forms.css" type="text/css"  />
+        <link rel="stylesheet" href="{$backend_css_url}filemanager.css" type="text/css" />
+        <link rel="stylesheet" href="{$backend_css_url}jqueryFileTree.css" type="text/css" />
+        <link rel="stylesheet" href="{$backend_css_url}jquery.contextMenu.css" type="text/css" />
+        <link rel="stylesheet" href="{$js_url}jquery/fancybox/jquery.fancybox-1.3.1.css" type="text/css" />
+        
+        <script type="text/javascript" language="javascript">
+            //<![CDATA[
+    var seeMode = false;
+    var menuItems;
+    var filemanager = null;
+    var session_id = '{$session_id}';
+    var cmsurl = '{$cfg.portalurl}/';
+    var backendImagePath = '{$backendImagePath}';
+    var cms_pagepath = '{$pagepath}/';                
+    var cmsurl_regex = {$cmsurl_jsregex};
+    var colorPickerWidth = 12;
+    var exitpopup = {$js_popup};
+    var widgetcolumns = 4; // num of widget div cols for frontpage
+    var use_fancy_checkboxes = false;
+    var is_defaultheader = false;
+    var hasTrash = false;
+    var max_upload_size = "{$uploadsize} MB";
+    var max_upload_limit = "{$uploadlimit}";
+    var is_defaultheader = false;
+    var cookiePrefix = '{$cookieprefix}';
+    var fm_viewmode = '{$fileman_view_mode}';
+    var requestString = '{requeststring('post')}';
+    
+    var settings = {};
+        settings.base_url = cmsurl;
+        settings.session_id = session_id;
+
+    var pageTitle = '{$pageTitle}';
+    var pageCurrentTitle = '{$pageCurrentTitle}';
+    var menuObj;
+
+$(document).ready( function() {
+    if($('#comp-runtime').text()!='') {
+        $('#comp-runtime').show();
+        window.setTimeout(function() {$('#comp-runtime').fadeOut();}, 4000);
+    }
+
+    $('#logoutbutton').click(function() { logout(); } );
+    $('#helpbutton').click(function() { dcmshelp('{$request.adm}', '{$request.action}'); } );
+    $('#notecreate').click(function() { create_note(); } );
+    $('#notetoggle').click(function() { toggle_notes(); } );
+
+});
+
+//]]>
+        </script>
+        <cp:include template="generic/js_lang.html"/>        
+        {$js_code}
+        {$js}  
+        <script type="text/javascript" src="admin.php?adm=buildpulldown" rel="buildpulldown"></script>
+        <script type="text/javascript" src="admin.php?adm=widget"></script>
+        <script type="text/javascript" src="admin.php?adm=getMenuTree"></script>        
+        <script type="text/javascript" src="admin.php?adm=loadjs&js={escape('backend/dcms.menu,backend/dcms.tree,backend/dcms.widget', 'url')}"></script>
+    </head>
+    <body id="cpbody" topmargin="0" leftmargin="0">
+        
+        
+        
+        <div id="widget-contents">
+            
+            <div id="header">
+                <div id="title-bar">
+                    <div id="copyright">&copy; {date('m/Y')} by DreamCMS Development</div>
+                    <div id="tips">
+                        <h1 id="title-container" style="display:block">
+                            <img src="html/style/default/img/buttons/lock.png" class="absmiddle" width="16" height="16" alt="" /> {trans("angemeldet als")}&nbsp;{$user.username}
+                        </h1>
+                        <h1 id="tip-container" style="display:none"></h1>                    
+                    </div>
+                </div>
+                <div id="menu-bar">
+                    
+                    <!-- Menu Buttons -->
+                    <div id="topmenubar">
+                        <ul id="dcms-menu">
+                            <li>Loading menu...</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Notepad Buttons -->
+                    <div id="notepad">
+                        <button id="logoutbutton" class="action-button"><img src="images/buttons/decrypted.png" width="16" height="16" alt="" /> {trans("Logout")}</button>
+                        <button id="helpbutton" class="action-button"><img src="images/pulldownmenu/help.png" width="16" height="16" alt="" /> {trans("Hilfe")}</button>
+                        <button id="notecreate" class="action-button" title="Press this button to create a new Note"><img src="images/edit-note.png" width="16" height="16" alt="" /> {trans("neue Notiz")}</button>                  
+                        <button id="notetoggle" class="action-button" style="display:{$shownote}" title="You can use this button to toggle the visibility of your Notes"><img src="images/notes.png" width="16" height="16" alt="" /> <span id="notes-message">{trans("Notiz open")} </span></button>
+                    </div>
+                </div>
+                
+                
+                <div class="toolbar" style="padding-left:300px;">
+                    <div class="fl" style="margin-left: 5px;">
+                        <cp:block name="toolbar"/>
+                    </div>
+                </div>
+                
+                <div id="tree" style="width: 534px;">
+                    <div id="node-container" style="display: block"></div>
+                    <div id="tree-footer">        
+                        <span style="display: none"><img src="/fruml/cms/asset/img/icon/tree-open.png" width="16" height="16" alt="" />&nbsp;Open Site Browser</span>
+                        <span style="display: inline"><img src="/fruml/cms/asset/img/icon/tree-close.png" width="16" height="16" alt="" />&nbsp;Close Site Browser</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="content">
+                <div id="maincontent">
+                    <cp:block name="content"/>
+                    
+                    <div style="display:inline-block;width:100%">{$session_history}</div>
+                    {$session_expiry}
+                </div>
+            </div>
+        </div>
+
+        <!-- Notepad Content -->
+        <div id="note_ajax"></div>
+        
+        <!-- ToolTip Box -->
+        <div id="tip" onclick="infohide();" style="display:none;">
+            <div id="tip-title"><img src="html/style/default/img/info.png" width="16" height="16" alt="" /><span id="tiptitle-text"></span></div>
+            <div id="tip-body"></div>
+        </div>
+        
+        
+        <ul id="page-tree-menu" class="dcmscontextmenu ui-menu">
+            <li id="site-edit"><a href="#"><img src="images/site-edit.png" width="16" height="16" alt="" /> Edit Site</a></li>
+            <li id="site-delete"><a href="#"><img src="images/site-delete.png" width="16" height="16" alt="" /> Delete Site</a></li>
+            <li id="site-separator" class="separator"><div class="menu-separator"></div></li>
+            <li id="site-page-add"><a href="#"><img src="images/ui-menu.png" width="16" height="16" alt="" /> Men√ºpunkt hier erstellen</a></li>            
+            <li id="page-view"><a href="#"><img src="images/page-view.png" width="16" height="16" alt="" /> View Page Details</a></li>
+            <li id="page-edit"><a href="#"><img src="images/context/edit.png" width="16" height="16" alt="" /> Men√ºpunkt bearbeiten</a></li>
+            <li id="page-delete"><a href="#"><img src="images/context/page_delete.png" width="16" height="16" alt="" /> Men√ºpunkt l√∂schen</a></li>
+            <li id="page-add"><a href="#"><img src="images/ui-menu.png" width="16" height="16" alt="" /> Men√ºpunkt hier erstellen</a></li>
+            <li id="page-separator" class="separator"><div class="menu-separator"></div></li>            
+            <li id="page-copy"><a href="#"><img src="images/context/document-copy.png" width="16" height="16" alt="" /> Men√ºpunkt kopieren</a></li>
+            <li id="page-move"><a href="#"><img src="images/context/move.png" width="16" height="16" alt="" /> Men√ºpunkt verschieben</a></li>            
+            <li id="past-item-copy"><a href="#"><img src="images/context/page_white_paste.png" width="16" height="16" alt="" /> Men√ºpunkt hier einf√ºgen</a></li>
+            <li id="past-item-move"><a href="#"><img src="images/context/page_white_paste.png" width="16" height="16" alt="" /> Men√ºpunkt hierher verschieben</a></li>
+        </ul>
+    </body>
+</html>

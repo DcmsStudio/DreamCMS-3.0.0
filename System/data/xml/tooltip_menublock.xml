@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tooltip>
+	<templatevar title="Template Variable"><![CDATA[Es dürfen keine Leerzeichen und auch keine Sonderzeichen bis auf den Unterstrich "_" verwendet werden!]]></templatevar>
+	<showtitle title=""><![CDATA[----]]></showtitle>
+	<position title=""><![CDATA[----]]></position>
+	<access title=""><![CDATA[----]]></access>
+	<publish title=""><![CDATA[----]]></publish>
+	<added_items title=""><![CDATA[----]]></added_items>
+	<items title=""><![CDATA[----]]></items>
+	<showat title=""><![CDATA[----]]></showat>
+</tooltip>

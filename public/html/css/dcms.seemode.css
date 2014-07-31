@@ -1,0 +1,525 @@
+body {
+    overflow-x: hidden;
+}
+
+#seemode-panel {
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    min-height: 30px;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #D1D1D1;
+}
+
+#seemode-main {
+    display: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 400px;
+    max-height: 700px;
+}
+
+#seemode-header, #seemode-panel-left, #seemode-panel-content, #seemode-footer {
+    margin: 0;
+    padding: 0;
+}
+
+
+#seemode-header {
+    display: block;
+    clear: both;
+    height: 28px;
+
+    background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+
+    border-bottom: 1px solid #8A8A8A;
+    padding-left: 210px;
+    padding-top: 3px;
+}
+
+#seemode-panel-left {
+    min-width: 200px;
+    float: left;
+    position: relative;
+    background: #DDD;
+    border-right: 1px solid #ccc;
+}
+
+#seemode-panel-content {
+    margin-left: 200px;
+    position: relative;
+    background: #f7f7f7;
+}
+
+#seemode-panel-control {
+    width: 100%;
+    min-height: 30px;
+    background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+    border-top: 1px solid #8A8A8A;
+    padding-left: 20px;
+}
+
+
+
+
+#seemode-panel-control .base-spacer {
+    width: 30px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    float: left;
+}
+
+#seemode-panel-control .base-btn {
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    border: 1px solid transparent;
+    position: relative;
+    top: 4px;
+    float: left;
+    background-color: #eee;
+    margin: 0 3px 0 0;
+    padding: 0;
+}
+#seemode-panel-control .base-btn:hover,
+#seemode-panel-control .base-btn:active,
+#seemode-panel-control .base-btn.active {
+    background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+    border-color: #4B6BA0;
+}
+
+#seemode-panel-control .base-btn span {
+    background-image: url('../../../html/img/seemode/seemode-control.png');
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+#seemode-panel-control .toggle-open span,
+#seemode-panel-control .toggle-close span {
+    background-position: 0 0;
+}
+#seemode-panel-control .config span {
+    background-position: -368px 0;
+}
+
+#seemode-panel-control .debug span {
+    background-position: -390px 0;
+}
+#seemode-panel-control .debug.off span {
+    background-position: -411px 0;
+    opacity: 0.8;
+}
+
+#seemode-panel-control .firewall span {
+    background-position: -434px 0;
+}
+#seemode-panel-control .firewall.off span {
+    background-position: -452px 0;
+    opacity: 0.8;
+}
+#seemode-panel-control .clearcache span {
+    background-position: -499px 0;
+}
+#seemode-panel-control .clearcache-full span {
+    background-position: -520px 0;
+}
+#seemode-panel-control .pagecache span {
+    background-position: -541px 0;
+}
+#seemode-panel-control .clickanalyser span {
+    background-position: -476px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+/**
+    Notifier
+*/
+#seemode_notifier {
+    z-index: 999999;
+    position: fixed;
+    top: 30px!important;
+    left: 20px!important;
+    min-height: 20px;
+    max-height: 100px;
+    width: auto;
+    float: left;
+    color: #FFF;
+    font-size: 12px;
+    overflow: hidden;
+    display: none;
+    background: rgba(30, 200, 12, 0.81);
+    box-shadow: 0 0 15px rgba(25, 139, 11, 0.81);
+    padding: 6px 12px 6px 6px;
+    font-weight: 700;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+/**
+    Dirty Message
+*/
+#seemode-dirty {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    background: rgba(255, 5, 0, 0.7);
+    border-bottom: 1px solid #D31D1D;
+    box-shadow: 0 0 15px rgba(182, 0, 0, 0.9);
+    z-index: 99990;
+}
+#seemode-dirty span {
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    display: block;
+}
+
+/**
+    Analystic
+*/
+.analysePoint {
+    position: absolute;
+    z-index: 99995!important;
+    border-radius: 5px;
+    background: rgba(103, 0, 255, 0.20);
+}
+
+
+
+
+/**
+    Header Buttons
+*/
+.btn-group-container {
+    margin: 0!important;
+    padding: 0!important;
+}
+.btn-group-label {
+    display: none!important;
+}
+
+.btn-group-container button,
+.btn-group-container .label {
+    color: #777;
+    font-size: 12px;
+    height: 20px;
+}
+
+/**
+    Form
+*/
+#content-seemode-panel-content form {
+    max-width: 99%;
+}
+span.note {
+    display: block;
+    font-size: 11px;
+}
+form p:empty {
+    display: none;
+}
+#seemode-panel-content {
+    overflow: auto;
+}
+
+#seemode-panel-content p {
+    display: block;
+}
+#seemode-panel-content h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.validation {
+    display: inline-block;
+    position: absolute;
+    z-index: 10;
+    background: rgba(189, 26, 26, 0.8);
+    color: #fff;
+    top: 0;
+    padding: 3px;
+    font-size: 11px;
+}
+
+.validation .content:after
+{
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 6px 6px 0;
+    border-color: rgba(189, 26, 26, 0.8) transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -6px;
+    left: 20px;
+}
+
+.tinymce-editor.inited {
+    display: none!important;
+}
+
+.input .icon-prepend,
+.textarea .icon-prepend,
+.input .icon-append,
+.textarea .icon-append{
+    width: 22px;
+}
+
+select[size] {
+    min-height: 90px;
+}
+
+
+
+
+
+
+.seemode-content {
+    display: inline-block;
+    right: 0;
+    position: absolute;
+    z-index: 999;
+    margin-top: 4px;
+}
+.seemode-button {
+    position: absolute;
+    display: inline-block;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 20px;
+    background: rgba(51, 51, 51, 0.70);
+    color: #eee;
+    z-index: 110;
+    right: 0;
+    clear: both;
+    cursor: pointer;
+}
+.seemode-button:hover,.seemode-button.active  {
+    background: rgba(51, 51, 51, 0.9);
+}
+.seemode-button * {
+    cursor: pointer;
+}
+
+.seemode-actions {
+    display: none;
+    padding: 3px;
+    position: relative;
+    z-index: 100;
+    background: rgba(51, 51, 51, 0.70);
+    top: 18px;
+    right: 0;
+    padding-top: 6px;
+    height: 25px;
+}
+
+.seemode-actions span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 3px;
+    margin-right: 3px;
+    cursor: pointer;
+    background: #333 url('../img/seemode-actions.png') no-repeat;
+    border: 1px solid #888;
+    border-radius: 3px;
+}
+
+.seemode-actions span.edit {
+    background-position: 50% -37px;
+}
+.seemode-actions span.publish {
+    background-position: 50% 0;
+}
+.seemode-actions span.publish.off {
+    background-position: 50% -18px;
+}
+.seemode-actions span.delete {
+    background-position: 50% -63px;
+}
+
+.seemode-item {
+    border: 1px solid transparent;
+    padding: 3px;
+}
+.seemode-item:hover {
+    background: #ffffe0;
+}
+
+
+.seemode-editing {
+    border: 1px dashed #009F00!important;
+    background: #FFFFF9!important;
+}
+
+
+/**
+    Content Tabs
+*/
+#seemode-panel-content {
+    padding-top: 25px;
+}
+#seemode-panel-content .tabcontainer {
+    position: fixed;
+    z-index: 100;
+    display: block;
+    background: #DDD;
+    border-bottom: 1px solid #CCC;
+    margin-top: -25px;
+    left: 200px;
+    right: 14px;
+    height: 22px;
+}
+#seemode-panel-content .tabcontainer ul,
+#seemode-panel-content .tabcontainer li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 22px;
+    line-height: 22px;
+}
+
+#seemode-panel-content .tabcontainer li {
+    display: inline-block;
+    margin-left: 3px;
+    float: left;
+    padding: 0 4px;
+    background: #f1f1f1;
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    cursor: pointer;
+}
+#seemode-panel-content .tabcontainer li.defTab {
+    background: none;
+    border-color: transparent;
+}
+
+
+
+
+/**
+
+*/
+.column-2 {
+    margin-right: 360px;
+}
+
+.column-2 .post-content {
+
+    width: 100%;
+    min-width: 463px;
+    float: left;
+    position: relative;
+
+}
+
+.column-2 .post-column {
+
+    float: right;
+    margin-right: -350px;
+    width: 330px;
+
+}
+
+.postbox {
+    position: relative;
+    min-width: 255px;
+    border: 1px solid #E5E5E5;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    background: #FFF;
+    margin-bottom: 20px;
+    line-height: 1;
+    padding: 0;
+}
+
+
+
+.postbox h3 {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: bold;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0 8px;
+    padding-right: 22px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.postbox span.toggle {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    font-family: "FontAwesome";
+    cursor: pointer;
+    z-index: 10;
+}
+
+.postbox span.toggle:after {
+    content: '\f0d8';
+}
+.postbox.closed span.toggle:after {
+    content: '\f0d7';
+}
+.postbox-content {
+    border-top: 1px solid #eee;
+    padding: 8px;
+}
+
+#seemode-panel-content input[type=text],
+#seemode-panel-content input[type=password],
+#seemode-panel-content input[type=email],
+#seemode-panel-content input[type=url]{
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+

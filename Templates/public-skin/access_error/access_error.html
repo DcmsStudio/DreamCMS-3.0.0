@@ -1,0 +1,35 @@
+<div class="module-grey">
+    <div>
+        <div>
+            <div>
+                <div class="w100perc tc">
+                    <div class="w100perc tc fl">
+                        <img title="{trans('Folgende Fehler sind aufgetreten:')}" alt="{trans('Folgende Fehler sind aufgetreten:')}" src="images/errors/people.jpg" width="232" height="114" border="0"/>
+                    </div>
+                    <h3 class="w100perc tl">
+                        {trans('Folgende Fehler sind aufgetreten:')}
+                    </h3>
+                    <div class="w100perc tl mb5">
+                        <cp:if condition="$access_error_msg">
+                            <span class="b red mb5 mt5">
+                                <em>
+                                    {$error_msg}
+                                </em>
+                            </span>
+                        </cp:if>
+                        <cp:else>
+                            <ul>
+                                {trans('<li>Aus einem der folgenden Gründe fehlt Ihnen die Berechtigung, diese Seite zu betreten:</li><li>Sie sind nicht angemeldet. Einige Bereiche und Funktionen sind nur für angemeldete Benutzer zugänglich. Bitte nutzen Sie die Eingabemöglich auf dieser Seite, um sich anzumelden. <a href="index.php?cp=register&amp;sid=">Falls Sie noch  nicht registriert sind, können Sie dies hier tun.</a></li>')}
+                                {trans('<li>Ihr Benutzeraccount könnte gesperrt worden sein. Melden Sie sich gegebenenfalls ab und kontaktieren den zuständigen Administrator.</li>')}
+                                {trans('<li>Es gibt Bereiche, die bestimmten Benutzer vorbehalten sind. Sie haben Möglicherweise versucht einen solchen Bereich zu betreten.</li>')}
+                            </ul>
+                        </cp:else>
+                    </div>
+                    <div class="w100perc mt5 tc">
+                        {$login_form}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

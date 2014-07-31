@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<userstatus>
+    <info>
+        <name>Userstatus Ajax Plugin</name>
+        <author>Marcel Domke</author>
+        <authoremail>info at cyber-portal.net</authoremail>
+        <authorurl>www.dcms-studio.de</authorurl>
+        <version>0.0.1</version>
+        <cmsversion>1.0.2</cmsversion>
+    </info>
+    <params>
+		<status name="Online" default="true">online.gif</status>
+		<status name="Offline" offline="true">offline.gif</status>
+        <status name="Abwesend">abwesend.gif</status>
+        <status name="Unterwegs">weg.gif</status>
+		<status name="Beschäftigt">beschaeftigt.gif</status>
+		<status name="Am schreiben">schreiben.gif</status>
+	</params>
+</userstatus>

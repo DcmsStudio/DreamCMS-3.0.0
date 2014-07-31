@@ -1,0 +1,71 @@
+{$layout.doctype_html}
+<html cp:on="xmlns:!empty($layout.html.xmlns)" parse:xmlns="http://www.w3.org/1999/xhtml" cp:on="xml-lang:!empty($layout.html.xmllang)" parse:xml-lang="{$layout.html.xmllang}" cp:on="lang:!empty($layout.html.lang)" parse:lang="{$layout.html.lang}">
+    <head>
+        <base href="{cfg('portalurl')}/" />
+        <title>{$layout.documenttitle}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="Content-Script-Type" content="text/javascript" />
+        <meta name="generator" content="DreamCMS {$version}" />
+    <cp:if condition="$META_KEYWORDS">
+        <meta name="keywords" content="{$META_KEYWORDS}" />
+    </cp:if>
+    <cp:if condition="$META_DESCRIPTION">
+        <meta name="description" content="{$META_DESCRIPTION}" />
+    </cp:if>
+    <cp:if condition="$META_COPYRIGHT">
+        <meta name="copyright" content="{$META_COPYRIGHT}" />
+    </cp:if>
+    <cp:if condition="$META_AUTHOR">
+        <meta name="author" content="{$META_AUTHOR}" />
+    </cp:if>
+    <cp:if condition="$META_EXPIRES">
+        <meta name="expires" content="{$META_EXPIRES}" />
+    </cp:if>
+    <meta name="robots" content="noindex,nofollow" />
+    <cp:if condition="$META_LANGUAGE">
+        <meta name="language" content="{$META_LANGUAGE}" />
+    </cp:if>
+    <script type="text/javascript" src="html/iepngfix/iepngfix_tilebg.js"></script>
+    {$layout.framework}
+    {$layout.stylesheets}
+    {$layout.mooScripts}
+    {$layout.headtags}
+    <cp:block name="append-head" />
+    <link rel="stylesheet" type="text/css" href="html/css/print.css"/>
+    <!-- Layout -->
+</head>
+<body>
+    <div id="wrapper-border" class="{$controller-action}">
+        <div id="wrapper" class="{$controller-action}">
+
+            <div id="header" class="{$controller-action}">
+                <div class="inside">
+                    <span class="print-logo"></span>
+                    <span class="print-btn">
+
+                        <button id="print-btn" onclick="window.print()">{trans('Drucken')}</button>
+                    </span>
+                </div>
+            </div>
+
+            <div id="container" class="{$controller-action}">
+                <div>
+                    <div id="main">
+                        <cp:block name="main" />
+                        <div id="clear"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="footer" class="{$controller-action}">
+                <div class="inside">
+                    <strong>{$layout.documenttitle}</strong><br/>
+                    <em>{$layout.documenturl}</em>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

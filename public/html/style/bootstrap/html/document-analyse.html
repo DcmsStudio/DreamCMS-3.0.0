@@ -1,0 +1,75 @@
+<div>
+    <div class="row">
+
+        <div id="optimize-content-preview" class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>{trans('Vorschau')}</h3></div>
+                <div class="panel-body">
+                </div>
+            </div>
+        </div>
+        <div id="optimize-infos" class="col-md-3">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3>{trans('Auswertung')}</h3>
+                </div>
+                <div class="panel-body no-padding">
+
+                    <table border="0" class="table table-striped table-hover">
+                        <tr>
+                            <td width="50%">Anzahl Wörter</td>
+                            <td width="50%" rel="words"></td>
+                        </tr>
+                        <tr>
+                            <td>Anzahl Sätze</td>
+                            <td rel="sentences"></td>
+                        </tr>
+                        <tr>
+                            <td>Anzahl Zeichen</td>
+                            <td rel="chars"></td>
+                        </tr>
+                        <tr>
+                            <td>Anzahl Überschriften</td>
+                            <td rel="h"></td>
+                        </tr>
+                        <tr>
+                            <td>Anzahl Text-Abschnitte</td>
+                            <td rel="p"></td>
+                        </tr>
+                        <tr>
+                            <td>Anzahl Listen</td>
+                            <td rel="ul"></td>
+                        </tr>
+                        <tr>
+                            <td>Anzahl Zitate</td>
+                            <td rel="quote"></td>
+                        </tr>
+                        <tr>
+                            <td>Anzahl Bilder</td>
+                            <td rel="img"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3>
+                        {trans('Zusatzinfos')}
+                        <div><small>Folgend die 15 wichtigsten Worte in diesem Dokument:</small></div>
+                    </h3>
+                </div>
+                <div class="panel-body no-padding">
+                    <div id="optimize-extra"></div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>

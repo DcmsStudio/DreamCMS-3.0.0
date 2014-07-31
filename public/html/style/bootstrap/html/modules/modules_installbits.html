@@ -1,0 +1,31 @@
+<?php
+
+function __modules_installbits($rowclass='', $mod_name='', $dirctory='', $mod='', $mod_version='', $act_status='', $status='', $mid='', $i = 0){
+global $cp, $cfg, $fct, $cp, $cp;
+
+return <<<EOF
+<tr onmouseover="over(this)" onmouseout="out(this)" class="$rowclass">
+    <td>
+
+    $mod_name
+
+    <input type="hidden" name="name[]" value="$mod_name" />
+    <input type="hidden" name="module[]" value="$dirctory" />
+
+    </td>
+    <td>$mod[author]</td>
+    <td>$mod_version</td>
+    <td>$mod[last_update]</td>
+    <td align="center">$act_status</td>
+    <td align="center">
+        $status
+        <!-- <a href="admin.php?adm=modules&amp;action=install&amp;mod_dir=$dirctory&amp;sid=$cp->session_id&reload=1">Installieren</a> -->
+    </td>
+    <td align="center" colspan="2"><a href="javascript:openWindow('admin.php?adm=modules&amp;action=version&amp;mid=$mid&amp;sid=$cp->session_id','Info',450,230);">Info</a>
+    </td>
+</tr>
+
+EOF;
+}
+
+?>

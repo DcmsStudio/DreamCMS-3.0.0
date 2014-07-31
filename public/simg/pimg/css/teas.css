@@ -1,0 +1,44 @@
+#teaser-container:empty { display: none; }
+.teaser-icon {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    float: left;
+    margin: 0;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+    -moz-background-size: contain!important;
+    -webkit-background-size: contain!important;
+    -o-background-size: contain!important;
+}
+.teaser-icon.apple {
+    background-image: url("../img/teasers/Apple-Aluminum.png");
+}
+
+.teaser-icon.ubuntu {
+    background-image: url("../img/teasers/distributions-ubuntu.png");
+}
+
+.teaser-icon.php {
+    background-image: url("../img/teasers/Internet-php.png");
+}
+.teaser-icon.gaming {
+    background-image: url("../img/teasers/gaming.png");
+}
+.teaser-icon.dcms {
+    background-image: url("../img/teasers/dcms.png");
+    height: 128px;
+    background-size: 150%!important;
+    -moz-background-size: 150%!important;
+    -webkit-background-size: 150%!important;
+    -o-background-size: 150%!important;
+    background-position: -30px -110px;
+}
+
+
+.teaser > div > div:last-child {
+    margin-left: 220px;
+}
+.teaser > div > div.inside {
+    margin-left: 0;
+}

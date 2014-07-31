@@ -1,0 +1,5772 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DreamCMS 2.0.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 15:49+0100\n"
+"PO-Revision-Date: 2012-05-19 15:50+0100\n"
+"Last-Translator: Marcel Domke <madom.2011@googlemail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: trans\n"
+"X-Poedit-Basepath: /Volumes/FastData/Web/DCMS201\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: /Volumes/FastData/Web/DCMS201\n"
+
+#: /Volumes/FastData/Web/DCMS201/CoreTags/News/Title.php:80
+#: /Volumes/FastData/Web/DCMS201/CoreTags/News/Title.php:108
+#: /Volumes/FastData/Web/DCMS201/CoreTags/News/back/Title.php:80
+#: /Volumes/FastData/Web/DCMS201/CoreTags/News/back/Title.php:108
+msgid "News Titel kann nicht gefunden werden!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/CoreTags/News/Title.php:113
+#: /Volumes/FastData/Web/DCMS201/CoreTags/News/back/Title.php:113
+msgid "News Titel kann nicht gefunden werden, da kein Alias und auch keine ID übergeben wurde!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:7
+msgid "Achtung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:10
+msgid "Fehler"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:13
+msgid "Es ist ein Fehler aufgetreten."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:16
+msgid "Ihre Sitzung ist abgelaufen und werden daher zum Login weitergeleitet!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:20
+msgid "Hole Bilder..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:23
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:26
+msgid "Laden..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:29
+msgid "Lade Seite ..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:32
+msgid "Hole Grid-Daten..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:37
+msgid "Ihre Lesezeichen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:40
+msgid "Lesezeichen hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:43
+msgid "Bookmark löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:46
+msgid "Angaben dürfen nicht leer sein!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:49
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:313
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:313
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:313
+msgid "Notiz öffnen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:52
+msgid "Notiz schließen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:56
+msgid "Abmelden..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:59
+msgid "Willen Sie sich wirklich abmelden?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:62
+msgid "Die letzten Log einträge"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:65
+msgid "System Logs"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:69
+msgid "Ausführen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:75
+msgid "Liste Filtern..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:78
+msgid "Liste neu laden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:81
+msgid "Filter entfernen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:84
+msgid "Wollen Sie wirklich die gewählten Datensätze löschen?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:87
+#, php-format
+msgid "Wollen Sie diese Aktion (%s), für die gewählten Datensätze ausführen?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:90
+#, php-format
+msgid "Zeige Ergebnisse %s bis %s von %s Datensätzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:93
+#, php-format
+msgid "%s Datensätze ausgewählt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:96
+msgid "alle Datensätze ausgewählen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:99
+msgid "alle Datensätze abgewählen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:102
+#, php-format
+msgid "%s Datensätze pro Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:105
+#, php-format
+msgid "%s aufsteigend sortieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:108
+#, php-format
+msgid "%s absteigend sortieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:111
+msgid "Es sind keine Datensätze vorhanden."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:114
+msgid "Spalten anzeigen/ausblenden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:125
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:149
+msgid "Die aktuelle Seite enthält ungespeicherte Daten!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:128
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:137
+msgid "Keine Änderungen vorhanden."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:131
+msgid "Daten werden gespeichert..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:134
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:146
+msgid "Daten der Seite werden gespeichert..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:140
+msgid "Sende Formular..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:143
+msgid "Speichere Formular..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:152
+msgid "Daten können nicht gespeichert werden..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:155
+msgid "Formular wurde erfolgreich gespeichert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:158
+msgid "Beispiel URL:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:164
+msgid "Löschen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:167
+msgid "Möchtest Du diese Notiz wirklich löschen?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:170
+msgid "Tragen deine Notiz bitte ein:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:173
+msgid "Fortsetzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:176
+msgid "Abbrechen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:179
+msgid "Eingabe erforderlich..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:184
+msgid "Eine neue Packet Version ist verfügbar!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:187
+msgid "Das Locale Packet ist neuer."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:190
+msgid "Packet ist aktuell."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:193
+msgid "DreamCMS Packet Browser..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:198
+msgid "Ausklappen/Einklappen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:201
+msgid "Widget aktualisieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:204
+msgid "Widget Einstellungen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:207
+msgid "Widget entfernen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:210
+#, php-format
+msgid "Wollen Sie das Widget \"%s\" wirklich entfernen? lt br/ gt Bitte beachten Sie, das alle vorhandenen Einstellungen für dieses Widget verloren gehen!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:217
+msgid "Information zur Datei"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:220
+msgid "Information zum Verzeichnis"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:223
+msgid "Name:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:226
+msgid "Typ:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:229
+msgid "Größe:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:232
+msgid "Abmessungen:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:235
+msgid "Erstelldatum:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:238
+msgid "Änderungsdatum:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:241
+msgid "Ordner"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:244
+#, php-format
+msgid "%s Elemente ausgewählt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:247
+msgid "Die Dateien in dieses Verzeichnis kopieren?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:250
+msgid "Sind Sie sicher, das alle ausgewählten Dateien und Verzeichnisse gelöscht werden sollen? lt br/ gt  lt strong gt Seinen Sie vorsichtig mit dieser Funktion, diese kann unter umständen eine fehlerhafte Installation zur folge haben!!! lt /strong gt "
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:253
+msgid "Zip Datei erstellt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:256
+msgid " lt br/ gt Das Zip File befindet sich im Ordner mediacenter/files lt br/ gt Möchten Sie in diesen Ordner jetzt wechseln?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:259
+#, php-format
+msgid "Die Datei \"%s\" kann nicht editiert werden."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:262
+msgid "Datei ist leer. Trotzdem erstellen?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:265
+msgid "Datei speichern..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:268
+msgid "Fehlerhafter Verzeichnis Name"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:271
+msgid "Fehlerhafter Name der Medien Bibliothek"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:274
+msgid "Lösche Datei(en)..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:281
+msgid "Holt Informationen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:284
+msgid "Hole Daten aus Anfrage..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:287
+msgid "Bitte warten..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:290
+#, php-format
+msgid "Lade Seite \"%s\"..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:293
+msgid "Lade Dateien..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:296
+msgid "Datei(en) fürs kopieren vorbereitet..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:299
+msgid "Datei(en) werden kopiert..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:302
+msgid "Datei Informationen auslesen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:305
+msgid "Erzeuge Zip Datei..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:308
+msgid "Datei lesen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:311
+msgid "Speichern..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:319
+msgid "Tab umbenennen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:322
+msgid "Tab löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:325
+msgid "Tab hinzufügen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:328
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:334
+msgid "Bezeichung des Tabs:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:331
+msgid "Tab umbenennen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:337
+msgid "Tab wurde umbenannt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:340
+msgid "Tab löschen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:343
+#, php-format
+msgid "Wollen Sie dieses Tab \"%s\" wirklich löschen? Beim löschen werden die Felder die dieser Tab enthält in das Standart Tab verschoben somit gehen Ihnen die Felder nicht verloren."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:346
+#, php-format
+msgid "Tab wurde gelöscht. Die Felder finden Sie in Tab \"%s\"."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:349
+msgid "Speichern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:352
+msgid "Feld bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:355
+msgid "Feld löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:358
+msgid "Neues Feld"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:361
+#, php-format
+msgid "Neues %s"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:364
+msgid "Feld Name"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:367
+msgid "Tooltip / Beschreibung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:370
+#, php-format
+msgid "Neues %s Feld wurde hinzugefügt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:373
+msgid "Wollen Sie dieses Feld wirklich löschen? lt br/ gt Beim löschen dieses Feldes, gehen alle für dieses Feld gespeicherten daten verloren un dies könnte zu Fehlern bei der ausführung Ihrer Anwendung führen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:376
+msgid "Lösche das Formular Feld..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:379
+msgid "Feld wurde erfolgreich gelöscht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:385
+msgid "Inhalt hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:388
+msgid "Kategrorie hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:391
+msgid "Inhalt bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:394
+msgid "Kategrorie bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:397
+msgid "Inhalt aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:400
+msgid "Modul aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:403
+msgid "Anwendung aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:406
+msgid "Modul bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:413
+msgid "hole Mail..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:416
+msgid "Papierkorb leeren..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:419
+msgid "Ordnername"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:422
+msgid "Ordner Anlegen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:425
+msgid "Ordner Umgenennen..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:428
+msgid "lade Ordner..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:431
+msgid "Doppelklick zum lesen der Nachricht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:434
+msgid "Sind Sie sicher, das Sie den Ordner löschen wollen? lt br/ gt Alle darin enthalteten Nachrichten werden in den Papierkorb verschoben."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/js_strings_html_compiled.php:443
+msgid "DreamCMS Datei Browser..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:259
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:259
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:259
+msgid "Lade Dashboard"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:272
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:272
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:272
+#, php-format
+msgid "aktuelle Website `%s` unter Domain `%s` wird bearbeitet"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:278
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:278
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:278
+msgid "angemeldet als"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:293
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:293
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:293
+msgid "Lade Menü..."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:302
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:302
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:302
+msgid "Logout"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:305
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:305
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:305
+msgid "Hilfe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:308
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:308
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:308
+msgid "neue Notiz"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:369
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:369
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:369
+msgid "Papierkorb"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:381
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:381
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:381
+msgid "Inhaltssprache"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:388
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:388
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:388
+msgid "Lesezeichen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:450
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:450
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:450
+msgid "Inhalts Einstellung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:460
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:460
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:460
+msgid "Seiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:468
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:468
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:468
+msgid "Frontend Navigation"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:587
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:587
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:587
+msgid "Diese Website Verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:590
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:590
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:590
+msgid "Website Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:593
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:593
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:593
+msgid "Website löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:597
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:609
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:597
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:609
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:597
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:609
+msgid "Menüpunkt hier erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:600
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:600
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:600
+msgid "Details anzeigen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:603
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:603
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:603
+msgid "Menüpunkt bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:606
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:606
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:606
+msgid "Menüpunkt löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:613
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:613
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:613
+msgid "Menüpunkt kopieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:616
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:616
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:616
+msgid "Menüpunkt verschieben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:619
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:619
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:619
+msgid "Menüpunkt hier einfügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:622
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:622
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:622
+msgid "Menüpunkt hierher verschieben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:628
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:628
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:628
+msgid "Menüpunkt aktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/build_html_compiled.php:631
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/index_html_compiled.php:631
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/index_html_compiled.php:631
+msgid "Menüpunkt deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:11
+msgid "Veröffentlichen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:15
+msgid "Status"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:24
+msgid "Offline"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:31
+msgid "Online"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:38
+msgid "Zeitgesteuert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:64
+msgid "bis"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:90
+msgid "Allgemein"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:94
+msgid "Seiten Titel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:100
+msgid "(falls keiner eingetragen wird, wird der Titel des Dokumentes verwendet)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:106
+msgid "Beschreibung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:112
+msgid "(Hier können Sie eine kurze Beschreibung der Seite eingeben, die von Suchmaschinen wie Google oder Yahoo ausgewertet wird.)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:118
+msgid "Schlüsselwörter"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:124
+msgid "(Bitte mit Komma trennen)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:131
+msgid "Robot-Tags"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:161
+msgid "Sprachen-Fallback"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:168
+msgid "Sprachen-Fallback aktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:175
+msgid "Sprache"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:188
+msgid "Dokument Alias"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:193
+msgid "Alias und Suffix"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:257
+msgid "(falls keiner eingetragen wird, wird aus dem Titel des Dokumentes ein alias generiert)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:266
+msgid "Suchen & Analysieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:274
+msgid "Durchsuchbar"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:281
+msgid "Klick-Analyse aktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:289
+msgid "Caching"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:294
+msgid "Seiten Caching"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:301
+msgid "Cache aktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:308
+msgid "Cachezeit"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:313
+msgid "in Sekunden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:319
+msgid "Caching für Benutzergruppen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/metadata_html_compiled.php:327
+msgid "alle Benutzergruppen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/module-blocks/build-content_compiled.php:28
+#, php-format
+msgid "Die neue Application wird auf basis der Application `%s` erstellt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/module-blocks/build-content_compiled.php:33
+msgid "Application erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/module-blocks/build-content_compiled.php:75
+msgid "Anwendungs Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/module-blocks/build-content_compiled.php:93
+msgid "Anwendungs Alias"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/module-blocks/build-content_compiled.php:124
+#, php-format
+msgid "Application `%s` erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/application/module-blocks/index-toolbar_compiled.php:7
+msgid "Anwendung erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/cache/compiled/generic/module-blocks/index-toolbar_compiled.php:8
+msgid "Widget hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:25
+msgid "Blog"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:26
+msgid "Blog Application"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:28
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:7
+msgid "Artikel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:29
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:106
+msgid "Autor"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:35
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:66
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:340
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:394
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:452
+msgid "Titel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:40
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:71
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:345
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:415
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:457
+msgid "Content"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:45
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:76
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:355
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:409
+msgid "Kategorie"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:51
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:82
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:361
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:420
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:462
+msgid "Zugriffsrechte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:57
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:88
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:128
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:163
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:202
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:227
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:246
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:269
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:309
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:367
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:426
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:468
+msgid "Core Tags"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:58
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:89
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:129
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:164
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:203
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:228
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:247
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:270
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:310
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:368
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:427
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:469
+msgid "Core Tags für diesen Inhalt nicht Parsen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:100
+msgid "Produkt Katalog"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:103
+msgid "Automobil"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:104
+msgid "Buch"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:105
+msgid "Kamera"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:107
+msgid "Möbel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:108
+msgid "Produkt Allgemein"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:109
+msgid "Schuhe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:110
+msgid "Test"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:111
+msgid "Uhr"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:117
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:142
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:496
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:15
+msgid "Hersteller"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:123
+msgid "Maximal Geschwindigkeit"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:148
+msgid "ISBN-10"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:153
+msgid "ISBN-13"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:158
+msgid "Seiten Anzahl"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:172
+msgid "Megapixel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:184
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:221
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:236
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:263
+msgid "Farbe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:190
+msgid "Optischer Zoom"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:196
+msgid "Digital Zoom"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:211
+msgid "Wireless"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:241
+msgid "Abmessungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:257
+msgid "Größe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:280
+msgid "Gehäuse"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:284
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:293
+msgid "Edelstahl"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:285
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:294
+msgid "Plastik"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:289
+msgid "Band"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:295
+msgid "Leder"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:296
+msgid "Harz"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:300
+msgid "Typ"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:304
+msgid "Analog"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:305
+msgid "Digital"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:323
+msgid "Movie Datenbank"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:326
+msgid "Person"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:327
+msgid "Film"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:331
+msgid "Dokumentation"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:332
+msgid "Erstellt eine Anwendung anhand einer Dokumentations Anwendung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:334
+msgid "Dokumentationsseite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:350
+msgid "Alias"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:374
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:475
+msgid "Publish"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:375
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:476
+msgid "Inhalt ist aktiv"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:385
+msgid "Download Archiv"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:388
+msgid "Dateien"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:399
+msgid "Datei"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:444
+msgid "Einfache Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:447
+msgid "Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:486
+msgid "Koch Rezepte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:489
+msgid "Rezept"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:493
+msgid "Business Katalog"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/application_types.php:497
+msgid "Mitarbeiter"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:5
+msgid "Entwicklungstools"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:33
+msgid "Dashboard Rechte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:34
+msgid "Achtung: Diese Option erlaubt dem User dieses Rechtesystem zu benutzen! Bitte diese Funktion nur dem Administrator zugängig machen!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:38
+msgid "darf Rechte vergeben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:42
+msgid "Dashboard Rechte verwenden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:48
+msgid "System Konfiguration"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:49
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:60
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:558
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:691
+msgid "Achtung: Bitte diese Funktion nur dem Administrator zugängig machen!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:53
+msgid "darf die System Konfiguration bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:59
+msgid "System Konsole"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:64
+msgid "darf die System Konsole benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:70
+msgid "Statistiken"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:71
+msgid "Zeigt System Statistiken wie Besucher Herkunft/Browser/Betriebssystem usw. an"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:75
+msgid "darf System Statistiken benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:81
+msgid "Widgets"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:86
+msgid "kann Widgets benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:90
+msgid "kann die Widget Einstellungen bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:94
+msgid "kann Widgets installieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:100
+msgid "Plugin Manager"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:105
+msgid "kann Plugins verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:109
+msgid "kann Plugins installieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:113
+msgid "kann Plugins deinstallieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:117
+msgid "kann Plugin Einstellungen bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:121
+msgid "kann Plugins aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:126
+msgid "Bild Transformation"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:131
+msgid "Bild Transformationen benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:135
+msgid "Bild Transformation bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:139
+msgid "Bild Transformation löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:144
+msgid "Benutzergruppen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:149
+msgid "darf Benutzergruppen verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:153
+msgid "darf die Standart Benutzergruppe ändern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:157
+msgid "darf Benutzergruppen hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:161
+msgid "darf Benutzergruppen bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:165
+msgid "darf Benutzergruppen löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:169
+msgid "darf die Backend Rechte von Benutzergruppen verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:175
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:30
+msgid "Benutzer"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:180
+msgid "darf Benutzer verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:184
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:289
+msgid "darf Benutzer hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:188
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:293
+msgid "darf Benutzer bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:196
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:301
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:305
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:309
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:313
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:317
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:321
+msgid "darf Benutzer löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:200
+msgid "darf Benutzern Spezielle Rechte zuweisen/diese verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:204
+msgid "darf Benutzer aktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:208
+msgid "darf Benutzern Emails senden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:212
+msgid "darf Benutzer entsperren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:218
+msgid "Profilefelder"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:223
+msgid "darf Profilefelder verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:227
+msgid "darf Profilefelder hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:231
+msgid "darf Profilefelder bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:235
+msgid "darf Profilefelder löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:241
+msgid "Eventmanager (Hooks)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:246
+msgid "darf Events/Hooks verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:250
+msgid "Hook Kompenenten entfernen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:254
+msgid "Events Syncronisieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:258
+msgid "Events sortieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:262
+msgid "scannen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:266
+msgid "component"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:270
+msgid "hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:274
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1182
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1224
+msgid "bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:280
+msgid "Komponenten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:285
+msgid "darf Komponenten verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:297
+msgid "darf Benutzer sperren/entsperren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:327
+msgid "Skins"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:332
+msgid "darf Skins verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:336
+msgid "darf den Tag-Wizard verwenden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:340
+msgid "erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:344
+msgid "darf Skins bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:348
+msgid "Standart Skin ändern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:356
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:372
+msgid "Skins löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:360
+msgid "kann Skins aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:364
+msgid "Skins hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:368
+msgid "Skins aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:376
+msgid "Templates löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:380
+msgid "Templates bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:384
+msgid "Templates exportieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:388
+msgid "Templates Importieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:392
+msgid "Templates erneuern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:396
+msgid "Templates umbenennen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:400
+msgid "Templates Suchen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:404
+msgid "getsense"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:408
+msgid "wizard"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:414
+msgid "BB-Codes"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:419
+msgid "darf BB-Codes verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:423
+msgid "darf BB-Codes hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:427
+msgid "darf BB-Codes bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:431
+msgid "darf BB-Codes löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:437
+msgid "Smilies"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:442
+msgid "darf Smilies verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:446
+msgid "darf Smilies hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:450
+msgid "darf Smilies bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:454
+msgid "darf Smilies löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:460
+msgid "Icons"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:465
+msgid "darf Icons verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:469
+msgid "darf Icons hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:473
+msgid "darf Icons bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:477
+msgid "darf Icons löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:483
+msgid "Benutzer Ränge"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:488
+msgid "darf Ränge verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:492
+msgid "darf Ränge hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:496
+msgid "darf Ränge bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:500
+msgid "darf Ränge löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:506
+msgid "Cache System"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:516
+msgid "darf Cache leeren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:520
+msgid "darf Cache komplett leeren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:524
+msgid "darf Seitencache leeren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:530
+msgid "Datenbank"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:535
+msgid "darf Datenbank verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:539
+msgid "SQL Befehle ausführen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:543
+msgid "darf Tabellen optimieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:547
+msgid "darf Tabellen reparieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:551
+msgid "darf SQL Dateien importieren (ausführen)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:557
+msgid "Backups"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:562
+msgid "darf Backups verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:566
+msgid "Backups erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:570
+msgid "darf Backups herunterladen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:574
+msgid "darf Backups löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:580
+msgid "Dateimanager"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:585
+msgid "darf Dateimanager benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:589
+msgid "darf Dateien/Verzeichnisse löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:593
+msgid "darf Verzeichnisse erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:597
+msgid "darf Dateien bearbeiten/erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:601
+msgid "darf Dateien Uploaden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:605
+msgid "darf Datei Inhalte anzeigen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:609
+msgid "darf Verzeichnisse/Dateien umbenennen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:613
+msgid "darf Verzeichnisse/Dateien kopieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:617
+msgid "darf Zip Dateien erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:623
+msgid "Frontent Menüpunkte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:628
+msgid "darf Menüpunkte verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:632
+msgid "darf Menüpunkte bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:636
+msgid "darf Menüpunkte erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:640
+msgid "darf Menüpunkte aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:644
+msgid "darf Menüpunkte löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:648
+msgid "darf Menüpunkte verschieben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:652
+msgid "darf Menüpunkte kopieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:656
+msgid "add_menu"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:660
+msgid "delete_menu"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:664
+msgid "edit_menu"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:668
+msgid "menu_publish"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:672
+msgid "menu_unpublish"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:676
+msgid "reorder"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:680
+msgid "save_menu"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:684
+msgid "save_menuitem"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:695
+msgid "darf Papierkorb benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:699
+msgid "darf Einträge im Papierkorb wiederherstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:703
+msgid "darf Papierkorb Einträge löschen und den Papierkorb leeren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:709
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:4
+msgid "News"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:714
+msgid "darf News verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:718
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:742
+msgid "darf News löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:722
+msgid "darf News erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:726
+msgid "darf News-Kategorien verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:730
+msgid "darf News-Kategorien bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:734
+msgid "darf News-Kategorien aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:738
+msgid "darf News bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:746
+msgid "Aliase erneuern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:750
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:791
+msgid "Suchindex erneuern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:754
+msgid "darf News archivieren und aus Archiv holen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:758
+msgid "aus Archiv holen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:762
+msgid "darf News aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:766
+msgid "News aktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:770
+msgid "News deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:774
+msgid "News verschieben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:780
+msgid "Anwendungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:783
+msgid "Anwendungen verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:787
+msgid "Anwendungen bearbeiten/hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:795
+msgid "Anwendungen löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:799
+msgid "Anwendungen aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:803
+msgid "Neue Tabs hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:807
+msgid "Tabs löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:811
+msgid "Tabs umbenennen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:817
+msgid "Anwendungs Kategorien"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:820
+msgid "Anwendungs Kategorien verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:824
+msgid "Anwendungs Kategorien bearbeiten/erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:828
+msgid "Anwendungs Kategorien löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:832
+msgid "Anwendungs Kategorien aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:836
+msgid "Anwendungs Kategorien umsortieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:840
+msgid "Aliase der Anwendungs Kategorien aktualisieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:846
+msgid "Anwendungsinhalte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:849
+msgid "Anwendungsinhalte verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:853
+msgid "Anwendungsinhalte erstellen/bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:857
+msgid "Anwendungsinhalte löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:861
+msgid "Anwendungsinhalte aktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:865
+msgid "Anwendungsinhalte deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:869
+msgid "Aliase der Anwendungsinhalte aktualisieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:876
+msgid "Asset Verwaltung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:879
+msgid "Asset Verwaltung benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:883
+msgid "Asset löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:887
+msgid "Asset hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:891
+msgid "Assets aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:897
+msgid "Avatar Verwaltung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:900
+msgid "Avatar Verwaltung benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:903
+msgid "Avatar hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:907
+msgid "Avatar löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:911
+msgid "Avatar bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:917
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:930
+msgid "Blockierte IP´s"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:920
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:933
+msgid "Blockierte IP´s einsehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:924
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:945
+msgid "Spam Statistik einsehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:937
+msgid "Blockierte IP´s löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:941
+msgid "Spammer Details einsehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:951
+msgid "Klick-Analyser"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:954
+msgid "Klick-Analyser Benutzen (erfordert Adminrechte und ist nur im Frontend sichtbar)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:958
+msgid "Klick-Analyser ststistik für eine URL löschen (leeren)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:964
+msgid "Kommentare"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:967
+msgid "Kommentare verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:970
+msgid "Kommentare löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:974
+msgid "Kommentare freischalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:978
+msgid "Kommentare bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:984
+msgid "Contentprovider"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:987
+msgid "Contentprovider Verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:991
+msgid "Contentprovider hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:995
+msgid "Contentprovider löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:999
+msgid "Contentprovider bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1003
+msgid "Contentprovider umsortieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1012
+msgid "Sitzungshistorie sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1018
+msgid "Editor Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1021
+msgid "Editor Einstellungen löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1025
+msgid "Editor Einstellungen bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1029
+msgid "Editor Einstellungen einsehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1033
+msgid "Editor Einstellungen aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1042
+msgid "Dateiupload benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1048
+msgid "Formulare"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1051
+msgid "Formulare bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1055
+msgid "Formulare löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1059
+msgid "options"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1063
+msgid "Formularfelder auflisten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1067
+msgid "Formularfelder hinzufügen/bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1071
+msgid "Formularfelder löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1077
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:59
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:60
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:20
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:29
+msgid "Forum"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1113
+msgid "Lizense Einsehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1119
+msgid "Filetree"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1120
+msgid "Filetree erfordert zugriff auf den Dateimanager"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1123
+msgid "Filetree benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1129
+msgid "Layout Manager"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1132
+msgid "Layout Manager benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1136
+msgid "Layouts löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1140
+msgid "Layouts duplizieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1144
+msgid "Layouts bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1148
+msgid "Neue Inhaltsblöcke hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1152
+msgid "Inhaltsblöcke bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1156
+msgid "Inhaltsblöcke verschieben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1160
+msgid "Inhaltsblöcke löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1166
+msgid "Linkchecker"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1169
+msgid "Linkchecker benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1175
+msgid "Sprachen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1178
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1220
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1288
+msgid "löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1186
+msgid "übesetzen (GUI Sprachen)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1190
+msgid "darf Sprachen verwalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1194
+msgid "save"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1203
+msgid "darf System Logs löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1207
+msgid "darf System Logs sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1213
+msgid "Media Manager"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1216
+msgid "Biblioteken erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1228
+msgid "neue Inhalte als Dateilink hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1232
+msgid "Inhalte umbenennen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1236
+msgid "neue Inhalte hochladen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1242
+msgid "System Module"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1245
+msgid "createplugin"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1249
+msgid "aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1253
+msgid "darf die Einstellungen bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1257
+msgid "darf Module deinstallieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1261
+msgid "darf Module aktualisieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1267
+msgid "Paket Manager"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1270
+msgid "Hinzufügen/aktualisieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1276
+msgid "Pagetree"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1279
+msgid "darf Pagetree verwenden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1285
+msgid "Controller: repository -> dev only"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1292
+msgid "inhalte bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1296
+msgid "kategorien bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1300
+msgid "uploaden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1306
+msgid "Router"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1309
+msgid "darf Routen löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1313
+msgid "darf Routen bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1317
+msgid "darf Routen aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1323
+msgid "Debugger"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1326
+msgid "darf den Debugger zu/abschalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1332
+msgid "Firewall"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1335
+msgid "darf die Firewall zu/abschalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1341
+msgid "Systeminformationen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1344
+msgid "darf die Systeminformationen sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1350
+msgid "Tags"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/controlleractions.php:1353
+msgid "darf Tags löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:25
+msgid "Navigation"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:26
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:33
+msgid "Sitemap"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:26
+msgid "Erzeugt eine Liste aller Seiten aus der Seitenstruktur."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:31
+msgid "Konto schließen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:31
+msgid "Erzeugt ein Formular zur Löschung eines Benutzerkontos."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:32
+msgid "Profil"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:32
+msgid "Profilansicht des Benutzers eines Benutzerkontos."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:33
+msgid "Passwort ändern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:33
+msgid "Erzeugt ein Formular zum ändern des Passwortes eines Benutzerkontos."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:34
+msgid "Konto Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:34
+msgid "Erzeugt ein Formular mit den Einstellungen eines Benutzerkontos."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:35
+msgid "Benutzer Avatar/Profilbild"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:35
+msgid "Erzeugt ein Formular zur Änderung des Benutzer Bildes eines Benutzerkontos."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:36
+msgid "Signatur"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:36
+msgid "Erzeugt ein Formular zum bearbeiten der Signatur eines Benutzerkontos."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:37
+msgid "Sonstige Benutzer-Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:37
+msgid "Erzeugt ein Formular zum bearbeiten sonstiger Einstellungen eines Benutzerkontos."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:40
+msgid "Anmeldung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:41
+msgid "Login-Formular"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:41
+msgid "Erzeugt ein Anmeldeformular (Login)."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:42
+msgid "Automatischer Logout"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:42
+msgid "Meldet einen Benutzer automatisch ab (Logout)."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:43
+msgid "Passwort vergessen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:43
+msgid "Erzeugt ein Formular zur Passwort-Anforderung."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:46
+msgid "Registrierung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:47
+msgid "Registrierungs-Formular"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:47
+msgid "Erzeugt ein Formular zur Benutzerregistrierung."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:48
+msgid "Verifizierungs-Formular"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:48
+msgid "Erzeugt ein Formular zur Verifizierung eines Benutzerkontos."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:50
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:9
+msgid "Private Nachrichten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:51
+msgid "Übersicht der Privaten Nachrichten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:51
+msgid "Erzeugt eine Übersicht der Privaten Nachrichten."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:53
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:55
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:30
+msgid "Gästebuch"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:55
+msgid "Erzeugt ein Gästebuch."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:60
+msgid "Fügt der Seite ein Forum hinzu."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:61
+msgid "Forum Suche"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:61
+msgid "Fügt dem Forum ein Suchformular hinzu."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:64
+msgid "Nachrichten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:65
+msgid "Nachrichtenliste"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:65
+msgid "Fügt der Seite eine Nachrichtenliste hinzu."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:66
+msgid "Nachrichtenleser"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:66
+msgid "Stellt einen einzelnen Nachrichtenbeitrag dar."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:67
+msgid "Nachrichtenarchiv"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:67
+msgid "Fügt der Seite ein Nachrichtenarchiv hinzu."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:70
+msgid "Verschiedenes"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:71
+msgid "Benutzer Liste"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:71
+msgid "Erzeugt eine Liste aller registrierten Benutzer."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:72
+msgid "Einfache Inhalte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:72
+msgid "Ermöglicht es einfache Seiten zu verwalten."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:73
+msgid "Suchmaschine"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:73
+msgid "Fügt der Seite ein Suchformular hinzu."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:74
+msgid "Statistik"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:74
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:75
+msgid "Dient zur Statistik auswertung."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:75
+msgid "Plugins"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:76
+msgid "Startseite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/frontend_modules.php:77
+msgid "Druckansicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:5
+msgid "Download"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:6
+msgid "Galerie"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:8
+msgid "F.A.Q"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:10
+msgid "Ignorierliste"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:11
+msgid "Registrieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:12
+msgid "Autoren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:13
+msgid "Profilansicht eines Benutzers"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:14
+msgid "Produkte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:16
+msgid "Web Links"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:17
+msgid "Umfragen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:18
+msgid "RSS News"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:19
+msgid "RSS Artikel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:21
+msgid "Newsletter"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:22
+msgid "Partner/Affiliates"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:23
+msgid "Gamecheats"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:24
+msgid "Kalender"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:25
+msgid "Statistik Box"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:26
+msgid "Website Statistik"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:27
+msgid "User Online Box"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:28
+msgid "Mitgliederliste"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:31
+msgid "System durchsuchen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:32
+msgid "Wer ist Wo?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:34
+msgid "User Gästebuch"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:35
+msgid "User Galerie"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/i18n_translations.php:36
+msgid "Bugtracker"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/grouptags.php:4
+msgid "Benutzerverwaltung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/grouptags.php:5
+msgid "Kontroll Strukturen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/grouptags.php:6
+msgid "Listen/Schleifen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/grouptags.php:7
+msgid "Sonstige Tags"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:6
+msgid "Ermöglicht den Zugriff auf eine Anwendung mit derer Funktionen und Variablen, die mit dem Anwendungs-Generator erzeugt wurde. (nur während der Verarbeitung)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:12
+msgid "Anwendungs Function"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:13
+msgid "Function die innerhalb einer Anwendung aufgerufen werden soll."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:20
+msgid "Variablen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:21
+msgid "Anwendungs Variable die wärend der Verarbeitung abgerufen wird."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:28
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:36
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/block.php:19
+msgid "Variablen Inhalt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:29
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:37
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/block.php:20
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:20
+msgid "Es ist kein HTML Code hier erlaubt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:45
+msgid "Zusätzliche Attribute"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/app.php:46
+msgid "Es ist kein HTML Code hier erlaubt. Attribute schreiben Sie bitte so z.B.: attribut=\"wert\". Bitte nur ein Attribut pro Zeile!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/block.php:5
+msgid "Hiermit haben Sie die Möglichkeit Blöcke zu definieren deren Inhalt an beliebigen Stellen in einem Template erscheinen. (Sollte es sich um einen Singletag (&lt;cp:block /&gt;) handeln.)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/block.php:11
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/for.php:35
+msgid "Variablen Bezeichnung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/block.php:12
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/for.php:36
+msgid "Zugriffsvariable"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/continue.php:5
+msgid "Überspringt einen Eintrag in einem <cp:loop>, <cp:tree>, <cp:for>"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:5
+msgid "Ermöglichkeit es Ihnen einen WYSIWYG Editor (z.Z. TinyMCE) in ein Template einzufügen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:11
+msgid "Formular Feld (Textarea) Name Attribut"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:12
+msgid "Hierbei wird das Textarea diese Bezeichnung erhalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:19
+msgid "Basis Url"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:28
+msgid "Inhalt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:29
+msgid "z.Z. kein HTML Code erlaubt! Benutzen die eine Variable. Bsp: {$value}"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:36
+msgid "Breite des Editors"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:37
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:45
+msgid "Es sind sowohl Nummerische als auch Angaben in Pixel/Prozent möglich"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/editor.php:44
+msgid "Höhe des Editors"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/else.php:5
+msgid "Dieses Tag leitet die Alternative ein, wenn die Bedingung eines if-Tags. (<cp:if>, <cp:elseif>, <cp:loop>) nicht zutrifft."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/elseif.php:4
+msgid "Dieses Tag leitet die Alternative ein, wenn die Bedingung eines if-Tags (z. B. <cp:if>, <cp:elseif>) nicht zutrifft."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/elseif.php:11
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/if.php:13
+msgid "Expression"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/extends.php:6
+msgid "Dieses Tag importiert das aktuelle Template in das übergeordnete Template. (Voraussetzung: das übergeordnete Template hat die gleichen <block/> Tags wie das aktuelle Template.) Achtung: Der Tag muss am Anfang eines Templates stehen!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/extends.php:13
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/extends.php:31
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/include.php:11
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/include.php:29
+msgid "Template"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/extends.php:22
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/include.php:20
+msgid "Pfad zur Datei"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/extends.php:32
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/include.php:30
+msgid "Dokument"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/extends.php:34
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/include.php:32
+msgid "Typ der zu verwendenden Vorlage"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/for.php:5
+msgid "Nummerische Schleife"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/for.php:11
+msgid "Wert Von"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/for.php:19
+msgid "Wert Bis"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/for.php:20
+msgid "Es sind nur Zahlen erlaubt. Bsp: 10 oder 2011"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/for.php:27
+msgid "Schritte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/for.php:28
+msgid "Es sind nur Zahlen erlaubt. Bsp: 1 oder 3"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/hasperm.php:5
+msgid "Hiermit haben Sie die Möglichkeit zu Prüfen ob ein Benutzer die benötigten Rechte besitzt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/hasperm.php:11
+msgid "Wert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/hasperm.php:12
+msgid "Bsp: \"controller/action\" (ohne Anführungszeichen)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/if.php:6
+msgid "Dieses Tag prüft eine Bedingung ob diese zutrifft."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/include.php:5
+msgid "Dieses Tag importiert ein Template/Dokument in das aktuelle Template."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/loop.php:5
+msgid "Verarbeitet den Inhalt eines Arrays."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/loop.php:11
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:12
+msgid "Bezeichnung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/loop.php:20
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:37
+msgid "Es sind nur Buchstaben und unterzeichen erlaubt. Bsp: r "
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/next.php:4
+msgid "Nächster Eintrag in einem <cp:loop>, <cp:tree>, <cp:for>"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/set.php:5
+msgid "Setzt eine Variable bei der Template Verarbeitung. Der cp:set Tag kann an beliebiegen stellen im Template stehen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/stop.php:5
+msgid "Alias for cp:continue. Abbruch einer Schleife in einem cp:loop, cp:tree, cp:for"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:6
+msgid "Erzeugt ein Listen Tree. Dieser Tag ist Ideal geeignet um ein Menü/Liste Strukturiert darzustellen. Der Inhalt dieses Tags dient dabei als Vorlage."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:20
+msgid "Primär Schlüssel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:28
+msgid "Schlüssel welcher sich auf den Primär Schlüssel bezieht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:44
+msgid "Modus"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:45
+msgid "Es sind nur Buchstaben erlaubt. Sollten Sie keine Angaben machen wird automatisch ein UL-Tag erzeugt. Bsp: ul, ol, div usw. "
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:52
+msgid "class Attribut für den Modus"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:53
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:61
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:69
+msgid "Optional"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:60
+msgid "id Attribut für den Modus"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/tree.php:68
+msgid "style Attribut für den Modus"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/data/system/tagwizard/tags/unset.php:5
+msgid "Entfernt eine Variable bei der Template Verarbeitung. Der cp:unset Tag kann an beliebiegen stellen im Template stehen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/AliasRegistry.php:228
+#: /Volumes/FastData/Web/DCMS201/Framework/AliasRegistry.php:243
+msgid "Alias kann nicht angelegt werden, da kein Modul übergeben wurde!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/AliasRegistry.php:273
+msgid "Alias kann nicht gelöscht werden, da kein Controller übergeben wurde!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Application.php:961
+msgid "System Administrator"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Application.php:962
+msgid "Chefredakteur"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Application.php:965
+msgid "Gäste"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller.php:157
+msgid "Es wurden zu viele Ergebnisse des gewünschten Eintrages gefunden! Anzahl: "
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Html.php:396
+#, php-format
+msgid "Sorry der Tag `%s` ist kein HTML Block tag!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:565
+msgid "Minute"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:569
+msgid "Minuten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:575
+msgid "Stunde"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:579
+msgid "Stunden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:585
+msgid "Tag"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:589
+msgid "Tage"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:595
+msgid "Monat"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:599
+msgid "Monate"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:605
+msgid "Jahr"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales.php:607
+msgid "Jahre"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Media.php:38
+#, php-format
+msgid "The requested media - `%s` - does not exist."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Media.php:45
+#, php-format
+msgid "The requested file - `%s` - cannot be found."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Module.php:208
+#, php-format
+msgid "Das parameter `%s` für das Modul `%s` ist erforderlich aber wurde nicht übergeben!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:40
+msgid "Allgemeiner Fehler"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:206
+msgid "Statische Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:210
+msgid "News Kategorie"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:214
+msgid "Artikel Kategorie"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:218
+msgid "Url"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:222
+msgid "Main"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:226
+msgid "Modul"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:230
+msgid "System Link"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:235
+msgid "Plugin"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Page.php:360
+msgid "There is no node with id "
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Paging.php:239
+msgid "« Erste Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Paging.php:247
+msgid "Zurück"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Paging.php:275
+msgid "Weiter"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Paging.php:282
+msgid "Letzte Seite »"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Permission.php:496
+#: /Volumes/FastData/Web/DCMS201/Framework/Permission.php:556
+msgid "Sie besitzen nicht die nötigen Rechte für diese Aktion!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Plugin.php:62
+#, php-format
+msgid "Plugin `%s` ist nicht installiert!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Plugin.php:282
+#, php-format
+msgid "Plugin template `%s` does not exist."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Plugin.php:313
+#, php-format
+msgid "Cannot load configuration file for plugin `%s` - installation aborted."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Upload.php:23
+msgid "Es wurde keine Datei zu hochgeladen übergeben."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Upload.php:35
+#: /Volumes/FastData/Web/DCMS201/Framework/Upload.php:85
+#, php-format
+msgid "Der Pfad %s ist nicht schreibbar! Code:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Upload.php:107
+msgid "Die hochgeladene Datei überschreitet die in der Anweisung upload_max_filesize in php.ini festgelegte Größe."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Upload.php:110
+msgid "Die hochgeladene Datei überschreitet die in dem Formular mittels der Anweisung MAX_FILE_SIZE angegebene maximale Dateigröße."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Upload.php:113
+msgid "Die Datei wurde nur teilweise hochgeladen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Upload.php:116
+msgid "Es wurde keine Datei hochgeladen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/User.php:161
+#: /Volumes/FastData/Web/DCMS201/Framework/User.php:165
+msgid "Dieser Account wurde von uns gesperrt!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/User.php:184
+#, php-format
+msgid "Login ist fehlgeschlagen!<br/><strong>Dein Account ist fÃ¼r %s gesperrt.</strong>"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/User.php:979
+msgid "Ohne Angabe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/User.php:983
+msgid "Männlich"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/User.php:987
+msgid "Weiblich"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/User.php:991
+msgid "Zwitter"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Validation.php:53
+#, php-format
+msgid "The validator has no method `%s` - cannot validate posted data. Field: %s"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Validation.php:71
+#, php-format
+msgid "The minimum length validation for `%s` has no length value supplied in it's configuration - cannot validate posted data."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Validation.php:81
+#, php-format
+msgid "The maximum length validation for `%s` has no length value supplied in it's configuration - cannot validate posted data."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Validation.php:91
+#, php-format
+msgid "The unique validation for `%s` has no table supplied in it's configuration - cannot validate posted data."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Validation.php:95
+#, php-format
+msgid "The unique validation for `%s` has no id_field supplied in it's configuration - cannot validate posted data."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Validation.php:101
+#, php-format
+msgid "Could not find the %s value to use in a unique validation - cannot validate posted data."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Validation.php:136
+#, php-format
+msgid "The identical validation for `%s` has no value to test against - cannot validate posted data."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Validation.php:248
+#, php-format
+msgid "The minimum value validation for `%s` has no value supplied in it's configuration - cannot validate posted data."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Validation.php:258
+#, php-format
+msgid "The maximum value validation for `%s` has no value supplied in it's configuration - cannot validate posted data."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/App/Abstract.php:263
+msgid "Name is a required field"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/App/Abstract.php:264
+msgid "Name must be at least 4 characters long"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/App/Abstract.php:265
+msgid "Name may not be longer than 50 characters"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/App/Abstract.php:267
+msgid "Name must be unique, there is already a custom field with that ID"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:517
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:588
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:675
+msgid "Inhalt befindet sich in Bearbeitung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:557
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:649
+msgid "Veröffentlicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:564
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:663
+msgid "Zeitgesteuert Veröffentlicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:569
+msgid "nicht Veröffentlicht da abgelaufen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:576
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:656
+msgid "nicht Veröffentlicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:582
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:669
+msgid "Ariviert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:636
+msgid "Eintrag bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Controller/Abstract.php:642
+msgid "Eintrag löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1199
+msgid "Sonntag"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1200
+msgid "Montag"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1201
+msgid "Dienstag"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1202
+msgid "Mittwoch"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1203
+msgid "Donnerstag"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1204
+msgid "Freitag"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1205
+msgid "Samstag"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1207
+msgid "So"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1208
+msgid "Mo"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1209
+msgid "Di"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1210
+msgid "Mi"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1211
+msgid "Do"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1212
+msgid "Fr"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1213
+msgid "Sa"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1216
+msgid "Januar"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1217
+msgid "Februar"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1218
+msgid "März"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1219
+msgid "April"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1220
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1233
+msgid "Mai"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1221
+msgid "Juni"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1222
+msgid "Juli"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1223
+msgid "August"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1224
+msgid "September"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1225
+msgid "Oktober"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1226
+msgid "November"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1227
+msgid "Dezember"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1229
+msgid "Jan"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1230
+msgid "Feb"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1231
+msgid "Mär"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1232
+msgid "Apr"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1234
+msgid "Jun"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1235
+msgid "Jul"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1236
+msgid "Aug"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1237
+msgid "Sep"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1238
+msgid "Okt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1239
+msgid "Nov"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1240
+msgid "Dez"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1243
+msgid "am"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1244
+msgid "pm"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1245
+msgid "AM"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Locales/Abstract.php:1246
+msgid "PM"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Template/Abstract.php:1093
+#, php-format
+msgid "Session Ende: %s"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Template/Abstract.php:1099
+msgid "Administration"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Template/Abstract.php:1179
+msgid "Speichern &amp; Beenden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Template/Abstract.php:1193
+msgid "Ausführen &amp; Beenden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Template/Abstract.php:1234
+msgid "Zurücksetzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Template/Abstract.php:1258
+msgid "Pause"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Tree/JsTree.php:149
+#, php-format
+msgid "Menüpunkt %s löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Tree/JsTree.php:150
+#, php-format
+msgid "Menüpunkt %s aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Tree/JsTree.php:151
+#, php-format
+msgid "Menüpunkt %s Bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Tree/JsTree.php:152
+#, php-format
+msgid "Neuen Menüpunkt danach %s einfügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework/Tree/JsTree.php:153
+#, php-format
+msgid "Neuen Untermenüpunkt einfügen %s"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:532
+msgid "Allgemeine Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:538
+msgid "Titel der Website"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:540
+msgid "Geben Sie hier den Titel Ihrer Websize an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:543
+msgid "URL zur Website"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:545
+msgid "Dieses Url-Format ist nicht korrekt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:546
+msgid "Geben Sie hier die URL der Seite an. Angaben bitte ohne / am ende!!!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:549
+msgid "Standart System Locale"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:555
+msgid "URLs umschreiben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:557
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:590
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:678
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:778
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:784
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:817
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:823
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:829
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:835
+msgid "Ja"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:557
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:590
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:678
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:778
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:784
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:817
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:823
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:829
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:835
+msgid "Nein"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:558
+msgid "Statische URLs ohne das index.php-Fragment erzeugen. Für diese Funktion muss `mod_rewrite` verfügbar sein sowie die Datei `.htaccess.default` in `.htaccess` umbenannt und gegebenenfalls die RewriteBase angepasst werden."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:561
+msgid "Standart Seiten Suffix"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:563
+msgid "Standart verwenden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:564
+msgid "Diese Angabe ist Optional. Wenn sie nichts wählen wird der Suffix automatisch auf `.html` gesetzt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:570
+msgid "Email Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:576
+msgid "Absender eMail Adresse"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:577
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:583
+msgid "Dieses Emailformat ist nicht korrekt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:579
+msgid "Geben Sie hier die eMail Adresse ein, die als Absender bei allen vom System automatisch verschickten eMails als Absender benutzt werden soll."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:582
+msgid "Kontakt eMail Adresse"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:585
+msgid "Geben Sie hier die Kontakt eMail Adresse Ihrer Seite bzw. des Administrators an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:588
+msgid "Email Debugger an?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:593
+msgid "Email Funktion"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:595
+msgid "Standart PHP Mail Funktion"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:595
+msgid "SMTP"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:596
+msgid "PHP Mail funktion oder die erweiterte Mail funktion?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:599
+msgid "SMTP Server"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:601
+msgid "Geben Sie hier die Adresse zu einem SMTP Server an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:605
+msgid "SMTP Verschlüsselung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:607
+msgid "keine"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:607
+msgid "SSL"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:607
+msgid "TLS"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:608
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:614
+msgid "Geben Sie hier den SMTP Server Port an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:612
+msgid "SMTP Server Port"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:618
+msgid "SMTP Benutzer"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:620
+msgid "Geben Sie hier den Benutzer zum SMTP Server an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:624
+msgid "SMTP Passwort"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:626
+msgid "Geben Sie hier das Passwort zum SMTP Server an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:634
+msgid "Cookies"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:640
+msgid "Pfadangabe für Cookie"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:642
+msgid "Geben Sie hier einen relativen Pfad zur eigentlichen Domain, auf der sich Ihr Portal befindet, an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:645
+msgid "Domainangabe für Cookie"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:647
+msgid "Hier können Sie angeben, unter welcher Domain die Cookies gespeichert werden sollen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:650
+msgid "Cookie Timeout"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:651
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:685
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:709
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:715
+msgid "Der Wert darf nur aus Zahlen bestehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:653
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:694
+msgid "Tragen Sie hier ein, wie lange ein Cookie gültig sein soll. Angaben in Sekunden. Bsp: 60*60 = 3600 Sec. (1h)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:660
+msgid "Sicherheit"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:666
+msgid "Hashwert für Verschlüsselung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:668
+msgid "Verschlüsselte Daten können nur mit demselben Hashwert wieder entschlüsselt werden!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:671
+msgid "Hashwert für Cronjobs"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:673
+msgid "Dieser Wert darf in keinem falle leer sein!!!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:676
+msgid "User Sperren nach mehreren fehlerhafteb Logins"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:682
+msgid "Fehlgeschlagene Login Limit"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:689
+msgid "Dauer der Sperre"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:691
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:692
+#, php-format
+msgid "%s Minuten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:692
+#, php-format
+msgid "%s Tag"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:693
+#, php-format
+msgid "%s Tage"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:693
+msgid "dauerhaft"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:702
+msgid "Zwischenspeicher Zeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:708
+msgid "Speicherzeit für Versionen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:711
+msgid "Hier können Sie die Speicherzeit für verschiedene Versionen eines Datensatzes in Sekunden eingeben (90 Tage = 7776000 Sekunden)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:714
+msgid "Speicherzeit für den System Cache"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:717
+msgid "Hier können Sie die Speicherzeit für den System Cache in Sekunden eingeben (90 Tage = 7776000 Sekunden)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:725
+msgid "Metatags"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:726
+msgid "HIerbei handelt es sich um die Standartwerte die eingetragen werden, wenn zu einer Seite keine Metadaten hinterlegt wurden."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:731
+msgid "Copyright"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:736
+msgid "Author"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:741
+msgid "Revisit After"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:746
+msgid "Suchmaschienen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:748
+msgid "Links nicht folgen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:748
+msgid "Indizeieren aber Links nicht folgen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:748
+msgid "Indizeieren und Links folgen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:757
+msgid "Keywords"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:759
+msgid "Bitte mit komma trennen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:770
+msgid "Performance"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:776
+msgid "Cache System verwenden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:779
+msgid "Mit dieser Funktion spart man sich sehr viele Datenbank Abfragen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:782
+msgid "GZip Komprimierung aktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:785
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:799
+msgid "Geben Sie hier an, ob die Ausgabe der Seiten des mit GZip komprimiert werden soll. Dies kann den Trafficverbrauch erheblich verkleinern."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:788
+msgid "GZip Komprimierungslevel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:790
+msgid "schwach"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:792
+msgid "optimal"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:798
+msgid "sehr stark"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:809
+msgid "HTML Ausgabe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:815
+msgid "Html Code Comprimiert ausgeben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:818
+msgid "Hiermit ist es möglich den komplettrn HTML Code zu komprimieren. Textareas, JavaScripts und Pre Elemente werden nicht kompimiert!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:821
+msgid "HTML Code sauber formatieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:824
+msgid "Hiermit ist es möglich den Ausgegeben HTML Code sauber und lesbasr zu formatiern. Diese Funktion hat keine Auswirkung, wenn Sie den HTML Code Comprimiert ausgeben. ACHTUNG: kleine Performance einbuße!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:827
+msgid "Standard headers senden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:830
+msgid "Bei einigen Webservern führt diese Option zu Problemen - bei anderen wird sie benötigt. Hier gilt es auszuprobieren."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:833
+msgid "Seitencaching deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:836
+msgid "Mit dieser Option können Sie das Caching der Seite im Browser verhindern."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:843
+msgid "Datum & Zeit Formate"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:849
+msgid "Datumsformat"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:851
+msgid "Geben Sie hier das Standard-Datumsformat an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:854
+msgid "Zeitformat"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:856
+msgid "Geben Sie hier das Standard-Zeitformat an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:859
+msgid "Zeitzone"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:862
+msgid "Geben Sie hier den Unterschied in Stunden zur GMT Zeitzone an."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:865
+msgid "Start der Woche"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/Loader.php:868
+msgid "Geben Sie hier an, mit welchem Tag die Woche standardmäßig startet."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Framework_o/User.php:1025
+msgid "MÃ¤nnlich"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:1484
+msgid "could.not.move.uploaded.file"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2783
+msgid "FAQ"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2785
+msgid "User Controllpanel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2786
+msgid "Profil eines Mitgliedes"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2788
+msgid "Bilder Gallery"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2789
+msgid "Galeriebild"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2790
+msgid "Liste der registrierten Mitglieder"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2793
+msgid "Login Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2794
+msgid "Logout Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2795
+msgid "Statische Seiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2797
+msgid "Anwendungen in der Kategorie Ansicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2798
+msgid "Anwendungen in der Artikel Ansicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2799
+msgid "News Artikel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2800
+msgid "News Archive"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2801
+msgid "Kontakt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2802
+msgid "Website Team"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2804
+msgid "Formmailder / Weiterempfehlen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2805
+msgid "Sonstige Seiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2806
+msgid "Suchen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Library.php:2811
+msgid "Fehler Seiten (404/403)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:8
+msgid "darf Signaturen anderer Benutzer sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:9
+msgid "darf Avatare/Profilbilder anderer Benutzer sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:10
+msgid "darf Bilder sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:11
+msgid "ist ein \"Sheriff\""
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:12
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:15
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:18
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:19
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:20
+msgid "darf Dateien herunterladen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:13
+msgid "darf die Email Adresse anderer Benutzer sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:14
+msgid "darf sich unsichtbar machen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:16
+msgid "darf Privater Nachrichten nutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:17
+msgid "soll eine Email bei neuer Privater Nachricht erhalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:30
+msgid "sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:31
+msgid "kann Events eintragen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:32
+msgid "maximale länge des Event Textes"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:34
+msgid "kann private Events eintragen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:35
+msgid "kann Events löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:36
+msgid "kann Events von anderen Benutzern sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:48
+msgid "kann News hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:49
+msgid "Kommentare zur News hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:50
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:77
+msgid "maximale länge des Kommentars"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:58
+msgid "Allgemeine Rechte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:61
+msgid "ist eine gesperrte Gruppe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:62
+msgid "kann das CMS im Offlinemodus sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:63
+msgid "kann die Suchfunktion des Systems benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:64
+msgid "kann die Seite einer anderen Person weiterempfehlen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:74
+msgid "Umfragen sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:75
+msgid "kann an Umfragen teilnehmen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:76
+msgid "Kommentare zur Umfrage hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:90
+msgid "kann Avatare benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:91
+msgid "kann eigene Avatare benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:92
+msgid "Erlaubte Endungen für Avatare"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:93
+msgid "maximale Dateigröße des eigenen Avatars in KB"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:94
+msgid "maximale breite des eigenen Avatars"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:95
+msgid "maximale höhe des eigenen Avatars"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:97
+msgid "kann eigenes Gästebuch benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:98
+msgid "maximale Anzahl der erlaubten Gästebucheinträge"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:101
+msgid "kann das Profil anderer Benutzer sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:102
+msgid "kann Signatur benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:103
+msgid "maximale länge der eigenen Signatur"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:105
+msgid "kann das Geburtsdatum von Benutzern sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:106
+msgid "kann die Benutzerliste sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:107
+msgid "kann versteckte Benutzer sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:108
+msgid "kann sich unsichtbar machen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:108
+msgid "Hebt sich auf, wenn die Benutzergruppe auch versteckte Benutzer sehen darf"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:111
+msgid "kann private Nachrichten benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:112
+msgid "maximale länge von private Nachrichten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:113
+msgid "maximal anzahl an Ordnern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:114
+msgid "maximal anzahl an Nachrichten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:117
+msgid "maximale länge der eigenen Beschreibung/Biografie"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:127
+msgid "kann das Forum sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:128
+msgid "kann Beiträge von andern Benutzern sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:129
+msgid "kann das Forum durchsuchen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:130
+msgid "kann neue Beiträge schreiben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:131
+msgid "kann auf seine eigenen Beiträge antworten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:132
+msgid "kann auf andere Beiträge antworten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:133
+msgid "kann Beiträge bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:134
+msgid "kann Beiträge löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:135
+msgid "kann Themen löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:136
+msgid "kann Themen schließen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:137
+msgid "kann Themen verschieben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:138
+msgid "kann Attachments herunterladen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:139
+msgid "kann Attachments zu beiträgen hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:140
+msgid "kann Umfragen erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:141
+msgid "kann Umfragen bewerten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:142
+msgid "kann Themen bewerten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:143
+msgid "neue Beiträge müssen erst freigeschalten werden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:144
+msgid "kann die Notz der Löschung von Themen und Beiträgen sehen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:147
+msgid "maximale Dateigröße für Attachments (in KB)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/permission_defines.php:148
+msgid "Erlaubte Dateitypen für Attachments"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Field/class_authorfield.php:62
+msgid "Keine Angabe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Field/class_mediafilefield.php:161
+msgid "Browse Files"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Field/class_mediaimagefield.php:164
+msgid "Browse Mediacenter"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/Field/UsergroupsField.php:61
+msgid "Alle Benutzergruppen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.blend.php:7
+msgid "Farbe in das Bild mischen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.blend.php:11
+msgid "Mischt eine Farbe in das Bild."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.blend.php:19
+msgid "Die Farbe wird in das Bild gemischt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.blend.php:24
+msgid "Die Deckkraft (Prozentsatz) der Farbe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.blur.php:7
+msgid "Bild verwischen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.blur.php:11
+msgid "Bewegung in das Bild bringen um es zu verwischen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.border.php:7
+msgid "Bild Einrahmen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.border.php:11
+msgid "Fügt dem Bil einen Rahmen hinzu."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.canvas.php:6
+msgid "Bild Gräße ändern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.canvas.php:9
+msgid "Ändert die Größe des Bildes."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.charcoal.php:6
+msgid "Kohlezeichnung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.charcoal.php:9
+msgid "Simuliert eine Kohlezeichnung."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.crop.php:6
+msgid "Bild Ausschnitt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.crop.php:9
+msgid "Schneidet einen bestimmten Bereich des Bildes aus."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.enhance.php:6
+msgid "Qualität verbessern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.flip.php:6
+msgid "Flip"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.flip.php:9
+msgid "Flip the image along either it's x or y axis."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.grayscale.php:6
+msgid "Bild in Graustufen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.grayscale.php:9
+msgid "Ändern Sie das Bild in Graustufen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.margin.php:5
+msgid "Abstände"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.margin.php:8
+msgid "Fügt dem Bild Abstände hinzu."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.modulate.php:5
+msgid "Helligkeit, Sättigung und Farbton"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.modulate.php:8
+msgid "Ändern Sie die Helligkeit, Sättigung und Farbton des Bildes."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.negative.php:5
+msgid "Farben umkehren (Negativ)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.negative.php:8
+msgid "Kehren Sie die Farben des Bildes um (Negativ)."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.oilpaint.php:5
+msgid "Ölgemälde"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.oilpaint.php:8
+msgid "Simulieren Sie ein Ölgemälde."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.overlay.php:6
+msgid "Bild überlappen (Wasserzeichen)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.overlay.php:10
+msgid "Überlappt das Bild mit einem anderen Bild."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.polaroid.php:5
+msgid "Polaroid-Foto"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.polaroid.php:8
+msgid "Simulieren Sie einen Polaroid-Foto."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.reflect.php:8
+msgid "Reflexion"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.reflect.php:13
+msgid "Erstellen Sie eine Reflexion des Bildes."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.resize.php:5
+msgid "Ändern der Bildgröße"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.resize.php:8
+msgid "Ändern der Bildgröße."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.roundcorner.php:5
+msgid "runde Ecken"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.roundcorner.php:8
+msgid "Fügt runde Ecken, um das Bild hinzu."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.sepia.php:5
+msgid "Sepia Tönung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.sepia.php:8
+msgid "Wendet einen Effekt auf das Bild, ähnlich dem Effekt in einem Foto Dunkelkammer um Sepia Tönung zu erreichen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.shadow.php:5
+msgid "Schatten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.shadow.php:8
+msgid "Hinzufügen eines Schattens, um das Bild."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.sharpen.php:8
+msgid "Bild schärfen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.sharpen.php:13
+msgid "Schärfen Sie das Bild."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.sketch.php:8
+msgid "Bleistiftskizze"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.sketch.php:13
+msgid "Simulieren Sie eine Bleistiftskizze."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.solarize.php:8
+msgid "Selektive Belichtung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.solarize.php:13
+msgid "Selektive Belichtung durch Abdecken von Partien."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.swirl.php:8
+msgid "Schwenken"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.swirl.php:13
+msgid "Schwenken Sie die Pixel um die Mitte des Bildes."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.vignette.php:6
+msgid "Vignettierung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Library/imglib/transformers/imagick/class.vignette.php:10
+msgid "Die Vignettierung ist eine Abschattung zum Rand eines Bildes, was oft in Fotografien des vergangenen Jahrhunderts zu sehen ist."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Apps/Action/Index.php:32
+msgid "Anwendungs-Titel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Apps/Action/Index.php:35
+msgid "Anwendungs-Typ"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Apps/Action/Index.php:37
+msgid "Aktiv"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Apps/Action/Index.php:39
+msgid "Optionen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Apps/Action/Index.php:50
+#, php-format
+msgid "`%s` barbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Apps/Action/Index.php:102
+msgid "Anwendungs-Übersicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Apps/Config/Base.php:67
+msgid "Anwendungs Generator"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Asset/Config/Base.php:63
+msgid "Medieninhalte (Assets)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Auth/Action/Login.php:29
+msgid "Sie sind bereits eingeloggt!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Auth/Action/Login.php:72
+msgid "Could not log you in for one of the following reasons:<ul><li>the username is incorrect;</li><li>the password is incorrect;</li><li>the account has not been activated;</li><li>the account has been blocked.</li></ul>"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Backup/Action/Create.php:32
+msgid "Please select the files and databases that should be backed up."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Backup/Action/Create.php:45
+msgid "Backup wurde erstellt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Backup/Action/Create.php:79
+msgid "Backup anlegen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Backup/Action/Delete.php:43
+msgid "Backup-Datei wurde gelöscht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Cache/Action/Clear.php:42
+msgid "Quick Cache wurde erfolgreich geleert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Cache/Action/Clearfull.php:42
+msgid "Cache wurde erfolgreich geleert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Cache/Action/Clearpagecache.php:34
+msgid "Seiten Cache wurde erfolgreich geleert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Console/Action/Index.php:10
+msgid "Konsole"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Checkalias.php:13
+msgid "Seiten Typ wurde nicht mit übergeben. Daher ist keine überprüfung des Alias möglich."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Checkalias.php:39
+#, php-format
+msgid "Der Alias \"%s\" existiert bereits!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Checkalias.php:54
+msgid "Invalid Identifier check!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Checkversion.php:58
+#, php-format
+msgid "There's a new version (%s) of the DreamCMS available!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Checkversion.php:58
+#, php-format
+msgid "Critical DreamCMS update (%s) available!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Index.php:143
+msgid "Unbekannt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:590
+msgid "Plugins ausführen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:604
+#, php-format
+msgid "Plugin `%s` ausführen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:619
+msgid "Plugin Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:632
+#, php-format
+msgid "Plugin `%s` Einstellungen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:695
+msgid "Inhalte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:697
+#, php-format
+msgid "Inhalte der Anwendung `%s` bearbeiten."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:704
+msgid "Kategorien"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:706
+#, php-format
+msgid "Kategorien der Anwendung `%s` bearbeiten."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:715
+#, php-format
+msgid "Kommentare der Anwendung `%s` freischalten / bearbeiten."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:723
+#, php-format
+msgid "Tags der Anwendung `%s` bearbeiten."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:734
+#, php-format
+msgid "Suchindex der Anwendung `%s` neu erzeugen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:740
+msgid "Inhalt Rewrite Identifiers erneuern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:743
+#, php-format
+msgid "Rewrite Identifiers der Anwendung `%s` neu erzeugen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:749
+msgid "Kategorien Rewrite Identifiers erneuern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:752
+#, php-format
+msgid "Kategorie rewrite Identifiers der Anwendung `%s` neu erzeugen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:762
+msgid "Typen Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:764
+#, php-format
+msgid "Typen Einstellungen des Apps `%s`."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:769
+msgid "Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Dashboard/Action/Menu.php:771
+#, php-format
+msgid "Einstellungen der Anwendung `%s`."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forms/Config/Base.php:63
+msgid "Formular Verarbeitung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:62
+msgid "Diskussions Forum"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:74
+msgid "Minimale Beitragslänge"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:78
+msgid "Maximale Beitragslänge"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:82
+msgid "Attachment Pfad"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:86
+msgid "Maximale größe eines Attachments in Byte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:90
+msgid "Doppeltes posten von Attachments erlauben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:95
+msgid "Forenbeschreibung anzeigen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:100
+msgid "Foren Moderatoren anzeigen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:105
+msgid "Anzahl der Themen pro Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:110
+msgid "Beiträge pro Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:115
+msgid "Themen Bewertung Anzeigen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:120
+msgid "Standart Post Icon anzeigen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:125
+msgid "Länge des Vorschau-Textes"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:126
+msgid "Hier können Sie festlegen, wie viele Zeichen in der Vorschau eines Themas stehen. Die Vorschau ist auf jeder Seite der Themen (Themenauflistung) zu sehen, wenn man die Maus über den Betreff des Themas hält."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:130
+msgid "Signatur eines Benutzers im Beitrag anzeugen?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:135
+msgid "Schnellnavigation benutzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:140
+msgid "Minimale Benutzerlänge"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:141
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:146
+msgid "Dies gilt nur für Gäste"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Forum/Config/Base.php:145
+msgid "Maximale Benutzerlänge"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Help/Action/Index.php:52
+#, php-format
+msgid "<p>Unfortunately, there is no help-page available yet for `%s/%s`. (%s)</p>"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Delete.php:38
+#, php-format
+msgid "Diese Locale `%s` kann nicht gelöscht werden, da sie als System Standart definiert wurde!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Delete.php:43
+msgid "Locale existiert leider nicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Delete.php:49
+#, php-format
+msgid "Locale `%s` wurde gelöscht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Delete.php:50
+#, php-format
+msgid "Locale `%s` erfolgreich gelöscht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Edit.php:46
+msgid "Locales"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Edit.php:47
+#, php-format
+msgid "Locale `%s` bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Edit.php:47
+msgid "Locale erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Index.php:37
+msgid "Locale auf Unix Servern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Index.php:38
+msgid "Locale auf Windows&trade; Servern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Index.php:39
+msgid "GUI"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Index.php:50
+#, php-format
+msgid "Übersetzungen %s Bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Index.php:51
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Translation.php:76
+#, php-format
+msgid "%s Bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Translation.php:42
+msgid "alle Sprachen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Translation.php:52
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:35
+msgid "Suchen nach"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Translation.php:53
+msgid "in Locale"
+msgstr "in Sprachen"
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Translation.php:60
+msgid "Original String"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Translation.php:61
+msgid "Übersetzung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Translation.php:62
+msgid "Locale"
+msgstr "Sprache"
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Translation.php:82
+msgid "Löschen nicht möglich da vom System verwendet"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Action/Translation.php:119
+msgid "Übersetzungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Config/Base.php:64
+msgid "Sprach Verwaltung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Model/Mysql.php:107
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Model/Mysql.php:108
+#, php-format
+msgid "Locale `%s` aktualisiert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Model/Mysql.php:118
+#: /Volumes/FastData/Web/DCMS201/Modules/Locale/Model/Mysql.php:119
+#, php-format
+msgid "Locale `%s` erfolgreich erstellt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:13
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:46
+msgid "Meldung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:14
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:47
+msgid "IP Adresse"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:26
+msgid "Frontend und Backend Logs"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:27
+msgid "Frontend Logs"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:28
+msgid "Backend Logs"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:36
+msgid "Suchen in"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:37
+msgid "Log Type"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:48
+msgid "Datum"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:54
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:70
+msgid "Löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:81
+msgid "Warnung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:86
+msgid "PHP Fehler"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:90
+msgid "Info"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:105
+msgid "Type:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:106
+msgid "Nachricht:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Logs/Action/Index.php:107
+msgid "User Agent:"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Main/Config/Base.php:54
+msgid "Core Modul"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Members/Config/Base.php:54
+msgid "Mitglieder Liste"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Menues/Action/Save.php:24
+msgid "Es fehlt der Titel, dieser ist aber erforderlich!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Menues/Action/Save.php:79
+msgid "Diese Url ist nicht Valid!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Menues/Action/Save.php:102
+msgid "Sie müssen ein Modul angeben bevor sie fortsetzen können!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Menues/Action/Save.php:513
+msgid "Menüpunkt wurde erfolgreich gespeichert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Menues/Action/Save.php:529
+msgid "Error Invalid Menu ID!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Menues/Action/Save.php:534
+msgid "Menüpunkt kann sich nicht selbst als Übergeordneten Menüpunkt haben!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Menues/Action/Save.php:590
+msgid "Menüpunkt wurde erfolgreich aktualisiert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Index.php:45
+msgid "Verwendete Meta Tabellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Index.php:68
+msgid "Modul Beschreibung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Index.php:69
+msgid "Version"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Index.php:88
+msgid "Modul Löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Index.php:107
+msgid "Modul aktualisieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Index.php:109
+#, php-format
+msgid "Modul %s Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Index.php:159
+msgid "Frontend Module"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Install.php:49
+msgid "Das von ihnen zu installierende Modul existiert nicht oder wurde schon installiert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Install.php:66
+msgid "Das Modul wurde installiert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Install.php:86
+msgid "Weitere Module installieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Update.php:25
+#, php-format
+msgid "Das Modul `%s` ist auf dem Aktuellsten stand und wurde daher nicht aktualisiert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Action/Update.php:41
+#, php-format
+msgid "Das Modul `%s` wurde aktualisiert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Modules/Config/Base.php:62
+msgid "Module"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Edit_news.php:148
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:167
+msgid "News Übersicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Edit_news.php:149
+#, php-format
+msgid "News `%s` bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Edit_news.php:149
+msgid "News erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:31
+msgid "Online News"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:32
+msgid "Offline News"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:33
+msgid "Archivierte News"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:34
+msgid "in Bearbeitung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:35
+msgid "Online &amp; Offline News"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:52
+msgid "nicht Übersetzte"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:63
+msgid "Bearbeitet am"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:64
+msgid "Bearbeiter"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:65
+msgid "Hits"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:82
+msgid "nicht Veröffentlichen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:83
+msgid "Archivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:86
+msgid "Verschieben nach"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Index.php:396
+msgid "Die von Ihnen aufgerufene Seite existiert leider nicht!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Save_news.php:52
+msgid "News Titel fehlt!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Save_news.php:57
+msgid "News enthält eine fehlerhafte Kategorie!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Save_news.php:62
+msgid "News enthält keinen Inhalt!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Save_news.php:139
+msgid "News wurde erfolgreich geändert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Show.php:50
+msgid "Die von Ihnen aufgerufene News existiert nicht oder aber Sie haben keine Rechte Sich diese News anzusehen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Show.php:56
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Show.php:62
+msgid "Die von Ihnen aufgerufene News existiert nicht."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Show.php:78
+msgid "Sorry aber Sie können diesen Inhalt nicht mehr bewerten, da Sie Ihre Wertung schon abgegeben haben."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Show.php:94
+msgid "Danke für Ihre Bewertung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Action/Show.php:115
+msgid "Sie haben keine Rechte sich diese News anzusehen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Model/model.news.php:81
+msgid "News Kategorien"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Model/model.news.php:87
+msgid "Top News"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Model/model.news.php:94
+msgid "Top Bewertete News"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Model/model.news.php:101
+msgid "Aktuelle News"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Model/model.news.php:108
+msgid "News Tags"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/News/Model/model.news.php:520
+msgid "In Bearbeitung"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Packages/Config/Base.php:62
+msgid "Packete"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:133
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:146
+msgid "keine Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:152
+msgid "--- Standart Layout ---"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:157
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Index.php:156
+msgid "Übersicht Statischer Seiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:158
+#, php-format
+msgid "Statische Seite `%s` bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:158
+msgid "Statische Seite erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:189
+msgid "Seiten Titel fehlt!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:194
+msgid "Seite enthält keinen Inhalt!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:264
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Action/Edit.php:291
+msgid "Seite wurde erfolgreich geändert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Page/Config/Base.php:72
+msgid "Verwaltet statische Seiten. (Reiner HTML Code)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Rules/Action/Delete.php:33
+#, php-format
+msgid "Rule for Controller `%s/%s` deleted."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Rules/Action/Delete.php:34
+msgid "Rule erfolgreich gelöscht."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Rules/Action/Edit.php:36
+msgid "Controller darf nicht leer sein"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Rules/Action/Edit.php:63
+#, php-format
+msgid "Router Rule for Controller `%s/%s` changed."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Rules/Action/Edit.php:64
+msgid "Router Rule erfolgreich aktualisiert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Rules/Action/Edit.php:74
+#, php-format
+msgid "Router Rule for Controller `%s/%s` added."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Rules/Action/Edit.php:75
+msgid "Router Rule erfolgreich erstellt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Rules/Action/Index.php:174
+#, php-format
+msgid "Rule %s bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Rules/Action/Index.php:221
+msgid "Router Rules Übersicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Settings/Action/Edit.php:51
+msgid "Eingabe ist erforderlich"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Settings/Action/Edit.php:56
+#, php-format
+msgid "Eingabe darf maximal %s Zeichen lang sein"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Settings/Action/Edit.php:79
+#, php-format
+msgid "Die Konfiguration konnte nicht abgeschlossen werden. %s"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Settings/Action/Edit.php:92
+msgid "Die Konfiguration wurde aktualisiert."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Settings/Action/Edit.php:260
+#: /Volumes/FastData/Web/DCMS201/Modules/Settings/Action/Index.php:18
+#: /Volumes/FastData/Web/DCMS201/Modules/Settings/Action/Index.php:42
+msgid "DreamCMS Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Settings/Action/Edit.php:261
+#, php-format
+msgid "%s Einstellungen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Sitemap/Config/Base.php:56
+msgid "Generiert eine einfache Sitemap"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Edittemplate.php:54
+msgid "Sie haben dem Template keinen namen gegeben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Edittemplate.php:59
+msgid "Template darf nicht leer sein"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Edittemplate.php:93
+msgid "Template wurde erfolgreich aktualisiert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Edittemplate.php:127
+msgid "Template wurde erfolgreich angelegt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Edittemplate.php:165
+msgid "Frontend Skins Übersicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Edittemplate.php:166
+#, php-format
+msgid "Frontend Skin `%s`"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Edittemplate.php:167
+#, php-format
+msgid "Template `%s` bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Getsense.php:147
+msgid "Alle cp: Tags"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Index.php:84
+#, php-format
+msgid "Skin %s exportieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Index.php:85
+#, php-format
+msgid "Skin %s bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Index.php:86
+#, php-format
+msgid "Skin %s löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Index.php:87
+msgid "Skin Templates erneuern"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Index.php:88
+#, php-format
+msgid "Skin %s aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Index.php:89
+#, php-format
+msgid "Skin %s als Standart setzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Index.php:90
+#, php-format
+msgid "Skin %s Templates"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Templates.php:74
+msgid "unbekannt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Templates.php:105
+msgid "Templates"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Wizard.php:20
+msgid "Es wurde keine Tag übergeben."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Wizard.php:26
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Wizard.php:33
+#, php-format
+msgid "Es wurde keine Tag-Definition für den Tag `%s` gefunden."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Wizard.php:44
+msgid "Es wurde keine Function übergeben."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Skins/Action/Wizard.php:50
+#, php-format
+msgid "Es wurde keine Functions-Definition für die Function `%s` gefunden."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Tracker/Config/Base.php:54
+msgid "Website Statistik Tracker"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Trash/Model/Mysql.php:87
+msgid "Es wurde nicht angegeben, aus welcher Tabelle die Daten in den Papierkorb geschoben werden soll!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Trash/Model/Mysql.php:92
+#, php-format
+msgid "Es wurden keine Daten aus der Tabelle `%s` ausgewählt, welche in den Papierkorb geschoben werden sollen!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Trash/Model/Mysql.php:110
+#, php-format
+msgid "Unbekannter Inhalt (%s)"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Edit.php:323
+msgid "Benutzer wurde erstellt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Edit.php:323
+msgid "Änderungen am Benutzer wurden übernommen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Edit.php:430
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:34
+msgid "Benutzer Übersicht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Edit.php:431
+#, php-format
+msgid "Benutzer `%s` bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Edit.php:431
+msgid "Benutzer erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:63
+msgid "Suche nach Benutzer"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:64
+msgid "Benutzergruppe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:67
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:81
+msgid "Email"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:68
+msgid "MSN"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:69
+msgid "ICQ"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:70
+msgid "YIM"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:72
+msgid "mehr als X Posts"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:73
+msgid "weniger als X Posts"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:80
+msgid "Username"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:82
+msgid "Gruppe"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:83
+msgid "Posts"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:84
+msgid "Registriert seit"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:85
+msgid "zuletzt Online"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:92
+msgid "eMail senden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:93
+msgid "Zugriffsrechte setzen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:94
+msgid "Benutzer freischalten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:95
+msgid "Benutzer sperren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:96
+msgid "Benutzer sperre aufheben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:97
+msgid "Benutzer löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:334
+#, php-format
+msgid "Profil von %s bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:335
+#, php-format
+msgid "Benutzer %s löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:336
+#, php-format
+msgid "Benutzer %s eine eMail senden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Action/Index.php:337
+#, php-format
+msgid "Zugriffsrechte für Benutzer %s festlegen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:12
+msgid "Anzahl der Benutzer pro Seite"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:14
+#, php-format
+msgid "%s Benutzer"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:15
+msgid "Geben Sie hier an, wieviele Mitglieder pro Seite auf der Mitgliederauflistungsseite angezeigt werden sollen."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:18
+msgid "Avatare anzeigen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:21
+msgid "Sollen die Avatare der Benutzer angezeigt werden?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:24
+msgid "Avatare im swf Format erlauben"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:27
+msgid "Sollen Avatare im swf Format angezeigt werden?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:31
+msgid "HTML in Signatur"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:34
+msgid "Soll HTML Code in den Signaturen der Mitglieder erlaubt sein?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:37
+msgid "BBCode in Signatur"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:40
+msgid "Soll BBCode in den Signaturen der Mitglieder erlaubt sein?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:43
+msgid "Smilies in Signatur"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:46
+msgid "Sollen Smilies in den Signaturen der Mitglieder erlaubt sein?"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:49
+msgid "Max. Bilderanzahl in der Signatur"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:52
+msgid "Maximale Anzahl der Bilder (auch Smilies) die in der Signatur erlaubt sind. 0 = unbegrenzt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:55
+msgid "Benutzerlevel anzeigen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/User/Model/model.user.php:58
+msgid "Zeigt ein Benutzerlevel im Forum an"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Usergroups/Action/Delete.php:41
+msgid "Standardgruppen können nicht gelöscht werden."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Usergroups/Action/Delete.php:48
+msgid "Sie können diese Gruppe nicht löschen, da Sie dem Admin bzw. der Standardgruppe gehört."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Usergroups/Action/Index.php:51
+#, php-format
+msgid "Benutzergruppe `%s` bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Usergroups/Action/Index.php:52
+#, php-format
+msgid "`%s` Dashboard Berechtigungen bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Modules/Usergroups/Action/Index.php:72
+msgid "Gruppe kann nicht gelöschst werden"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.permissions.php:6
+msgid "RSS Feed Import Plugin"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.permissions.php:9
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:9
+msgid "Kann das Plugin ausführen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.permissions.php:12
+msgid "Kann RSS-Feed Imports aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.permissions.php:13
+msgid "Kann RSS-Feed Imports löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.permissions.php:14
+msgid "Kann RSS-Feed Imports bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:55
+msgid "Leider ist dieses Modul im Frontend nicht verfügbar!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:60
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:261
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:730
+msgid "Ihnen fehlen die Rechte für diese Aktion!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:70
+msgid "RSS Feed Importer"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:94
+msgid "Feed Titel"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:95
+msgid "Feed Url"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:97
+msgid "letzter Fetch"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:208
+#, php-format
+msgid "%s Importieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:211
+#, php-format
+msgid "Feed `%s` bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:271
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:275
+msgid "Der RSS Titel darf nicht leer sein"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:277
+msgid "Die RSS Url darf nicht leer sein"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:278
+msgid "Die von Ihnen angegebene Url ist keine gültige URL"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:301
+msgid "Der RSS Fetch wurde erfolgreich geändert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:316
+msgid "Der RSS Fetch wurde erfolgreich hinzugefügt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:337
+#, php-format
+msgid "RSS Feed-Fetch %s bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:341
+msgid "RSS Feed-Fetch erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:571
+msgid "RSS Fetch konnte nicht abgeschlossen werden!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/feedimport/plugin.feedimport.php:748
+msgid "Feed-Fetch kann nicht gefunden werden!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:6
+msgid "Gallery Plugin"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:12
+msgid "Kann Gallerien bearbeiten/erstellen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:13
+msgid "Kann Gallerien aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:14
+msgid "Kann Gallerien löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:15
+msgid "Kann Gallerien leeren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:16
+msgid "Kann Gallerie Bilder bearbeiten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:17
+msgid "Kann Gallerie Bilder aktivieren/deaktivieren"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:18
+msgid "Kann Gallerie Bilder löschen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:19
+msgid "Kann Gallerie Bilder hochladen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.permissions.php:26
+msgid "Kommentare zu einem Bild hinzufügen"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:87
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:198
+msgid "Gallerien"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:116
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:139
+msgid "Gallerie"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:176
+msgid "Gallerie kann nicht gefunden werden!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:199
+#, php-format
+msgid "Gallerie %s"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:218
+msgid "Bitte einen Gallerie Titel angeben!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:230
+#, php-format
+msgid "Gallerie %s wurde erfolgreich erstellt"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:239
+#, php-format
+msgid "Gallerie %s wurde erfolgreich geändert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:276
+#, php-format
+msgid "Gallerie `%s` wurde erfolgreich gelöscht!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:314
+#, php-format
+msgid "Gallerie `%s` wurde erfolgreich geleert!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:344
+#, php-format
+msgid "Bild `%s` wurde erfolgreich geändert"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:354
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:381
+msgid "Bild kann nicht gefunden werden!"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:408
+#, php-format
+msgid "Bild `%s` wurde erfolgreich gelöscht"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/gallery/plugin.gallery.php:463
+msgid "Speichern erfolgreich"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/pagerank/plugin.pagerank.php:79
+msgid "Pagerank"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/timing/plugin.timing.php:81
+msgid "AN"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/plugins/timing/plugin.timing.php:85
+msgid "AUS"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/widgets/feedback/widget.feedback.php:24
+msgid "Sorry aber Sie können nicht ständig Nachrichten verschicken. Bitte loggen Sie sich aus und anschließend wieder ein um weitere Nachrichten zu senden."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/widgets/feedback/widget.feedback.php:31
+msgid "Betreff fehlt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/widgets/feedback/widget.feedback.php:38
+msgid "Bitte eine Nachricht eingeben."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Packages/widgets/feedback/widget.feedback.php:65
+msgid "Ihre Nachricht wurde erfolgreich verschickt."
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/public/pages/2/cache/skins/skin_98/compiled/main/module-blocks/index-footer_compiled.php:52
+msgid "Render Time"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/public/pages/2/cache/skins/skin_98/compiled/main/module-blocks/index-header_compiled.php:26
+msgid "Mein Account"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/public/pages/2/cache/skins/skin_98/compiled/main/module-blocks/index-header_compiled.php:32
+#, php-format
+msgid "Du hast %s neue Nachrichten"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/public/pages/2/cache/skins/skin_98/compiled/main/module-blocks/index-header_compiled.php:39
+msgid "Mein Profil"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/public/pages/2/cache/skins/skin_98/compiled/main/module-blocks/index-header_compiled.php:50
+msgid "Messenger"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/public/pages/2/cache/skins/skin_98/compiled/main/module-blocks/index-header_compiled.php:80
+msgid "Login"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/public/pages/2/cache/skins/skin_98/compiled/main/module-blocks/index-header_compiled.php:95
+#, php-format
+msgid "Hallo, %s"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/public/pages/2/cache/skins/skin_98/compiled/main/module-blocks/index-main_content_compiled.php:98
+msgid "Letzte Kommentare"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/public/pages/2/cache/skins/skin_98/compiled/main/module-blocks/index-main_content_compiled.php:107
+msgid "Neuste Mitglieder"
+msgstr ""
+
+#: /Volumes/FastData/Web/DCMS201/Vendor/php-gettext/examples/pigs_dropin.php:77
+msgid ""
+"This is how the story goes.\n"
+"\n"
+msgstr ""
+

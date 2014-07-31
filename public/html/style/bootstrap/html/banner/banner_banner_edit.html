@@ -1,0 +1,48 @@
+<?php
+
+function __banner_banner_edit(){
+global $cp, $cfg, $fct, $cp, $cp;
+
+	return <<<EOF
+<table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#999999">
+  <tr>
+    <td>
+    <table width="100%" border="0" cellspacing="1" cellpadding="8" bgcolor="#cccccc">
+      <tr>
+        <td><font class="option"><center><b>Banner ändern</b><br>
+        <br>
+        </center>
+        <br>
+        <br>
+        <form  action="admin.php"  method="post" onsubmit=""><input type="hidden" name="adm" value="admin?op=BannerChange" />
+          Kundenname: <select name="cid">
+          <option value="1" selected>tztr</option>
+          </select><br>
+          weitere Einblendungen hinzufügen:
+          <input type="text" name="impadded" size="12" maxlength="11" class="input"> gekauft<b>Unbegrenzt</b>
+          erfolgte: <b>1</b><br>
+          Banner-Adresse:
+          <input type="text" name="imageurl" size="60" maxlength="60" value="http://" class="input"><br>
+          Seiten-Adresse:
+          <input type="text" name="clickurl" size="60" maxlength="100" value="http://" class="input"><br>
+          <input type="hidden" name="bid" value="1">
+          <input type="hidden" name="imptotal" value="0">
+          <input type="hidden" name="op" value="BannerChange">
+          <input type="submit" value="Änderungen speichern" id=button> <input type="reset" value="Zurücksetzen" class="button" /> <input type="button" value="Abbrechen" onclick="history.back();" class="button" /></form>
+        </font></td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+EOF;
+}
+
+?>

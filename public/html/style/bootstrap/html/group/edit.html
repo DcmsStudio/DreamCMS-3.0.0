@@ -1,0 +1,152 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+
+    [save:ugform{$usergroup.groupid}] [save_exit:ugform{$usergroup.groupid}] [reset:ugform{$usergroup.groupid}] [cancel:ugform{$usergroup.groupid}]
+
+</cp:block>
+
+<cp:block name="content">
+
+    <form action="admin.php" name="ugform{$usergroup.groupid}" id="ugform{$usergroup.groupid}" method="post">
+
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="action" value="save" />
+        <input type="hidden" name="id" id="group-id" value="{$usergroup.groupid}" />
+        <input type="hidden" name="adm" value="usergroups" />
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>{trans('Benutzergruppe')}</label>
+                <input type="text" name="k[title]" value="{escape($usergroup.title, 'quotes')}" class="required text form-control" size="40" />
+                <span class="note">{trans('Bezeichnung der Benutzergruppe')}</span>
+            </div>
+
+
+            <div class="col-md-4">
+                <label>{trans('Benutzergruppen-Typ')}</label>
+                <select name="k[grouptype]" id="grouptype" class="required select form-control">
+                    <option value="">{trans('Bitte auswählen')}</option>
+                    <cp:loop name="usergroup.grouptypes" key="r">
+                        <option value="{$r.value}" cp:on="selected:$r.value == $usergroup.grouptype" parse:selected="selected"> {$r.label} </option>
+                    </cp:loop>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label>{info:usergroup|dashboard}{trans('Dashboard?')}</label>
+                <label for="usedashboard">
+                    <input type="checkbox" class="checkbox form-control" name="k[dashboard]" id="usedashboard" value="1" cp:on="checked:$usergroup.dashboard" parse:checked="checked"/> {trans('hat Dashboard Zugriff')}
+                </label>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>{trans('Beschreibung')}</label>
+                <textarea name="k[description]" class="textarea form-control" rows="3">{$usergroup.description}</textarea>
+                <span class="note">{trans('Hier können Sie zu besseren Übersicht eine kurze Bechreibung eintragen')}</span>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div style="margin-top:10px;margin-bottom:0">
+            <cp:jstabs tabs="$tab_titles"  default="{$defaulttab}" usetrans="true"  />
+        </div>
+
+
+
+        <div id="tab-contents" style="margin-top:0;width:100%;display:inline-block">
+            {$tab_containers}
+        </div>
+
+
+    </form>
+
+
+
+
+
+
+    <script type="text/javascript">
+
+        Form.registerForm('ugform{$usergroup.groupid}', {
+            contentIdentifierID: 'group-id',
+            exiturl: 'admin.php?adm=usergroups&action=',
+            runAfterSubmit: function() {
+                Win.refreshOpenerWindow();
+                Desktop.Taskbar.Menu.createStartMenu();
+            }
+        });
+
+        var $defaultchecked = $('#' + Win.windowID ).find('#usedashboard').prop('checked');
+        /*
+         if ($defaultchecked) {
+         $('#usedashboard').checked = true;
+         $('#usedashboard').attr('checked', 'checked');
+         } */
+
+        var value = $('#' + Win.windowID ).find('#grouptype').find('option:selected').val();
+        if (value != 'administrator' && value != 'chefredakteur' && value != 'author')
+        {
+            $('#' + Win.windowID ).find('#usedashboard').attr('disabled', 'disabled');
+        }
+
+        $('#' + Win.windowID ).find('#grouptype').bind('change', function(e)
+        {
+            var value = $(this).find('option:selected').val();
+            if (value == 'administrator' || value == 'chefredakteur' || value == 'author')
+            {
+                $('#' + Win.windowID ).find('#usedashboard').removeAttr('disabled');
+            }
+            else {
+                $('#' + Win.windowID ).find('#usedashboard').attr('disabled', 'disabled');
+            }
+        });
+
+        $('#' + Win.windowID ).find('#usedashboard').bind('change', function(e)
+        {
+            if ($(this).prop('disabled')) {
+                return;
+            }
+
+            var self = $(this);
+            if ($(this).prop('checked'))
+            {
+                jConfirm('{trans("Bist du dir sicher, das diese Benutzergruppe keinen Dashboardzugriff haben soll? <br/> Achtung: Alle bisherigen Dashboard Berechtigungen werden beim Speichern gelöscht!")}', '{trans("Warnung...")}', function(res) {
+                    if (res)
+                    {
+                //        $(self).prop('checked', false);
+                //        $(self).removeAttr('checked');
+                    }
+                    else
+                    {
+                        if ($defaultchecked)
+                        {
+                       //     $(self).prop('checked', true);
+                       //     $(self).attr('checked', true);
+                        }
+                    }
+                });
+            }
+        });
+        
+        
+        
+        $('#' + Win.windowID).find('fieldset').css({marginBottom: '3px'});
+
+        initUserGroupPerms();
+        // $('<br/>').insertAfter($('#' + Win.windowID).find('label'));
+
+    </script>
+
+
+</cp:block>
+

@@ -1,0 +1,31 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="add-forum-mod{$forum.forumid}" class="action-button"><img src="images/buttons/new.png" width="16" height="16" alt="" />&nbsp;{trans('Moderator hinzufügen')}</button>
+</cp:block>
+
+<cp:block name="content">
+    <div id="forum-mod-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+
+        Application.Grid('forum-mod-grid', {
+        url: 'admin.php?adm=plugin&plugin=forum&action=managemods&id={$forum.forumid}',
+                currentFilter: {$grid.activeFilter},
+                colModel: {$grid.colModel},
+                gridActions: {$grid.gridActions},
+                sort: '{$grid.sort}',
+                orderby: '{$grid.orderby}',
+                total: {$grid.total},
+                key: 'id',
+                datarows: {$grid.datarows}
+        });
+        
+        
+        $('#add-forum-mod{$forum.forumid}').click(function(){
+            openTab({url:'admin.php?adm=plugin&plugin=forum&action=addmod&forumid={$forum.forumid}', obj:this, label:$(this).text()});
+        });
+        
+
+    </script>
+</cp:block>

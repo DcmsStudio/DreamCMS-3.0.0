@@ -1,0 +1,163 @@
+<cp:section name="publishing">
+
+<div class="postbox">
+    <h3>{trans('Veröffentlichen')}</h3>
+    <div class="postbox-content" rel="metapublish">
+
+        <p>
+            <span>{trans('Status')}</span>
+            <span id="publish-state" class="state online"></span>
+            <select id="meta-published" name="documentmeta[published]">
+                <option value="0" cp:on="selected:$documentmeta.published == 0 && $documentmeta.contentid > 0" parse:selected="selected"> {trans('Offline')}</option>
+                <option value="1" cp:on="selected:$documentmeta.published == 1 || empty( $documentmeta.contentid )" parse:selected="selected"> {trans('Online')}</option>
+                <option value="2" class="timecontrol" cp:on="selected:$documentmeta.published == 2" parse:selected="selected"> {trans('Zeitgesteuert')}</option>
+            </select>
+        </p>
+
+        <div id="timecontrol" style="display: {iif($documentmeta.published == 2 && ($documentmeta.publishon || $documentmeta.publishoff), 'block', 'none')}">
+            <cp:jscalender name="documentmeta[publishon]" value="$documentmeta.publishon" showtime="true" firstday="1" timeformat="%d.%m.%Y"/>
+            <span style="display: block">{trans('bis')}</span>
+            <cp:jscalender name="documentmeta[publishoff]" value="$documentmeta.publishoff" showtime="true" firstday="1" timeformat="%d.%m.%Y"/>
+        </div>
+
+    </div>
+</div>
+
+</cp:section>
+
+
+<div class="postbox">
+    <h3>{trans('Meta Daten')}</h3>
+    <div class="postbox-content" rel="metageneric">
+        <p>
+            <span style="display: block">{trans('Seiten Titel')}</span>
+            <input name="documentmeta[pagetitle]" value="{escape($documentmeta.pagetitle, 'html')}" type="text" data-tooltip="{trans('(falls keiner eingetragen wird, wird der Titel des Dokumentes verwendet)')}" data-position="top-left" style="width: 100%"/>
+        </p>
+
+        <p>
+            <span>{trans('Beschreibung')}</span>
+            <textarea data-position="top-left" data-tooltip="{trans('(Hier können Sie eine kurze Beschreibung der Seite eingeben, die von Suchmaschinen wie Google oder Yahoo ausgewertet wird.)')}" name="documentmeta[metadescription]" rows="2" style="width: 100%">{$documentmeta.metadescription}</textarea>
+        </p>
+
+        <p>
+            <span>{trans('Schlüsselwörter')}</span>
+            <input data-position="top-left" data-tooltip="{trans('(Bitte mit Komma trennen)')}" name="documentmeta[metakeywords]" value="{escape($documentmeta.metakeywords, 'html')}" type="text" style="width: 100%"/>
+        </p>
+
+
+        <p>
+            <span>{trans('Robot-Tags')}</span>
+            <select name="documentmeta[indexfollow]">
+                <option value="index,follow" cp:on="selected:$documentmeta.indexfollow == 'index,follow' || empty($documentmeta.indexfollow)" parse:selected="selected"> index, follow</option>
+                <option value="index,nofollow" cp:on="selected:$documentmeta.indexfollow == 'index,nofollow'" parse:selected="selected"> index, nofollow</option>
+                <option value="noindex,follow" cp:on="selected:$documentmeta.indexfollow == 'noindex,follow'" parse:selected="selected"> noindex, follow</option>
+                <option value="noindex,nofollow" cp:on="selected:$documentmeta.indexfollow == 'noindex,nofollow'" parse:selected="selected"> noindex, nofollow</option>
+            </select>
+        </p>
+
+
+        <p>
+            <span>{trans('Sprachen-Fallback')}</span>
+            <label for="language-fallback"><input type="checkbox" name="documentmeta[languagefallback]" id="language-fallback" value="1" cp:on="checked:$documentmeta.languagefallback" parse:checked="checked"/> {trans('Sprachen-Fallback aktivieren')}</label>
+        </p>
+
+
+        <p>
+            <span>{trans('Sprache')}</span>
+            <input type="text" name="documentmeta[language]" value="{escape($documentmeta.language, 'html')}" size="12" maxlength="2"/>
+        </p>
+
+
+    </div>
+</div>
+
+
+<div class="postbox">
+    <h3>{trans('Dokument Alias')}</h3>
+    <div class="postbox-content" rel="metaalias">
+        <input name="rw_controller" value="{$documentmeta.controller}" type="hidden"/>
+        <input name="rw_action" value="{$documentmeta.action}" type="hidden"/>
+        <input name="identifier" value="{$page_identifier}" type="hidden"/>
+        <input name="oldalias" value="{$documentmeta.alias}" type="hidden"/>
+        <input name="oldsuffix" value="{$documentmeta.suffix}" type="hidden"/>
+
+        <div>
+            <input name="alias" value="{$documentmeta.alias}" type="text" style="width: 70%" class="input pageident"/> .
+            <select name="suffix">
+                <option value="" cp:on="selected:empty( $documentmeta.suffix ) " parse:selected="selected">----</option>
+                <option value="dcms" cp:on="selected:$documentmeta.suffix=='dcms'" parse:selected="selected">dcms</option>
+                <option value="html" cp:on="selected:$documentmeta.suffix=='html'" parse:selected="selected">html</option>
+                <option value="xhtml" cp:on="selected:$documentmeta.suffix=='xhtml'" parse:selected="selected">xhtml</option>
+                <option value="phtml" cp:on="selected:$documentmeta.suffix=='phtml'" parse:selected="selected">phtml</option>
+                <option value="php" cp:on="selected:$documentmeta.suffix=='php'" parse:selected="selected">php</option>
+                <option value="txt" cp:on="selected:$documentmeta.suffix=='txt'" parse:selected="selected">txt</option>
+            </select>
+        </div>
+
+        <small>{trans('(falls keiner eingetragen wird, wird aus dem Titel des Dokumentes ein alias generiert)')}</small>
+    </div>
+</div>
+
+
+<div class="postbox">
+    <h3>{trans('Suchen & Analysieren')}</h3>
+    <div class="postbox-content" rel="metaanalyse">
+
+        <label for="searchable"><input name="documentmeta[searchable]" id="searchable" value="1" type="checkbox" cp:on="checked:$documentmeta.searchable || (cfg('pagedefaultsearchable') && empty($documentmeta.searchable) )" parse:checked="checked"/>
+            {trans('Durchsuchbar')}
+        </label>
+        <label for="click-analyse"><input name="documentmeta[clickanalyse]" id="click-analyse" value="1" type="checkbox" cp:on="checked:$documentmeta.clickanalyse || (cfg('pagedefaultclickanalyse') && empty($documentmeta.clickanalyse) )" parse:checked="checked"/>
+            {trans('Klick-Analyse aktivieren')}
+        </label>
+
+    </div>
+</div>
+
+
+
+<div class="postbox">
+    <h3>{trans('Caching')}</h3>
+    <div class="postbox-content" rel="metacache">
+
+        <p>
+            <span style="display: block">{trans('Seiten Caching')}</span>
+            <label for="cacheable"><input name="documentmeta[cacheable]" id="cacheable" value="1" type="checkbox" cp:on="checked:$documentmeta.cacheable || (cfg('pagedefaultenablecaching') && empty($documentmeta.cacheable) )" parse:checked="checked"/> {trans('Cache aktivieren')}</label>
+        </p>
+
+
+        <cp:if condition="set($documentmeta.cachetime)">
+            <cp:set var="_ct" value="$documentmeta.cachetime"/>
+        </cp:if>
+        <cp:else>
+            <cp:set var="_ct" value="cfg('pagedefaultcachetime')"/>
+        </cp:else>
+
+
+        <p>
+            <span>{trans('Cachezeit')}</span>
+            <input data-position="top-left" data-tooltip="{trans('in Sekunden')}" class="input" type="text" name="documentmeta[cachetime]" value="{escape($_ct, 'html')}" size="12" maxlength="10"/>
+        </p>
+
+        <p>
+            <span style="display: block">{trans('Caching für Benutzergruppen')}</span>
+
+            <select name="documentmeta[cachegroups][]" size="4" multiple="multiple" style="width:160px">
+                <option value="0" cp:on="selected:(is_array($documentmeta.cachegroups) && in_array(0, $documentmeta.cachegroups)) || empty($documentmeta.cachegroups)" parse:selected="selected"> {trans('alle Benutzergruppen')}</option>
+
+                <cp:if condition="!is_array($usergroups)">
+                    <cp:sql return="usergroups">
+                        SELECT groupid, title FROM %tp%users_groups ORDER BY title
+                    </cp:sql>
+                </cp:if>
+
+                <cp:loop name="usergroups" key="r">
+                    <cp:if condition="$r.groupid == 0">
+                        <cp:continue/>
+                    </cp:if>
+                    <option value="{$r.groupid}" cp:on="selected:is_array($documentmeta.cachegroups) && in_array($r.groupid, $documentmeta.cachegroups)" parse:selected="selected"> {$r.title}</option>
+                </cp:loop>
+            </select>
+        </p>
+
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+        [save:action_form]
+        [save_exit:action_form]
+        [reset:action_form] [cancel:action_form]
+</cp:block>
+
+<cp:block name="content">
+<form action="admin.php" method="post" id="action_form" name="action_form">
+    <input type="hidden" id="key" name="adm" value="pluginmanager" />
+    <input type="hidden" id="key" name="action" value="saveconfig" />
+    <input type="hidden" id="key" name="key" value="{$key}" />
+    
+    
+    <cp:include template="../metadata"/>
+    
+    {$plugin_config_form}    
+
+</form>
+
+<script type="text/javascript">
+
+        $(document).ready(function() { 
+            $('#action_form').registerForm({
+                contentIdentifierID: null,
+                exiturl: 'admin.php?adm=pluginmanager',
+            });
+        });        
+
+</script>
+
+</cp:block>

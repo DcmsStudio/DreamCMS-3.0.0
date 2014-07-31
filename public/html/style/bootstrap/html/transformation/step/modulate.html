@@ -1,0 +1,21 @@
+    <fieldset>
+        <legend>{trans("Brightness Modifier")}</legend>
+        <input type="text" class="textbox" name="params[brightness]" id="brightness" value="{iif($values.brightness, $values.brightness, '20')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Saturation Modifier")}</legend>
+        <input type="text" class="textbox" name="params[saturation]" id="saturation" value="{iif($values.saturation, $values.saturation, '0')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Hue Modifier")}</legend>
+        <input type="text" class="textbox" name="params[hue]" id="hue" value="{iif($values.hue, $values.hue, '0')}" style="width: 100px;" />
+    </fieldset>
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+</script>

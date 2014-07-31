@@ -1,0 +1,33 @@
+    <fieldset>
+        <legend>{trans("Crop Width")}</legend>
+        <input type="text" class="textbox" name="params[width]" id="width" value="{$values.width}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Crop Height")}</legend>
+        <input type="text" class="textbox" name="params[height]" id="height" value="{$values.height}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Horizontal Alignment")}</legend>
+        <label for="align_left"><input type="radio" class="checkbox" name="params[align]" id="align_left" value="left" cp:on="checked:$values.align=='left' || empty($values.align)" parse:checked="checked" />{trans("Left")}</label><br />
+        <label for="align_center"><input type="radio" class="checkbox" name="params[align]" id="align_center" value="center" cp:on="checked:$values.align=='center'" parse:checked="checked"/>{trans("Center")}</label><br />
+        <label for="align_right"><input type="radio" class="checkbox" name="params[align]" id="align_right" value="right" cp:on="checked:$values.align=='right'" parse:checked="checked" />{trans("Right")}</label>
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Vertical Alignment")}</legend>
+        <label for="valign_top"><input type="radio" class="checkbox" name="params[valign]" id="valign_top" value="top" cp:on="checked:$values.valign=='top' || empty($values.valign)" parse:checked="checked" />{trans("Top")}</label><br />
+        <label for="valign_middle"><input type="radio" class="checkbox" name="params[valign]" id="valign_middle" value="middle" cp:on="checked:$values.valign=='middle'" parse:checked="checked" />{trans("Middle")}</label><br />
+        <label for="valign_bottom"><input type="radio" class="checkbox" name="params[valign]" id="valign_bottom" value="bottom" cp:on="checked:$values.valign=='bottom'" parse:checked="checked"/>{trans("Bottom")}</label>
+    </fieldset>
+
+
+
+<script type="text/javascript">
+
+    setStepDescription("{escape($description, 'html')}");
+
+</script>
+
+

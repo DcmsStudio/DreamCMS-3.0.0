@@ -1,0 +1,62 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        
+        <button id="edit-comment" type="button" class="action-button edit-btn">
+            <span class="icn"></span>
+            <span class="label">{trans('Bearbeiten')}</span>
+        </button>
+        
+        <button id="delete-comment" type="button" class="action-button delete-btn">
+            <span class="icn"></span>
+            <span class="label">{trans('Löschen')}</span>
+        </button>
+        
+        <button id="spam-comment" type="button" class="action-button spam-btn">
+            <span class="icn"></span>
+            <span class="label">{trans('Als Spam markieren')}</span>
+        </button>
+
+        
+    </cp:groupbutton>
+</cp:block>
+
+
+
+<cp:block name="content">
+
+    <div class="box" >
+        
+        <div class="box-inner">
+            <small>
+                {trans('Datum')}: {date('d.m.Y, H:i:s', $comment.timestamp)} - 
+                {trans('IP')}: {$comment.ip} - 
+                {trans('Username')}: {$comment.username} <cp:if condition="!$comment.userid">&nbsp;({trans('Gast')})</cp:if>
+            </small>
+            
+            <h3>{trans('Kommentar')}: {escape($comment.title, 'htmlall')}</h3>
+            <p>{parsetext($comment.comment)}</p>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+
+        var commentID = {$input.id};
+        var _Win = $('#'+ Win.windowID);
+        
+        $('#edit-comment', _Win ).click(function(){
+            
+        });
+        
+        $('#delete-comment', _Win ).click(function(){
+            
+        });
+        
+        $('#spam-comment', _Win ).click(function(){
+            
+        });
+
+    </script>
+</cp:block>

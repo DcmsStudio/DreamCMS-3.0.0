@@ -1,0 +1,65 @@
+<?php
+
+function __bbcodes_add(){
+global $cp, $cfg, $fct, $cp, $cp;
+
+	return <<<EOF
+<form method="post" action="admin.php" id="bbcodesform" name="bbcodesform">
+<input type="hidden" name="adm" value="bbcodes" />
+<input type="hidden" name="send" value="send" />
+<input type="hidden" name="action" value="add" />
+<input type="hidden" name="sid" value="$cp->session_id" />
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+    	<td colspan="2">BBCode bearbeiten</td>
+    </tr>
+    <tr class="firstrow">
+    	<td width="40%"><b>BBCode tag:</b></td>
+    	<td>{info:bbcode|codetag}<input type="text" name="bbcodetag" value="" maxlength="250" size="40" class="input" /></td>
+    </tr>
+    <tr class="secondrow">
+    	<td valign="top"><b>wird ersetzt durch:</b><br>{param1} als erster Parameter<br>{param2} als zweiter Parameter<br>{param3} als dritter Parameter</td>
+    	<td>{info:bbcode|replaceparms}<textarea cols="50" rows="5" name="bbcodereplacement" style='width: 100%' class="textarea"></textarea></td>
+    </tr>
+    <tr class="firstrow">
+    	<td><b>Beispiel für die Verwendung (für Hilfe):</b></td>
+    	<td>{info:bbcode|example}<input type="text" name="bbcodeexample" value="" maxlength="250" size="40" class="input" /></td>
+    </tr>
+    <tr class="secondrow">
+    	<td valign="top"><b>Beschreibung (für Hilfe):</b></td>
+    	<td>{info:bbcode|examplelong}<textarea cols="50" rows="5" name="bbcodeexplanation" style='width: 100%' class="textarea"></textarea></td>
+    </tr>
+    <tr class="firstrow">
+        <td><b>Anzahl Parameter:</b></td>
+        <td>{info:bbcode|numparms}
+            <select name="params" class="select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </td>
+    </tr>
+    <tr class="secondrow">
+    	<td><b>max. Anzahl der Verschachtelungen:</b></td>
+    	<td>{info:bbcode|numofmultiuse}<input type="text" name="multiuse" value="" maxlength="3" size="40" class="input" /></td>
+    </tr>
+</table>
+<btn>
+	[save_exit:bbcodesform]
+	<input type="reset" value="Zurücksetzen" class="button" /> <input type="button" value="Abbrechen" onclick="history.back();" class="button" />
+</btn>
+
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+        add_dirty_flag('bbcodesform');
+        register_form_handler('savethis');
+        exiturl = 'admin.php?adm=bbcodes';        
+    //]]>
+</script>
+
+EOF;
+}
+
+?>

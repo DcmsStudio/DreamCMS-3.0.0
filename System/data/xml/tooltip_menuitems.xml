@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooltip>
+  <name title="Titel"><![CDATA[Titel des Menüpunktes. (Erforderlich)]]></name>
+  <pagetype title="Typ einer Seite"><![CDATA[Der Typ einer Seite legt fest, ob sie statische Inhalte ausgibt, zu einer anderen Seite weiterleitet oder den Startpunkt einer Webseite innerhalb der Seitenstruktur markiert.]]></pagetype>
+  <published title="Menüpunkt Aktive?"><![CDATA[]]></published>
+  <parent title="Weiterleitungsseite"><![CDATA[Bitte wählen Sie die Seite aus, zu der Besucher weitergeleitet werden. Wenn Sie keine Zielseite auswählen, wird automatisch zur ersten regulären Unterseite weitergeleitet.]]></parent>
+  <title title=""><![CDATA[]]></title>
+</tooltip>

@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <div>
+
+
+
+            <cp:switch key="$condition">
+                <cp:case value="value1">Body...</cp:case>
+                <cp:case value="foo">body foo...</cp:case>
+                <cp:case value="bar">body bar...</cp:case>
+                <cp:case value="joe">body {$condition} joe...</cp:case> 
+                <cp:default>body BOB...</cp:default>    
+            </cp:switch>
+
+
+        </div>
+    </body>
+</html>

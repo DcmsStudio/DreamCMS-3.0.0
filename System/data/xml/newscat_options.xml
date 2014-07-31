@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<cp type="component" version="2.3.0">
+	<name>News Article Settings</name>
+	<author>Marcel Domke</author>
+	<creationDate>Mai 2005</creationDate>
+	<copyright>(C) 2005 Cyber-Portal.NET</copyright>
+	<authorEmail>info@cyber-portal.net</authorEmail>
+	<authorUrl>www.cyber-portal.net</authorUrl>
+	<version>0.1.0a</version>
+	<description>This shows a single news Article page</description>
+	<params>
+<!-- Artikel einstellungen -->
+		<param name="link_titles" type="radio" default="1" label="Linked Titles" description="Make your Item titles linkable">
+			<option value="0">nein</option>
+			<option value="1">ja</option>
+		</param>
+
+		<param name="rating" type="radio" default="0" label="Item Rating" description="Show/Hide the item rating - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+
+		<param name="author" type="radio" default="1" label="Author Names" description="Show/Hide the item author - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+
+		<param name="createdate" type="radio" default="1" label="Created Date and Time" description="Show/Hide the item creation date - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+
+		<param name="modifydate" type="radio" default="0" label="Modified Date and Time" description="Show/Hide the item modification date - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+
+		<param name="pdf" type="radio" default="1" label="PDF Icon" description="Show/Hide the item pdf button - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+
+		<param name="print" type="radio" default="1" label="Print Icon" description="Show/Hide the item print button - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+		<param name="email" type="radio" default="1" label="Email Icon" description="Show/Hide the item email button - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+		<param name="comment" type="radio" default="1" label="News Comment" description="Can Comment the News Item">
+			<option value="0">Nein</option>
+			<option value="1">Ja</option>
+		</param>
+
+
+
+<!-- Ende  Artikel einstellungen -->
+
+<!-- Kategorie einstellungen -->
+
+		<param name="display_num" type="list" default="20" label="Anzahl" description="Anzahl der News Artikel pro Seite">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="30">30</option>
+			<option value="50">50</option>
+		</param>
+
+		<param name="orderby" type="list" default="rdate" label="Sortieren nach" description="Nach was soll die Kategorie sortiert werden.">
+			<option value="">keine Sortierung</option>
+			<option value="date">Alte zuerst</option>
+			<option value="rdate">Neuste zuerst</option>
+			<option value="alpha">Title aufwärts</option>
+			<option value="ralpha">Title abwärts</option>
+			<option value="author">Author aufwärts</option>
+			<option value="rauthor">Author abwärts</option>
+			<option value="hits">Hits aufwärts</option>
+			<option value="rhits">Hits abwärts</option>
+		</param>
+
+		<param name="other_cat" type="radio" default="1" label="andere Kategorien" description="Anzeigen/Ausblenden der liste mit anderen Kategorien">
+			<option value="0">Ausblenden</option>
+			<option value="1">Anzeigen</option>
+		</param>
+
+		<param name="cat_items" type="radio" default="1" label="Kategorie Inhaltscounter" description="Anzeigen/Ausblenden">
+			<option value="0">Ausblenden</option>
+			<option value="1">Anzeigen</option>
+		</param>
+
+		<param name="cat_description" type="radio" default="1" label="Kategorie Beschreibung" description="Anzeigen/Ausblenden einer Kategorie Beschreibung">
+			<option value="0">Ausblenden</option>
+			<option value="1">Anzeigen</option>
+		</param>
+
+<!-- Ende Kategorie einstellungen -->
+
+	</params>
+</cp>

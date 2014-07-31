@@ -1,0 +1,350 @@
+<?php
+
+function __forum_editperms($forumpermission, $forum, $usergroup, $getperms, $groupid)
+{
+global $cp, $cfg, $fct, $adm_skin;
+
+	foreach($GLOBALS['BITFIELD']['forumpermissions'] as $k => $v)
+	{
+		if ( !array_key_exists($k, $GLOBALS['BITFIELD']['forumpermissions']) || !$k) continue;
+
+		if ( $forumpermission[$k] == 1 )
+		{
+			eval("\$".$k."_1 = ' checked=\"checked\"';");
+			eval("\$".$k."_0 = '';");
+		}
+		else
+		{
+			eval("\$".$k."_0 = ' checked=\"checked\"';");
+			eval("\$".$k."_1 = '';");
+		}
+	}
+
+
+
+	$check_my = '';
+	$check_global = ' checked="checked"';
+
+	if ( $getperms['usegroup_perm'] == 0 )
+	{
+		$check_global = '';
+		$check_my = ' checked="checked"';
+	}
+	
+	$btn = "[save:form_forumperms] [save_exit:form_forumperms]";
+	
+if ( IS_AJAX == false )
+{
+
+	if ($usergroup['groupselect'])
+	{
+		$is_new = <<<EOF
+
+    <tr class="tableheader">
+    	<td colspan="2">Forenrechte für Benutzergruppe und Forum {$forum['title']}</td>
+    </tr>
+	
+    <tr class="firstrow">
+		<td colspan="2">
+
+			<div class="fl fieldset2">
+				<fieldset>
+					<legend>Forenrechte für Benutzergruppe</legend>
+					{info:forumright|useusergroup}
+					<input type="radio" class="radio" id="useusergroup1" name="useusergroup" value="1"$check_global /> <label for="useusergroup1">Benutzergruppen Rechte benutzen</label><br/>
+					{info:forumright|usethisgroup}
+					<input type="radio" class="radio" name="useusergroup" id="useusergroup0" value="0"$check_my /> <label for="useusergroup0">eigene Rechte benutzen</label>
+				</fieldset>
+			</div>
+			<div class="fl fieldset2">
+				<fieldset style="height:100%">
+					<legend>Rechte für Benutzergruppen</legend>
+					<select name="groupid" id="groupid" class="select" onchange="_getSelectContent($('ajaxcontent'), 'adm=forum_permission&action=edit&f={$forum['boardid']}&groupid='+this.options[this.selectedIndex].value+'&useusergroup='+getCheckedValue('form_forumperms', 'useusergroup') )">
+					{$usergroup['groupselect']}
+					</select> <input type="button" value="Aktualisieren" onclick="_getSelectContent($('ajaxcontent'), 'adm=forum_permission&action=edit&f={$forum['boardid']}&groupid='+$('groupid').options[$('groupid').selectedIndex].value+'&useusergroup='+getCheckedValue('form_forumperms', 'useusergroup') )" class="button"/>
+					<br/><small></small><br/>
+				</fieldset>
+		
+		
+		</td>
+	</tr>
+EOF;
+
+	}
+	else
+	{
+		$is_new = <<<EOF
+		
+<input type="hidden" name="permid" value="{$getperms['permissionid']}" />
+<input type="hidden" name="groupid" value="{$groupid}" />
+
+
+
+    <tr class="tableheader">
+    	<td colspan="2">Forenrechte für Benutzergruppe <i>{$usergroup['title']}</i> und Forum <i>{$forum['title']}</i> </td>
+    </tr>
+    <tr class="firstrow">
+    	<td colspan="2">{info:forumright|useusergroup}<input type="radio" class="radio" id="useusergroup1" name="useusergroup" value="1"$check_global /> <label for="useusergroup1">Benutzergruppen Rechte benutzen</label></td>
+	</tr>
+	<tr class="secondrow">
+    	<td colspan="2">{info:forumright|usethisgroup}
+    		<input type="radio" class="radio" name="useusergroup" id="useusergroup0" value="0"$check_my /> <label for="useusergroup0">eigene Rechte benutzen</label>
+    	</td>
+    </tr>
+EOF;
+	}
+
+
+    $tab_controll = new tab_controll();
+    $tab_controll->add_tabs(
+                'Foren Ansicht', array('Foren Ansicht', 'Beitrags Erstellung', 'Themen, Beiträge &amp; Attachment Rechte', 'Umfrage Rechte')
+                );
+				
+	
+				
+	$html .= <<<EOF
+<form action="admin.php" method="post" name="form_forumperms" id="form_forumperms">
+<input type="hidden" name="adm" value="forum_permission" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="action" value="save" />
+
+<input type="hidden" name="id" value="{$forum['boardid']}" />
+{$tab_controll->js_header_code}
+<div>
+	{$tab_controll->tab_js_code}
+</div>
+
+<table width="100%" border="0" cellpadding="3" cellspacing="0" class="tblborder">
+{$is_new}
+</table>
+<div id="ajaxcontent" class="mt5">
+
+EOF;
+
+} // kein AJAX
+
+
+$hidden_permid = '';
+if ( $getperms['permissionid'] )
+{
+	$hidden_permid = '<input type="hidden" name="permid" value="'.$getperms['permissionid'].'" />';
+}
+
+
+	$html .= <<<EOF
+
+<div class="tcontent" id="tc0">
+<table width="100%" border="0" cellpadding="3" cellspacing="0" class="tblborder">
+    <tr class="tableheader">
+    	<td colspan="2">{$hidden_permid}Foren Ansicht</td>
+    </tr>
+	<tr>
+		<td>
+			<div class="fl fieldset2">
+				<fieldset>
+					<legend>Kann dieses Forum sehen</legend>
+                    {info:forumright|can_view}
+    	<input type="radio" class="radio" name="fperm[canview]"{$canview_1} value="1" id="canview1" /> <label for="canview1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canview]"{$canview_0} value="0" id="canview0" /> <label for="canview0">Nein	</label> 
+				</fieldset>
+				
+				<fieldset>
+					<legend>Kann andere Themen (nicht nur eigene Themen) sehen</legend>
+					{info:forumright|can_viewothers}
+    	<input type="radio" class="radio" name="fperm[canviewothers]"{$canviewothers_1} value="1" id="canviewothers1" /> <label for="canviewothers1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canviewothers]"{$canviewothers_0} value="0" id="canviewothers0" /> <label for="canviewothers0">Nein</label> 
+				</fieldset>
+			</div>
+			
+			<div class="fl fieldset2">
+				<fieldset>
+					<legend>Kann Forum durchsuchen</legend>
+                    {info:forumright|can_search}
+    	<input type="radio" class="radio" name="fperm[cansearch]"{$cansearch_1} value="1" id="cansearch1" /> <label for="cansearch1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[cansearch]"{$cansearch_0} value="0" id="cansearch0" /> <label for="cansearch0">Nein	</label> 
+				</fieldset>
+				
+				<fieldset>
+					<legend>Kann Attachments herunterladen</legend>
+					{info:forumright|can_getattachment}
+    	<input type="radio" class="radio" name="fperm[cangetattachment]"{$cangetattachment_1} value="1" id="cangetattachment1" /> <label for="cangetattachment1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[cangetattachment]"{$cangetattachment_0} value="0" id="cangetattachment0" /> <label for="cangetattachment0">Nein</label> 
+				</fieldset>
+			</div>
+		</td>
+	</tr>
+</table>
+</div>
+
+<div class="tcontent" id="tc1">
+<table width="100%" border="0" cellpadding="3" cellspacing="0" class="tblborder">
+    <tr class="tableheader">
+    	<td colspan="2">Beitrags Erstellung</td>
+    </tr>
+	<tr>
+		<td>			
+			<div class="fl fieldset3">
+				<fieldset>
+					<legend>Kann Themen posten</legend>
+					{info:forumright|can_postnew}
+    	<input type="radio" class="radio" name="fperm[canpostnew]"{$canpostnew_1} value="1" id="canpostnew1" /> <label for="canpostnew1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canpostnew]"{$canpostnew_0} value="0" id="canpostnew0" /> <label for="canpostnew0">Nein</label> 
+				</fieldset>
+				<fieldset>
+					<legend>Kann Attachments anfügen</legend>
+					{info:forumright|can_postattachment}
+    	<input type="radio" class="radio" name="fperm[canpostattachment]"{$canpostattachment_1} value="1" id="canpostattachment1" /> <label for="canpostattachment1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canpostattachment]"{$canpostattachment_0} value="0" id="canpostattachment0" /> <label for="canpostattachment0">Nein</label> 
+				</fieldset>
+			</div>
+			
+			<div class="fl fieldset3">
+				<fieldset>
+					<legend>Kann eigene Themen beantworden</legend>
+					{info:forumright|can_replyown}
+    	<input type="radio" class="radio" name="fperm[canreplyown]"{$canreplyown_1} value="1" id="canreplyown1" /> <label for="canreplyown1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canreplyown]"{$canreplyown_0} value="0" id="canreplyown0" /> <label for="canreplyown0">Nein</label> 
+				</fieldset>
+				<fieldset>
+					<legend>Kann Themen bewerten</legend>
+					{info:forumright|can_threadrate}
+    	<input type="radio" class="radio" name="fperm[canthreadrate]"{$canthreadrate_1} value="1" id="canthreadrate1" /> <label for="canthreadrate1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canthreadrate]"{$canthreadrate_0} value="0" id="canthreadrate0" /> <label for="canthreadrate0">Nein</label> 
+				</fieldset>
+			</div>
+			
+			<div class="fl fieldset3">
+				<fieldset>
+					<legend>Kann andere Themen beantworden</legend>
+					{info:forumright|can_replyothers}
+    	<input type="radio" class="radio" name="fperm[canreplyothers]"{$canreplyothers_1} value="1" id="canreplyothers1" /> <label for="canreplyothers1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canreplyothers]"{$canreplyothers_0} value="0" id="canreplyothers0" /> <label for="canreplyothers0">Nein</label> 
+				</fieldset>
+				<fieldset>
+					<legend>Neue Beiträge / Themen werden erst Moderiert</legend>
+					{info:forumright|isalwaysmoderated}
+    	<input type="radio" class="radio" name="fperm[isalwaysmoderated]"{$isalwaysmoderated_1} value="1" id="isalwaysmoderated1" /> <label for="isalwaysmoderated1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[isalwaysmoderated]"{$isalwaysmoderated_0} value="0" id="isalwaysmoderated0" /> <label for="isalwaysmoderated0">Nein</label> 
+				</fieldset>
+			</div>
+		</td>
+	</tr>
+
+</table>
+</div>
+
+<div class="tcontent" id="tc2">
+<table width="100%" border="0" cellpadding="3" cellspacing="0" class="tblborder">
+    <tr class="tableheader">
+    	<td colspan="2">Themen, Beiträge &amp; Attachment Rechte</td>
+    </tr>
+	
+	<tr>
+		<td>
+			<div>
+				<div class="fl fieldset3">
+					<fieldset>
+						<legend>Kann eigene Beiträge bearbeiten</legend>
+						{info:forumright|can_editpost}
+						<input type="radio" class="radio" name="fperm[caneditpost]"{$caneditpost_1} value="1" id="caneditpost1" /> <label for="caneditpost1">Ja &nbsp;</label> 
+						<input type="radio" class="radio" name="fperm[caneditpost]"{$caneditpost_0} value="0" id="caneditpost0" /> <label for="caneditpost0">Nein</label> 
+					</fieldset>
+					<fieldset>
+						<legend>Kann eigene Beiträge löschen</legend>
+						{info:forumright|can_deletepost}
+						<input type="radio" class="radio" name="fperm[candeletepost]"{$candeletepost_1} value="1" id="deletepost1" /> <label for="deletepost1">Ja &nbsp;</label> 
+						<input type="radio" class="radio" name="fperm[candeletepost]"{$candeletepost_0} value="0" id="deletepost0" /> <label for="deletepost0">Nein</label> 
+					</fieldset>
+					<fieldset>
+						<legend>Kann eigene Beiträge verschieben</legend>
+						{info:forumright|newpostemail}
+						<input type="radio" class="radio" name="fperm[newpostemail]"{$canmove_1} value="1" id="newpostemail1" /> <label for="newpostemail1">Ja &nbsp;</label> 
+						<input type="radio" class="radio" name="fperm[newpostemail]"{$canmove_0} value="0" id="newpostemail0" /> <label for="newpostemail0">Nein</label> 
+					</fieldset>
+				</div>
+			</div>
+			
+			
+			
+			<div class="fl fieldset2">
+				<fieldset>
+					<legend>Kann eigene Beiträge Öffnen / Schließen</legend>
+					{info:forumright|can_openclose}
+    	<input type="radio" class="radio" name="fperm[canopenclose]"{$canopenclose_1} value="1" id="openclose1" /> <label for="openclose1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canopenclose]"{$canopenclose_0} value="0" id="openclose0" /> <label for="openclose0">Nein</label> 
+				</fieldset>
+				<fieldset>
+					<legend>Kann eigene Themen löschen</legend>
+					{info:forumright|can_deletethread}
+    	<input type="radio" class="radio" name="fperm[candeletethread]"{$candeletethread_1} value="1" id="deletethread1" /> <label for="deletethread1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[candeletethread]"{$candeletethread_0} value="0" id="deletethread0" /> <label for="deletethread0">Nein</label> 
+				</fieldset>
+			</div>
+		</td>
+	</tr>
+</table>
+</div>
+
+<div class="tcontent" id="tc3">
+<table width="100%" border="0" cellpadding="3" cellspacing="0" class="tblborder">
+    <tr class="tableheader">
+    	<td colspan="2">Umfrage Rechte</td>
+    </tr>
+	<tr>
+		<td>
+			<div class="fl fieldset2">
+				<fieldset>
+					<legend>Kann Umfragen erstellen</legend>
+					{info:forumright|can_postpoll}
+    	<input type="radio" class="radio" name="fperm[canpostpoll]"{$canpostpoll_1} value="1" id="canpostpoll1" /> <label for="canpostpoll1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canpostpoll]"{$canpostpoll_0} value="0" id="canpostpoll0" /> <label for="canpostpoll0">Nein</label> 
+				</fieldset>
+				<fieldset>
+					<legend>Kann an Umfragen teilnehmen</legend>
+					{info:forumright|can_vote}
+    	<input type="radio" class="radio" name="fperm[canvote]"{$canvote_1} value="1" id="canvote1" /> <label for="canvote1">Ja &nbsp;</label> 
+    	<input type="radio" class="radio" name="fperm[canvote]"{$canvote_0} value="0" id="canvote0" /> <label for="canvote0">Nein</label> 
+				</fieldset>
+			</div>
+		</td>
+	</tr>
+
+</table>
+
+</div>
+
+
+<btn>
+		$btn
+    	<input type="reset" value="Zurücksetzen" class="button" /> 
+    	<input type="button" value="Abbrechen" onclick="cancel();" class="button"/>
+</btn>
+
+EOF;
+
+if ( !IS_AJAX )
+{
+	$html .= <<<EOF
+</div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+add_dirty_flag('form_forumperms');
+register_form_handler('savehis');
+exiturl = 'admin.php?adm=forum';
+
+//]]>
+</script>
+EOF;
+
+}
+else
+{
+#	$html = $adm_skin->_save_exit_button($html);
+	$html = replaceInfoIcons($html);
+}
+
+return $html;
+}
+
+?>

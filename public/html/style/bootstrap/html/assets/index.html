@@ -1,0 +1,33 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="asset-add-btn" class="action-button"><img src="images/buttons/new.png" width="16" height="16" title="" alt="" border="0"/> {trans('Neues Asset hinzufügen')}</button>
+</cp:block>
+
+<cp:block name="content">
+    <div id="asset-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+        Application.Grid( 'asset-grid', {$gridJson});
+/*
+        var table = new dcmsGrid('asset-grid', {
+            url: 'admin.php?adm=asset',
+            currentFilter: {$grid.activeFilter},
+            colModel: {$grid.colModel},
+            gridActions: {$grid.gridActions},
+            searchitems: {$grid.searchitems},
+            sort: '{$grid.sort}',
+            orderby: '{$grid.orderby}',
+            total: {$grid.total}, key: 'id',
+                        perpage: {$grid.perpage}
+        });
+        
+        */
+        $('#asset-add-btn').click(function(){
+            openTab({url: 'admin.php?adm=asset&action=edit', obj: this, label: $(this).text()});
+        });
+
+
+    </script>
+
+</cp:block>

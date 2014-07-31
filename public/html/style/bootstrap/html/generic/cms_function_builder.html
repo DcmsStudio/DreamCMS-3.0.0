@@ -1,0 +1,63 @@
+<?php
+
+function __cms_function_builder($javascript_code, $id = 0){
+global $cp;
+
+return <<<EOF
+$javascript_code|#|#|
+<SCRIPT type="text/javascript" language="javascript">
+<!--
+
+$javascript_code
+
+function init_select() {
+	  try{
+		var xform = document.functionBuilder;
+		for (var i =0; i < avaible_functions.length; ++i) {
+
+			var list = avaible_functions[i].split("|");
+
+			var option_name = list[0];
+			var option_title = list[1];
+			var opt = new Option( option_title, option_name );
+			xform.avaible_function.options[xform.avaible_function.length] = opt;
+		}
+	  }
+	  catch(e){
+			alert("Error "+e+" "+e.message);
+	  }
+}
+
+// DOM2
+if ( typeof window.addEventListener != "undefined" )
+    window.addEventListener( "load", init_select, false );
+
+// IE
+else if ( typeof window.attachEvent != "undefined" )
+    window.attachEvent( "onload", init_select);
+
+else {
+    if ( window.onload != null ) {
+        var oldOnload = window.onload;
+        window.onload = function ( e ) {
+            oldOnload( e );
+            init_select();
+        };
+    }
+    else
+        window.onload = init_select;
+}
+init_select();
+
+</SCRIPT>
+
+
+EOF;
+
+
+
+
+// ======================================================================
+}
+
+?>

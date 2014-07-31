@@ -1,0 +1,68 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+
+    <div class="controlpanel-tabs">
+        <cp:include template="usercontrol/tabpanel" />
+    </div>
+
+                
+                <div class="containerdiv mb5">
+                    <a href="user/password" class="sprite input-link mr5"><span class="sprite">Passwort ändern</span></a>
+                    <a href="user/settings" class="sprite input-link mr5"><span class="sprite">Einstellungen</span></a>
+                    <a href="user/avatar" class="sprite input-link mr5"><span class="sprite">Avatar/Profilbild</span></a>
+                    <a href="user/signatur" class="sprite input-link mr5"><span class="sprite">Signatur</span></a>
+                    <a href="user/other" class="sprite input-link"><span class="sprite">Sonstiges</span></a>
+                </div>
+
+
+                <div class="containerdiv control-panel">
+
+                                 
+                    <div class="fl w40perc">
+                    <h3 class="decorator">{trans('Allgemeine Daten')}</h3>
+                    <ul>
+                        <li>{trans('Deine Benutzergruppe')}: <span>{$user.grouptitle}</span></li>
+                        <li>{trans('Dein Rank')}: <span>{$user.ranktitle}<br/></span></li>
+                        <li>{trans('Registriert seit')}: <span>{date('d.m.Y, H:i:s', $user.regdate)}</span></li>
+                        <li>{trans('Beiträge')}: <span>{$user.userposts}</span></li>
+                        <li>{trans('Dein Geburtsdatum')}: <span>{date('d.m.Y', $user.birthday)}</span></li>
+                    </ul>
+                    
+                    <p>
+                    
+                    <h3 class="decorator">{trans('Persönliche Daten *')}</h3>
+                    <ul>
+                        <li>{trans('Vorname')}: <span><cp:if condition="$user.name">{$user.name}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                        <li>{trans('Nachname')}: <span><cp:if condition="$user.lastname">{$user.lastname}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                        <li>{trans('Adresse')}: <span><cp:if condition="$user.street">{$user.street}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                        <li>{trans('Ort')}: <span><cp:if condition="$user.zip && $user.user_from == ''">{$user.zip} - {$user.user_from}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                        <li>{trans('Land')}: <span><cp:if condition="$user.country">{$user.country}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                        <li>{trans('Telefon')}: <span><cp:if condition="$user.phone">{$user.phone}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                        <li>{trans('Mobil Tel.')}: <span><cp:if condition="$user.mobile_phone">{$user.mobile_phone}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                        <li>{trans('Fax')}: <span><cp:if condition="$user.fax">{$user.fax}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                        
+                    </ul>
+                    <br/><small>{trans('* Diese Angaben siehst nur du! Wir werden keine Daten zu deiner Person preisgeben.')}</small>
+                    </p>
+                    </div>
+                    
+                    <div class="fr w60perc">
+                    
+                        <cp:if condition="$user.userphoto != ''">                        
+                        <div class="user-photo">
+                            <img alt="" src="{photo($user.userphoto, 'AuthorImageLarge', '')}" title="{escape($user.username, 'html')}" border="0" />
+                        </div>
+                        </cp:if>
+                    
+                        <h3 class="decorator">{trans('Kontakte Daten')}</h3>
+                        <ul>
+                            <li>{trans('Email')}: <span>{$user.email}</span></li>
+                            <li>{trans('MSN')}: <span><cp:if condition="$user.msn">{$user.msn}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                            <li>{trans('ICQ')}: <span><cp:if condition="$user.icq">{$user.icq}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                            <li>{trans('AIM')}: <span><cp:if condition="$user.aim">{$user.aim}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                            <li>{trans('YIM')}: <span><cp:if condition="$user.yim">{$user.yim}</cp:if><cp:else>{trans('du hast noch keine angaben gemacht')}</cp:else></span></li>
+                        </ul>
+                    </div>
+                </div>
+
+</cp:block>

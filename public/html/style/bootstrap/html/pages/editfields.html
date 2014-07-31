@@ -1,0 +1,110 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:pageField{$field.fieldid}] [save_exit:pageField{$field.fieldid}]
+        [reset:pageField{$field.fieldid}] [cancel:pageField{$field.fieldid}]
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+    <form method="post" action="admin.php" id="pageField{$field.fieldid}" name="pageField{$field.fieldid}">
+
+        <input type="hidden" name="adm" value="page" />
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="action" value="editfield" />
+        <input type="hidden" name="pagetypeid" id="pagetypeid" value="{$pagetypeid}" />
+        <input type="hidden" name="fieldid" id="newfieldid-{$field.fieldid}" value="{$fieldid}" />
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Feld Name')}</label>
+                <input name="fieldname" type="text" value="{$field.fieldname}" size="70" class="form-control required" />
+            </div>
+
+            <div class="col-md-6">
+                <label>{trans('Feld Typ')}</label>
+                <select name="fieldtype" id="type-{$field.fieldid}">
+                    <option value="email" cp:on="selected:$field.fieldtype == 'email'" parse:selected="selected">{trans("Email Feld")}</option>
+                    <option value="spamprotect" cp:on="selected:$field.fieldtype == 'spamprotect'" parse:selected="selected">{trans("Spamschutz Feld")}</option>
+                    <option value="text" cp:on="selected:$field.fieldtype == 'text' || empty($field.field_id)" parse:selected="selected">{trans("Text Feld")}</option>
+                    <option value="hidden" cp:on="selected:$field.fieldtype == 'hidden'" parse:selected="selected">{trans("Verstecktes Feld")}</option>
+                    <option value="file" cp:on="selected:$field.fieldtype == 'file'" parse:selected="selected">{trans("Datei Feld")}</option>
+                    <option value="password" cp:on="selected:$field.fieldtype == 'password'" parse:selected="selected">{trans("Password Feld")}</option>
+                    <option value="textarea" cp:on="selected:$field.fieldtype == 'textarea'" parse:selected="selected">{trans("Textarea")}</option>
+                    <option value="richtext" cp:on="selected:$field.fieldtype == 'richtext'" parse:selected="selected">{trans("Rich Text Feld")}</option>
+                    <option value="select" cp:on="selected:$field.fieldtype == 'select'" parse:selected="selected">{trans("Drop Down Liste")}</option>
+                    <option value="radio" cp:on="selected:$field.fieldtype == 'radio'" parse:selected="selected">{trans("Radio Buttons")}</option>
+                    <option value="checkbox" cp:on="selected:$field.fieldtype =='checkbox'" parse:selected="selected">{trans("Checkbox Feld")}</option>
+                    <option value="multiplecheckbox" cp:on="selected:$field.fieldtype =='multiplecheckbox'" parse:selected="selected">{trans("Mehrfach Checkbox Feld")}</option>
+                    <option value="datetime" cp:on="selected:$field.fieldtype == 'datetime'" parse:selected="selected">{trans("Datums- und Zeitauswahl Feld")}</option>
+                </select>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row domask">
+            <div id="field-container-{$field.fieldid}" style="min-height:90px;"></div>
+        </div>
+
+
+
+
+
+    </form>
+
+    <script type="text/javascript">
+
+
+        Form.registerForm('pageField{$field.fieldid}', {
+            autosave: false,
+            contentIdentifierID: 'newfieldid-{$field.fieldid}',
+            exiturl: 'admin.php?adm=page&action=fields&pagetypeid={$pagetypeid}'
+        });
+
+
+
+        $('#type-{$field.fieldid}').bind('change', function () {
+            $('#pageField{$field.fieldid}').mask('Einstellungen holen...');
+
+            $.get('admin.php?adm=page&action=fieldoptions&pagetypeid={$pagetypeid}&type=' + $('#type-{$field.fieldid}').val() + '&fieldid=' + $('#newfieldid-{$field.fieldid}').val(), {}, function (data) {
+
+                $('#pageField{$field.fieldid}').unmask();
+                if (Tools.responseIsOk(data)) {
+                    $('#field-container-{$field.fieldid}').html(data.output);
+                    Desktop.Tools.rebuildTooltips(Win.windowID);
+                    Win.prepareWindowFormUi();
+
+                } else {
+
+                    jAlert(data.msg);
+                }
+
+            });
+        });
+
+        $('#pageField{$field.fieldid}').mask('Einstellungen holen...');
+
+        $.get('admin.php?adm=page&action=fieldoptions&pagetypeid={$pagetypeid}&type=' + $('#type-{$field.fieldid}').val() + '&fieldid=' + $('#newfieldid-{$field.fieldid}').val(), {}, function (data) {
+
+            $('#pageField{$field.fieldid}').unmask();
+            if (Tools.responseIsOk(data)) {
+                $('#field-container-{$field.fieldid}').html(data.output);
+                Desktop.Tools.rebuildTooltips(Win.windowID);
+                Win.prepareWindowFormUi();
+
+            } else {
+
+                jAlert(data.msg);
+            }
+
+        });
+
+
+    </script>
+</cp:block>

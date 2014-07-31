@@ -1,0 +1,73 @@
+.ts {
+    background: url('../img/tree/tree-sprite.png') 0 0 no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    float: left;
+    position: relative;
+    top: 2px;
+    left: -2px;
+}
+
+
+
+
+
+.article{ background-position: 0 0;  }
+.bricks{ background-position: 0 -32px;  }
+.document-block{ background-position: 0 -64px;  }
+.document-clock{ background-position: 0 -96px;  }
+.document-clock.locked, .document-clock-locked { background-position: 0 -772px;  }
+.document-locked{ background-position: 0 -772px;  }
+
+
+.document-extern{ background-position: 0 -128px;  }
+.document-globe{ background-position: 0 -160px;  }
+.document-insert-after{ background-position: 0 -192px;  }
+.document-insert{ background-position: 0 -224px;  }
+.document-php{ background-position: 0 -256px;  }
+.document-protected{ background-position: 0 -288px;  }
+.document-text{ background-position: 0 -320px;  }
+.document-text.locked, .document-text-locked { background-position: 0 -772px;  }
+
+.folder-closed.locked, .folder-closed-locked { background-position: 0 -352px;  }
+.folder-closed{ background-position: 0 -384px;  }
+.folder-open-document-text{ background-position: 0 -416px;  }
+
+.folder-open.locked, .folder-open-locked { background-position: 0 -448px;  }
+.folder-open{ background-position: 0 -480px;  }
+.home{ background-position: 0 -512px;  }
+.link{ background-position: 0 -544px;  }
+.minus-hover{ background-position: 0 -576px;  }
+.minus{ background-position: 0 -610px;  }
+.newspaper{ background-position: 0 -644px;  }
+.packages{ background-position: 0 -676px;  }
+.page-index.locked, .page-index-locked { background-position: 0 -708px;  }
+.page-index{ background-position: 0 -740px;  }
+.page.locked, .page-locked{ background-position: 0 -772px;  }
+.page{ background-position: 0 -804px;  }
+.plus-hover{ background-position: 0 -836px;  }
+.plus{ background-position: 0 -870px;  }
+.site-add{ background-position: 0 -904px;  }
+.site-delete{ background-position: 0 -936px;  }
+.site-edit{ background-position: 0 -968px;  }
+.site-editing{ background-position: 0 -1000px;  }
+.site{ background-position: 0 -1032px;  }
+.tree-close{ background-position: 0 -1064px;  }
+.tree-open{ background-position: 0 -1096px;  }
+
+
+
+
+.tree_close_arrow_small{ background-position: 0 -1128px;  }
+
+
+
+
+
+.ts.loading {
+    background-image: url('../img/loading.gif')!important;
+    background-position: 2px 2px!important;
+    background-size: 12px 12px;
+}
+

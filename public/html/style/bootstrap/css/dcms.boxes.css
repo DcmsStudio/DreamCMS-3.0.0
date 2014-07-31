@@ -1,0 +1,610 @@
+.box {
+    padding: 0;
+    margin: 0 5px 10px 5px;
+
+    position: relative;
+    /*border-radius: 3px;
+    -moz-border-radius:3px;
+    -webkit-radius:3px;
+
+    
+        border: 1px solid rgba(181, 181, 181, 0.55);
+        -webkit-box-shadow: inset 0px 0px 3px 0px rgba(181, 181, 181, 0.8);
+        box-shadow: inset 0px 0px 3px 0px rgba(181, 181, 181, 0.8);
+        background: #E2E2E2;
+    */
+    min-height: 50px;
+    overflow: hidden;
+    display: block;
+}
+
+
+.box.light {
+    overflow: visible;
+    background: #F9F9F9;
+    -webkit-box-shadow: 0 0 0 0;
+    box-shadow: 0 0 0 0;
+    border-radius:0;
+    -moz-border-radius:0;
+    -webkit-radius:0;
+}
+
+
+
+.box.transparent {
+    background: transparent!important;
+}
+
+.box h1,
+.box h3 {
+    margin: 10px 10px 5px 0;
+    border-bottom: 1px solid #cecece;
+    padding-bottom: 3px;
+    line-height: 24px;
+}
+.box h2 {
+    padding-bottom: 3px;
+    font-size: 13px;
+    margin: 0px 10px 10px 0;
+    line-height: 24px;
+}
+
+.box-inner {
+    margin: 0;
+    padding: 0;
+}
+.box-inner > p {
+    margin: 0 0 10px 0;
+}
+
+.box .firstrow, .box .secondrow {
+    /* background: transparent; */
+    line-height: 16px;
+}
+
+
+
+
+
+
+#accessItems .box {
+    min-height: 0;
+}
+
+
+ul.sortable-menu {
+    margin: 0!important;
+    padding: 0!important;
+}
+
+ul.sortable-menu ul {
+    margin: 0!important;
+    margin-left: 25px!important;
+    padding: 0;
+    list-style-type: none;
+}
+
+
+ul.sortable-menu li {
+    margin: 5px 0 0 0!important;
+    padding: 0;
+    width: 100%;
+    float: none!important;
+}
+
+
+ul.sortable-menu li > div:first-child {
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-color: #D4D4D4 #D4D4D4 #BCBCBC;
+    line-height: 20px;
+    margin: 0;
+    background: #f6f6f6;
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed));
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: -o-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: linear-gradient(to bottom,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
+
+    padding-left: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+
+
+ul.sortable-menu li div.listitem-form-container
+{
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-top-left-radius: 3px;    
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-top-right-radius: 3px;    
+    background: #fff;    
+    border: 1px solid #d4d4d4;
+    border-top: 0;
+    padding: 5px;
+}
+
+
+
+
+ul.sortable-menu li > div > span:first-child {
+    background: url('../img/Apple/moveCursor.png') 0 1px no-repeat; 
+    width: 16px;
+    height: 16px;
+    display: block;
+    float: left;
+    margin-right: 5px;
+    margin-left: 2px;
+    cursor: move;
+    display: none;
+
+}
+
+
+
+ul.sortable-menu li div span.edit {
+    margin: 0;
+    background: url('../img/edit.png') 50% 50% no-repeat!important; 
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: right;
+    margin-right: 5px;
+    line-height: 20px;
+
+    opacity: .5;
+    cursor: pointer!important; 
+}
+ul.sortable-menu li div span.edit:hover {
+    opacity: 1;
+}
+ul.sortable-menu li div span.delete {
+    margin: 0;
+    background: url('../img/delete.gif') 50% 50% no-repeat!important; 
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: right;
+    margin-right: 5px;
+    line-height: 20px;
+
+    opacity: .5;
+    cursor: pointer!important; 
+}
+
+ul.sortable-menu li div span.delete:hover {
+    opacity: 1;
+}
+
+
+
+
+ul.sortable-menu li div span.save-form-btn {
+    margin: 0;
+    background: url('../img/buttons/save.png') 2px 50% no-repeat!important; 
+    height: 20px;
+    display: inline-block;
+    float: right;
+    margin-right: 5px;
+    padding-left: 20px;    
+    display: none;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #555;
+    opacity: .7;
+    cursor: pointer!important; 
+}
+
+ul.sortable-menu li div span.save-form-btn:hover {
+    opacity: 1;
+    color: #333;
+}
+
+
+
+
+
+
+
+
+ul.sortable-menu li.mjs-nestedSortable-branch div {
+
+}
+
+ul.sortable-menu li.mjs-nestedSortable-leaf div {
+
+}
+
+ul.sortable-menu li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
+    border-color: #999;
+    background: #fafafa;
+}
+
+
+
+li .disclose {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    background-position: 50% 50%!important;
+}
+
+ul.sortable-menu li.mjs-nestedSortable-collapsed > ul {
+    display: none;
+}
+
+ul.sortable-menu li.mjs-nestedSortable-collapsed > div > .disclose, 
+li.mjs-nestedSortable-collapsed > div > .disclose {
+    background: url('../img/down.png') no-repeat!important;
+    display: inline-block;
+    float: left;
+    margin-right: 4px;
+}
+
+ul.sortable-menu li.mjs-nestedSortable-expanded > div > .disclose, li.mjs-nestedSortable-expanded > div > .disclose {
+    background: url('../img/up.png') no-repeat!important; 
+    display: inline-block;
+    float: left;
+    margin-right: 4px;
+}
+
+
+.ui-sortable li, 
+li.mjs-nestedSortable-branch, 
+li.mjs-nestedSortable-leaf {
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-color: #D4D4D4 #D4D4D4 #BCBCBC;
+    line-height: 20px;
+    margin: 0 0 5px;
+    padding: 3px;
+    background: #f6f6f6;
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed));
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: -o-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: linear-gradient(to bottom,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
+}
+
+
+.placeholder,
+.ui-sortable li.placeholder,
+.menu-placeholder {
+    outline: 1px dashed #4183C4;
+    background: transparent url('../../img/dropbg.gif') repeat!important;
+}
+
+.menu-placeholder {
+    height: auto;
+}
+
+.ui-sortable.sortable-menu li 
+{
+    background: transparent;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.listitem-form-container .fieldset, 
+.listitem-form-container .fieldset2,
+.listitem-form-container fieldset,
+.listitem-form-container .box {
+    border: 0!important;
+    background: transparent!important;
+}
+
+
+
+
+
+/**
+    config window
+*/
+
+.cfg-group {
+    display: table;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    background: #DFDFDF;
+    padding: 0;
+}
+.cfg-group >div:first-child {
+    padding: 10px;
+    display: inline-block;
+}
+
+.cfg-group:nth-of-type(odd) {
+    background: #E8E8E8;
+}
+
+.cfg-group >div:first-child > div {
+    display: table;
+    margin-top: 10px;
+}
+
+.cfg-group:last-of-type {
+    margin: 0;
+    padding-bottom: 0;
+}
+
+.cfg-group>div .cfg-btn {
+    display: inline-block;
+    width: 80px;
+    height: 65px;
+    margin-right: 10px;
+    margin-left: 10px;
+    float: left;
+    overflow: hidden;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.cfg-group>div .cfg-btn .cfg-icon {
+    width: 80px;
+    height: 40px;
+    text-align: center;
+}
+.cfg-group>div .cfg-btn .cfg-icon img {
+    width: 36px;
+    max-height: 36px;
+}
+.cfg-group>div .cfg-btn span {
+    text-align: center;
+    width: 80px;
+    display: inline-block;
+    cursor: default;
+}
+
+
+.sortable-table {
+    width: 100%;
+    height: 100%;
+    display: inline-table;
+    background: #fff;
+}
+.sortable-table .header-table {
+    width: 100%;
+    display: table;
+    margin: 0;    
+    border-bottom: 1px solid #A7A7A7;
+    background: #f6f8f9; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y2ZjhmOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2U1ZWJlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2Q3ZGVlMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmNWY3ZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  hsla(200,20%,97%,1) 0%, hsla(200,21%,92%,1) 50%, hsla(205,18%,87%,1) 51%, hsla(210,25%,97%,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsla(200,20%,97%,1)), color-stop(50%,hsla(200,21%,92%,1)), color-stop(51%,hsla(205,18%,87%,1)), color-stop(100%,hsla(210,25%,97%,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  hsla(200,20%,97%,1) 0%,hsla(200,21%,92%,1) 50%,hsla(205,18%,87%,1) 51%,hsla(210,25%,97%,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  hsla(200,20%,97%,1) 0%,hsla(200,21%,92%,1) 50%,hsla(205,18%,87%,1) 51%,hsla(210,25%,97%,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  hsla(200,20%,97%,1) 0%,hsla(200,21%,92%,1) 50%,hsla(205,18%,87%,1) 51%,hsla(210,25%,97%,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  hsla(200,20%,97%,1) 0%,hsla(200,21%,92%,1) 50%,hsla(205,18%,87%,1) 51%,hsla(210,25%,97%,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-8 */
+    height: 16px;
+    line-height: 16px;
+    
+}
+
+.sortable-table .header-table td {
+    border-right: 1px solid #DDDDDD;
+}
+.sortable-table .header-table td:last-child {
+    border: 0;
+}
+
+.sortable-table .header-table td > div {
+    padding: 0;
+    margin: 0;
+    padding-left: 3px;
+    padding-right: 3px;
+    height: 16px;
+    line-height: 16px;
+}
+
+
+.sortable-table>ul {
+    padding: 0;    
+    margin: 0;
+    display: inline-table;
+    width: 100%;
+}
+
+.sortable-table .ui-sortable li,
+.sortable-table li {
+    padding: 0;
+    background: #FFF;
+    border: 0;
+    line-height: 0px!important;
+    margin: 0;
+}
+
+.sortable-table li table {
+    width: 100%;
+}
+.sortable-table li table td {
+    line-height: 20px;
+    vertical-align: middle;
+}
+.sortable-table li table td > div {
+    padding: 0;
+    margin: 0;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.sortable-table .header-table td.tr > div,
+.sortable-table li table td.tr > div {
+    text-align: right;
+    padding-right: 5px;
+    height: 16px;
+    line-height: 16px;
+}
+.sortable-table table .drag-handler, 
+.sortable-table table .handle div {
+    width: 16px;
+    height: 20px;
+    display: inline-block;
+    float: left;
+    padding-right: 10px;
+    position: relative;
+    left: 0;
+    cursor: move;
+    background: transparent url("../img/Apple/moveCursor.png") 50% 50% no-repeat;
+}
+
+.sortable-table table .handle.updating div {
+    background: transparent url("../img/loading.gif") 0 0 no-repeat;
+}
+
+
+.sortable-table table.header-table .drag-handler, 
+.sortable-table table.header-table .handle div {
+    cursor: default;
+}
+.sortable-table table.header-table .drag-handler, 
+.sortable-table table.header-table .handle {
+    width: 25px;
+    top: 2px;
+    position: relative;
+}
+
+.sortable-table table.header-table .handle div {
+    top: -2px;
+}
+
+.sortable-table table.header-table .drag-handler {
+    visibility: hidden;
+}
+
+.sortable-table li {
+    background-color:  #fff;
+}
+
+.sortable-table li:nth-child(even) table {
+    height: 10px;
+}
+
+.sortable-table li:nth-child(odd) {
+
+}
+
+.sortable-table li:nth-child(odd) table {
+    height: 10px;
+}
+
+.sortable-table ul ul {
+
+}
+.sortable-table ul ul > li {
+   /* padding-left: 20px!important; */
+}
+
+
+/*
+.sortable-table ul ul li >.row {
+    padding-left: 20px!important;
+}
+.sortable-table ul ul ul li >.row {
+    padding-left: 40px!important;
+}
+.sortable-table ul ul ul ul li >.row {
+    padding-left: 60px!important;
+}
+.sortable-table ul ul ul ul ul li >.row {
+    padding-left: 80px!important;
+}
+.sortable-table ul ul ul ul ul ul li >.row {
+    padding-left: 100px!important;
+}
+.sortable-table ul ul ul ul ul ul ul li >.row {
+    padding-left: 120px!important;
+}
+.sortable-table ul ul ul ul ul ul ul ul li >.row {
+    padding-left: 140px!important;
+}
+
+.sortable-table ul ul ul ul ul ul ul ul ul li >.row {
+    padding-left: 160px!important;
+}
+.sortable-table ul ul ul ul ul ul ul ul ul ul li >.row {
+    padding-left: 180px!important;
+}
+.sortable-table ul ul ul ul ul ul ul ul ul ul ul li >.row {
+    padding-left: 200px!important;
+}
+.sortable-table ul ul ul ul ul ul ul ul ul ul ul ulli >.row {
+    padding-left: 220px!important;
+}
+
+*/
+
+
+
+.sortable-table .zebra {
+    background-color: #F9F9F9!important;
+}
+
+.sortable-table ul li.hover:last-child {
+    
+    color: #fff!important;
+    border-radius: 0;
+}
+
+.sortable-table ul li.hover:last-child * {
+    
+}
+.sortable-table .ui-sortable > li.mjs-nestedSortable-leaf {
+    border-bottom: 1px solid #DDD!important;
+}
+
+.sortable-table .row:hover {
+    background: #5D7286!important;
+    color: #fff!important;
+}
+.sortable-table .row:hover > * {
+    color: #fff!important;
+}
+
+
+#component-code {
+    background: #fff;
+}
+
+
+
+body > li.ui-sortable-helper {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #fff!important;
+    border: 1px solid #999!important;
+    cursor: move;
+}
+body > li.ui-sortable-helper ul li {
+    padding-left: 20px!important;
+}
+
+body > li.ui-sortable-helper .handle div, 
+body > li.ui-sortable-helper .drag-handler {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    top: 2px;
+    position: relative;
+    left: 5px;
+    margin-right: 10px;
+    cursor: move;
+    background: transparent url("../img/Apple/moveCursor.png") 0 0 no-repeat;
+}
+
+

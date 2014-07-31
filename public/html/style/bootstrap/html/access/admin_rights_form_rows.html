@@ -1,0 +1,13 @@
+<div class="box mb5" id="items{$x}" style="display:inline-block;width:100%!important;">
+    <h2 class="link">
+        <span>{$title}</span>
+    </h2>
+    <div class="box-inner" id="tc{$x}"<cp:if condition="{$default} != true"> style="display:none"</cp:if>>
+        <cp:loop name="accessitems" key="r">
+            {$r.content}
+        </cp:loop>       
+        <cp:if condition="{$description}"><small>{$description}</small></cp:if>
+    </div>
+</div>
+
+

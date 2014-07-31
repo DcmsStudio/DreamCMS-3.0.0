@@ -1,0 +1,205 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <div id="fm-toolbar">
+        &nbsp;
+    </div>
+</cp:block>
+
+
+<cp:block name="content">
+
+    <div id="fm" class="fm">
+        <div class="pathway"></div>
+        <div class="fm-container">
+            <div class="left-side">
+                <div class="treelist">
+                    <div class="treelistInner">
+
+                    </div>
+                </div>
+                <div class="file-info">
+                    <!-- height resizeable -->
+                    <div class="preview-container"></div>
+                    <div class="fileinfos">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-side">
+                <!-- width resizeable -->
+
+                <div class="foldercontent">
+                    <div class="foldercontentInner"></div>
+                </div>
+                <div class="statusbar"></div>
+            </div>            
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+        $('#' + Win.windowID).addClass('no-padding');
+        $('#' + Win.windowID).find('#fm').parent().addClass('no-padding');
+        $('#' + Win.windowID).find('#fm').parent().parent().addClass('no-scroll'); //.jScrollPaneRemove();
+
+        $('#panel-buttons li[rel=files]' ).trigger('click');
+
+
+
+        if (Desktop.isWindowSkin) {
+
+            $('#' + Win.windowID).addWindowEvent('onResizeStart', function () {
+                $('#' + Win.windowID).find('#fm div.header th,#fm div.body tr:first td').attr('style', '');
+            });
+
+            $('#' + Win.windowID).addWindowEvent('onResize', function () {
+                $('#' + Win.windowID).find('#fm').resizePanels(false);
+            });
+
+            $('#' + Win.windowID).addWindowEvent('onResizeStop', function () {
+                var win = $('#' + Win.windowID);
+
+                win.find('#fm').resizePanels(function ()
+                {
+                    //$('#fm').addResizeable();
+                    win.find('#fm .treelistInner,#fm .body').css({overflow: ''});
+                    Tools.scrollBar(win.find('#fm .treelistInner'));
+                    Tools.scrollBar(win.find('#fm .listview .body>:first-child'));
+                    Tools.scrollBar(win.find('#fm iconview.body'));
+
+                    setTimeout(function () {
+                        win.find('#fm').fixTableWidth();
+                    }, 50);
+                });
+            });
+
+
+            $('#' + Win.windowID).addWindowEvent('onAfterShow', function () {
+                var win = $('#' + Win.windowID);
+
+                win.find('#fm').resizePanels(function ()
+                {
+                    //$('#fm').addResizeable();
+                    win.find('#fm .treelistInner,#fm .body').css({overflow: ''});
+                    Tools.scrollBar(win.find('#fm .treelistInner'));
+                    Tools.scrollBar(win.find('#fm .listview .body>:first-child'));
+                    Tools.scrollBar(win.find('#fm iconview.body'));
+
+                    setTimeout(function () {
+                        win.find('#fm').fixTableWidth();
+                    }, 50);
+                });
+            });
+        }
+        else {
+
+        }
+
+        $('#files-tree,#files-info', $('#files-tree-content')).empty();
+
+
+        var hash =  Win.windowID.replace('content-', '').replace('tab-', '');
+        $('#' + Win.windowID).attr('isfileman', true);
+
+
+        $('#' + Win.windowID).find('#fm').Filemanager({
+            connectorUrl: 'admin.php?adm=fileman',
+            mode: '{$fm.mode}',
+            dirSep: '{$fm.dirSep}',
+            toolbarContainer: $('#buttons-' + hash).find('#fm-toolbar'),
+            externalScrollbarContainer: '.pane',
+            treePanel: $('#files-tree', $('#files-tree-content')),
+            treePanelInfo: $('#files-info', $('#files-tree-content')),
+            scrollTo: function (container, toObject)
+            {
+                if (container === 'tree')
+                {
+                    Tools.scrollBar($('#files-tree-content #files-tree').find('.treelistInner'), toObject);
+                }
+            },
+            externalScrollbarDestroy: function ()
+            {
+
+            },
+            externalScrollbarCreate: function ()
+            {
+                var _win = $('#' + Win.windowID);
+
+                $('#files-tree-content #files-tree .treelistInner').css({overflow: ''});
+                _win.find('#fm .body').css({overflow: ''});
+
+                Tools.scrollBar($('#files-tree-content #files-tree').find('.treelistInner'));
+                Tools.scrollBar(_win.find('#fm .listview .body>:first-child'));
+                Tools.scrollBar(_win.find('#fm .iconview.body'));
+
+                setTimeout(function ()  {
+                    //if ($('#fm .foldercontentInner .body', _win).hasClass('jspScrollable'))
+                    // {
+                    _win.find('#fm').fixTableWidth();
+                    // }
+                }, 80);
+
+            },
+            onResizeStart: function ()
+            {
+
+                $('#files-tree-content #files-tree .treelistInner').css({width: '', overflow: ''});
+                $('#' + Win.windowID).find('#fm .body').css({width: '', overflow: ''});
+
+
+            },
+            onResizeStop: function ()
+            {
+                var win = $('#' + Win.windowID);
+
+                Tools.scrollBar($('#files-tree-content #files-tree').find('.treelistInner'));
+                Tools.scrollBar(win.find('#fm .listview .body>:first-child'));
+                Tools.scrollBar(win.find('#fm .iconview.body'));
+
+
+                setTimeout(function ()  {
+                    //if ($('#fm .foldercontentInner .body', _win).hasClass('jspScrollable'))
+                    // {
+                    $('#' + Win.windowID).find('#fm').fixTableWidth();
+                    // }
+                }, 80);
+
+            },
+            onBeforeLoad: function ()
+            {
+
+            },
+            onAfterLoad: function ()
+            {
+                //var win = $('#'+ Win.windowID);
+                // $('#fm .treelistInner,#fm .foldercontentInner .body', $('#'+ Win.windowID) ).jScrollPaneRemove();
+
+                $('#files-tree-content #files-tree .treelistInner').css({overflow: ''});
+                $('#' + Win.windowID).find('#fm .body').css({overflow: ''});
+
+                Tools.scrollBar($('#files-tree-content #files-tree').find('.treelistInner'));
+                Tools.scrollBar($('#' + Win.windowID).find('#fm .listview .body>:first-child'));
+                Tools.scrollBar($('#' + Win.windowID).find('#fm .iconview.body'));
+
+
+                setTimeout(function ()  {
+                    //if ($('#fm .foldercontentInner .body', _win).hasClass('jspScrollable'))
+                    // {
+                    $('#' + Win.windowID).find('#fm').fixTableWidth();
+                    // }
+                }, 80);
+
+            }
+        });
+    </script>
+</cp:block>
+
+
+
+
+
+
+

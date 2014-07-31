@@ -1,0 +1,195 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    <cp:if condition="$input.id > 0">
+        [save:localeForm{$input.id}] [save_exit:localeForm{$input.id}]
+    </cp:if>
+    <cp:else>
+        [save_exit:localeForm{$input.id}]
+    </cp:else>
+    [reset:localeForm{$input.id}] [cancel:localeForm{$input.id}]
+</cp:block>
+
+<cp:block name="content">
+
+    <form action="admin.php" id="localeForm{$input.id}" name="localeForm{$input.id}">
+        <input type="hidden" name="adm" value="locale"/>
+        <input type="hidden" name="id" id="item-id{$input.id}" value="{$input.id}"/>
+        <input type="hidden" name="action" value="save"/>
+        <div class="box description">
+            <div class="box-inner">
+                <div class="fieldset2">
+                    <fieldset>
+                        <legend>{info:locale|title}{trans('Titel')}</legend>
+                        <input type="text" name="title" id="title" size="60" maxLength="250" value="{$title}" class="input"/>
+                    </fieldset>          
+
+                    <fieldset>
+                        <legend>{trans('Flagge')}</legend>
+                        <input type="text" name="flag" id="flag" size="40" maxLength="30" value="{$flag}" class="input"/>
+                        <img id="flag-icon" parse:src="{$backendImagePath}flags/{$flag}" width="16" height="16" alt="" />
+                    </fieldset>
+                </div>
+
+                <div class="fieldset2">
+                    <fieldset>
+                        <legend>{info:locale|code}{trans('Locale Code')}</legend>
+                        <input type="text" name="code" id="code" size="40" maxLength="30" value="{$code}" class="input"/>
+                        <select name="codeS" id="codeS">
+                            <cp:loop name="locales" key="r">
+                                <option value="{$r.code}" cp:on="selected:$r.code == $code" parse:selected="selected">{$r.title}</option>
+                            </cp:loop>
+                        </select>                
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>{info:locale|wincode}{trans('Locale Code für Windows™ Server')}</legend>
+                        <input type="text" name="wincode" size="40" maxLength="30" value="{$wincode}" class="input"/>
+                    </fieldset>
+                </div>
+
+
+                <div class="fieldset2">
+                    <fieldset>
+                        <legend>{info:locale|guicontentlang}{trans('GUI &amp; Inhalts Sprache')}</legend>
+
+                        <div>
+                            <label for="gui-1"><input type="checkbox" name="guilanguage" id="gui-1" value="1" cp:on="checked:$guilanguage == 1" parse:checked="checked"/> Dient als GUI Sprache</label>
+                            <br/>
+                            <label for="cont-1"><input type="checkbox" name="contentlanguage" id="cont-1" value="1" cp:on="checked:$contentlanguage == 1" parse:checked="checked"/> Dient als Inhalts Sprache</label>
+                        </div>
+                    </fieldset>
+
+
+
+                    <fieldset>
+                        <legend>{info:locale|timezone}{trans('Zeitzone')}</legend>
+
+                        <select name="timezone" id="timezone">
+                            <cp:loop name="timezones" key="r">
+                                <option value="{$r.value}" cp:on="selected:$r.value == $timezone" parse:selected="selected">{$r.title}</option>
+                            </cp:loop>
+                        </select>  
+
+
+                    </fieldset>
+                </div>
+
+                <fieldset>
+                    <legend>{info:locale|decimal}{trans('Dezimal Punkt')}</legend>
+                    <input type="text" name="decimal" size="40" maxLength="30" value="{$decimal}" class="input"/>
+                    <span class="note">{trans('Beispiel')}: .</span>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{info:locale|thousands}{trans('Tausender Stelle')}</legend>
+                    <input type="text" name="thousands" size="40" maxLength="30" value="{$thousands}" class="input"/>
+                    <span class="note">{trans('Beispiel')}: .</span>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{info:locale|dateformat}{trans('Datums Format (Kurz)')}</legend>
+                    <input type="text" name="dateformat" size="40" maxLength="30" value="{$dateformat}" class="input"/>
+                    <span class="note">{trans('Beispiel')}: d.m.Y</span>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{info:locale|timeformat}{trans('Zeit Format')}</legend>
+                    <input type="text" name="timeformat" size="40" maxLength="30" value="{$timeformat}" class="input"/>
+                    <span class="note">{trans('Beispiel')}: H:i</span>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{info:locale|fulldate_format}{trans('Datums Format (Lang)')}</legend>
+                    <input type="text" name="fulldate_format" size="40" maxLength="30" parse:value="{$fulldate_format}" class="input"/>
+                    <span class="note">{trans('Beispiel')}: l, d.F.Y</span>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{info:locale|datetime_format}{trans('Datums &amp; Zeit Format (Kurz)')}</legend>
+                    <input type="text" name="datetime_format" size="40" maxLength="30" value="{$datetime_format}" class="input"/>
+                    <span class="note">{trans('Beispiel')}: d.m.Y, H:i</span>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{info:locale|fulldatetime_format}{trans('Datums &amp; Zeit Format (Lang)')}</legend>
+                    <input type="text" name="fulldatetime_format" size="40" maxLength="30" value="{$fulldatetime_format}" class="input"/>
+                    <span class="note">{trans('Beispiel')}: l, d.F.Y - H:i:s</span>
+                </fieldset>
+
+            </div>
+        </div>
+
+
+
+    </form>
+
+
+    <script type="text/javascript">
+        
+
+        if (typeof setLocale != 'function') {
+            function setLocale (str)
+            {
+                var loc = str.split('_');
+                var idx = 0;
+                if (loc[0] != loc[1] && loc[1].length == 2)
+                {
+                    idx = 1;
+                }
+                else if (loc[0] != loc[1] && loc[1].length != 2 && loc[0].length == 2)
+                {
+                    idx = 0;
+                }
+                else if (loc[0] == loc[1] && loc[0].length == 2)
+                {
+                    idx = 0;
+                }
+
+                return loc[ idx ].toLowerCase();
+            }
+        }
+        
+        
+        Form.registerForm('localeForm{$input.id}', {
+            contentIdentifierID: 'item-id{$input.id}',
+            exiturl: 'admin.php?adm=locale'
+        });
+
+        var selected = $('#' + Win.windowID).find('#codeS').find(':selected');
+        if ($(selected).val() != '') {
+            var loc = setLocale($(selected).val());
+            var flag = loc + '.png';
+            $('#' + Win.windowID).find('#flag').val(flag);
+            $('#' + Win.windowID).find('#flag-icon').attr('src', Config.get('backendImagePath') + 'flags/' + $('#flag').val());
+        }
+
+        $('#' + Win.windowID).find('#flag').change(function () {
+            if ($(this).val() != '') {
+                $('#' + Win.windowID).find('#flag-icon').attr('src', Config.get('backendImagePath') + 'flags/' + $(this).val());
+            } else {
+                $('#' + Win.windowID).find('#flag-icon').attr('src', Config.get('backendImagePath') + 'spacer.gif');
+            }
+        });
+
+        $('#' + Win.windowID).find('#flag-icon').error(function () {
+            $('#' + Win.windowID).find('#flag').val('');
+            $('#' + Win.windowID).find('#flag-icon').attr('src', Config.get('backendImagePath') + 'spacer.gif');
+        });
+
+        $('#' + Win.windowID).find('#codeS').change(function () {
+            var selected = $('#' + Win.windowID).find('#codeS').find(':selected');
+            $('#' + Win.windowID).find('#title').val($(selected).text());
+
+            if ($(selected).val() != '') {
+                var loc = setLocale($(selected).val());
+                var flag = loc + '.png';
+                $('#' + Win.windowID).find('#code').val($(selected).val());
+                $('#' + Win.windowID).find('#flag').val(flag);
+                $('#' + Win.windowID).find('#flag').change();
+            }
+        });
+
+    </script>
+</cp:block>

@@ -1,0 +1,46 @@
+<?php
+
+function __database_query1(){
+global $cp, $cfg, $fct, $cp, $cp;
+
+return <<<EOF
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<BODY>
+
+<div class="description">
+	<div class="tip_icon"><img src="images/tip.gif" border="0" alt="Tip" hspace="4" vspace="4" /></div>
+Hiermit werden alle Tabellen aus einer Datei wieder hergestellt. Falls es
+Dein Server unterstützt, kannst Du auch einen GZip-komprimierten Text hochladen
+- er wird automatisch dekomprimiert! <B>ACHTUNG</B> Es werden alle existierenden
+Daten überschrieben. Der Vorgang wird einige Zeit dauern, bitte verlasse diese
+Seite nicht, bis er abgeschlossen wurde.
+</div>
+
+<form enctype="multipart/form-data" method="post"  action="admin.php"  onsubmit=""><input type="hidden" name="adm" value="database" />
+ <input type="hidden" name="sid" value="$cp->session_id">
+ <input type="hidden" name="send" value="send">
+ <input type="hidden" name="action" value="restore">
+
+<table cellpadding="4" cellspacing="1" width="99%" class="tblborder" align="center">
+	<tr class="tableheader">
+		<th class="thHead">Wähle eine Datei</th>
+	</tr>
+	<tr class="firstrow">
+		<td class="row1" align="center">{info:dbrestore|uploadsql}
+		<input type="file" name="backup_file" SIZE="45" class="input">&nbsp;&nbsp;<input type="submit" name="restore_start" value="Start" class="button">
+		&nbsp;</td>
+	</tr>
+</table>
+</form>
+
+</BODY>
+</HTML>
+EOF;
+}
+
+?>

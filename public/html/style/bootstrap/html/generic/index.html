@@ -1,0 +1,29 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+
+    <button onclick="openTab({url: 'admin.php?adm=widget&action=listwidget', obj: this, label: $(this).text()});" class="button"><img src="images/add_widget.png" width="16" height="16" /> {trans('Widget hinzufügen')}</button>
+
+</cp:block>
+
+
+<cp:block name="content">
+    <div id="system-version-notifier">{iif($version_info, $version_info, '')}</div>
+
+    <div id="dropbox" style="height:auto; display:inline-block;float:none">
+
+        <div style="width:100%!important;">
+            <div id="widget-column-1" class="widget-column" style="display:inline-block;width:19%!important;float:left;margin-right:5px;"></div>
+            <div id="widget-column-2" class="widget-column" style="display:inline-block;width:19%!important;float:left;margin:0 auto;"></div>
+            <div id="widget-column-3" class="widget-column" style="display:inline-block;width:30%!important;float:left;margin:0 auto;"></div>
+            <div id="widget-column-4" class="widget-column" style="display:inline-block;width:30%!important;float:right;"></div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+
+
+</cp:block>
+
+

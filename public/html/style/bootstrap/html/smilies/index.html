@@ -1,0 +1,74 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="smilie-add-button" onclick="openTab({url: 'admin.php?adm=smilies&action=add', obj: this, label: $(this).text() })" class="action-button">
+        <img src="images/buttons/new.png" width="16" height="16" alt=""/>&nbsp;{trans("Smilies hinzufügen")}
+    </button>
+</cp:block>
+
+<cp:block name="content">
+
+    <form id="smilie-form" action="admin.php" method="post">
+        <input type="hidden" name="adm" value="smilies"/>
+        <input type="hidden" name="action" value="save"/>
+
+
+        <div id="smilies">
+            <cp:set var="groupname" value=""/>
+            <cp:loop name="smiliegroups" key="r">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span rel="{$r.smilieid}">{$r.smilietitle}</span>
+                    </div>
+                    <div class="panel-body">
+
+                        <cp:tag name="ul" class="smilies"/>
+
+
+                        <cp:if condition="count($r.smilies)">
+                            <cp:loop name="r.smilies" key="rs">
+                                <li rel="smilie-{$rs.smilieid}">
+                                    <i>x</i>
+
+                                    <div class="smilie"><img src="{$rs.smiliepath}"/></div>
+                                    <div class="smilie-label"><input type="text" value="{$rs.smiliecode}" name="smilie[{$r.smilieid}][{$rs.smilieid}]"/></div>
+                                </li>
+                            </cp:loop>
+                        </cp:if>
+
+                        <cp:tag name="ul" forceclose="true"/>
+
+                    </div>
+                </div>
+            </cp:loop>
+        </div>
+
+        <div>
+            <button type="button">{trans('Speichern')}</button>
+        </div>
+
+    </form>
+    <script type="text/javascript" language="javascript">
+        $( '#smilies .smilies' ).sortable().disableSelection();
+
+        $( '#smilie-form button' ).click( function ()
+        {
+            var postdata = $( '#smilie-form' ).serialize();
+
+            $.post( 'admin.php', postdata, function ( data )
+            {
+                if ( Tools.responseIsOk( data ) ) {
+                    Notifier.info( data.msg );
+                }
+                else {
+                    Notifier.error( data.msg );
+                }
+            } );
+
+        } );
+
+
+    </script>
+</cp:block>

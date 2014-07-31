@@ -1,0 +1,126 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        <button id="clear-firewall-log" class="action-button btn_new"><span class="icn"></span><span class="label"> {trans('Log Leeren')}</span></button>
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+    <div id="firewall-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+        var firewallWinOpt = {
+            title: 'Erweiterte Log Infos...',
+            Resizable: true,
+            WindowToolbar: false,
+            Minimize: false,
+            minWidth: 400,
+            minHeight: 180,
+            Height: 450,
+            Width: 600,
+            Controller: 'logs',
+            app: 'logs',
+            Action: 'index',
+            WindowID: 'fw-log-advanced-window',
+            enableContentScrollbar: true,
+            nopadding: true,
+            onAfterClose: function ( e, wm, callback )
+            {
+                if ( Tools.isFunction( callback ) ) {
+                    callback();
+                }
+            },
+            onResizeStart: function ( e, e2, wm, size )
+            {
+                $( wm.win ).addClass( 'popup-logs' );
+            },
+            onBeforeShow: function ( e, wm, callback )
+            {
+                wm.settings.enableContentScrollbar = true;
+                if ( Tools.isFunction( callback ) ) {
+                    callback();
+                    setTimeout( function () { $( wm.win ).addClass( 'popup-logs' ); }, 150 );
+                }
+            }
+        };
+
+        if ( typeof getAdvancedFirewall !== 'function' ) {
+
+
+
+            function getAdvancedFirewall( d, windowid )
+            {
+                firewallWinOpt.opener = windowid;
+
+                var genid = new Date().getTime();
+                firewallWinOpt.WindowID += '-' +genid;
+
+                var container = $( '<div class="advancedlog" style="padding: 10px"/>' );
+
+                container.append( '<div><span>Date</span>' + d.date + '</div>' );
+                container.append( '<div><span>IP</span>' + d.ip + ' (' + d.host + ')</div>' );
+                container.append( '<div><span>User Agent</span>' + d.browser + '</div>' );
+                container.append( '<div><span>Country</span>' + d.country + '</div>' );
+                container.append( '<div class="map" id="fw-dcmsgmap-'+ genid +'"></div>' );
+
+
+                var container2 = $( '<div class="advancedlog"/>' ).append(container);
+
+
+
+                firewallWinOpt.onAfterOpen = function() {
+
+                    if ( typeof d.lat != 'undefined' && typeof d.lon != 'undefined' ) {
+                        $('#fw-dcmsgmap-'+ genid).show();
+
+                        var ipnote = '<div id="content" style="width: 200px;overflow:hidden"><div id="siteNotice"></div>'
+                            + '<h1 id="firstHeading" class="firstHeading" style="margin-bottom: 10px">Herkunft Infos</h1>'
+                            + '<div id="bodyContent" style="width: 200px;overflow:hidden"><p>IP: ' + d.ip + '<br/>Host: ' + d.host + '<br/>Land: ' + d.country + '</p></div>'
+                            + '</div>';
+
+                        initMap({
+                            //   mapType: 'TERRAIN',
+                            mapElement: '#fw-dcmsgmap-'+ genid,
+                            lat: d.lat,
+                            lon: d.lon,
+                            useMarker: true,
+                            infoWindow: ipnote,
+                            markerTitle: 'IP'
+                        });
+
+                    }
+                    else {
+                        $('#fw-dcmsgmap-'+ genid).hide();
+                    }
+                }
+
+
+                Tools.createPopup( container2.html(), firewallWinOpt );
+            }
+        }
+
+
+        Application.Grid( 'firewall-grid', {$gridJson});
+
+        $('#clear-firewall-log').click(function() {
+            $.post('admin.php', {
+                adm: 'firewall',
+                action: 'clear'
+            }, function(data) {
+                if (Tools.responseIsOk(data))
+                {
+                    if (data.msg) {
+                        Notifier.info(data.msg);
+                    }
+
+                    $('#firewall-grid').find('.refresh-grid').trigger('click') ;
+                }
+            });
+        });
+
+
+
+    </script>
+
+</cp:block>

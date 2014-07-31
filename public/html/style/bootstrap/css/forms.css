@@ -1,0 +1,1802 @@
+div.tcontent { 
+    margin:0;
+    display:inline-block;
+    width:100%;
+    padding:0;
+    border:0;
+}
+
+
+/*
+    Css Form definitions
+*/
+
+
+form {
+    margin:0;
+    padding:0;
+
+}
+.grid form {
+    float:none;
+}
+button {
+    width:auto;
+    display:inline;
+    margin:0;
+    padding:0;
+    float:left;
+}
+
+input[type=hidden] { display:none !important; }
+fieldset { overflow:hidden; }
+
+
+
+label {
+    vertical-align : middle;
+    clear:right;
+    display:inline-block;
+    line-height:20px;
+}
+
+label small {
+    white-space: nowrap;
+}
+
+label:hover {
+    color : silver;
+}
+
+
+legend {
+    font-weight: bold;
+    margin-left: 10px;
+    padding : 3px;
+    padding-right:10px;
+
+}
+
+fieldset img {
+    vertical-align : middle;
+    padding-left : 5px;
+}
+
+fieldset .infoicon {
+    position: relative;
+    left: 0;
+    z-index:100;
+    padding:0;
+    margin-top: 2px;
+    margin-right: 3px;
+    float:left;
+    clear:right;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+    opacity: .70;
+    overflow:hidden;
+}
+
+fieldset .infoicon:hover {
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    opacity: 1;
+}
+fieldset small {
+    padding-top : 3px;
+    padding-bottom : 3px;
+}
+
+/* Form elemente */
+
+.input-disabled {
+    background-color : #eeeeee !important;
+    border : 1px solid #dddddd !important;
+    color : #333333;
+}
+
+.input {
+    height : 20px;
+}
+
+
+.select, select {
+    padding : 2px;
+    border : 1px solid #d0d0d0;
+    min-height : 20px;
+    background-color : #fff;
+    vertical-align : middle;
+    position:relative;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+option {
+    padding-right : 10px;
+}
+textarea, input{
+    padding : 0 0 0 2px;
+    position:relative;
+
+}
+
+textarea {
+
+    min-width:96%;
+    max-width:98%;
+    width:auto;
+
+    border : 1px solid #d0d0d0;
+    display:block;
+    margin: 0;
+}
+input[type="text"], input[type="input"], input[type="password"], .input, .hasDatepicker, .hasDatetimepicker {
+    line-height : 14px;
+    height : 20px;
+    position:relative;
+    margin: 0;
+}
+
+input[type="text"], input[type="input"], input[type="password"], .input, .textarea, textarea, .hasDatepicker, .hasDatetimepicker {
+    padding : 2px;
+    vertical-align : middle;
+    border: 1px solid #c3c3c3;
+    background-color : #fff;
+    font-size : 12px;
+    /* font-family:"Trebuchet MS",Verdana,sans-serif; */
+    font-family:Tahoma,Helvetica,Arial,sans-serif;
+    display:inline-block;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    position:relative;
+    margin: 0;
+}
+
+
+input[type=text]:focus, 
+input[type=password]:focus, 
+textarea:focus, .hasDatepicker:focus, .hasDatetimepicker:focus
+input[type=text]:active, 
+input[type=password]:active, 
+select:active, select:focus, 
+textarea:active, .hasDatepicker:active, .hasDatetimepicker:active
+{ 
+    background-color : #ffffdd;
+    border : 1px solid #ff9988;
+    -moz-box-shadow:  0 0 1px #ff9900;
+    -webkit-box-shadow:  0 0 1px #ff9900;
+    box-shadow: 0 0 1px #ff9900;
+    position:relative;
+    margin: 0;
+}
+optgroup {
+    font-size : 12px;
+    margin-top: 5px;
+    font-weight : normal;
+    /* font-family:"Trebuchet MS",Verdana,sans-serif; */
+    font-family:Tahoma,Helvetica,Arial,sans-serif
+
+}
+
+
+input[type="checkbox"], 
+input[type="radio"] 
+{
+    display:inline;
+    padding:0px!important;
+    padding-bottom: 4px!important;
+    margin: 0!important;
+    margin-right: 5px!important;
+    margin-top: 0px!important;
+    margin-bottom: 0px!important;
+    line-height:18px!important;
+    position:relative;
+    border: 0;
+}
+
+
+input:disabled, textarea:disabled, select:disabled {
+    background-color: #EEEEEE !important;
+    border: 1px solid #DDDDDD !important;
+    color: #999;
+}
+
+
+
+input.fieldValidation,
+input[type="text"].input.fieldValidation,
+input[type="text"].fieldValidation {
+    background: transparent url(../img/loading.gif) no-repeat 2px 2px;
+    padding-left:20px!important;
+}
+/* Fix Chrome stupidity */
+input:-webkit-autofill {
+    color: #2a2a2a !important;
+}
+
+span.identifiercheck {
+    padding-top:10px;
+    line-height : 18px;
+    padding-left:5px;
+}
+div#identifier-url, div#identifier-url-spacer {
+    padding:3px;
+    font-size : 11px;
+}
+div#identifier-url span { font-family:sans-serif,Arial,Tahoma,Helvetica!important; }
+
+
+.fieldsetwrapper {
+    margin: 0; 
+    padding:0;
+    width:100%;
+    display:inline-block;
+    margin-top:3px;
+    margin-bottom:3px;
+}
+
+fieldset small { font-size: 10px!important}
+
+
+/* fieldset allgemein */
+fieldset {
+    margin:0;
+    margin-bottom:5px;
+    padding:3px;
+    /* border: 1px solid #D5D5D5;
+    margin-right:1px; */
+    float:none!important;
+    position: relative;
+}
+
+
+
+
+/* 2 spalten fieldset <div class="fieldset2"> fieldset....  </div> */
+div.fieldset2 {
+    margin: 0; 
+    padding:0;
+    width:100%;
+    display:inline-block;
+    clear:both;
+}
+
+
+div.fieldset2 fieldset {
+    width: 49%;
+    margin:0 3px 0 0; 
+    display:inline-block;
+    float:left;
+    margin-bottom:5px;
+    clear:right;
+}
+div.fieldset2 fieldset:last-child {float:right!important;margin:0; }
+div.fieldset2 fieldset:first-child {float:left!important;}
+
+
+/* 2 spalten fieldset zeilenweise  <div class="fieldset2 rows"> fieldset....  </div> */
+div.rows {
+    margin-right:3px;
+    float: left; 
+    width: 49%; 
+    display:block;
+
+}
+div.fieldset2.rows fieldset:last-child {float:left!important; margin:0 3px 0 0; }
+div.rows fieldset { width:100%; display:block; float:left!important;}
+
+
+
+
+/* 2 spalten fieldset zeilenweise letzte spalte <div class="fieldsetrows"> fieldset....  </div> */
+div.fieldsetrows {
+    display:inline-block;
+    float: left; 
+    width:50%;
+}
+div.fieldsetrows fieldset {
+    width:98%;
+    margin:0;
+    display:inline-block;
+    margin-bottom:5px; /* FIX IE */
+    clear:right;
+    margin-left:6px;
+    float:left!important;
+    margin-bottom:5px;
+}
+
+div.fieldsetrows.right fieldset {
+    width:98%;
+    margin:0;
+    display:inline-block;
+    margin-bottom:5px; /* FIX IE */
+    clear:right;
+    float:right!important;
+    margin-bottom:5px;
+}
+
+/* 3 spalten fieldset */
+.fieldset3 {
+    width:100%;
+    display:inline-block;
+    clear:both;
+}
+.fieldset3 fieldset {
+    display:inline-block;
+    margin: 0px 5px;
+    width: 32.4%;
+}
+.fieldset3 fieldset:first-child {
+    display:inline-block;
+    width: 32.2%!important;
+    margin: 0px!important;
+    float: left!important;
+}
+
+.fieldset3 fieldset:last-child {
+    display:inline-block;
+    width: 32.2%!important;
+    margin: 0px!important;
+    float: right!important;
+}
+
+
+
+
+
+/* 4 spalten fieldset */
+.fieldset4 {
+    width:100%;
+    display:inline-block;
+    outline:none;
+}
+.fieldset4 fieldset {
+    display:inline-block;
+    width: 24%;
+    margin-left:0;
+    margin-right:4px;
+    outline:none;
+    clear:right;
+    float: left; 
+}
+
+
+div#ck_dialog_background_cover {
+    background-color : #333;
+}
+
+div.fieldsetrows.left {
+    float: left; 
+    text-align : left;
+}
+div.fieldsetrows.right {
+    float: right; 
+    text-align : left;
+    margin-right:1px;
+}
+
+
+
+.contentEditor > fieldset 
+{
+
+    display:inline-block!important;
+    position:relative;
+}
+
+span.errorlist {
+    padding: 0px!important;
+    margin: 0px!important;
+    height:18px!important;	
+    display : inline!important;	
+    white-space : nowrap!important;
+    margin-left : 5px!important;
+    color : red;
+    margin-top:10px!important;
+    padding : 3px!important;
+    padding-left : 20px!important;
+    background-image : url(../img/critical.png);
+    background-repeat : no-repeat;
+    background-position : 2px 2px!important;
+    clear:right!important;
+
+}
+span.errorlist span { 
+    padding: 0px!important;
+    margin: 0px!important;
+    font-size:10px; 
+    display : inline-block!important;	
+
+    min-width: 200px!important;
+    width: 200px!important;
+}
+
+.formErrorHighlight {
+    margin-top:10px;
+    padding : 2px;
+    background-color :transparent;
+    border : 0px solid #ff9988;
+}
+
+.contentEditorWrapper {
+    display : inline-block!important;
+    margin:0!important;
+    padding:0!important;
+}
+
+.inlinePictures {
+    display:none;
+    margin:0!important;
+    padding:0!important;
+    margin-right:5px;	
+    width: 400px!important;
+    max-width: 400px!important;
+    float:left;
+}
+
+.inlinePictures fieldset {
+    width: 400px!important;
+    max-width: 400px!important;
+    display : inline-block!important;
+
+}
+.contentEditor {
+    display : block!important;
+    clear:right!important;
+    margin:0 auto!important;
+    padding:0!important;
+    float:left;
+}
+
+fieldset table.cke_editor {
+    margin:0!important;
+    position:relative!important;
+    top:0!important;
+    left:0!important;
+    width:100%!important;
+}
+
+textarea.jquery_ckeditor {
+    display:none!important;
+    width:100%!important;
+}
+
+
+
+
+
+div.legend {
+    margin:0;
+    margin-top:10px;
+    margin-bottom:5px;
+    padding:3px;
+    border: 1px solid #DeDeDe;
+    margin-right:1px;
+    float:none!important;
+    display: inline-table;
+    width: 98%;
+    position: relative;
+
+}
+div.legend div:last-child {
+    padding-top:10px;
+}
+div.label {
+    font-weight: bold;
+    font-family: arial;
+    margin-left: 10px;
+    padding : 3px;
+    padding-right:10px;
+    display: inline-block;
+    background-color :#fff;
+    position: relative;
+    top: -13px;
+    margin-bottom: -13px;
+    padding-bottom: -13px;
+}
+
+
+div.grippie {
+    background:#EEEEEE url(../img/forms/grippie.png) no-repeat scroll center 2px;
+    border-color:#DeDeDe;
+    border-style:solid;
+    border-width:0pt 1px 1px;
+    cursor:s-resize;
+    height:8px;
+    overflow:hidden;
+    display:block!important;
+    padding:0!important;
+}
+.resizable-textarea {
+    display:block!important;
+    width:100%!important;
+    min-width:90%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    clear:both;
+}
+textarea.textarea-resize {
+    width:100%!important;
+    margin:0!important;
+    clear:both;
+}
+
+
+
+
+
+
+
+label.multi-cbk {
+    clear:right!important;
+    margin-right:5px!important;
+}
+label.multi-cbk input {
+    vertical-align : middle!important;
+}
+
+
+.cols {
+    padding: 3px;
+}
+.cols label {
+    margin-right: 5px;
+}
+.cols input[type="radio"] { display:none!important; }
+.cols span {
+    width:24px;
+    height:28px;
+    border: 1px solid transparent;
+    display:block;
+}
+.cols span:hover {
+    width:24px;
+    height:28px;
+    border: 1px solid #c0c0c0;
+}
+.cols span.active {
+    border: 1px solid #333;
+}
+
+
+.cols label[for="col-0"] {
+    background:transparent url(../img/layouter/col-0.png) 50% 50% no-repeat;
+}
+.cols label[for="col-0-margin"] {
+    background:transparent url(../img/layouter/col-0-margin.png) 50% 50% no-repeat;
+}
+.cols label[for="col-2-left"] {
+    background:transparent url(../img/layouter/col-2-left.png) 50% 50% no-repeat;
+}
+.cols label[for="col-2-right"] {
+    background:transparent url(../img/layouter/col-2-right.png) 50% 50% no-repeat;
+}
+.cols label[for="col-3"] {
+    background:transparent url(../img/layouter/col-3.png) 50% 50% no-repeat;
+}
+
+
+/**
+ *	Page Metadata FloatBox
+*/
+#metadata-container {
+    position: fixed;
+    z-index:999;
+    margin-left: 0 auto!important;
+    top: 126px;
+    overflow: visible;    
+    display: inherit!important;
+    /* top:125px; */
+
+    padding:0;
+
+    background: #e1e1e1; /* Old browsers */
+    background: -moz-linear-gradient(top, #e1e1e1 0%, #f2f2f2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e1e1e1), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1e1', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* W3C */
+
+
+    border-top : 1px solid #333;
+    border-left : 1px solid #A1A1a1;
+    border-right : 1px solid #A1A1a1;
+    border-bottom : 1px solid #A1A1a1;
+
+
+    -webkit-border-bottom-right-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+
+}
+#metadata-container .pageident {
+
+    max-width: 260px!important;
+}
+#metadata-container .identifiercheck {
+    font-size:11px;
+}
+#metadata-default {
+    width:100%;
+    display: inline-block;
+    clear:both;
+    line-height: 26px;
+    height: 26px;
+    word-wrap: none;
+    break-word: none;
+    overflow: visible;
+}
+#metadata-default select, #metadata-default input{
+    padding:1px;
+    font-size: 11px;
+}
+#metadata-default input {
+    max-width: 150px;
+
+}
+#metadata-default .gui-form-element { top: 0px!important;}
+#metadata-default span { line-height: 18px; }
+
+.meta-left {
+    width:80%;
+    float:left;
+    display: block;
+    overflow: visible;
+}
+.meta-left div {
+
+}
+#metadata-default .meta-left img {
+    position: relative;
+    top: 4px!important;
+    margin-left:3px!important;
+    margin-right:5px!important;
+}
+
+#document-metadata .hasDatepicker { height:18px;line-height:12px; padding:1px!important; margin-top:0px!important; }
+#document-metadata .state, fieldset .state  {margin:3px; margin-top:5px; float:left; display: block; width:16px; height:16px; }
+#document-metadata span.online, fieldset span.online {
+    background : transparent url(../img/form-ok.png) no-repeat 0% 0px;
+}
+#document-metadata span.offline, fieldset span.offline {
+    background : transparent url(../img/form-not-ok.png) no-repeat 0% 0px!important;
+}
+#document-metadata span.timecontrol, fieldset span.timecontrol {
+    background : transparent url(../img/clock.png) no-repeat 0% 0px!important;
+
+}
+#metadata-default .meta-left span.content-draft {
+    display:inline-block;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+div#timecontrol { position:relative;display: inline; vertical-align:top; clear:right; }
+
+.meta-right {
+    width:17%;
+    float:right;
+    display: block;
+    text-align:right;
+    padding-right:5px;
+    text-shadow: #999 1px 1px 1px;
+    font-weight: bold;
+}
+.meta-right span {
+    margin:0px!important;
+    line-height:28px!important;
+    padding:0px!important;
+    display: inline-block;
+
+    padding-left:18px!important;
+    background : transparent url(../img/buttons/property.png) no-repeat 0px 50%!important;
+    vertical-align:middle!important;
+}
+#metadata-default .meta-right button {
+    line-height:22px!important;
+    margin:0px!important;
+    margin-top:2px!important;
+    height:22px!important;
+    line-height:22px!important;
+    padding-top:0px!important;
+    vertical-align:middle!important;
+    padding-left:3px!important;
+    padding-right:3px!important;
+}
+#meta-advanced-toggle { margin-top:1px!important; }
+#meta-advanced-toggle span {
+    margin:0px!important;
+    height:22px!important;
+    line-height:22px!important;
+    padding:0px!important;
+    display: inline-block;	
+    padding-left:18px!important;
+    background : transparent url(../img/buttons/property.png) no-repeat 0px 0px!important;
+    vertical-align:middle!important;
+}
+
+
+
+
+
+
+
+#meta-advanced-container {
+    width:100%;
+    min-height:200px;
+    display:inline-block;
+    margin-bottom:10px;
+    border-top : 1px solid #a1a1a1;
+    background : #fff;
+    overflow: hidden;
+    margin:0;
+    padding: 0;
+}
+
+#meta-advanced-container .cols-l {
+    float:left;
+    display:inline-block;
+    width:42%;
+    margin:0;
+    padding:3px;
+    border-right: 1px solid #eee;
+}
+
+#meta-advanced-container .cols-r {
+    float:right;
+    display:inline-block;
+    width:55%;
+    margin:0;
+    padding:3px;
+
+}
+#meta-advanced-container .label {
+    font-size:11px;
+    display:block;
+    clear:both;
+    margin-top: 3px;
+}
+#meta-advanced-container .label span { color: #c4c4c4; }
+#meta-advanced-container label { font-size:11px; margin-left: 10px;}
+
+#meta-advanced-container select, #meta-advanced-container textarea,
+#meta-advanced-container input[type="text"] {
+    padding:1px!important;
+    line-height: 12px!important;
+}
+
+#meta-advanced-container .colborder {
+    border-left: 1px solid #eee;
+    padding-left: 5px;
+}
+#meta-advanced-container .colbordert {
+    border-top: 1px solid #eee;
+    padding-top: 3px;
+}
+
+
+
+.fullsize-textarea-container {
+    background : #fff;
+}
+.addTextareaToolbar {
+    float:right;
+    position:relative;
+    display:inline-block;
+    width:16px;
+    clear:both;
+}
+.fullsize-textarea-container .toolbar button,.fullsize-textarea-container .toolbar button:hover { float:right!important; margin-right:20px!important; }
+.fullsize-textarea-container textarea {
+    width:100%!important;
+    max-width:100%!important;
+    padding:5px!important;
+}
+
+
+
+.tinymce-editor {
+    min-height: 200px!important;
+}
+
+
+
+
+
+
+
+
+
+/*
+
+errors 
+var arrow = document.createElement('div');
+$(arrow).addClass("formErrorArrow");
+$(arrow).addClass("formErrorArrowBottom");
+
+$(arrow).html('<div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div>');
+
+*/
+.formError {
+
+    position:absolute;
+
+    top:300px; left:300px;
+
+    padding-bottom:13px;
+
+    display:block;
+
+    z-index:5000;
+
+}
+.formError .formErrorArrow{
+    width:15px;
+    margin:-2px 0 0 13px;
+    z-index:5001;
+}
+
+.formError .formErrorArrowBottom{top:0;margin:-6px;}
+.formError .formErrorArrow div{
+    border-left:2px solid #ddd;
+    border-right:2px solid #ddd;
+    box-shadow: 0px 2px 3px #444;
+    -moz-box-shadow: 0px 2px 3px #444;
+    -webkit-box-shadow: 0px 2px 3px #444;
+    font-size:0px; height:1px; background:#ee0101;margin:0 auto;line-height:0px; font-size:0px; display:block;
+}
+.formError .formErrorArrowBottom div{
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.greenPopup .formErrorArrow div{background:#33be40;}
+.blackPopup .formErrorArrow div{background:#393939;color:#FFF;}
+
+.formError .formErrorArrow .line10{width:15px;border:none;} 
+.formError .formErrorArrow .line9{width:13px;border:none;} 
+.formError .formErrorArrow .line8{width:11px;} 
+.formError .formErrorArrow .line7{width:9px;} 
+.formError .formErrorArrow .line6{width:7px;} 
+.formError .formErrorArrow .line5{width:5px;} 
+.formError .formErrorArrow .line4{width:3px;} 
+.formError .formErrorArrow .line3{width:1px;
+                                  border-left:2px solid #ddd;
+                                  border-right:2px solid #ddd;
+                                  border-bottom:0px solid #ddd;} 
+.formError .formErrorArrow .line2{width:3px;border:none;background:#ddd;}
+.formError .formErrorArrow .line1{width:1px;border:none;background:#ddd;}  
+
+
+
+.formError .formErrorContent {
+
+    width:100%;
+
+    background:#ee0101!important;
+
+    color:#000;
+
+
+    min-width: 150px;
+
+    max-width: 250px;
+
+    font-size:11px;
+
+    border:2px solid #ddd;
+
+    box-shadow: 0px 0px 6px #000;
+
+    -moz-box-shadow: 0px 0px 6px #000;
+
+    -webkit-box-shadow: 0px 0px 6px #000;
+
+    padding:4px 10px 4px 10px;
+
+    border-radius: 6px;
+
+    -moz-border-radius: 6px;
+
+    -webkit-border-radius: 6px;}
+
+
+
+
+
+.guiHide { filter:alpha(opacity=0)!important; opacity:0!important; z-index:-1!important; position:absolute!important; top: -9999px; left: -9999px; }
+
+/*
+    C9 Select
+*/
+
+INPUT.spin-button {
+    padding-right:20px;					/* Padding pevents text from covering the up/dn img. Works better in Firefox but also causes textbox to widen by 20px. Arrows can go wonky in IE when text is too long. Perhaps it could be fixed with script that monitored the horiz-scroll position? */
+    background-repeat:no-repeat;		/* Warning: Img may disappear in Firefox if you use 'background-attachment:fixed' ! */
+    background-image: url("../img/gui/spinner_body2.png") no-repeat right;
+}
+
+INPUT.spin-button.up {					/* Change button img when mouse is over the UP-arrow */
+    background-image: url("../img/gui/spinner_minus.png") no-repeat right!important;
+    cursor: default;
+    background-position: 0 24px;
+    margin: 0;
+
+}
+INPUT.spin-button.up:focus {	
+    background-position: 0 27px;
+}
+INPUT.spin-button.up:hover {	
+    background-position: 0 18px;
+}
+
+
+INPUT.spin-button.down {				/* Change button img when mouse is over the DOWN-arrow */
+    background-image: url("../img/gui/spinner_plus.png") no-repeat right!important;
+    cursor: default;
+    background-position: 0 24px;
+    margin: 0;
+
+}
+INPUT.spin-button.down:focus {	
+    background-position: 0 24px;
+}
+INPUT.spin-button.down:hover {	
+    background-position: 0 16px;
+}
+
+
+.spinner {
+    position  : relative;
+    height    : 19px;
+    margin    : 0;
+    padding   : 0;
+    margin: 5px 0 0;
+    max-height: 19px;
+    max-width: 10000px;
+    min-height: 19px;
+    min-width: 35px;
+    width: 50px;
+    -moz-box-sizing: border-box;
+}
+
+.spinner .divfix {
+    border: 0 none;
+    display: block;
+    height: 19px;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 19px;
+    text-align: right;
+    z-index: 9000;
+}
+
+.fixMargin2 {
+    margin-bottom: 2px !important;
+}
+
+.fixMargin5 {
+    margin-bottom: 5px !important;
+}
+.spinner .divfix input[type=text],
+.spinner .divfix input[type=text]:focus, .spinner .divfix input[type=text]:active {
+    border-radius: 0px!important;
+    -moz-border-radius: 0px!important;
+    -webkit-border-radius: 0px!important;
+    -moz-box-shadow: 0!important;
+    -webkit-box-shadow: 0!important;
+    box-shadow: 0!important;	
+    border-top          : 1px solid #b2b2b2!important;
+    border-left         : 1px solid #b2b2b2!important;
+    border-bottom       : 1px solid #b2b2b2!important;
+    border-right        : 0!important;
+}
+.spinner .divfix input[type=text] {
+    outline             : none!important;
+    display             : inline-block!important;
+    border-color: #B2B2B2 -moz-use-text-color #B2B2B2 #B2B2B2!important;
+    border-style: solid none solid solid!important;
+    border-width: 1px 0 1px 1px!important;
+    padding             : 1px 1px 2px 0!important;
+    position            : absolute!important;
+    text-align          : right!important;
+    left                : 0!important;
+    height              : 19px!important;
+    color               : black;
+    font-family         : Tahoma, Arial;
+    font-size           : 11px!important;
+    width               : 100%!important;
+    margin              : 0!important;
+    z-index             : 10000;
+}
+
+.spinner .buttons {
+    display  : block;
+    width    : 19px;
+    height   : 19px;
+    position : absolute;
+    right    : 0;
+    z-index  : 11000;
+}
+
+.spinner .buttons .plus {
+    height              : 9px;
+    width               : 18px;
+    cursor              : default;
+    border-left         : 0;
+    border-right        : 1px solid #b2b2b2;
+    border-bottom       : 0;
+    border-top          : 1px solid #b2b2b2;
+    background-image    : url(../img/gui/spinner_plus.png);
+    background-position : 0 0;
+    margin              : 0;
+}
+
+.spinner .buttons .minus {
+    height              : 8px;
+    width               : 18px;
+    cursor              : default;
+    border-left         : 0;
+    border-right        : 1px solid #b2b2b2;
+    border-bottom       : 1px solid #b2b2b2;
+    border-top          : 0;
+    background-image    : url(../img/gui/spinner_minus.png);
+    background-position : 0 0;
+}
+
+.spinner .buttons .plus:focus {
+    background-position : 0 27px;
+    border-top          : 1px solid #327fbd;
+    border-right        : 1px solid #327fbd;
+}
+
+.spinner .buttons .minus:focus {
+    background-position : 0 24px;
+    border-bottom       : 1px solid #327fbd;
+    border-right        : 1px solid #327fbd;
+}
+
+.spinner .buttons .plus.down {
+    background-position : 0 9px!important;
+    border-top          : 1px solid #327fbd!important;
+    border-right        : 1px solid #327fbd!important;
+}
+
+.spinner .buttons .minus.down {
+    background-position : 0 8px!important;
+    border-bottom       : 1px solid #327fbd!important;
+    border-right        : 1px solid #327fbd!important;
+}
+
+.spinner .buttons .plus:hover {
+    background-position : 0 18px;
+}
+
+.spinner .buttons .minus:hover {
+    background-position : 0 16px;
+}
+
+.spinner .divfix .focus {
+    background-position : 0 17px;
+    border-top          : 1px solid #327fbd!important;
+    border-bottom       : 1px solid #327fbd!important;
+    border-left         : 1px solid #327fbd!important;
+    border-right        : 0;
+}
+
+
+
+
+
+
+.gui-form-element {
+    margin:0!important;
+    padding:0!important;
+    margin-right: 5px!important;
+    display: inline-block;
+    max-height: 15px!important;
+    position: relative;
+}
+
+
+
+.dropdown-relative { position: relative; display: table; }
+.dropdown {
+
+    position: relative;
+    background: #DEDEDE;
+    background: -moz-linear-gradient(center bottom,#DEDEDE 0%,white 100%);
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #DEDEDE),color-stop(1, white));
+    background: -moz-linear-gradient(center bottom,#DEDEDE 0%,white 100%);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 1px #9FA0A3;
+    -moz-box-shadow: 0px 1px 1px #9FA0A3;
+    box-shadow: 0px 1px 1px #9FA0A3;
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #FAFAFA;
+    border-left: 1px solid #FAFAFA;
+    border-right: 1px solid #FAFAFA;
+    height: 15px!important;
+    margin: 0!important;
+    padding: 1px 21px 1px 0!important;
+    color: #333;
+    font-family: Tahoma, Arial;
+    font-size: 11px;
+    display: inline-block;
+    margin-right: 3px!important;
+    /*  margin-right: 24px!important; */
+    
+    min-width: 25px;
+}
+
+.dropdown .dropdownlabel {
+    padding: 1px 0px 0px 2px!important;
+    cursor: default;
+    height: 13px!important;
+    line-height: 11px;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 25px;
+    font-weight: normal!important;
+
+}
+.dropdown:hover .dropdownArrow {
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0.48, #CFCFCF),color-stop(0.53, #E6E6E6),color-stop(1, white));
+    background: -moz-linear-gradient(center bottom,#CFCFCF 48%,#E6E6E6 53%,white 100%);
+}
+
+.dropdown.listOpen .dropdownArrow {
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0.48, white),color-stop(0.53, #E6E6E6),color-stop(1, #CFCFCF));
+    background: -moz-linear-gradient(center bottom,white 48%,#E6E6E6 53%,#CFCFCF 100%);
+}
+
+.dropdown .dropdownArrow {
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #DEDEDE),color-stop(1, white));
+    background: -moz-linear-gradient(center bottom,#DEDEDE 0%,white 100%);
+    height: 15px!important;
+    width: 18px!important;
+    position: absolute;
+    right: 0;
+    top: 0px!important;
+
+    -webkit-border-top-right-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    -moz-border-radius-topright: 2px;
+    -moz-border-radius-bottomright: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+
+}
+.dropdown .dropdownArrow span {
+    background: url("../img/gui/ddarrow.png") no-repeat 50% 50%!important;
+    display: block!important;
+    height:20px!important;
+    max-height: 20px!important;
+    position: absolute;
+    width: 18px!important;
+    top: 0px!important;
+}
+
+
+
+
+
+
+.dropdown .dropdownArrow div {
+    border-left: 1px solid #B9B9B9;
+    height: 13px!important;
+    width: 1px!important;
+    background-color: white;
+    padding-bottom: 2px!important;
+    position: absolute;
+    top: 2px!important;
+}
+
+.tablegrid-searchbar .dropdown,
+#metadata-default .dropdown,
+.griddropdown { height: 13px!important; padding: 1px 21px 1px 0!important; font-size: 10px!important; top: 2px!important; margin-right: 5px!important; }
+
+.tablegrid-searchbar .dropdown,
+#metadata-default .dropdown { margin-right: 5px!important; float: none; clear: left; top: 1px!important;  }
+.tablegrid-searchbar .dropdown { top: 0px!important;}
+
+#metadata-default .dropdownArrow span,
+.sarchbar-row .dropdownArrow span,
+.griddropdown .dropdownArrow span {width: 16px!important; height: 14px!important; background-position: 50% 30%!important;  }
+
+.sarchbar-row .dropdownArrow,
+.griddropdown .dropdownArrow {width: 16px!important; height: 14px!important;background-position: 50% 50%!important;}
+
+.optionList {
+    position: absolute;
+    /*  top: 0;
+      left: 0;
+    */
+    background: white;
+    z-index: 99999;
+    color: #333;
+    font-family: Tahoma, Arial;
+    font-size: 11px;
+    /* display: none; */
+    overflow: hidden;
+    text-align: left;
+    margin-top: 22px;
+    /* width: 120px; */
+    margin-top: 0px;
+
+    padding: 0;    
+    padding-bottom: 2px;
+    padding-top: 2px;
+
+    -webkit-box-shadow: 0 2px 8px #8A8A8A;
+    -moz-box-shadow: 0 2px 8px #8A8A8A;
+    box-shadow: 0 2px 8px #8A8A8A;
+    
+    font-weight: normal!important;
+
+}
+
+.optionList span.item {
+    height: 16px!important;
+    min-height: 16px!important;
+    max-height: 16px!important;
+    line-height: 16px!important;
+    padding: 2px 3px 2px 20px!important;
+    margin: 0!important;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+    color: #333;
+    cursor: default;
+    left: 0!important;
+    text-align: left!important;
+    float: none!important;
+    display: block;
+    position: relative!important;
+    
+    font-weight: normal!important;
+
+
+}
+.optionList span.item:hover {
+    /*
+    background-color: #337CBC;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #337CBC),color-stop(1, #4091D8))!important;
+    background: -moz-linear-gradient(center bottom,#337CBC 0%,#4091D8 100%)!important;
+    
+    */
+    background: #0337cb!important; /* Old browsers */
+    background: -moz-linear-gradient(top, #0337cb 0%, #337cbc 0%, #0338b2 100%)!important; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0337cb), color-stop(0%,#337cbc), color-stop(100%,#0338b2))!important; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0337cb', endColorstr='#0338b2',GradientType=0 )!important; /* IE6-9 */
+    background: linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* W3C */
+    color: white;
+    left: 0!important;
+    height: 16px!important;
+    min-height: 16px!important;
+    max-height: 16px!important;
+    line-height: 16px!important;
+
+
+    padding: 2px 3px 2px 20px!important;
+    margin: 0!important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left!important;
+    float: none!important;
+    display: block!important;
+
+}
+
+.optionList .item.selected span{
+    background: url("../img/gui/dot_blue.png") no-repeat 0 0;
+    height: 9px!important;
+    min-height: 9px!important;
+    max-height: 9px!important;
+    left: 5px!important;
+    position:absolute!important;
+    top: 6px!important;
+    width: 9px!important;
+    margin: 0!important;
+    padding: 0!important;
+    float: none!important;
+}
+
+.optionList .item.selected:hover span{
+    background-position: 0 -8px;
+    margin: 0!important;
+    padding: 0!important;
+}
+.tablegrid-toolbar .optionList.griddropdownList span, 
+#metadata-default .optionList.griddropdownList span { min-height: 1px!important; }
+
+.optionList.griddropdownList,
+#metadata-default .optionList
+{ padding: 0!important; margin: 0!important; overflow-x: hidden; font-size: 10px; }
+
+
+
+.tablegrid-searchbar .optionList span,
+#metadata-default .optionList span,
+.optionList.griddropdownList span { float: none; min-width: inherit!important; }
+
+.tablegrid-searchbar .optionList .item,
+#metadata-default .optionList .item,
+.optionList.griddropdownList .item { position: relative!important; display: block; height: 16px!important; line-height: 16px!important; }
+
+.tablegrid-searchbar .optionList .item.selected span,
+#metadata-default .optionList .item.selected span,
+.optionList.griddropdownList .item.selected span {
+    margin: 0!important;
+    padding: 0!important;
+
+    top: 6px!important; }
+
+.tablegrid-searchbar .dropdown .dropdownArrow,
+#metadata-default .dropdown .dropdownArrow,
+.tablegrid-toolbar .dropdown .dropdownArrow { height: 10px!important; }
+
+
+.tablegrid-searchbar .dropdown .dropdownArrow div,
+#metadata-default .dropdown .dropdownArrow div,
+.tablegrid-toolbar .dropdown .dropdownArrow div {
+    border-left: 1px solid #B9B9B9;
+    height: 10px!important;
+    width: 1px!important;
+    background-color: white;
+    padding-bottom: 2px!important;
+}
+
+
+.toolbar .dropdown, 
+.toolbar .optionList {
+    margin: 0!important;
+    padding: 0!important;
+    text-overflow: ellipsis;
+    float: none!important;
+}
+.toolbar .dropdown { margin: 0!important; padding: 0!important; text-overflow: ellipsis; }
+.toolbar .dropdown .dropdownlabel { left: 0!important; line-height: 15px!important;text-overflow: ellipsis;}
+.toolbar .optionList .item { float: none!important; margin: 0!important; padding: 0;text-overflow: ellipsis;left: 0!important;}
+.toolbar .optionList .item span {left: 3px!important; float: none!important; }
+
+textarea { border: 1px solid #c3c3c3!important;padding: 6px!important;outline: none; resize: none!important; }
+
+select.multipledropdown {
+    border-top: 1px solid #DDD!important;
+    border-bottom: 1px solid #CACAFA!important;
+    border-left: 1px solid #CACAFA!important;
+    border-right: 1px solid #CACAFA!important;
+
+    color: #333!important;
+    font-family: Tahoma, Arial!important;
+    font-size: 11px!important;
+    padding: 0;
+}
+
+select.multipledropdown:active, 
+select.multipledropdown:focus
+{ 
+    background-color : #fff!important;
+    border-top: 1px solid #DDD!important;
+    border-bottom: 1px solid #CACAFA!important;
+    border-left: 1px solid #CACAFA!important;
+    border-right: 1px solid #CACAFA!important;
+    -moz-box-shadow:none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+}
+
+select.multipledropdown option { 
+    margin: 0!important; 
+    height: 16px!important;
+    padding: 2px 3px 2px 20px!important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+    color: #333;
+    line-height: 16px;
+}
+
+select.multipledropdown:active option:hover, 
+select.multipledropdown option:selected,
+select.multipledropdown option:focus,
+select.multipledropdown option:active,
+select.multipledropdown option:hover
+{
+    background-color: #337CBC;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #337CBC),color-stop(1, #4091D8))!important;
+    background: -moz-linear-gradient(center bottom,#337CBC 0%,#4091D8 100%)!important;
+    color: white!important;
+}
+
+
+
+
+div.checkbox {
+    width      : 12px;
+    height     : 12px;
+    overflow   : hidden;
+    position   : relative;
+    /* left       : 2px;
+    top        : 2px; */
+    background : url("../img/gui/checkbox.png") no-repeat 0 -12px;
+    display: inline-block;
+    margin-right: 3px;
+}
+div.checkbox:hover {
+    background-position : 0 -36px;
+}
+div.checkbox.checked, div.checkbox.checked:hover {
+    background-position : 0 -24px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+div.radiobox {
+    width      : 12px;
+    height     : 12px;
+    overflow   : hidden;
+    position   : relative;
+    /* top:2px; */
+    left:0;
+    background : url("../img/gui/radio.png") no-repeat 0 -12px;
+    display: inline-block;
+    margin-right: 3px;
+}
+
+div.radiobox.checked {
+    background-position: 0 -24px;
+}
+
+div.radiobox.disabled {
+    background-position: 0 -0px;
+}
+
+
+fieldset {
+    border: 0;
+
+    display: table;
+    padding-bottom: 5px;
+    overflow: visible;
+    /* background-color: #eaeaea!important;
+      border: 1px solid #CECECE; 
+    
+    border-bottom: 1px #333 dashed;
+    */
+}
+
+fieldset:last-child {
+    border: 0;
+}
+
+fieldset br { clear: both; }
+fieldset legend {
+    margin: 0;
+    padding: 0;
+    clear: right;
+    font-weight: bold;
+    min-width: 150px;
+    max-width: 400px;
+    /*line-height: 22px;
+     float: left; */
+    margin-right: 5px;
+    overflow: visible;
+    position: relative;
+}
+.legend-top,
+fieldset.legend-top legend {
+    clear: both;
+    float: none;
+    width: 100%;
+}
+
+
+
+fieldset small:first-child { 
+    position: relative;
+    display: block!important; 
+    width: 100%!important; margin:0!important; margin-top:5px!important; float: left!important; clear: left!important; line-height: 14px; }
+
+fieldset>div {
+    display: inline-block;
+}
+
+
+#tinyMCE-Toolbar {
+    position: relative;
+    display: inline-block;
+    z-index: 50;
+    left: 0!important;
+
+    background: #e1e1e1; /* Old browsers */
+    background: -moz-linear-gradient(top, #e1e1e1 0%, #f2f2f2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e1e1e1), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1e1', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* W3C */
+
+    border-top: 0;
+    border-bottom: 1px solid #333;
+    padding-top: 2px;
+    width: 100%;
+}
+
+
+#tinyMCE-Toolbar.disabled div.disabled {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 51;
+    display: block;
+    opacity: .7!important;
+}
+
+
+#tinyMCE-Toolbar .mceExternalToolbar {
+    position: relative;
+    top: -3px!important;
+    margin:0!important;
+    display: block!important;
+    width: 100%;
+
+    background: #e1e1e1; /* Old browsers */
+    background: -moz-linear-gradient(top, #e1e1e1 0%, #f2f2f2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e1e1e1), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1e1', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* W3C */
+}
+#tinyMCE-Toolbar .mceexternaltoolbar {
+    position: relative!important;
+    z-index: 1!important;
+    background: transparent!important;
+
+
+
+    background: #e1e1e1; /* Old browsers */
+    background: -moz-linear-gradient(top, #e1e1e1 0%, #f2f2f2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e1e1e1), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1e1', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* W3C */
+}
+
+
+#tinyMCE-Toolbar .mceExternalToolbar.disabled {opacity: .7!important; position: relative; width: auto!important; height: auto!important;}
+#tinyMCE-Toolbar TD.mceToolbar {border: 0!important; background: transparent; 
+
+                                background: #e1e1e1; /* Old browsers */
+                                background: -moz-linear-gradient(top, #e1e1e1 0%, #f2f2f2 100%); /* FF3.6+ */
+                                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e1e1e1), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
+                                background: -webkit-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
+                                background: -o-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* Opera11.10+ */
+                                background: -ms-linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* IE10+ */
+                                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1e1', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+                                background: linear-gradient(top, #e1e1e1 0%,#f2f2f2 100%); /* W3C */
+
+
+}
+
+.mceExternalToolbar > table {
+    width: 100%!important;
+    background: transparent!important;
+    border: 0!important;
+}
+
+
+/*
+input[type=radio] { 
+    width      : 12px;
+    height     : 12px;
+    background : transparent url("../img/gui/radio.png") no-repeat 0 -12px!important; 
+    
+    
+}
+
+input[type=radio]:hover:checked,
+input[type=radio]:focus:checked,
+input[type=radio]:checked { background-position: 0 -24px; }
+
+
+
+
+
+input[type=radio]:hover:disabled:checked,
+input[type=radio]:focus:disabled:checked,
+input[type=radio]:disabled:checked { background-position: 0 -0px; }
+
+
+
+input[type=checkbox] { 
+    width      : 12px;
+    height     : 12px;
+    background : transparent url("../img/gui/checkbox.png") no-repeat 0 -12px!important; 
+}
+
+input[type=checkbox]:hover:checked,
+input[type=checkbox]:focus:checked,
+input[type=checkbox]:checked { background-position: 0 -24px; }
+
+input[type=checkbox]:hover:disabled:checked,
+input[type=checkbox]:focus:disabled:checked,
+input[type=checkbox]:disabled:checked { background-position: 0 -0px; }
+
+
+*/
+
+#document-metadata { white-space: wrap!important; width: auto!important  }
+#document-metadata fieldset {
+    float: none!important;
+   /* margin: 3px!important; */
+   margin: 0px!important;
+    padding: 0;    
+    border: 0;
+    clear: both;
+    white-space: wrap!important; 
+    width: 85%;
+    padding: 3px;
+}
+
+#document-metadata fieldset legend {
+    float: left;
+    clear: both;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: inline-block;    
+    white-space: wrap!important; 
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px!important; 
+    border: 0;    
+    padding-left: 4px;    
+    background-color: #333333;
+    border-bottom: 1px solid #333333;
+    margin-left: -3px;
+    -moz-box-shadow: 0px 0px 4px 0px #000000!important; 
+    -webkit-box-shadow: 0px 0px 4px 0px #0000000!important;     
+        box-shadow: 0px 0px 4px 0px #000000;
+}
+
+
+
+#document-metadata fieldset legend:first-child {
+    margin-top: -3px;
+}
+
+
+
+
+#document-metadata fieldset span:first-child {    
+    clear: both;
+    float: none;    
+    white-space: wrap;
+    display: block;
+    font-style: italic;
+    font-weight: bold;
+    
+    border-top: 1px solid #333;
+}
+
+#document-metadata fieldset .dropdown span, #document-metadata fieldset .optionList span, #document-metadata fieldset span.identifiercheck {    
+    font-style: normal;
+    font-weight: normal;
+    border: 0!important;
+}
+
+
+
+#document-metadata fieldset p {
+    margin: 0;
+    padding: 3px;
+    margin-bottom: 2px;
+    white-space: wrap!important;
+    line-height: 20px;
+    display: inline-block;
+    width: 99%;
+    clear: both;
+}
+
+#document-metadata fieldset small {
+    clear: both;
+    display: inline-block;
+    float: none;
+    white-space: wrap!important;
+    line-height: 12px;
+}
+#document-metadata fieldset small:first-child { width:auto; white-space: wrap!important;  }
+
+#document-metadata fieldset input, 
+#document-metadata fieldset textarea {
+    max-width: 95%!important;
+    min-width: 10%;
+    width: 95%!important;
+}
+
+#document-metadata fieldset textarea {
+    padding: 2px!important;
+}
+
+#document-metadata fieldset input.pageident
+{
+    max-width: 60%!important;
+    width: auto!important;
+}
+
+
+
+#document-metadata fieldset label {
+    float: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+#document-metadata .identifiercheck {
+    clear: none;
+    display: inline;
+    font-style: normal ;
+    font-weight: normal;
+}
+
+.cal_input,
+#document-metadata fieldset input.cal_input {
+    width: auto!important;
+}
+
+
+
+
+
+/**
+    Content editing/adding
+*/
+
+.editcontent {    
+    width: 65%;
+    max-width: 65%!important;
+    display: inline-block;    
+    clear: none;
+}
+
+.contentoptions {
+    display: inline-block;
+    float: right;
+    width: 33%;    
+    clear: both;
+}

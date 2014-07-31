@@ -1,0 +1,236 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+</cp:block>
+
+<cp:block name="content">
+
+
+
+
+    <script language="javascript" type="text/javascript">
+
+        var checktimer;
+        var checkdLinks = 0;
+        var faildLinks = 0;
+        var isSleep = false;
+        var lastUrl = '';
+        var isStop = false;
+        var stopUrl = Tools.prepareAjaxUrl('admin.php?adm=linkcheck&dostop=1&ajax=1');
+        var checkUrl = Tools.prepareAjaxUrl('admin.php?adm=linkcheck&getstate=1');
+
+        setTimeout(function () {
+
+            $('#loader,#start-counters').hide();
+            $('#stop-check').disableButton();
+            $('#stop-check').click(function (e) {
+                e.preventDefault();
+                isStop = true;
+                $('#states').mask('{trans("Aufgabe abbrechen...")}');
+                $.get(stopUrl, {}, function (data) {
+                    $('#states').unmask();
+                    if (Tools.responseIsOk(data)) {
+                        lastUrl = '';
+                        finished();
+                        $(this).disableButton();
+                        $('#loader').hide();
+                        $('#start-check').enableButton();
+                        checkdLinks = 0;
+                        faildLinks = 0;
+                    } else {
+                        alert(data.msg);
+                    }
+                }, "json");
+                return false;
+            });
+
+            $('#start-check').click(function (e) {
+
+                checkdLinks = 0;
+                faildLinks = 0;
+                if ($('#base-url').val() == '') {
+                    return false;
+                }
+
+                isSleep = false;
+                isStop = false;
+                $('#current-url').prev().show();
+                $('#current-url').html('{trans("Starte Anfrage...")}');
+                $('#urlcounter,#urlfaild-counter').html('0');
+                $('#states').empty();
+                $(this).disableButton();
+                $('#stop-check').enableButton();
+                var post = $('#linkcheckerForm').serialize();
+                url = 'admin.php?' + post + '&sid=' + Desktop.SessionID;
+                $('#loader,#start-counters').show();
+
+                $('#check-execute').attr('src', url).unbind().on('load', function () {
+                    $('#current-url').html('{trans("Fertig...")}');
+                });
+
+
+
+                checktimer = setTimeout(getLinkCheckState, 300);
+                return false;
+            });
+        }, 300);
+
+
+
+        if (typeof setCheckedLink !== 'function')
+        {
+            function setCheckedLink (url, status)
+            {
+                console.log('url:' + url + ' state:' + status);
+                if (isStop) {
+                    return false;
+                }
+                setCheck(url);
+                checkdLinks++;
+                var statusElement = $('<div/>');
+                statusElement.append(url);
+                if (status != 'true' && status != '2') {
+                    statusElement.addClass('linkFaild');
+                    statusElement.append($('<span/>').append(' (' + status + ')'));
+                    isSleep = false;
+                    faildLinks++;
+                    $('#urlfaild-counter').html(faildLinks);
+                }
+                else if (status == '2') {
+                    if (!isSleep && !isStop) {
+                        isSleep = true;
+                        statusElement.append('{trans("Warten...")}');
+                        $('#urlfaild-counter').html(faildLinks);
+                        $('#states').prepend(statusElement);
+                        $('#urlcounter').html(checkdLinks);
+                    }
+                }
+                else
+                {
+                    isSleep = false;
+                    statusElement.addClass('linkOk');
+                }
+
+                if (!isSleep) {
+                    lastUrl = url;
+                    $('#states').prepend(statusElement);
+                    $('#urlcounter').html(checkdLinks);
+                }
+            }
+
+            function setCheck (url) {
+
+                if (lastUrl != url && !isStop) {
+                    $('#current-url').html(url);
+                }
+                $('#urlcounter').html(checkdLinks);
+                $('#urlfaild-counter').html(faildLinks);
+            }
+
+            function finished () {
+                isStop = true;
+                lastUrl = '';
+                clearTimeout(checktimer);
+                $('#loader').hide();
+                $('#start-check').enableButton();
+                $('#stop-check').disableButton();
+                $('#current-url').prev().hide();
+                $('#current-url').html('{trans('Link Prüfung ist abgeschlossen')}');
+            }
+
+
+            function getLinkCheckState ()
+            {
+                if (!isStop) {
+                    $.ajax({
+                        type: "GET",
+                        url: checkUrl,
+                        'data': {sid: Desktop.SessionID},
+                        timeout: 5000,
+                        dataType: "json",
+                        cache: false,
+                        async: false,
+                        success: function (data) {
+                            if (Tools.responseIsOk(data)) {
+                                if (typeof data.stop != 'undefined' && data.stop != true) {
+                                    if (data.currenturl != '' && !isStop) {
+                                        setCheck(data.currenturl);
+                                    }
+                                    if (!isStop)
+                                        checktimer = setTimeout(getLinkCheckState, 1200);
+                                }
+                                else {
+                                    finished();
+                                    clearTimeout(checktimer);
+                                }
+                            }
+                            else
+                            {
+                                if (!isStop) {
+                                    //    checktimer('=', 'setTimeout(getLinkCheckState', 1000); 
+                                    checktimer = setTimeout(getLinkCheckState, 1200);
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+    </script>
+
+    <form name="linkcheckerForm" id="linkcheckerForm">
+        <input type="hidden" name="adm" value="linkcheck"/>
+        <input type="hidden" name="action" value="check"/>
+
+        <div class="box">
+            <h2>{trans('Prüfe Seiten Links')}</h2>
+            <div class="box-inner">
+
+                <div style="display:inline-block;width:100%">
+
+
+                    <div class="tblborder" style="width:30%!important;float:right!important;display:inline-block!important;padding:3px!important;background:transparent">
+                        {trans('Prüfen beginnend ab:')} 
+                        <input type="text" name="baseurl" id="base-url" value="" style="width: 95%" />
+                        <br/>
+
+                        <label for="check-external">
+                            <input type="checkbox" name="external" value="1" id="check-external" /> {trans('Externe Links überprüfen')}
+                        </label><br/>
+
+                        <label for="check-followinternal">
+                            <input type="checkbox" name="followinternal" value="1" id="check-followinternal" checked="checked" /> {trans('Interne Links automatisch folgen')}
+                        </label><br/>
+
+                        <button type="button" id="start-check" class="action-button">
+                            <img src="images/buttons/control.png" width="16" height="16" alt="" border="0"/> {trans('Start')}
+                        </button> 
+                        <button type="button" id="stop-check" class="action-button">
+                            <img src="images/buttons/control-stop.png" width="16" height="16" alt="" border="0"/> {trans('Abbrechen')}
+                        </button>
+                        <br/>
+                        <div id="loader" class="load-bar" style="display:none"></div>
+                        <div id="start-counters" style="display:none;margin-top: 20px;">
+                            <div>{trans('bisher geprüfte Urls:')} <span id="urlcounter">0</span></div>
+                            <div>{trans('fehlerhafte Urls:')} <span id="urlfaild-counter">0</span></div>
+                        </div>
+                    </div>
+
+
+                    <div class="tblborder" style="width:65%!important;display:inline-block!important;padding:3px!important;">
+                        <div id="states" style="width:100%;display:inline-block;min-height:400px;height:400px;overflow: auto;border: 1px solid #cecece;padding: 5px;">
+
+                        </div>
+                        <div style="margin-top: 4px; display: block"><span>{trans('Prüfe Url:')}</span> <span id="current-url"></span></div>
+                        <iframe id="check-execute" name="checkexecute" src="about:blank" style="height:0px!important;width:0px!important;display:inline!important;" frameborder="0"></iframe>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</cp:block>

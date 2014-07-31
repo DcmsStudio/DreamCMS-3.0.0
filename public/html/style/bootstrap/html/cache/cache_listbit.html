@@ -1,0 +1,18 @@
+<?php
+
+function __cache_listbit($rowclass, $row=''){
+global $cp, $cfg, $fct, $cp;
+
+return <<<EOF
+    <tr onmouseover="over(this)" onmouseout="out(this)" class="$rowclass">
+        <td><b>{$row[cache_var]}</b><br />{$row[cache_description]}</td>
+        <td align="right">{$row[size]} kb</td>
+        <td align="center">
+		<input onclick="getInfoData('admin.php?adm=cache_control&action=view_cache&id={$row[cache_var]}');return false;" type="button" value="Vorschau" class="button">
+		</td>
+    </tr>
+EOF;
+
+}
+
+?>

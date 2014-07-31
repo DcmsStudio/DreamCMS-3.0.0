@@ -1,0 +1,169 @@
+<div>
+    <fieldset>
+        <legend>{trans('Modul')}</legend>
+        {info:menutypes|module}
+        <select name="module" id="module-page">
+            <cp:loop name="componentes" key="r">
+                <cp:if condition="$r.controller == '' && !$r.empty">
+                    <cp:tag name="optgroup" label="&nbsp;{$r.title}" />
+                </cp:if>
+                <cp:else>
+                    <option rel="{$r.rule}" value="{$r.controller}{iif($r.action, '/', '')}{$r.action}" cp:on="selected:$r.rule == $r.pagelink" parse:selected="selected"> {$r.title}</option>
+                    <cp:if condition="$r.next_r.controller == ''">
+                        <cp:tag name="optgroup" forceclose="true"/>                        
+                    </cp:if>
+                </cp:else>
+            </cp:loop>
+        </select> 
+
+        <img class="module-help" src="images/info.png" width="16" height="16" title="{trans('Erläuterung der Module')}" alt="{trans('Erläuterung der Module')}"/>
+
+        <br/><small>Diese Auswahl basiert auf der Router-Liste und kann über das Menü "Werkzeuge / Router" erweitert werden.</small>
+    </fieldset>    
+
+    <fieldset>
+        <legend>{trans('Url')}</legend>
+        {info:menutypes|url}
+        <input class="input" type="text" name="url" id="controller-url" value="{escape($link, 'html')}" size="45" maxlength="255" />  
+        <br/><small>Die Url kann manuell angepasst werden. Wähle entweder das Modul oder trage hier einen Core-Tag in form von {*link:*} ein wobei * durch deinen eigenen text ersetzt wird!</small>
+    </fieldset>
+
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    function getController() {
+        var value = $('#module-page').find(':selected').val();
+        if ( value)
+        {
+            var values = value.split('/');
+            if (values.length == 2 && values[0] != 'index')
+            {
+                if (values[1] == 'index')
+                {
+                    return values[0];
+                }
+            }
+
+            if (values[0] == 'index')
+            {
+                value = '';
+            }
+        }
+
+        return value;
+    }
+
+
+    var alias = $('input[name="alias"]').val();
+    var suffix = $('select[name="suffix"]').find(':selected').val();
+    var value = getController();
+    if ($('#module-page').find(':selected').val() == '' && value != '') {
+        $('#controller-url').val('/' + value);
+    }
+
+
+    $('.module-help').each(function() {
+        $(this).unbind('click').click(function(ee) {
+            var currentID = $('#item-id').val();
+            setType = $('#page-type').find(':selected').val();
+            u = (currentID > 0 ? '&id=' + currentID : '');
+            $.get('admin.php?adm=menues&action=edit&help=1&loadtype=' + setType + u, {}, function(data) {
+                if (Desktop.responseIsOk(data))
+                {
+                    var table = $('<table/>').attr({'width': '99%', 'cellpadding': 3}).addClass('tblborder');
+                    var divouter = $('<div/>').addClass('box');
+                    var div = $('<div/>').addClass('box-inner');
+                    for (modul in data.modules)
+                    {
+                        if (typeof data.modules[ modul ].empty == 'undefined')
+                        {
+                            if (data.modules[ modul ].controller == '')
+                            {
+
+                                if (table.find('tr').length > 0)
+                                {
+                                    div.append(table);
+                                    table = $('<table/>').attr({'width': '99%', 'cellpadding': 3}).addClass('tblborder');
+                                }
+
+
+                                div.append($('<h3/>').append(data.modules[ modul ].title));
+                            }
+                            else {
+
+                                table.append($('<tr/>').addClass('top').append($('<td width="40%">' + data.modules[ modul ].title + '</td><td>' + (data.modules[ modul ].advanced_title ? data.modules[ modul ].advanced_title : '---') + '</td>')));
+                            }
+                        }
+                    }
+
+
+                    if (table.find('tr').length > 0)
+                    {
+                        div.append(table);
+                    }
+                    divouter.append(div);
+                    Desktop.ajaxData = {};
+                    var opts = {};
+                    opts.WindowMaximize = false;
+                    opts.WindowMinimize = false;
+                    opts.loadWithAjax = true;
+                    opts.allowAjaxCache = false;
+                    opts.WindowToolbar = false;
+                    opts.DesktopIconWidth = 36;
+                    opts.DesktopIconHeight = 36;
+                    opts.UseWindowIcon = false;
+                    opts.Skin = Desktop.settings.Skin;
+                    opts.WindowContent = divouter;
+                    opts.WindowURL = null;
+                    opts.title = 'Modul Erläuterungen';
+                    opts.WindowID = 'mod-info';
+                    opts.onAfterOpen = function(obj) {
+                        obj.attr('app', 'menues');
+                    };
+                    Tools.createPopup('<div class="box">' + divouter.html() + '</div>', opts);
+                }
+                else {
+                    jAlert(data.msg);
+                }
+            }, 'json');
+        });
+        return false;
+    });
+    $('#module-page').on('change', function() {
+        var title = $('#thisname').val();
+        if (!title)
+        {
+            if ($('#module-page').find(':selected').val() == '')
+                $('#thisname').val($.trim($(this).find(':selected').text()));
+        }
+
+        var value = getController();
+        var alias = $('input[name="alias"]').val();
+        var suffix = $('select[name="suffix"]').find(':selected').val();
+        if ($('#module-page').find(':selected').val() == '' && (value != '')) {
+            $('#controller-url').val('/' + value);
+        }
+    });
+    
+    $('input[name="alias"]').change(function() {
+        var alias = $(this).val();
+        var suffix = $('select[name="suffix"]').find(':selected').val();
+        var value = getController();
+        if ($('#module-page').find(':selected').val() == '' && (value != '')) {
+            $('#controller-url').val('/' + value);
+        }
+    });
+    
+    $('select[name="suffix"]').change(function() {
+        var alias = $('input[name="alias"]').val();
+        var suffix = $(this).find(':selected').val();
+        var value = getController();
+        if ($('#module-page').find(':selected').val() == '' && (value != '')) {
+            $('#controller-url').val('/' + value);
+        }
+    });
+
+</script>

@@ -1,0 +1,188 @@
+#ajax-list table {
+    margin: 0;
+}
+
+#ajax-list { margin-left: auto; margin-right: auto;  width:100%; clear:both; position: relative; display: inline-block }
+#ajax-list ul {
+    margin-bottom: 10px;
+    width:100%;
+    margin:0!important;
+    padding:0!important;
+    list-style:none!important;
+    background:none!important;
+
+}
+#ajax-list ul li { background:none!important; margin:0!important; padding:0!important; list-style:none; border: 0; }
+#ajax-list ul li.left {float:left; display:inline-block;width: 49%;min-width: 49%;max-width: 49%; }
+#ajax-list ul li.right { float:right;display:inline-block; width: 49%;min-width: 49%;max-width: 49%;  }
+#ajax-list ul li .user-row {
+    display: block;
+    border: 1px solid #DDD;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 95%;
+    padding: 10px;
+    border-radius: 4px;
+    background: #FDFDFD;
+}
+
+
+
+
+#ajax-list ul li .user-row:last-child { margin-right: 0; }
+#ajax-list ul li .user-row .user-statistic {
+    line-height: 20px;
+    display: inline-block;
+    width: 100%;
+    font-size: 11px;
+    color: #AFAFAF;
+}
+#ajax-list ul li .photo {
+    display:inline-block;
+    float:left;
+    width:120px;
+    height: 90px;
+    margin-right: 4px;
+    text-align:center;
+    padding:3px;
+}
+#ajax-list ul li .photo img {
+    width:120px;
+}
+
+
+#ajax-list ul li .user-row .photo {
+    display:inline-block;
+    float:left;
+    width:90px;
+    margin-right: 4px;
+    text-align:center;
+    padding:3px;
+    overflow: hidden;
+}
+#ajax-list ul li .photo img { margin: 0 auto; }
+#ajax-list ul li .user-row .photo img {
+    width:90px;
+}
+
+#ajax-list ul li .user-row .photo.no-photo {
+    background: url('../../../img/nophoto.gif') 50% 0% no-repeat;
+}
+#ajax-list ul li .user-row .photo.no-photo img { display: none; }
+
+
+
+#ajax-list ul li .details {
+    display:inline-block;
+    float:right;
+    width:75%;
+    overflow: hidden;
+    height: 97px;
+    text-overflow: ellipsis;
+
+}
+
+#ajax-list ul li .details .header {
+    font-weight: bold;
+    font-family: sans-serif;
+}
+#ajax-list ul li .details small {
+    display:block;
+    width: 100%;
+    font-size: 11px;
+    color: #AFAFAF;
+}
+
+#ajax-list ul li .details .mini-bio {
+    font-style: italic;
+}
+
+#ajax-list ul li.default {
+    width:90px!important;
+    height:110px!important;
+    float:left;
+    display:inline-block;
+    margin-bottom: 10px!important;
+    border:1px solid #dddddd;
+    padding:3px!important;
+    margin-right:8px!important;
+    text-align:center;
+    overflow:hidden;
+}
+#ajax-list ul li.default .photo { 
+
+    height:90px;
+    width:90px!important;
+    float:none;
+    margin:0!important;
+    padding:0!important;
+    text-align:center;
+}
+
+#ajax-list ul li.default .photo img { 
+    margin:0!important;
+    padding:0!important;
+    margin: 0 auto;
+    float:none!important;
+    text-align:center;
+}
+
+@media (max-width: 1000px) and  (min-width: 768px) {
+    #ajax-list ul li .user-row {
+        height: auto;
+    }
+    #ajax-list ul li .user-row .photo {
+        float: none;
+        display: block;
+        text-align: center;
+        width: auto;
+    }
+    #ajax-list ul li .details {
+        float: none;
+        display: block;
+    }
+
+    #ajax-list ul li.left, #ajax-list ul li.right {
+        float: none;
+    }
+}
+@media (max-width: 767px) {
+    #ajax-list ul li.left,
+    #ajax-list ul li.right {
+        float: none;
+        width: 100%;
+        display: block;
+        min-width: 100%;
+        max-width: 100%;
+    }
+    #ajax-list ul li .user-row {
+        width: 100%;
+        height: auto;
+    }
+}
+@media (max-width: 470px) {
+    #ajax-list ul li.left,
+    #ajax-list ul li.right {
+        float: none;
+        width: 100%;
+        display: block;
+        min-width: 100%;
+        max-width: 100%;
+    }
+    #ajax-list ul li .user-row {
+        width: 100%;
+        height: auto;
+    }
+    #ajax-list ul li .user-row .photo {
+        float: none;
+        display: block;
+        text-align: center;
+        width: auto;
+    }
+    #ajax-list ul li .details {
+        float: none;
+        display: block;
+    }
+}
+
+

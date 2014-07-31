@@ -1,0 +1,52 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    <cp:if condition="!$input.coretags">
+        <button id="add-provider" class="action-button"><img src="images/buttons/new.png" width="16" height="16" alt="" border="0"/> {trans('Provider erstellen')}</button>
+        <button id="reorder-provider" class="action-button"><img src="images/document-reload.png" width="16" height="16" alt="" border="0"/> {trans('Provider umsortieren')}</button>
+    </cp:if>
+    <cp:else>
+        <button id="add-provider" class="action-button"><img src="images/buttons/new.png" width="16" height="16" alt="" border="0"/> {trans('Core-Tag erstellen')}</button>
+        <button id="reorder-provider" class="action-button"><img src="images/document-reload.png" width="16" height="16" alt="" border="0"/> {trans('Core-Tags umsortieren')}</button>
+    </cp:else>
+
+</cp:block>
+
+<cp:block name="content">
+
+    <div id="provider-grid"></div>
+
+
+    <script type="text/javascript" language="javascript">
+        /*
+
+         var table = new dcmsGrid('provider-grid', {
+         url: 'admin.php?adm=contentprovider{iif($input.coretags,'&coretags=1','')}',
+         currentFilter: {$grid.activeFilter},
+         colModel: {$grid.colModel},
+         gridActions: {$grid.gridActions},
+         searchitems: {$grid.searchitems},
+         sort: '{$grid.sort}',
+         orderby: '{$grid.orderby}',
+         total: {$grid.total},
+         perpage: {$grid.perpage}
+         });
+         */
+
+        Application.Grid( 'provider-grid', {$gridJson});
+
+        $( '#add-provider' ).click( function ()
+        {
+            href = 'admin.php?adm=contentprovider&action=add' + {iif($input.coretags, '"&coretags = 1"', '""')};
+            openTab( {url: href, obj: this, label: $( this ).text() } );
+        } );
+        $( '#reorder-provider' ).click( function ()
+        {
+            href = 'admin.php?adm=contentprovider&action=order' + {iif($input.coretags, '"&coretags = 1"', '""')};
+            openTab( {url: href, obj: this, label: $( this ).text() } );
+        } );
+
+
+    </script>
+</cp:block>

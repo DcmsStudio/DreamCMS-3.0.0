@@ -1,0 +1,39 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+    <div class="controlpanel-tabs">
+        <cp:include template="usercontrol/tabpanel" />
+    </div>
+    <form action="user/signature" method="post" id="signature-form">
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="uiqtoken" value="{$session.uiqtoken}" />
+        <div class="signature">
+            <div class="containerdiv">
+                <h3 class="">
+                    {trans('Deine Signatur')}
+                </h3>
+                <fieldset>
+                    <legend>
+                        {trans('Meine Signatur')}
+                    </legend>
+                    <textarea class="textarea bbcodeSignTextarea" id="signatur" name="signatur" rows="10" cols="40">{$user.signature}</textarea>
+                </fieldset>
+            </div>
+        </div>
+        <div class="settings">
+            <div class="containerdiv">
+                <p class="tc">
+                    <input class="button save-button" type="button" value="{trans('Abschicken')}" />
+                    <input class="button" type="reset" accesskey="R" value="{trans('Zurücksetzen')}" />
+                </p>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        $(document).ready(function() {
+            //$('.bbcodeSignTextarea').markItUp(bbcodeBioTextarea);
+            $('.bbcodeSignTextarea').signature();
+        });
+        /* ]]> */
+    </script>
+</cp:block>

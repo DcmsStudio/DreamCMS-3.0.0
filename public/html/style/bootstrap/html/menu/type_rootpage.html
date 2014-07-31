@@ -1,0 +1,19 @@
+
+<fieldset>
+    <legend>{trans('Domainname')}</legend>
+    {info:menutypes|domainname}
+    <input class="required input" type="text" name="domainname" id="domainname" value="{escape($domainname, 'quotes')}" size="60" maxlength="255" />
+</fieldset>                
+
+
+
+<script type="text/javascript">
+
+    $(document).ready( function() {
+        $('input[name="alias"]').attr('disabled', true);
+        $('select[name="suffix"]').attr('disabled', true);
+    
+
+    });
+
+</script>

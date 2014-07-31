@@ -1,0 +1,990 @@
+<div id="builder">
+<form id="builder-form">
+<div id="shadow">
+<div id="ui_content">
+<h3>
+    GUI Tool
+    <a class="switch_pin" href="#" title="">
+        <img src="images/pin-out.png" alt=""/>
+    </a>
+</h3>
+<div class="jquery_tabs">
+    <ul>
+        <li id="tab0" class="current layout">
+            <a href="#">
+                Layout
+            </a>
+        </li>
+        <li id="tab1" class="layout">
+            <a href="#">
+                Spalten
+            </a>
+        </li>
+        <li id="tab2" class="layout">
+            <a href="#">
+                Subtemplates
+            </a>
+        </li>
+        <li id="tab3">
+            <a href="#">
+                Inhalts Elemente
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="t_0" class="tcontainer">
+    <h4>
+        Layout Einstellungen
+    </h4>
+    <table id="layout_settings" class="full columns3" border="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <th scope="col" colspan="4" class="align_left">
+                Statisches Layout
+            </th>
+        </tr>
+        <tr>
+            <td colspan="4" class="align_left">
+                <label for="layout-static">
+                    <input type="checkbox" name="static" id="layout-static" value="1" cp:on="checked:$static" parse:checked="checked"/>
+                    Statisches Layout
+                </label>
+            </td>
+        </tr>
+        <tr class="layout-static">
+            <th scope="col">
+                <label for="layout_width">
+                    alignment
+                </label>
+            </th>
+            <th scope="col" class="left">
+                <label for="layout_width">
+                    width
+                </label>
+            </th>
+            <th scope="col" class="center">
+                <label for="layout_minwidth">
+                    min
+                </label>
+            </th>
+            <th scope="col" class="right">
+                <label for="layout_maxwidth">
+                    max
+                </label>
+            </th>
+        </tr>
+        <tr class="layout-static">
+            <td>
+                <select name="align" id="layout_align" title="set layout alignment">
+                    <option value="" cp:on="selected:$align == ''" parse:selected="selected">
+                        -
+                    </option>
+                    <option value="left" cp:on="selected:$align == 'left' || empty($align)" parse:selected="selected">
+                        left
+                    </option>
+                    <option value="right" cp:on="selected:$align == 'right'" parse:selected="selected">
+                        right
+                    </option>
+                    <option value="center" cp:on="selected:$align == 'center'" parse:selected="selected">
+                        center
+                    </option>
+                </select>
+            </td>
+            <td>
+                <input id="layout_width" class="left" name="width[value]" title="set overall layout width" value="{iif($width.value, $width.value, 'auto')}" maxlength="4" type="text"/>
+                <select name="width[unit]" class="unit">
+                    <option value="" cp:on="selected:$width.unit == '' || empty($width.unit)" parse:selected="selected">
+                        -
+                    </option>
+                    <option value="px" cp:on="selected:$width.unit == 'px'" parse:selected="selected">
+                        px
+                    </option>
+                    <option value="%" cp:on="selected:$width.unit == '%'" parse:selected="selected">
+                        %
+                    </option>
+                    <option value="em" cp:on="selected:$width.unit == 'em'" parse:selected="selected">
+                        em
+                    </option>
+                    <option value="pt" cp:on="selected:$width.unit == 'pt'" parse:selected="selected">
+                        pt
+                    </option>
+                    <option value="pc" cp:on="selected:$width.unit == 'pc'" parse:selected="selected">
+                        pc
+                    </option>
+                    <option value="in" cp:on="selected:$width.unit == 'in'" parse:selected="selected">
+                        in
+                    </option>
+                    <option value="cm" cp:on="selected:$width.unit == 'cm'" parse:selected="selected">
+                        cm
+                    </option>
+                    <option value="mm" cp:on="selected:$width.unit == 'mm'" parse:selected="selected">
+                        mm
+                    </option>
+                </select>
+            </td>
+            <td>
+                <input id="layout_minwidth" class="center" name="minwidth[value]" title="set minimum layout width" value="{iif($minwidth.value, $minwidth.value, '740')}" maxlength="4" type="text"/>
+                <select name="minwidth[unit]" class="unit">
+                    <option value="" cp:on="selected:$minwidth.unit == '' || empty($minwidth.unit)" parse:selected="selected">
+                        -
+                    </option>
+                    <option value="px" cp:on="selected:$minwidth.unit == 'px'" parse:selected="selected">
+                        px
+                    </option>
+                    <option value="%" cp:on="selected:$minwidth.unit == '%'" parse:selected="selected">
+                        %
+                    </option>
+                    <option value="em" cp:on="selected:$minwidth.unit == 'em'" parse:selected="selected">
+                        em
+                    </option>
+                    <option value="pt" cp:on="selected:$minwidth.unit == 'pt'" parse:selected="selected">
+                        pt
+                    </option>
+                    <option value="pc" cp:on="selected:$minwidth.unit == 'pc'" parse:selected="selected">
+                        pc
+                    </option>
+                    <option value="in" cp:on="selected:$minwidth.unit == 'in'" parse:selected="selected">
+                        in
+                    </option>
+                    <option value="cm" cp:on="selected:$minwidth.unit == 'cm'" parse:selected="selected">
+                        cm
+                    </option>
+                    <option value="mm" cp:on="selected:$minwidth.unit == 'mm'" parse:selected="selected">
+                        mm
+                    </option>
+                </select>
+            </td>
+            <td>
+                <input id="layout_maxwidth" class="right" name="maxwidth[value]" title="set minimum layout width" value="{$maxwidth.value}" maxlength="4" type="text"/>
+                <select name="maxwidth[unit]" class="unit">
+                    <option value="" cp:on="selected:$maxwidth.unit == '' || empty($maxwidth.unit)" parse:selected="selected">
+                        -
+                    </option>
+                    <option value="px" cp:on="selected:$maxwidth.unit == 'px'" parse:selected="selected">
+                        px
+                    </option>
+                    <option value="%" cp:on="selected:$maxwidth.unit == '%'" parse:selected="selected">
+                        %
+                    </option>
+                    <option value="em" cp:on="selected:$maxwidth.unit == 'em'" parse:selected="selected">
+                        em
+                    </option>
+                    <option value="pt" cp:on="selected:$maxwidth.unit == 'pt'" parse:selected="selected">
+                        pt
+                    </option>
+                    <option value="pc" cp:on="selected:$maxwidth.unit == 'pc'" parse:selected="selected">
+                        pc
+                    </option>
+                    <option value="in" cp:on="selected:$maxwidth.unit == 'in'" parse:selected="selected">
+                        in
+                    </option>
+                    <option value="cm" cp:on="selected:$maxwidth.unit == 'cm'" parse:selected="selected">
+                        cm
+                    </option>
+                    <option value="mm" cp:on="selected:$maxwidth.unit == 'mm'" parse:selected="selected">
+                        mm
+                    </option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div id="t_1" class="tcontainer">
+<h4>
+    Spalten Einstellungen
+</h4>
+<table id="column_settings" class="full columns3" border="0" cellspacing="0">
+<tbody>
+<tr>
+    <th scope="col" class="left align_left" colspan="3" width="70%">
+        Header
+    </th>
+    <th scope="col" class="left">
+        height
+    </th>
+</tr>
+<tr>
+    <td scope="col" class="secondary align_left" colspan="3">
+        <label for="layout-header">
+            <input type="checkbox" name="header" id="layout-header" value="1" cp:on="checked:$header" parse:checked="checked"/>
+            Header verwenden
+        </label>
+    </td>
+    <td scope="col" class="secondary align_left" colspan="2">
+        <div class="layout-header" style="display:inline">
+            <input name="headerHeight[value]" class="unit" value="{$headerheight.value}" type="text" size="5"/>
+            <select name="headerHeight[unit]" class="unit">
+                <option value="" cp:on="selected:$headerheight.unit == '' || empty($header.height.unit)" parse:selected="selected">
+                    -
+                </option>
+                <option value="px" cp:on="selected:$headerheight.unit == 'px'" parse:selected="selected">
+                    px
+                </option>
+                <option value="%" cp:on="selected:$headerheight.unit == '%'" parse:selected="selected">
+                    %
+                </option>
+                <option value="em" cp:on="selected:$headerheight.unit == 'em'" parse:selected="selected">
+                    em
+                </option>
+                <option value="pt" cp:on="selected:$headerheight.unit == 'pt'" parse:selected="selected">
+                    pt
+                </option>
+                <option value="pc" cp:on="selected:$headerheight.unit == 'pc'" parse:selected="selected">
+                    pc
+                </option>
+                <option value="in" cp:on="selected:$headerheight.unit == 'in'" parse:selected="selected">
+                    in
+                </option>
+                <option value="cm" cp:on="selected:$headerheight.unit == 'cm'" parse:selected="selected">
+                    cm
+                </option>
+                <option value="mm" cp:on="selected:$headerheight.unit == 'mm'" parse:selected="selected">
+                    mm
+                </option>
+            </select>
+        </div>
+    </td>
+</tr>
+<tr>
+    <th scope="col" class="left align_left" colspan="3">
+        Custom Header
+    </th>
+    <th scope="col" class="left">
+        height
+    </th>
+</tr>
+<tr>
+    <td scope="col" class="secondary align_left" colspan="3">
+        <label for="layout-customheader">
+            <input type="checkbox" name="customheader" id="layout-customheader" value="1" cp:on="checked:$customheader" parse:checked="checked"/>
+            Zusatz Header verwenden
+        </label>
+    </td>
+    <td scope="col" class="secondary align_left">
+        <div class="layout-customheader" style="display:inline">
+            <input name="customheaderheight[value]" class="unit" value="{$customheaderheight.value}" type="text" size="5"/>
+            <select name="customheaderheight[unit]" class="unit">
+                <option value="" cp:on="selected:$customheaderheight.unit == '' || empty($customheaderheight.unit)" parse:selected="selected">
+                    -
+                </option>
+                <option value="px" cp:on="selected:$customheaderheight.unit == 'px'" parse:selected="selected">
+                    px
+                </option>
+                <option value="%" cp:on="selected:$customheaderheight.unit == '%'" parse:selected="selected">
+                    %
+                </option>
+                <option value="em" cp:on="selected:$customheaderheight.unit == 'em'" parse:selected="selected">
+                    em
+                </option>
+                <option value="pt" cp:on="selected:$customheaderheight.unit == 'pt'" parse:selected="selected">
+                    pt
+                </option>
+                <option value="pc" cp:on="selected:$customheaderheight.unit == 'pc'" parse:selected="selected">
+                    pc
+                </option>
+                <option value="in" cp:on="selected:$customheaderheight.unit == 'in'" parse:selected="selected">
+                    in
+                </option>
+                <option value="cm" cp:on="selected:$customheaderheight.unit == 'cm'" parse:selected="selected">
+                    cm
+                </option>
+                <option value="mm" cp:on="selected:$customheaderheight.unit == 'mm'" parse:selected="selected">
+                    mm
+                </option>
+            </select>
+        </div>
+    </td>
+</tr>
+<tr>
+    <th scope="col" class="left align_left" colspan="3">
+        Footer
+    </th>
+    <th scope="col" class="left">
+        height
+    </th>
+</tr>
+<tr>
+    <td scope="col" class="secondary align_left" colspan="3">
+        <label for="layout-footer">
+            <input type="checkbox" name="footer" id="layout-footer" value="1" cp:on="checked:$footer" parse:checked="checked"/>
+            Footer verwenden
+        </label>
+    </td>
+    <td scope="col" class="secondary align_left">
+        <div class="layout-footer" style="display:inline">
+            <input name="footerHeight[value]" class="unit" value="{$footerheight.value}" type="text" size="5"/>
+            <select name="footerHeight[unit]" class="unit">
+                <option value="" cp:on="selected:$footerheight.unit == '' || empty($footerheight.unit)" parse:selected="selected">
+                    -
+                </option>
+                <option value="px" cp:on="selected:$footerheight.unit == 'px'" parse:selected="selected">
+                    px
+                </option>
+                <option value="%" cp:on="selected:$footerheight.unit == '%'" parse:selected="selected">
+                    %
+                </option>
+                <option value="em" cp:on="selected:$footerheight.unit == 'em'" parse:selected="selected">
+                    em
+                </option>
+                <option value="pt" cp:on="selected:$footerheight.unit == 'pt'" parse:selected="selected">
+                    pt
+                </option>
+                <option value="pc" cp:on="selected:$footerheight.unit == 'pc'" parse:selected="selected">
+                    pc
+                </option>
+                <option value="in" cp:on="selected:$footerheight.unit == 'in'" parse:selected="selected">
+                    in
+                </option>
+                <option value="cm" cp:on="selected:$footerheight.unit == 'cm'" parse:selected="selected">
+                    cm
+                </option>
+                <option value="mm" cp:on="selected:$footerheight.unit == 'mm'" parse:selected="selected">
+                    mm
+                </option>
+            </select>
+        </div>
+    </td>
+</tr>
+<tr>
+    <th scope="col" class="left align_left" colspan="3">
+        Custom Footer
+    </th>
+    <th scope="col" class="left">
+        height
+    </th>
+</tr>
+<tr>
+    <td scope="col" class="secondary align_left" colspan="3">
+        <label for="layout-customfooter">
+            <input type="checkbox" name="customfooter" id="layout-customfooter" value="1" cp:on="checked:$customfooter" parse:checked="checked"/>
+            Zusatz Footer verwenden
+        </label>
+    </td>
+    <td scope="col" class="secondary align_left">
+        <div class="layout-customfooter" style="display:inline">
+            <input name="customfooterheight[value]" class="unit" value="{$customfooterheight.value}" type="text" size="5"/>
+            <select name="customfooterheight[unit]" class="unit">
+                <option value="" cp:on="selected:$customfooterheight.unit == '' || empty($customfooterheight.unit)" parse:selected="selected">
+                    -
+                </option>
+                <option value="px" cp:on="selected:$customfooterheight.unit == 'px'" parse:selected="selected">
+                    px
+                </option>
+                <option value="%" cp:on="selected:$customfooterheight.unit == '%'" parse:selected="selected">
+                    %
+                </option>
+                <option value="em" cp:on="selected:$customfooterheight.unit == 'em'" parse:selected="selected">
+                    em
+                </option>
+                <option value="pt" cp:on="selected:$customfooterheight.unit == 'pt'" parse:selected="selected">
+                    pt
+                </option>
+                <option value="pc" cp:on="selected:$customfooterheight.unit == 'pc'" parse:selected="selected">
+                    pc
+                </option>
+                <option value="in" cp:on="selected:$customfooterheight.unit == 'in'" parse:selected="selected">
+                    in
+                </option>
+                <option value="cm" cp:on="selected:$customfooterheight.unit == 'cm'" parse:selected="selected">
+                    cm
+                </option>
+                <option value="mm" cp:on="selected:$customfooterheight.unit == 'mm'" parse:selected="selected">
+                    mm
+                </option>
+            </select>
+        </div>
+    </td>
+</tr>
+<tr>
+    <th scope="col" class="left " colspan="4">
+        Spaltendarstellung
+    </th>
+</tr>
+<tr>
+    <td scope="col" class="secondary numcols align_left" colspan="4">
+        <div class="cols">
+            <label for="col-0">
+                <input type="radio" name="cols" id="col-0" value="cols0-content" cp:on="checked:$cols == 'cols0-content'" parse:checked="checked"/>
+                                            <span class="cols0-content" title="Nur die Hauptspalte">
+                                            </span>
+            </label>
+            <label for="col-0-margin">
+                <input type="radio" name="cols" id="col-0-margin" value="cols0-content-margin" cp:on="checked:$cols == 'cols0-content-margin'" parse:checked="checked"/>
+                                            <span class="cols0-content-margin" title="Nur die Hauptspalte (mit abstand)">
+                                            </span>
+            </label>
+            <label for="col-2-left">
+                <input type="radio" name="cols" id="col-2-left" value="cols2-content-left" cp:on="checked:$cols == 'cols2-content-left'" parse:checked="checked"/>
+                                            <span class="cols2-content-left" title="Hauptspalte und linke Spalte">
+                                            </span>
+            </label>
+            <label for="col-2-right">
+                <input type="radio" name="cols" id="col-2-right" value="cols2-content-right" cp:on="checked:$cols == 'cols2-content-right'" parse:checked="checked"/>
+                                            <span class="cols2-content-right" title="Hauptspalte und rechte Spalte">
+                                            </span>
+            </label>
+            <label for="col-3">
+                <input type="radio" name="cols" id="col-3" value="cols3-left-content-right" cp:on="checked:$cols == 'cols3-left-content-right' || empty($cols)" parse:checked="checked"/>
+                                            <span class="cols3-left-content-right" title="Hauptspalte, linke und rechte Spalte">
+                                            </span>
+            </label>
+        </div>
+    </td>
+</tr>
+<tr>
+    <th scope="col" class="left secondary" width="25%">
+    </th>
+    <th scope="col" class="left secondary" width="25%">
+        width
+    </th>
+    <th scope="col" class="left secondary" width="25%">
+    </th>
+    <th scope="col" class="left secondary" width="25%">
+        width
+    </th>
+</tr>
+<tr>
+    <td scope="col" class="secondary align_left">
+        <label for="widthleft">
+            Rechts
+        </label>
+    </td>
+    <td scope="col" class="secondary">
+                                    <span class="col-left">
+                                        <input name="colsLeft[value]" id="widthleft" class="unit" value="{$widthleft.value}" type="text" size="5"/>
+                                        <select name="colsLeft[unit]" class="unit">
+                                            <option value="" cp:on="selected:$widthleft.unit == '' || empty($widthleft.unit)" parse:selected="selected">
+                                                -
+                                            </option>
+                                            <option value="px" cp:on="selected:$widthleft.unit == 'px'" parse:selected="selected">
+                                                px
+                                            </option>
+                                            <option value="%" cp:on="selected:$widthleft.unit == '%'" parse:selected="selected">
+                                                %
+                                            </option>
+                                            <option value="em" cp:on="selected:$widthleft.unit == 'em'" parse:selected="selected">
+                                                em
+                                            </option>
+                                            <option value="pt" cp:on="selected:$widthleft.unit == 'pt'" parse:selected="selected">
+                                                pt
+                                            </option>
+                                            <option value="pc" cp:on="selected:$widthleft.unit == 'pc'" parse:selected="selected">
+                                                pc
+                                            </option>
+                                            <option value="in" cp:on="selected:$widthleft.unit == 'in'" parse:selected="selected">
+                                                in
+                                            </option>
+                                            <option value="cm" cp:on="selected:$widthleft.unit == 'cm'" parse:selected="selected">
+                                                cm
+                                            </option>
+                                            <option value="mm" cp:on="selected:$widthleft.unit == 'mm'" parse:selected="selected">
+                                                mm
+                                            </option>
+                                        </select>
+                                    </span>
+    </td>
+    <td scope="col" class="secondary align_left">
+        <label for="widthright">
+            Links
+        </label>
+    </td>
+    <td scope="col" class="secondary">
+                                    <span class="col-right">
+                                        <input name="colsRight[value]" id="widthright" class="unit" value="{$widthright.value}" type="text" size="5"/>
+                                        <select name="colsRight[unit]" class="unit">
+                                            <option value="" cp:on="selected:$widthright.unit == '' || empty($widthright.unit)" parse:selected="selected">
+                                                -
+                                            </option>
+                                            <option value="px" cp:on="selected:$widthright.unit == 'px'" parse:selected="selected">
+                                                px
+                                            </option>
+                                            <option value="%" cp:on="selected:$widthright.unit == '%'" parse:selected="selected">
+                                                %
+                                            </option>
+                                            <option value="em" cp:on="selected:$widthright.unit == 'em'" parse:selected="selected">
+                                                em
+                                            </option>
+                                            <option value="pt" cp:on="selected:$widthright.unit == 'pt'" parse:selected="selected">
+                                                pt
+                                            </option>
+                                            <option value="pc" cp:on="selected:$widthright.unit == 'pc'" parse:selected="selected">
+                                                pc
+                                            </option>
+                                            <option value="in" cp:on="selected:$widthright.unit == 'in'" parse:selected="selected">
+                                                in
+                                            </option>
+                                            <option value="cm" cp:on="selected:$widthright.unit == 'cm'" parse:selected="selected">
+                                                cm
+                                            </option>
+                                            <option value="mm" cp:on="selected:$widthright.unit == 'mm'" parse:selected="selected">
+                                                mm
+                                            </option>
+                                        </select>
+                                    </span>
+    </td>
+</tr>
+<tr class="col-orders">
+    <th scope="col">
+        column order
+    </th>
+    <th scope="col" class="left">
+        left
+    </th>
+    <th scope="col" class="center">
+        center
+    </th>
+    <th scope="col" class="right">
+        right
+    </th>
+</tr>
+<tr class="col-orders">
+    <th scope="col" class="secondary">
+        <select style="display: none;" name="order_2" id="order_2" title="change column order">
+            <option value="1-3" cp:on="selected:$column_order == '1-3' || empty($column_order)" parse:selected="selected">
+                1-3
+            </option>
+            <option value="3-1" cp:on="selected:$column_order == '3-1' " parse:selected="selected">
+                3-1
+            </option>
+        </select>
+        <select name="order_3" id="order_3" title="change column order">
+            <option value="1-3-2" cp:on="selected:$column_order == '1-3-2' || empty($column_order)" parse:selected="selected">
+                1-3-2
+            </option>
+            <option value="2-3-1" cp:on="selected:$column_order == '2-3-1' " parse:selected="selected">
+                2-3-1
+            </option>
+            <option value="1-2-3" cp:on="selected:$column_order == '1-2-3' " parse:selected="selected">
+                1-2-3
+            </option>
+            <option value="3-2-1" cp:on="selected:$column_order == '3-2-1' " parse:selected="selected">
+                3-2-1
+            </option>
+        </select>
+    </th>
+    <th class="left secondary">
+        <label for="left_width">
+            Left
+        </label>
+    </th>
+    <th class="center secondary">
+        <label for="center_width">
+            Content
+        </label>
+    </th>
+    <th class="right secondary">
+        <label for="right_width">
+            Right
+        </label>
+    </th>
+</tr>
+<tr class="col-orders">
+    <td>
+    </td>
+    <td class="left" width="80">
+        <input class="" id="left_width" name="left_width[value]" title="set column width" value="25%" maxlength="4" type="text"/>
+                                    <span class="width_dummy">
+                                        auto
+                                    </span>
+        <select name="left_width[unit]" class="unit">
+            <option value="" cp:on="selected:$left_width.unit == '' || empty($left_width.unit)" parse:selected="selected">
+                -
+            </option>
+            <option value="px" cp:on="selected:$left_width.unit == 'px'" parse:selected="selected">
+                px
+            </option>
+            <option value="%" cp:on="selected:$left_width.unit == '%'" parse:selected="selected">
+                %
+            </option>
+            <option value="em" cp:on="selected:$left_width.unit == 'em'" parse:selected="selected">
+                em
+            </option>
+            <option value="pt" cp:on="selected:$left_width.unit == 'pt'" parse:selected="selected">
+                pt
+            </option>
+            <option value="pc" cp:on="selected:$left_width.unit == 'pc'" parse:selected="selected">
+                pc
+            </option>
+            <option value="in" cp:on="selected:$left_width.unit == 'in'" parse:selected="selected">
+                in
+            </option>
+            <option value="cm" cp:on="selected:$left_width.unit == 'cm'" parse:selected="selected">
+                cm
+            </option>
+            <option value="mm" cp:on="selected:$left_width.unit == 'mm'" parse:selected="selected">
+                mm
+            </option>
+        </select>
+    </td>
+    <td class="center" width="80">
+        <input style="display: none;" class="" id="center_width" name="center_width[value]" title="set column width" value="auto" maxlength="4" type="text"/>
+                                    <span class="width_dummy">
+                                        auto
+                                    </span>
+        <select name="center_width[unit]" class="unit">
+            <option value="" cp:on="selected:$center_width.unit == '' || empty($center_width.unit)" parse:selected="selected">
+                -
+            </option>
+            <option value="px" cp:on="selected:$center_width.unit == 'px'" parse:selected="selected">
+                px
+            </option>
+            <option value="%" cp:on="selected:$center_width.unit == '%'" parse:selected="selected">
+                %
+            </option>
+            <option value="em" cp:on="selected:$center_width.unit == 'em'" parse:selected="selected">
+                em
+            </option>
+            <option value="pt" cp:on="selected:$center_width.unit == 'pt'" parse:selected="selected">
+                pt
+            </option>
+            <option value="pc" cp:on="selected:$center_width.unit == 'pc'" parse:selected="selected">
+                pc
+            </option>
+            <option value="in" cp:on="selected:$center_width.unit == 'in'" parse:selected="selected">
+                in
+            </option>
+            <option value="cm" cp:on="selected:$center_width.unit == 'cm'" parse:selected="selected">
+                cm
+            </option>
+            <option value="mm" cp:on="selected:$center_width.unit == 'mm'" parse:selected="selected">
+                mm
+            </option>
+        </select>
+    </td>
+    <td class="right" width="80">
+        <input class="" id="right_width" name="right_width[value]" title="set column width" value="25%" maxlength="4" type="text"/>
+                                    <span class="width_dummy">
+                                        auto
+                                    </span>
+        <select name="right_width[unit]" class="unit">
+            <option value="" cp:on="selected:$right_width.unit == '' || empty($right_width.unit)" parse:selected="selected">
+                -
+            </option>
+            <option value="px" cp:on="selected:$right_width.unit == 'px'" parse:selected="selected">
+                px
+            </option>
+            <option value="%" cp:on="selected:$right_width.unit == '%'" parse:selected="selected">
+                %
+            </option>
+            <option value="em" cp:on="selected:$right_width.unit == 'em'" parse:selected="selected">
+                em
+            </option>
+            <option value="pt" cp:on="selected:$right_width.unit == 'pt'" parse:selected="selected">
+                pt
+            </option>
+            <option value="pc" cp:on="selected:$right_width.unit == 'pc'" parse:selected="selected">
+                pc
+            </option>
+            <option value="in" cp:on="selected:$right_width.unit == 'in'" parse:selected="selected">
+                in
+            </option>
+            <option value="cm" cp:on="selected:$right_width.unit == 'cm'" parse:selected="selected">
+                cm
+            </option>
+            <option value="mm" cp:on="selected:$right_width.unit == 'mm'" parse:selected="selected">
+                mm
+            </option>
+        </select>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="t_2" class="tcontainer">
+    <h4>
+        Subtemplates
+    </h4>
+    <table id="dropelements_grids" class="full" border="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <th scope="col" width="55%">
+                Flexible Grids
+            </th>
+            <th scope="col" colspan="2" width="45%">
+                Content Boxes
+            </th>
+        </tr>
+        <tr>
+            <td class="scroll" rowspan="3">
+                <div class="inline_table">
+                    <ul class="full" id="column-layouts">
+                        <li layout="dp_2575" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            25% | 75%
+                        </li>
+                        <li layout="dp_3366" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            33% | 66%
+                        </li>
+                        <li layout="dp_3862" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            38% | 62%
+                        </li>
+                        <li layout="dp_5050" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            50% | 50%
+                        </li>
+                        <li layout="dp_6238" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            62% | 38%
+                        </li>
+                        <li layout="dp_6633" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            66% | 33%
+                        </li>
+                        <li layout="dp_7525" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            75% | 25%
+                        </li>
+                        <li layout="dp_3333" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            33% | 33% | 33%
+                        </li>
+                        <li layout="dp_4425" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            25% | 25% | 25% | 25%
+                        </li>
+                        <li layout="dp_1221" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            25% | 50% | 25%
+                        </li>
+                        <li layout="dp_1122" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            25% | 25% | 50%
+                        </li>
+                        <li layout="dp_2211" class="subtemplate">
+                            <img src="images/layouter/ui/application_view_columns.png" title="Insert subtemplate [25/75]" height="16" width="16"/>
+                            50% | 25% | 25%
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            <td>
+                <img layout="dp_subcl" src="images/layouter/ui/shape_align_left.png" class="contentcolumn" alt="" title="Insert subtemplate content container [subcl]" height="16" width="16"/>
+            </td>
+            <td class="align_left">
+                left aligned
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img layout="dp_subc" src="images/layouter/ui/shape_align_center.png" class="contentcolumn" alt="" title="Insert subtemplate content container [subc]" height="16" width="16"/>
+            </td>
+            <td class="align_left">
+                centered
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img layout="dp_subcr" src="images/layouter/ui/shape_align_right.png" class="contentcolumn" alt="" title="Insert subtemplate content container [subcr]" height="16" width="16"/>
+            </td>
+            <td class="align_left">
+                right aligned
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div id="t_3" class="layoutModules tcontainer">
+    <div id="layout-accordion" class="AccordionList">
+        <h4>
+            Einfache Inhalte
+        </h4>
+        <div class="accordion-body">
+            <ul id="content-blocks" class="connectedSortable mod">
+                <li id="html-content" class="m">
+                                    <span class="html-content">
+                                        Html Inhalt
+                                    </span>
+                </li>
+                <li id="php-content" class="m">
+                                    <span class="php-content">
+                                        PHP Inhalt
+                                    </span>
+                </li>
+                <li id="image-content" class="m">
+                                    <span class="image-content">
+                                        Bild
+                                    </span>
+                </li>
+                <li id="other-content" class="m">
+                                    <span class="other-content">
+                                        Sonstiger Inhalt
+                                    </span>
+                </li>
+            </ul>
+        </div>
+        <h4>
+            Module
+        </h4>
+        <div class="accordion-body">
+            <ul id="content-modules" class="connectedSortable mod">
+                <cp:loop name="availeble_modules" key="r">
+                    <li class="{$r.blockid} m {$r.classes}" id="{$r.blockid}">
+                        <img cp:if="$r.icon" src="images/modules/{$r.icon}" width="16" height="16" alt=""/>
+                                        <span>
+                                            {$r.name}
+                                        </span>
+                    </li>
+                </cp:loop>
+            </ul>
+        </div>
+        <h4>
+            Gespeicherte Inhalte
+        </h4>
+        <div class="accordion-body">
+            <ul id="content-saved-blocks" class="connectedSortable mod">
+                <cp:loop name="saved_contentboxes" key="r">
+                    <li cp:is="$r.title" id="{$r.type}" class="m" rel="{$r.blockid}" dataid="{$r.dataid}">
+                        <img cp:if="$r.icon" src="images/modules/{$r.icon}" width="16" height="16" alt=""/>
+                                        <span class="{$r.type}">
+                                            {$r.title}
+                                        </span>
+                    </li>
+                </cp:loop>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<!-- ui-content-->
+</div>
+</form>
+</div>
+<div id="layouts">
+    <div class="layoutBox" id="layoutsContainer">
+        <div class="layoutBoxTop" id="layoutBox-header">
+            <em>
+            </em>
+            <div class="layoutBox mainBox connectedSortable allowSubCols" id="layoutBoxTop">
+            </div>
+            <div class="lockbtn">
+                <div class="section-opts">
+                    <span>
+                    </span>
+                </div>
+                <div class="lockbtn-label">
+                    <span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="layoutBoxCustomTop" id="layoutBox-customheader">
+            <em>
+            </em>
+            <div class="layoutBox mainBox connectedSortable allowSubCols" id="layoutBoxCustomTop">
+            </div>
+            <div class="lockbtn">
+                <div class="section-opts">
+                    <span>
+                    </span>
+                </div>
+                <div class="lockbtn-label">
+                    <span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="layoutBox-inner" id="layoutbox-container" style="display:block;">
+            <div class="leftWidth leftColumns left" id="col1">
+                <em>
+                </em>
+                <div class="layoutBox mainBox layoutBoxLeft connectedSortable allowSubCols" id="layoutBoxLeft">
+                    <div class="contentPlaceholder itemBox cbox">
+                        <span>
+                            Defaults
+                        </span>
+                    </div>
+                </div>
+                <div class="lockbtn">
+                    <div class="lockbtn-label">
+                        <span>
+                            Unlocked
+                        </span>
+                    </div>
+                    <div class="section-opts">
+                        <span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="rightWidth rightColumns right" id="col2">
+                <em>
+                </em>
+                <div class="layoutBox mainBox layoutBoxRight connectedSortable allowSubCols" id="layoutBoxRight">
+                    <div class="contentPlaceholder itemBox cbox" id="contentPlaceholder">
+                        <span>
+                            Defaults
+                        </span>
+                    </div>
+                </div>
+                <div class="lockbtn">
+                    <div class="lockbtn-label">
+                        <span>
+                            Unlocked
+                        </span>
+                    </div>
+                    <div class="section-opts">
+                        <span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="middleWidth middleColumns middle" id="col3">
+                <em>
+                </em>
+                <div class="layoutBox mainBox layoutBoxMiddle connectedSortable allowSubCols" id="layoutBoxMiddle">
+                    <div class="contentPlaceholder itemBox cbox">
+                        <span>
+                            Inhalte, die Sie erstellen, werden hier angezeigt.
+                        </span>
+                    </div>
+                </div>
+                <div class="lockbtn">
+                    <div class="lockbtn-label">
+                        <span>
+                            Unlocked
+                        </span>
+                    </div>
+                    <div class="section-opts">
+                        <span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layoutBoxCustomBottom" id="layoutBox-customfooter">
+            <em>
+            </em>
+            <div class="layoutBox mainBox connectedSortable allowSubCols" id="layoutBoxCustomBottom">
+            </div>
+            <div class="lockbtn">
+                <div class="section-opts">
+                    <span>
+                    </span>
+                </div>
+                <div class="lockbtn-label">
+                    <span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="layoutBoxBottom bottom" id="layoutBox-footer">
+            <em>
+            </em>
+            <div class="layoutBox mainBox connectedSortable allowSubCols" id="layoutBoxBottom">
+            </div>
+            <div class="lockbtn">
+                <div class="section-opts">
+                    <span>
+                    </span>
+                </div>
+                <div class="lockbtn-label">
+                    <span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,210 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+
+    [save:rform] [save_exit:rform] [reset:rform] [cancel:rform] 
+</cp:block>
+
+<cp:block name="content">
+
+
+
+    <div style="margin-left: 5px;margin-right: 14px;">
+        <div class="fr mb5">
+            <input type="button" onclick="closeAll()" value="{trans('Alle Container Schließen')}" class="action-button"/>
+            <input type="button" onclick="openAll()" value="{trans('Alle Container Öffnen')}" class="action-button"/>
+        </div>
+
+        <input type="button" onclick="switchSelections(true);" value="alles markieren" class="action-button"/>
+        <input type="button" onclick="switchSelections(false);" value="alles demarkieren" class="action-button"/>
+    </div>
+
+    <form action="admin.php" method="post" id="rform">
+        <input type="hidden" name="adm" value="usergroups" />
+        <input type="hidden" name="action" value="dashaccess"/>
+        <input type="hidden" name="send" value="send"/>
+        <input type="hidden" name="id" id="group-id" value="{$group.groupid}"/>
+        <div id="accessItems" style="display:inline-block;width:100%;">
+
+            <cp:loop name="permitems" key="item">
+
+                <div class="box">
+                    <h2>{$item.title}</h2>
+                    <div class="box-inner" style="display: none">
+
+                        <cp:if condition="$item.description"><small>{$item.description}</small><p/></cp:if>
+
+                        <cp:loop name="item.access" key="r">
+                            <label for="{$item.modul}-{$r.action}">
+                                <input type="checkbox" name="access[{$item.modul}][{$r.action}]" id="{$item.modul}-{$r.action}" value="1" cp:on="checked:$r.hasperm || ($r.hasperm == null && $item.default)" parse:checked="checked" /> {$r.label}
+                            </label><br/>
+                        </cp:loop>
+                    </div>
+                </div>
+            </cp:loop>
+
+        </div>
+    </form>
+
+    <script type="text/javascript">
+
+        Form.registerForm('rform', {
+            contentIdentifierID: 'group-id',
+            exiturl: 'admin.php?adm=usergroup',
+            onAfterSubmit: function () {
+                // Desktop.Taskbar.Menu.createStartMenu();
+                delete top.menuItems;
+                $('#main-menu ul:first').empty().append('<li>reload ...</li>');
+
+                $.ajax({
+                    type: "GET",
+                    url: Tools.prepareAjaxUrl('admin.php?action=menu'),
+                    success: function () {
+                        DesktopMenu.coreMenuCache = top.menuItems;
+                        DesktopMenu.createCoreMenu();
+                        //top.menuItems = null;
+                    },
+                    dataType: "script",
+                    cache: false
+                });
+
+            }
+        });
+
+        var accessItems = $('#accessItems').find('h2');
+        var iconopen = Config.get('backendImagePath') + 'down.png';
+        var iconclose = Config.get('backendImagePath') + 'up.png';
+        var icon;
+
+        accessItems.each(function ()
+        {
+            $(this).css({cursor: 'pointer'});
+            var container = $(this).parent().children('.box-inner');
+
+
+            $(this).find('img').remove();
+
+            $(this).prepend($('<img/>').attr({'src': iconopen, 'width': '16'}));
+            $(this).prepend($('<img/>').attr({'src': iconclose, 'width': '16'}).css({display: 'none'}).hide());
+            $(this).css({'-moz-user-select': 'none'});
+            $(this).attr({'title': 'Klick zum Öffnen/Schließen'});
+
+            $(this).unbind('click').click(function (e)
+            {
+                $(this).children('img').toggle();
+                $(container).slideToggle('fast', function () {
+                    Win.refreshScrollbars();
+                });
+            });
+        });
+
+        if (typeof jumpToItem !== 'function')
+        {
+
+            function jumpToItem (obj)
+            {
+                var num = $(obj).val();
+
+                if (num != '')
+                {
+                    var container = $('#items' + num).children('.box-inner');
+                    if (!$(container).is(':visible'))
+                    {
+                        $(container).slideDown('fast', function () {
+                            Win.refreshScrollbars();
+                        });
+                        $('#items' + num).children('img').toggle();
+                    }
+                }
+            }
+
+            function closeAll ()
+            {
+                var accessItems = $('#accessItems').find('h2');
+
+                accessItems.each(function (i)
+                {
+                    if ($(this).next().is(':visible')) {
+                        $(this).next().hide();
+                        $(this).children('img').toggle();
+                    }
+                    if (i >= accessItems.length - 1) {
+                        Win.refreshScrollbars();
+                    }
+                });
+            }
+
+            function openAll ()
+            {
+                var accessItems = $('#accessItems').find('h2');
+                accessItems.each(function (i)
+                {
+                    if (!$(this).next().is(':visible'))
+                    {
+                        $(this).next().show();
+                        $(this).children('img').toggle();
+                    }
+
+                    if (i >= accessItems.length - 1) {
+                        Win.refreshScrollbars();
+                    }
+
+
+                });
+
+            }
+
+
+
+            function switchSelections (sel)
+            {
+                var allItems;
+                if (sel == true)
+                {
+
+                    Win.mask('es wird alles aktiviert...');
+                    allItems = $('#accessItems').find('input:checkbox');
+                    openAll();
+
+                    allItems.each(function (i)
+                    {
+                        if (!$(this).prop('checked'))
+                        {
+                            $(this).prop('checked', true).trigger('change');
+                        }
+
+                        if (i >= allItems.length - 1) {
+                            Win.unmask();
+                            Win.refreshScrollbars();
+                        }
+
+
+                    });
+
+                }
+                else
+                {
+                    Win.mask('es wird alles deaktiviert...');
+                    closeAll();
+                    allItems = $('#accessItems').find('input:checkbox');
+                    allItems.each(function (x)
+                    {
+                        if ($(this).prop('checked'))
+                        {
+                            $(this).prop('checked', false).trigger('change');
+                        }
+                        if (x >= allItems.length - 1) {
+                            Win.unmask();
+                            Win.refreshScrollbars();
+                        }
+                    });
+
+
+                }
+            }
+        }
+
+    </script>
+
+</cp:block>

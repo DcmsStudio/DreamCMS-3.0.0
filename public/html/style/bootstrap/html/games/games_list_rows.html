@@ -1,0 +1,33 @@
+<?php
+
+function __games_list_rows( $r ){
+static $x;
+	global $cp;
+
+
+	$pubicon = $r['published'] ? '<img src="images/online.gif" border="0" width="16" height="16" alt="Spiel schließen" title="Spiel schließen" class="absmiddle" />' : '<img src="images/offline.gif" border="0" width="16" height="16" alt="Spiel öffnen" title="Spiel öffnen" class="absmiddle" />';
+
+	$css = ($x++%2 ? 'firstrow' : 'secondrow');
+	$r['genre'] = ( $r['genre'] ? $r['genre'] : '----');
+	
+	$imgs = '';
+	if ( $r['images'] > 0 )
+	{
+		$imgs = '<img src="images/photos.png" alt="" title="" border="0" class="absmiddle" />';
+	}
+
+return <<<EOF
+<tr onmouseover="over(this)" onmouseout="out(this)" class="$css">
+	<td><input type="checkbox" name="ids[]" value="$r[id]" /></td>
+    <td><b>{$r['title']}</b><br /><small><a href="{$r['userid']}">{$r['username']}</a> {$r['time']}</small></td>
+ 	<td align="center">{$r['plattform']}</td>
+ 	<td align="center">{$r['genre']}</td>
+ 	<td align="center">$imgs 
+ 	<a href="admin.php?adm=games&amp;sid=$cp->session_id&action=publish&id=$r[id]">$pubicon</a> &nbsp; <a href="admin.php?adm=games&amp;sid=$cp->session_id&action=edit&id=$r[id]"><img src="images/edit.png" border="0" alt="Review bearbeiten" class="absmiddle" /></a> &nbsp; <a href="admin.php?adm=games&amp;sid=$cp->session_id&action=del&id=$r[id]"><img src="images/delete.gif" border="0" alt="Review löschen" class="absmiddle" /></a>
+ 	</td>
+</tr>
+
+EOF;;;
+}
+
+?>

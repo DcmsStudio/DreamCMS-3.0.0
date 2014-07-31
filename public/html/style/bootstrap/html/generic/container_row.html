@@ -1,0 +1,28 @@
+<?php
+
+function __container_row($r){
+global $cp;
+
+	static $i;
+
+	$css = $i++ % 2 ? 'firstrow' : 'secondrow';
+
+return <<<EOF
+	<tr onmouseover="over(this)" onmouseout="out(this)" class="$css">
+	  <td>{$r['lang']}</td>
+	  <td align="center">
+	  <select id="{$r['id']}" name="data[{$r['id']}]" class="select" size="1">
+	  {$r['dropdown']}
+	  </select> &nbsp; <a href="#" onclick="goto_edit({$r['id']});"><img src="images/edit.png" alt="selectiertes Template bearbeiten" title="selectiertes Template bearbeiten" class="absmiddle" /></a>
+	  </td>
+	</tr>
+EOF;
+
+
+
+
+
+// =================================================================
+}
+
+?>

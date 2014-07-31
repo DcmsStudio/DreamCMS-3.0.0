@@ -1,0 +1,45 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button class="action-button emptytrash"><span></span> {trans('Papierkorb Leeren')}</button>
+</cp:block>
+
+<cp:block name="content">
+<div id="trash-grid"></div>
+<script type="text/javascript" language="javascript">
+<cp:literal type="cdata_comment">
+
+    var table = new dcmsGrid('trash-grid', {
+        url: 'admin.php?adm=trash',
+        currentFilter: {$grid.activeFilter},
+        colModel: {$grid.colModel},
+        gridActions: {$grid.gridActions},
+        searchitems: {$grid.searchitems},
+        sort: '{$grid.sort}',
+        orderby: '{$grid.orderby}',
+        total: {$grid.total},
+        key: 'trashid',
+                        perpage: {$grid.perpage}
+    });
+
+
+    $('.emptytrash').click(function(){
+        var self = this;
+        $('#maincontent').mask('{trans('Papierkorb wird geleert...')}');
+        $.post('admin.php', {adm: 'trash', action: 'delete', empty: 1}, function(data){
+            if(responseIsOk(data)) { 
+                
+                
+                reloadTable( $('#trash-grid') );
+                
+                setFormStatusOk(data.msg); $(self).disableButton(); setTimeout(removeFormStatus, 2000); 
+            
+        
+            } else { alert(data.msg) }
+        }, 'json');
+
+    });
+
+</cp:literal>
+</script>
+</cp:block>

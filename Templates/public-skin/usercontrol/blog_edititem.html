@@ -1,0 +1,55 @@
+<cp:include group="usercontrol" template="tabpanel"/>
+<form method="post" action="index.php">
+    <input type="hidden" name="cp" value="mycp" />
+    <input type="hidden" name="send" value="send" />
+    <input type="hidden" name="action" value="blog" />
+    <input type="hidden" name="do" value="editblog" />
+    <input type="hidden" name="sid" value="{$cp->session_id}" />
+    <table cellpadding="3" cellspacing="1" width="100%" class="inner">
+        <tr>
+            <td width="20%">
+                <strong>{trans('Titel')}</strong>
+            </td>
+            <td width="80%">
+                <input type="text" name="title" value="{$item_title}" size="25" />
+            </td>
+        </tr>
+        <tr class="top">
+            <td colspan="2">
+                <strong>{trans('Inhalt')}</strong>
+            </td>
+	</tr>
+	<tr>
+            <td colspan="2">
+                <textarea cols="50" rows="5" name="content" class="textarea">{$item_content}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>{trans('Eintrag aktivieren')}</strong>
+            </td>
+            <td>
+                <input type="radio" name="publish" id="pub1" value="1"<cp:if !empty="blog_publish" || empty="blog_title"> checked="checked"</cp:if> /><label for="pub1">{trans('Blog aktiviert')}</label>
+		<input type="radio" name="publish" id="pub0" value="0"<cp:if !empty="blog_publish"> checked="checked"</cp:if> /><label for="pub0">{trans('Blog deaktiviert')}</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <strong>{trans('Zugriffsrechte')}</strong><br/>
+		<small>{trans('Falls du deinen Blog für jeden oder nur für Registrierte Benutzer offen hast, hast du hier noch die möglichkeit diesen Eintrag nur für Freunde sichtbar zu machen.')}</small>
+            </td>
+	</tr>
+	<tr>
+            <td colspan="2">
+                <input type="checkbox" name="publish" id="chk1" value="1"<cp:if !empty="blog_publish" || empty="blog_title"> checked="checked"</cp:if> /><label for="chk1">{trans('Zugriff nur für registrierte Benutzer')}</label><br/>
+		<input type="checkbox" name="publish" id="chk0" value="0"<cp:if !empty="blog_publish"> checked="checked"</cp:if> /><label for="chk0">{trans('Zugriff nur für Freunde')}</label>
+            </td>
+        </tr>
+        <tr class="tc">
+            <td colspan="2">
+                <input type="submit" value="{trans('Speichern')}" class="button" /> 
+                <input type="reset" value="{trans('Zurücksetzen')}" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>

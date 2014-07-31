@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title>{iif($pageTitle, $pageTitle, 'Administration')}</title>
+        <meta http-equiv="Content-Language" content="de"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <base href="{cfg('portalurl')}/" />        
+        <link rel="stylesheet" href="html/css/backend.css?{$session_id}" type="text/css" />
+        <cp:block name="inlinecss"/>
+        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;hl=de&amp;oe=iso-8859-1&amp;sensor=true&amp;allow_bidi=true&key=ABQIAAAASieREfIg7ruZ4dz1X1uZ4BRVbprBumkWKmVu8N3oj0UI4mD9VxSlLe0dUaoGueMAWvz1E9Q9aqHoUQ"></script>
+        
+        
+        <script type="text/javascript" language="javascript" rel="main-js">
+            //<![CDATA[
+    var webSite = '{$website.id}';
+    var seeMode = false;
+    var menuItems;
+    var pagestree;
+    var filemanager = null;
+    var session_id = '{$session_id}';
+    var cmsurl = '{$cfg.portalurl}/';
+    var backendImagePath = '{$backendImagePath}';
+    var cms_pagepath = '{$pagepath}/';                
+    var cmsurl_regex = {$cmsurl_jsregex};
+    var colorPickerWidth = 12;
+    var exitpopup = 0;
+    var widgetcolumns = 4; // num of widget div cols for frontpage
+    var use_fancy_checkboxes = false;
+    var is_defaultheader = false;
+    var hasTrash = false;
+    var max_upload_size = "{$uploadsize} MB";
+    var max_upload_limit = "{$uploadlimit}";
+    var is_defaultheader = false;
+    var cookiePrefix = '{$cookieprefix}';
+    var fm_viewmode = '{$fileman_view_mode}';
+    var requestString = '{requeststring('post')}';
+    var lang = {};
+    var isLoginPage = false;
+    var tinymceConfig;
+    var settings = {};
+        settings.base_url = cmsurl;
+        settings.session_id = session_id;
+        settings.sidebarOpen = {$sidebar.isopen};
+        settings.sidebarWidth = {$sidebar.width};
+
+    var pageTitle = '{$pageTitle}';
+    var pageCurrentTitle = '{$pageCurrentTitle}';
+    var menuObj;
+
+//]]>
+        </script>
+        
+        
+        
+        <cp:if condition="$request.seemodePopup || $cookie.isSeemodePopup">
+            <link rel="stylesheet" href="{$backend_css_url}seemode_popup.css?{$session_id}" type="text/css"  />        
+        </cp:if>
+        
+        <script type="text/javascript" language="javascript" src="admin.php?adm=lang&_{$session_id}"></script>
+        <script type="text/javascript" language="javascript" src="external/edit_area/edit_area_compressor.php?_{$session_id}"></script>
+      <!--  {$js_code} -->
+        {$js}
+       <!-- <script type="text/javascript" language="javascript" src="external/tinymce/jquery.tinymce.js"></script> -->
+        <script type="text/javascript" language="javascript" src="admin.php?adm=buildpulldown" rel="buildpulldown"></script>
+        <script type="text/javascript" language="javascript" src="admin.php?adm=loadjs&js={escape('backend/dcms.menu,backend/dcms.tree,backend/dcms.widget', 'url')}&_{$session_id}"></script>
+        
+        <cp:block name="inlinejs"/>
+        
+    </head>
+    <body id="cpbody" topmargin="0" leftmargin="0">
+        <div id="widget-contents">            
+            <div id="header">
+                
+                <cp:if condition="!$request.seemodePopup && !$cookie.isSeemodePopup">
+                    <div id="title-bar">
+                        <div id="copyright"><span>&copy; {date('m/Y')} by DreamCMS Development</span><span style="display:none">{trans('aktuelle Website `%s` unter Domain `%s` wird bearbeitet', $website.title, $website.domainname)}</span></div>
+                        <div id="title-bar-logo"></div>
+                        <h1 id="title-container" style="display:block">
+                            <img src="html/style/default/img/buttons/lock.png" class="absmiddle" width="16" height="16" alt="" /> {trans("angemeldet als")}&nbsp;{$user.username}
+                        </h1>
+                        <h1 id="tip-container" style="display:none"></h1>                    
+                        
+                    </div>
+                    
+                    <div id="menu-bar">
+                        
+                        <!-- Menu Buttons -->
+                        <div id="topmenubar">
+                            <ul id="dcms-menu">
+                                <li>{trans('Lade Menü...')}</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Notepad Buttons -->
+                        <div id="notepad" style="margin-right: 5px;float:right;">
+                            
+                            <button id="logoutbutton" class="action-button"><img src="images/buttons/decrypted.png" width="16" height="16" alt="" /> {trans("Logout")}</button>
+                            <button id="helpbutton" class="action-button"><img src="images/pulldownmenu/help.png" width="16" height="16" alt="" /> {trans("Hilfe")}</button>
+                            <button id="notecreate" class="action-button" title="Press this button to create a new Note"><img src="images/edit-note.png" width="16" height="16" alt="" /> {trans("neue Notiz")}</button>                  
+                            <button id="notetoggle" class="action-button" style="display:{$shownote}" title="You can use this button to toggle the visibility of your Notes"><img src="images/notes.png" width="16" height="16" alt="" /> <div id="notes-message">{trans("Notiz öffnen")} </div></button>
+                        </div>
+                    </div>
+                </cp:if>
+                
+                
+                
+                
+                <cp:if condition="$request.seemodePopup != 1 && !$cookie.isSeemodePopup && $sidebar.isopen">
+                    <cp:set var="paddingLeft" value="200"/>
+                </cp:if>
+                <cp:else>
+                    <cp:set var="paddingLeft" value="10"/>
+                </cp:else>
+                
+                <div id="toolbar-tabs" class="toolbar_tabs" style="padding-left:{$paddingLeft}px;">
+                    <ul>
+                        
+                        <cp:if condition="$toolbarTabs == ''">
+                            <li class="colser"><span></span></li>
+                        </cp:if>
+                        <cp:else>
+                            {$toolbarTabs}
+                        </cp:else>
+                        
+                    </ul>
+                    
+                </div>
+                <div class="toolbar" style="padding-left:{$paddingLeft}px;">
+                    
+                    
+                    <div class="toolbar-left">
+                        
+                        <cp:block name="toolbar"/>
+                        
+                    </div>
+                    <div class="toolbar-right">
+                        <div class="toolbar-version">{$versioning}</div>
+                        
+                        
+                        <!-- Trash -->
+                        <cp:hasperm perm="trash/index">
+                            <button id="dcmsTrashHolder" class="action-button{iif('!$trashcounter', ' empty', '')}">
+                                <img src="images/buttons/bin.png" width="16" height="16" />
+                                {trans('Papierkorb')}
+                            </button>
+                        </cp:hasperm>
+                        
+                        <button id="content-translations" class="action-button">
+                            <img src="{$backendImagePath}flags/{$contenttranslation.flag}" width="16" height="16" />
+                            {trans('Inhaltssprache')}
+                        </button>
+                        
+                        <button id="dcmsFav" class="action-button">
+                            <img src="images/buttons/star.png" width="16" height="16" />
+                            {trans('Lesezeichen')}
+                        </button>
+                        
+                        
+                    </div>
+                </div>
+                
+                <cp:if condition="!$request.seemodePopup && !$cookie.isSeemodePopup">
+                    <div id="sidebar-tree"{iif($sidebar.isopen, '', ' class="closed"')} style="width: {iif($sidebar.width, $sidebar.width, '200')}px;">
+                        <div id="node-container" style="display: {iif($sidebar.isopen, 'block', 'none')}">
+                            
+                            <div id="node-container-content">
+                                <div id="accordion_container" style="display:inline-block;z-index:1;overflow-x:hidden">
+                                    
+                                    <div id="accordion">
+                                        
+                                        <div class="accordion_title" id="side-treepages"><span>{trans('Seiten')}</span></div>
+                                        <div class="accordion_body" id="side-tree_p" style="vertical-align:top;overflow-x:hidden;<cp:if condition="$sidebar.widgetopen != 'side-tree_p'">display:none</cp:if>">
+                                            <div id="pages-tree-content" style="overflow:auto;overflow-x:hidden"></div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        <div class="accordion_title" id="side-tree"><span>{trans('Frontend Navigation')}</span></div>
+                                        <div class="accordion_body" id="side-tree_c" style="vertical-align:top;overflow-x:hidden;<cp:if condition="$sidebar.widgetopen != 'side-tree_c'">display:none</cp:if>">
+                                            <div id="side-tree-content" style="overflow:auto;overflow-x:hidden"></div>
+                                        </div>
+                                        
+                                        <div class="accordion_title" id="sidebarwidgets"><span>{trans('Widgets')}</span></div>
+                                        <div class="accordion_body" id="sidebarwidgets_c" style="vertical-align:top;overflow-x:hidden;<cp:if condition="$sidebar.widgetopen != 'sidebarwidgets_c'">display:none</cp:if>">
+                                            <div id="widget-column-1" class="widget-column" style="vertical-align:top;overflow-x:hidden"></div>
+                                        </div>
+                                        
+                                        <div class="active accordion_title" id="file-mantree"><span>{trans('Datei Verwaltung')}</span></div>
+                                        <div class="accordion_body" id="fileman-tree_c" style="vertical-align:top;max-height:300px;overflow-x:hidden;<cp:if condition="$sidebar.widgetopen != 'fileman-tree_c'">display:none</cp:if>">
+                                            <div id="dcmsFileTree" style="overflow:auto;overflow-x:hidden"></div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div id="tree-footer-toggle"{iif($sidebar.isopen, '', ' style="margin-top:24px;"')}>        
+                            <span style="display: {iif($sidebar.isopen, 'none', 'inline')}"><img src="images/tree/tree-open.png" width="16" height="16" alt="" />&nbsp;{trans('Öffne Sidebar')}</span>
+                            <span style="display: {iif($sidebar.isopen, 'inline', 'none')}"><img src="images/tree/tree-close.png" width="16" height="16" alt="" />&nbsp;{trans('Schließe Sidebar')}</span>
+                        </div>
+                    </div>
+                </div>
+                </cp:if>
+                
+                
+                
+            </div><!-- end header-->
+            
+            
+            <div id="content">
+                <div id="maincontent">
+                    
+                    
+                    <!-- maincontent -->
+                    <cp:block name="content"/>
+                    {$output}
+                    <cp:hasperm perm="dashboard/sessionhistory">
+                        <div style="display:inline-block;width:100%" id="session_history">{$session_history}</div>
+                    </cp:hasperm>
+                    {$session_expiry}
+                    <!-- end_maincontent -->
+                </div>
+            </div>
+            
+            <div id="comp-runtime" class="fl" style="width:400px;padding:3px">
+                <img id="status-runtime" src="images/clock.png" width="16" height="16" alt="" class="fl" />
+                <small>Run Time: <!--TIMING--></small>
+            </div>
+            
+            <div id="notification-box" class="fl" style="display:none">
+                <img id="notifiction-icon" src="images/form-ok.png" width="16" height="16" alt="" class="fl" />
+                <span id="notifier"></span>
+            </div>
+        </div>
+        
+        <!-- Notepad Content -->
+        <div id="note_ajax"></div>
+        
+        <!-- ToolTip Box -->
+        <div id="tip" onclick="infohide();" style="display:none;">
+            <div id="tip-title"><img src="html/style/default/img/info.png" width="16" height="16" alt="" /><span id="tiptitle-text"></span></div>
+            <div id="tip-body"></div>
+        </div>
+        
+        
+        <ul id="page-tree-menu" class="dcmscontextmenu ui-menu">
+            <li id="site-active"><a href="#"><img src="images/tree/site-editing.png" width="16" height="16" alt="" /> {trans('Diese Website Verwalten')}</a></li>
+            <li id="site-edit"><a href="#"><img src="images/tree/site-edit.png" width="16" height="16" alt="" /> {trans('Website Einstellungen')}</a></li>
+            <li id="site-delete"><a href="#"><img src="images/tree/site-delete.png" width="16" height="16" alt="" /> {trans('Website löschen')}</a></li>
+            <li id="site-separator" class="separator"><div class="menu-separator"></div></li>
+            <li id="site-page-add"><a href="#"><img src="images/ui-menu.png" width="16" height="16" alt="" /> {trans('Menüpunkt hier erstellen')}</a></li>            
+            <li id="page-view"><a href="#"><img src="images/page-view.png" width="16" height="16" alt="" /> {trans('Details anzeigen')}</a></li>
+            <li id="page-edit"><a href="#"><img src="images/context/edit.png" width="16" height="16" alt="" /> {trans('Menüpunkt bearbeiten')}</a></li>
+            <li id="page-delete"><a href="#"><img src="images/context/page_delete.png" width="16" height="16" alt="" /> {trans('Menüpunkt löschen')}</a></li>
+            <li id="page-add"><a href="#"><img src="images/ui-menu.png" width="16" height="16" alt="" /> {trans('Menüpunkt hier erstellen')}</a></li>
+            <li id="page-separator" class="separator"><div class="menu-separator"></div></li>            
+            <li id="page-copy"><a href="#"><img src="images/context/document-copy.png" width="16" height="16" alt="" /> {trans('Menüpunkt kopieren')}</a></li>
+            <li id="page-move"><a href="#"><img src="images/context/move.png" width="16" height="16" alt="" /> {trans('Menüpunkt verschieben')}</a></li>
+            <li id="past-item-copy"><a href="#"><img src="images/context/page_white_paste.png" width="16" height="16" alt="" /> {trans('Menüpunkt hier einfügen')}</a></li>
+            <li id="past-item-move"><a href="#"><img src="images/context/page_white_paste.png" width="16" height="16" alt="" /> {trans('Menüpunkt hierher verschieben')}</a></li>
+            <li id="page-separator" class="separator"><div class="menu-separator"></div></li>            
+            <li id="page-publish">
+                <a href="#">                
+                    <div><img src="images/context/online.png" width="16" height="16" alt="" /> {trans('Menüpunkt aktivieren')}</div>
+                    <div><img src="images/context/offline.png" width="16" height="16" alt="" /> {trans('Menüpunkt deaktivieren')}</div>
+                </a>
+            </li>            
+        </ul>
+        
+        
+        
+        <script type="text/javascript" src="admin.php?adm=getmenutree" rel="pages-tree"></script>
+        
+        
+        <script type="text/javascript" language="javascript">
+            //<![CDATA[
+var wopen = '{$sidebar.widgetopen}';
+$(document).ready( function() {
+    initGUI();
+
+    if($('#comp-runtime').text()!='') {
+        $('#comp-runtime').show();
+        window.setTimeout(function() {$('#comp-runtime').fadeOut();}, 2000);
+    }
+
+    
+    
+
+    $('#logoutbutton').click(function() { logout(); } );
+    $('#helpbutton').click(function() { dcmshelp('{$request.adm}', '{$request.action}'); } );
+    $('#notecreate').click(function() { create_note(); } );
+    $('#notetoggle').click(function() { toggle_notes(); } );
+   // loadWidgets();
+    $('#copyright').bind('mouseover', function() { $(this).find('span').toggle(); });
+    $('#copyright').bind('mouseout', function() { $(this).find('span').toggle(); });
+    setupSeemode();
+
+    pagestree = new buildPagesTree('#pages-tree-content');
+    //aTree.setupTreeMenu();
+
+
+    if (wopen != '') { setTimeout(function(){ $('#'+ wopen).prev().click();}, 10); }
+
+});
+//]]>
+        </script>
+        
+    </body>
+</html>

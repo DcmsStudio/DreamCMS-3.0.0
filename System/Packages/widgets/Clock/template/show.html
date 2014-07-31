@@ -1,0 +1,23 @@
+<div id="clock-{$widgetid}" style="text-align: center; padding: 5px">
+    <canvas id="u{$widgetid}" style="background: rgba(255, 255, 255, 0.8);border-radius: 170px;box-shadow: 0 0 10px #000;"></canvas>
+</div>
+
+
+<script>
+
+        Loader.require( ['Packages/widgets/Clock/js/coolclock', 'Packages/widgets/Clock/js/moreskins', 'Packages/widgets/Clock/js/excanvas'], function ()
+        {
+            // Create a clock object for this element
+            new CoolClock( {
+                canvasId: 'u{$widgetid}',
+                skinId: '{$skin}',
+                displayRadius: '{iif($displayRadius, $displayRadius, 85)}',
+                showSecondHand: {iif($showSecondHand, $showSecondHand, 0)},
+                gmtOffset: {iif($gmtOffset, $gmtOffset, 0)},
+                showDigital: {iif($showDigital, $showDigital, 0)},
+                logClock: false,
+                logClockRev: false
+            } );
+        } );
+
+</script>

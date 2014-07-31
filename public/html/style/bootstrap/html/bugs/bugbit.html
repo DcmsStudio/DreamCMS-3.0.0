@@ -1,0 +1,14 @@
+<?php
+
+function __bugbit($id=0,$name='',$desc='',$status='', $date = 0){
+global $cp, $cfg, $fct;
+return <<<EOF
+        <tr>
+            <td width="5%" class="secondrow">$id</td>
+            <td width="80%" class="firstrow"><b><a href="admin.php?adm=bugtracker&amp;action=bugedit&amp;id=$id&amp;sid={$cp->session_id}">$name</a></b> <em>($date)</em><br />$desc</td>
+            <td width="15%" align="center" class="secondrow">$status</td>
+        </tr>
+EOF;
+}
+
+?>

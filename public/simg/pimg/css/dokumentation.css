@@ -1,0 +1,137 @@
+body.perms .logo, body.Perms .logo {
+    background: transparent url('../img/headers/impressum.jpg') 50% 50% no-repeat;
+    background-size: 925px 200px;
+    height: 203px;
+    width: 100%;
+}
+body.perms .logo span, body.Perms .logo span {
+    top: 40%;
+}
+
+
+
+body.dokumentation .logo, body.Dokumentation .logo {
+    background: transparent url('../img/headers/dl-header.jpg') 50% 50% no-repeat;
+    background-size: 925px 200px;
+    height: 220px;
+    width: 100%;
+    margin-top: -10px;
+
+}
+
+
+body.doku-tags .logo, body.Doku-tags .logo {
+    background: transparent url('../img/headers/path.jpg') 50% 50% no-repeat;
+    background-size: 925px 200px;
+    height: 220px;
+    width: 100%;
+    margin-top: -10px;
+}
+body.doku-tags .logo span, body.Doku-tags .logo span {
+    top: 40%;
+    left: auto;
+    right: 28%;
+    color: #ddd;
+    text-shadow: 2px 2px 10px #000000;
+}
+
+
+body.dcms-infos .logo, body.Dcms-infos .logo {
+    background: transparent url('../img/headers/docu_header.jpg') 50% 50% no-repeat;
+    background-size: 925px 200px;
+    height: 203px;
+    width: 100%;
+}
+body.dcms-infos .logo span, body.Dcms-infos .logo span {
+    text-shadow: 1px 1px 5px #5E5E5E;
+}
+
+
+body.contact .logo {
+    display: none!important;
+}
+
+
+body.dl .logo {
+    background: transparent url('../img/headers/header_download.jpg') 50% 50% no-repeat;
+    background-size: 925px 200px;
+    height: 220px;
+    width: 100%;
+    margin-top: -10px;
+}
+
+
+body.perms table, body.perms tr, body.perms td {
+    border: 0!important;
+    padding: 0;
+    margin: 0;
+}
+
+body.perms table td:first-child {
+    width: 80px;
+}
+
+
+
+
+
+table.documentation, #template-tags {
+    width: 100%;
+    border: 1px solid #F3F3F3;
+    box-shadow: 0px 1px 2px #CFCFCF;
+    background-color: #fff!important;
+}
+table.documentation thead, #template-tags thead {
+    background: #F1F1F1;
+    line-height: 24px;
+    font-size: 14px;
+    border-bottom: 1px solid #E0E0E0;
+}
+table.documentation thead th:nth-of-type(1) {
+     width: 20%;
+     overflow: hidden;
+     text-overflow: ellipsis;
+}
+table.documentation thead th:nth-of-type(2) {
+    width: 14%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+#template-tags thead th:nth-of-type(1) {
+    width: 20%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+table.documentation tbody tr, #template-tags tbody tr {
+    border-bottom: 1px solid #EAEAEA;
+}
+table.documentation tbody tr:last-child, #template-tags tbody tr:last-child {
+    border-bottom: 0;
+}
+table.documentation tbody td, #template-tags tbody td {
+    line-height: 20px;
+}
+table.documentation tbody tr:nth-of-type(even), #template-tags tbody tr:nth-of-type(even) {
+    background: #DFFFF8;
+}
+
+.doku-tags .syntaxhighlighter {
+    border: 1px solid #E0E0E0!important;
+    box-shadow: 0 1px 2px #D1D1D1;
+}
+
+.doku-tags .syntaxhighlighter .line.alt1 {
+    background-color: #DFFFF8!important;
+    border-top: 1px solid #F3F3F3!important;
+    border-bottom: 1px solid #F3F3F3!important;
+    line-height: 20px!important;
+}
+
+.doku-tags .syntaxhighlighter .line.alt2 {
+    background-color: #fff!important;
+
+}

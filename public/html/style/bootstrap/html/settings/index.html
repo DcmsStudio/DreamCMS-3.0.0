@@ -1,0 +1,162 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    <cp:if condition="$configopts.group">
+        <div id="config-buttons">
+            <cp:groupbutton label="trans('Aktion')">
+                [save:settings_frm{$configopts.group}]
+                [reset:settings_frm{$configopts.group}]
+            </cp:groupbutton>
+        </div>
+    </cp:if>
+    <cp:else>
+
+    </cp:else>
+</cp:block>
+
+
+<cp:block name="content">
+
+    <cp:if condition="$configopts.group">
+
+        <form action="admin.php" method="post" name="settings_frm{$configopts.group}" id="settings_frm{$configopts.group}">
+            <input type="hidden" name="adm" value="settings"/>
+            <input type="hidden" name="action" value="edit"/>
+            <input type="hidden" name="send" value="1"/>
+            <input type="hidden" name="type" value="{$configopts.type}"/>
+            <input type="hidden" name="group" value="{$configopts.group}"/>
+
+            <div>
+                <p>
+
+                <h2 class="gray">{$configopts.label}</h2>
+                </p>
+
+                <cp:loop name="configopts.fields" key="r">
+                    <div class="row {$r.class} {iif($r.field_label, '', ' nolabel')}">
+                        <div class="col-md-12">
+                            <label cp:is="$r.field_label">{$r.field_label}</label>
+                            {$r.field}
+                            <cp:if condition="$r.type != 'text' && $r.type != 'textarea' && $r.description">
+                                <span class="note">{$r.description}</span>
+                            </cp:if>
+                            <cp:if condition="$r.id == 'emailverifymode'">
+                                <br/>
+                            </cp:if>
+                        </div>
+                    </div>
+                </cp:loop>
+            </div>
+
+        </form>
+
+        <script type="text/javascript">
+
+
+            Form.registerForm('settings_frm{$configopts.group}', {
+                autosave: false,
+                contentIdentifierID: 'catid{$configopts.group}',
+                exiturl: 'admin.php?adm=settings'
+            });
+
+
+            $('#settings_frm{$configopts.group}').find('div.row').each(function () {
+                if (!$(this).hasClass('req')) {
+                    $(this).find('input:checkbox,input:radio').each(function () {
+                        var keyname = $(this).attr('name');
+
+                        if (($(this).is(':checked') || $(this).prop('checked') || this.checked) && ($(this).val() == 0 || $(this).val() == 'none' || $(this).val() == '')) {
+                            $('#settings_frm{$configopts.group}').find('div.req-' + keyname).hide();
+                        }
+                        else {
+                            $('#settings_frm{$configopts.group}').find('div.req-' + keyname).show();
+                        }
+                    });
+                }
+            });
+
+
+            Core.addEvent('onBeforeShow', function (content, hash) {
+
+                content.find('div.row').each(function () {
+                    if (!$(this).hasClass('req')) {
+                        var self = this;
+                        var form = $('#settings_frm{$configopts.group}');
+
+                        $(this).find('input:checkbox,input:radio').each(function () {
+
+                            var keyname = $(this).attr('name');
+
+
+                            if (($(this).is(':checked') || $(this).prop('checked') || this.checked) && ($(this).val() == 0 || $(this).val() == 'none' || $(this).val() == '')) {
+                                form.find('div.req-' + keyname).hide();
+                            }
+                            else {
+                                form.find('div.req-' + keyname).show();
+                            }
+
+
+                            form.find('input[name="' + Tools.escapeJqueryRegex(keyname) + '"]').unbind('change.opt').bind('change.opt', function (e) {
+                                var keyname = $(this).attr('name');
+                                var form = $(this).parents('form:first');
+                                if (($(this).is(':checked') || $(this).prop('checked') || this.checked) && ($(this).val() == 0 || $(this).val() == 'none' || $(this).val() == '')) {
+                                    form.find('div.req-' + keyname).hide();
+                                    console.log('Hide: ' + keyname);
+                                }
+                                else {
+                                    form.find('div.req-' + keyname).show();
+                                    console.log('Show: ' + keyname);
+                                }
+
+                                $(window).trigger('resize');
+                            });
+                        });
+                    }
+
+                });
+
+            });
+
+
+        </script>
+
+
+    </cp:if>
+    <cp:else>
+        <div id="cfg-groups">
+            <cp:loop name="configgroups" key="gr">
+                <div class="cfg-group">
+                    <div>
+                        <strong>{$gr.title}</strong>
+
+                        <div>
+                            <cp:loop name="gr.items" key="r">
+                                <div class="cfg-btn" data-url="{$r.url}&type={$gr.type}">
+                                    <div class="cfg-icon"><img src="{$r.icon}"/></div>
+                                    <span>{$r.title}</span>
+                                </div>
+
+                            </cp:loop>
+                        </div>
+                    </div>
+                </div>
+            </cp:loop>
+        </div>
+
+        <div id="config-content"></div>
+
+        <script type="text/javascript">
+
+
+
+            $('#cfg-groups', $('#' + Win.windowID)).find('div.cfg-btn').unbind('click').bind('click', function (e) {
+                e.preventDefault();
+                console.log($(this).attr('data-url'));
+                openTab({url: $(this).attr('data-url'), obj: this, label: $(this).find('span').text(), isSingleWindow: true});
+            });
+
+        </script>
+
+    </cp:else>
+</cp:block>

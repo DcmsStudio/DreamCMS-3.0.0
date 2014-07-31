@@ -1,0 +1,136 @@
+<cp:set var="mediabrowser" value="mediaBrowser2-"/>
+
+    <div class="toolbar">
+    <div id="{$mediabrowser}std-btn">
+        <button class="action-button" id="{$mediabrowser}add-file-btn">
+            <img src="html/style/default/img/fileman/add.png" width="16" height="16" alt="" /> {trans('Datei Erstellen')}
+        </button>
+        <button class="action-button" id="{$mediabrowser}add-folder-btn">
+            <img src="html/style/default/img/fileman/folder_add.png" width="16" height="16" alt="" /> {trans('Verzeichnis Erstellen')}
+        </button>
+        <button class="action-button" id="{$mediabrowser}delete-btn">
+            <img src="html/style/default/img/fileman/delete.png" width="16" height="16" alt="" /> {trans('Löschen')}
+        </button>
+        <button class="action-button" id="{$mediabrowser}edit-file-btn">
+            <img src="html/style/default/img/edit.png" width="16" height="16" alt="" /> {trans('Bearbeiten')}
+        </button>
+        <button class="action-button" id="{$mediabrowser}rename-btn">
+            <img src="html/style/default/img/fileman/rename.png" width="16" height="16" alt="" /> {trans('Umbenennen')}
+        </button>
+        <button class="action-button" id="{$mediabrowser}zip-btn">
+            <img src="html/style/default/img/buttons/zip.png" width="16" height="16" alt="" /> {trans('Zip Datei erstellen')}
+        </button>
+        <button class="action-button" id="{$mediabrowser}upload-btn">
+            <img src="html/style/default/img/fileman/folder_go.png" width="16" height="16" alt="" /> {trans('Upload')}
+        </button>
+    </div>
+    
+    <!-- View Mode -->
+    <div id="{$mediabrowser}back-btn" style="float:left;display:none">
+        <button class="action-button" id="{$mediabrowser}fm-exitbtn">
+            <img src="html/style/default/img/back.png" width="16" height="16" alt="" /> {trans('Zurück')}
+        </button>
+    </div>
+    
+    <!-- View Mode -->
+    <div id="{$mediabrowser}edit-add-btn" style="float:left;display:none">
+        
+        <button class="action-button" id="{$mediabrowser}save-filebtn">
+            <img src="html/style/default/img/buttons/save.png" width="16" height="16" alt="" /> {trans('Speichern')}
+        </button>
+        
+        <button class="action-button" id="{$mediabrowser}save-exitfilebtn">
+            <img src="html/style/default/img/buttons/save.png" width="16" height="16" alt="" /> {trans('Speichern & Schließen')}
+        </button>
+        
+        <button class="action-button" id="{$mediabrowser}reset-filebtn">
+            <img src="html/style/default/img/refresh.png" width="16" height="16" alt="" /> {trans('Zurücksetzen')}
+        </button>
+    </div>
+    <div id="{$mediabrowser}copymove_container">
+        <div id="copymove_cache">
+            <div id="{$mediabrowser}copy_cache" style="display:none"><img src="html/style/default/img/folder_page.png" width="16" height="16" alt="" /></div>
+            <div id="{$mediabrowser}move_cache" style="display:none"><img src="html/style/default/img/forward.png" width="16" height="16" alt="" /></div>        
+        </div>
+    </div>
+    <div id="viewmode_container">
+        <img id="mode_smaller" src="html/style/default/img/fileman/view_list.png" width="16" height="16" alt="" title="List View"/> 
+        <img id="mode_larger" src="html/style/default/img/fileman/view_largelist.png" width="16" height="16" alt="" title="Thumb List View" />    
+    </div>
+        
+    </div>
+
+    
+
+<div style="width:100%; display:block; padding:5px">
+    <div id="{$mediabrowser}file-info">
+        <div>
+            <strong>{trans('Path')}</strong>: <a class="file-path-button file-path-root">Root</a>
+            <span id="{$mediabrowser}path-container"></span>
+        </div>
+    </div>
+    
+    <div id="{$mediabrowser}fmOuterContainer">
+        <div id="{$mediabrowser}upload-container" style="display:none"></div>
+        <div id="{$mediabrowser}fmContainer"></div>
+        <div id="{$mediabrowser}fmFileView" style="display:none"></div>
+        <div id="{$mediabrowser}fmFileEditAdd" style="display:none">
+            <form id="{$mediabrowser}FileEditAdd_form" name="FileEditAdd_form" action="">
+                <fieldset>
+                    <legend>{trans('Dateiname')}</legend>
+                    <input class="input" type="text" id="filename" name="filename" value="" size="72" maxlength="80" />        
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Inhalt')}</legend>                    
+                    <textarea class="textarea" cols="30" rows="20" name="filecontent" id="filecontent"></textarea>
+                </fieldset>    
+            </form>
+        </div>
+        <div id="{$mediabrowser}fileInformation">
+            
+        </div>
+    </div>
+</div>
+
+<ul id="{$mediabrowser}FileContexMenu" class="dcmscontextmenu">
+    <li><a href="#edit" id="file_edit"><span class="file_edit"></span>Edit</a></li>
+    <li><a href="#cut" id="file_cut"><span class="file_cut"></span>Cut</a></li>
+    <li><a href="#copy" id="file_copy"><span class="file_copy"></span>Copy</a></li>
+    <li><a href="#past" id="file_paste"><span class="file_paste"></span>Paste</a></li>
+    <li><a href="#delete" id="file_delete"><span class="file_delete"></span>Delete</a></li>            
+    <li class="separator"><div class="menu-separator"></div></li>            
+    <li><a href="#addfolder" id="file_addfolder"><span class="file_addfolder"></span>Create Folder</a></li>                
+    <li><a href="#addfile" id="file_addfile"><span class="file_addfile"></span>Create File</a></li>
+    <li class="separator"><div class="menu-separator"></div></li>            
+    <li><a href="#refresh" id="file_refresh"><span class="file_refresh"></span>Refresh</a></li>            
+</ul>
+
+<!-- <script type="text/javascript" language="javascript" src="html/js/backend/dcmsfileman.js"></script> -->
+    <script type="text/javascript" language="javascript">
+
+dcmsFileman = null;
+    var dcmsFileman2 = new dcmsFileman();
+    dcmsFileman2.init({
+        object: '{$mediabrowser}fmContainer',
+        data_url: cmsurl + 'admin.php?adm=jqfiletree&ajax=1&readdir=',
+        path: '{iif($path != "", $path, '/')}',
+        image_types: 'jpg,jpeg,png,gif',
+        movie_types: 'swf,fly,flv,avi,mpg,mpeg',
+        client_source_path: 'html/',
+        isImgBrowser: true, media: true
+    });
+
+    dcmsFileman2.getData('{iif($path != "", $path, '/')}', ('{$path}' ? true : false) );
+
+    $('#maincontent').bind('click', function(e) { dcmsFileman2.deselectNodes(e, dcmsFileman2); });
+
+
+    </script>
+
+
+
+
+
+
+

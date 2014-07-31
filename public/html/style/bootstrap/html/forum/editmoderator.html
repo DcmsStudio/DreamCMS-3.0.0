@@ -1,0 +1,80 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:admmod{$mod.modid}] [save_exit:admmod{$mod.modid}]
+        [reset:admmod{$mod.modid}] [cancel:admmod{$mod.modid}]</cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+    <form action="admin.php" name="admmod{$mod.modid}" id="admmod{$mod.modid}" method="post">
+        <input type="hidden" name="adm" value="plugin"/>
+        <input type="hidden" name="plugin" value="forum"/>
+        <input type="hidden" name="action" value="{$input.action}"/>
+        <input type="hidden" name="send" value="1"/>
+        <input type="hidden" name="forumid" value="{$forum.forumid}"/>
+        <input type="hidden" name="id" id="mod-id{$mod.modid}" value="{$mod.modid}"/>
+
+        <div class="box description">
+            <div class="box-inner">
+                <fieldset>
+                    <legend>{trans('Benutzer')}</legend>
+                    <input type="hidden" name="userid" id="mod-userid{$mod.modid}" value="{$mod.userid}"/>
+                    <input type="text" name="username" id="forummods-username" value="{$mod.username}" size="70" />
+                    <br/>
+                    <label for="cbk-published">
+                        <input type="checkbox" id="cbk-published" name="published" value="1" cp:on="checked:$mod.published" parse:checked="checked" /> {trans('Moderator ist Aktiviert')}
+                    </label>
+                </fieldset>
+
+
+                <fieldset>
+                    <legend>{trans('Berechtigungen des Moderators')}</legend>
+                    <cp:loop name="permissions" key="r">
+                        <label for="cbk-{$r.name}">
+                            <input type="checkbox" id="cbk-{$r.name}" name="perm[{$r.name}]" value="1" cp:on="checked:$r.value" parse:checked="checked" /> {$r.label}
+                        </label>
+                        <br/>
+                    </cp:loop>
+
+                </fieldset>
+
+            </div>
+        </div>
+
+
+    </form>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $('#forummods-username').dcmsAutocomplete({
+                // container: $('#forummods-autocomplete{$mod.modid}'),
+                url: 'admin.php',
+                minlength: 2,
+                onClick: function(e)
+                {
+                    $('#forummods-username').val(($(e.target).is('li') ? $(e.target).text().trim() : $(e.target).parents('li:first').text().trim()));
+                    $('#mod-userid{$mod.modid}').val(($(e.target).is('li') ? $(e.target).attr('rel') : $(e.target).parents('li:first').attr('rel')));
+                    $('#forummods-autocomplete{$mod.modid}').hide();
+                },
+                postparams: {
+                    adm: 'plugin',
+                    plugin: 'forum',
+                    action: '{$input.action}',
+                    getUser: true
+                }
+            });
+
+            Form.registerForm('admmod{$mod.modid}', {
+                contentIdentifierID: 'mod-id{$mod.modid}',
+                exiturl: 'admin.php?adm=plugin&plugin=forum&action=managemods',
+                identifierType: 'forum'
+            });
+        });
+
+
+    </script>
+</cp:block>

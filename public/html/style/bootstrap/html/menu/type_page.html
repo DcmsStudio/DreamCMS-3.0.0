@@ -1,0 +1,38 @@
+            
+<fieldset>
+    <legend>{trans('Link zur `Statischen Seite`')}</legend>
+    {info:menutypes|page}
+    <input type="hidden" name="staticpage" id="staticpage" value=""/>
+    <select name="page" id="static-page" style="width:99%">
+        <cp:loop name="pages" key="r">
+            <option rel="{escape($r.basetitle, 'quotes')}||{$r.id}" value="{$r.alias}.{$r.suffix}" cp:on="selected:$r.pagelink == $link || $r.contentid == $r.id" parse:selected="selected"> {$r.title}</option>
+        </cp:loop>
+    </select>
+    <br/><small>{trans('Die Angabe des Titels ist nur obligatorisch, da der Titel der ausgewählten Seite verwendet wird!')}</small>
+</fieldset>
+
+
+
+<script language="javascript" type="text/javascript">
+
+
+        $('input[name="alias"]').attr('disabled', true);
+        $('select[name="suffix"]').attr('disabled', true);
+
+        var sel = $.trim( $('#static-page').find(':selected').attr('rel') );
+        var sels = sel.split('||');
+        $('#staticpage').val( parseInt(sels[1]) );
+
+
+        $('#static-page').change(function(){
+            var sel = $.trim( $(this).find(':selected').attr('rel') );
+            var sels = sel.split('||');
+            $('#thisname').val( sels[0] );
+            $('#staticpage').val( parseInt(sels[1]) );
+            var value = $(this).find(':selected').val();
+            value = value.split('.');
+            $('input[name="oldalias"]').val(value[0]);
+            $('input[name="oldsuffix"]').val(value[1]);
+        });
+
+</script>

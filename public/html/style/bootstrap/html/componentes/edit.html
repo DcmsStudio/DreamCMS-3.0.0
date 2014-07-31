@@ -1,0 +1,155 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:if condition="$component.id > 0">[save:action_form{$component.id}]</cp:if>
+    [save_exit:action_form{$component.id}]
+    [cancel:action_form{$component.id}]
+
+</cp:block>
+
+<cp:block name="content">
+
+    <form action="admin.php" method="post" id="action_form{$component.id}" name="action_form{$component.id}">
+        <input type="hidden" name="adm" value="component"/>
+        <input type="hidden" name="action" value="save"/>
+        <input type="hidden" name="ajax" value="1"/>
+        <input type="hidden" id="com-id{$component.id}" name="id" value="{$component.id}"/>
+
+
+        <div>
+            <cp:jstabs tabs="trans('Allgemein'),trans('Code')" usetrans="true" default="Allgemein"/>
+        </div>
+
+
+        <div id="tc0" class="m10">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{trans("Titel der Komponente")}</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{escape($component.name, 'quotes')}" size="80"/>
+                </div>
+
+                <div class="col-md-6">
+                    <label>{trans("Kategorie")}</label>
+                    <select class="form-control" name="category" id="category">
+
+                        <cp:loop name="categories" key="cat">
+                            <option value="{$cat.id}" cp:on="selected:$component.category == $cat.id" parse:selected="selected">{$cat.name}</option>
+                        </cp:loop>
+
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label>{trans("Beschreibung")}</label>
+                    <textarea class="form-control" id="description" name="description" cols="80" rows="4" style="height: 60px;">{$component.description}</textarea>
+                    <span class="note">{trans('Hier können Sie zu besseren Übersicht eine kurze Bechreibung eintragen')}</span>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{trans("Datei Laden")}</label>
+                    <span class="note warn">{trans('Dies ist zur Zeit noch nicht Implementiert')}</span>
+                    <div id="upload-control"></div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="tc1" class="use-nopadding" style="display: none">
+            <textarea id="component{$component.id}" name="component" cols="40" rows="25" class="sourceEdit mode-php mono">{$component.component}</textarea>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+
+
+        Form.registerForm( 'action_form{$component.id}', {
+            contentIdentifierID: 'com-id',
+            exiturl: 'admin.php?adm=component',
+            save: function ( exit )
+            {
+                saveComponente( exit );
+            }
+        } );
+
+        if ( typeof saveComponente == 'undefined' ) {
+            function saveComponente( exit )
+            {
+
+                var aceEdit = $( '#' + Win.windowID ).find( '#component{$component.id}' ).data( 'ace' );
+
+                if ( !aceEdit ) {
+                    Debug.error( 'Invalid Ace Editor' );
+                    return false;
+                }
+
+                $( '#' + Win.windowID ).mask( '{trans("Komponente Speichern...")}'
+                )
+                ;
+                $( '#component{$component.id}', $( '#' + Win.windowID ) ).val( aceEdit.getValue() );
+
+                var post = $( '#action_form{$component.id}' ).serialize();
+                $.post( "admin.php", post, function ( data )
+                {
+
+                    $( '#' + Win.windowID ).unmask();
+
+                    if ( Tools.responseIsOk( data ) ) {
+                        if ( typeof data.newid != 'undefined' ) {
+                            $( '#com-id{$component.id}' ).val( data.newid );
+                        }
+
+                        if ( typeof data.msg != 'undefined' && data.msg != '' ) {
+                            Notifier.display( 'info', data.msg );
+                        }
+                        else {
+                            Notifier.display( 'info', "Komponente wurde gespeichert." );
+                        }
+
+                        Form.resetDirty( $( '#action_form{$component.id}' ) );
+
+                        if ( exit ) {
+                            var opener = $( '#' + Win.windowID ).attr( 'opener' );
+
+                            setTimeout( function ()
+                            {
+                                $( '#' + opener ).data( 'WindowManager' ).focus();
+                                $( '#' + opener ).data( 'WindowManager' ).ReloadWindow();
+                            }, 300 );
+
+                            $( '#' + Win.windowID ).data( 'WindowManager' ).close();
+                        }
+                    }
+                    else {
+                        jAlert( data.msg, 'Fehler...', function ()
+                        {
+                            Notifier.display( 'warn', 'Daten können nicht gespeichert werden...', true );
+                        } );
+                    }
+                }, 'json' );
+            }
+
+            function prepareContent()
+            {
+                $.pagemask.show( strings.working );
+            }
+
+            function setContent( data )
+            {
+                $( '#component{$component.id}' ).val( data.content );
+                $.pagemask.hide();
+            }
+        }
+
+        Win.redrawWindowHeight( Win.windowID, true );
+
+    </script>
+
+
+</cp:block>

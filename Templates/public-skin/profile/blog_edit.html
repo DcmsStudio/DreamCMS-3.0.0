@@ -1,0 +1,101 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+    <cp:if condition="$error">
+        <div class="error">
+            <div>
+                {$error}
+            </div>
+        </div>
+    </cp:if>
+    <cp:elseif condition="$notifier">
+    
+        <div class="notifier">
+            <div>
+                {$notifier}
+            </div>
+        </div>
+    
+    </cp:elseif>
+    <cp:else>
+        <form id="blog-edit-form" action="user/blog/{$bloguser.username}" method="post">
+            <input type="hidden" name="userid" value="{$bloguser.userid}" />
+            <input type="hidden" name="id" value="{$blogdata.id}" />
+            <input type="hidden" name="do" value="{iif($input.do == 'add', 'add', 'edit')}" />
+            <input type="hidden" name="send" value="1" />
+            <fieldset>
+                <legend>
+                    {trans('Titel')} *
+                </legend>
+                <input type="text" name="title" size="50" value="{$blogdata.title}" style="width: 98.5%"/>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    {trans('Teaser')}
+                    <small>
+                        (Optional)
+                    </small>
+                </legend>
+                <cp:include template="bbcode/bbcode_toolbar_comments" />
+                <textarea class="textarea bbcode-textarea" name="teaser" rows="5" cols="40" placeholder="{trans('Teaser')}">
+                    {$blogdata.teaser}
+</textarea>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    {trans('Inhalt')} *
+                </legend>
+                <cp:include template="bbcode/bbcode_toolbar_comments" />
+                <textarea class="textarea bbcode-textarea" name="content" rows="20" cols="40" placeholder="{trans('Inhalt')} *">{$blogdata.content}
+</textarea>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    {trans('Optionen')}
+                </legend>
+                <label for="usefor-0">
+                    <input type="radio" name="usefor" id="usefor-0" value="0" cp:on="checked:empty($blogdata.permission)" parse:checked="checked"/>
+                    {trans('Für alle sichtbar')}
+                </label>
+                <label for="usefor-1">
+                    <input type="radio" name="usefor" id="usefor-1" value="1" cp:on="checked:$blogdata.permission == 1" parse:checked="checked"/>
+                    {trans('Für alle registrierten Benutzer')}
+                </label>
+                <label for="usefor-2">
+                    <input type="radio" name="usefor" id="usefor-2" value="2" cp:on="checked:$blogdata.permission == 2" parse:checked="checked"/>
+                    {trans('Nur für Freunde')}
+                </label>
+                <div style="margin-top: 5px">
+                    <label for="commenting">
+                        <input type="checkbox" name="cancomment" id="commenting" value="1" cp:on="checked:$blogdata.cancomment" parse:checked="checked"/>
+                        {trans('Kommentierbar')}
+                    </label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    {trans('Inhalt veröffentlichen')}
+                </legend>
+                <label for="publish">
+                    <input type="checkbox" name="published" id="publish" value="1" cp:on="checked:$blogdata.published" parse:checked="checked"/>
+                    {trans('veröffentlichen')}
+                </label>
+            </fieldset>
+            <button type="button" id="send">
+                {trans('Speichern')}
+            </button>
+        </form>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                if (typeof userblog == 'function') {
+                    var blog = new userblog({
+                        formid: 'blog-edit-form'
+                    });
+                    blog.init();
+                }
+                
+                
+                
+            });
+        </script>
+    </cp:else>
+</cp:block>

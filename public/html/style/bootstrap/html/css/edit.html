@@ -1,0 +1,179 @@
+<cp:extends template="../main"/>
+<cp:block name="inlinecss">
+    <link rel="stylesheet" href="{$backend_css_url}colorpicker.css" type="text/css"/>
+</cp:block>
+
+<cp:block name="toolbar">
+
+    [save:cssedit] [save_exit:cssedit]
+    [reset:cssedit] [cancel:cssedit]
+</cp:block>
+
+<cp:block name="content">
+
+    <form action="admin.php" name="cssedit" id="cssedit" method="post">
+        <input type="hidden" name="adm" value="css"/>
+        <input type="hidden" name="ajaxfields" id="ajaxfields" value="{$ajaxfields}"/>
+        <input type="hidden" name="action" value="edit"/>
+        <input type="hidden" name="styleid" id="styleid" value="{$styleid}"/>
+        <input type="hidden" name="id" id="id" value="{$id}"/>
+        <input type="hidden" name="send" value="1"/>
+
+
+        <cp:loop name="groups" key="group">
+
+            <div class="box" id="{$group.fieldname}">
+                <h2>
+                    <cp:if condition="$group.fieldonclick">
+                        <label for="cbx_{$group.fieldname}">
+                            <input class="group-toggle" type="checkbox" name="cbx_{$group.fieldname}" id="cbx_{$group.fieldname}" value="1"{$group.fieldonclick} {iif($group.fieldvalue, ' checked="checked"', '')}/>
+                    </cp:if>
+
+                    {$group.fieldlabel}
+                    <cp:if condition="$group.fielddescription"><br/>
+                        <small>{$group.fielddescription}</small>
+                    </cp:if>
+                    <cp:if condition="$group.fieldonclick"></label></cp:if>
+                </h2>
+
+                <div class="box-inner" id="sub_{$group.fieldname}">
+                    <cp:if condition="is_array($group.fields)">
+                        <cp:loop name="group.fields" key="f">
+
+                            <fieldset>
+                                <legend>{$f.legend}</legend>
+                                <cp:if condition="$f.type == 'text'">
+                                    <input type="text"
+                                    <cp:if condition="$f.iscolor"> id="color-{$f.inputname}-{$f.field}"</cp:if>
+                                    name="{$f.inputname}[{$f.field}]" value="{escape($f.value)}"{iif($f.iscolor, ' size="20"', ' size="70"')}{iif($f.iscolor, ' class="color-input"', '')}/>
+
+                                    <cp:if condition="$f.options">
+                                        {$f.options}
+                                    </cp:if>
+
+                                </cp:if>
+                                <cp:elseif condition="$f.type == 'checkbox'">
+
+                                    <cp:if condition="count( $f.options )">
+                                        <cp:loop name="f.options" key="r">
+                                            <label for="{$f.field}-{$r.value}"><input type="checkbox" name="{$f.inputname}[{$f.field}][]" value="{$r.value}" id="{$f.field}-{$r.value}"{iif($r.checked, ' checked="checked"', '')} /> {$r.label}</label>
+                                        </cp:loop>
+                                    </cp:if>
+                                    <cp:else>
+                                        <label for="{$f.field}-{$r.value}"><input type="checkbox" name="{$f.inputname}[{$f.field}]" id="{$f.field}-{$r.value}" value="1"{iif($f.value, ' checked="checked"', '')} /> {$f.label}</label>
+                                    </cp:else>
+                                </cp:elseif>
+                                <cp:elseif condition="$f.type == 'textarea'">
+                                    <textarea name="{$f.inputname}[{$f.field}]" rows="5" cols="50">{escape($f.value)}</textarea>
+                                </cp:elseif>
+                                <cp:elseif condition="$f.type == 'trbl'">
+
+                                    <cp:loop name="f.trbls" key="r">
+                                        <input type="text" name="{$f.inputname}[{$f.field}][{$r.name}]" value="{escape($r.value)}" id="{$f.field}-{$r.name}" maxlength="{$r.maxlength}" size="4" style="margin-right: 2px"/>
+                                    </cp:loop>
+
+                                    <cp:if condition="$f.options">
+                                        {$f.options}
+                                    </cp:if>
+
+                                </cp:elseif>
+                                <cp:elseif condition="$f.type == 'inputUnit'">
+                                    <input type="text" name="{$f.inputname}[{$f.field}]" value="{escape($f.value)}" size="6"/>
+
+                                    <cp:if condition="$f.options">
+                                        {$f.options}
+                                    </cp:if>
+
+                                </cp:elseif>
+                                <cp:elseif condition="$f.type == 'select'">
+                                    <select name="{$f.inputname}[{$f.field}]">
+                                        <cp:loop name="f.options" key="select">
+                                            <option value="{$select.value}"
+                                            {iif($select.value == $f.value, ' selected="selected"', '')}>{$select.title}</option>
+                                        </cp:loop>
+                                    </select>
+                                </cp:elseif>
+                                <cp:else>
+
+                                </cp:else>
+
+                                <cp:if condition="$f.legend_description">
+                                    <br/>
+                                    <small>{$f.legend_description}</small>
+                                </cp:if>
+                            </fieldset>
+
+                        </cp:loop>
+                    </cp:if>
+                    <cp:else>
+
+                        <cp:if condition="$group.fieldtype == 'text'">
+                            <input type="text"
+                            <cp:if condition="$group.iscolor"> id="color-{$group.inputname}-{$group.fieldname}"</cp:if>
+                            name="{$group.inputname}[{$group.fieldname}]" value="{escape($group.fieldvalue)}"{iif($group.iscolor, ' size="20"', ' size="70"')}{iif($group.iscolor, ' class="color-input"', '')}/>
+
+                            <cp:if condition="$group.fieldoptions">
+                                {$group.fieldoptions}
+                            </cp:if>
+
+                        </cp:if>
+                        <cp:elseif condition="$group.fieldtype == 'textarea'">
+                            <textarea name="{$group.inputname}[{$group.fieldname}]" rows="5" cols="50">{escape($group.fieldvalue)}</textarea>
+                        </cp:elseif>
+                    </cp:else>
+                </div>
+            </div>
+        </cp:loop>
+
+    </form>
+
+    <script type="text/javascript">
+
+        $( document ).ready( function ()
+        {
+
+            $( '#cssedit' ).registerForm( {
+                contentIdentifierID: 'styleid',
+                exiturl: 'admin.php?adm=css&action=list&styleid={$styleid}&c={$_c}&s={$_s}'
+            } );
+
+            $( '.group-toggle' ).each( function ()
+            {
+                if ( !$( this ).is( ':checked' ) ) {
+                    $( this ).parents( 'div.box:first' ).find( 'div.box-inner:first' ).hide();
+                }
+            } );
+
+            $( 'input.color-input' ).each( function ()
+            {
+                $( this ).parents( 'fieldset:first' ).addClass( 'custom-skin' );
+                $( this ).ColorPicker( {
+                    onSubmit: function ( hsb, hex, rgb, el )
+                    {
+                        $( el ).val( '#' + hex );
+                        $( el ).ColorPickerHide();
+                    },
+                    onShow: function ( colpkr )
+                    {
+                        $( colpkr ).fadeIn( 300 );
+                        return false;
+                    },
+                    onHide: function ( colpkr )
+                    {
+                        $( colpkr ).fadeOut( 300 );
+                        return false;
+                    },
+
+                    onBeforeShow: function ()
+                    {
+                        $( this ).ColorPickerSetColor( this.value );
+                    }
+                } ).bind( 'keyup', function ()
+                        {
+                            $( this ).ColorPickerSetColor( this.value );
+                        } );
+            } );
+        } );
+
+    </script>
+</cp:block>

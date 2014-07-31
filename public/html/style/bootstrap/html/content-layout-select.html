@@ -1,0 +1,14 @@
+
+<cp:if condition="is_array($layouts)">
+    <filedset>
+        <legend>{trans('Layout des Inhalts')}</legend>
+        <select name="content-layout">
+            <option value="" cp:on="selected:empty($contentlayout)" parse:selected="selected">---</option>
+            <cp:loop name="layouts" key="r">
+                <cp:if condition="$r.skintitle"><option value="{$r.id}" cp:on="selected:$contentlayout == $r.id" parse:selected="selected">{$r.skintitle} - {$r.title}</option></cp:if>
+            </cp:loop>
+        </select>
+        
+        <br/><span>Optional</span>
+    </filedset>
+</cp:if>

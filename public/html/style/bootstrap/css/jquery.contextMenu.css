@@ -1,0 +1,26 @@
+/* Generic context menu styles */
+
+/*
+	Adding Icons
+	
+	You can add icons to the context menu by adding
+	classes to the respective LI element(s)
+*/
+
+.file_edit { background-image: url(../img/context/page_white_edit.png); }
+.file_cut { background-image: url(../img/context/cut.png); }
+.file_copy { background-image: url(../img/context/page_white_copy.png); }
+.file_paste { background-image: url(../img/context/page_white_paste.png); }
+.file_delete { background-image: url(../img/context/page_white_delete.png); }
+.file_addfolder { background-image: url(../img/context/folder-add.png); }
+.file_editfolder { background-image: url(../img/context/folder-edit.png); }
+.file_refresh { background-image: url(../img/context/refresh.png); }
+.file_addfile { background-image: url(../img/context/file-add.png); }
+
+
+ul.dcmscontextmenu{
+    display: none;
+}
+ul.dcmscontextmenu li{
+	float:none;
+}

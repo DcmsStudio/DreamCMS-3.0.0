@@ -1,0 +1,181 @@
+.menu-sprite {
+
+    background-image: url('../img/menu/menu-sprite.png')!important;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    width: 16px!important;
+    height: 16px!important;
+    display: inline-block;
+    float: left;
+    top: 2px;
+    position: relative;
+    
+    -webkit-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter:grayscale(100%);
+}
+
+.menu-sprite.administration{ background-position: 0 0;  } 
+.menu-sprite.app-categories{ background-position: 0 -21px!important;  } 
+.menu-sprite.app-contents{ background-position: 0 -42px!important;  } 
+.menu-sprite.app-history{ background-position: 0 -63px!important;  } 
+.menu-sprite.app-settings{ background-position: 0 -84px!important;  } 
+.menu-sprite.application-form{ background-position: 0 -105px!important;  } 
+.menu-sprite.application-image{ background-position: 0 -126px!important;  } 
+.menu-sprite.applications{ background-position: 0 -147px!important;  } 
+.menu-sprite.assets{ background-position: 0 -168px!important;  } 
+.menu-sprite.backup{ background-position: 0 -189px!important;  } 
+.menu-sprite.bin{ background-position: 0 -210px!important;  } 
+.menu-sprite.blog-pencil{ background-position: 0 -231px!important;  } 
+.menu-sprite.blog-plus{ background-position: 0 -252px!important;  } 
+.menu-sprite.blogs{ background-position: 0 -273px!important;  } 
+.menu-sprite.blue-document-globe{ background-position: 0 -294px!important;  } 
+.menu-sprite.box{ background-position: 0 -315px!important;  } 
+.menu-sprite.brick{ background-position: 0 -336px!important;  } 
+.menu-sprite.bricks{ background-position: 0 -357px!important;  } 
+.menu-sprite.bug{ background-position: 0 -378px!important;  } 
+.menu-sprite.bug_add{ background-position: 0 -399px!important;  } 
+.menu-sprite.bug_error{ background-position: 0 -420px!important;  } 
+.menu-sprite.building{ background-position: 0 -441px!important;  } 
+.menu-sprite.building_add{ background-position: 0 -462px!important;  } 
+.menu-sprite.calendar_view_day{ background-position: 0 -483px!important;  } 
+.menu-sprite.chart_bar{ background-position: 0 -504px!important;  } 
+.menu-sprite.chart_bar_add{ background-position: 0 -525px!important;  } 
+.menu-sprite.chart_curve{ background-position: 0 -546px!important;  } 
+.menu-sprite.chart_organisation{ background-position: 0 -567px!important;  } 
+.menu-sprite.coins{ background-position: 0 -588px!important;  } 
+.menu-sprite.comments{ background-position: 0 -609px!important;  } 
+.menu-sprite.component{ background-position: 0 -630px!important;  } 
+.menu-sprite.computer{ background-position: 0 -651px!important;  } 
+.menu-sprite.content-provider{ background-position: 0 -672px!important;  } 
+.menu-sprite.content{ background-position: 0 -693px!important;  } 
+.menu-sprite.control_pause{ background-position: 0 -714px!important;  } 
+.menu-sprite.controller{ background-position: 0 -735px!important;  } 
+.menu-sprite.controller_add{ background-position: 0 -756px!important;  } 
+.menu-sprite.coretags{ background-position: 0 -777px!important;  } 
+.menu-sprite.credits{ background-position: 0 -798px!important;  } 
+.menu-sprite.cutter{ background-position: 0 -819px!important;  } 
+.menu-sprite.database-delete{ background-position: 0 -840px!important;  } 
+.menu-sprite.database{ background-position: 0 -861px!important;  } 
+.menu-sprite.database_gear{ background-position: 0 -882px!important;  } 
+.menu-sprite.database_go{ background-position: 0 -903px!important;  } 
+.menu-sprite.database_lightning{ background-position: 0 -924px!important;  } 
+.menu-sprite.database_refresh{ background-position: 0 -945px!important;  } 
+.menu-sprite.downloads{ background-position: 0 -966px!important;  } 
+.menu-sprite.email_go{ background-position: 0 -987px!important;  } 
+.menu-sprite.emoticon_grin{ background-position: 0 -1008px!important;  } 
+.menu-sprite.emoticon_tongue{ background-position: 0 -1029px!important;  } 
+.menu-sprite.error_go{ background-position: 0 -1050px!important;  } 
+.menu-sprite.event{ background-position: 0 -1071px!important;  } 
+.menu-sprite.folder_add{ background-position: 0 -1092px!important;  } 
+.menu-sprite.folder_key{ background-position: 0 -1113px!important;  } 
+.menu-sprite.folder_user{ background-position: 0 -1134px!important;  } 
+.menu-sprite.group_add{ background-position: 0 -1155px!important;  } 
+.menu-sprite.group_default{ background-position: 0 -1176px!important;  } 
+.menu-sprite.group_edit{ background-position: 0 -1197px!important;  } 
+.menu-sprite.group_key{ background-position: 0 -1218px!important;  } 
+.menu-sprite.help{ background-position: 0 -1239px!important;  } 
+.menu-sprite.house{ background-position: 0 -1260px!important;  } 
+.menu-sprite.icons{ background-position: 0 -1281px!important;  } 
+.menu-sprite.iconthemes{ background-position: 0 -1302px!important;  } 
+.menu-sprite.image_add{ background-position: 0 -1323px!important;  } 
+.menu-sprite.image_edit{ background-position: 0 -1344px!important;  } 
+.menu-sprite.images{ background-position: 0 -1365px!important;  } 
+.menu-sprite.inbox{ background-position: 0 -1386px!important;  } 
+.menu-sprite.information{ background-position: 0 -1407px!important;  } 
+.menu-sprite.interface_preferences{ background-position: 0 -1428px!important;  } 
+.menu-sprite.layout{ background-position: 0 -1449px!important;  } 
+.menu-sprite.layout_content{ background-position: 0 -1470px!important;  } 
+.menu-sprite.layout_edit{ background-position: 0 -1491px!important;  } 
+.menu-sprite.layout_sidebar{ background-position: 0 -1512px!important;  } 
+.menu-sprite.lightbulb{ background-position: 0 -1533px!important;  } 
+.menu-sprite.link_break{ background-position: 0 -1554px!important;  } 
+.menu-sprite.link_edit{ background-position: 0 -1575px!important;  } 
+.menu-sprite.link_error{ background-position: 0 -1596px!important;  } 
+.menu-sprite.link_go{ background-position: 0 -1617px!important;  } 
+.menu-sprite.locale{ background-position: 0 -1638px!important;  } 
+.menu-sprite.lock_edit{ background-position: 0 -1659px!important;  } 
+.menu-sprite.lorry{ background-position: 0 -1680px!important;  } 
+.menu-sprite.lorry_add{ background-position: 0 -1701px!important;  } 
+.menu-sprite.mail-all{ background-position: 0 -1722px!important;  } 
+.menu-sprite.mainmenu{ background-position: 0 -1743px!important;  } 
+.menu-sprite.medal_silver{ background-position: 0 -1763px!important;  } 
+.menu-sprite.medal_silver_add{ background-position: 0 -1784px!important;  } 
+.menu-sprite.menues{ background-position: 0 -1805px!important;  } 
+.menu-sprite.network-firewall{ background-position: 0 -1842px!important;  } 
+.menu-sprite.newspaper{ background-position: 0 -1863px!important;  } 
+.menu-sprite.newspaper_add{ background-position: 0 -1884px!important;  } 
+.menu-sprite.overview{ background-position: 0 -1905px!important;  } 
+.menu-sprite.package_add{ background-position: 0 -1926px!important;  } 
+.menu-sprite.package_go{ background-position: 0 -1947px!important;  } 
+.menu-sprite.packages{ background-position: 0 -1968px!important;  } 
+.menu-sprite.page_add{ background-position: 0 -1989px!important;  } 
+.menu-sprite.page_green{ background-position: -37px 0;  } 
+.menu-sprite.page_red{ background-position: -37px -21px!important;  } 
+.menu-sprite.page_white_code{ background-position: -37px -42px!important;  } 
+.menu-sprite.page_white_code_red{ background-position: -37px -63px!important;  } 
+.menu-sprite.page_white_compressed{ background-position: -37px -84px!important;  } 
+.menu-sprite.page_white_medal{ background-position: -37px -105px!important;  } 
+.menu-sprite.page_white_php{ background-position: -37px -126px!important;  } 
+.menu-sprite.page_white_swoosh{ background-position: -37px -147px!important;  } 
+.menu-sprite.page_white_wrench{ background-position: -37px -168px!important;  } 
+.menu-sprite.palette{ background-position: -37px -189px!important;  } 
+.menu-sprite.pencil-field{ background-position: -37px -210px!important;  } 
+.menu-sprite.plugin-management{ background-position: -37px -231px!important;  } 
+.menu-sprite.plugin-run{ background-position: -37px -252px!important;  } 
+.menu-sprite.plugin{ background-position: -37px -273px!important;  } 
+.menu-sprite.reload{ background-position: -37px -294px!important;  } 
+.menu-sprite.report{ background-position: -37px -315px!important;  } 
+.menu-sprite.report_add{ background-position: -37px -336px!important;  } 
+.menu-sprite.report_disk{ background-position: -37px -357px!important;  } 
+.menu-sprite.report_go{ background-position: -37px -378px!important;  } 
+.menu-sprite.report_user{ background-position: -37px -399px!important;  } 
+.menu-sprite.root{ background-position: -37px -420px!important;  } 
+.menu-sprite.rosette{ background-position: -37px -441px!important;  } 
+.menu-sprite.routermaps{ background-position: -37px -462px!important;  } 
+.menu-sprite.script_add{ background-position: -37px -483px!important;  } 
+.menu-sprite.script_code{ background-position: -37px -504px!important;  } 
+.menu-sprite.security{ background-position: -37px -525px!important;  } 
+.menu-sprite.server_key{ background-position: -37px -546px!important;  } 
+.menu-sprite.shape_align_left{ background-position: -37px -567px!important;  } 
+.menu-sprite.shape_square_add{ background-position: -37px -588px!important;  } 
+.menu-sprite.sitemap{ background-position: -37px -609px!important;  } 
+.menu-sprite.spam{ background-position: -37px -630px!important;  } 
+.menu-sprite.sport_soccer{ background-position: -37px -651px!important;  } 
+.menu-sprite.style{ background-position: -37px -672px!important;  } 
+.menu-sprite.style_edit{ background-position: -37px -693px!important;  } 
+.menu-sprite.style_go{ background-position: -37px -714px!important;  } 
+.menu-sprite.stylesheet{ background-position: -37px -735px!important;  } 
+.menu-sprite.table_edit{ background-position: -37px -756px!important;  } 
+.menu-sprite.table_row_insert{ background-position: -37px -777px!important;  } 
+.menu-sprite.tag-label{ background-position: -37px -798px!important;  } 
+.menu-sprite.text_replace{ background-position: -37px -819px!important;  } 
+.menu-sprite.transform{ background-position: -37px -840px!important;  } 
+.menu-sprite.ui-menu-blue{ background-position: -37px -861px!important;  } 
+.menu-sprite.ui-menu{ background-position: -37px -882px!important;  } 
+.menu-sprite.ui-text-field{ background-position: -37px -903px!important;  } 
+.menu-sprite.ups{ background-position: -37px -924px!important;  } 
+.menu-sprite.user-add{ background-position: -37px -945px!important;  } 
+.menu-sprite.user-business-gray-boss{ background-position: -37px -966px!important;  } 
+.menu-sprite.user-groups-access{ background-position: -37px -987px!important;  } 
+.menu-sprite.user-groups{ background-position: -37px -1008px!important;  } 
+.menu-sprite.user-worker-boss{ background-position: -37px -1029px!important;  } 
+.menu-sprite.user-yellow{ background-position: -37px -1050px!important;  } 
+.menu-sprite.user{ background-position: -37px -1071px!important;  } 
+.menu-sprite.user_add{ background-position: -37px -1092px!important;  } 
+.menu-sprite.user_comment{ background-position: -37px -1113px!important;  } 
+.menu-sprite.user_delete{ background-position: -37px -1134px!important;  } 
+.menu-sprite.user_edit{ background-position: -37px -1155px!important;  } 
+.menu-sprite.user_gray{ background-position: -37px -1176px!important;  } 
+.menu-sprite.user_suit{ background-position: -37px -1197px!important;  } 
+.menu-sprite.users{ background-position: -37px -1218px!important;  } 
+.menu-sprite.vcard{ background-position: -37px -1239px!important;  } 
+.menu-sprite.webcam{ background-position: -37px -1260px!important;  } 
+.menu-sprite.webcam_add{ background-position: -37px -1281px!important;  } 
+.menu-sprite.world{ background-position: -37px -1302px!important;  } 
+.menu-sprite.world_add{ background-position: -37px -1323px!important;  } 
+.menu-sprite.world_edit{ background-position: -37px -1344px!important;  } 
+.menu-sprite.world_go{ background-position: -37px -1365px!important;  } 
+.menu-sprite.world_link{ background-position: -37px -1386px!important;  } 
+.menu-sprite.zoom{ background-position: -37px -1407px!important;  } 

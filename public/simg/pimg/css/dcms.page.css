@@ -1,0 +1,65 @@
+/* 
+    Created on : 08.02.2014, 09:23:46
+    Author     : marcel
+*/
+
+.portfolio {
+    
+}
+
+.portfolio article {
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+
+.portfolio h3 {
+    margin: 0;
+}
+.portfolio-header {
+    margin-bottom: 10px;
+}
+.portfolio-header h3, .about h3, .work h3 {
+    border-bottom: 1px dotted #d2cacb;
+    margin-bottom: 2px;
+}
+
+.portfolio-photo {
+    width: 250px;
+    float: left;
+}
+
+.portfolio-infos {
+    margin-left: 260px;
+}
+
+.portfolio-contact {
+    display: block;
+}
+
+.about {
+    margin-bottom: 10px;
+}
+
+.work {
+    margin-bottom: 10px;
+}
+
+.feedback {
+    margin-bottom: 10px;
+}
+
+.portfolio .box-comments-form {
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.portfolio .box-comments-form .note {
+    margin: 10px auto;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

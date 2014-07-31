@@ -1,0 +1,290 @@
+
+BODY { margin:10px; }
+
+
+.tab_pages {
+
+	border: none;
+    background: #fff;
+    padding: 2em 2em;
+    font: 12px Verdana;
+    color: black;
+    border: 1px solid rgb( 145, 155, 156 );
+    clear: both;
+    filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#ffffff', EndColorStr='#eeeeee');
+
+
+    margin: 0;
+    padding: 0px;
+
+
+    width: 99%;
+
+    top: -1px;
+    position: relative;
+    z-index: 1;
+
+
+}
+
+.tabs {
+    border: none;
+    width: 50%;
+    float: left;
+    position: relative;
+    top: 0px;
+
+	padding-left:0px;
+
+
+}
+
+.tab {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	float: left;
+	cursor:pointer;
+	font: 11px Tahoma;
+
+	overflow: hidden;
+	
+	height: 20px;
+	letter-spacing: 1px;
+	z-index: 0;
+	padding-right:1px;
+}
+
+.tcontent {
+	padding:3px;
+}
+
+.tab_l {
+
+    position:  relative;
+    top: 1px;
+
+
+    background-image: url( "tab_l.gif" );
+    height: 20px;
+    width: 3px;
+    float: left;
+
+    margin: 0px;
+
+z-index: 10;
+    border: 0;
+
+    font: 11px Tahoma;
+    white-space: nowrap;
+    text-align: center;
+    padding-top: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+
+}
+.tab_c {
+    position:  relative;
+    top: 1px;
+
+
+    background-image: url( "tab_c.gif" );
+    height: 20px;
+
+    float: left;
+
+    margin: 0px;
+
+    border: 0;z-index: 10;
+
+    font: 11px Tahoma;
+    white-space: nowrap;
+    text-align: center;
+
+
+    padding-top: 2px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 0px;
+
+
+}
+.tab_r {
+
+    position: relative;
+    top: 1px;
+z-index: 10;
+
+    background-image: url( "tab_r.gif" );
+    height: 20px;
+    width: 3px;
+    float: left;
+
+    margin: 0px;
+
+
+    border: 0;
+    padding-top: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font: 11px Tahoma;
+    white-space: nowrap;
+    text-align: center;
+}
+
+
+.atab_l {
+    position:  relative;
+    top:-1px;
+    display: inline;
+
+    background-image: url( "tab_active_l.gif" );
+    height: 20px;
+    width: 3px;
+    float: left;
+
+    margin: 0px;
+
+
+    border: 0;
+    z-index: 10;
+    overflow: hidden;
+
+    padding-top: 4px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font: 11px Tahoma;
+    white-space: nowrap;
+    text-align: center;
+
+}
+.atab_c {
+
+    position:  relative;
+    top:-1px;
+    display: inline;
+
+    background-image: url( "tab_active_c.gif" );
+    height: 20px;
+    float: left;
+
+    margin: 0px;
+
+    padding-top: 4px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 0px;
+
+    border: 0;
+
+	z-index: 10;
+    font: 11px Tahoma;
+    white-space: nowrap;
+    text-align: center;
+
+
+}
+.atab_r {
+
+    position:  relative;
+    top:-1px;
+    display: inline;
+
+    background-image: url( "tab_active_r.gif" );
+    height: 20px;
+    width: 3px;
+    float: left;
+
+    margin: 0px;
+
+
+    border: 0;
+    z-index: 10;
+    overflow: hidden;
+
+    padding-top: 4px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font: 11px Tahoma;
+    white-space: nowrap;
+    text-align: center;
+}
+
+
+.htab_l {
+
+    background-image: url( "tab_hover_l.gif" );
+    position:  relative;
+    top:1px;
+
+    height: 20px;
+    width: 3px;
+    float: left;
+
+    margin: 0px;
+
+    padding-top: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+
+    border: 0;
+
+	z-index: 10;
+    font: 11px Tahoma;
+    white-space: nowrap;
+    text-align: center;
+    display: inline;
+
+}
+.htab_c {
+    background-image: url( "tab_hover_c.gif" );
+    position:  relative;
+    top:1px;
+    height: 20px;
+    float: left;
+
+    margin: 0px;
+
+    padding-top: 2px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 0px;
+
+    border: 0;
+
+	z-index: 10;
+    font: 11px Tahoma;
+    white-space: nowrap;
+    text-align: center;
+    display: inline;
+}
+.htab_r {
+
+
+    background-image: url( "tab_hover_r.gif" );
+    position:  relative;
+    top:1px;
+
+    height: 20px;
+    width: 3px;
+    float: left;
+
+    margin: 0px;
+
+    padding-top: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+
+    border: 0;
+
+	z-index: 10;
+    font: 11px Tahoma;
+    white-space: nowrap;
+    text-align: center;
+    display: inline;
+}

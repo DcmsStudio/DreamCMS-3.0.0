@@ -1,0 +1,112 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:editField{$field.formid}] [save_exit:editField{$field.formid}] 
+        [reset:editField{$field.formid}] [cancel:editField{$field.formid}]</cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+    <form method="post" action="admin.php" id="editField{$field.formid}" name="editField{$field.formid}">
+
+        <input type="hidden" name="adm" value="forms" />
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="action" value="editfield" />
+        <input type="hidden" name="formid" id="formid" value="{$field.formid}" />
+        <input type="hidden" name="field_id" id="fieldid" value="{$field.field_id}" />
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>{trans('Feld Name')}</label>
+                <input name="name" type="text" value="{escape($field.name, 'html')}" size="70" class="input form-control required" />
+            </div>
+            <div class="col-md-4">
+                <label>{trans('Feld vorgesehen als')}</label>
+                <select name="rel" id="rel">
+                    <option value="generic" cp:on="selected:$field.rel == 'generic' || empty($field.field_id)" parse:selected="selected">{trans("Allgemeines Formularfeld")}</option>
+                    <option value="profilefield" cp:on="selected:$field.rel == 'profilefield'" parse:selected="selected">{trans("Profielfeld")}</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>{trans('Feld Typ')}</label>
+                <select name="type" id="type">
+                    <option value="email" cp:on="selected:$field.type == 'email'" parse:selected="selected">{trans("Email Feld")}</option>
+                    <option value="spamprotect" cp:on="selected:$field.type == 'spamprotect'" parse:selected="selected">{trans("Spamschutz Feld")}</option>
+                    <option value="text" cp:on="selected:$field.type == 'text' || empty($field.field_id)" parse:selected="selected">{trans("Text Feld")}</option>
+                    <option value="hidden" cp:on="selected:$field.type == 'hidden'" parse:selected="selected">{trans("Verstecktes Feld")}</option>
+                    <option value="password" cp:on="selected:$field.type == 'password'" parse:selected="selected">{trans("Password Feld")}</option>
+                    <option value="textarea" cp:on="selected:$field.type == 'textarea'" parse:selected="selected">{trans("Textarea")}</option>
+                    <option value="richtext" cp:on="selected:$field.type == 'richtext'" parse:selected="selected">{trans("Rich Text Feld")}</option>
+                    <option value="select" cp:on="selected:$field.type == 'select'" parse:selected="selected">{trans("Drop Down Liste")}</option>
+                    <option value="radio" cp:on="selected:$field.type == 'radio'" parse:selected="selected">{trans("Radio Buttons")}</option>
+                    <option value="checkbox" cp:on="selected:$field.type =='checkbox'" parse:selected="selected">{trans("Checkbox Feld")}</option>
+                    <option value="multiplecheckbox" cp:on="selected:$field.type =='multiplecheckbox'" parse:selected="selected">{trans("Mehrfach Checkbox Feld")}</option>
+                    <option value="datetime" cp:on="selected:$field.type == 'datetime'" parse:selected="selected">{trans("Datums- und Zeitauswahl Feld")}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>{trans('Beschreibung')}</label>
+                <textarea data-tooltip="{trans('Hier können Sie zu besseren Übersicht eine kurze Bechreibung eintragen')}" data-position="top-left" name="description" rows="2" cols="50" class="form-control">{$field.description}</textarea>
+            </div>
+        </div>
+
+
+        <div id="field-container" style="min-height:90px;"></div>
+
+
+
+
+
+    </form>
+
+    <script type="text/javascript">
+
+        Form.registerForm('editField{$field.formid}', {
+            contentIdentifierID: 'fieldid',
+            exiturl: 'admin.php?adm=forms&action=fields&formid={$form.formid}'
+        });
+        $('#type').bind('change', getFieldOptions);
+
+
+
+        if (typeof getFieldOptions == 'undefined') {
+            function getFieldOptions () {
+
+
+                if (typeof Core != 'undefined') {
+                    Doc.unload(null, $('#field-container'));
+                }
+
+
+                $('#editField{$field.formid}').mask('Formular-Einstellungen holen...');
+                $.get('admin.php?adm=forms&action=options&type=' + $('#type').val() + '&id=' + $('#fieldid').val(), {}, function (data) {
+                    if (Tools.responseIsOk(data)) {
+                        $('#field-container').html(data.output);
+                        $('#editField{$field.formid}').unmask();
+
+                        Desktop.Tools.rebuildTooltips(Win.windowID);
+                        Win.prepareWindowFormUi();
+
+                        if (typeof Core != 'undefined') {
+                            Core.BootstrapInit($('#field-container'));
+                        }
+
+
+                    } else {
+                        $('#editField{$field.formid}').unmask();
+                        jAlert(data.msg);
+                    }
+
+                });
+            }
+
+        }
+
+        getFieldOptions();
+
+    </script>
+</cp:block>

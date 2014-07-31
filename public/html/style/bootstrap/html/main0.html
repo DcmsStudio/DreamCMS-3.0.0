@@ -1,0 +1,532 @@
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title>{iif($pageTitle,$pageTitle,'Administration')}</title>
+        <meta http-equiv="Content-Language" content="de" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <base href="{cfg('portalurl')}/" />
+
+        <link href="public/html/style/c9/css/jquery-ui-1.8.6.custom.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/skin.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.missioncontrol.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.dock.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.launchpad.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/css/colorpicker.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/jquery.selectbox.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.fileman.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.grid-new.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.tabs.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.sourcecodeedit.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.selectbox.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.desktop.sidepanel.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.menu.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.dashboard.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.applications.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.autocomplete.css" rel="stylesheet" type="text/css"/>
+
+        <link rel="stylesheet" type="text/css" href="Vendor/codemirror/lib/codemirror.css"/>
+        <link rel="stylesheet" type="text/css" href="Vendor/codemirror/lib/util/simple-hint.css"/>
+        <link rel="stylesheet" type="text/css" href="Vendor/codemirror/lib/util/dialog.css"/>
+        <link rel="stylesheet" type="text/css" href="Vendor/codemirror/lib/merge.css"/>
+
+
+        <link href="public/html/style/c9/css/css3-animations.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/newAppleWindow.css" rel="stylesheet" type="text/css"/>
+        <link href="public/html/style/c9/css/dcms.notepad.css" rel="stylesheet" type="text/css"/>
+
+    <cp:block name="inlinecss"/>
+
+    <cp:if condition="$request.seemodePopup || $cookie.isSeemodePopup">
+        <link rel="stylesheet" parse:href="{$backend_css_url}seemode_popup.css?{$session_id}" type="text/css" />
+    </cp:if>
+
+    <script type="text/javascript">
+        var cmslang = {};
+        var isSeemodePopup = {iif($input.seemodePopup || $cookie.isSeemodePopup, 'true', 'false')};
+        var cookiePrefix = '{$cookieprefix}';
+        var webSite = '{$website.id}';
+        var seeMode = isSeemodePopup;
+        var session_id = '{$session_id}';
+
+
+    </script>
+
+    <script type="application/x-javascript" src="admin.php?adm=lang"></script>
+    <script type="application/x-javascript" src="admin.php?adm=skins&action=getsense"></script>
+    <script type="text/javascript" src="public/html/js/jquery/jquery.202.min.js"></script>
+    <script type="text/javascript" src="public/html/js/backend/dcms.loader.js"></script>
+
+    <cp:block name="inlinejs" />
+
+    <script type="text/javascript" language="javascript" rel="main-js">
+
+        var loadScripts = [
+            'public/html/js/backend/modernizr.js',
+            'public/html/js/jquery/jquery.requestAnimationFrame.js',
+            //'https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js',
+            'public/html/js/jquery/jquery-ui.1.10.0.min.js',
+            //'public/html/js/jquery/jquery.animate-enhanced.js',
+
+            'public/html/js/backend/dcms.animate.js',
+            'public/html/js/jquery/jquery.colorpicker.js',
+            'public/html/js/jquery/jquery.ui.widget.js',
+            'public/html/js/jquery/jquery.fileupload.js',
+            'Vendor/codemirror/lib/util/diff_match_patch.js',
+            'Vendor/codemirror/lib/codemirror.js',
+            'Vendor/codemirror/lib/util/dialog.js',
+            'Vendor/codemirror/lib/util/searchcursor.js',
+            'Vendor/codemirror/lib/util/search.js',
+            'Vendor/codemirror/lib/util/matchbrackets.js',
+            'Vendor/codemirror/lib/util/formatting.js',
+            'Vendor/codemirror/lib/util/merge-view.js',
+            //    'Vendor/codemirror/lib/util/fold-xml.js',
+            'Vendor/codemirror/lib/util/foldcode.js',
+            //   'Vendor/codemirror/lib/util/foldgutter.js',
+            'Vendor/codemirror/lib/util/simple-hint.js',
+            'Vendor/codemirror/lib/util/javascript-hint.js',
+            'Vendor/codemirror/lib/util/php-hint.js',
+            'Vendor/codemirror/lib/util/closetag.js',
+            'Vendor/codemirror/lib/util/xml-hint.js',
+            'Vendor/codemirror/lib/util/loadmode.js',
+            'Vendor/codemirror/mode/clike/clike.js',
+            'Vendor/codemirror/mode/xml/xml.js',
+            'Vendor/codemirror/mode/javascript/javascript.js',
+            'Vendor/tinymce/tiny_mce_src.js',
+            'Vendor/tinymce/jquery.tinymce.js',
+            'public/html/js/jquery/jquery.contextMenu.js',
+            'public/html/js/backend/phpjs.js',
+            'public/html/js/jquery/spin.min.js',
+            'public/html/js/backend/jquery.gritter.js',
+            'public/html/js/backend/jquery.easing.1.3.js',
+            //   'public/html/js/backend/colResizable-1.3.source.js',
+
+
+            'public/html/js/backend/dcms.serialize.js',
+            'public/html/js/backend/jquery.mjs.nestedSortable.js',
+            //    'public/html/js/backend/jquery.selectbox-0.2.js',
+            'public/html/js/backend/jquery.alert.js',
+            'public/html/js/backend/dcms.autocomplete.js',
+            'public/html/js/backend/dcms.scrollbar.js',
+            'public/html/js/backend/dcms.utf8.js',
+            'public/html/js/backend/dcms.config.js',
+            'public/html/js/backend/dcms.namespace.js',
+            'public/html/js/backend/dcms.string.js',
+            'public/html/js/backend/dcms.hashgen.js',
+            'public/html/js/backend/dcms.loader.js',
+            'public/html/js/backend/dcms.tools.js',
+            'public/html/js/backend/dcms.debug.js',
+            'public/html/js/backend/dcms.template.js',
+            'public/html/js/backend/dcms.notifier.js',
+            'public/html/js/backend/dcms.selectbox.js',
+            'public/html/js/backend/dcms.checkbox.js',
+            'public/html/js/backend/dcms.window.animation.js',
+            'public/html/js/backend/dcms.newWindowManager.js',
+            'public/html/js/backend/dcms.window.tabs.js',
+            'public/html/js/backend/dcms.desktop.js',
+            'public/html/js/backend/dcms.desktop.sidepanel.js',
+            'public/html/js/backend/dcms.desktop.sidepanel.tree.js',
+            'public/html/js/backend/dcms.desktop.tools.js',
+            'public/html/js/backend/dcms.desktop.auth.js',
+            'public/html/js/backend/dcms.panel.js',
+            'public/html/js/backend/dcms.form.js',
+            'public/html/js/backend/dcms.console.js',
+            'public/html/js/backend/dcms.taskbar.js',
+            'public/html/js/backend/dcms.taskbar.menu.js',
+            'public/html/js/backend/dcms.user.js',
+            'public/html/js/backend/dcms.launchpad.js',
+            'public/html/js/backend/dcms.dock.js',
+            'public/html/js/backend/dcms.menu.js',
+            'public/html/js/backend/dcms.application.js',
+            'public/html/js/backend/dcms.missioncontrol.js',
+            'public/html/js/backend/dcms.dashboard.js',
+            'public/html/js/backend/dcms.grid.js',
+            'public/html/js/backend/dcms.trash.js',
+            'public/html/js/backend/dcms.document.js',
+            'public/html/js/backend/dcms.document.metadata.js',
+            'public/html/js/backend/dcms.appelements.js',
+            'public/html/js/backend/fileman/dcms.fileman.js',
+            'public/html/js/backend/fileman/dcms.fileman.layout.js',
+            'public/html/js/backend/fileman/dcms.fileman.commands.js',
+            'public/html/js/backend/fileman/dcms.fileman.quickview.js',
+            'public/html/js/backend/templates/dcms.desktop.contextmenu.js',
+            'public/html/js/backend/templates/dcms.desktop.icon.js',
+            'public/html/js/backend/templates/dcms.desktop.icongroup.js',
+            'public/html/js/backend/templates/dcms.desktop.balloon.js',
+            'public/html/js/backend/templates/dcms.taskbar.notification.js',
+            'public/html/js/backend/templates/dcms.form.notification.js',
+            'public/html/js/backend/templates/dcms.user.menu.js',
+            'public/html/js/backend/templates/dcms.desktop.mask.js',
+            'public/html/js/backend/templates/dcms.window.mask.js',
+            'public/html/js/backend/dcms.layouter.js',
+            'public/html/js/backend/tpleditor/cscc.js',
+            'public/html/js/backend/tpleditor/cscc-parse-xml.js',
+            'public/html/js/backend/tpleditor/cscc-parse-css.js',
+            'public/html/js/backend/tpleditor/cscc-sense.js',
+            'public/html/js/backend/tpleditor/placeholder.js',
+            'public/html/js/backend/tpleditor/html5.js',
+            'public/html/js/backend/tpleditor/dcms.editor.js'
+        ];
+        $(document).ready(function() {
+
+            Loader.require(loadScripts, function() {
+
+                /*
+                 if (Modernizr.cssgradients) {
+                 $('#fail,#custom-error').hide();
+                 $('body').removeClass('fail').addClass('boot');
+                 } */
+                $('#fail,#custom-error').hide();
+                $('body').removeClass('fail').addClass('boot');
+                $.ajaxSetup(
+                        {
+                            dataType: "json",
+                            cache: false,
+                            async: false
+                        });
+
+
+                var opts = {};
+                opts.isWindowSkin = false;
+                opts.isSeemode = isSeemodePopup;
+                opts.baseURL = '{$cfg.portalurl}/';
+                opts.EnableBootScreen = true;
+                opts.enableDebug = true;
+
+                // !!!! Skin AeroWindow is currently not allowed !!!!
+                opts.Skin = 'AppleWindow'; // AeroWindow for windows 7 style. i use osx lion an will the osx feeling ;)
+                opts.loadWithAjax = false;
+                opts.allowAjaxCache = false;
+                opts.DesktopIconWidth = 36;
+                opts.DesktopIconHeight = 36;
+                opts.UseWindowIcon = false; // diabled for osx skin
+                opts.TaskbarClockSeperatorBlinking = true;
+                opts.ShowTaskbarClock = true;
+                opts.WindowAnimationSpeed = 0; // @deprenced
+                opts.SID = session_id;
+                opts.SkinPath = 'html/style/apple/img/';
+
+                //Initialize the Desktop
+                Desktop.init(opts);
+            });
+        });
+
+    </script>
+
+
+</head>
+<body class="fail">
+
+    <div id="fail">
+        <div id="browser-error">
+            <div class="fail-browser-logo">
+            </div>
+            <div class="fail-browser">
+                <p><strong>I'm sorry to inform you that your browser don't support CSS3 Animations!</strong></p> 
+                <p>This site uses features that <em>require</em> a modern browser - why not try <a href="http://www.mozilla.org/en-US/firefox/fx/" target="_blank" title="Download Firefox">Firefox</a> ?</p>
+            </div>
+        </div>
+        <div id="custom-error" style="display: none">
+            <div class="fail-browser-logo">
+            </div>                
+            <div class="fail-browser custom-msg"></div>
+        </div>
+    </div>
+
+    <div id="boot-mask"></div>
+    <div id="boot-maskmsg"><span class="loadinggui" title="{trans('Lade Dashboard')}"></span></div>
+
+
+
+
+
+
+
+
+
+    <div id="fullscreenContainer">
+
+        <div id="MissionControlMain" style="display: none"></div>
+        <div id="spacesMiniContainer" style="display: none"><center></center></div>
+        <div id="missioncontrol-bg" style="display: none"></div>
+
+
+
+
+        <div id="dashboard" style="display: none">
+
+            <div id="dashboard-main">
+
+                <div id="widgets">
+
+                    <div class="widget-container transform3d" ontouchstart="this.classList.toggle('hover');">
+                        <div class="widget-drag-handler"></div>
+                        <div class="widget-container-inner g-transform-3d" data-direction="right">
+
+                            <div class="widget-content">
+                                <h3>Front Side</h3>
+                                <div class="settings-btn">i</div>
+                            </div>
+
+                            <div class="widget-settings flipBack">
+                                <div class="back-widget-btn"></div>
+
+
+                                <h3>Back Side</h3>
+
+
+                            </div>
+
+                            <div class="remove-widget-btn"></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                <div id="add-widgets"></div>
+
+            </div>
+            <div id="dashboard-fo">
+
+                <span class="add"></span>
+                <span class="min"></span>            
+
+                <span class="close"></span>
+            </div>
+        </div>
+        <div id="dashboard-bg" style="display: none"></div>
+
+
+
+        <!-- <img id="launchpad-bg" class="desktop-bg" style="display: none" src="images/Apple/launchpad/blur.jpg"/> -->
+        <div id="launchpad" style="display: none">
+            <div id="launchpadHeader"></div>
+            <div id="launchpadMain"></div>
+            <div id="launchpadFooter"></div>
+        </div>
+
+
+        <div id="desktop-container">
+            <div id="header" style="display: none">
+                <div class="menu-header">
+                    <div id="topmenubar">
+                        <ul id="dcms-menu">
+                            <li>{trans('Lade Menü...')}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="middle-container" class="middle-container" style="display:inline-block;width: 100%">
+
+                <div class="panel-right" style="position: absolute; float: left; display: inline-block; clear: right;height: 100%;">
+                    <div id="panel-right">
+
+                        <div class="documentsettings">
+                            <div></div>
+                            <span>Inhalts Einstellung</span>
+                        </div>
+
+                        <div class="sites">
+                            <div></div>
+                            <span>Inhalte</span>
+                        </div>
+
+                        <div class="navi">
+                            <div></div>
+                            <span>Navigation</span>
+                        </div>
+
+                        <div class="files">
+                            <div></div>
+                            <span>Dateien</span>
+                        </div>
+
+                        <div class="users">
+                            <div><span class="counter"></span></div>
+                            <span>Benutzer</span>
+                        </div>
+
+                        <div class="firewall">
+                            <div><span class="counter"></span></div>
+                            <span>Firewall</span>
+                        </div>
+
+                        <div class="messenger">
+                            <div><span class="counter"></span></div>
+                            <span>Messenger</span>
+                        </div>
+
+                        <div class="systemversion">
+                            <span>Version 2.0.1</span>
+                        </div>
+                    </div>
+
+
+                    <div id="panel-right-content" style="position: relative; float: left; height: 100%; width:200px; max-width: 400px;">
+
+                        <div id="panel-documentsettings">
+                            <div class="header">{trans('Inhalts Einstellung')}</div>
+                            <div class="panel-content gui-scroll" id="documentsettings-content" style="height:93%;overflow:hidden;display:block!important">
+                            </div>
+                        </div>                    
+
+
+                        <div id="panel-sites">
+                            <div class="header">{trans('Seiten')}<span></span></div>
+                            <div class="panel-content gui-scroll" style="height:93%;overflow:hidden;display:block!important" id="pages-tree-content">
+                            </div>
+                        </div>
+
+                        <div id="panel-navi">
+                            <div class="header">{trans('Frontend Navigation')}</div>
+                            <div class="panel-content gui-scroll" id="side-tree-content" style="height:93%;overflow:hidden;display:block!important">
+                            </div>
+                        </div>
+
+                        <div id="panel-files">
+                            <div class="header"></div>
+                            <div class="panel-content gui-scroll" id="dcmsFileTree" style="height:100%;overflow:hidden;display:block!important">
+                            </div>
+                        </div>
+
+
+                        <div id="panel-users">
+                            <div class="header"></div>
+                            <div class="panel-content gui-scroll" id="dcmsFileTree" style="height:100%;overflow:hidden;display:block!important">
+                            </div>
+                        </div>
+
+                        <div id="panel-firewall">
+                            <div class="header"></div>
+                            <div class="panel-content gui-scroll" id="dcmsFileTree" style="height:100%;overflow:hidden;display:block!important">
+                            </div>
+                        </div>
+
+
+                        <div id="panel-messenger">
+                            <div class="header">Nachrichten<span></span></div>
+                            <div class="panel-content gui-scroll" id="dcmsFileTree" style="height:100%;overflow:hidden;display:block!important">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <cp:if condition="$request.seemodePopup != 1 && $cookie.isSeemodePopup != true && $sidebar.panel">
+                    <cp:set var="paddingLeft" value=" $sidebar.width px"/>
+                </cp:if>
+                <cp:else>
+                    <cp:set var="paddingLeft" value=" 64px"/>
+                </cp:else>
+
+                <div id="header-tools-container" class="header-tools-container">
+                    <div id="toolbar-tabs" class="toolbar-tabs" parse:style="margin-left:{$paddingLeft};">
+                        <ul>
+                            <cp:if condition="$toolbarTabs == '' || $request.seemodePopup || $cookie.isSeemodePopup ">
+                                <li class="colser"><span></span></li>
+                            </cp:if>
+                            <cp:else>
+                                {$toolbarTabs}
+                            </cp:else>
+                        </ul>
+                    </div>
+
+                    <div id="toolbar" parse:style="margin-left:{$paddingLeft};">
+                        <div id="toolbar-left"></div>
+                        <div id="toolbar-right"></div>
+                    </div>
+                </div>
+
+                <div id="content" class="gui-content" parse:style="margin-left:{iif($sidebar.width, $sidebar.width, '0')}px">
+                    <div id="desktop-bg-container"><img id="desktop-bg" class="desktop-bg" style="display: none" src="html/style/apple/img/Apple/galaxy.jpg"/></div>
+                    <div id="maincontent" class="gui-scroll">
+                        <!-- maincontent -->
+                        <cp:block name="content"/>
+                        <!-- end_maincontent -->
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div id="desktop-bg-container"><img id="desktop-bg" class="desktop-bg" style="display: none" src="html/style/apple/img/Apple/galaxy.jpg"/></div>
+            <div id="desktop" style="display: none">
+                <div id="DesktopIcons">
+                    <ul style="display: none">
+                        <!-- @todo make desktop icons sortable in this container -->
+                    </ul>
+                </div>
+
+                <div id="Sidepanel">
+                    <div class="shadow">
+                        <div id="PanelButtons">
+                            <div class="document-settings-toggler"></div>                        
+                        </div>
+                        <div class="PanelContent" id="documentsettings-content"></div>
+                    </div>
+                </div>
+
+                <div id="gui-console">
+                    <div id="gui-console-base" style="display: none;">
+                        <div class="gui-console-buttons">
+                            <div class="left-btn">
+                                <div class="console">Console</div>
+                                <div class="debuginfo act">Debug Infos</div>
+                                <div class="errors">Errors</div>
+                            </div>
+                            <div class="right-btn">
+                                <div class="clear"></div>
+                                <div class="close"></div>
+                            </div>
+                        </div>
+
+                        <div id="gui-console-matrix" style="display: none"></div>
+                        <div id="gui-console-text" style="display: none"></div>
+                        <div id="gui-console-debug"></div>
+                        <div id="gui-console-errors" style="display: none"></div>
+                    </div>
+
+                    <div class="gui-console">
+
+                        <div class="left">
+                            <div class="icon"></div>
+                            <div class="text">
+                                <input name="consoleexec" id="console-exec" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="right">
+                            <div id="toggle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="loginscreen" style="display: none">
+            <div id="login-logo" class="new-apple-logo"></div>
+            <div class="form-content">
+                <form method="post" name="lform" id="lform">
+                    <input type="hidden" name="adm" value="auth" />
+                    <input type="hidden" name="action" value="login" />
+                    <input type="text" name="logusername" id="logusername" size="30" placeholder="Username" />
+                    <input type="password" name="logpassword" id="logpassword" size="30" placeholder="Password" />
+                    <input type="button" id="auth-submit" class="submit" />
+                </form>
+            </div>
+        </div>
+
+
+        <div id="copyright">© 2013 by marcel domke - all rights reserved.</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,437 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+    <div cp:is="$forum.note" class="forum-note">{$forum.note}</div>
+</cp:block>
+<cp:block name="main_content">
+    <div class="containerdiv">
+        <div class="thread-buttons">
+            <cp:hasperm permkey="forum/canpostnew">
+                <a class="btn newtopic" href="forum/newthread/{$thread.forumid}" title="{trans('Neues Thema')}">
+                    {trans('Neues Thema')}
+                    {*
+                    <img src="{$pluginpath}asset/img/newtopic.png" alt="{trans('Neues Thema')}" title="{trans('Neues Thema')}" />
+                    *}
+                </a>
+            </cp:hasperm>
+            <cp:else>
+                <span cp:is="!$user.userid" rel="thread-closed" class="btn login" title="{trans('Thema ist geschlossen')}">
+                    {trans('Sie müssen sich anmelden um ein neues Thema anzulegen')}
+                </span>
+            </cp:else>
+            <cp:if condition="(hasperm('forum/canreplyown') || hasperm('forum/canreplyothers')) && !$thread.closed">
+                <a rel="thread-replythread" class="btn replythread" href="forum/replythread/{$thread.threadid}" title="{trans('Antworten')}">
+                    {trans('Antworten')}
+                </a>
+            </cp:if>
+            <cp:elseif condition="$ismod && $thread.closed">
+                <a rel="thread-replythread" class="btn replythread" style="display:none" href="forum/replythread/{$thread.threadid}" title="{trans('Antworten')}">
+                    {trans('Antworten')}
+                </a>
+            </cp:elseif>
+            <span rel="thread-closed" class="btn closed" style="{iif($thread.closed, '', 'display:none!important')}" title="{trans('Thema ist geschlossen')}">
+                {trans('Thema ist geschlossen')}
+            </span>
+            {*
+            <cp:if condition="$ismod">
+                <cp:include template="board/modmenu" />
+            </cp:if>
+            *}
+        </div>
+        <div class="thread-paging top">
+            {$thread.pages}
+        </div>
+    </div>
+    <h3 id="thread-posts-header" class="thread-posts-header">
+        <cp:if condition="$ismod">
+            <div id="moderate-check-all" class="moderate-check-all">
+                <input type="checkbox" id="mod-check-all"/>
+                <ul>
+                    <li class="extra moderation">
+                        <span>
+                            Moderation
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </cp:if>
+        <span cp:is="$thread.threadtype == 20" class="thread-pinned">
+            Pinned
+        </span>
+        <span class="thread-label">
+            {trans('In diesem Thema befinden sich %s Beiträge', $thread.postcounter )}
+        </span>
+    </h3>
+    <cp:if condition="$ismod">
+        <ul id="forum-modmenu" class="forum-modmenu">
+            <li rel="close">
+                {trans('Thema schließen')}
+            </li>
+            <li rel="open">
+                {trans('Thema öffnen')}
+            </li>
+            <li rel="publish">
+                {trans('Thema veröffentlichen')}
+            </li>
+            <li rel="unpublish">
+                {trans('Thema verbergen')}
+            </li>
+            <li rel="pin">
+                {trans('Thema Pinnen')}
+            </li>
+            <li rel="unpin">
+                {trans('Thema Unpin')}
+            </li>
+            <li rel="move">
+                {trans('Thema Verschieben')}
+            </li>
+            <li rel="delete">
+                {trans('Thema löschen')}
+            </li>
+            <li class="separator">
+            </li>
+            <li rel="publishpost">
+                {trans('Antworten veröffentlichen')}
+            </li>
+            <li rel="unpublishpost">
+                {trans('Antworten verbergen')}
+            </li>
+            <li rel="deletepost">
+                {trans('Antworten löschen')}
+            </li>
+        </ul>
+    </cp:if>
+    <ul id="thread-posts" class="thread-posts">
+        <cp:loop name="posts" key="r">
+            <a name="post-{$r.postid}" id="post-{$r.postid}">
+            </a>
+            <li class="postrow{iif(!$r.published, ' unpublished', '')}{iif($ismod, ' mod', '')}" id="post_{$r.postid}" rel="post-{$r.postid}">
+                <div class="post-left tl">
+                    <div class="userimage">
+                        <cp:if condition="$r.avatarowner != null">
+                            <img alt="" src="{photo($r.userphoto, 'AuthorImageSmall', '')}" title="{escape($r.username, 'html')}" border="0" />
+                        </cp:if>
+                        <cp:else>
+                            <img alt="" src="{$r.userphoto}" title="{escape($r.username, 'html')}" border="0" />
+                        </cp:else>
+                    </div>
+                    <div class="user">
+                        <span class="username">
+                            <span>
+                                {trans('Benutzername')}:
+                            </span>
+                            <a href="profile/{$r.userid}/{suggest($r.username, true)}" cp:if="$r.userid">{$r.username}</a>
+                        </span>
+                        <span class="usergroup">
+                            <span>
+                                {trans('Benutzergruppe')}:
+                            </span>
+                            {$r.usergroup}
+                        </span>
+                        <cp:if condition="$r.userid">
+                            <span class="userposts">
+                                <span>
+                                    {trans('Beiträge')}:
+                                </span>
+                                {$r.userposts}
+                            </span>
+                            <span class="userrank">
+                                <span>
+                                    {trans('Rang')}:
+                                </span>
+                                {$r.ranktitle}
+                            </span>
+                            <span class="userrank-image">
+                                {$r.rankimage}
+                            </span>
+                        </cp:if>
+                    </div>
+                </div>
+                <div class="post-right">
+                    <div class="postheader">
+                        <div class="posttitle">
+                            <cp:if condition="($thread.threadauthorid >
+                                0 && $thread.threadauthorid == $r.userid) || $thread.threadauthor == $r.username">
+                                <img alt="" src="{$pluginpath}asset/img/threadstarter.png" title="{trans('Themen Starter')}" border="0" class="threadstarter absmiddle" />
+                            </cp:if>
+                            <cp:if condition="$r.iconpath != ''">
+                                <img src="{$r.iconpath}" width="16" height="16" alt="" title="" border="0" class="absmiddle" />
+                            </cp:if>
+                            {$r.title}
+                        </div>
+                        <div class="posttime">
+                            {date($user.dateformat, $r.createdate)}, {date($user.timeformat, $r.createdate)}
+                            <span class="postnum">
+                                #{$r.postnum}
+                            </span>
+                        </div>
+                        <cp:if condition="$ismod">
+                            <p class="moderate-check">
+                                <label>
+                                    <input type="checkbox" name="postid[]" value="{$r.postid}"/>
+                                </label>
+                                <span class="jump-to-modmenu">
+                                    <span class="fa fa-level-up">
+                                    </span>
+                                </span>
+                            </p>
+                        </cp:if>
+                    </div>
+                    <div class="post">
+                        {$r.content}
+                        <!-- end p -->
+                        <cp:if condition="count($r.attachmentthumbs) || count($r.attachmentsfiles)">
+                            <fieldset class="attachments">
+                                <legend>
+                                    {trans('Attachments')}
+                                </legend>
+                                <cp:if condition="count($r.attachmentthumbs)">
+                                    <ul class="attachment-thumbs">
+                                        <cp:loop name="r.attachmentthumbs" key="t">
+                                            <li>
+                                                <cp:if condition="$t.thumbnail">
+                                                    <a rel="forumlightbox" href="forum/loadattachment/{$t.uiqid}">
+                                                        <img src="{$t.thumbnail}" width="{$t.width}" height="{$t.height}" alt="Image" title="#{$r.postnum} {escape($r.title,'html')}" />
+                                                    </a>
+                                                </cp:if>
+                                            </li>
+                                        </cp:loop>
+                                    </ul>
+                                </cp:if>
+                                <ul>
+                                    <cp:loop name="r.attachmentsfiles" key="rs">
+                                        <li class="ext_{$rs.fileext}{iif($rs.thumbnail, ' thumb', '')}">
+                                            <cp:if condition="$rs.thumbnail">
+                                                <a rel="forumlightbox" href="forum/loadattachment/{$rs.uiqid}">
+                                                    <img src="{$rs.thumbnail}" width="{$rs.width}" height="{$rs.height}" alt="Image" title="#{$r.postnum} {escape($r.title,'html')}" />
+                                                </a>
+                                            </cp:if>
+                                            <cp:else>
+                                                <a href="forum/loadattachment/{$rs.uiqid}" target="_new">
+                                                    <span>
+                                                    </span>
+                                                    {$rs.filename}
+                                                </a>
+                                                <br/>
+                                                <span class="descinfo">
+                                                    {trans('Dateigröße')}: {$rs.filesize}, {trans('Downloads bisher')}: {$rs.hits}
+                                                </span>
+                                            </cp:else>
+                                        </li>
+                                    </cp:loop>
+                                </ul>
+                            </fieldset>
+                        </cp:if>
+                    </div>
+                    <cp:if condition="$cfg.allowsignatures || $user.allowsignatures">
+                        <div class="usersig">
+                            {$r.signature}
+                        </div>
+                    </cp:if>
+                    <div class="postfooter">
+                        <div>
+                            <cp:if condition="cfg('forum.uselikesystem')">
+                                <div class="like-buttons">
+                                    <a href="javascript:void(0)" rel="postid-{$r.postid}" class="like">
+                                        {trans('Gefällt mir')}
+                                        <span class="counter">
+                                            <span>
+                                                {escape($r.likes, 'hexentity')}
+                                            </span>
+                                        </span>
+                                    </a>
+                                    |
+                                    <a href="javascript:void(0)" rel="postid-{$r.postid}" class="dislike">
+                                        {trans('Gefällt mir nicht')}
+                                        <span class="counter">
+                                            <span>
+                                                {escape($r.dislike, 'hexentity')}
+                                            </span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </cp:if>
+                            {*
+                            <cp:if condition="$ismod">
+                                <cp:set var="forumpost" value="$r"/>
+                                <cp:include template="board/modbuttons" />
+                            </cp:if>
+                            *}
+                            <div class="post-buttons">
+                                <cp:if condition="(hasperm('forum/canreplyown') || hasperm('forum/canreplyothers')) && !$thread.closed">
+                                    <span>
+                                        {trans('Eintrag')}
+                                    </span>
+                                    <cp:if condition="$r.userid == $user.userid || $ismod">
+                                        <a class="post-edit" href="forum/editpost/{$r.postid}">
+                                            {trans('Bearbeiten')}
+                                        </a>
+                                    </cp:if>
+                                    <a class="post-replyquote" href="forum/replythread/{$thread.threadid}/quote/{$r.postid}">
+                                        {trans('Zitieren')}
+                                    </a>
+                                    <a class="post-reply" href="forum/replythread/{$thread.threadid}/reply/{$r.postid}">
+                                        {trans('Antworten')}
+                                    </a>
+                                </cp:if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </cp:loop>
+    </ul>
+    <div class="containerdiv">
+        <div class="thread-buttons">
+            <cp:hasperm permkey="forum/canpostnew">
+                <a class="btn newtopic" href="forum/newthread/{$thread.forumid}" title="{trans('Neues Thema')}">
+                    {trans('Neues Thema')}
+                    {*
+                    <img src="{$pluginpath}asset/img/newtopic.png" alt="{trans('Neues Thema')}" title="{trans('Neues Thema')}" />
+                    *}
+                </a>
+            </cp:hasperm>
+            <cp:else>
+                <span cp:is="!$user.userid" class="btn login" title="{trans('Thema ist geschlossen')}">
+                    {trans('Sie müssen sich anmelden um ein neues Thema anzulegen')}
+                </span>
+            </cp:else>
+            <cp:if condition="(hasperm('forum/canreplyown') || hasperm('forum/canreplyothers')) && !$thread.closed">
+                <a rel="thread-replythread" class="btn replythread" href="forum/replythread/{$thread.threadid}" title="{trans('Antworten')}">
+                    {trans('Antworten')}
+                </a>
+            </cp:if>
+            <cp:elseif condition="$ismod && $thread.closed">
+                <a rel="thread-replythread" style="display:none" class="btn replythread" href="forum/replythread/{$thread.threadid}" title="{trans('Antworten')}">
+                    {trans('Antworten')}
+                </a>
+            </cp:elseif>
+            <span rel="thread-closed" class="btn closed" style="{iif($thread.closed, '', 'display:none!important')}" title="{trans('Thema ist geschlossen')}">
+                {trans('Thema ist geschlossen')}
+            </span>
+        </div>
+        <div class="thread-paging">
+            {$thread.pages}
+        </div>
+    </div>
+    <div class="prevnextthread shadowed">
+        <div class="inner-boundary">
+            <div class="inner-border tc">
+                <a href="">
+                    {trans('Vorheriges Thema')}
+                </a>
+                |
+                <a href="">
+                    {trans('Nächstes Thema')}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="containerdiv">
+        <div class="rules left">
+            <div class="basic-rules">
+                <strong>
+                    {trans('Berechtigungen')}
+                </strong>
+                <ul>
+                    <li>
+                        Neue Themen erstellen
+                        <cp:if condition="hasperm('forum/canpostnew')">
+                            {trans('Ja')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Nein')}
+                        </cp:else>
+                    </li>
+                    <li>
+                        Themen beantworten:
+                        <cp:if condition="hasperm('forum/canreplyothers')">
+                            {trans('Ja')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Nein')}
+                        </cp:else>
+                    </li>
+                    <li>
+                        Beiträge bearbeiten:
+                        <cp:if condition="hasperm('forum/caneditpost')">
+                            {trans('Ja')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Nein')}
+                        </cp:else>
+                    </li>
+                    <li>
+                        Anhänge hochladen:
+                        <cp:if condition="hasperm('forum/cangetattachment')">
+                            {trans('Ja')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Nein')}
+                        </cp:else>
+                    </li>
+                </ul>
+            </div>
+            <div class="bbcode-rules">
+                <ul>
+                    <li>
+                        <cp:if condition="$forum.allowbbcode">
+                            {trans('BBCode ist an')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('BBCode ist aus')}
+                        </cp:else>
+                    </li>
+                    <li>
+                        <cp:if condition="$forum.allowicons">
+                            {trans('Themen & Post Icons sind an')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Themen & Post Icons sind aus')}
+                        </cp:else>
+                    </li>
+                    <li>
+                        <cp:if condition="$forum.allowimg">
+                            {trans('Bilder sind an')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Bilder sind aus')}
+                        </cp:else>
+                    </li>
+                    <li>
+                        <cp:if condition="$forum.allowhtml">
+                            {trans('HTML Code ist an')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('HTML Code ist aus')}
+                        </cp:else>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="forumjump">
+            <strong>
+                {trans('Gehe zu Forum')}
+            </strong>
+            <select name="fjump" id="forumjump">
+                <cp:loop name="forumjump" key="r">
+                    <option value="{$r.forumid}" cp:on="selected:$thread.forumid == $r.forumid" parse:selected="selected">
+                        {iif($r.depth > 0, '|', '')}
+                        <cp:if condition="$r.depth >
+                            0">{repeat('--', $r.depth)}
+                        </cp:if>
+                        {$r.title}
+                    </option>
+                </cp:loop>
+            </select>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            if (typeof Forum != 'undefined') {
+                setTimeout(function(){
+                    Forum.setForumID({iif($thread.forumid, $thread.forumid, false)});
+                }, 500);
+            }
+        });
+    </script>
+</cp:block>

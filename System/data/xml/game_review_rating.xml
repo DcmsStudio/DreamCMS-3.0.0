@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<gamereview_rating>
+	<option display="1" key="graphic">Grafik</option>
+	<option display="1" key="sound">Sound</option>
+	<option display="1" key="gameplay">Spielspaß</option>
+	<option display="1" key="usage">Steuerung</option>
+	<option display="0" key="rating">Gesamtwertung</option>
+</gamereview_rating>

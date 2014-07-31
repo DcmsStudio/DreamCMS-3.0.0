@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+    <name>Weather</name>
+    <version>1.0</version>
+    <author>Marcel Domke</author>
+    <website>http://www.dcms-studio.de</website>
+    <collapsible>1</collapsible>
+    <configurable>1</configurable>
+    <multiple>1</multiple>
+    <description><![CDATA[The Weather widget shows the weather in your area, right in your CMS Dashboard! Has nothing to do with content management, but shows a nice example of what widgets can do.]]>
+    </description>
+</widget>

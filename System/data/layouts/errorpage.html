@@ -1,0 +1,112 @@
+{$layout.doctype_html}
+<html cp:on="xmlns:!empty($layout.html.xmlns)" parse:xmlns="http://www.w3.org/1999/xhtml" cp:on="xml-lang:!empty($layout.html.xmllang)" parse:xml-lang="{$layout.html.xmllang}" cp:on="lang:!empty($layout.html.lang)" parse:lang="{$layout.html.lang}">
+<head>
+        <base href="{cfg('portalurl')}/"/>
+        <title>{$layout.pagetitle}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="Content-Script-Type" content="text/javascript" />
+        <meta name="generator" content="DreamCMS {$version}" />
+		<link  href="http://fonts.googleapis.com/css?family=Tangerine:regular,bold" rel="stylesheet" type="text/css"/>
+        <cp:if condition="$META_KEYWORDS">
+            <meta name="keywords" content="{$META_KEYWORDS}" />
+        </cp:if>
+        <cp:if condition="$META_DESCRIPTION">
+            <meta name="description" content="{$META_DESCRIPTION}" />
+        </cp:if>
+        <cp:if condition="$META_COPYRIGHT">
+            <meta name="copyright" content="{$META_COPYRIGHT}" />
+        </cp:if>
+        <cp:if condition="$META_AUTHOR">
+            <meta name="author" content="{$META_AUTHOR}" />
+        </cp:if>
+        <cp:if condition="$META_EXPIRES">
+            <meta name="expires" content="{$META_EXPIRES}" />
+        </cp:if>
+        <cp:if condition="$META_ROBOTS">
+            <meta name="robots" content="{$META_ROBOTS}" />
+        </cp:if>
+        <cp:if condition="$META_REVISIT_AFTER">
+            <meta name="revisit-after" content="{$META_REVISIT_AFTER}" />
+        </cp:if>
+    {$layout.framework}
+    {$layout.stylesheets}
+    {$layout.mooScripts}
+    {$layout.headtags}
+	<cp:block name="append-head" />
+    <cp:include template="seemode_include"/>
+        <!-- Error Layout -->
+</head>
+<body id="top">
+    <div id="wrapper-border" class="{$controller-action}{iif($layout.cols, ' ', '')}{$layout.cols}">
+		<div id="wrapper" class="{$controller-action}">
+		
+            <cp:if condition="$layout.header">
+                <div id="header" class="{$controller-action}">
+                    <div class="inside tplsect-top-inside">
+                        <cp:block name="header" />
+                    </div>
+                </div>
+            </cp:if>
+
+            <cp:if condition="$layout.customheader">
+                <div id="customheader" class="tplsect-customtop-inside">
+                    <cp:block name="custom_header" />
+                </div>
+            </cp:if>
+		
+		<cp:if condition="$NAVIGATION">
+			<div id="breadcrumbs">
+				<a href="{cfg('portalurl')}/" class="first">{trans ('Startseite')}</a> / {$NAVIGATION}
+			</div>
+		</cp:if>
+	
+            <div id="container" class="{$controller-action}">
+                <cp:block name="container-header" />
+
+                <div>
+                    <cp:if condition="$layout.left">
+                        <div id="left">
+                            <div class="inside tplsect-left-inside">
+                                <cp:block name="left" />
+                            </div>
+                        </div>
+                    </cp:if>
+
+                    <cp:if condition="$layout.right">
+                        <div id="right">
+                            <div class="inside tplsect-right-inside">
+                                <cp:block name="right" />
+                            </div>
+                        </div>
+                    </cp:if>
+
+                    <div id="main">
+                        <div class="inside tplsect-middle-inside">
+                            <cp:block name="main" />
+                        </div>
+                    </div>
+                </div>
+
+                <cp:block name="container-footer" />
+
+            </div>
+
+            <cp:if condition="$layout.customfooter">
+                <div id="customfooter" class="inside tplsect-custombottom-inside">
+                    <cp:block name="custom_footer" />
+                </div>
+            </cp:if>
+
+            <cp:if condition="$layout.footer">
+                <div id="footer" class="{$controller-action}">
+                    <div class="inside tplsect-bottom-inside">
+                        <cp:block name="footer" />
+                    </div>
+                </div>
+            </cp:if>
+
+		</div>
+	</div>
+</body>
+</html>

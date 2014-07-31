@@ -1,0 +1,235 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    [save:madminForm] [save_exit:madminForm]
+    [reset:madminForm] [cancel:madminForm]
+</cp:block>
+
+<cp:block name="content">
+
+    <div id="menuArrays" style="height:0px;">
+    </div>
+
+    <form action="admin.php" method="post" name="madminForm" id="madminForm">
+        <input type="hidden" name="adm" value="menues" />
+        <input type="hidden" name="action" value="save_menu" />
+        <input type="hidden" name="id" id="item-id" value="{$id}" />
+        <input type="hidden" name="original_pos" value="{$position}" />
+        <input type="hidden" name="original_ord" value="{$ordering}" />
+        <input type="hidden" name="module" value="{$module}" />
+        <input type="hidden" name="is_new" value="{$is_new}" />
+        <input type="hidden" name="add_menuitems" id="added-menuitems" value="" />
+
+
+        <cp:jstabs tabs="Allgemein,Anzeigen auf Seite(n)" usetrans="true" default="Allgemein"/>
+
+        <div class="box description">
+            <div class="box-inner">
+
+                <div class="tab_pages">
+
+                    <div class="tcontent" id="tc0">
+
+                        <div class="fieldset3">
+                            <fieldset>
+                                <legend>{trans('Menü Titel')}</legend>
+                                <input class="input required" type="text" name="title" id="title" size="40" value="{escape($title, 'html')}" />
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>{trans('Menü Anzeigen')}</legend>
+                                {info:menublock|publish}
+                                <label for="published1"><input type="radio" name="published" value="1" id="published1" class="radio"{iif($published, ' checked="checked"', '')}/> {trans('anzeigen')}</label>
+                                <label for="published0"><input type="radio" name="published" value="0" id="published0" class="radio"{iif('!$published', ' checked="checked"', '')}/> {trans('ausblenden')}</label>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>{trans('Template Variable')}</legend>
+                                {info:menublock|templatevar}
+                                <input class="input" type="text" name="templatevar" size="30" value="{$templatevar}" />
+                            </fieldset>
+                        </div>
+
+
+
+                        <div class="fieldset2 rows">
+                            <fieldset>
+                                <legend>{trans('Title anzeigen')}</legend>
+                                {info:menublock|showtitle}
+
+                                <label for="showtitle1"><input type="radio" name="showtitle" value="1" id="showtitle1" class="radio"{iif($showtitle, ' checked="checked"', '')}/> {trans('anzeigen')}</label>
+                                <label for="showtitle0"><input type="radio" name="showtitle" value="0" id="showtitle0" class="radio"{iif('!$showtitle', ' checked="checked"', '')}/> {trans('ausblenden')}</label>
+                            </fieldset>
+                            <fieldset>
+                                <legend>{trans('Position')}</legend>
+                                {info:menublock|position}
+                                {$positions}
+                            </fieldset>
+                        </div>
+                        <div class="fieldsetrows right">
+                            <fieldset>
+                                <legend>{trans('Zugriffsrechte / Sichtbar für')}</legend>
+                                {info:menublock|access}
+                                {$access}
+                            </fieldset>                                
+
+                        </div>                            
+
+
+
+
+                        <cp:if condition="$module == '' || $module != 'mod_mainmenu'">
+
+                            <fieldset>
+                                <legend>{trans('Inhalt')}</legend>
+                                <cp:editor baseurl="{$cfg.portalurl}" name="content" value="{$code}" height="350px"/>
+                            </fieldset>
+
+                        </cp:if><cp:elseif condition="$module != '' && $module == 'mod_mainmenu'">
+                            <!-- START selectable pages -->
+
+                            <div id="listNewOrder" class="w100 fl"></div>
+                            <div id="menucontainer">
+                                <div class="fieldset2">
+                                    <fieldset>
+                                        <legend>{trans('Eingefügte Menüpunkte')}</legend>
+                                        <ul class="datacontainer" id="assigned-items" style="overflow:auto">                                
+                                            {$added_drag_drop}
+                                        </ul>
+                                        <small>{trans('Zum sortieren einfach den Menüpunkt anfassen und dort hin ziehen wo er im Menü erscheinen soll. Wenn Sie einen Menüpunkt aus der der Liste wieder entfernen möchten einfach den Menüpunkt anfassen und auf die linke Seite ziehen.')}</small>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <legend>{trans('Verfügbare Menüpunkte')}</legend>
+
+                                        <ul class="datacontainer" id="available-items" style="overflow:auto">                                    
+                                            {$drag_drop_selectlist}
+                                        </ul>
+
+                                        <small>{trans('Drag &amp; Drop: Ziehen Sie einfach die Menüpunkte von der linken Seite auf die rechte Seite.')}<br/><br/></small>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+
+                        </cp:elseif>
+                    </div>
+
+                    <div class="tcontent" id="tc1">
+                        <fieldset>
+                            <legend>{trans('Angezeigen auf Seite(n)')}</legend>
+                            {info:menublock|showat}
+                            {$selections}
+                        </fieldset>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+
+        var sortString = '';
+        var sortArray = new Array();
+
+        $(document).ready(function() {
+            var form = $('#madminForm').registerForm({
+                contentIdentifierID: 'item-id',
+                exiturl: 'admin.php?adm=menues',
+                onBeforeSubmit: function() {
+                    if ($('#title').val() == '')
+                    {
+                        jAlert('Bitte geben Sie einen Titel an.');
+                        _SubmitError = true;
+                        return true;
+                    }
+                }
+            });
+
+            if ($('#menucontainer'))
+            {
+
+                $('#assigned-items').sortable({
+                    containment: '#tc0',
+                    connectWith: ["#available-items"],
+                    forceHelperSize: true,
+                    forcePlaceholderSize: true,
+                    placeholder: 'ui-state-highlight',
+                    distance: 10,
+                    revert: true,
+                    tolerance: 'pointer',
+                    update: updateFieldAssignment
+                });
+
+                $('#assigned-items').css({height: '250px'});
+
+                $('#available-items').sortable({
+                    containment: '#tc0',
+                    connectWith: ["#assigned-items"],
+                    forceHelperSize: true,
+                    forcePlaceholderSize: true,
+                    placeholder: 'ui-state-highlight',
+                    distance: 10,
+                    revert: false,
+                    tolerance: 'pointer',
+                });
+
+                $('#available-items li').draggable({
+                    connectToSortable: "#assigned-items",
+                    forceHelperSize: true,
+                    forcePlaceholderSize: true,
+                    placeholder: 'ui-state-highlight',
+                    distance: 10,
+                    revert: false,
+                    handle: 'li',
+                    tolerance: 'pointer',
+                    helper: 'clone'
+                });
+
+
+
+                $('#available-items').css({height: '250px'});
+
+                var items = $('#assigned-items li').get();
+                for (var i = 0; i < items.length; i++) {
+                    sortArray[i] = items[i].id.replace(/^id_/i, '');
+                }
+                sortString = sortArray.join(',');
+                $('#added-menuitems').val(sortString);
+
+            }
+
+        });
+
+        function startSelection() {
+
+        }
+
+        function checkSelection() {
+            selection = getSelection();
+            return selection.length;
+        }
+
+        function getSelection() {
+            return $('#available-items').find('li.ui-selected[writable="1"]');
+        }
+
+        function updateFieldAssignment(event, ui) {
+            var sortArray = new Array();
+            var items = $('#assigned-items li').get();
+            for (var i = 0; i < items.length; i++) {
+                sortArray[i] = items[i].id.replace(/^id_/i, '');
+            }
+            sortString = sortArray.join(',');
+            $('#added-menuitems').val(sortString);
+        }
+
+
+    </script>
+
+</cp:block>

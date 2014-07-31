@@ -1,0 +1,18 @@
+<div class="rating-box{iif($boxclass, $boxclass, '')}">
+    <h3 cp:if="$boxlabel">
+        {$boxlabel}
+    </h3>
+    <div class="vote-bubble sprite">
+        <h6>
+            {$vote.ratingsum}
+        </h6>
+        <small>
+            {trans('Wertung')}
+        </small>
+    </div>
+    <cp:set var="vn" value="$vn + 1"/>
+    <div id="rating{$vn}"></div>
+    <cp:provider pname="component" url="$vote.voteurl" toobj="str('rating', $vn)" name="jQueryRating" stars="5" value="$vote.rating" votes="$vote.votes" rating="iif($vote.ratingsum, $vote.ratingsum, '0.00')"/>
+    
+    {*[component name="jQueryRating" toObj="rating{$vn}" stars="5" value="{$vote.rating}" votes="{$vote.votes}" rating="{iif($vote.ratingsum, $vote.ratingsum, '0.00')}" url="{$vote.voteurl}/{$vote.dataid}/"]*}
+</div>

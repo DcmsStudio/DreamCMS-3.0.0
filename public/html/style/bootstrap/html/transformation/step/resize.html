@@ -1,0 +1,36 @@
+    <fieldset>
+        <legend>{trans("Width (pixels)")}</legend>
+        <input type="text" class="textbox" name="params[width]" id="width" value="{iif($values.width, $values.width, '')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Height (pixels)")}</legend>
+        <input type="text" class="textbox" name="params[height]" id="height" value="{iif($values.height, $values.height, '')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Width (percentage)")}</legend>
+        <input type="text" class="textbox" name="params[p_width]" id="p_width" value="{iif($values.p_width, $values.p_width, '')}" style="width: 80px;" /> %
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Height (percentage)")}</legend>
+        <input type="text" class="textbox" name="params[p_height]" id="p_height" value="{iif($values.p_height, $values.p_height, '')}" style="width: 80px;" /> %
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Optionen")}</legend>
+
+        <label for="keep_aspect"><input type="checkbox" class="checkbox" id="keep_aspect" name="params[keep_aspect]" value="1" cp:on="checked:$values.keep_aspect" parse:checked="checked"/> {trans("Keep Aspect Ratio")}</label><br/>
+        <label for="shrink_only"><input type="checkbox" class="checkbox" id="shrink_only" name="params[shrink_only]" value="1" cp:on="checked:$values.shrink_only" parse:checked="checked"/> {trans("Shrink Only (has no effect when resizing based on percentages)")}</label>
+        
+    </fieldset>
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+</script>
+
+

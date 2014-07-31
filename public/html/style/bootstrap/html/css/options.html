@@ -1,0 +1,59 @@
+<cp:loop name="fields" key="field">
+    
+    <fieldset>
+        <legend>{$field.legend}</legend>
+        <cp:if condition="$field.type == 'text'">
+            <input type="text"<cp:if condition="$field.iscolor"> id="color-{$field.inputname}-{$field.field}"</cp:if> name="{$field.inputname}[{$field.field}]" value="{escape($field.value)}"{iif($field.iscolor, ' size="20"', ' size="70"')}{iif($field.iscolor, ' class="color-input"', '')}/>
+        
+        <cp:if condition="$field.options">
+            {$field.options}
+        </cp:if>
+        
+    </cp:if>
+        <cp:elseif condition="$field.type == 'checkbox'">
+            
+            <cp:if condition="count( $field.options )">
+                <cp:loop name="field.options" key="r">
+                    <label for="{$field.field}-{$r.value}"><input type="checkbox" name="{$field.inputname}[{$field.field}][]" value="{$r.value}" id="{$field.field}-{$r.value}"{iif($r.checked, ' checked="checked"', '')} /> {$r.label}</label>
+                </cp:loop>
+            </cp:if>        
+            <cp:else>
+                <label for="{$field.field}-{$r.value}"><input type="checkbox" name="{$field.inputname}[{$field.field}]" id="{$field.field}-{$r.value}" value="1"{iif($field.value, ' checked="checked"', '')} /> {$field.label}</label>
+            </cp:else>
+        </cp:elseif>
+        <cp:elseif condition="$field.type == 'textarea'">
+            <textarea name="{$field.inputname}[{$field.field}]" rows="5" cols="50">{$field.value}</textarea>
+        </cp:elseif>
+        <cp:elseif condition="$field.type == 'trbl'">
+            
+            <cp:loop name="field.trbls" key="r">
+                <input type="text" name="{$field.inputname}[{$field.field}][{$r.name}]" value="{escape($r.value)}" id="{$field.field}-{$r.name}" maxlength="{$r.maxlength}" size="6" style="margin-right: 2px" />
+            </cp:loop>
+            
+            <cp:if condition="$field.options">
+                {$field.options}
+            </cp:if>
+            
+        </cp:elseif>
+        <cp:elseif condition="$field.type == 'inputUnit'">
+            <input type="text" name="{$field.inputname}[{$field.field}]" value="{escape($field.value)}" size="6" />
+            
+            <cp:if condition="$field.options">
+                {$field.options}
+            </cp:if>
+            
+        </cp:elseif>
+        <cp:elseif condition="$field.type == 'select'">
+            <select name="{$field.inputname}[{$field.field}]">
+                <cp:loop name="field.options" key="r">
+                    <option value="{$r.value}"{iif($r.value == $field.value, ' selected="selected"', '')}>{$r.title}</option>
+                </cp:loop>
+            </select>
+        </cp:elseif>
+        
+        <cp:if condition="$field.legend_description">
+            <br/><small>{$field.legend_description}</small>
+        </cp:if>
+    </fieldset>
+    
+</cp:loop>

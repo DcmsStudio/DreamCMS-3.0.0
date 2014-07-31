@@ -1,0 +1,16 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button class="action-button btn_new" onclick="openTab({url: 'admin.php?adm=page&action=addfield&pagetypeid={$pagetypeid}', obj: this, label: $(this).text() })"><span class="btn_new"></span> Feld hinzufügen</button>
+</cp:block>
+
+<cp:block name="content">
+
+    <div id="pagefields-grid{$input.pagetypeid}"></div>
+
+    <script type="text/javascript" language="javascript">
+
+        Application.Grid('pagefields-grid{$input.pagetypeid}', {$gridJson});
+
+    </script>
+</cp:block>

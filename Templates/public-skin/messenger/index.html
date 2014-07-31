@@ -1,0 +1,244 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+	<div id="teaser">
+	</div>
+</cp:block>
+
+
+
+<cp:block name="main_content">
+
+<script type="text/javascript">
+    // <![CDATA[
+var backendImagePath = '{$backendImagePath}';
+var current_message = 0;
+var current_folder = 1;
+var cancelClick = '';
+var maxMessages = {group('user:maxpms', 50)};
+    // ]]>
+</script>
+    <script type="text/javascript" src="{$js_url}dcms-messenger.js"></script>
+
+                <table width="100%" cellpadding="0" cellspacing="0" style="border:0!important">
+                    <tr>
+                        <td style="width:250px;vertical-align:top;border:0!important">
+                            <div class="box folders">
+                                <h2>
+                                    {trans("Ordner")}
+                                </h2>
+                                <div class="box-inner" style="padding:3px;" id="folder-panel">
+                                    <table border="0" cellpadding="0" cellspacing="1" width="100%">
+                                        <tr id="folder-1">
+                                            <td>
+                                                <a href="#" rel="folder-1" style="display: block;">
+                                                <img src="{$img_url}messenger/right.png" width="16" height="16" alt="" class="current-folder" />
+                                                <img src="{$img_url}messenger/inbox.png" width="16" height="16" alt="" />
+                                                {trans('Posteingang')}
+                                                </a>
+                                            </td>
+                                            <td class="folder-count" id="count-1">
+                                                <cp:if condition="$foldercount_1 > 0">
+                                                    {$foldercount_1}
+                                                </cp:if>
+                                                <cp:else>
+                                                    0
+                                                </cp:else>
+                                            </td>
+                                        </tr>
+                                        <tr id="folder-2">
+                                            <td>
+                                                <a href="#" rel="folder-2" style="display: block;">
+                                                <img src="{$img_url}spacer.gif" width="16" height="16" alt="" />
+                                                <img src="{$img_url}messenger/outbox.png" width="16" height="16" alt="" />
+                                                {trans('Postausgang')}
+                                                </a>
+                                            </td>
+                                            <td class="folder-count" id="count-2">
+                                                <cp:if condition="$foldercount_2 > 0">
+                                                    {$foldercount_2}
+                                                </cp:if>
+                                                <cp:else>
+                                                    0
+                                                </cp:else>
+                                            </td>
+                                        </tr>
+                                        <tr id="folder-3">
+                                            <td>
+                                                <a href="#" rel="folder-3" style="display: block;">
+                                                <img src="{$img_url}spacer.gif" width="16" height="16" alt="" />
+                                                <img src="{$img_url}bin.png" width="16" height="16" alt=""<cp:if condition="{$foldercount_3} > 0"> class="trashfull"</cp:if> />
+                                                {trans('Papierkorb')}
+                                                </a>
+                                            </td>
+                                            <td class="folder-count" id="count-3">
+                                                <cp:if condition="$foldercount_3 > 0">
+                                                    {$foldercount_3}
+                                                </cp:if>
+                                                <cp:else>
+                                                    0
+                                                </cp:else>
+                                            </td>
+                                        </tr>
+                                        <cp:loop name="folders" key="r">
+                                            <tr id="folder-{$r.id}">
+                                                <td>
+                                                    <a href="#" rel="folder-{$r.id}" style="display: block;">
+                                                    <img src="{$img_url}spacer.gif" width="16" height="16" alt="" />
+                                                    <img src="{$img_url}folder.png" width="16" height="16" alt="" />
+                                                    <span>{$r.title}</span>
+                                                    </a>
+                                                </td>
+                                                <td class="folder-count" id="count-{$r.id}">
+                                                    <cp:if condition="$r.counter > 0">
+                                                        {$r.counter}
+                                                    </cp:if>
+                                                    <cp:else>
+                                                        0
+                                                    </cp:else>
+                                                </td>
+                                            </tr>
+                                        </cp:loop>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="box" style="margin: 0; margin-top: 5px;" id="status-panel">
+                                <h2>
+                                    {trans("Speicherverbrauch")}
+                                </h2>
+                                <div class="box-inner" style="padding:3px;">
+                                    <table style="width: 100%;" cellpadding="0" cellspacing="0" class="simple small">
+                                        <tr>
+                                            <td>
+                                                {trans("Erlaubte Nachrichten")}:
+                                            </td>
+                                            <td>
+                                                <span id="count-max">
+                                                    {group('user:maxpms', 50)}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {trans("Nachrichten im Speicher")}:
+                                            </td>
+                                            <td>
+                                                <span id="count-all">
+                                                    {$totalmessages}
+                                                </span>
+                                                (
+                                                <span id="count-all-percent"></span>
+                                                %)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center; padding-bottom: 8px;padding-top: 8px;" id="count-percent-graph">
+                                                <img src="{$img_url}bar/bar-unused-left.gif" width="2" height="8" alt="" />
+                                                <img src="{$img_url}bar/bar-unused.gif" width="180" height="8" alt="" />
+                                                <img src="{$img_url}bar/bar-unused-right.gif" width="2" height="8" alt="" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="box" style="margin: 0; margin-top:5px; display: none;" id="option-panel">
+                                <h2>
+                                    {trans("Options")}
+                                </h2>
+                                <div class="box-inner" style="padding:3px;">
+                                    <table style="width: 100%;" cellpadding="0" cellspacing="0" class="simple small">
+                                        <tr>
+                                            <td>
+                                                <img src="{$img_url}new.png" width="16" height="16" alt="" style="opacity: .5;" />
+                                                <a id="set-read" href="#">{trans("als gelesen markieren")}</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="{$img_url}new.png" width="16" height="16" alt="" />
+                                                <a id="set-unread" href="#">{trans("als ungelesen markieren")}</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="{$img_url}messenger/inbox.png" width="16" height="16" alt="" />
+                                                <a class="move-to-link" rel="folder-1" href="#">{trans("in den Posteingang verschieben")}</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="{$img_url}bin.png" width="16" height="16" alt="" />
+                                                <a class="move-to-link" rel="folder-3" href="#">{trans("in den Papierkorb verschieben")}</a>
+                                            </td>
+                                        </tr>
+                                        <cp:loop name="folders" key="r">
+                                            <tr>
+                                                <td>
+                                                    <img src="{$img_url}messenger/user.png" width="16" height="16" alt="" />
+                                                    <a class="move-to-link" rel="folder-{$r.id}" href="#">{trans("verschieben nach")}: {$r.title}</a>
+                                                </td>
+                                            </tr>
+                                        </cp:loop>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="vertical-align: top;">
+                            <div id="message-container" style="margin-left:10px;margin-top: 0px;">
+                            
+                                <div class="mb5">
+                                    <div id="messengercompose" style="display:none">
+                                        <button id="compose-save-button" class="action-button"><img src="{$img_url}messenger/send.png" width="16" height="16" alt="" />&nbsp;{trans("Nachricht Senden")}</button>
+                                        <button id="compose-cancel-button" class="action-button"><img src="{$img_url}cancel.png" width="16" height="16" alt="" />&nbsp;{trans("Abbrechen")}</button>
+                                    </div>
+                                    <div id="messengerfolder">
+                                        <button id="compose-button" class="action-button"><img src="{$img_url}messenger/compose.png" width="16" height="16" alt="" />&nbsp;{trans("Mail verfassen")}</button>
+                                        <button id="empty-trash-button" class="action-button button-disabled" disabled="disabled"><img src="{$img_url}bin.png" width="16" height="16" alt="" />&nbsp;{trans("Papierkorb leeren")}</button>
+                                        <button id="create-folder-button" class="action-button"><img src="{$img_url}folder_add.png" width="16" height="16" alt="" />&nbsp;{trans("Ordner erstellen")}</button>
+                                        <button id="rename-folder-button" class="action-button button-disabled" disabled="disabled"><img src="{$img_url}folder_rename.png" width="16" height="16" alt="" />&nbsp;{trans("Ordner Umbenennen")}</button>
+                                        <button id="delete-folder-button" class="action-button button-disabled" disabled="disabled"><img src="{$img_url}folder_delete.png" width="16" height="16" alt="" />&nbsp;{trans("Ordner Löschen")}</button>
+                                    </div>
+                                </div>
+                            
+                                <div id="message-table" style="margin: 0;">
+                                    <table width="100%" cellpadding="3" cellspacing="0" id="grid-table">
+                                    <tr class="header">
+                                        <td width="1%"></td>
+                                        <td class="icon" width="10%"></td>
+                                        <td>Betreff</td>
+                                        <td width="20%">Von</td>
+                                        <td width="25%" class="tr">Datum</td>
+                                    </tr>
+                                    <cp:loop name="messages" key="r">
+                                    <tr class="gridRow">
+                                        <td><input type="checkbox" name="mail[]" value="{$r.id}"/></td>
+                                        <td class="icon" width="10%">{$r.status}</td>
+                                        <td>{$r.title}</td>
+                                        <td>{$r.username}</td>
+                                        <td class="tr small">{date('d.m.Y, H:i:s', $r.sendtime)}</td>
+                                    </tr>
+                                    </cp:loop>                                      
+                                    </table>
+                                    
+                                    <div class="tr" id="message-pages">{$pages}</div>
+                                </div>
+                                <div id="message-compose-container" style="display: none;"></div>
+                                <div id="message-view" style="display: none;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    </table>
+
+    
+
+<script type="text/javascript">
+    // <![CDATA[
+
+$(document).ready(function() {
+
+    $('#count-all-percent').text( ( parseInt($('#count-all').text().trim() ) * 100) / maxMessages );
+    drawGraph( Math.round( parseInt($('#count-all-percent').text().trim() ) ) );
+});
+//]]>
+</script>
+
+</cp:block>

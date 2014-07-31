@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title>DreamCMS {$version} - Packet Browser</title>
+        <meta http-equiv="Content-Language" content="de"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <base href="{cfg('portalurl')}/" />
+        <link type="text/css" href="{$js_url}jquery/css/base/jquery.ui.base.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{$backend_css_url}layout.css" type="text/css" />
+        <link rel="stylesheet" href="{$backend_css_url}forms.css" type="text/css"  />
+        <link rel="stylesheet" href="{$backend_css_url}filemanager.css" type="text/css" />
+        <link rel="stylesheet" href="{$backend_css_url}jqueryFileTree.css" type="text/css" />
+        <link rel="stylesheet" href="{$backend_css_url}jquery.contextMenu.css" type="text/css" />
+        <link rel="stylesheet" href="{$js_url}jquery/fancybox/jquery.fancybox-1.3.1.css" type="text/css" />
+        <script type="text/javascript" language="javascript">
+            //<![CDATA[
+    var seeMode = false;
+    var menuItems;
+    var filemanager = null;
+    var session_id = '{$session_id}';
+    var cmsurl = '{$cfg.portalurl}/';
+    var backendImagePath = '{$backendImagePath}';
+    var cms_pagepath = '{$pagepath}/';                
+    var cmsurl_regex = {$cmsurl_jsregex};
+    var colorPickerWidth = 12;
+    var exitpopup = 0;
+    var widgetcolumns = 4; // num of widget div cols for frontpage
+    var use_fancy_checkboxes = false;
+    var is_defaultheader = false;
+    var hasTrash = false;
+    var max_upload_size = "{$uploadsize} MB";
+    var max_upload_limit = "{$uploadlimit}";
+    var is_defaultheader = false;
+    var cookiePrefix = '{$cookieprefix}';
+    var fm_viewmode = '{$fileman_view_mode}';
+    var requestString = '{requeststring('post')}';
+    
+    var settings = {};
+        settings.base_url = cmsurl;
+        settings.session_id = session_id;
+        settings.sidebarOpen = 0;
+        settings.sidebarWidth = 0;
+
+    var pageTitle = '{$pageTitle}';
+    var pageCurrentTitle = '{$pageCurrentTitle}';
+    var menuObj;
+
+
+
+//]]>
+        </script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="admin.php?adm=lang"></script>  
+        {$js_code}
+        {$js}  
+
+        <script type="text/javascript" language="javascript">
+            //<![CDATA[
+$(document).ready( function() {
+    if($('#comp-runtime').text()!='') {
+        $('#comp-runtime').show();
+        window.setTimeout(function() {$('#comp-runtime').fadeOut();}, 4000);
+    }
+
+
+    
+
+<cp:if condition="!$islogin">
+
+    $('#logoutbutton').click(function() { logout(); } );
+    $('#helpbutton').click(function() { dcmshelp('{$request.adm}', '{$request.action}'); } );
+
+</cp:if>
+});
+//]]>
+        </script>
+<cp:block name="cssinline"/>
+    </head>
+    <body>
+
+        <div id="widget-contents">
+            <div class="toolbar">
+                <div class="toolbar-left"><!--TOOLBAR-->
+                    <cp:block name="toolbar"/>
+                    
+                </div>
+                <div class="toolbar-right">
+                </div>
+            </div>
+            <div id="content" style="width:99%;margin-top:10px">
+                <div id="maincontent" style="margin-top:10px;padding-top:3px;">
+                    <cp:block name="content"/>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Notepad Content -->
+        <div id="note_ajax"></div>
+        
+        <!-- ToolTip Box -->
+        <div id="tip" onclick="infohide();" style="display:none;">
+            <div id="tip-title"><img src="html/style/default/img/info.png" width="16" height="16" alt="" /><span id="tiptitle-text"></span></div>
+            <div id="tip-body"></div>
+        </div>
+
+    </body>
+</html>

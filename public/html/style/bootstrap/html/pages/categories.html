@@ -1,0 +1,235 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    {$toolbar}
+</cp:block>
+<cp:block name="content">
+    <div class="sortable-table" id="sortable-tablepages-cats" style="position: relative;padding: 0;margin: 0">
+        <table width="100%" class="header-table" style="z-index: 100;position: fixed;padding: 0;margin: 0">
+            <thead>
+                <tr>
+                    <td>
+                        <div>{trans('Titel')}</div>
+                    </td>
+                    <td width="120" class="tc">
+                        <div>{trans('Anzahl Seiten')}</div>
+                    </td>
+                </tr>
+
+            </thead>
+        </table>
+
+        <cp:tree name="pagecats" key="r" primarykey="catid" parentkey="parentid" id="page-cats" style="margin-top: 22px">
+            <li id="cat-{$r.catid}">
+                <div class="row" id="data-{$r.catid}">
+                    <table class="table" width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="20">
+                                    <div><span class="drag-handler"></span></div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div class="row-label">
+                                            {$r.title}
+                                            <cp:if condition="$r.password != null">
+                                                &nbsp; <img src="images/private.png" border="0" alt="{trans('Passwortschutz')}" title="{trans('Passwortschutz')}" />
+                                            </cp:if>
+                                        </div>
+
+                                        <div class="opt">
+
+                                            <a href="javascript:void(0)" rel="ppub{$r.catid}" publishurl="admin.php?adm=page&amp;action=catpublish&amp;id={$r.catid}">
+                                                <span id="ppub{$r.catid}" class="published fa fa-refresh"></span>
+                                                <span class="pub-label">
+                                                    <cp:if condition="$r.published > 0">
+                                                        {trans('Aktiviert')}
+                                                    </cp:if>
+                                                    <cp:else>
+                                                        {trans('Deaktiviert')}
+                                                    </cp:else>
+                                                </span>
+                                            </a>
+                                            <i></i>
+                                            <a class="doTab" href="admin.php?adm=page&amp;action=editcat&amp;catid={$r.catid}&amp;edit=1">
+                                                {trans('Bearbeiten')}
+                                            </a>
+                                            <i></i>
+                                            <a class="delconfirm" href="admin.php?adm=page&amp;action=deletecat&amp;catid={$r.catid}">
+                                                {trans('Löschen')}
+                                            </a>
+
+                                        </div>
+
+
+                                    </div>
+                                </td>
+                                <td width="120" class="tc">
+                                    <div>{$r.totalpages}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </cp:tree>
+    </div>
+    <script language="javascript" type="text/javascript">
+        
+        /*
+        $('#'+ Win.windowID).addWindowEvent('onBeforeShow', function(e, wm){
+            $('#'+ Win.windowID).addClass('no-padding');
+        });
+        
+        
+        
+        Application.enableMenuitems('editcat');
+        Application.hideMenuitems('add');
+*/
+
+        if (typeof updatePageCatSorting != 'function')
+        {
+
+
+            function updatePagesCatZebra () {
+                updateZebraForTreeGrid($('#page-cats'), 'li', 'div.row');
+            }
+
+            function updatePageCatSorting ()
+            {
+
+                var serialized = $('#page-cats').nestedSortable('toArray', {startDepthCount: 0});
+                serialized.shift();
+                var object = $.extend({}, serialized);
+                var items = new Array();
+                items['items'] = new Array();
+
+                $(object).each(function (i, item) {
+                    items['items'].push(item);
+                })
+
+
+                var serialized = $.extend({}, items);
+                var ordering = '', menuitems = '';
+
+
+
+                $('#page-cats').find('li').each(function (i) {
+                    ordering += (ordering ? ',' + (i + 1) : (i + 1));
+                    menuitems += (menuitems ? ',' + $(this).attr('id').replace('cat-', '') : $(this).attr('id').replace('cat-', ''));
+                });
+
+                serialized.ordering = ordering;
+                serialized.adm = 'page';
+                serialized.action = 'editcat';
+                serialized.ajax = true;
+                serialized.updateOrder = true;
+                serialized.ids = menuitems;
+
+
+                var object = $.extend({}, serialized);
+
+                $.post(Tools.prepareAjaxUrl('admin.php'), object, function (data) {
+                    if (Tools.responseIsOk(data))
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                });
+            }
+        }
+
+
+
+        $('#sortable-tablepages-cats table.header-table' ).width( $('#content-container' ).width() );
+        $(window ).resize(function() {
+            $('#sortable-tablepages-cats table.header-table' ).width( $('#content-container' ).width() );
+        });
+
+        updatePagesCatZebra();
+        $('#page-cats').nestedSortable({
+            forcePlaceholderSize: true,
+            forceHelperSize: true,
+            handle: '.drag-handler',
+            helper: 'clone',
+            items: 'li',
+            listType: 'ul',
+            opacity: .7,
+            placeholder: 'ui-sortable-placeholder',
+            revert: 250,
+            tabSize: 25,
+            tolerance: 'pointer',
+            toleranceElement: '>.row > table:first',
+            maxLevels: 10,
+            isTree: true,
+            expandOnHover: 500,
+            appendTo: 'body',
+            startCollapsed: false,
+            scroll: false,
+            start: function (event, ui)
+            {
+
+            },
+            stop: function (event, ui) {
+
+                updatePageCatSorting();
+                updatePagesCatZebra();
+
+            }
+        });
+
+
+        $('#sortable-tablepages-cats').find('a.delconfirm').each(function () {
+            $(this).unbind();
+            $(this).bind('click', function (e) {
+                e.preventDefault();
+
+                var href = $(this).attr('href');
+
+                jConfirm('Möchtest du diesen Inhalt wirklich löschen?', 'Bestätigung...', function (r) {
+                    if (r) {
+
+                        //unnotify();
+
+                        $.get(Tools.prepareAjaxUrl(href + '&send=1'), {}, function (data) {
+                            if (Tools.responseIsOk(data))
+                            {
+                                if (data.msg)
+                                {
+                                    Notifier.display('info', data.msg);
+                                }
+                                else
+                                {
+                                    Notifier.display('info', 'Daten wurden erfolgreich gelöscht...');
+                                }
+
+
+
+                                // refresh
+                                if (Desktop.isWindowContainer) { $('#' + Win.windowID).data('WindowManager').ReloadWindow(); }
+                                else {
+                                    Core.refreshTab();
+                                }
+                            }
+                            else
+                            {
+                                jAlert(data.msg);
+                            }
+                        }, 'json');
+                    }
+
+                });
+
+                return false;
+            });
+        });
+
+
+        $('#' + Win.windowID).addClass('no-padding');
+
+    </script>
+
+</cp:block>

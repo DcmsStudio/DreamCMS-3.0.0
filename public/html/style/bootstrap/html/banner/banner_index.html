@@ -1,0 +1,112 @@
+<?php
+
+function __banner_index(){
+global $cp, $cfg, $fct, $cp, $cp;
+
+	return <<<EOF
+<a name="top"></a><center><font class="option"><b>Zur Zeit aktive Banner</b></font></center>
+<br>
+<table cellpadding=4 cellspacing=1 border=0 class="tblborder" width="95%" align="center">
+    <tr class="tableheader">
+        <td align="center">ID</td>
+        <td align="center">Einblendungen</td>
+        <td align="center">Verbleibende Einbl.</td>
+        <td align="center">Klicks</td>
+        <td align="center">% Klicks</td>
+        <td align="center">Kundenname</td>
+        <td align="center">Funktionen</td>
+    </tr>
+$bannerlist
+</td>
+</tr>
+</table>
+<br>
+<center><font class="option"><b>Fertige Banner</b></font></center><br>
+<table cellpadding=4 cellspacing=1 border=0 class="tblborder" width="95%" align="center">
+  <tr class="tableheader">
+    <td align="center">ID</td>
+    <td align="center">Einbl.</td>
+    <td align="center">Klicks</td>
+    <td align="center">% Klicks</td>
+    <td align="center">Startdatum</td>
+    <td align="center">Enddatum</td>
+    <td align="center">Kundenname</td>
+    <td align="center">Funktionen</td>
+  </tr>
+  $finish_bannerlist </td>
+  </tr>
+</table>
+<br>
+$banner_add_form <center><font class="option"><b>Werbekunden</b></font></center>
+<br>
+<table cellpadding=4 cellspacing=1 border=0 class="tblborder" width="99%" align="center">
+  <tr class="tableheader">
+    <td align="center">ID</td>
+    <td align="center">Kundenname</td>
+    <td align="center">Aktive Banner</td>
+    <td align="center">Name Ansprechpartner</td>
+    <td align="center">EMail Ansprechpartner</td>
+    <td align="center">Funktionen</td>
+  </tr>
+  $clientlist </td>
+  </tr>
+</table>
+<br>
+<form  action="admin.php"  method="post" onsubmit=""><input type="hidden" name="adm" value="marketing" />
+  <input type="hidden" name="sid" value="$cp->session_id">
+  <input type="hidden" name="action" value="BannerAddClient">
+  <div align="center">
+    <center>
+<table cellpadding=4 cellspacing=1 border=0 class="tblborder" width="95%">
+    <tr class="tableheader">
+      <td colspan="2" width="95%"><font class="option"><b>Neuen Kunden hinzufügen</b></center></font></td>
+    </tr>
+    <tr class="firstrow">
+      <td><font class="option">Kundenname: </font></td>
+      <td width="60%"><font class="option">
+      <input type="text" name="name" size="53" maxlength="60"></font></td>
+    </tr>
+    <tr class="secondrow">
+      <td><font class="option">Name Ansprechpartner:</font></td>
+      <td width="60%"><font class="option">
+      <input type="text" name="contact" size="53" maxlength="60"></font></td>
+    </tr>
+    <tr class="firstrow">
+      <td><font class="option">EMail Ansprechpartner: </font></td>
+      <td width="60%"><font class="option">
+      <input type="text" name="email" size="53" maxlength="60"></font></td>
+    </tr>
+    <tr class="secondrow">
+      <td><font class="option">Kunden Login:</font></td>
+      <td width="60%"><font class="option">
+      <input type="text" name="login" size="18" maxlength="10"></font></td>
+    </tr>
+    <tr class="firstrow">
+      <td><font class="option">Kunden Passwort: </font></td>
+      <td width="60%"><font class="option">
+      <input type="text" name="passwd" size="18" maxlength="10"></font></td>
+    </tr>
+    <tr class="secondrow">
+      <td><font class="option">Weitere Infos:</font></td>
+      <td width="60%">&nbsp;</td>
+    </tr>
+    <tr class="firstrow">
+      <td colspan="2"><font class="option">
+      <textarea name="extrainfo" style="width:100%; height:70"></textarea></font></td>
+    </tr>
+    <tr class="secondrow">
+      <td colspan="2"><font class="option">
+      <input type="submit" value="Kunden hinzufügen"> <input type="reset" value="Zurücksetzen" class="button" /></font></td>
+    </tr>
+  </table>
+    </center>
+  </div>
+</form>
+</td>
+</tr>
+</table>
+
+EOF;
+}
+
+?>

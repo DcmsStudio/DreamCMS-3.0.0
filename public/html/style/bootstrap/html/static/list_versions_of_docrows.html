@@ -1,0 +1,25 @@
+<?php
+
+function __list_versions_of_docrows($row){
+global $cp, $cfg, $fct, $root_path;
+
+	static $page_x;
+	$class = $page_x++%2 ? 'firstrow' : 'secondrow';
+
+return <<<EOF
+        <tr onmouseover="over(this)" onmouseout="out(this)" class="$class">
+            <td>$row[page_title]</td>
+            <td align="center">$row[author_name]</td>
+            <td align="center">$row[version]</td>
+            <td align="center">{$row['date']}</td>
+            <td align="center">
+            <a href="admin.php?adm=static_pages&amp;sid=$cp->session_id&action=preview_backup&id=$row[id]" target="_blank"><img src="images/button_preview.gif" border="0" alt="Vorschau"></a> &nbsp;&nbsp;
+            <a href="admin.php?adm=static_pages&amp;sid=$cp->session_id&action=restore&id=$row[id]"><img src="images/doc_backup_refresh.gif" border="0" alt="Dokument wiederherstellen"></a>
+             &nbsp;&nbsp;
+            <a href="admin.php?adm=static_pages&amp;sid=$cp->session_id&action=del_backup&id=$row[id]"><img src="images/delete.gif" border="0" alt="Dokument endgültig löschen"></a>
+            </td>
+        </tr>
+EOF;
+}
+
+?>

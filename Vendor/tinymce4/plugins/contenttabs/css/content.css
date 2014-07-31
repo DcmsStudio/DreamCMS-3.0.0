@@ -1,0 +1,82 @@
+.mce-content-body .tabsection {
+    border: 0;
+    background: transparent;
+}
+
+.mce-content-body .tabs {
+    list-style: none;
+    border: 0;
+    margin: 0;
+}
+.mce-content-body .tabs li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 3px;
+    margin-left: 3px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-bottom: 1px solid #fff;
+    padding-left: 5px;
+    padding-right: 5px;
+    line-height: 20px;
+    position: relative;
+    top: 1px;
+}
+.mce-content-body .tab-content {
+    padding: 3px;
+    border: 1px solid #EEE;
+    background: transparent;
+}
+.mce-content-body .tab-content .tab-pane {
+    padding: 10px;
+    border: 1px solid #E9E9E9;
+    background-color: #fcfcfc;
+    background-image: none;
+    margin-bottom: 10px;
+    position: relative;
+}
+.mce-content-body .tab-content .tab-pane:before {
+    content: ' ';
+    background-image: url("../img/labels.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    width: 30px;
+    height: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-bottom: 1px dashed #c0c0c0;
+    border-right: 1px dashed #c0c0c0;
+    display: block;
+}
+.mce-content-body .tab-content .tab-pane:last-child {
+    margin: 0;
+}
+
+.mce-content-body .tab-content .tab-pane.c-1:before {
+    background-position: 0 -10px;
+}
+.mce-content-body .tab-content .tab-pane.c-2:before {
+    background-position: 0 -20px;
+}
+.mce-content-body .tab-content .tab-pane.c-3:before {
+    background-position: 0 -28px;
+}
+.mce-content-body .tab-content .tab-pane.c-4:before {
+    background-position: 0 -37px;
+}
+.mce-content-body .tab-content .tab-pane.c-5:before {
+    background-position: 0 -46px;
+}
+.mce-content-body .tab-content .tab-pane.c-6:before {
+    background-position: 0 -55px;
+}
+.mce-content-body .tab-content .tab-pane.c-7:before {
+    background-position: 0 -64px;
+}
+.mce-content-body .tab-content .tab-pane.c-8:before {
+    background-position: 0 -72px;
+}
+.mce-content-body .tab-content .tab-pane.c-9:before {
+    background-position: 0 -82px;
+}

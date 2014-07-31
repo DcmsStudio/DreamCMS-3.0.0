@@ -1,0 +1,129 @@
+.markItUp * {
+    margin:0px;
+    padding:0px;
+    outline:none; 
+    list-style:none!important;
+    list-style-image: none !important;
+    list-style-position: outside!important;
+    list-style-type: none!important;
+    background-repeat: no-repeat!important;
+    background-image: none!important;
+    padding: 0;
+    line-height: auto;
+    border: 0;
+}
+
+.markItUpHeader{
+    display: inline-block!important;
+    width: 100%!important;
+    margin-bottom: 5px!important;
+}
+
+.markItUpHeader ul, 
+.markItUpHeader ul li {
+    list-style:none!important;
+    list-style-image: none !important;
+    list-style-position: outside!important;
+    list-style-type: none!important;
+    margin:0px;
+    padding:0px;
+    line-height: 20px;
+    background: transparent;
+}
+
+
+.markItUpHeader > ul:first-child > li.markItUpButton {
+    display: inline-block;
+    float: left;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat!important;
+    background-position: 50% 50%!important;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 3px!important;
+}
+.markItUpHeader > ul > li.markItUpSeparator >span,
+.markItUpHeader > ul > li.markItUpButton > a > span {
+    display: none!important; 
+}
+
+.markItUpHeader > ul > li.markItUpButton > a {
+    height: 20px;
+    width: 20px;
+    display: block;
+    background-repeat: no-repeat!important;
+    background-position: 50% 50%!important;
+}
+
+.markItUpHeader > ul > li.markItUpSeparator {
+    display: block;
+    float: left;
+    height: 28px;
+    width: 1px!important;
+    border-right: 1px solid #ddd;
+    margin-left: 8px!important;
+    margin-right: 5px!important;
+    margin-top: 3px!important;
+}
+
+.markItUpHeader > ul > li.markItUpButton:hover {
+    border: 1px solid #CACACA!important;
+    background-color: #D9D9D9!important;
+}
+
+.markItUpHeader > ul > li ul {
+    display: none;
+    background: #fff;
+    border:1px solid silver;
+    position: absolute;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(49, 49, 49, 0.4);
+    padding: 0!important;
+    margin-top: -5px!important;
+    margin-left: -10px!important;
+    overflow: hidden;
+    
+}
+
+.markItUpHeader > ul > li ul li {
+    float: none;
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    
+}
+.markItUpHeader > ul > li ul li a {
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    padding: 0;
+    margin: 0;
+    display: block;
+    padding-left: 22px!important;
+}
+
+textarea.markItUpEditor {
+    width: 97%;
+    max-width: 900px!important;
+    font-size: 14px!important;
+    padding: 5px!important;
+}
+.markItUpDropMenu.size ul{
+    width: 150px!important;
+}
+.markItUpDropMenu.size li > a {
+    display: inline-block;
+    width: 100%;
+    border: 1px solid transparent!important;
+}
+.markItUpDropMenu.size li > a:hover {
+    border: 1px solid #CACACA!important;
+    background-color: #D9D9D9!important;
+}
+.markItUpDropMenu.size .markItUpButton.size8 {font-size:8px!important; } 
+.markItUpDropMenu.size .markItUpButton.size10 {font-size:10px!important; } 
+.markItUpDropMenu.size .markItUpButton.size12 {font-size:12px!important; } 
+.markItUpDropMenu.size .markItUpButton.size18 {font-size:18px!important; } 
+.markItUpDropMenu.size .markItUpButton.size24 {font-size:24px!important; } 

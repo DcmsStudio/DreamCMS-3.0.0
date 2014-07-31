@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tooltip>
+	<table title=""><![CDATA[]]></table>
+	<export_xml title=""><![CDATA[----]]></export_xml>
+	<structure title=""><![CDATA[----]]></structure>
+	<inclusive_droptable title=""><![CDATA[----]]></inclusive_droptable>
+	<dataonly title=""><![CDATA[----]]></dataonly>
+	<delet_all title=""><![CDATA[----]]></delet_all>
+	<export_update title=""><![CDATA[----]]></export_update>
+	<server title=""><![CDATA[----]]></server>
+	<download title=""><![CDATA[----]]></download>
+	<nocompress title=""><![CDATA[----]]></nocompress>
+	<bz2compress title=""><![CDATA[----]]></bz2compress>
+	<gzcompress title=""><![CDATA[----]]></gzcompress>
+	<zipcompress title=""><![CDATA[----]]></zipcompress>
+	<select_special_data title=""><![CDATA[----]]></select_special_data>
+	<datafortable title=""><![CDATA[----]]></datafortable>
+</tooltip>

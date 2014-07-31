@@ -1,0 +1,196 @@
+<form action="admin.php" method="post" id="sendMessage_form" name="sendMessage_form">
+    <input type="hidden" name="adm" value="messenger"/>
+    <input type="hidden" name="action" value="send"/>
+    <input type="hidden" name="id" value="{$input.id}"/>
+
+    <div class="box">
+        <h2>{trans("Nachricht schreiben")}</h2>
+        <div class="box-inner">
+
+            <fieldset>
+                <label>{trans("To")}</label>
+                <input type="text" class="input fl" id="m_to" name="m_to" value="{$send_to}" style="width: 400px;" /> 
+                <img class="find-link" src="images/messenger/search.png" width="16" height="16" alt="" />
+            </fieldset>
+
+            <fieldset>
+                <label>{trans("CC")}</label>
+                <input type="text" class="input fl" id="m_cc" name="m_cc" value="{$send_cc}" style="width: 400px;" />
+                <img class="find-link" src="images/messenger/search.png" width="16" height="16" alt="" />
+            </fieldset>
+
+            <fieldset>
+                <label>{trans("Bcc")}</label>
+                <input type="text" class="input fl" id="m_bcc" name="m_bcc" value="{$send_bcc}" style="width: 400px;" />
+                <img class="find-link" src="images/messenger/search.png" width="16" height="16" alt="" />
+            </fieldset>
+
+
+            <div id="switcher1">                
+                <fieldset>
+                    <label>{trans("Nachrichten Option")}</label>
+                    <label for="prio"><input type="checkbox" class="checkbox" name="prio" id="prio" value="1" /> {trans("Nachricht mit hoher Priorität versenden")}</label>
+                    <label for="copy"><input type="checkbox" class="checkbox" name="copy" id="copy" value="1" /> {trans("Kopie im Ordner gesendet Speichern")}</label>
+                    <label for="rcpt"><input type="checkbox" class="checkbox" name="rcpt" id="rcpt" value="1" /> {trans("Lesebestätigung anfordern")}</label>
+                </fieldset>
+
+                <fieldset>
+                    <label>{trans("Betreff")}</label>
+                    <input type="text" class="form-control" id="m_subject" name="m_subject" value="{$send_subject}" maxlength="60" style="width: 400px;" />
+                </fieldset>
+
+                <fieldset>
+                    <label>{trans("Nachricht")}</label>
+                    <textarea id="m_body" name="m_body" cols="40" rows="8" class="form-control" style="height: 150px;">{$send_message}</textarea>
+                </fieldset>
+            </div>
+
+            <div id="switcher2" style="display: none;">
+                <fieldset>
+                    <label>{trans("Empfänger Suchen")}</label>
+                    <div class="form-item-wrapper">
+                        <input type="text" class="input nodirty" id="user_search" name="user_search" value="" style="width: 400px;" />
+                        <button id="search-button"><img src="images/messenger/search.png" width="16" height="16" alt="" /> {trans("Search")}</button>&nbsp;&nbsp;&nbsp;
+                        <button id="cancel-search-button"><img src="images/cancel.png" width="16" height="16" alt="" /> {trans("Cancel")}</button>
+                    </div>
+                </fieldset>
+
+                <div class="clearer"></div>                
+                <div id="search-results"></div>                
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+
+<script type="text/javascript">
+
+
+    if (typeof doUserSearch != 'function') {
+        function doUserSearch () {
+            var query = $('#user_search').val();
+            if (query) {
+                var params = {};
+                params.q = query;
+                params.adm = 'messenger';
+                params.action = 'usersearch';
+                params.ajax = 1;
+
+                //  $('label[for="user_search"]').addClass('label-disabled');
+                // $('#user_search').addClass('input-disabled').attr('disabled', 'disabled');
+                $('#search-button').find('img').attr('src', Config.get('backendImagePath') + 'loading.gif');
+                $.post('admin.php', params, function (data) {
+                    if (Tools.responseIsOk(data)) {
+                        $('#search-results').html(data.maincontent);
+                    } else {
+                        jAlert(data.msg);
+                    }
+                    //  $('label[for="user_search"]').removeClass('label-disabled');
+                    //     $('#user_search').removeClass('input-disabled').attr('disabled', '');
+                    $('#search-button').find('img').attr('src', Config.get('backendImagePath') + 'messenger/search.png');
+                }, 'json');
+            } else {
+                $('#search-results').empty();
+                $('#user_search').effect("pulsate", {times: 3}, 500, function () {
+                    $('#user_search')[0].focus();
+                });
+            }
+        }
+
+        function addAddress (name, type) {
+            var el = $('#m_' + type), data = el.val();
+
+            // $('label[for="m_to"],label[for="m_cc"],label[for="m_bcc"]').removeClass('label-disabled');
+            // $('#m_to,#m_cc,#m_bcc').removeClass('input-disabled').removeAttr('disabled');
+
+            if (data == '') {
+                el.val(name);
+                el.trigger('change');
+            } else {
+                data = data.split(',');
+                data.push(name);
+                var res = [];
+                for (var i in data) {
+                    if (typeof data[i] == 'string' && data[i].length > 0) {
+
+                        name = data[i].replace(/\s{1,}/g, '');
+                        var nameFound = false;
+                        for (var x in res) {
+                            if (res[x] == name) {
+                                nameFound = true;
+                                break;
+                            }
+                        }
+                        if (!nameFound) {
+                            res.push(name);
+                        }
+                    }
+                }
+                el.val(res.join(', '));
+            }
+            el.trigger('change');
+            //    el.addClass('input-disabled').attr('disabled', 'disabled');
+
+        }
+    }
+
+
+    Win.prepareWindowFormUi()
+    Form.registerForm('sendMessage_form', {
+        contentIdentifierID: 'none',
+        exiturl: '',
+        autosave: false
+    });
+
+    $('.find-link').css({cursor: 'pointer'}).bind('click', function () {
+        $('#compose-save-button').disableButton();
+
+        $('.find-link').fadeOut(800);
+        //   $('label[for="m_to"],label[for="m_cc"],label[for="m_bcc"]').addClass('label-disabled');
+        //   $('#m_to,#m_cc,#m_bcc').addClass('input-disabled').attr('disabled', 'disabled');
+        $('#switcher1').hide('blind', {}, 400, function () {
+            $('#switcher2').show('blind', {}, 400, function () {
+
+                //         $('label[for="user_search"]').removeClass('label-disabled');
+                //         $('#user_search').removeClass('input-disabled').removeAttr('disabled');
+
+
+
+                $('#user_search')[0].focus();
+            });
+        });
+    });
+
+
+    $('#cancel-search-button').bind('click', function (e) {
+        $('#compose-save-button').enableButton();
+
+        $('.find-link').fadeIn(800);
+        //     $('label[for="m_to"],label[for="m_cc"],label[for="m_bcc"]').removeClass('label-disabled');
+        //     $('#m_to,#m_cc,#m_bcc').removeClass('input-disabled').removeAttr('disabled');
+
+        $('#switcher2').hide('blind', {}, 400, function () {
+            $('#search-results').empty();
+            $('#user_search').val('');
+            $('#switcher1').show('blind', {}, 400);
+        });
+        e.preventDefault();
+        return false;
+    });
+
+    $('#search-button').bind('click', function (e) {
+        doUserSearch();
+        e.preventDefault();
+        return false;
+    });
+
+    $('#user_search').bind('keyup', function (e) {
+        if (e.keyCode == 13) {
+            doUserSearch();
+        }
+    });
+
+
+</script>

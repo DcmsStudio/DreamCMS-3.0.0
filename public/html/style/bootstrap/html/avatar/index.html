@@ -1,0 +1,35 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button onclick="openTab({url:'admin.php?adm=avatar&action=add', obj: this, label:$(this).text()})" class="action-button btn_new">
+        {trans("Avatar hinzufügen")}
+    </button>
+
+</cp:block>
+
+<cp:block name="content">
+    <div id="avatar-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+
+        Application.Grid( 'avatar-grid', {$gridJson} );
+        /*
+
+         Application.Grid('avatar-grid', {
+         url: 'admin.php?adm=avatar',
+         currentFilter: {$grid.activeFilter},
+         colModel: {$grid.colModel},
+         gridActions: {$grid.gridActions},
+         searchitems: {$grid.searchitems},
+         datarows: {$grid.datarows},
+         sort: '{$grid.sort}',
+         orderby: '{$grid.orderby}',
+         total: {$grid.total},
+         key: 'avatarid',
+         perpage: {$grid.perpage}
+         });
+
+         */
+
+    </script>
+</cp:block>

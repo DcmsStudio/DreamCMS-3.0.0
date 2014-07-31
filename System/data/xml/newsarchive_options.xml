@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<cp type="component" version="2.3.0">
+	<name>News Archive Settings</name>
+	<author>Marcel Domke</author>
+	<creationDate>Mai 2005</creationDate>
+	<copyright>(C) 2005 Cyber-Portal.NET</copyright>
+	<authorEmail>info@cyber-portal.net</authorEmail>
+	<authorUrl>www.cyber-portal.net</authorUrl>
+	<version>0.1.0a</version>
+	<description></description>
+	<params>
+	
+	
+	
+		<param name="link_titles" type="radio" default="1" label="Linked Titles" description="Make your Item titles linkable">
+			<option value="0">nein</option>
+			<option value="1">ja</option>
+		</param>
+
+		<param name="rating" type="radio" default="0" label="Item Rating" description="Show/Hide the item rating - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+
+		<param name="author" type="radio" default="1" label="Author Names" description="Show/Hide the item author - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+
+		<param name="createdate" type="radio" default="1" label="Created Date and Time" description="Show/Hide the item creation date - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+
+
+		<param name="modifydate" type="radio" default="0" label="Modified Date and Time" description="Show/Hide the item modification date - only affects this page">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+	
+	
+	
+		<param name="hitcounter" type="radio" default="1" label="Anzahl der aufrufe" description="">
+			<option value="0">verbergen</option>
+			<option value="1">anzeigen</option>
+		</param>
+	
+
+		<param name="display_num" type="list" default="20" label="Anzahl" description="Anzahl der News Artikel pro Seite">
+			<option value="10">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="30">30</option>
+			<option value="35">35</option>
+			<option value="40">40</option>
+			<option value="50">50</option>
+			<option value="75">75</option>
+			<option value="100">100</option>
+		</param>
+		
+		<param name="orderby" type="list" default="rdate" label="Sortieren nach" description="Nach was soll das Archiv sortiert werden.">
+			<option value="">keine Sortierung</option>
+			<option value="date">Alte zuerst</option>
+			<option value="rdate">Neuste zuerst</option>
+			<option value="alpha">Title aufwärts</option>
+			<option value="ralpha">Title abwärts</option>
+			<option value="author">Author aufwärts</option>
+			<option value="rauthor">Author abwärts</option>
+			<option value="hits">Hits aufwärts</option>
+			<option value="rhits">Hits abwärts</option>
+		</param>
+
+	</params>
+</cp>

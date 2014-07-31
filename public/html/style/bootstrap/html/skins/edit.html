@@ -1,0 +1,82 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:if condition="$id > 0">[save:skinform{$id}]</cp:if> [save_exit:skinform{$id}] 
+    [reset:skinform{$id}] [cancel:skinform{$id}]
+</cp:block>
+
+<cp:block name="content">
+    <form action="admin.php" method="post" name="skinform{$id}" id="skinform{$id}">
+        <input type="hidden" name="adm" value="skins" />
+        <input type="hidden" name="action" value="edit" />
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="id" id="item-id" value="{$id}"/>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>{trans('Skin Titel')}</label>
+                <input name="title" type="text" value="{escape($title, 'quotes')}" size="70" class="required form-control" />
+            </div>
+            <div class="col-md-12">
+                <label>{trans('Skin Beschreibung')}</label>
+                <textarea name="description" rows="3" class="form-control">{$description}</textarea>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Author')}</label>
+                <input name="author" type="text" value="{escape($author, 'quotes')}" size="70" class="required form-control" />
+            </div>
+            <div class="col-md-6">
+                <label>{trans('Author Email')}</label>
+                <input name="author_mail" type="text" value="{escape($author_mail, 'quotes')}" class="form-control" size="70"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Author Website')}</label>
+                <input data-tooltip="{trans('Bitte mit http:// beginnen')}" data-position="top-left" name="author_website" class="form-control" type="text" value="{iif($author_website != 'http://', escape($author_website, 'quotes'), 'http://')}" size="70" />
+            </div>
+            <div class="col-md-6">
+                <label>{trans('Seiten Navigations Splitter')}</label>
+                <input data-tooltip="{trans('Bitte keine HTML Tags verwenden')}" data-position="top-left" name="navsplitter" class="form-control" type="text" value="{escape($navsplitter, 'quotes')}" size="70" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Skin Aktivieren / Deaktivieren')}</label>
+
+                <label for="pub1">
+                    <input type="radio" value="1" name="published" id="pub1" cp:on="checked:$published" parse:checked="checked" />
+                    {trans('Aktiv')}
+                </label>
+
+                <label for="pub0">
+                    <input type="radio" value="0" name="published" id="pub0" cp:on="checked:!$published" parse:checked="checked" />
+                    {trans('Deaktiviert')}
+                </label>
+            </div>
+            <div class="col-md-6">
+                <label>{trans('Image Verzeichnis')}</label>
+                <select name="img_dir" size="6">
+                    <cp:loop name="image_dirs" key="r">
+                        <option value="{$r.dirname}" cp:on="selected:$img_dir == $r.dirname" parse:selected="selected">{$r.dirname}</option>
+                    </cp:loop>
+                </select>
+            </div>
+        </div>
+
+    </form>
+    <script type="text/javascript">
+
+        Form.registerForm('skinform{$id}', {
+            autosave: false,
+            contentIdentifierID: 'item-id',
+            exiturl: 'admin.php?adm=skins'
+        });
+
+    </script>
+    </cp:block>

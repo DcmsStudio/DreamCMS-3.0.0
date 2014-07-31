@@ -1,0 +1,138 @@
+<cp:extends template="../container" />
+
+<cp:block name="main_content">
+	<cp:if condition="$user.userid && $user.userid == $profile.userid">
+		<div class="controlpanel-tabs">
+			<cp:include template="usercontrol/tabpanel" />
+		</div>
+	</cp:if>
+		<h3 class="decorator underlined">
+		{trans('Profil von %s', $profile.username)}
+	</h3>
+
+	<div class="containerdiv control-panel{iif($profile.blocked, ' profile-blocked', '')}">
+		<div class="fl w40perc">
+				<h4 class="decorator underlined">
+				{trans('Allgemeine Daten')}
+			</h4>
+
+			<ul>
+				<li>{trans('Benutzergruppe')}:	<span>
+						{$profile.grouptitle}
+					</span>
+
+				</li>
+				<li>{trans('Rank')}:	<span>
+						{$profile.rank.ranktitle}
+						<br/>
+					</span>
+
+				</li>
+				<li>{trans('Registriert seit')}:	<span>
+						{date('d.m.Y, H:i:s', $profile.regdate)}
+					</span>
+
+				</li>
+				<li>{trans('Beiträge')}:	<span>
+						{$profile.userposts}
+					</span>
+
+				</li>
+				<li>{trans('Geburtsdatum')}:	<span>
+						<cp:if condition="$profile.birthday">
+							{date('d.m.Y', $profile.birthday)}
+						</cp:if>
+						<cp:else>
+							-
+						</cp:else>
+					</span>
+
+				</li>
+			</ul>
+		</div>
+		<div class="fr w60perc">
+				<h4 class="decorator underlined">
+				{trans('Kontakt Daten')}
+			</h4>
+
+			<ul>
+				<li>{trans('Email')}:	<span>
+						{$profile.email}
+					</span>
+
+				</li>
+				<li>{trans('MSN')}:	<span>
+						<cp:if condition="$profile.msn">
+							<cp:if condition="$profile.msnstatus.error == null">
+								<img src="{$profile.msnstatus.icon.url}" width="16" height="16" alt="" title="{$profile.username} MSN Status" />
+							</cp:if>
+							{$profile.msn}
+						</cp:if>
+						<cp:else>
+							-
+						</cp:else>
+					</span>
+
+				</li>
+				<li>{trans('ICQ')}:	<span>
+						<cp:if condition="$profile.icq">
+							<img src="{@IMG_URL}messengers/icq{iif($profile.icqstatus.status, '', '_offline')}.png" width="16" height="16" border="0" />
+							<a href="http://icq.com/{$profile.icq}" target="_blank">{$profile.icq}</a>
+						</cp:if>
+						<cp:else>
+							-
+						</cp:else>
+					</span>
+
+				</li>
+				<li>{trans('AIM')}:	<span>
+						<cp:if condition="$profile.aim">
+							{$profile.aim}
+						</cp:if>
+						<cp:else>
+							-
+						</cp:else>
+					</span>
+
+				</li>
+				<li>{trans('YIM')}:	<span>
+						<cp:if condition="$profile.yim">
+							<img src="{@IMG_URL}messengers/yim{iif($profile.yimstatus.status, '', '_offline')}.png" width="16" height="16" border="0" />
+							{$profile.yim}
+						</cp:if>
+						<cp:else>
+							-
+						</cp:else>
+					</span>
+
+				</li>
+				<li>{trans('Skype')}:	<span>
+						<cp:if condition="$profile.skype">
+							<img src="{@IMG_URL}messengers/skype{iif($profile.skypestatus.status, '', '_offline')}.png" width="16" height="16" border="0" />
+							<a cp:if="$profile.skypestatus.status" href="skype:{$profile.skype}?chat">{$profile.skype}</a>
+						</cp:if>
+						<cp:else>
+							-
+						</cp:else>
+					</span>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="item bio">
+			<h4 class="decorator underlined">
+			{trans('Biografie von %s', $profile.username)}
+		</h4>
+
+		<p cp:on="class:$profile.blocked" parse:class="profile-blocked">
+			<cp:if condition="$profile.userphoto">	<span class="user-photo">
+					<img alt="" src="{photo($profile.userphoto, 'AuthorImageLarge', '')}" title="{escape($profile.username, 'html')}" border="0" />
+				</span>
+
+			</cp:if>
+			<cp:if condition="$profile.bio">{$profile.bio}</cp:if>
+			<cp:else>{trans('%s hat noch keine Biografie hinterlegt', $profile.username)}</cp:else>
+		</p>
+	</div>
+</cp:block>

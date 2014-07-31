@@ -1,0 +1,41 @@
+<?php
+
+function __faq_cats($fixeds='',$normalfaq='' ){
+global $cp, $cfg, $fct, $cp, $cp;
+
+return <<<EOF
+
+<table cellpadding=4 cellspacing=1 border=0 class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+        <td align="center"><b>ID</b></td>
+        <td align="center"><b>Kategorie</b></td>
+        <td align="center"><b>Funktionen</b></td>
+        
+$fixeds
+$normalfaq
+
+</table>
+<p>
+<form  action="admin.php"  method="post" onsubmit=""><input type="hidden" name="adm" value="faqadmin" />
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+        <td colspan="2"><b>Kategorie hinzufügen</b></td>
+    </tr>
+    <tr class="firstrow">
+        <td>Kategorie:</td><td><input type="text" name="categories" size="50" class="input" /></td>
+    </tr>
+    <tr class="secondrow">
+        <td colspan="2" align="center">
+        <input type="hidden" name="action" value="FaqCatAdd">
+        <input type="submit" value="Hinzufügen" class="button" /> 
+        <input type="reset" value="Zurücksetzen" class="button" /> 
+        <input type="button" value="Abbrechen" onclick="history.back();" class="button" />
+        </td>
+    </tr>
+</table>
+</form>
+
+EOF;
+}
+
+?>

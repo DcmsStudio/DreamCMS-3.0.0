@@ -1,0 +1,26 @@
+#header {
+	height: 35px!important;
+}
+#content {
+	margin: 5px!important;
+	padding-top: 0px!important;
+	width:99%!important;
+}
+
+#footerwrap {
+	margin:0px!important;
+}
+.toolbar-right .action-button {
+	margin-right:10px!important;
+	min-width:90px!important;
+}
+
+#metadata-container {
+	position:fixed!important;
+	top:57px!important;
+	margin-left: 2%!important;
+	margin-right: 5%!important;
+	width:92%!important;
+}
+
+#notepad, #dcmsTrashHolder, #dcmsFav { display:none!important; }

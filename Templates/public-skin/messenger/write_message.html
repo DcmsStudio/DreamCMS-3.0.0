@@ -1,0 +1,200 @@
+<form action="messenger/send" method="post" id="sendMessage_form">
+    <input type="hidden" name="cp" value="messenger"/>
+    <input type="hidden" name="action" value="send"/>
+    <input type="hidden" name="id" value="{$request.id}"/>
+    
+    <div class="box">
+        <h2>{trans('Nachricht schreiben')}</h2>
+        <div class="box-inner">
+            
+            <fieldset>
+                <legend>{trans('To')}</legend>
+                <input type="text" class="input fl" id="m_to" name="m_to" value="{$send_to}" style="width: 400px;" />
+                <img class="find-link" src="{$img_url}messenger/search.png" width="16" height="16" alt="" />
+            </fieldset>
+            
+            <fieldset>
+                <legend>{trans('CC')}</legend>
+                <input type="text" class="input fl" id="m_cc" name="m_cc" value="{$send_cc}" style="width: 400px;" />
+                <img class="find-link" src="{$img_url}messenger/search.png" width="16" height="16" alt="" />
+            </fieldset>
+            
+            <fieldset>
+                <legend>{trans('Bcc')}</legend>
+                <input type="text" class="input fl" id="m_bcc" name="m_bcc" value="{$send_bcc}" style="width: 400px;" />
+                <img class="find-link" src="{$img_url}messenger/search.png" width="16" height="16" alt="" />
+            </fieldset>
+            
+            
+            <div id="switcher1">                
+                <fieldset>
+                    <legend>{trans('Nachrichten Option')}</legend>
+                        <label for="prio"><input type="checkbox" class="checkbox" name="prio" id="prio" value="1" />{trans('Nachricht mit hoher Priorität versenden')}</label><br />
+                        <label for="copy"><input type="checkbox" class="checkbox" name="copy" id="copy" value="1" />{trans('Kopie im Ordner gesendet Speichern')}</label><br />
+                        <label for="rcpt"><input type="checkbox" class="checkbox" name="rcpt" id="rcpt" value="1" />{trans('Lesebestätigung anfordern')}</label>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Betreff')}</legend>
+                    <input type="text" class="input" id="m_subject" name="m_subject" value="{$send_subject}" maxlength="60" style="width: 400px;" />
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Nachricht')}</legend>
+                    <textarea id="m_body" name="m_body" cols="40" rows="8" class="textarea" style="height: 150px;">{$send_message}</textarea>
+                </fieldset>
+            </div>
+            
+            <div id="switcher2" style="display: none;">
+                <fieldset>
+                    <legend>{trans('Empfänger Suchen')}</legend>
+                    <div class="form-item-wrapper">
+                        <input type="text" class="input nodirt" id="user_search" name="user_search" value="" style="width: 400px;" />
+                        <a href="javascript:void(0)" id="search-button" class="action-button"><img src="{$img_url}messenger/search.png" width="16" height="16" alt="" />{trans('Search')}</a>   
+                        <a href="javascript:void(0)" id="cancel-search-button" class="action-button"><img src="{$img_url}cancel.png" width="16" height="16" alt="" /> {trans('Cancel')}</a>
+                    </div>
+                </fieldset>
+                
+                <div class="clearer"></div>                
+                <div id="search-results"></div>                
+            </div>
+            
+        </div>
+    </div>
+    
+</form>
+
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+            var form = $('#sendMessage_form').registerForm({
+                exiturl: '',
+                save: function(exit) {
+                    var self = this;
+                    var post = $('#sendMessage_form').serialize();
+                    $('#sendMessage_form').mask('Sende Nachricht...');
+                    $.post( 'index.php?cp=messenger&action=send', post , function(data) {
+                        if(responseIsOk(data)) {
+                            getFolder();
+                        } else {
+                            $('#sendMessage_form').unmask();
+                            self.error(data);
+                        }
+                    },'json');
+                }
+            });
+                    
+            $('.find-link').css({'cursor': 'pointer'}).each(function(){
+            
+	            $(this).click( function() {
+	                $('#compose-save-button').disableButton();
+	               // $('#user_search').die('change', set_dirty);
+	                $('.find-link').fadeOut(800);
+	                $('label[for="m_to"],label[for="m_cc"],label[for="m_bcc"]').addClass('label-disabled');
+	                $('#m_to,#m_cc,#m_bcc').addClass('input-disabled').attr('disabled', 'disabled');
+	                $('#switcher1').hide('blind', {}, 800, function() {
+	                    $('#switcher2').show('blind', {}, 800, function() {
+	                        $('#user_search')[0].focus();
+	                    });
+	                });
+	            });
+            
+            });
+
+            
+            $('#cancel-search-button').click(  function(e) {
+                e.preventDefault();
+                $('#compose-save-button').enableButton();
+                $('.find-link').fadeIn(800);
+                $('label[for="m_to"],label[for="m_cc"],label[for="m_bcc"]').removeClass('label-disabled');
+                $('#m_to,#m_cc,#m_bcc').removeClass('input-disabled').attr('disabled', '');
+                $('#switcher2').hide('blind', {}, 800, function() {
+                    $('#search-results').empty();
+                    $('#user_search').val('');
+                    $('#switcher1').show('blind', {}, 800);
+                    
+                });
+                
+                return false;
+            });
+            
+            $('#search-button').click( function(e) {
+                doUserSearch();
+                e.preventDefault();
+                return false;
+            });
+
+            $('#user_search').bind('keypress', function(e) {
+                if(e.keyCode==13) {
+                    doUserSearch();
+                }
+            });
+
+            $('#messengercompose #compose-save-button').click( function(e) {
+                e.preventDefault();
+                form.save(false);
+                return false;
+            });
+});
+
+
+    function doUserSearch() {
+        var query = $('#user_search').val();
+        if(query) {
+            $('#search-results').empty();
+            
+            var params = {};
+            params.q = query;
+            params.cp = 'messenger';
+            params.action = 'usersearch';
+            params.ajax = 1;
+
+            $('label[for="user_search"]').addClass('label-disabled');
+            $('#user_search').addClass('input-disabled').attr('disabled', 'disabled');
+            $('#search-button').find('img').attr('src', backendImagePath + 'loading.gif');
+            $.get(systemUrl + '/index.php', params, function(data) {
+                if(responseIsOk(data)) {
+                    
+                    $('#search-results').html(data.maincontent).show();
+                } else {
+                    jAlert(data.msg);
+                }
+                $('label[for="user_search"]').removeClass('label-disabled');
+                $('#user_search').removeClass('input-disabled').attr('disabled', '');
+                $('#search-button').find('img').attr('src', backendImagePath + 'messenger/search.png');
+            }, 'json');
+        } else {
+            $('#search-results').empty();
+            $('#user_search').effect("pulsate", { times:3 }, 200, function() { $('#user_search')[0].focus(); } );
+        }
+    }
+
+    function addAddress(name, type) {
+        el = $('#m_' + type);
+        data = el.val();
+        if(data=='') {
+            el.val(name);
+        } else {
+            data = data.split(',');
+            data.push(name);
+            res = [];
+            for(i in data) {
+                name = data[i].trim();
+                nameFound = false;
+                for(x in res) {
+                    if(res[x]==name) {
+                        nameFound = true;
+                        break;
+                    }
+                }
+                if(!nameFound) {
+                    res.push(name);
+                }
+            }
+            el.val(res.join(', '));
+        }
+        el.change();
+    }
+// ]]>
+</script>

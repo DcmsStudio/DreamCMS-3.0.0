@@ -1,0 +1,542 @@
+<cp:if condition="{$request.imagebrowser} != null">
+    <cp:include template="imagebrowser"/>
+</cp:if>
+<cp:elseif condition="{$request.imagebrowser} == null && {$default_header} !== true">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+    <html>
+        <head>
+            <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+            <title>DreamCMS {$cp->version} {trans('Administration')}</title>
+            <meta http-equiv="cache-control" content="no-cache" />
+            <meta http-equiv="expires" content="0" />
+            <meta http-equiv="Content-Language" content="de"/>
+            <meta http-equiv="Content-Type" content="text/html; charset={$cp->lang['lang_encoding']}" />
+
+            <link type="text/css" href="{$js_url}jquery/css/smoothness/jquery-ui.css" rel="stylesheet" />
+
+            <link rel="stylesheet" href="{$backend_css_url}forms.css" type="text/css"  />
+            <link rel="stylesheet" href="{$backend_css_url}new_css_valid_css2-1.css" type="text/css" />
+
+
+
+            <link rel="stylesheet" href="{$backend_css_url}filemanager.css" type="text/css" />
+            <link rel="stylesheet" href="{$backend_css_url}jqueryFileTree.css" type="text/css" />
+            <link rel="stylesheet" href="{$backend_css_url}jquery.contextMenu.css" type="text/css" />
+            <link rel="stylesheet" href="{$js_url}jquery/fancybox/jquery.fancybox-1.3.1.css" type="text/css" />
+            <script type="text/javascript" language="javascript">
+
+                var menuItems;
+                var filemanager = null;
+                var session_id = '{$cp->session_id}';
+                var cmsurl = '{$cfg.portalurl}/';
+                var backendImagePath = '{$backendImagePath}';
+                var cms_pagepath = '{$pagepath}/';                
+                var cmsurl_regex = {$cmsurl_jsregex};
+                var colorPickerWidth = 12;
+                var exitpopup = {$js_popup};
+                var widgetcolumns = 4; // num of widget div cols for frontpage
+                var use_fancy_checkboxes = false;
+                var is_defaultheader = false;
+                var hasTrash = false;
+                var max_upload_size = "{$uploadsize} MB";
+                var max_upload_limit = "{$uploadlimit}";
+                var is_defaultheader = false;
+                var fm_viewmode = '{$fileman_view_mode}';
+                var requestString = '{requeststring('post')}';
+                var settings = {};
+                settings.base_url = cmsurl;
+                settings.session_id = session_id;
+
+
+            </script>
+        <cp:include template="generic/js_lang.html"/>
+        {$js_code}
+        {$js}        
+        <cp:if condition="{$login_sreen} == false">
+            <script type="text/javascript" src="admin.php?adm=buildpulldown"></script>
+            <script type="text/javascript" src="{$js_url}backend/pulldown/fruml.menu.js"></script>
+        </cp:if>
+        <!-- <script type="text/javascript" src="{$js_url}jquery/jquery.accordion.js"></script> -->
+        <script type="text/javascript" src="{$js_url}dcms_admin_box.js"></script>
+        <script type="text/javascript" src="{$js_url}backend/side_toolbar.js"></script>
+
+        <cp:if condition="{$login_sreen} == false">
+            <script type="text/javascript" src="admin.php?adm=widget"></script>
+            <script type="text/javascript" src="{$js_url}backend/widget.js"></script>
+        </cp:if>
+        </head>
+        <body{$onload} id="cpbody" scroll="{$scroll}" topmargin="0" leftmargin="0"{$CSSclass}>
+
+            <noscript>
+                <div id="noscript"><div class="noscript-shadow"></div><div class="noscript-text">{trans("Bitte aktivieren Sie Javascript in Ihrem Browser um arbeiten zu können!")}</div></div>
+            </noscript>
+
+
+            <div id="mask-remover" style="display:none;" onclick="unmask();"><img src="html/style/default/img/cancel.png" width="16" height="16" alt="" title="Click to Remove Page Mask" /></div>
+            <div id="page-mask" style="display:none;"></div>
+            <div id="save-mask" style="display:none;">
+                <div id="mask-title">{trans("Bitte Warten...")}</div>
+                <img src="images/please-wait.gif" width="180" height="19" alt="" />
+            </div>
+
+
+        <cp:if condition="{$login_sreen} == false && {$default_header} == false">
+            <!-- widget-contents Div Container -->
+            <div id="widget-contents">
+                <div id="global_tbl">
+
+                    <div id="global_tbl_top" style="width:100%;">
+
+                        <div id="topBar" style="margin:0;padding:0;width:100%">
+                            <!-- <div id="dcmsLogo"><img src="html/style/default/img/bg/logo.png"/></div> -->
+                            <div id="navPan" style="width:100%;">
+                                <div id="copyright"><span class="copyText">&copy; {date('m/Y')} by DreamCMS Development</span></div>
+                                <div id="pathBar">                        
+                                    <div id="formMenu" style="display:block;">
+                                        <div id="rootmenu"><img src="html/style/default/img/buttons/lock.png" width="16" height="16" alt="" /> {trans("angemeldet als")}&nbsp;{$user.username}</div>
+                                    </div>
+                                    <div id="tip-container" style="display:none;"></div>
+                                </div>
+                            </div>
+                            <div id="menuBar" style="width:100%;">
+                                <!-- PAGE Navigation -->
+                                <div id="topmenubar">
+
+                                    <ul id="dcms-menu">
+                                        <li>{trans("Loading menu...")}</li>
+                                    </ul>
+
+                                </div>
+                                <!-- Notepad Buttons -->
+                                <div id="notepad">
+                                    <button id="logoutbutton" class="action-button"><img src="images/buttons/decrypted.png" width="16" height="16" alt="" /> {trans("Logout")}</button>
+                                    <button id="helpbutton" class="action-button"><img src="images/pulldownmenu/help.png" width="16" height="16" alt="" /> {trans("Hilfe")}</button>
+                                    <button id="notecreate" class="action-button" title="Press this button to create a new Note"><img src="images/edit-note.png" width="16" height="16" alt="" /> {trans("neue Notiz")}</button>                  
+                                    <button id="notetoggle" class="action-button" style="display:{$shownote}" title="You can use this button to toggle the visibility of your Notes"><img src="images/notes.png" width="16" height="16" alt="" /> <span id="notes-message">{trans("Notiz open")} </span></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div id="global_tbl_bottom" width="100%">
+
+                        <div id="global_tbl_contents">
+
+                            <div id="menudiv" style="float:left;max-width:400px;">
+                                <div id="global_menu_content" style="display:inline-block;float:none;max-width:400px;width:100%;z-index:1;margin:0;">
+                                    <div id="accordion_container">
+
+                                        <div id="accordion">
+                                            <div class="accordion_title" id="sidebarwidgets"><span>{trans('Widgets')}</span></div>
+                                            <div class="accordion_body" id="sidebarwidgets_c" style="vertical-align:top;">
+                                                <div id="widget-column-1" class="widget-column" style="vertical-align:top;"></div>
+                                            </div>
+
+                                            <div class="active accordion_title" id="file-mantree"><span>{trans('Filemanager')}</span></div>
+                                            <div class="accordion_body" id="fileman-tree_c" style="vertical-align:top;">
+                                                <div id="dcmsFileTree"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- end accordion_container -->
+                                    <div id="smbuttonscontainer" style="width:260px;max-width:400px;min-width:260px;height:1px"><!--links oben (smbuttonscontainer) --></div>
+                                </div>
+
+                                <div id="vertical-resizer" style="min-width:260px;max-width:400px;height:0px"></div>
+
+                                <div id="vertical-left-bottom">                
+                                    <div id="sSplitter" style="float:left; width:100%">
+                                        <div class="sSplitterToggler" style="height:6px;margin:0px auto;"></div>
+                                    </div>                        
+                                    <div id="vcontainer" style="min-height: 40px; max-height:80px;">
+                                        <div id="buttonscontainer">
+
+                                            <!-- Trash -->
+                                            <div id="dcmsTrashHolder" class="dcmsTrashHolder">
+                                                <img src="images/buttons/trash_empty.png" />
+                                                <span>{trans('Papierkorb')}</span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!-- ende menudiv -->
+
+                        </div><!-- ende id=global_tbl_contents -->
+
+
+                        <div id="eSplitter" style="float:left;width:6px;z-index:1"><div class="eSplitterToggler" style="width:6px;margin:auto 0;"></div></div>
+
+                        <div id="tbl_content_td">
+
+                            <div id="maincontent_fix" class="maincontent_fix">
+                                <!-- DIV Start maincontent -->
+                                </cp:if>
+                                <cp:if condition="{$login_sreen} == false">
+                                    {$toolbarfixed}
+                                    <div class="maincontent" id="maincontent">
+                                </cp:if>
+
+                                {$output}
+
+
+                                </cp:elseif>
+                                <cp:else>
+                                    <cp:if condition="{$default_header} == true"><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+                                            "http://www.w3.org/TR/html4/strict.dtd">
+                                        <html>
+                                            <head>
+                                                <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+                                                <title>DreamCMS {$cp->version} {trans('Administration')}</title>
+                                                <meta http-equiv="cache-control" content="no-cache" />
+                                                <meta http-equiv="expires" content="0" />
+                                                <meta http-equiv="Content-Language" content="de"/>
+                                                <meta http-equiv="Content-Type" content="text/html; charset={$cp->lang['lang_encoding']}" />
+
+
+
+                                                <link type="text/css" href="{$js_url}jquery/css/smoothness/jquery-ui.css" rel="stylesheet" media="all" />
+                                                <link rel="stylesheet" href="{$backend_css_url}new_css_valid_css2-1.css" type="text/css" media="all" />
+
+                                                <link rel="stylesheet" href="{$backend_css_url}filemanager.css" type="text/css" media="all" />
+                                                <link rel="stylesheet" href="{$backend_css_url}jqueryFileTree.css" type="text/css" media="all" />
+                                                <link rel="stylesheet" href="{$backend_css_url}jquery.contextMenu.css" type="text/css" media="all" />
+                                                <link rel="stylesheet" href="{$js_url}jquery/fancybox/jquery.fancybox-1.3.1.css" type="text/css" media="all" />
+                                                <link rel="stylesheet" href="{$backend_css_url}login_background.css" type="text/css" media="all" />
+
+
+
+
+                                                <style type="text/css">
+                                                    #loginBody p {
+                                                        margin-top:10px;
+                                                        width: 390px;
+                                                    }
+
+                                                    /*
+                                                    *    Image Preloader
+                                                    */
+                                                    #preloadInfo {
+                                                        width:100%;
+
+                                                        text-align:center;
+
+                                                        border-right: 1px solid #aaa;
+                                                        border-bottom: 1px solid #aaa;
+                                                        border-top:1px solid #ccc;
+                                                        border-left:1px solid #ccc;
+                                                        color: #333;
+                                                        font:15px arial;
+
+
+
+
+                                                    }
+                                                    #preloadInfoComplete { display:none; }
+                                                    .preloadInfo-inner {
+                                                        padding:20px;
+                                                        margin:0 auto 0 auto;
+                                                        text-align:center;
+
+                                                    }
+                                                    #statusBar { border: 1px solid #aaa; width: 300px; background: #ddd url({$backendImagePath}preload/inset_hard.png) 50% repeat-x; }
+                                                    #status {background: url({$backendImagePath}preload/diagonals_thick.png) 0 50% no-repeat; height: 12px; }
+
+                                                    #textStatus { width:100%; float:left; font-weight: bold; }
+                                                    #textStatus span { float:none; width:auto; display:inline; }
+                                                    #textStatus .numLoaded {font-weight: bold;}
+                                                    #textStatus .numTotal {font-weight: bold;}
+                                                    #textStatus .percentLoaded {font-weight: bold;}
+                                                    #textStatus .currentImg {font-weight: bold; display: block;font-size: .8em;}
+                                                    #textStatus .currentImg span {font-weight: normal;  }
+                                                </style>
+
+
+                                                <script type="text/javascript" language="javascript">
+
+                                                    var menuItems;
+                                                    var session_id = '{$cp->session_id}';
+                                                    var cmsurl = '{$cfg.portalurl}/';
+                                                    var cmsurl_regex = {$cmsurl_jsregex};
+                                                    var colorPickerWidth = 12;
+                                                    var exitpopup = {$js_popup};
+                                                    var widgetcolumns = 4; // num of widget div cols for frontpage        
+                                                    var settings = {};
+                                                    settings.base_url = cmsurl;
+                                                    settings.session_id = session_id;            
+                                                    var is_defaultheader = true;
+
+                                                    /*
+                                                $(function(){
+
+                                                   // $('#preloadInfoComplete').hide();
+                                                   // $('#preloadInfo').hide();
+
+                                                    var loadedImgs = $.preloadCssImages({statusTextEl: '#textStatus', statusBarEl: '#status'});    
+                                                    var max = loadedImgs.length;
+                                                    if ( !max )
+                                                    {
+                                                       $('#preloadInfo').hide();
+                                                       $('#preloadInfoComplete').show();
+                                                    }
+                                                    else
+                                                    {
+                                                      var i;
+                                                      for(i = 1; i<=max; i++){
+                                                        if (i == max)
+                                                        {
+                                                            $('#preloadInfo').hide();
+                                                            $('#preloadInfoComplete').show();
+                                                        }
+                                                      }
+                                                    }
+                                                });
+                                                     */
+
+                                                </script>
+                                            <cp:include template="generic/js_lang.html"/>
+                                            <!-- {$js_code} -->
+                                            <script type="text/javascript" src="{$js_url}jquery/jquery.js"></script>
+                                            <script type="text/javascript" src="{$js_url}splashScreen.js"></script>
+
+
+
+
+
+
+
+                                            </head>
+                                            <body{$onload} id="cpbody" scroll="{$scroll}" topmargin="0" leftmargin="0"{$CSSclass}>
+                                                <!--  Global Div Container -->
+                                                <div id="global_pagecontainer">
+
+
+                                                    <noscript>
+                                                        <div id="noscript"><div class="noscript-shadow"></div><div class="noscript-text">{trans('Bitte aktivieren Sie Javascript in Ihrem Browser um arbeiten zu können!')}</div></div>
+                                                    </noscript>
+
+
+
+
+                                                    <div id="mask-remover" onclick="unmask();"><img src="html/style/default/img/cancel.png" width="16" height="16" alt="" title="Click to Remove Page Mask" /></div>
+                                                    <div id="page-mask" style="display:none;"></div>
+                                                    <div id="save-mask">
+                                                        <div id="mask-title">{trans('Bitte Warten...')}</div>
+                                                        <img src="images/please-wait.gif" width="220" height="19" alt="" />
+                                                    </div>
+
+                                                    <div class="fixed_error" id="error-win">
+                                                        <div id="error-display" style="display: none;">
+                                                            <div id="error-title" onclick="flyerror();">
+                                                                <div style="width:100%">
+                                                                    <div style="float:left;" id="error-titletext">{trans('Es ist ein Fehler aufgetreten!')}</div>
+                                                                    <div style="float:right;"><img id="error-flywin" src="html/style/default/img/arrow_down.gif" width="15" height="15" alt="" style="margin: 2px;"/></div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="error-message"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Error Box -->
+                                                    <div id="error-display2" style="display: none;">
+                                                        <div id="error-title">
+                                                            {trans('Es ist ein Fehler aufgetreten!')}
+                                                        </div>
+                                                        <div id="error-message"></div>
+                                                    </div>
+                                                    <div id="widget-contents">
+                                                        {$output}
+                                                        </cp:if>
+                                                        </cp:else>
+
+
+                                                        <!-- begin footer -->
+
+
+
+                                                        <cp:if condition="{$IS_AJAX} == true">
+                                                            {$session_expiry}</div><!-- / END maincontent Div Container -->
+                                    </cp:if>
+                                    <cp:else>
+
+
+                                        <cp:if condition="{$request.imagebrowser} != null && {$request.adm} == 'filemanager'">
+                                            </div>
+
+
+
+
+                                            <script type="text/javascript" language="javascript">
+
+                                                $(document).ready( function() {
+
+                                                        <cp:if condition="{$request.adm} == 'filemanager'">
+                                                        fileManager = new dcmsFileman('#fmContainer', {
+                                                        data_url: cmsurl + 'admin.php?adm=jqfiletree&ajax=1&readdir=',
+                                                        path: '<cp:if condition="{$request.readdir} != null">{regexreplace($request.readdir, '\/$', '')}</cp:if>',
+                                                        image_types: 'jpg,jpeg,png,gif',
+                                                        movie_types: 'swf,fly,flv,avi',
+                                                        client_source_path: 'html/',
+                                                        isImgBrowser: <cp:if condition="{$request.imagebrowser} != null">true</cp:if><cp:else>false</cp:else>
+                                                        });
+                                                    fileManager.getData('{regexreplace($request.readdir, '\/$', '')}', ('{regexreplace($request.readdir, '\/$', '')}' ? true : false) );
+                                                    $('#maincontent').bind('click', fileManager.deselectNodes);
+                                                        </cp:if>
+
+                                                        <cp:if condition="{$loadWidgets} == true">
+                                                        $('#dcmsFileTree').fileTree(
+                                                    { root: '/',
+                                                        treescript: 'admin.php?adm=jqfiletree&ajax=1',
+                                                        script: 'admin.php?adm=filemanager',
+                                                        folderEvent: 'click',
+                                                        expandSpeed: 1,
+                                                        collapseSpeed: 1<cp:if condition="{$request.adm} == 'filemanager'">, fmobj: fileManager</cp:if>
+                                                        },
+                                                    function(file) {
+                                                        alert(file);
+                                                    }
+                                                );
+                                                    loadWidgets();
+                                                        </cp:if>
+                                                    });
+
+                                            </script>
+
+                                        </cp:if>
+                                        <cp:else>
+
+
+                                            <cp:if condition="{$login_sreen} == false">
+                                                <cp:if condition="{$request.adm} != 'filemanager'">{$session_history} </cp:if>
+                                                {$session_expiry}
+                                            </cp:if>
+
+                                            <cp:if condition="{$login_sreen} == false">
+                                                <div id="watermarklogo" class="watermarklogo"></div>
+                                            </cp:if>
+
+                                            </div></div>
+                                            <!-- / END maincontent Div Container -->
+                                            <!-- Footer Form Status -->
+                                            <cp:if condition="{$login_sreen} == false">
+
+
+
+                                                <div id="footerwrap" class="xx">
+                                                    <div id="server-activity">
+                                                        <span id="loader-icon" style="cursor:default;">
+                                                            <img src="images/loading.gif" width="16" height="16" alt="" class="fl" style="padding-right:3px;" />
+                                                        </span>
+                                                        <span id="noloader-icon"></span>
+                                                    </div>            
+                                                    <div id="notification-box" style="display:none">
+                                                        <img id="notifiction-icon" src="images/form-ok.png" width="16" height="16" alt="" class="fl" />
+                                                        <span id="notifier">&nbsp;</span>
+                                                    </div>            
+                                                    <div id="form-status">
+                                                        <img id="status-indicator" src="images/form-ok.png" width="16" height="16" alt="" class="fl" />
+                                                        <span id="status-text" class=""> {trans('Keine Änderungen vorhanden.')}</span>
+                                                    </div>
+                                                    <div id="comp-runtime" class="fl" style="width:190px;padding:3px">
+                                                        <img id="status-runtime" src="images/clock.png" width="16" height="16" alt="" class="fl" />
+                                                        <small>Run Time: <!--TIMING--></small>
+                                                    </div>
+                                                </div>
+                                            </cp:if>
+
+                                            </div><!-- DIV maincontent_fix -->
+
+
+                                            </div>
+                                            </div>
+                                            <!-- / END Tabelle innen -->
+
+
+                                            </div>
+                                            <!-- / END Tabelle außen -->
+                                            </div><!-- / END widget-contents Div Container -->    
+
+                                            <!-- Simple Popup Box -->
+                                            <div id="info-popup">
+                                                <div id="info-text"><img src="html/style/default/img/loading.gif" width="16" height="16" alt="" style="margin: 2px;"/></div>
+                                            </div>
+
+                                            <!-- Notepad Content -->
+                                            <div id="note_ajax"></div>
+
+                                            <!-- ToolTip Box -->
+                                            <div id="tip" onclick="infohide();" style="display:none;">
+                                                <div id="tip-title"><img src="html/style/default/img/info.png" width="16" height="16" alt="" /><span id="tiptitle-text"></span></div>
+                                                <div id="tip-body"></div>
+                                            </div>
+
+
+
+
+                                            <script type="text/javascript" language="javascript">
+
+                                                $(document).ready( function() {
+
+                                                    if($('#comp-runtime').text()!='') {
+                                                        $('#comp-runtime').show();
+                                                        window.setTimeout(function() {$('#comp-runtime').fadeOut();}, 4000);
+                                                    }
+
+
+                                                    $('#logoutbutton').click(function() { logout(); } );
+                                                    $('#helpbutton').click(function() { dcmshelp('{$request.adm}', '{$request.action}'); } );
+                                                    $('#notecreate').click(function() { create_note(); } );
+                                                    $('#notetoggle').click(function() { toggle_notes(); } );
+                                                        <cp:if condition="{$login_sreen} == false && {$loadWidgets} == true && {$request.imagebrowser} == null">
+
+                                                        <cp:if condition="{$request.adm} == 'filemanager'">
+                                                        fileManager = new dcmsFileman('#fmContainer', {
+                                                        data_url: cmsurl + 'admin.php?adm=jqfiletree&ajax=1&readdir=',
+                                                        path: '<cp:if condition="{$request.readdir} != null">{regexreplace($request.readdir, '\/$', '')}</cp:if>',
+                                                        image_types: 'jpg,jpeg,png,gif',
+                                                        movie_types: 'swf,fly,flv,avi',
+                                                        client_source_path: 'html/',
+                                                        isImgBrowser: <cp:if condition="{$request.imagebrowser} != null">true</cp:if><cp:else>false</cp:else>
+                                                        });
+                                                    fileManager.getData('{regexreplace($request.readdir, '\/$', '')}', ('{regexreplace($request.readdir, '\/$', '')}' ? true : false) );
+                                                    $('#maincontent').bind('click', fileManager.deselectNodes);
+                                                        </cp:if>
+
+                                                        $('#dcmsFileTree').fileTree(
+                                                    { root: '/',
+                                                        treescript: 'admin.php?adm=jqfiletree&ajax=1',
+                                                        script: 'admin.php?adm=filemanager',
+                                                        folderEvent: 'click',
+                                                        expandSpeed: 1,
+                                                        collapseSpeed: 1<cp:if condition="{$request.adm} == 'filemanager'">,
+                                                        fmobj: fileManager</cp:if>
+                                                        },
+                                                    function(file) {
+                                                        alert(file);
+                                                    }
+                                                );        
+                                                    loadWidgets();
+
+                                                        </cp:if>
+
+                                                        if ( use_fancy_checkboxes )
+                                                    {
+                                                        fancy_checkboxes.initialise();
+                                                    }
+                                                });
+
+                                            </script>
+
+                                            </body>
+                                            </html>
+
+                                        </cp:else>
+                                    </cp:else>

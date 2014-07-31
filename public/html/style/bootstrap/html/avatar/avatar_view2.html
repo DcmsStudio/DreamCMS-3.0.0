@@ -1,0 +1,54 @@
+<?php
+
+function __avatar_view2($avatar_viewbit='',$pagelink='',$sel_sortby='',$sel_orderby = ''){
+global $cp, $cfg, $fct, $cp, $cp;
+
+	return <<<EOF
+<form method="post" action="admin.php">
+<input type="hidden" name="adm" value="avatar" />
+<input type="hidden" name="sid" value="$cp->session_id" />
+<input type="hidden" name="action" value="view" />
+
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+    	<td colspan="4">Avatar bearbeiten</td>
+    </tr>
+    <tr class="tableheader" align="center">
+        <td>Avatar</td>
+        <td width="50%">Avatarname</td>
+        <td width="50%">Benutzer</td>
+        <td>entfernen</td>
+    </tr>
+    $avatar_viewbit
+    <tr class="tableheader" align="center">
+        <td colspan="4">Anzeige der Avatare $countfrom bis $countto von $avatarcount
+        <br>$pagelink
+        </td>
+    </tr>
+    <tr align="center" class="tableheader">
+        <td colspan="6">
+
+        <form action="admin.php" method="post" onsubmit="">
+        <input type="hidden" name="adm" value="avatar" />
+        <input type="hidden" name="action" value="view" />
+        <input type="hidden" name="sid" value="$cp->session_id" />
+        <select name="sortby" class="select">
+        	<option value="0"$sel_sortby[0]>ACP Avatare anzeigen</option>
+        	<option value="1"$sel_sortby[1]>User-Avatare anzeigen</option>
+        </select>
+        &nbsp;
+        <select name="orderby" class="select">
+        	<option value="ASC"$sel_orderby[ASC]>Aufsteigend sortieren</option>
+        	<option value="DESC"$sel_orderby[DESC]>Absteigend sortieren</option>
+        </select>
+        &nbsp;
+        <input type="submit" value="Anzeigen" class="button" />
+        </td>
+    </tr>
+</table>
+</form>
+EOF;
+}
+
+?>

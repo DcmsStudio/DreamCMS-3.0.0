@@ -1,0 +1,49 @@
+    <fieldset>
+        <legend>{trans("Reflect Height")}</legend>
+        <input type="text" id="height" name="params[height]" value="{iif($values.height, $values.height, '')}" style="width:80px" />
+    </fieldset>
+
+
+    <fieldset>
+        <legend>{trans("Reflect Height (Percent)")}</legend>
+        <input type="text" id="p_height" name="params[p_height]" value="{iif($values.p_height, $values.p_height, '')}" style="width:60px" /> %
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Opacity")}</legend>
+        <input type="text" id="opacity" name="params[opacity]" value="{iif($values.opacity, $values.opacity, '60')}" style="width:80px" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Background Color")}</legend>
+        # <input type="text" id="bgcolor" name="params[bgcolor]" value="{iif($values.bgcolor, $values.bgcolor, '')}" style="width:60px" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Reflection Space")}</legend>
+        <input type="text" id="space" name="params[space]" value="{iif($values.space, $values.space, '0')}" style="width:80px" />
+    </fieldset>
+
+
+    <fieldset>
+        <legend>{trans("Einstellung")}</legend>
+        <label for="transparent"><input type="checkbox" class="checkbox" id="transparent" name="params[transparent]" value="1"{iif($values.transparent, ' checked="checked"', '')} /> {trans("Transparent (for PNG/ GIF source images with transparency)")}</label>
+    </fieldset>
+
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+    $('#bgcolor').ColorPicker({
+        livePreview: true,
+        color: '{iif($values.bgcolor, $values.bgcolor, "000000")}',
+        onChange: function(hsb, hex, rgb) {
+            $('#bgcolor').val(hex);
+        }
+    });
+
+</script>
+
+

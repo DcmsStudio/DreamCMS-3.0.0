@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Image Manager</title>
+    <link rel="stylesheet" href="../../../../public/html/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="../../../../public/html/css/bootstrap/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../../../../public/html/css/jquery/jcrop/jquery.Jcrop.min.css"/>
+
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../../../../public/html/js/bootstrap/bootstrap.min.js"></script>
+    <script src="../../../../public/html/js/bootstrap/dcms.bootstrap-input-spin.js"></script>
+    <script src="../../../../public/html/js/jquery/jquery.Jcrop.min.js"></script>
+    <script src="./js/dialog.js"></script>
+    <base target="_self"/>
+    <style type="text/css">
+        .cropsize {
+            position: absolute;
+            z-index: 999999;
+            top: -22px;
+            left: 10px;
+            text-shadow: 0 0 3px #000;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.49);
+            padding: 3px;
+            color: #FFF;
+            font-family: arial,verdana, sans-serif;
+            line-height: normal;
+            display: none;
+        }
+        .nav-tabs {
+            border-bottom: 1px solid #C5C5C5;
+        }
+        .nav-tabs li {
+
+        }
+        .nav-tabs li a {
+            padding: 8px;
+            border-radius: 0;
+            background: #E3E3E3;
+            color: #333;
+            border-top: 1px solid rgba(0, 0, 0, 0)!important;
+        }
+
+
+        .nav-tabs li:first-child a {
+            border-left: 0!important;
+        }
+        .nav-tabs li a,
+        .nav-tabs li a:hover {
+            border-color: #C5C5C5!important;
+            border-left: 0!important;
+
+        }
+
+        .nav-tabs li.active {
+            background: #fff;
+        }
+        .nav-tabs li.active a {
+            border-bottom-color: #FFF!important;
+        }
+
+    </style>
+</head>
+<body style="padding: 0; overflow: hidden">
+
+
+<ul class="nav nav-tabs" id="tabs">
+    <li class="active"><a href="#home" data-toggle="tab">Allgemein</a></li>
+    <li><a href="#advanced" data-toggle="tab">Optionen</a></li>
+</ul>
+<div class="tab-content" style="padding: 10px">
+    <div class="tab-pane active" id="home">
+        <div class="row">
+            <div class="col-xs-3">
+                Quelle
+            </div>
+            <div class="col-xs-9">
+                <div class="col-xs-11">
+
+                    <input type="hidden" id="crop-file" name="cropfile"/>
+                    <input type="text" name="file" id="file" class="form-control"/>
+                </div>
+                <div class="col-xs-1">
+                    <button type="button" class="btn btn-default" id="browse" style="width: 30px"><span class="fa fa-file"></span></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                Alternativ Beschreibung
+            </div>
+            <div class="col-xs-9">
+                <input type="text" name="alt" id="alt" class="form-control"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                Abmessungen
+            </div>
+            <div class="col-xs-9">
+                <div class="col-xs-2"><input type="text" name="width" id="width" class="form-control"/></div>
+                <div class="pull-left" style="padding-right: 10px">x</div>
+                <div class="col-xs-2"><input type="text" name="height" id="height" class="form-control"/></div>
+                <div class="col-xs-3">
+                    <label for="constrain"><input type="checkbox" name="constrain" id="constrain" value="1"/> Constrain</label>
+                </div>
+                <div class="col-xs-3 pull-right">
+                    <label for="fanxbox"><input type="checkbox" name="fancybox" id="fancybox" value="1"/> Fancybox</label>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-xs-3">
+                Horizontal Abstand
+            </div>
+            <div class="col-xs-1">
+                <input type="text" name="hspace" id="hspace" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                Vertical Abstand
+            </div>
+            <div class="col-xs-1">
+                <input type="text" name="vspace" id="vspace" class="form-control"/>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-3">
+                Rahmenstärke
+            </div>
+            <div class="col-xs-1">
+                <input type="text" name="border" id="border" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                CSS Style
+            </div>
+            <div class="col-xs-9">
+                <input type="text" name="style" id="style" class="form-control"/>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="tab-pane" id="advanced">
+
+        <div class="row" style="width: 25%; height: 30px">
+            <div class="col-xs-12" style="position: relative">
+                <form action="crop.php" id="crop-form" style="display: inline-block;float: right;" method="post" onsubmit="return checkCoords();">
+                    <input type="hidden" id="x" name="x"/>
+                    <input type="hidden" id="y" name="y"/>
+                    <input type="hidden" id="w" name="w"/>
+                    <input type="hidden" id="h" name="h"/>
+                    <input type="hidden" id="oldcrop" name="oldcrop"/>
+                    <button type="button" id="do-crop" class="btn btn-primary">
+                        Crop Image
+                    </button>
+
+                    <button type="button" id="do-reset" class="btn btn-primary" style="display: none">
+                        Reset Image
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="row" id="preview" style="height: 408px;">
+            <div class="col-xs-12" style="position: relative">
+                <div id="cropsize" class="cropsize"></div>
+                <div id="preview-container" style="height: 408px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

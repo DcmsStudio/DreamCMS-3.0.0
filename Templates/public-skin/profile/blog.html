@@ -1,0 +1,69 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+    <h1>
+        {trans('%s´s Blog', $bloguser.username)}
+    </h1>
+    <div class="list-items userblog">
+        <cp:loop name="blogdata" key="r">
+            <article class="list-item{iif(!$r.next_r.id, ' last', '')}{iif($r.image.src, '', ' no-image')}">
+                <div class="list-cal-left">
+                    <span>
+                        {date('Y', $r.created)}
+                    </span>
+                    <span>
+                        {date('M', $r.created)}
+                    </span>
+                    <span>
+                        {date('d', $r.created)}
+                    </span>
+                </div>
+                <cp:if condition="$r.image.src">
+                    <div class="listview-image">
+                        <a href="{$r.url}">
+                            <cp:thumb src="$r.image.src" width="920" height="300" aspect="true" cache="news/index/" alt="escape($r.title, 'htmlall')" title="escape($r.title, 'htmlall')" />
+                        </a>
+                    </div>
+                </cp:if>
+                <cp:else>
+                    <div class="listview-image">
+                        <a href="{$r.url}" title="{escape($r.title, 'htmlall')}">
+                        </a>
+                    </div>
+                </cp:else>
+                <div class="list-item-details">
+                    <span class="meta">
+                        <span class="meta-num-reads">
+                            {trans('%s mal gelesen', $r.hits)}
+                        </span>
+                        <span class="meta-comments">
+                            {trans('Kommentare')}: {$r.comments}
+                        </span>
+                        <span class="meta-read-more">
+                            <a href="{$r.url}">
+                                » {trans('weiterlesen')}
+                            </a>
+                        </span>
+                    </span>
+                </div>
+                
+                <div class="list-item-text">
+                    <h2>
+                        <a href="{$r.url}">
+                            {truncate($r.title, 60)}
+                        </a>
+                    </h2>
+                    <p>
+                        {truncate($r.content, 350, 'span,em', ' [...]')}
+                    </p>
+                </div>
+                
+
+            </article>
+        </cp:loop>
+        <cp:else>
+            <em>
+                {trans('%s hat noch keine Blog-Einträge geschrieben', $bloguser.username)}
+            </em>
+        </cp:else>
+    </div>
+</cp:block>

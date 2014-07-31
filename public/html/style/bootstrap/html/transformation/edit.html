@@ -1,0 +1,234 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    [save:action_form{$id}] [save_exit:action_form{$id}]
+    [reset:action_form{$id}] [cancel:action_form{$id}] 
+</cp:block>
+
+<cp:block name="content">
+    <form action="admin.php" method="post" id="action_form{$id}" name="action_form{$id}">
+        <input type="hidden" name="adm" value="transform" />
+        <input type="hidden" name="action" value="save" />
+        <input type="hidden" id="item-id{$id}" name="id" value="{$id}" />
+        <input type="hidden" id="stepsort" name="step" value="" />
+
+        <div class="box">
+            <h2>{trans("Transformation Details")}</h2>
+            <div class="box-inner">
+
+                <fieldset>
+                    <legend>{trans("Name")}</legend>
+                    <input type="text" class="input" id="name" name="name" value="{escape($title, 'quotes')}" maxlength="50" style="width: 400px;" />
+                </fieldset>
+
+                <fieldset>
+                    <legend>{trans("Beschreibung")}</legend>
+                    <input type="text" class="input" id="description" name="description" value="{escape($description, 'quotes')}" maxlength="255" style="width: 400px;" />
+                </fieldset>
+
+            </div>
+        </div>
+
+
+
+
+        <div style="width:100%;display:inline-block">
+
+
+            <div class="box" style="width:30%;float:left;margin-right: 5px">
+                <h2>{trans("Schritte")}</h2>
+                <div class="box-inner" id="step-content">
+                    <p>
+                        <button type="button" class="addtransform action-button">
+                            <img src="images/buttons/transform-add.png" width="16" height="16" alt="" /> {trans("Neuen Schritt hinzufügen")}
+                        </button>
+                    </p>
+
+                    <cp:if condition="$steps">
+                        <ul id="steps">
+
+                            <cp:loop name="steps" key="r">
+                                <li id="step_{$r.id}">
+                                    <div style="float: left;">
+                                        {$r.type}
+                                    </div>
+                                    <div style="float: right;">
+                                        <img src="images/edit.png" class="edit-icon" width="16" height="16" alt="" title="{trans('Schritt bearbeiten')}" />
+                                        <img src="images/delete.png" class="delete-icon" width="16" height="16" alt="" title="{trans('Schritt löschen')}" />
+                                    </div>
+                                    <br class="clearer" />
+                                </li>
+                            </cp:loop>
+
+                        </ul>
+                    </cp:if>
+
+                </div>
+            </div>
+
+
+
+            <div class="box" style="width: 65%;float: right">
+                <h2>{trans("Vorschau")}</h2>
+                <div class="box-inner" style="overflow: hidden">
+                    <input type="hidden" id="preview-format" value="jpeg" />
+                    <div id="format-selector" style="text-align: center;">
+                        {trans("Vorschau als")}: <a href="#" rel="png">PNG</a> | <a href="#" rel="jpeg">JPEG</a> | <a href="#" rel="gif">GIF</a>
+                    </div>
+
+                    <div id="bgcolor-selector" style="text-align: center;">
+                        {trans("Hintergrund")}: 
+                        <a href="#" rel="">Transparent</a> | 
+                        <a href="#" rel="blue">Blau</a> | 
+                        <a href="#" rel="black">Schwarz</a> | 
+                        <a href="#" rel="yellow">Gelb</a>
+                    </div>
+
+                    <div style="text-align: center; margin-bottom: 10px;overflow: hidden; width: 99%;">
+                        <div style="overflow: auto;" id="preview">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+    </form>
+
+    <script type="text/javascript">
+
+
+        if (typeof updateSteps == 'undefined') {
+            function updateSteps (event, ui) {
+                if (sortString != $('#steps').sortable("toArray").join(',')) {
+                    sortString = $('#steps').sortable("toArray").join(',');
+                    Form.setDirty( null, $('action_form{$id}'));
+                    $('#stepsort').val(sortString);
+                }
+            }
+
+            function getPreview () {
+                if ($('#id').val() != 0)
+                {
+                    $('#preview').empty().append(
+                            $('<img/>').attr({width: 16, height: 16, src: Config.get('backendImagePath') + 'loading.gif'})
+                            );
+
+                    var url = 'admin.php?adm=transform&action=preview&transformation=' + $('#name').val() + '&format=' + $('#preview-format').val();
+                    url = url + '&_t=' + new Date().getTime();
+
+                    var img = $('<img/>').attr({width: '', height: '', src: url})
+
+
+
+                    $('#preview').append(img);
+                    img.load(function () {
+                        $(this).prev().remove();
+                    });
+                }
+            }
+        }
+
+
+
+        Form.registerForm('action_form{$id}', {
+            contentIdentifierID: 'item-id{$id}',
+            exiturl: 'admin.php?adm=transform',
+            runAfterSubmit: function () {
+                $('.addtransform').enableButton();
+            }
+        });
+
+
+        var sortString = '';
+
+        $('#steps').sortable({
+            containment: '#step-content',
+            forceHelperSize: true,
+            forcePlaceholderSize: true,
+            placeholder: 'ui-sortable-placeholder',
+            distance: 10,
+            revert: true,
+            tolerance: 'pointer',
+            update: updateSteps,
+            cancel: ':input,option,img'
+        });
+
+        if (!$('#item-id{$id}').val())
+        {
+            $('.addtransform').disableButton();
+        }
+
+        $('#steps').css({minHeight: '250px'});
+        if ($('#steps').length > 0)
+        {
+            sortString = $('#steps').sortable("toArray").join(',');
+        }
+        $('#stepsort').val(sortString);
+
+
+        $('.addtransform').click(function () {
+            //document.location.href = 'admin.php?adm=transform&action=editstep&id='+ $('#item-id').val();
+            openTab({url: 'admin.php?adm=transform&action=editstep&id=' + $('#item-id{$id}').val(), obj: $(this), label: $(this).text()});
+            return false;
+        });
+
+        $('#steps .edit-icon').css({cursor: 'pointer'}).click(function () {
+            var id = $(this).parents('li:first').attr('id').replace('step_', '');
+            //document.location.href = 'admin.php?adm=transform&action=editstep&id=' + $('#item-id').val() + '&stepid=' + id;
+            openTab({url: 'admin.php?adm=transform&action=editstep&id=' + $('#item-id{$id}').val() + '&stepid=' + id, obj: $(this).attr('src'), label: $('#step_' + id).find('div:first').text()});
+            return false;
+        });
+
+        $('#steps .delete-icon').css({cursor: 'pointer'}).click(function () {
+            var id = $(this).parents('li:first').attr('id').replace('step_', '');
+            var self = this;
+
+            jConfirm('{trans("Sind Sie sicher, das Sie diese Einstellung löschen wollen?")}', 'Achtung', function (r) {
+                if (r) {
+                    $.pagemask.show('Einstellung löschen...');
+                    $.get('admin.php?adm=transform&action=deletestep&id=' + id, {}, function (data) {
+                        if (Desktop.responseIsOk(data)) {
+                            $(self).parents('li:first').remove();
+                            $.pagemask.hide();
+                            //document.location.href = document.location.href;
+                        } else {
+                            $.pagemask.hide();
+                            jAlert(data.msg);
+                        }
+                    });
+                }
+            });
+
+            return false;
+        });
+
+        $('#format-selector a').click(function (e) {
+            $('#preview-format').val($(this).attr('rel'));
+            getPreview();
+            e.preventDefault();
+            return false;
+        });
+
+        $('#bgcolor-selector a').click(function (e) {
+            $('#preview').css('background-color', ($(this).attr('rel') == '' ? 'transparent' : $(this).attr('rel')));
+            e.preventDefault();
+            return false;
+        });
+        
+        setTimeout(function(){
+            $('#preview-format').val('png');
+            getPreview();
+        }, 500);
+
+
+    </script>
+
+</cp:block>

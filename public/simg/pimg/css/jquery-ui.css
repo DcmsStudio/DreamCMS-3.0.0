@@ -1,0 +1,103 @@
+/*
+DreamCMS 3.0
+
+This source file is subject to the GNU GENERAL PUBLIC LICENSE Version 2
+that is bundled with this package in the file LICENSE.txt.
+It is also available through the world-wide-web at this URL:
+http://www.gnu.org/licenses/gpl-2.0.txt
+If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to license@dcms-studio.de so we can send you a copy immediately.
+
+PHP Version 5.3.6
+@copyright	Copyright (c) 2008-2013 Marcel Domke (http://www.dcms-studio.de)
+@license     http://www.gnu.org/licenses/gpl-2.0.txt GNU GENERAL PUBLIC LICENSE Version 2
+@author      Marcel Domke <http://www.dcms-studio.de>
+*/
+/* 
+    Created on : 10.12.2013, 11:55:58
+    Author     : marcel
+*/
+.ui-resizable {
+
+}
+.ui-resizable-n {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    cursor: ns-resize;
+}
+
+.ui-datepicker {
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.11);
+}
+.ui-datepicker-calendar {
+    margin: 0;
+    border: 1px solid #F3F3F3!important;
+}
+
+.ui-datepicker-week-end:last-child {
+    color: #9DC92C;
+}
+.ui-datepicker-calendar thead {
+    text-shadow: 0 1px 0 #fff;
+    background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+    background-image: linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+}
+.ui-datepicker-calendar thead th {
+    border: 0!important;
+}
+.ui-datepicker-calendar tr {
+    border: 0!important;
+}
+.ui-datepicker-calendar tr a {
+    color: #333;
+}
+.ui-datepicker-calendar tr .ui-datepicker-week-end:last-child a {
+    color: #9DC92C;
+}
+.ui-datepicker-calendar td {
+    padding: 5px;
+    border: 0!important;
+    text-align: center;
+    vertical-align: middle;
+}
+.ui-datepicker-current-day {
+    background: #F3F3F3;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.20);
+}
+
+.ui-datepicker-header {
+    background-image: -webkit-linear-gradient(top, #5bc0de 0%, #2aabd2 100%);
+    background-image: linear-gradient(to bottom, #5bc0de 0%, #2aabd2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2aabd2', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border-color: #28a4c9;
+    line-height: 22px;
+    padding: 3px;
+}
+.ui-datepicker-title {
+    display: inline-block;
+    line-height: 22px;
+}
+
+.ui-datepicker-prev {
+    float: left;
+    line-height: 22px;
+}
+
+.ui-datepicker-next {
+    float: right;
+    line-height: 22px;
+}
+
+.ui-datepicker-buttonpane {
+    padding: 3px;
+}

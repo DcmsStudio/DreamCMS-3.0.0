@@ -1,0 +1,396 @@
+
+/*
+        Last Comments block
+*/
+.last-comments-list, .last-comments-list li {
+    padding: 0!important;
+    background: none!important;
+    line-height: normal!important;
+}
+
+.last-comments-list li {
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+    border-bottom: 1px dotted #AAA;
+}
+.last-comments-list li:first-child {
+    padding-top: 0!important;
+}
+
+
+
+.last-comments-list li:last-child {
+    border: 0;
+}
+
+.last-comments-list li > a:first-child {
+    font-weight: bold;
+}
+
+.last-comments-list li .comment-details {
+    font-size: 11px;
+    color: #808183;
+}
+.last-comments-list li .comment {
+    line-height: normal;
+}
+
+/*
+        Comments
+*/
+.comment-form-toggle {
+    line-height: 36px;
+    padding: 5px;
+    padding-left: 10px;
+}
+.comment-form-toggle a {
+    padding-left: 36px;
+}
+
+.comment-form-toggle a span.fa {
+    position: relative;
+    color: #CCC;
+}
+#comments-container .post {
+    width:100%!important;
+    display:inline-block!important;
+    margin: 0px!important;
+    padding:0!important;
+}
+#comments-container .post_clear{
+    height:1px!important;	
+    min-height:1px!important;
+    max-height:1px!important;	
+
+    width: 99%;
+    margin:0;
+    padding: 0;
+    display:inline;
+}
+#comments-container .post-tools {
+    margin-bottom: -5px;
+    border-top: 1px solid #DDD;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    padding-top: 4px;
+}
+
+#comments-container .post-tools a {
+
+}
+#comments-container > a {
+    display: block;
+    position: relative;
+}
+
+#comments-container .author small {
+    color: #aa4d1d;
+}
+
+#comments-container .post-header .author {
+    display: inline;
+    height: 42px;
+    width: 52px;
+    float: right;
+    position: relative;
+    z-index: 100;
+    height: 42px;
+}
+#comments-container .post-header p {
+    display: inline;
+}
+
+#comments-container .author .sash{
+    position: absolute;
+    width: 41px;
+    height: 42px;
+    display:inline-block;
+    float: right;
+}
+#comments-container .author small {
+    text-transform: uppercase;
+    font-size: 10px;
+    margin-right: 15px;
+    position: absolute;
+    top: -10px;
+}
+
+#comments-container .author .sash{
+    background: transparent url(../sprites/sprite_activeden.png) no-repeat top left;
+    background-position: -650px -132px;
+}
+
+#comments-container a.author {
+    float: none!important;
+    position: relative!important;
+}
+
+
+#comments-container .post-header {
+    width:100%;
+    display:inline-block;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 0;
+    padding:0!important;
+    height:auto;	
+    border-bottom: 1px solid #DDD;
+    vertical-align:top!important;
+}
+
+#comments-container .post-header div.author {
+    right:5px!important;
+    top:0!important;
+    height:20px!important;
+    float:right!important;
+    position:absolute!important;
+    z-index: 10;
+
+}
+
+#comments-container .post-header div.author div.sash {
+    top: -17px!important;
+    right: -14px!important;
+}
+
+
+#comments-container h3:first-child {
+    margin-bottom: 0;
+    text-transform: uppercase;
+}
+
+
+
+#comments-container .author-name {
+    float:none!important;
+    display:inline-block!important;
+    font-style: italic!important;
+}
+#comments-container .authorname:after {
+    content: ':';
+    margin-right: 10px;
+}
+
+#comments-container .user-photo {
+    width: 80px;
+    height: 80px;
+    float: left;
+    text-align: center;
+    background: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+#comments-container .user-photo img {   
+    margin-top: 5px;
+}
+#comments-container .post-content.photo .comment-text {
+    margin-left: 90px;
+    display: block;
+}
+
+
+
+#comments-container .post-header .post-time {
+    float:right!important;
+    font-size: 11px!important;
+    display:inline-block!important;
+    margin:0!important;
+    padding:0!important;
+    position:absolute!important;
+    top:0;
+    right:0;
+    line-height: 23px;
+    font-style: italic;
+    color: #999999;
+}
+
+#comments-container .post-header h3 {
+    float:none!important;
+    font-size:14px!important;
+    display:block!important;
+    margin:0!important;
+    padding:0!important;
+}
+
+
+
+#comments-container .post div.poster, 
+#comments-container .postreply div.poster {
+    float: left;
+    width: 99px;
+    margin-top: 5px;
+    display:none
+}
+#comments-container .postreply {
+    border-left: 1px dotted #c0c0c0;
+    margin-left: 10px;
+}
+
+#comments-container .post .author small { top:3px; right:0px; font-size: 10px; }
+#comments-container .post div.text,
+#comments-container .postreply div.text{
+
+    padding-left: 10px;
+    padding-bottom: 0;
+    padding-right: 10px;
+    display:block;
+    clear:both;	
+    margin:0;
+    overflow:hidden;
+    font-size: 12px;
+    background: #F3F3F3;
+    box-shadow: inset 0 0 2px #C0C0C0;
+}
+#comments-container .post-content {
+    padding: 0;
+    margin-top: 5px;
+}
+
+
+#comments-container .comment-box {
+    display:block;
+}
+
+#comments-container .postreply .comment-box {
+    display:block;
+    padding-left:25px;
+    margin-bottom: 10px;
+}
+
+
+#comments-container .replies {
+    display:block;
+    margin: 0;
+    padding:0;
+}
+#comments-container .replies .postreply {
+    position: relative;	
+    padding:0px;
+    overflow: hidden;
+    display:block;
+    clear: both;
+}
+
+#comments-container .authorname {
+    display: inline-table;
+    float: left;
+    margin-right: 5px;
+    line-height: 23px;
+    font-style: italic!important;
+}
+
+
+
+#comments-container div.replies div.reply .comment_reply_content {
+    clear: both;
+}
+
+#comments-container div.replies div.post-header {
+    width:100%!important;
+    display:inline-block!important;
+    position: relative!important;
+}
+#comments-container div.replies div.reply div.post-header p strong {
+    font-size: 15px;
+    font-weight: normal;
+    color: #232323;
+}
+#comments-container div.replies div.reply div.post-header p small {
+    line-height: 15px;
+    vertical-align: -2px;
+}
+#comments-container div.replies div.reply div.post-header p a img {
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+
+
+#comments-container .ul-pointer {
+    position: relative;
+    height: 1px;
+    width: 15px;
+    top: 15px;
+    border-bottom: 1px dotted #c0c0c0;
+}
+
+
+#comments-container .replies .expand-replies {
+    position: relative;
+    clear: both;
+    margin: 0px!important;
+    padding:10px 2px 5px 0px;
+    overflow: hidden;
+}
+
+#comments-container .replies .expand-replies .reply {
+    position: relative;
+    clear: both;
+    margin: 0px!important;
+    padding:0px 2px 5px 0px;
+    overflow: hidden;
+    display:inline-block;
+}
+#comments-container .replies .expand-replies {
+    min-height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    color: #171717;
+    font-weight: bold;
+}
+#comments-container .replies .expand-replies a {
+    color: #aa4d1d;
+    padding: 0px 5px;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 11px;
+    cursor: pointer;
+    float:right;
+}
+
+
+.box-comments-form {
+    background: #F3F3F3;
+    padding: 0;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 1px #BBB;
+}
+.box-comments-form-disabled {
+    background: #F3F3F3;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 1px #BBB;
+    margin-left: -10px;
+    margin-right: -10px;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#commentform {
+    margin-top: 15px;
+    padding: 10px;
+}
+#commentFrom legend { display: none;}
+
+
+#comments-container .post, #comments-container .postreply .comment-box {
+    margin-bottom: 5px!important;
+}
+
+
+.comment-form.note {
+
+}
+
+.comment-form .fa {
+    font-size: 36px;
+    float: left;
+}
+
+.comment-form.note div {
+    display: inline-block;
+    margin-left: 10px;
+}

@@ -1,0 +1,493 @@
+<style type="text/css">
+    BODY {
+    margin:0;
+    padding:0;
+    background:transparent;
+    BACKGROUND-COLOR:transparent;
+    height:100%;
+    }
+</style>
+
+<cp:if condition="{$request.contentid} != 0">
+    <cp:set var="contentid" value="{$request.contentid}"/>
+</cp:if>
+<cp:else>
+    <cp:set var="contentid" value="99999999"/>   
+</cp:else>
+
+<table class="tblborder fl" width="100%" cellpadding="3" cellspacing="1" border="0" style="width:100%">
+    <tr class="tableheader">
+        <td colspan="2">{trans('Aktuelle Bilder')}</td>
+    </tr>
+    <tr>
+        <td style="height:130px;overflow:auto;vertical-align:top">
+            
+            <div id="currentImagesMask">
+                <table width="100%" id="currentImages" class="tblborder" cellpadding="3" cellspacing="1">
+                    <cp:if condition="{$current} != null">
+                        {$current}
+                    </cp:if>
+                    <cp:else>
+                        <tr><td><em>{trans('Es sind noch keine Bilder für den Content vorhanden.')}</em></td></tr>
+                    </cp:else>
+                </table>
+            </div>
+            
+        </td>
+    </tr>
+</table>
+
+<form id="uploadImageForm" enctype="multipart/form-data">
+    <input type="hidden" name="adm" value="images" />
+    <input type="hidden" name="sid" value="{$cp->session_id}" />
+    <input type="hidden" name="action" value="upload" />
+    <input type="hidden" name="ajax" value="1" />
+    <input type="hidden" name="id" value="" />
+    <input type="hidden" name="contentid" value="{$contentid}" />
+    <input type="hidden" name="contenttype" id="upload_contenttype" value="{$request.contenttype}" />
+    <input type="hidden" name="images" id="upload_images" value="{$images}" />
+    
+    <table id="uploadImage" class="tblborder fl" width="100%" cellpadding="3" cellspacing="1" border="0" style="margin-top:3px;width:100%">
+        <tr class="tableheader">
+            <td colspan="2">{trans('Bilder hinzufügen')}</td>
+        </tr>
+        {$upload}
+    </table>
+    
+</form>
+
+<script type="text/javascript" language="javascript">
+
+var images      = '{$images}'; // IDS of images
+var contenttype = '{$request.contenttype}';
+var oImageOriginal;
+
+{$js_all_image_wh}
+
+
+var pobj = my_getbyid('_images');
+
+function _InitImageFrame()
+{
+    $('#imagelist').val(images);
+}
+
+function SetUrl( image )
+{
+    var image = image.replace(cmsurl_regex, '');
+    $('#localfile').val( image );
+}
+
+
+function updateImageInContent( id )
+{
+    $.get('admin.php?adm=images&id='+ id +'&ajax=1&action=thumb&getJson=1', {}, function(data)
+    {
+        if( responseIsOk(data))
+        {    
+            var imgcode = '<img src="'+ data.imageurl +'" width="'+ $('#image_width').val() +'" height="'+ $('#image_height').val() +'"'+($('#image_position').val() != '' ? ' style="float:'+ $('#image_position').val() +'"' : '') +' dcmsID="content_image_'+id+'"/>';
+            
+            return imgcode;
+        }
+        else
+        {
+            return '';
+        }
+    },'json');
+    
+    return '';
+}
+
+function saveThisImage( id )
+{
+    if ( id <= 0 )
+    {
+        jAlert('{trans('Fehler...<br/>Die ID des Bildes konnte nicht gesetzt werden!')}');
+        return false;
+    }    
+    var postdata = $('#editContentImgForm').serialize();
+    
+    $.pagemask.show('{trans('arbeite...')}');    
+    
+    $.post('admin.php?ajax=1', postdata, function(data) 
+    {
+        if(responseIsOk(data))
+        {
+            $.pagemask.hide();
+            $.pagemask.show('{trans('Aktualisiere Editor Content...')}');
+
+            $.get('admin.php?adm=images&id='+ id +'&ajax=1&action=thumb&getJson=1', {}, function(data1)
+            {
+                if( responseIsOk(data1))
+                {    
+                    var imgcode = '<img src="'+ data1.imageurl +'" width="'+ $('#image_width').val() +'" height="'+ $('#image_height').val() +'"'+($('#image_position').val() != '' ? ' style="float:'+ $('#image_position').val() +'"' : '') +' dcmsID="content_image_'+id+'"/>';
+                    
+                    setCkData(getFCKObj(), 'imgedit', 'dcmsID="content_image_'+id+'"', imgcode);
+                    
+
+                    $.pagemask.hide();
+                    $('#imageEditform').hide();
+                    
+                    var currentImg = $('#img_'+id);
+                        currentImg.attr('src', currentImg.attr('src').replace( 'edit.gif', 'form-ok.png' ) );
+                    
+                    
+                    $('#img_'+id).effect('pulsate',{},500, function(){
+                        currentImg.attr('src', currentImg.attr('src').replace( 'form-ok.png', 'edit.gif' ) );
+                    } );
+                    
+                }
+                else
+                {
+
+                    $.pagemask.hide();
+                    $('#imageEditform').hide();
+                    
+                    var currentImg = $('#img_'+id);
+                        currentImg.attr('src', currentImg.attr('src').replace( 'edit.gif', 'form-ok.png' ) );
+                    
+                    
+                    $('#img_'+id).effect('pulsate',{},500, function(){
+                        currentImg.attr('src', currentImg.attr('src').replace( 'form-ok.png', 'edit.gif' ) );
+                    } );
+                    
+                    jAlert('{trans('Bilder im Content konnten nicht aktualisiert werden.')}');
+                }
+            },'json');
+
+        }
+        else
+        {
+            $('#imageEditform').hide();
+            $.pagemask.hide();
+            
+            jAlert('{trans('Fehler... ')}'+data.msg);
+            
+            $('#FileEditCont').show();
+            $('#FileEditContShadow').show();
+            $('#imageEditform').show();
+        }
+    },'json');
+}
+
+function doEditImage(id)
+{
+    $('#maincontent').mask('{trans('arbeite...')}');
+    $.get('admin.php?adm=images&id='+ id +'&action=thumb&loadInfo=1', {}, function(data)
+    {
+        if(top.responseIsOk(data)) {
+            var info = data.info;
+            
+            $('#FileEditCont').show();
+            $('#FileEditContShadow').show();
+            $('#imageEditform').show();
+            
+            
+            $('#image_title').val( info.title );
+            $('#image_description').val(info.description);
+            
+            $('#image_imagelist').val( $('#imagelist').val() );
+
+            $('#image_width').val(info.width);
+            $('#image_height').val(info.height);
+            
+            $('#image_width').attr('originalW', info.width);
+            $('#image_height').attr('originalH', info.height);
+            
+            
+            $('#image_vspacing').val(info.vspacing);
+            $('#image_hspacing').val(info.hspacing);            
+            $('#image_ordering').val(info.ordering);
+
+            $('#image_id').val(id);
+            
+            $('#maincontent').unmask();    
+            
+        }
+        else
+        {
+            $('#maincontent').unmask();    
+            $('#imageEditform').hide();
+            
+            jAlert(data.msg);
+            
+            $('#FileEditCont').show();
+            $('#FileEditContShadow').show();
+            $('#imageEditform').show();
+            
+            return;
+        }
+    },'json');
+}
+
+
+
+function uplodThisImage()
+{
+    if ( $('#localfile').val() == '' && $('#uploadfile').val() == ''  )
+    {
+        jAlert('{trans('Es wurde kein bild ausgewählt. Bitte erst ein Bild wählen um fortsetzen zu können!')}');
+        return;
+    }
+    $('#uploadImage').mask('{trans('Füge Bild hinzu...')}');
+    var postdata = $('#uploadImageForm').serialize();
+
+    $.post('admin.php?ajax=1', postdata, function(data) 
+    {
+        if(responseIsOk(data))
+        {
+            $('#uploadImage').unmask();
+            $('#uploadImageForm')[0].reset();
+            $('#imagelist').val( data.image_ids );
+            $('#upload_images').val( data.image_ids );
+
+            $('#currentImagesMask').mask('{trans('Aktualisiere Liste...')}');
+            
+            $.get('admin.php?adm=images&action=&reloadList=1&images='+ data.image_ids +'&contenttype='+ $('#upload_contenttype').val() , {}, function(data1)
+            {
+                $('#currentImages').empty();
+                $('#currentImages').append( data1.rows );
+                $('#currentImagesMask').unmask();                
+            }, 'json');
+            
+            
+            set_dirty();
+        }
+        else
+        {
+            $('#uploadImage').unmask();
+            jAlert(data.msg);
+        }
+    },'json');
+}
+
+
+function delContentImage( id )
+{
+    $('#maincontent').mask('{trans('Lösche Bild...')}');
+    
+    $.get('admin.php?adm=images&images='+ $('#imagelist').val() +'&id='+ id +'&action=delete', {}, function(data) 
+    {
+        if(responseIsOk(data))
+        {
+            $('#maincontent').unmask();
+            $('#imagelist').val( data.image_ids );
+            $('#upload_images').val( data.image_ids );
+
+            $.get('admin.php?adm=images&action=&reloadList=1&images='+ $('#imagelist').val() +'&contenttype='+ $('#upload_contenttype').val() , {}, function(data1)
+            {
+                $('#currentImages').empty();
+                $('#currentImages').append( data1.rows );
+                $('#currentImagesMask').unmask();                
+            }, 'json');
+            
+            set_dirty();
+
+            
+            $.pagemask.show('{trans('Aktualisiere Editor Content...')}');
+            setCkData('text', 'imgedit', 'dcmsID="content_image_'+id+'"', '');
+            $.pagemask.hide();
+        }
+        else
+        {
+            $('#maincontent').unmask();
+            jAlert(data.msg);
+        }
+    },'json');
+}
+
+
+
+
+function newelement(newid)
+{ 
+    if(document.createElement)
+    { 
+        var el = document.createElement('div'); 
+        el.id = newid;
+        el.style.float = 'left';
+        
+        with(el.style)
+        { 
+            display = 'none';
+            position = 'absolute';
+        }
+        
+        el.innerHTML = '&nbsp;'; 
+        document.body.appendChild(el); 
+    } 
+}
+
+function imgBrowse(objid)
+{
+    openImageBrowser('/mediacenter/images', $('body #'+ objid) , true);
+}
+
+
+
+
+function SizeChanged(dimension, value)
+{
+    var owidth  = $('#image_width').attr('originalW');
+    var oheight = $('#image_height').attr('originalH');    
+    var el = dimension == 'w' ? $('#image_height') : $('#image_width') ;
+
+    if ( value.length == 0 || isNaN( value ) )
+    {
+        $(el).val('');
+        return;
+    }
+    
+    if ( dimension == 'w' ){ 
+        var nvalue = value == 0 ? 0 : Math.round( oheight * ( value  / owidth ) ) ;
+    }
+    else{ 
+        var nvalue = value == 0 ? 0 : Math.round( owidth  * ( value / oheight ) ) ;
+    }
+
+    if ( !isNaN( nvalue ) ) $(el).val( nvalue);
+}
+
+
+function getFCKObj()
+{
+    var o = null;
+    
+    o = parent.dcmsCKgetEditor('text');
+    if (o != false )
+    {
+        return 'text';
+    }
+
+    
+    o = parent.dcmsCKgetEditor('longdescription');
+    if (o != false )
+    {
+        return 'longdescription';
+    }
+
+    
+    o = parent.dcmsCKgetEditor('description');
+    if (o != false )
+    {
+        return 'description';
+    }
+
+
+    o = parent.dcmsCKgetEditor('static_page');
+    if ( o != false ){
+        return 'static_page';
+    }
+}
+
+
+// insert Html Content
+function addFCKText( text )
+{
+    var o = null;
+    
+    o = parent.dcmsCKgetEditor('text');
+    if ( o != false ){
+        o.insertHtml(text);
+    }
+    
+    o = parent.dcmsCKgetEditor('longdescription');
+    if ( o != false ){
+        o.insertHtml(text);
+    }
+    
+    o = parent.dcmsCKgetEditor('description');
+    if ( o != false ){
+        o.insertHtml(text);
+    }
+
+    o = parent.dcmsCKgetEditor('static_page');
+    if ( o != false ){
+        o.insertHtml(text);
+    }
+
+}
+
+function insertImage(num)
+{
+    // addFCKText('{content_image_'+num+'}');
+
+    $.get('admin.php?adm=images&id='+ num +'&action=thumb&getJson=1', {}, function(data)
+    {
+        if(responseIsOk(data)) {
+
+
+            var picture1 = '<img src="'+  cmsurl + data.imageurl  +'" width="'+ data.width +'" height="'+ data.height  +'" style="width:'+ data.width  +'px;height:'+  data.height +';'+(data.position ? 'float:'+data.position  : '')+'"/>';
+
+
+            var picture2 = '<img src="'+  cmsurl + data.imageurl  +'" _cke_realelement="'+encodeURIComponent(picture1)+'" width="'+ data.width +'" height="'+  data.height  +'"  dcmsID="content_image_'+num+'" style="width:'+  data.width  +'px;height:'+  data.height +';'+(data.position ?  'float:'+data.position  : '')+'"/>';
+
+            var fake = encodeURIComponent(picture2);
+
+            var picture = '<img isReady="false" _cke_realelement="'+fake+'" src="'+  cmsurl + data.imageurl +'" width="'+ data.width +'" height="'+ data.height +'"  dcmsID="content_image_'+num+'" style="width:'+ data.width +'px;height:'+  data.height +';'+(data.position ? 'float:'+data.position : '')+'"/>';
+
+            addFCKText(picture );            
+            jAlert('{trans('Beachte Bitte, das du das eben eingefügte Bild nicht bearbeitest!')}', '{trans('ACHTUNG...')}');
+
+        }
+        else
+        {
+            jAlert(data.msg);
+
+        }
+    },'json');
+
+    return false;
+}
+
+
+function dosubmitimage(type, id)
+{
+    var form = my_getbyid("imgform"+id);
+
+    switch (type) {
+        case 'del':
+            act = 'delete';
+
+            if (parent) parent.setCkData('text', 'imgedit', 'dcmsID="content_image_'+id+'"', '');
+            else setCkData('text', 'imgedit', 'dcmsID="content_image_'+id+'"', '');
+            
+            form.action.value = act;
+            form.id.value = id;
+            form.imagelist.value = images;
+            form.submit();
+            
+        break;
+
+        case 'edit':
+            act = 'edit';
+            
+
+                
+        break;
+
+        case 'upl':
+            act = 'upload';
+            
+            form.action.value = act;
+            form.id.value = id;
+            form.imagelist.value = images;
+            form.submit();
+            
+        break;
+
+        default:
+            alert("{trans('Bitte einen Aktions Typ auswählen! Wenn noch kein Aktions Typ Vorhanden ist, erstellen Sie erst einen um diese Kategorie zu erstellen.')}");
+            return false;
+        break;
+    }
+
+    return true;
+}
+
+_InitImageFrame();
+
+</script>
+
+<script type="text/javascript" src="{$cfg['portalurl']}/core/js/mediacenter.js"></script>
+

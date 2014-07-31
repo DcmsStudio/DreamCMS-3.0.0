@@ -1,0 +1,862 @@
+.subcolumns {
+    width: auto;
+}
+
+#layouts {
+    display: inline-block!important;
+    min-height: 300px!important;
+    width:100%;
+    position:relative;
+}
+
+#layoutsContainer {
+    display:inline-block!important;
+    width:100%;
+    margin:0;
+}
+
+#layoutsContainer .ui-sortable,
+#layoutsContainer .ui-droppable {
+    margin:0;
+    height:auto!important;
+    min-height: 45px;
+    max-height:auto!important;
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+
+.layoutBoxCustomBottom,
+.layoutBoxBottom,
+.layoutBoxCustomTop,
+.layoutBoxTop {
+    float:none!important;
+    margin-top:0px!important;
+    margin-bottom:10px!important;
+    border: 1px solid #DDDDDD;
+    min-height: 45px;
+    display: block;
+}
+
+
+
+#col1 {
+    width: 300px;
+    min-height: 300px;
+    max-height:auto!important;
+    border: 1px solid #DDDDDD;
+    /* display:block; */
+    float:left;
+    overflow:hidden;
+    margin: 0;
+    height:auto!important;
+    position:relative;
+}
+
+#col3 {
+    min-height: 300px;
+    max-height:auto!important;
+    border: 1px solid #DDDDDD;
+    z-index:1;
+    overflow:hidden;
+
+    height:auto!important;
+    float:none;
+    position: relative;
+    /* 
+    
+    margin: 0 187px 0 187px;
+    display:block; 
+    position:relative;*/
+}
+
+#col2 {
+    width: 300px;
+    min-height: 300px;
+    max-height:auto!important;
+    border: 1px solid #DDDDDD;
+    /* display:block; */
+    float:right;
+    overflow:hidden;
+    margin: 0;
+    height:auto!important;
+    position:relative;
+}
+
+
+
+.layoutBoxTop, 
+.layoutBoxBottom {
+    border: 1px solid #DDDDDD;
+    margin-bottom:10px;
+    min-height: 48px;
+    height: auto!important;
+    display: block;
+    position:relative;
+}
+
+
+.layoutBoxCustomTop,
+.layoutBoxCustomBottom {
+    border: 1px solid #DDDDDD;
+    margin-bottom:10px;
+    min-height: 48px;
+    height: auto!important;
+    display: block;
+    position:relative;
+}
+
+
+
+.layoutBoxCustomBottom .connectedSortable,
+.layoutBoxBottom .connectedSortable,
+.layoutBoxCustomTop .connectedSortable,
+.layoutBoxTop .connectedSortable {
+    margin: 0 30px 0 0!important;
+    padding: 3px!important;
+    position:relative;
+    min-height: 45px;
+}
+
+
+
+
+#layoutBoxMiddle .ui-sortable-placeholder,
+.layoutBoxCustomBottom .ui-sortable-placeholder,
+.layoutBoxBottom .ui-sortable-placeholder,
+.layoutBoxCustomTop .ui-sortable-placeholder,
+.layoutBoxTop .ui-sortable-placeholder {
+    width: 99%!important;
+    margin: 0!important;
+    padding: 0!important;
+    margin-bottom: 5px!important;
+    border-radius: 0;
+    background: transparent url("../img/dropbg.gif")!important;
+}
+
+
+
+
+
+
+
+.layoutBoxCustomBottom  .lockbtn ,
+.layoutBoxBottom  .lockbtn ,
+.layoutBoxCustomTop  .lockbtn ,
+.layoutBoxTop .lockbtn {
+
+    min-height: 48px!important;
+    line-height:22px;
+    border-left: 1px solid #DDDDDD;
+    display:block;
+    width:22px;
+    background-color: #EEEEEE;
+    margin: 0;
+    height:100%!important;
+    cursor:pointer;
+    position:absolute;
+    top:0;
+    right:0;
+    z-index: 20;
+}
+
+.lockbtn.locked {
+    background-color: #F5ECC7;
+    cursor:default;
+}
+
+
+
+.layoutBoxCustomTop .lockbtn-label>span,
+.layoutBoxCustomBottom .lockbtn-label>span,
+.layoutBoxTop .lockbtn-label>span, 
+.layoutBoxBottom .lockbtn-label>span {
+    width:22px;
+    height:22px;
+    display:block;
+    background:#EEEEEE url('../img/unlock.png') no-repeat 50% 50%;
+    cursor:pointer;
+}
+
+.layoutBoxCustomTop .lockbtn-label.locked>span,
+.layoutBoxCustomBottom .lockbtn-label.locked>span,
+.layoutBoxTop .lockbtn-label.locked>span, 
+.layoutBoxBottom .lockbtn-label.locked>span { background: #F5ECC7 url('../img/lock.png') no-repeat 50% 50%; cursor:pointer; }
+
+.layoutBoxCustomTop .section-opts,
+.layoutBoxCustomBottom .section-opts,
+.layoutBoxTop .section-opts,
+.layoutBoxBottom .section-opts
+{
+    display:block;
+    width: 22px; 
+    height: 22px;
+    background: #EEEEEE url('../img/layouter/empty-section.png') no-repeat 50% 50%;
+}
+
+.layoutBoxCustomTop .section-opts.locked,
+.layoutBoxCustomBottom .section-opts.locked,
+.layoutBoxTop .section-opts.locked,
+.layoutBoxBottom .section-opts.locked
+{
+    background-color: #F5ECC7;
+}
+
+
+
+
+#col1 .lockbtn,
+#col2 .lockbtn,
+#col3 .lockbtn {
+    position:absolute;
+    bottom: 0;
+    left:0;
+    height:22px;
+    border-top: 1px solid #DDDDDD;
+    background-color: #EEEEEE;
+    display:block;
+    width:100%;
+    z-index: 20;
+    line-height: 20px;
+    text-align: left;
+    cursor:default;
+}
+
+
+
+
+#layoutbox-container {
+    margin-bottom: 10px;
+}
+
+#layoutbox-container .lockbtn-label {
+    margin:0!important;
+    padding:3px;
+    padding-left: 22px!important;
+    line-height:20px;
+    height:22px;
+    background:#EEEEEE url('../img/unlock.png') no-repeat 3px 30%;
+    cursor:pointer;
+}
+#layoutbox-container .lockbtn.locked .lockbtn-label { background: #F5ECC7 url('../img/lock.png') no-repeat 3px 30%; cursor:pointer; }
+
+
+
+
+
+#layouts .nosortables {
+    margin:0;
+    padding:0;
+    min-height: 85px;
+    height: auto;
+    display:inline-block;
+    width:100%;
+    background:transparent;
+}
+
+#layouts .nosortables .subcolumns {
+    padding:0;
+    margin: 0;
+
+}
+
+#layouts .nosortables .subcolumns .sortableSubCols {
+    border: 1px dashed #aaa;
+    min-height: 80px!important;
+}
+
+#layouts .dummy {
+    border:0!important;
+    width: 100%!important;
+    display:block!important;
+    margin: 0!important;
+    min-height: 30px;
+}
+
+
+
+.contentbox-menu .edit-btn {
+    width:10px;
+    line-height: 18px;
+    height: 18px;
+    display: block;
+    float:right;
+    margin-left:5px;
+    background: transparent url('../img/layouter/layout-edit.png') no-repeat 0 80%;
+    position: relative;
+    cursor: pointer;
+}
+
+
+
+.contentbox-menu .delete-btn {
+    width:10px;
+    line-height: 18px;
+    height: 18px;
+    display: block;
+    float:right;
+    margin-left:5px;
+    background: transparent url('../img/layouter/layout-delete.png') no-repeat 0 80%;
+    position: relative;
+    right: 5px;
+    cursor: pointer;
+}
+
+.contentbox-menu .disable-btn {
+    width:10px;
+    line-height: 18px;
+    height: 18px;
+    display: block;
+    float:right;
+    margin-left:5px;
+    margin-right:5px;
+    background: transparent url('../img/layouter/layout-active.png') no-repeat 0 80%;
+    position: relative;
+    cursor: pointer;
+}
+
+
+
+body .subcolumns.ui-sortable-helper,
+#layoutsContainer .subcolumns {
+    background: transparent!important;
+    border: 0!important;
+    height:none;
+    line-height:22px!important;	
+    min-height: 45px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.layoutBoxTop .subcolumns, 
+.layoutBoxCustomTop .subcolumns, 
+.layoutBoxCustomBottom .subcolumns, 
+.layoutBoxBottom .subcolumns
+{
+    margin-left: 0!important;
+}
+.itemBox.dum { width:100%!important; height: 10px; left:0; position: relative; }
+
+
+
+#layouts .subcolumns .sortableSubCols {
+    border: 1px dashed #bbb;
+    margin: 0 3px 3px !important;
+    margin-left: 0!important;
+    min-height: 32px;
+    width: 99%;
+}
+.mainBox > .subcolumns > div:last-child > .sortableSubCols {
+    width: 94%;
+}
+
+
+
+#layouts .subcolumns .sortableSubCols .subcolumns .sortableSubCols {
+    margin-left: 0!important;
+}
+
+
+#layouts .drop-hover {
+    background: transparent!important;
+}
+
+#layouts .sortableSubCols .drop-hover .ui-droppable-disabled {
+    background: transparent!important;
+}
+
+
+#layouts .contentPlaceholder 
+{ 
+
+    padding:3px;
+    font-weight: bold;
+    font-size: 18px;
+
+    cursor: not-allowed!important;
+    min-height:40px!important; 
+    height:40px!important; 
+    background: transparent;
+    vertical-align:middle;
+    text-align:center;
+    line-height: 38px;
+    clear:both;    
+
+    border: 1px solid rgba(187, 187, 187, 0.22)!important;
+    margin-bottom: 5px;
+    display: block;
+    margin-left: 3px;
+    margin-right: 8px;
+}
+
+
+
+#layouts .contentPlaceholder span {
+    width: 99%;
+    text-align:center!important;
+    line-height: 38px!important;
+    min-height:40px!important; 
+    height:40px!important; 
+
+    color: #ccc;
+
+}
+.boxLocked {
+
+
+}
+
+.layoutBox-lock-mask {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    z-index: 10;
+    display: block;
+    background-color:rgba(204, 204, 204, 0.19);
+}
+
+
+#layouts .boxLocked { cursor: not-allowed!important;}
+#layouts .lockedMask div.mainBox { opacity: 0.3; }
+
+
+#layouts .ui-draggable-dragging {
+    border: 1px solid #d0d0d0;
+    background-color: #eeffee;
+    position:absolute!important;
+    z-index: 999999!important;
+    cursor: move;
+}
+#layouts .ui-sortable-placeholder {
+    margin: 3px!important;
+    max-height: none!important;
+    min-height: inherit!important;
+    margin-bottom: 2px!important;
+    background: transparent!important;
+    background-color: transparent!important;
+    background: transparent url('../img/bg/dropbg.gif')!important;
+    background-image: url('../img/bg/dropbg.gif')!important;
+    border: 1px solid #ddd!important;
+    list-style-type: none;
+} 
+
+
+
+#layouts .html-content span,
+#layouts .php-content span,
+#layouts .image-content span,
+#layouts .other-content span { padding-left:18px!important; height:16px!important; line-height:16px!important;  }
+
+
+span.html-content,#layouts .html-content span { padding-left:18px!important; background: transparent url('../img/modules/document-content.png') no-repeat 0% 50%;}
+span.php-content,#layouts .php-content span {padding-left:18px!important;  background: transparent url('../img/modules/blue-document-php.png') no-repeat 0% 50%; }
+span.image-content,#layouts .image-content span {padding-left:18px!important;  background: transparent url('../img/images.png') no-repeat 0% 50%; }
+span.other-content,#layouts .other-content span {padding-left:18px!important;  background: transparent url('../img/modules/blue-document-globe.png') no-repeat 0% 50%; }
+
+
+/*
+#layoutsContainer .layoutbox-contentmenu >span, 
+#layoutsContainer .layoutbox-contentmenu >a { line-height: 22px!important; height: 22px!important; }
+
+#layoutsContainer .cbox>img {
+    float:left;
+    margin-top: 2px;
+    margin-right: 3px;
+}
+
+*/
+
+
+
+
+subcolumns.hideItems .cbox.itemBox {
+    display: none!important;
+}
+.transparentborder {
+    border-color: transparent!important;
+}
+
+.transparentborder .lockbtn {
+    display: none!important;
+}
+
+#layouts .subcolumns .sortableSubCols .subcolumns {
+    display: block;
+    width: 99%
+}
+
+.section-boder {
+    border: 1px dashed #C9C2C2;
+}
+
+
+.equalize > div {
+    display: block;
+}
+
+
+.m.itemBox {
+    padding: 0!important;
+    overflow: hidden;
+    background: #333;
+    border: 1px solid #C9C2C2;
+    color: #fff;
+    margin-bottom: 5px;
+    display: block;
+
+}
+.m.itemBox.isdisabled {
+    border: 1px solid #C0C0C0;
+}
+.m.itemBox.isdisabled .contentbox-menu {
+    background: #8C939C;
+}
+
+.m.itemBox .contentbox-menu {
+    width: 100%;
+    line-height: 12px;
+    height: 12px;
+    background-color:#bbb!important;
+    color: #fff;
+}
+
+.m.itemBox .contentbox-content {
+    background-color: #fff;
+    display: none;
+    width: 100%;
+    min-height: 45px;
+    padding: 3px;
+    color: #333;
+}
+
+.allowSubCols .itemBox {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+
+
+
+
+
+
+/* inline context menu */
+body div.layoutmenu,
+#layouts div.layoutmenu {
+    height: 18px;
+    line-height: 18px;
+    overflow:hidden;
+    font-size: 11px;
+    color:#fff;
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNmNGM2YiIgc3RvcC1vcGFjaXR5PSIwLjciLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzNmNGM2YiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+    background: -moz-linear-gradient(top,  rgba(63,76,107,0.7) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(63,76,107,0.7)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(63,76,107,0.7) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(63,76,107,0.7) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(63,76,107,0.7) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(63,76,107,0.7) 0%,rgba(63,76,107,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b33f4c6b', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-8 */
+
+
+    /* margin-left: 2px!important; */
+    margin: 0!important;
+    margin-bottom: 3px!important;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#layouts div.menu .more {
+    margin-top: 3px;
+    cursor: pointer;
+    float: left;
+    margin-left: 5px;
+    padding-left: 5px;
+    border-left: 1px solid #333;
+    line-height: 12px;
+    height: 12px;
+
+}
+#layouts div.menu .more:hover {
+    color: #666666;
+}
+#layouts div.menu .submenu {
+    display: none;
+    width: 150px;
+    max-width: 150px;
+
+    background: #fff;
+    border: 1px solid #444;
+    position: absolute;
+    margin-top: 22px;  
+    box-shadow: 1px 2px 8px 1px #333;
+}
+
+#layouts div.menu .submenu div {
+    display: block;
+    line-height: 20px;
+    height: 20px;
+    clear: both;
+}
+
+
+
+#layouts ul#column-layouts {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+}
+#layouts ul#column-layouts li img {
+    float: left;
+    margin-right: 5px;
+    vertical-align: middle;
+    padding-left: 3px;
+}
+
+#layouts ul#column-layouts li {
+    padding: 3px;
+    margin: 0;    
+    text-align: center;
+    line-height: 18px;
+    clear: both;
+    border-color: #FFFFFF #F0F0F0 #F0F0F0 #FFFFFF;
+    border-style: solid;
+    border-width: 1px;
+    color: #666666;
+
+}
+
+#layouts ul#column-layouts li:hover {
+    background-color: #E7E7E7;
+}
+
+.layoutBoxTop .mainBox, .layoutBoxCustomTop .mainBox, .layoutBoxCustomBottom .mainBox, .layoutBoxBottom .mainBox {
+    padding-top: 20px!important;   
+}
+
+
+.middleColumns {
+    padding-bottom: 35px;
+}
+
+.layoutBoxTop em,
+.layoutBoxCustomTop em,
+.layoutBoxCustomBottom em,
+.layoutBoxBottom em {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    height: 16px;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-color: #E0E0E0;
+    border-bottom-right-radius: 5px;
+}
+
+.layoutBoxTop em {
+    background-image: url('../img/layouter/top.png');
+}
+.layoutBoxCustomTop em {
+    background-image: url('../img/layouter/custom-top.png');
+}
+.layoutBoxCustomBottom em {
+    background-image: url('../img/layouter/custom-bottom.png');
+}
+.layoutBoxBottom em {
+    background-image: url('../img/layouter/bottom.png');
+}
+
+
+.leftWidth .mainBox, .rightWidth .mainBox, .middleWidth .mainBox {
+    padding-top: 20px!important;   
+}
+
+.leftWidth em, .rightWidth em, .middleWidth em {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    height: 16px;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-color: #E0E0E0;
+    border-bottom-right-radius: 5px;
+}
+
+.leftWidth em {
+    background-image: url('../img/layouter/left.png');
+}
+
+.rightWidth em {
+    background-image: url('../img/layouter/right.png');
+}
+
+.middleWidth em {
+    background-image: url('../img/layouter/middle.png');
+}
+
+
+
+
+
+
+
+
+/**
+    More and edit box
+*/
+.layoutmenu .submenu {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    width: 130px;
+    background: #fff;
+    border: 1px solid #c0c0c0;
+    color: #333;
+}
+.layoutmenu .submenu div span {
+    line-height: 18px;
+}
+.layoutmenu .submenu div:hover {
+    background: #999;
+    color: #fff;
+}
+.addsubcols { 
+    float:left!important;
+    cursor:pointer;
+    display:block; width:16px; height: 20px; 
+    background-image: url('../img/layouter/edit.png');	
+    background-position: 50% 50%;
+    background-repeat: no-repeat!important;	
+}
+.addsubcols.addsubcols-cancel {
+    background-image: url('../img/layouter/layout-delete.png');	
+}
+.emptycontent { 
+    cursor:pointer;
+    display:block; 
+    height: 20px;
+    background-image: url('../img/layouter/clear.png');
+    background-position: 3px 50%;
+    background-repeat: no-repeat!important;	
+    padding-left: 18px;
+}
+.removecontainer {
+    cursor:pointer;
+    display:block;
+    height: 20px; 
+    background-image: url('../img/layouter/delete.png');	
+    background-position: 3px 50%;
+    background-repeat: no-repeat!important;
+    padding-left: 18px;
+}
+
+
+/**
+    Drop events
+*/
+.layoutBox.ui-sortable-disabled, 
+.layoutBox.ui-droppable-disabled,
+.layoutBox .ui-sortable-disabled, 
+.layoutBox .ui-droppable-disabled,
+.layoutBox .ui-draggable-disabled
+{
+    opacity: 1!important;
+}
+.dropzone { background-position: -1px -2px !important;}	
+.dropzoneactive { border: #f63 1px solid !important;  background-position: -1px -2px !important; margin:0!important;padding:0!important;}	
+.dropzonehover { opacity: 0.5; filter: alpha(Opacity=50); background: blue; background-position: -1px -2px !important;}
+
+.dropzone.dropaccept {
+
+}
+
+
+
+
+
+[app=layouter] .box {
+    box-shadow: none;
+    background: #eee;
+    border: 0;
+    padding: 0;
+}
+[app=layouter] .box-inner {
+    margin: 0;
+    padding: 5px;
+}
+
+
+
+
+
+
+.itemBox .contentbox-menu{
+    white-space: nowrap;
+}
+.itemBox .contentbox-menu > span:first-child {
+    width: 45%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    float: left;
+    line-height: 22px;
+}
+
+
+.layoutBoxtop > .mainBox,
+.layoutBoxCustomTop > .mainBox,
+.layoutBoxBottom > .mainBox,
+.layoutBoxCustomBottom > .mainBox {
+    margin-right: 25px!important;
+    display: block;
+    width: auto;
+}
+
+.layoutBoxtop > .mainBox .allowsubcols,
+.layoutBoxCustomTop > .mainBox .allowsubcols,
+.layoutBoxBottom > .mainBox .allowsubcols,
+.layoutBoxCustomBottom > .mainBox .allowsubcols {
+    width: 100%!important;
+}
+.layoutBoxtop > .mainBox .allowsubcols .itemBox,
+.layoutBoxCustomTop > .mainBox .allowsubcols .itemBox,
+.layoutBoxBottom > .mainBox .allowsubcols .itemBox,
+.layoutBoxCustomBottom > .mainBox .allowsubcols .itemBox {
+    margin-right: 5px;
+}
+
+
+.mainBox .subcolumns .allowSubCols {
+    margin-bottom: 0!important;
+}
+
+.mainBox .drop-hover {
+    border-color: #cafd99!important;
+}
+
+.mainBox .drop-hover-active {
+    background: #cafd99;
+}

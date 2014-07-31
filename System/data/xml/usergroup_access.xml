@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groupaccess>
+<admin title="Admins">
+	
+	<canuseacp title="canuseacp" fieldtype="yesno">		
+		<title>Darf den Admin Bereich benutzen?</title>
+		<tip><![CDATA[
+		adasdas
+		]]></tip>
+		<value></value>
+	</canuseacp>
+	<ismod title="ismod" fieldtype="yesno">0</ismod>
+	<issupermod title="issupermod" fieldtype="yesno">0</issupermod>
+</admin>
+
+<board>
+	<candeletepost title="can_bdeletepost" fieldtype="fyesno">0</candeletepost>
+	<candeletethread title="can_bdeletethread" fieldtype="fyesno">0</candeletethread>
+	<caneditpost title="can_beditpost" fieldtype="fyesno">0</caneditpost>
+
+	<canemail title="can_bemail" fieldtype="fyesno">0</canemail>
+	<cangetattachment title="can_bgetattachment" fieldtype="fyesno">0</cangetattachment>
+	<isalwaysmoderated title="can_bisalwaysmoderated" fieldtype="fyesno">0</isalwaysmoderated>
+	<canmove title="can_bmove" fieldtype="fyesno">0</canmove>
+	<canopenclose title="can_bopenclose" fieldtype="fyesno">0</canopenclose>
+	<canpostattachment title="can_bpostattachment" fieldtype="fyesno" disabled="0">0</canpostattachment>
+	<canpostnew title="can_bpostnew" fieldtype="fyesno">1</canpostnew>
+	<canpostpoll title="can_bpostpoll" fieldtype="fyesno">0</canpostpoll>
+	<canreplyothers title="can_breplyothers" fieldtype="fyesno">1</canreplyothers>
+
+	<canreplyown title="can_breplyown" fieldtype="fyesno">1</canreplyown>
+	<cansearch title="can_bsearch" fieldtype="fyesno">1</cansearch>
+	<canseedelnotice title="can_bseedelnotice" fieldtype="fyesno">0</canseedelnotice>
+	<canthreadrate title="can_bthreadrate" fieldtype="fyesno">0</canthreadrate>
+	<canview title="can_bview" fieldtype="fyesno">1</canview>
+	<canviewothers title="can_bviewothers" fieldtype="fyesno">1</canviewothers>
+	<canvote title="can_bvote" fieldtype="fyesno">0</canvote>
+	<can_view_board title="can_view_board" fieldtype="yesno">1</can_view_board>
+
+</board>
+
+<bugs>
+	<can_view_bugs title="can_view_bugs" fieldtype="yesno">1</can_view_bugs>
+	<can_add_bugs title="can_add_bugs" fieldtype="yesno">0</can_add_bugs>
+</bugs>
+
+<cheats>
+	<can_cheat_print_pdf title="can_cheat_print_pdf" fieldtype="yesno">0</can_cheat_print_pdf>
+	<can_comment_cheats title="can_comment_cheats" fieldtype="yesno">1</can_comment_cheats>
+	<can_view_cheats title="can_view_cheats" fieldtype="yesno">1</can_view_cheats>
+	<can_view_cheat_details title="can_view_cheat_details" fieldtype="yesno">1</can_view_cheat_details>
+</cheats>
+
+<games>
+	<can_games_print_pdf title="can_games_print_pdf" fieldtype="yesno">0</can_games_print_pdf>
+	<can_comment_games title="can_comment_games" fieldtype="yesno">1</can_comment_games>
+	<can_view_games title="can_view_games" fieldtype="yesno">1</can_view_games>
+	<can_view_games_details title="can_view_games_details" fieldtype="yesno">1</can_view_games_details>
+</games>
+
+<companys>
+	<can_comment_company title="can_comment_company" fieldtype="yesno">1</can_comment_company>
+	<can_view_companys title="can_view_companys" fieldtype="yesno">1</can_view_companys>
+</companys>
+
+<downloads>
+	<can_add_downloads title="can_add_downloads" fieldtype="yesno">0</can_add_downloads>
+	<can_comment_downloads title="can_comment_downloads" fieldtype="yesno">1</can_comment_downloads>
+	<can_download_files title="can_download_files" fieldtype="yesno">1</can_download_files>
+
+	<can_rate_downloads title="can_rate_downloads" fieldtype="yesno">1</can_rate_downloads>
+	<can_view_downloads title="can_view_downloads" fieldtype="yesno">1</can_view_downloads>
+</downloads>
+
+<gallery>
+	<can_add_gallery_pic title="can_add_gallery_pic" fieldtype="yesno">0</can_add_gallery_pic>
+	<can_view_gallery title="can_view_gallery" fieldtype="yesno">1</can_view_gallery>
+	<can_view_gallery_picoriginal title="can_view_gallery_picoriginal" fieldtype="yesno">1</can_view_gallery_picoriginal>
+
+</gallery>
+
+<greviews>
+	<can_add_greviews title="canaddgreviews" fieldtype="yesno"></can_add_greviews>
+	<can_comment_greviews title="cancommentgreviews" fieldtype="yesno"></can_comment_greviews>
+	<can_edit_greviews title="caneditgreviews" fieldtype="yesno"></can_edit_greviews>
+	<can_view_greviews title="canviewgreviews" fieldtype="yesno"></can_view_greviews>
+	<can_view_greviews_details title="canviewgreviewsdetails" fieldtype="yesno"></can_view_greviews_details>
+</greviews>
+
+<links>
+	<can_add_links title="can_add_links" fieldtype="yesno">0</can_add_links>
+
+	<can_comment_links title="can_comment_links" fieldtype="yesno">1</can_comment_links>
+	<can_rate_links title="can_rate_links" fieldtype="yesno">1</can_rate_links>
+	<can_view_links title="can_view_links" fieldtype="yesno">1</can_view_links>
+</links>
+
+<news>
+	<can_add_news title="can_add_news" fieldtype="yesno">0</can_add_news>
+	<can_comment_news title="can_comment_news" fieldtype="yesno">1</can_comment_news>
+	<can_news_print_pdf title="can_news_print_pdf" fieldtype="yesno">0</can_news_print_pdf>
+	<can_rate_news title="can_rate_news" fieldtype="yesno">1</can_rate_news>
+	<can_view_news title="can_view_news" fieldtype="yesno">1</can_view_news>
+</news>
+
+<article>
+	<can_add_article title="can_add_article" fieldtype="yesno">0</can_add_article>
+	<can_comment_article title="can_comment_article" fieldtype="yesno">1</can_comment_article>
+	<can_article_print_pdf title="can_article_print_pdf" fieldtype="yesno">0</can_article_print_pdf>
+	<can_rate_article title="can_rate_article" fieldtype="yesno">1</can_rate_article>
+	<can_view_article title="can_view_article" fieldtype="yesno">1</can_view_article>
+</article>
+
+
+<other>
+	<can_search_portal title="can_search_portal" fieldtype="yesno">1</can_search_portal>
+	<can_tell title="can_tell" fieldtype="yesno">1</can_tell>
+
+	<can_view_calendar title="can_view_calendar" fieldtype="yesno">1</can_view_calendar>
+	<can_view_faq title="can_view_faq" fieldtype="yesno">1</can_view_faq>
+	<can_view_mblist title="can_view_mblist" fieldtype="yesno"></can_view_mblist>
+	<can_view_static_pages title="can_view_static_pages" fieldtype="yesno">1</can_view_static_pages>
+	<!--
+	<can_view_static_pages title="can_view_static_pages" fieldtype="yesno">1</can_view_static_pages>
+	<can_view_static_pages title="can_view_static_pages" fieldtype="yesno">1</can_view_static_pages>
+	-->
+</other>
+
+<poll>
+	<can_comment_poll title="can_comment_poll" fieldtype="yesno">0</can_comment_poll>
+	<can_poll title="can_poll" fieldtype="yesno"></can_poll>
+</poll>
+
+<portal>
+	<canprintpdfpage title="canprintpdfpage" fieldtype="yesno">0</canprintpdfpage>
+	<canviewoffportal title="canviewoffportal" fieldtype="yesno">1</canviewoffportal>
+	<canviewportal title="canviewportal" fieldtype="yesno">1</canviewportal>
+</portal>
+
+<posts>
+	<allowedattachmentextensions title="allowedattachmentextensions" fieldtype="textarea"></allowedattachmentextensions>
+	<maxattachments title="maxattachments" fieldtype="input">0</maxattachments>
+	<maxattachmentsize title="maxattachmentsize" fieldtype="input"></maxattachmentsize>
+	<maxboardpostlen title="maxboardpostlen" fieldtype="input">1000</maxboardpostlen>
+	<maxcommentlen title="maxcommentlen" fieldtype="input">500</maxcommentlen>
+	<maxpostimage title="maxpostimage" fieldtype="input">0</maxpostimage>
+</posts>
+
+<user>
+	<allowedavatarextensions title="allowedavatarextensions" fieldtype="textarea"></allowedavatarextensions>
+	<can_rate_users title="can_rate_users" fieldtype="yesno">0</can_rate_users>
+	<can_use_defined_avatar title="can_use_defined_avatar" fieldtype="yesno">1</can_use_defined_avatar>
+	<can_use_private_avatar title="can_use_private_avatar" fieldtype="yesno">0</can_use_private_avatar>
+	<can_use_private_gbook title="can_use_private_gbook" fieldtype="yesno">1</can_use_private_gbook>
+	<can_use_private_messages title="can_use_private_messages" fieldtype="yesno">1</can_use_private_messages>
+
+	<can_view_users_invisible title="can_view_users_invisible" fieldtype="yesno">0</can_view_users_invisible>
+	<can_view_user_profiles title="can_view_user_profiles" fieldtype="yesno">1</can_view_user_profiles>
+	<maxavatarheight title="maxavatarheight" fieldtype="input">180</maxavatarheight>
+	<maxavatarsize title="maxavatarsize" fieldtype="input">100</maxavatarsize>
+	<maxavatarwidth title="maxavatarwidth" fieldtype="input">120</maxavatarwidth>
+	<maxpmlen title="maxpmlen" fieldtype="input">250</maxpmlen>
+
+	<maxpms title="maxpms" fieldtype="input">50</maxpms>
+	<maxsigimage title="maxsigimage" fieldtype="input">0</maxsigimage>
+	<maxsiglength title="maxsiglength" fieldtype="input"></maxsiglength>
+	<maxusertextlength title="maxusertextlength" fieldtype="input">250</maxusertextlength>
+</user>
+
+
+</groupaccess>

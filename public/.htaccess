@@ -1,0 +1,38 @@
+php_flag eaccelerator.enable 0
+php_flag eaccelerator.optimizer 0
+php_flag eaccelerator.compress_level 0
+php_flag eaccelerator.compress 0
+php_flag eaccelerator.shm_only 0
+php_flag eaccelerator.cache_dir /Daten/Web/eaccelerator
+php_flag eaccelerator.content shm_and_disk
+php_flag eaccelerator.sessions shm_and_disk
+php_flag eaccelerator.keys shm_and_disk
+php_flag eaccelerator.log_file /Daten/Web/eaccelerator/eaccelerator_log
+php_flag eaccelerator.shm_size 32
+php_flag eaccelerator.shm_max 32M
+php_flag eaccelerator.shm_ttl 43200
+php_flag eaccelerator.shm_prune_period 3600
+
+
+<IfModule mod_expires.c>
+    SetEnv HTTP_EXPIRES On
+    ExpiresActive On
+
+    ExpiresByType image/gif A5184000
+    ExpiresByType image/png A5184000
+    ExpiresByType image/jpeg A5184000
+    ExpiresByType application/x-javascript A5184000
+    ExpiresByType application/javascript A5184000
+    ExpiresByType text/javascript A5184000
+    ExpiresByType text/css A5184000
+
+
+    # Webfonts
+    ExpiresByType font/truetype A5184000
+    ExpiresByType application/x-font-ttf A5184000
+    ExpiresByType font/opentype A5184000
+    ExpiresByType application/x-font-woff A5184000
+    ExpiresByType image/svg+xml A5184000
+    ExpiresByType application/vnd.ms-fontobject A5184000
+</IfModule>
+

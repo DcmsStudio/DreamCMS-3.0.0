@@ -1,0 +1,94 @@
+<div class="box" style="margin: 0; padding: 0;">
+
+    <h2 style="margin: 0;">
+        <div class="p3">
+            <button type="button" id="reply-button" class="btn btn-default"><img src="images/messenger/send.png" width="16" height="16" alt="" />&nbsp;{trans("Antworten")}</button>
+            <button type="button" id="replyall-button" class="btn btn-default"><img src="images/messenger/send.png" width="16" height="16" alt="" />&nbsp;{trans("Antwort an alle")}</button>
+            <button type="button" id="forward-button" class="btn btn-default"><img src="images/messenger/send.png" width="16" height="16" alt="" />&nbsp;{trans("Weiterleiten")}</button>
+            <button type="button" id="delete-button" class="btn btn-default"><img src="images/cancel.png" width="16" height="16" alt="" />&nbsp;{trans("Löschen")}</button>
+            <button type="button" id="cancel-button" class="btn btn-default"><img src="images/back.png" width="16" height="16" alt="" />&nbsp;{trans("Zurück")}</button>
+        </div>
+    </h2>
+
+    <div class="box-inner" style="padding: 5px">
+        <table cellpadding="3" cellspacing="0" style="width: 100%; margin: 0;">
+            <tr>
+                <td width="20%"><strong>{trans("Von")}:</strong></td>
+                <td width="80%">
+                    {$username} <cp:if condition="$firstname != '' || $lastname != ''">&nbsp;({$firstname}&nbsp;{$lastname})</cp:if>
+            </td>
+            </tr>
+            <tr>
+                <td><strong>{trans("An")}:</strong></td>
+                <td>
+            <cp:loop name="to_users" key="r">
+                <cp:if condition="$r.username != '' && $to_users_index > 1">, </cp:if>{$r.username}
+            </cp:loop>
+
+            </td>
+            </tr>
+            <cp:if condition="count($cc_users)">
+                <tr>
+                    <td><strong>{trans("C.c.")}:</strong></td>
+                    <td>
+                <cp:loop name="cc_users" key="r">
+                    <cp:if condition="$r.username != '' && $cc_users_index > 1">, </cp:if>{$r.username}
+                </cp:loop>
+
+                </td>
+                </tr>
+            </cp:if>
+            <cp:if condition="$bcc_users != 0">
+                <tr>
+                    <td><strong>{trans("B.c.c.")}:</strong></td>
+                    <td>{$bcc_users}</td>
+                </tr>
+            </cp:if>
+            <tr>
+                <td class="header"><strong>{trans("Empfangen")}:</strong></td>
+                <td>{date('d.m.Y, H:i:s', $sendtime)}</td>
+            </tr>            
+
+            <cp:if condition="$receipt == 1">
+                <cp:if condition="$receipttime != 0">
+                    <tr>
+                        <td><strong>{trans("Lesebestätigung gesendet")}:</strong></td>
+                        <td>{date('d.m.Y, H:i:s', $receipttime)}</td>
+                    </tr>
+                </cp:if>
+                <cp:else>
+                    <tr>
+                        <td class="header messenger-receipt top"><strong>{trans("Lesebestätigung")}:</strong></td>
+                        <td class="messenger-receipt">
+                            {trans("Eine Lesebestätigung für diese Nachricht wurde angefordert. Wollen Sie diese jetzt Senden?")} 
+                            <ul>
+                                <li><a href="#" id="rcpt-accept">{trans("Ja, Lesebestätigung senden.")}</a></li>
+                                <li><a href="#" id="rcpt-decline">{trans("Nein danke.")}</a></li>
+                            </ul>                            
+                        </td>
+                    </tr>
+                </cp:else>
+            </cp:if>
+
+            <cp:if condition="$replietime != 0">
+                <tr>
+                    <td><strong>{trans("Zuletzt beantwortet")}:</strong></td>
+                    <td>{date('d.m.Y, H:i:s', $replietime)}</td>
+                </tr>
+            </cp:if>
+
+            <tr>
+                <td><strong>{trans("Betreff")}:</strong></td>
+                <td>{escape($title, 'html')}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-top: 1px solid #d0d0d0;">
+                    <div id="message-body">
+                        {$message}
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>

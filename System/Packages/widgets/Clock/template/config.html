@@ -1,0 +1,51 @@
+<div style="padding: 5px">
+    <form action="admin.php" method="post">
+
+    <input type="hidden" id="name" name="name" value="{$config.name}" />
+    <input type="hidden" id="id" name="id" value="{$config.id}" />
+
+
+        <label>{trans('Skin')}</label>
+        <select name="config[skin]">
+            <option value="swissRail" cp:on="selected:$config.skin == 'swissRail'" parse:selected="selected">swissRail</option>
+            <option value="chunkySwiss" cp:on="selected:$config.skin == 'chunkySwiss'" parse:selected="selected">chunkySwiss</option>
+            <option value="fancy" cp:on="selected:$config.skin == 'fancy'" parse:selected="selected">fancy</option>
+            <option value="machine" cp:on="selected:$config.skin == 'machine'" parse:selected="selected">machine</option>
+            <option value="classic" cp:on="selected:$config.skin == 'classic'" parse:selected="selected">classic</option>
+            <option value="modern" cp:on="selected:$config.skin == 'modern' || !isset($config.skin)" parse:selected="selected">modern</option>
+            <option value="simple" cp:on="selected:$config.skin == 'simple'" parse:selected="selected">simple</option>
+            <option value="securephp" cp:on="selected:$config.skin == 'securephp'" parse:selected="selected">securephp</option>
+            <option value="Lev" cp:on="selected:$config.skin == 'Lev'" parse:selected="selected">Lev</option>
+            <option value="Sand" cp:on="selected:$config.skin == 'Sand'" parse:selected="selected">Sand</option>
+            <option value="Sun" cp:on="selected:$config.skin == 'Sun'" parse:selected="selected">Sun</option>
+            <option value="Disc" cp:on="selected:$config.skin == 'Disc'" parse:selected="selected">Disc</option>
+            <option value="Stone" cp:on="selected:$config.skin == 'Stone'" parse:selected="selected">Stone</option>
+            <option value="Tumb" cp:on="selected:$config.skin == 'Tumb'" parse:selected="selected">Tumb</option>
+            <option value="Cold" cp:on="selected:$config.skin == 'Cold'" parse:selected="selected">Cold</option>
+            <option value="Babosa" cp:on="selected:$config.skin == 'Babosa'" parse:selected="selected">Babosa</option>
+        </select>
+
+        <label>{trans('Radius')}</label>
+        <input type="text" name="config[displayRadius]" value="{iif($config.displayRadius, $config.displayRadius, 85)}" />
+
+        <label>{trans('GTM-Offset')}</label>
+        <input type="text" name="config[gmtOffset]" value="{iif($config.gmtOffset, $config.gmtOffset, 0)}" />
+
+        <label>{trans('Sekundenzeiger')}</label>
+        <label for="h-1-{$widgetid}"><input type="radio" id="h-1-{$widgetid}" name="config[showSecondHand]" value="1" cp:on="checked:$config.showSecondHand == 1 || !isset($config.showSecondHand)" parse:checked="checked" /> {trans('Ja')}</label>
+        <label for="h-0-{$widgetid}"><input type="radio" id="h-0-{$widgetid}" name="config[showSecondHand]" value="0" cp:on="checked:empty($config.showSecondHand)" parse:checked="checked" /> {trans('Nein')}</label>
+
+
+
+        <label>{trans('Digital')}</label>
+        <label for="w-1-{$widgetid}"><input type="radio" id="w-1-{$widgetid}" name="config[showDigital]" value="1" cp:on="checked:$config.showDigital == 1" parse:checked="checked" /> {trans('Ja')}</label>
+        <label for="w-0-{$widgetid}"><input type="radio" id="w-0-{$widgetid}" name="config[showDigital]" value="0" cp:on="checked:empty($config.showDigital)" parse:checked="checked" /> {trans('Nein')}</label>
+
+
+    <p>
+        <button class="widget-save-button pretty-button"><img src="{@BACKEND_IMAGE_PATH}buttons/save.png" width="16" height="16" alt="" />&nbsp;Save</button>
+    </p>
+
+</form>
+
+    </div>

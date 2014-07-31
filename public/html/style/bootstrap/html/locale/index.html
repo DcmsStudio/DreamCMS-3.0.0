@@ -1,0 +1,30 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    <button id="add-locale" class="action-button"><img src="images/buttons/locale-add.png" width="16" height="16" alt="" border="0"/> {trans('Locale hinzufügen')}</button> 
+    <button id="translations" class="action-button"><img src="images/buttons/locale.png" width="16" height="16" alt="" border="0"/> {trans('Übersetzungen')}</button>
+
+</cp:block>
+
+<cp:block name="content">
+
+    <div id="locale-grid"></div>
+
+    <script type="text/javascript">
+
+
+        $('#add-locale').click(function() {
+        var href = 'admin.php?adm=locale&action=add';
+                openTab({url: href, obj: this, label: $(this).text(), isSingleWindow: 0 });
+        });
+                $('#translations').click(function() {
+        var href = 'admin.php?adm=locale&action=translation';
+                openTab({url: href, obj: this, label: $(this).text(), isSingleWindow: 0 });
+        });
+
+        Application.Grid( 'locale-grid', {$gridJson});
+
+
+    </script>
+</cp:block>

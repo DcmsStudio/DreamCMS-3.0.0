@@ -1,0 +1,29 @@
+<fieldset>
+    <legend>{trans("Watermark")}</legend>
+    <input type="text" class="textbox" name="params[watermark]" id="watermark" value="{iif($values.watermark, $values.watermark, '')}" style="width: 450px;" />
+    <br/>
+    <small>Base Path is Root. Eg: /srv/www/</small>
+</fieldset>
+
+<fieldset>
+    <legend>{trans("Watermark Position")}</legend>
+    <select name="params[watermark_position]" id="watermark_position">
+        <option value="" cp:on="selected:$values.watermark_position == ''" parse:selected="selected">None</option>
+        <option value="top-left" cp:on="selected:$values.watermark_position == 'top-left'" parse:selected="selected">Top Left</option>
+        <option value="top-right" cp:on="selected:$values.watermark_position == 'top-right'" parse:selected="selected">Top Right</option>
+        <option value="bottom-left" cp:on="selected:$values.watermark_position == 'bottom-left'" parse:selected="selected">Bottom Left</option>
+        <option value="bottom-right" cp:on="selected:$values.watermark_position == 'bottom-right'" parse:selected="selected">Bottom Right</option>
+    </select>        
+</fieldset>
+
+
+<fieldset>
+    <legend>{trans("Watermark Position (X)")}</legend>
+    <input type="text" class="textbox" name="params[watermark_x]" id="watermark_x" value="{iif($values.watermark_x, $values.watermark_x, '')}" style="width: 60px;" />
+</fieldset>
+
+
+<fieldset>
+    <legend>{trans("Watermark Position (Y)")}</legend>
+    <input type="text" class="textbox" name="params[watermark_y]" id="watermark_y" value="{iif($values.watermark_y, $values.watermark_y, '')}" style="width: 60px;" />
+</fieldset>

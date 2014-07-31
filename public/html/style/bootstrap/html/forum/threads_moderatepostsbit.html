@@ -1,0 +1,16 @@
+<?php
+
+function __threads_moderatepostsbit($rowclass='',$row=''){
+global $cp, $cfg, $fct, $cp, $cp;
+
+return <<<EOF
+<tr onmouseover="over(this)" onmouseout="out(this)" class="$rowclass">
+ <td><a href="../admin.php?adm=thread&amp;sid=$cp->session_id&postid=$row[postid]#post$row[postid]" target="_blank">$row[topic]</a></td>
+ <td>$row[username]</td>
+ <td><input type="checkbox" name="setvisible[]" value="$row[postid]">&nbsp;freischalten</td>
+</tr>
+
+EOF;
+}
+
+?>

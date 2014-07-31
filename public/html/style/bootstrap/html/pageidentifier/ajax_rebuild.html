@@ -1,0 +1,90 @@
+<form action="admin.php" id="form-rebuild-identifiers" method="post">
+    <input type="hidden" name="adm" value="{$controller}" />
+    <input type="hidden" name="action" value="{$action}" />
+    <input type="hidden" name="appid" value="{$input.appid}" />
+    <input type="hidden" name="run" value="1" />
+
+    <div>
+        <div id="rebuild-container">
+            <fieldset>
+                <legend>{trans('Suffix')}</legend>
+                <select name="suffix">
+                    <option value="" cp:on="selected:empty($page_suffix)" parse:selected="selected">-</option>
+                    <option value="dcms" cp:on="selected:$page_suffix == 'dcms'" parse:selected="selected">dcms</option>
+                    <option value="html" cp:on="selected:$page_suffix == 'html'" parse:selected="selected">html</option>                    
+                    <option value="xhtml" cp:on="selected:$page_suffix == 'xhtml'" parse:selected="selected">xhtml</option>
+                    <option value="phtml" cp:on="selected:$page_suffix == 'phtml'" parse:selected="selected">phtml</option>
+                    <option value="php" cp:on="selected:$page_suffix == 'php'" parse:selected="selected">php</option>
+                    <option value="txt" cp:on="selected:$page_suffix == 'txt'" parse:selected="selected">txt</option>
+                </select><br/>
+                <small>{trans('Angabe ist optional. Wenn der Suffix leer ist, dann wird die Einstellung auf Ihre Konfiguration eingestellt.')}</small>
+            </fieldset> 
+
+
+            <fieldset>
+                <legend>{trans('Rebuild Methode')}</legend>
+                <label for="rebuild-all"><input type="radio" name="method" value="all" id="rebuild-all"/> {trans('Komplett neu erzeugen')}<br/><small>({trans('Vorhandene Identifier werden überschrieben')})</small></label><br/>
+                <label for="rebuild-default"><input type="radio" name="method" value="default" id="rebuild-default" checked="checked"/> {trans('Einfaches erzeugen')}<br/><small>({trans('Vorhandene beibehalten & nur die ohne Identifiers erzeugen')})</small></label>
+
+            </fieldset>
+
+
+            <div style="display:block; padding-top:5px">                
+
+                <button id="run-rebuild-identifiers" class="action-button" type="button" name="run">{trans('Ausführen')}</button>
+                <button class="action-button" type="reset">{trans('Zurücksetzen')}</button>
+            </div>
+
+        </div>
+
+        <div id="rebuild-container-run" style="height:200px; overflow:auto; display:none"></div>
+
+    </div>
+
+</form>
+<script type="text/javascript">
+
+
+    $('#run-rebuild-identifiers', $('#'+ Win.windowID)).click(function() {
+        jConfirm("{trans('Wollen Sie fortsetzen?')}", 'Confirmation Required', function(res) {
+            
+            if(res)
+            {
+                $('#rebuild-container', $('#'+ Win.windowID)).hide();
+                $('#rebuild-container-run', $('#'+ Win.windowID)).show();        
+                $('#rebuild-container-run', $('#'+ Win.windowID)).html('<span class="loading"></span> {trans('Erzeuge Identifiers...<p>Bitte haben Sie etwas Geduld und schließen Sie dieses Fenster bitte nicht! Falls fehler auftreten, werden diese im anschluss hier angezeigt.</p>')}' );
+        
+        
+                var parms = $('#form-rebuild-identifiers', $('#'+ Win.windowID)).serialize();
+                //alert('admin.php?adm={$controller}&run=1&'+ parms );
+        
+                setTimeout(function(){
+
+                
+                    $.ajax({
+                        type: "POST",
+                        url: 'admin.php',
+                        data: parms ,
+                        async: false,
+                        timeout: 200000,
+                        success: function(data) {
+
+                            if(Tools.responseIsOk(data))
+                            {
+                                $('#rebuild-container-run', $('#'+ Win.windowID)).empty().append('{trans('Identifiers wurden erfolgreich erzeugt.')}');            
+                            }
+                            else
+                            {
+                                $('#rebuild-container-run', $('#'+ Win.windowID)).empty().html( '<p>{trans('Folgende Fehler sind bei der Erzeugung der Identifiers aufgetreten')}:</p>'+ (data.errors ? data.errors : data.msg)  );
+                            }
+                        }
+                    
+                    });
+                
+                }, 300);
+        
+            }
+        });
+    });
+
+</script>

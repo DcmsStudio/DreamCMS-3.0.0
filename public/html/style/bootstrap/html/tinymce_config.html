@@ -1,0 +1,811 @@
+<div class="toolbars">
+    <ul id="available">
+        <li class="mce_divider nolock" id="divider" title="Divider::This is used to split up groups of buttons. Can be used multiple times."><span class="mceDivIcon">&nbsp;</span></li>
+        <li class="mce_newdocument" id="newdocument" title="New document::This clears the content of the TinyMCE editable area."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_undo" id="undo" title="Undo::Erases the last change done to the document reverting it to an older state."><span class="mceIcon">&nbsp;</span></li>
+
+        <li class="mce_redo" id="redo" title="Redo::Reverses the undo or advances the buffer to a more current state."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_justifyleft" id="justifyleft" title="Justifyleft::Left-justifies the format block in which the current selection is located."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_justifycenter" id="justifycenter" title="Justifycenter::Centers the format block in which the current selection is located."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_justifyright" id="justifyright" title="Justifyright::Right-justifies the format block in which the current selection is located."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_justifyfull" id="justifyfull" title="Justifyfull::"><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_cut" id="cut" title="Cut::Copies the current selection to the clipboard and then erases the current selection."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_copy" id="copy" title="Copy::Copies the current selection to the clipboard."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_paste" id="paste" title="Paste::Inserts the content of the clipboard at the current cursor position."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_pastetext" id="pastetext" title="Paste Text::Adds paste as plain text to TinyMCE."><span class="mceIcon">&nbsp;</span></li>
+
+        <li class="mce_pasteword" id="pasteword" title="Paste Word::Adds paste from MS Word to TinyMCE."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_selectall" id="selectall" title="Select All::Select the entire content of the TinyMCE edtable area."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_search" id="search" title="Search::Adds search dialogs to TinyMCE."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_replace" id="replace" title="Replace::Adds search/replace dialogs to TinyMCE."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_fullscreen" id="fullscreen" title="Fullscreen::Adds fullscreen editing mode to TinyMCE."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_cleanup" id="cleanup" title="Cleanup::Cleanup messy code."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_anchor" id="anchor" title="Anchor::Inserts an anchorlink into the TinyMCE editable area."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_link" id="link" title="Link::Adds a more advanced link dialog that supports popup windows and targets."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_typo3link" id="typo3link" title="TYPO3 Link::Allow a one click way to the page/file browser. Quite handy if you just want to create a link and don't care about other attributes like (target, rel ...)."><span class="mceIcon">&nbsp;</span></li>
+
+        <li class="mce_unlink" id="unlink" title="Unlink::Removes hyperlink from selected text."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_image" id="image" title="Image::Adds a more advanced image dialog that supports mouseover/out image swapping."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_typo3image" id="typo3image" title="TYPO3 Image::Allow a one click way to the imagebrowser. Quite handy if you just want to create an image and don't care about other attributes like (target, rel...)."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_spellchecker" id="spellchecker" title="Spellchecker::Adds spellchecker functionality to TinyMCE by providing a new button that performs a AJAX call to a backend PHP page that uses PSpell/ASpell or Google spellchecker."><span class="mceSpecialIcon">&nbsp;</span></li>
+        <li class="mce_table" id="table" title="Table::Insert table control."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_row_props" id="row_props" title="Row props::Edit row properties (tr)."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_cell_props" id="cell_props" title="Cell props::Edit cell properties (td)."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_delete_col" id="delete_col" title="Delete column::Delete column control."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_delete_row" id="delete_row" title="Delete row::Delete row control."><span class="mceIcon">&nbsp;</span></li>
+
+        <li class="mce_delete_table" id="delete_table" title="Delete table::Delete table control."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_col_after" id="col_after" title="Column after::Column after control."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_col_before" id="col_before" title="Column before::Column before control."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_row_after" id="row_after" title="Row after::Row after control."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_row_before" id="row_before" title="Row before::Row before control."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_split_cells" id="split_cells" title="Split cell::Splits a merged cell into rows and columns."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_merge_cells" id="merge_cells" title="Merge cell::Mergers selected cells into one cell."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_visualaid" id="visualaid" title="Visual aid::Toggle guidelines/invisible elements."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_code" id="code" title="Code::Show content of TinyMCE editable area as HTML."><span class="mceIcon">&nbsp;</span></li>
+
+        <li class="mce_insertdate" id="insertdate" title="Insert date::This button inserts the current date into the TinyMCE editable area."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_inserttime" id="inserttime" title="Insert time::This button inserts the current time into the TinyMCE editable area."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_hr" id="hr" title="Horizontal ruler::Inserts a horizontal ruler."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_advhr" id="advhr" title="Horizontal ruler::Inserts a horizontal ruler. This hr button supports noshade, width and size."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_removeformat" id="removeformat" title="Remove fomatting::Removes all HTML formatting from the selected block."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_nonbreaking" id="nonbreaking" title="Nonbreaking::This button insert nonbreaking space entities at the current caret location."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_pagebreak" id="pagebreak" title="Page break:: This plugin enables you to insert such page breaks in the editor. Some CMS systems uses a special separator to break the contents into pages."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_visualchars" id="visualchars" title="Visualchars::Adds the possibility to see invisible characters like &amp;nbsp;"><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_charmap" id="charmap" title="Charmap::Allows you to insert charcters not available on the keyboard."><span class="mceIcon">&nbsp;</span></li>
+
+        <li class="mce_emotions" id="emotions" title="Emotions::The emotions button is able to insert smiley images into the TinyMCE editable area."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_media" id="media" title="Media::This button handles embedded media such as QuickTime, Flash, ShockWave, RealPlayer and Windows Media Player."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_styleprops" id="styleprops" title="Style props::Adds CSS style editing support to TinyMCE, this will enable you to edit almost any CSS style property in a visual way."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_forecolor" id="forecolor" title="Foreground color::Allows you to select a foreground color from dropdown color palette."><span class="mceSpecialIcon">&nbsp;</span></li>
+        <li class="mce_backcolor" id="backcolor" title="Background color::Allows you to select a background color from dropdown color palette."><span class="mceSpecialIcon">&nbsp;</span></li>
+        <li class="mce_forecolorpicker" id="forecolorpicker" title="Foreground color::Allows you to select a foreground color from popup color palette."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_backcolorpicker" id="backcolorpicker" title="Background color::Allows you to select a background color from popup color palette."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_bold" id="bold" title="Bold::Makes current selected text bold."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_italic" id="italic" title="Italic::Makes current selected text italic."><span class="mceIcon">&nbsp;</span></li>
+
+        <li class="mce_underline" id="underline" title="Underline::Makes current selected text underlined."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_strikethrough" id="strikethrough" title="Strikethrough::Makes current selected text strikethrough."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_sub" id="sub" title="Subscript::Make text appears half a character below the baseline."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_sup" id="sup" title="Superscript::Make text appears half a character above the baseline."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_bullist" id="bullist" title="Bullet list::Inserts an (unordered) bullet list."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_numlist" id="numlist" title="Numeric list::Inserts an (ordered) numeric list."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_indent" id="indent" title="Indent::Indents list element(s)."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_outdent" id="outdent" title="Outdent::Outdent list element(s)."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_template" id="template" title="Template::Adds support for inserting custom templates."><span class="mceIcon">&nbsp;</span></li>
+
+        <li class="mce_blockquote" id="blockquote" title="blockquote::Insert a long quotation."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_cite" id="cite" title="Citation::Adds support for XHTML element: cite"><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_ins" id="ins" title="Insertion::Adds support for XHTML element: ins"><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_del" id="del" title="Deletion::Adds support for XHTML element: del"><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_abbr" id="abbr" title="Abbrevation::Adds support for XHTML element: abbr"><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_acronym" id="acronym" title="Acronym::Adds support for XHTML element: acronym"><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_attribs" id="attribs" title="Attribs::Adds support for XHTML element: attribs"><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_fullpage" id="fullpage" title="Fullpage::Adds fullpage editing support. This enables you to edit whole documents with both head and body."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_ltr" id="ltr" title="LTR::Enables TinyMCE to better handle languages that is written from left to right."><span class="mceIcon">&nbsp;</span></li>
+
+        <li class="mce_rtl" id="rtl" title="RTL::Enables TinyMCE to better handle languages that is written from right to left."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_insertlayer" id="insertlayer" title="Insert layer::Adds a layer support to TinyMCE by making it possible to create/remove and z-index block elements."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_moveforward" id="moveforward" title="Move forward::Adds a layer support to TinyMCE by making it possible to create/remove and z-index block elements."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_movebackward" id="movebackward" title="Move backward::Adds a layer support to TinyMCE by making it possible to create/remove and z-index block elements."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_absolute" id="absolute" title="Absolute::Adds a layer support to TinyMCE by making it possible to create/remove and z-index block elements."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_help" id="help" title="Help::Displays info about the current version of TinyMCE."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_preview" id="preview" title="Preview::Adds a preview button to TinyMCE, pressing the button opens a popup showing the current content."><span class="mceIcon">&nbsp;</span></li>
+        <li class="mce_print" id="print" title="Print::This adds a print button to TinyMCE"><span class="mceIcon">&nbsp;</span></li>
+        <!-- <li class="mce_save" id="save" title="Save::Adds a save button to TinyMCE. This save button will submit the form that the editor is within."><span class="mceIcon">&nbsp;</span></li> -->
+
+        <!-- <li class="mce_iespell" id="iespell" title="IE Spell::Add a Internet Explorer ONLY spellchecker to TinyMCE"><span class="mceIcon">&nbsp;</span></li> -->
+        <li class="mce_styleselect" id="styleselect" title="Style select::Adds a dropdown for selecting style."><span class="mceSelectIcon">&nbsp;</span></li>
+        <li class="mce_formatselect" id="formatselect" title="Format select::Adds a dropdown for selecting format."><span class="mceSelectIcon">&nbsp;</span></li>
+        <li class="mce_fontselect" id="fontselect" title="Font select::Adds a dropdown for selecting font."><span class="mceSelectIcon">&nbsp;</span></li>
+        <li class="mce_fontsizeselect" id="fontsizeselect" title="Fontsize select::Adds a dropdown for selecting fontsize."><span class="mceSelectIcon">&nbsp;</span></li>
+    </ul>
+</div>
+<div id="toolbar-mce" class="toolbars">
+    <ul id="toolbar1" class="toolbar"></ul>
+    <ul id="toolbar2" class="toolbar"></ul>
+    <ul id="toolbar3" class="toolbar"></ul>
+    <ul id="toolbar4" class="toolbar"></ul>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+
+    var extraconfig = {
+        pastetext: '# If enabled double linefeeds are converted to paragraph elements when using the plain text dialog. This is enabled by default.\n'+
+            'paste_create_paragraphs = true\n\n'+
+            '# If enabled single linefeeds are converted to hard line break elements when using the plain text dialog. This is enabled by default.\n'+
+            'paste_create_linebreaks = true',
+        pasteword: '# If disabled then normal cleanup will not be performed after wordpaste. This option is enabled by default.\n'+
+            'paste_force_cleanup_wordpaste = true\n\n'+
+            '# MSIE specific option, if you set this to true both Mozilla and MSIE will present a paste dialog. If you set it to false pasting in MSIE will be done directly. This option is set to true by default.\n'+
+            'paste_use_dialog = true\n\n'+
+            '# MSIE specific option. If you enable this feature, a word paste will be executed when the user copy/paste content to the editor. This feature is disabled by default.\n'+
+            'paste_auto_cleanup_on_paste = true\n\n'+
+            '# If this feature is enabled middot lists are converted into UL lists, these will be assigned a special class.\n'+
+            'paste_convert_middot_lists = true\n\n'+
+            '# This option enables you to specify what class to assign to the UL list of middot converted lists. Middot lists are unindented in MS Office. This option defaults to "unIndentedList".\n'+
+            'paste_unindented_list_class = unIndentedList\n\n'+
+            '# This feature converts H1-6 elements to strong elements on paste, this is feature is disabled by default.\n'+
+            'paste_convert_headers_to_strong = true\n\n'+
+            '# This enables you to control if the word parse operation should remove or keep span elements, they will be removed by default.\n'+
+            'paste_remove_spans = true\n\n'+
+            '# This enables you to control if the word parse operation should remove or keep style attributes, they will be removed by default.\n'+
+            'paste_remove_styles = true\n\n'+
+            '# Comma separated list of search/replace chunks. Where even items is the regexp that is to be used for the search and odd values are the contents that are to be replaced.\n'+
+            'paste_replace_list = \\u2122,<sup>TM</sup>,\\u2026,...,\\u201c|\\u201d,",\\u2019,\\\',\\u2013,&ndash;,\\u2014,&mdash;,\\u2015|\\u2212,-\n\n'+
+            '# This feature allows you to control whether or not class attributes are stripped when using pasteword. Valid values are:\n'+
+            '#   all - will strip all class attributes from the pasted content. This is the default value.\n'+
+            '#   none - will not strip any class attributes from the pasted content.\n'+
+            '#   mso - will strip out all of the class attribute values that start with "Mso", but retain all others.\n'+
+            'paste_strip_class_attributes = all\n\n'+
+            '# This option enables you to specify a callback function. This callback is executed when the user pastes word content, the return value of this function will be the new content string.\n'+
+            '#paste_insert_word_content_callback =',
+        nonbreaking: '# This enables you to force TinyMCE to insert three &amp;nbsp; entities when the user presses the tab key.\n'+
+            'nonbreaking_force_tab = false',
+        link: '# This option should contain a semicolon separated list of class titles and class names separated by =. The titles are the ones that get presented to the user in the styles drop down list and and the class names is the classes that gets inserted.\n'+
+            'advlink_styles =\n'+
+            '# This option should contain a semicolon separated list of link target titles and target names separated by =. The titles are the ones that get presented to the user in the link target drop down list and and the target names is the target that gets inserted as a target attribute.\n\n'+
+            '#theme_advanced_link_targets = Some frame=someframe;Some other frame=otherframe',
+        image: '# This option enables you to control if the image dimensions should be updated with new data if the image src field is changed. This option is enabled by default.\n'+
+            'advimage_update_dimensions_onchange = true',
+        table: '# This option should contain a semicolon separated list of class titles and class names separated by =\n'+
+            '# The titles are the ones that get presented to the user in the styles drop down list and and the class names is the classes that gets inserted.\n'+
+            'table_styles = Header 1=header1;Header 2=header2;Header 3=header3\n\n'+
+            '# This option should contain a semicolon separated list of class titles and class names separated by =\n'+
+            '# The titles are the ones that get presented to the user in the styles drop down list and and the class names is the classes that gets inserted.\n'+
+            'table_cell_styles = Header 1=header1;Header 2=header2;Header 3=header3;Table Cell=tableCel1\n\n'+
+            '# This option should contain a semicolon separated list of class titles and class names separated by =\n'+
+            '# The titles are the ones that get presented to the user in the styles drop down list and and the class names is the classes that gets inserted.\n'+
+            'table_row_styles = Header 1=header1;Header 2=header2;Header 3=header3;Table Row=tableRow1\n\n'+
+            '# Enables you to specify the max number of cells for a table.\n'+
+            'table_cell_limit = 100\n\n'+
+            '# Enables you to specify the max number of rows for a table.\n'+
+            'table_row_limit = 5\n\n'+
+            '# Enables you to specify the max number of columns for a table.\n'+
+            'table_col_limit = 5\n\n'+
+            '# Enables you to specify the default border value.\n'+
+            'table_default_border =\n\n'+
+            '# Enables you to specify the default cellpadding value.\n'+
+            'table_default_cellpadding = 2\n\n'+
+            '# Enables you to specify the default cellspacing value.\n'+
+            'table_default_cellspacing = 0',
+        code: '# This option enables you to force word wrap for the source editor, this option is set to true by default.\n'+
+            'theme_advanced_source_editor_wrap = true',
+        insertdate: '# Format that the time is output as.\n'+
+            'plugin_insertdate_timeFormat = %H:%M:%S',
+        inserttime: '# Format that the date is output as.\n'+
+            'plugin_insertdate_dateFormat = %Y-%m-%d',
+        advhr: 'extended_valid_elements = hr[class|width|size|noshade]',
+        pagebreak: '# Enables you to specify how the page break should be generated in the HTML source code.\n'+
+            'pagebreak_separator = <!-- my page break -->',
+        media: '# True/false option that gives you the ability to have a JavaScript embed method instead of using object/embed tags. Defaults to: false\n'+
+            'media_use_script = false\n\n'+
+            '# True/false option that enables you to force Windows media player 6 compatiblity by returning that clsid, but some features and options for WMP may not work if you use this option. You can find a reference on these options at w3schools. Defaults to: false\n'+
+            'media_wmp6_compatible = false\n\n'+
+            '# Skips the loading of the default plugin CSS file, this can be useful if your content CSS already defined the media specific CSS information, Defaults to: false.\n'+
+            'media_skip_plugin_css = false\n\n'+
+            '# URL to a JS file containing files to be listed in the media dropdown list similar to the one found in the advimg dialog. The name of the array variable in the JS file should be "tinyMCEMediaList".\n'+
+            'media_external_list_url\n\n'+
+            '# Name/Value list of format mappings to file extensions. Defaults to: flash=swf;shockwave=dcr;qt=mov,qt,mpg,mp3,mp4,mpeg;shockwave=dcr;wmp=avi,wmv,wm,asf,asx,wmx,wvx;rmp=rm,ra,ram.\n'+
+            'media_types = flash=swf;shockwave=dcr;qt=mov,qt,mpg,mp3,mp4,mpeg;shockwave=dcr;wmp=avi,wmv,wm,asf,asx,wmx,wvx;rmp=rm,ra,ram\n\n'+
+            '# This option enables you to switch strict output on/off.\n'+
+            'media_strict = false',
+        styleprops: '# Semicolon separated list of select box option name/values. In format key1=value1;key2=value2;..\n'+
+            '#style_font =\n'+
+            '#style_font_size =\n'+
+            '#style_font_size_measurement =\n'+
+            '#style_text_case =\n'+
+            '#style_font_weight =\n'+
+            '#style_font_style =\n'+
+            '#style_font_variant =\n'+
+            '#style_font_line_height =\n'+
+            '#style_font_line_height_measurement =\n'+
+            '#style_background_attachment =\n'+
+            '#style_background_repeat =\n'+
+            '#style_background_hpos_measurement =\n'+
+            '#style_background_vpos_measurement =\n'+
+            '#style_background_hpos =\n'+
+            '#style_background_vpos =\n'+
+            '#style_wordspacing =\n'+
+            '#style_wordspacing_measurement =\n'+
+            '#style_letterspacing =\n'+
+            '#style_letterspacing_measurement =\n'+
+            '#style_vertical_alignment =\n'+
+            '#style_text_align =\n'+
+            '#style_whitespace =\n'+
+            '#style_display =\n'+
+            '#style_text_indent_measurement =\n'+
+            '#style_box_width_measurement =\n'+
+            '#style_box_height_measurement =\n'+
+            '#style_float =\n'+
+            '#style_clear =\n'+
+            '#style_padding_left_measurement =\n'+
+            '#style_padding_top_measurement =\n'+
+            '#style_padding_bottom_measurement =\n'+
+            '#style_padding_right_measurement =\n'+
+            '#style_margin_left_measurement =\n'+
+            '#style_margin_top_measurement =\n'+
+            '#style_margin_bottom_measurement =\n'+
+            '#style_margin_right_measurement =\n'+
+            '#style_border_style_top =\n'+
+            '#style_border_style_right =\n'+
+            '#style_border_style_bottom =\n'+
+            '#style_border_style_left =\n'+
+            '#style_border_width_top =\n'+
+            '#style_border_width_right =\n'+
+            '#style_border_width_bottom =\n'+
+            '#style_border_width_left =\n'+
+            '#style_border_width_top_measurement =\n'+
+            '#style_border_width_right_measurement =\n'+
+            '#style_border_width_bottom_measurement =\n'+
+            '#style_border_width_left_measurement =\n'+
+            '#style_list_type =\n'+
+            '#style_list_position =\n'+
+            '#style_positioning_type =\n'+
+            '#style_positioning_visibility =\n'+
+            '#style_positioning_width_measurement =\n'+
+            '#style_positioning_height_measurement =\n'+
+            '#style_positioning_overflow =\n'+
+            '#style_positioning_placement_top_measurement =\n'+
+            '#style_positioning_placement_right_measurement =\n'+
+            '#style_positioning_placement_bottom_measurement =\n'+
+            '#style_positioning_placement_left_measurement =\n'+
+            '#style_positioning_clip_top_measurement =\n'+
+            '#style_positioning_clip_right_measurement =\n'+
+            '#style_positioning_clip_bottom_measurement =\n'+
+            '#style_positioning_clip_left_measurement =',
+        forecolor: '# This option enables you to specify the default foreground color.\n'+
+            'theme_advanced_default_foreground_color  = #FF00FF\n\n'+
+            '# This option controls the colors shown in the palette of colors displayed by the text color button. The default is a palette of 40 colors. It should contain a comma separated list of color values to be presented.\n'+
+            'theme_advanced_text_colors = FF00FF,FFFF00,000000\n\n'+
+            '# This option enables you to disable the "more colors" link for the text and background color menus.\n'+
+            'theme_advanced_more_colors = false',
+        backcolor: '# This option enables you to specify the default background color.\n'+
+            'theme_advanced_default_background_color  = #FF00FF\n\n'+
+            '# This option controls the colors shown in the palette of background colors displayed by the background color button. The default is a palette of 40 colors. It should contain a comma separated list of color values to be presented.\n'+
+            'theme_advanced_background_colors = FF00FF,FFFF00,000000\n\n'+
+            '# This option enables you to disable the "more colors" link for the text and background color menus.\n'+
+            'theme_advanced_more_colors = false',
+        forecolorpicker: '# This option enables you to specify the default foreground color.\n'+
+            'theme_advanced_default_foreground_color  = #FF00FF\n\n'+
+            '# This option controls the colors shown in the palette of colors displayed by the text color button. The default is a palette of 40 colors. It should contain a comma separated list of color values to be presented.\n'+
+            'theme_advanced_text_colors = FF00FF,FFFF00,000000\n\n'+
+            '# This option enables you to disable the "more colors" link for the text and background color menus.\n'+
+            'theme_advanced_more_colors = false',
+        backcolorpicker: '# This option enables you to specify the default background color.\n'+
+            'theme_advanced_default_background_color  = #FF00FF\n\n'+
+            '# This option controls the colors shown in the palette of background colors displayed by the background color button. The default is a palette of 40 colors. It should contain a comma separated list of color values to be presented.\n'+
+            'theme_advanced_background_colors = FF00FF,FFFF00,000000\n\n'+
+            '# This option enables you to disable the "more colors" link for the text and background color menus.\n'+
+            'theme_advanced_more_colors = false',
+        template: 'template_templates {\n'+
+            '\t10 {\n'+
+            '\t\ttitle = static HTML\n'+
+            '\t\tsrc = EXT:tinymce_rte/res/tinymce_templates/static.html\n'+
+            '\t\tdescription = Adds some static HTML an expert could prepare\n'+
+            '\t}\n'+
+            '\t20 {\n'+
+            '\t\ttitle = TYPO3 mod\n'+
+            '\t\tdescription = Use an TYPO3 mod to get data easily into the the TinyMCE Template\n'+
+            '\t\tinclude = EXT:tinymce_rte/res/tinymce_templates/advanced.php\n'+
+            '\t}\n'+
+            '\t12 {\n'+
+            '\t\ttitle = simple replace\n'+
+            '\t\tsrc = EXT:tinymce_rte/res/tinymce_templates/simpleReplace.html\n'+
+            '\t\tdescription = Adds some HTML where certain variables will be replaced\n'+
+            '\t}\n'+
+            '}',
+        styleselect: '# This option should contain a semicolon separated list of class titles and class names separated by =. The titles will be presented to the user in the styles dropdown list and the class names will be inserted. If this option is not defined, TinyMCE imports the classes from the content_css.\n'+
+            'theme_advanced_styles = Header 1=header1;Header 2=header2;Header 3=header3;Table Row=tableRow1',
+        formatselect: '# This option should contain a comma separated list of formats that will be available in the format drop down list.\n'+
+            'theme_advanced_blockformats = p,div,h1,h2,h3,h4,h5,h6,blockquote,dt,dd,code,samp',
+        fontselect: '# This option should contain a semicolon separated list of font titles and font families separated by =. The titles are the ones that get presented to the user in the fonts drop down list and the font family name is the string that gets inserted into the font face or fontFamily CSS style.\n'+
+            'theme_advanced_fonts = Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace',
+        fontsizeselect: 'This option should contain a semicolon separated list of font sizes to include.\n'+
+            'theme_advanced_font_sizes = Big text=30px,Small text=small,My Text Size=.mytextsize',
+        tabfocus: '# This option enables you to specify an element ID to focus, when the user pressed the tab key inside the editor. You can also use the special ":prev" and ":next" values. It will then places the focus on either the previous or next input element placed before/after the TinyMCE instance in the DOM.\n'+
+            '# Move focus to next element in DOM\n'+
+            '#tabfocus_elements = :prev,:next\n',
+        save:	'# If you set this option to true, the edit button will be disabled/dimmed until modifications are made. This is disabled by default.\n'+
+            '#save_enablewhendirty =\n\n'+
+            '# This option enables you to add a custom function to be called when the save button/command is invoked. This is not used by default.\n'+
+            '#save_onsavecallback =\n\n'+
+            '# This option enabled you to add a custom function to be called when the cancel button/command is invoked. This is not used by default.\n'+
+            '#save_oncancelcallback =',
+        preview:	'# Preview window width. Defaults to 550.\n'+
+            'plugin_preview_width = 550\n\n'+
+            '# Preview window height. Defaults to 600.\n'+
+            'plugin_preview_height = 600\n\n'+
+            '# Custom preview page URL relative from theme use "../../plugins/preview/example.html" for a example.\n'+
+            '#plugin_preview_pageurl =\n'
+    };
+
+
+
+    var plugins = {
+        pastetext: 'paste',
+        pasteword: 'paste',
+        selectall: 'paste',
+        search: 'searchreplace',
+        replace: 'searchreplace',
+        fullscreen: 'fullscreen',
+        emotions: 'emotions',
+        nonbreaking: 'nonbreaking',
+        spellchecker: 'spellchecker',
+        link: 'advlink',
+        typo3link: 'typo3filemanager',
+        image: 'advimage',
+        typo3image: 'typo3filemanager',
+        table: 'table',
+        row_props: 'table',
+        cell_props: 'table',
+        delete_col: 'table',
+        delete_row: 'table',
+        delete_table: 'table',
+        col_after: 'table',
+        col_before: 'table',
+        row_after: 'table',
+        row_before: 'table',
+        split_cells: 'table',
+        merge_cells: 'table',
+        insertdate: 'insertdatetime',
+        inserttime: 'insertdatetime',
+        advhr: 'advhr',
+        pagebreak: 'pagebreak',
+        media: 'media',
+        styleprops: 'style',
+        template: 'template',
+        insertlayer: 'layer',
+        moveforward: 'layer',
+        movebackward: 'layer',
+        absolute: 'layer',
+        cite: 'xhtmlxtras',
+        ins: 'xhtmlxtras',
+        del: 'xhtmlxtras',
+        abbr: 'xhtmlxtras',
+        acronym: 'xhtmlxtras',
+        attribs: 'xhtmlxtras',
+        visualchars: 'visualchars',
+        ltr: 'directionality',
+        rtl: 'directionality',
+        fullpage: 'fullpage',
+        save: 'save',
+        print: 'print',
+        preview: 'preview',
+        iespell: 'iespell'
+    }
+
+    var presets = {
+        empty: '',
+        minimal: 'plugins = inlinepopups\n'+
+            'theme_advanced_buttons1 = bold,italic,underline,|,bullist,numlist,|,justifyleft,justifycenter,justifyright,|,link,unlink',
+        small: 'plugins = inlinepopups\n'+
+            'theme_advanced_buttons1 = bold,italic,underline,|,bullist,numlist,|,justifyleft,justifycenter,justifyright,|,link,typo3link,unlink',
+        standard: 'plugins = contextmenu,inlinepopups,safari\n'+
+            'theme_advanced_buttons1 = newdocument,|,undo,redo,|,justifyleft,justifycenter,justifyright,justifyfull,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,fullscreen,|,cleanup,nonbreaking\n'+
+            'theme_advanced_buttons2 = link,typo3link,unlink,|,image,typo3image,|,tablecontrols\n'+
+            'theme_advanced_buttons3 = code,|,anchor,charmap,media,attribs,styleprops,|,forecolor,backcolor,strikethrough,sub,sup,|,bullist,numlist,|,outdent,indent,|,blockquote\n'+
+            'theme_advanced_buttons4 = styleselect,|,formatselect,|,fontselect,|,fontsizeselect,|,bold,italic,underline',
+        full: 'plugins = contextmenu,inlinepopups,safari\n'+
+            'theme_advanced_buttons1 = newdocument,|,undo,redo,|,justifyleft,justifycenter,justifyright,justifyfull,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,fullscreen,|,cleanup,nonbreaking,spellchecker\n'+
+            'theme_advanced_buttons2 = link,typo3link,unlink,|,image,typo3image,|,tablecontrols\n'+
+            'theme_advanced_buttons3 = code,|,anchor,charmap,media,attribs,styleprops,|,forecolor,backcolor,strikethrough,sub,sup,|,bullist,numlist,|,outdent,indent,|,blockquote,template\n'+
+            'theme_advanced_buttons4 = styleselect,|,formatselect,|,fontselect,|,fontsizeselect,|,bold,italic,underline',
+        giga: 'theme_advanced_buttons1=newdocument,|,bold,italic,underline,strikethrough,sub,sup,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,outdent,indent,|,pastetext,pasteword,|,search,replace,|,fullscreen\n'+
+            'theme_advanced_buttons2=code,|,link,typo3link,unlink,anchor,|,image,typo3image,|,table,delete_table,|,row_props,cell_props,|,row_before,row_after,delete_row,|,col_before,col_after,delete_col,|,split_cells,merge_cells,|,visualaid\n'+
+            'theme_advanced_buttons3=undo,redo,|,visualchars,|,charmap,emotions,|,media,styleprops,|,cleanup,nonbreaking,|,insertdate,inserttime,|,template,|,advhr,|,blockquote,cite,ins,del,abbr,acronym,attribs\n'+
+            'theme_advanced_buttons4=forecolor,backcolor,|,styleselect,|,formatselect,|,fontselect,|,fontsizeselect,|,spellchecker\n'+
+            'plugins=contextmenu,inlinepopups,safari,paste,searchreplace,fullscreen,advlink,typo3filemanager,advimage,table,visualchars,emotions,media,style,nonbreaking,insertdatetime,template,advhr,xhtmlxtras,spellchecker'
+    }
+
+
+    var rteextras = 'RTE.default {\n' +
+        '\tcallbackJavascriptFile =\n' +
+        '\t\n' +
+        '\tgzip = 1\n' +
+        '\tgzipFileCache = 1\n' +
+        '\tdefaultLanguageFE = de\n' +
+        '\ttypo3filemanager.window.width = 700\n' +
+        '\ttypo3filemanager.window.height = 400\n' +
+        '\ttypo3filemanagerThumbs.width = 200\n' +
+        '\ttypo3filemanagerThumbs.height = 150\n' +
+        '\ttypo3filemanagerMaxPlainImages.width = 500\n' +
+        '\ttypo3filemanagerMaxPlainImages.height = 500\n' +
+        '\t\n' +
+        '\tlinkhandler {\n' +
+        '\t\ttt_news {\n' +
+        '\t\t\t# id of the Single News Page\n' +
+        '\t\t\tparameter = 27\n' +
+        '\t\t\t# id of the Storage folder containing the news (just used to mark already selected news) [set "storage >" if unsure or the user can select from more than one Storage Folder]\n' +
+        '\t\t\tstorage = 25\n' +
+        '\t\t\tadditionalParams = &tx_ttnews[tt_news]={field:uid}\n' +
+        '\t\t\tadditionalParams.insertData = 1\n' +
+        '\t\t\t# you need: uid, hidden, header [this is the displayed title] (use xx as header to select other properties)\n' +
+        '\t\t\t# you can provide: bodytext [alternative title], starttime, endtime [to display the current status]\n' +
+        '\t\t\tselect = uid,title as header,hidden,starttime,endtime,bodytext\n' +
+        '\t\t\tsorting = crdate desc\n' +
+        '\t\t}\n' +
+        '\t}\n' +
+        '\t\n' +
+        '\t# Config used for the spellchecker\n' +
+        '\tspellcheck {\n' +
+        '\t\tgeneral.engine = GoogleSpell\n' +
+        '\t\tPSpell.mode = PSPELL_FAST\n' +
+        '\t\tPSpell.spelling =\n' +
+        '\t\tPSpell.jargon =\n' +
+        '\t\tPSpell.encoding =\n' +
+        '\t\tPSpellShell.mode = PSPELL_FAST\n' +
+        '\t\tPSpellShell.aspell =\n' +
+        '\t\tPSpellShell.tmp = ./tmp\n' +
+        '\t}\n' +
+        '\t\n' +
+        '}\n\n';
+
+
+
+    window.addEvent('domready',function(){
+
+        if(Browser.Engine.trident){
+            document.ondragstart = function(){return(false)} //IE drag hack
+        }
+        // Ajust CSS to look nicer in Opera
+        if (window.opera) {
+            $$('.resizehandle').setStyle('width',784);
+        }
+        // Setup div for custom preset submitting.
+        $('custompreset').setStyle('display','block'); // Must be visible in order to get coords.
+        var coord = $('custompreset').getCoordinates();
+        $('custompreset').setStyles({
+            position: 'absolute',
+            display: 'none',
+            left: ((window.getWidth() - coord['width'])/2),
+            top: (window.getHeight()/2 - coord['height'])
+        }).makeDraggable({handle: 'draghandle'});
+
+        $('cancel').addEvent('click', function() {
+            $('custompreset').setStyle('display','none');
+        });
+        $('submit').addEvent('click', function() {
+            resetbars();
+            setPresets($('textbarinput').value);
+            $('custompreset').setStyle('display','none');
+            updateOutput();
+        });
+
+        // Make Textbars resizable
+        $('textbaroutput').makeResizable({
+            handle: 'textbar_handle',
+            limit:	{x:[780,780], y:[35,500]}
+        });
+
+        // Add tooltips
+        var titleTips = new Tips({
+            className: 'tips',
+            hideDelay: 100,
+            showDelay: 1000,
+            onShow: function(el) { el.fade('in'); },
+            onHide: function(el) { el.fade('out'); }
+        });
+
+        // Enable toolTips on available icons and label tags
+        $$('#available li','#additionalplugins label','#options label').each(function(el) {
+            var t = el.get('title').split('::');
+            if (plugins[el.get('id')]) {
+                t[1]+= '<br /><br />Requires the "'+plugins[el.get('id')]+'" plugin.';
+            }
+            el.store('tip:title', t[0]).store('tip:text', t[1]);
+            titleTips.attach(el);
+        });
+
+        // Add onclick event to additional plugins &  option checkboxes label tags
+        $$('#additionalplugins label','#options label').addEvent('click', function(ev){
+            this.setStyle('color',(this.getFirst().checked ? '#000000' : '#666666'));
+            updateOutput();
+        });
+
+        // Add onchange event to presetconfig select tag
+        $('presetconfig').addEvent('change', function(ev){
+            if (this.selectedIndex==0) return;
+            if (this.value=='custom') {
+                $('custompreset').setStyle('display','block');
+            }
+            else {
+                resetbars();
+                setPresets(presets[this.value]);
+                updateOutput();
+            }
+            this.selectedIndex=0;
+        });
+
+        // Function to display output
+        var updateOutput = function() {
+
+            var serializeFunc = function(el) {
+                // Exclude ghost elements without id's
+                var x = el.retrieve('master');
+                return x ? x.id.replace(/divider/ig, '|') : null;
+            }
+            // Serialize content of each each toolbar
+            var tbar = [], abar = [];
+            for (var i=0;i<4;i++) {
+                tbar[i] = sort.serialize(i,serializeFunc).clean();
+                abar.combine(tbar[i]);
+            }
+
+            // Get plugins and extra config options.
+            var econfig = '', pconfig = [];
+            abar.each(function(id,i) {
+                pconfig[i] = plugins[id];
+                econfig += extraconfig[id] ? '\n\n# Additional config options for the "'+id+'" button.\n\n'+extraconfig[id]+'\n' : '';
+
+            });
+
+            // Add non-button related plugins
+            var econfigx = '',pconfigx = [];
+            $$('#additionalplugins input').each(function(el,i) {
+                pconfigx[i] = el.checked ? el.value : null;
+                econfigx += ( el.checked && extraconfig[el.value]) ? '\n\n# Additional config options for the "'+el.value+'" plugin.\n\n'+extraconfig[el.value]+'\n' : '';
+            });
+
+            pconfig = pconfigx.combine(pconfig).clean();
+            econfig += econfigx;
+
+            // Show output.
+            var output = 'theme_advanced_buttons1='+tbar[0]+
+                '\ntheme_advanced_buttons2='+tbar[1]+
+                '\ntheme_advanced_buttons3='+tbar[2]+
+                '\ntheme_advanced_buttons4='+tbar[3]+
+                '\nplugins='+pconfig+'\n'
+
+            if (!$('bponly').checked) {
+                output += '\ntheme_advanced_statusbar_location = bottom\n'+
+                    'width = 600\n'+
+                    'height = 550\n'+
+                    'fix_table_elements = true\n'+
+                    '# you could override the following option if you don\'t want to insert links.\n'+
+                    'file_browser_callback = typo3filemanager'+
+                    econfig;
+            }
+
+            // Quick indentation
+            output = '\t'+output.replace(/\n/ig, '\n\t').trim();
+
+            output = 'RTE.default.init {\n'+output+'\n}\n';
+
+            if ($('rteextra').checked && !$('bponly').checked) {
+                output = rteextras + output;
+            }
+
+            if ($('nicecomma').checked) {
+                // Force spaces after commas
+                output = output.replace(/\s*,\s*/ig, ', ');
+            }
+
+            $('textbaroutput').value = output;
+
+        }
+
+        var resetbars = function() {
+            // remove all elements in sortable toolsbar(s), and restore available status on master
+            sort.serialize(function(el) {
+                sort.removeItems(el);
+                var master = el.retrieve('master');
+                // IE adds ghost elements with no reference to the master element
+                // So we need to check if there's really a master element available
+                if (master) {
+                    master.removeClass('inuse').setStyle('opacity',1);
+                }
+                el.destroy();
+                return null;
+            });
+            // Reset additional plugin checkboxes
+            $$('#additionalplugins input').each(function(el) {
+                el.checked = false;
+                el.getParent().setStyle('color','#666666');
+            });
+        }
+
+
+        var setPresets = function(preset) {
+            var config = preset.split('\n');
+            config.each(function(obj,index) {
+                obj = obj.replace(/^\s+|\s+$/g,'');
+                switch(obj.substr(0,23)) {
+                    case 'theme_advanced_buttons1' :
+                        usePresets(obj,$('toolbar1'));
+                        break;
+                    case 'theme_advanced_buttons2' :
+                        usePresets(obj,$('toolbar2'));
+                        break;
+                    case 'theme_advanced_buttons3' :
+                        usePresets(obj,$('toolbar3'));
+                        break;
+                    case 'theme_advanced_buttons4' :
+                        usePresets(obj,$('toolbar4'));
+                        break;
+                };
+                if (obj.substr(0,7)=='plugins') {
+                    var pl = obj.split(/\s*=\s*/i);
+                    if (pl[1]) {
+                        pl = pl[1].split(/\s*,\s*/i);
+                        pl.each(function(el,index) {
+                            if ($(el)) {
+                                $(el).checked = true;
+                                $(el).getParent().setStyle('color','#000000');
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        // Add buttons to toolbar, based on button config options
+        var usePresets = function usePresets(config,toolbar) {
+            var conf = config.split(/\s*=\s*/i);
+            if(conf[1]) {
+                // Replace the "tablecontrols" button with seperate buttons and replace the "|" with "divider"
+                var but = conf[1].replace(/tablecontrols/ig, 'table,|,row_props,cell_props,|,row_before,row_after,delete_row,|,col_before,col_after,delete_col,|,split_cells,merge_cells').replace(/\|/ig,'divider').split(/\s*,\s*/i);
+                but.each(function(el) {
+                    var master = $(el);
+                    var elCopy = master.clone();
+                    elCopy.store('master',master).store('tip:title',master.retrieve('tip:title')).store('tip:text',master.retrieve('tip:text'));
+                    elCopy.addEvent('dblclick', doubleclick.bindWithEvent(elCopy));
+                    elCopy.getFirst().setStyles({
+                        border: 'none',
+                        backgroundColor: 'transparent',
+                        margin: '3px 1px'
+                    });
+                    toolbar.adopt(elCopy);
+                    sort.addItems(elCopy);
+                    titleTips.attach(elCopy);
+                    if (!master.hasClass('nolock')) {
+                        master.addClass('inuse').setStyle('opacity',0.25);
+                    }
+                });
+            }
+        };
+
+        var doubleclick = function(ev) {
+            ev.stop();
+            // Clone element is removed from sortable lists, so master element is available again
+            var master = this.retrieve('master');
+            titleTips.tip.fade('out');
+            titleTips.detach(this);//.fireEvent('hide',titleTips.tip);
+
+            var there = master.getPosition();
+            var here = this.getPosition();
+            this.setStyle('position','absolute').get('morph').start({
+                left:[here.x,there.x],
+                top:[here.y,there.y],
+                opacity: 0
+            }).chain(
+            this.destroy.bind(this)
+        ).chain(
+            master.removeClass('inuse').setStyle('opacity',1)
+        ).chain(
+            updateOutput.delay(600)
+        );
+        }
+
+        // Add Sortables
+        var sort = new Sortables($$('#toolbar1','#toolbar2','#toolbar3','#toolbar4'),{
+            constrain: false,
+            clone: false,
+            revert: false,
+            opacity:0.7,
+            onStart: function(el) {
+                /*
+                    if (this.clone) {
+                    now = this.drag.mouse.pos;
+                        this.clone.setStyles({
+                            left:now.y,
+                            top:now.x
+                        });
+                    }
+                 */
+                el.getFirst().setStyles({
+                    border: '1px solid #0A246A',
+                    backgroundColor: '#B2BBD0',
+                    margin: '2px 0px'
+                });
+                updateOutput();
+            },
+            onComplete: function(el) {
+                // Extra check needed because ghost elements without children might be in list
+                if (elImg = el.getFirst()) {
+                    elImg.setStyles({
+                        border: 'none',
+                        backgroundColor: 'transparent',
+                        margin: '3px 1px'
+                    });
+                }
+                // BUG: The onComplete event fires too many times, so this gets executed several times
+                // Need to find a way to reduce executioons.
+                updateOutput();
+            }
+        });
+
+        $$('#available li').addEvent('mousedown',function(ev) {
+            ev.stop();
+
+            // Object is already in use, so it can't be dragged again.
+            if (this.hasClass('inuse')) {
+                return false;
+            }
+
+            // Drag action is started, so master element is set to unavailable.
+            // Unless "nolock" class is set on element.
+            if (!this.hasClass('nolock')) {
+                this.addClass('inuse').setStyle('opacity',0.25);
+            }
+
+            var master = this;
+            var clone = this.clone();
+            var here = this.getPosition();
+
+            // Make clone icon draggable
+            clone.setStyles({
+                opacity:0.7,
+                position:'absolute',
+                left:here.x,
+                top:here.y
+            }).inject(document.body).store('master',this).makeDraggable({
+                droppables:[$$('#toolbar1','#toolbar2','#toolbar3','#toolbar4')],
+                onBeforeStart: function(el) {
+                    el.getFirst().setStyles({
+                        border: '1px solid #0A246A',
+                        backgroundColor: '#B2BBD0',
+                        margin: '2px 0px'
+                    });
+                },
+                onCancel: function(el) {
+                    // Drag action canceled, so master element is available again
+                    el.retrieve('master').removeClass('inuse').setStyle('opacity',1);
+                    el.destroy();
+                },
+                onEnter:function(el,drop) {
+                    var sortClone = el.clone();
+                    var master = el.retrieve('master');
+                    sortClone.setStyles({
+                        opacity:1,
+                        position:'static',
+                        margin:0
+                    }).store('master',master).inject(drop);
+                    sortClone.store('tip:title',master.retrieve('tip:title')).store('tip:text',master.retrieve('tip:text'));
+                    titleTips.attach(sortClone);
+                    sort.addItems(sortClone);
+                    el.setStyle('display','none').store('clone',sortClone);
+                    sort.start(ev,sortClone);
+                },
+                onLeave:function(el,drop) {
+                    var sortClone = el.retrieve('clone');
+                    sort.end();
+                    sort.removeItems(el);
+                    el.setStyle('display','');
+                    sortClone.destroy();
+                },
+                onDrop:function(el,drop) {
+                    if (drop) {
+                        var sortClone = el.retrieve('clone');
+                        // Add "dblclick" event to sortable element
+                        sortClone.addEvent('dblclick', doubleclick.bindWithEvent(sortClone));
+                        el.destroy();
+                        drop.removeEvents();
+                    }
+                    else {
+                        // Not dropped on a droppables, so master element is available again
+                        el.retrieve('master').removeClass('inuse').setStyle('opacity',1);
+                        el.get('morph').start({
+                            opacity:0,
+                            left:here.x,
+                            top:here.y
+                        }).chain(el.destroy.bind(el));
+                    }
+                }
+            }).start(ev);
+
+        });
+    });
+    //]]>
+</script>

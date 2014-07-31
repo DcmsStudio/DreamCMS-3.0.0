@@ -1,0 +1,89 @@
+<?php
+
+function __genre_edit($row){
+global $cp, $cfg, $fct, $cp;
+
+	if ($row['icon']) $path = $row['icon'];
+	else $path = '';
+
+	$icon_path = $cfg['portalurl'].'/images/genre/';
+
+	if ( HTTP::input('type')== 'add' )
+	{
+		$btn = '[save_exit:pform]';
+	}
+	else
+	{
+		$btn = '[save:pform] [save_exit:pform] ';
+	}
+	
+$html = <<<EOF
+<form action="admin.php" id="pform" method="post" onsubmit="">
+<input type="hidden" name="adm" value="plattformgenre" />
+<input type="hidden" name="sid" value="$cp->session_id" />
+<input type="hidden" name="id" value="HTTP::input('id')" />
+<input type="hidden" name="type" value="HTTP::input('type')" />
+<input type="hidden" name="action" value="edit_genre" />
+<input type="hidden" name="send" value="send" />
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="secondrow">
+    	<td width="20%"><b>Titel:</b></td>
+    	<td>{info:genre|title}<input type="text" name="title" value="{$row['name']}" class="input" size="50" /></td>
+    </tr>
+
+    <tr class="firstrow">
+    	<td width="20%">
+    	<b>Icon:</b><br />
+    	Icons im Verzeichnis: $icon_path
+    	<br /><b>Bsp:</b> X-BOX.gif</td>
+    	<td>{info:genre|icon}<input type="text" name="icon" value="{$row['icon']}" class="input" size="20" /></td>
+    </tr>
+	
+	<tr>
+		<td>Genre Typ</td>
+		<td>
+		<select name="genretype" class="select">
+EOF;
+
+
+	foreach ( $GLOBALS[ 'genre_types' ] as $id => $langkey )
+	{
+
+		$sel = '';
+		
+		if (HTTP::input('genretype') && !intval(HTTP::input('id') ) )
+		{
+			$sel = ($id == intval(HTTP::input('genretype') ) ? ' selected="selected"' : '') ;
+		}
+		else
+		{
+			$sel = ( $id == $row['type'] ? ' selected="selected"' : '' );
+		}
+		$html .= '<option value="'. $id .'"'.$sel.'>'. $cp->lang['genretype_'.$langkey] .'</option>';
+	}
+	
+$html .= <<<EOF
+		</select>
+		</td>
+	</tr>
+	
+
+    <tr class="secondrow">
+    	<td colspan="2" align="center">$btn <input type="reset" value="Zurücksetzen" class="button" /> <input type="button" value="Abbrechen" onclick="history.back();" class="button" /></td>
+    </tr>
+</table>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+        add_dirty_flag('pform');
+        register_form_handler('savethis');
+        exiturl = 'admin.php?adm=plattformgenre&action=list_genre&genretype=HTTP::input('genretype')';        
+    //]]>
+</script>
+EOF;
+
+	return $html;
+}
+
+?>

@@ -1,0 +1,155 @@
+<?php
+
+function __add_static_page($row){
+global $cp, $cfg, $fct, $root_path,$adm_skin;
+
+    $tab_controll = new tab_controll;
+    $tab_controll->add_tabs(
+                'Editor', array('Editor', 'Seiten Einstellungen', 'Metatags')
+                );
+
+$html = <<<EOF
+<form method="post" action="admin.php" name="staticpage" id="staticpage">
+<input type="hidden" name="adm" value="static_pages" />
+<input type="hidden" name="action" value="add_page">
+<input type="hidden" name="send" value="send">
+<input type="hidden" name="sid" value="{$cp->session_id}">
+
+{$tab_controll->js_header_code}
+
+<div>
+	{$tab_controll->tab_js_code}
+</div>
+<table class="tblborder" width="100%" border="0" cellpadding="3" cellspacing="0">
+<tr>
+<td>
+<div class="tab_pages">
+
+<div class="tcontent" id="tc0">
+
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<fieldset class="fl w49">
+					<legend>Seiten Titel</legend>
+					<input name="page_title" type="text" size="50" class="input" />
+				</fieldset>
+			
+				<fieldset class="fl w49">
+					<legend>Dateiname</legend>
+					<input name="page_filename" type="text" size="50" class="input" />
+					<small>Bitte nur den Dateinamen angeben. Bsp: site_1.php</small>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<fieldset>
+					<legend>Inhalt</legend>
+					{$row['editor']}
+				</fieldset>
+			</td>
+		</tr>
+	</table>
+	
+	
+</div>
+<div id="tc1" class="tcontent" style="display:none">
+
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+
+					<div class="fl fieldset2">
+						<div>
+							<fieldset>
+								<legend>Seite Aktiv?</legend>
+								{info:static|page_active}
+								<label for="hidde1"><input id="hidde1" type="radio" name="page_hidden"{$row['sel_page_hidden1']} value="1" /> Ja</label> 
+								<label for="hidde0"><input id="hidde0" type="radio" name="page_hidden"{$row['sel_page_hidden0']} value="0" /> Nein</label>
+							</fieldset>
+							<fieldset>
+								<legend>Kommentare erlauben?</legend>
+								{info:static|page_can_comment}
+								<label for="cancom1"><input id="cancom1" type="radio" name="can_comment"{$row['can_comment1']} value="1" /> Ja</label> 
+								<label for="cancom0"><input id="cancom0" type="radio" name="can_comment"{$row['can_comment0']} value="0" /> Nein</label>
+							</fieldset>						
+							<fieldset>
+								<legend>Seiten Container?</legend>
+								{info:static|page_container}
+									<select name="container" class="select">
+									{$row['container']}
+									</select>
+							</fieldset>
+						</div>
+
+						<fieldset>
+							<legend>Zugriffsrechte</legend>
+							{info:static|page_access}
+							<select name="usergroups[]" class="select" multiple="multiple" size="7" style="width:95%">
+								{$row['usergroups']}
+							</select>
+						</fieldset>				
+						
+					</div>
+
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<fieldset>
+					<legend>Parent Dokument (Seite)</legend>
+					<select name="parent_page[]" class="select" size="8" style="width:100%">
+
+						{$row['parent_page_options']}
+					</select>
+					
+					<br/><small>Diese Struktur wird zur Seiten Navigation benötigt.</small>
+				</fieldset>
+			</td>
+		</tr>
+		
+	</table>
+</div>
+
+<div class="tcontent" id="tc2">
+
+			<div class="fieldset2"><div>
+				<fieldset>
+					<legend>Metatag "description"</legend>
+					<textarea name="page_meta_desc" cols="50" rows="4" class="textarea"></textarea>
+					<br/><small>Diese Beschreibung sollte nicht l�nger als 250 Zeichen lang sein.</small>
+				</fieldset></div>
+				
+				<fieldset>
+					<legend>Metatag "keywords"</legend>
+					<textarea name="page_meta_keys" cols="50" rows="4" class="textarea"></textarea>
+					<br/><small>Keywords bitte durch Komma voneinander trennen. Tip: Vermeiden Sie dabei wiederholende Worte.</small>
+				</fieldset>
+
+			</div>
+
+</div>
+
+<btn>
+	[save_exit:staticpage] 
+	<input type="reset" value="Zurücksetzen" class="button" />
+	<input type="button" value="Abbrechen" onclick="history.back();" class="button" />
+</btn>
+
+</div>
+</td></tr></table>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+        add_dirty_flag('staticpage');
+        register_form_handler('savethis');
+        exiturl = 'admin.php?adm=static_pages';        
+    //]]>
+</script>
+EOF;
+
+return $html;
+}
+
+?>

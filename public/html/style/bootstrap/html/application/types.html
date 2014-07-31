@@ -1,0 +1,43 @@
+<cp:extends template="../main"/>
+
+<cp:block name="content">
+
+<table border="0" cellpadding="3" cellspacing="1" class="tblborder" id="app-types-{$input.appid}">
+    <tr class="tableheader">
+        <td>Typ</td>
+        <td>Template Layouts</td>
+        <td>Modul Layouts</td>
+    </tr>
+    
+    
+    <cp:loop name="types" key="r">
+        
+        <tr class="{cycle('cyclename', 'firstrow,secondrow', 'css')}" rel="{$r.type}">
+            <td><span class="elements">{$r.title}</span> ({$r.type})</td>
+            <td>Template Layouts</td>
+            <td>Modul Layouts</td>
+        </tr>
+    </cp:loop>
+    
+    
+</table>
+
+
+<script type="text/javascript">
+// <![CDATA[
+
+    var items = $('#app-types-{$input.appid}').find('tr[rel]');
+    items.each(function() {
+        
+        $(this).dblclick(function(e){
+            var key = $(e.target).parents('tr:first').attr('rel');
+            
+             var href = 'admin.php?adm=app&action=edit&_type=app&manage=elements&appid='+ {$input.appid} +'&element='+ key + '&itemtype=' + key ;
+             openTab({url: href, obj: null, label: $(e.target).parents('tr:first').find('td:first span').text() });
+        });
+    });
+
+
+//]]>
+</script>
+</cp:block>

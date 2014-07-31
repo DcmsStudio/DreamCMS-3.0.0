@@ -1,0 +1,92 @@
+<cp:set var="comment_perm" value="comment_$commentstype"/>
+{session($comment_perm, $globals.permissionkey)}
+
+<cp:hasperm permkey="$globals.permissionkey">
+    <section class="comment-form">
+        <div class="comment-form-toggle">
+            <a href="javascript:void(0)">
+                <span class="fa icon-comments">
+                </span>
+                {trans('Kommentar zu diesem Beitrag schreiben')}
+            </a>
+        </div>
+        <form action="comments/save" method="post" name="commentFrom" id="commentFrom" style="display:none">
+            <input type="hidden" name="parent" id="parentComment" value="0" />
+            <input type="hidden" name="commenttype" value="{$commentstype}" />
+            <input type="hidden" name="commentid" value="{$commentpostid}" />
+            
+            <input type="hidden" name="article_url" value="{escape($article_url, 'url')}" />
+            <input type="hidden" name="article_title" value="{escape($article_title, 'htmlall')}" />
+            <div>
+                <div class="alert alert-danger" style="display:none" id="comment-post-error">
+                    {trans('Comment Flooding!')}
+                </div>
+                <div class="clear">
+                </div>
+                <cp:if condition="!$user.userid">
+                    <fieldset>
+                        <legend>
+                            {trans('Ihr Name')}
+                            <sup>
+                                *
+                            </sup>
+                        </legend>
+                        <input type="text" name="guestname" class="input" size="50" maxlength="50" placeholder="{trans('Ihr Name')} *" />
+                    </fieldset>
+                </cp:if>
+                <fieldset>
+                    <legend>
+                        {trans('Titel')}
+                        <sup>
+                            *
+                        </sup>
+                    </legend>
+                    <input type="text" name="title" class="input" size="50" maxlength="100" placeholder="{trans('Titel')} *" />
+                </fieldset>
+                <fieldset>
+                    <legend>
+                        {trans('Kommentar')}
+                        <sup>
+                            *
+                        </sup>
+                    </legend>
+                    <cp:include template="bbcode/bbcode_toolbar_comments" />
+                    <textarea class="textarea bbcodeCommentTextarea" name="comment" rows="10" cols="40" placeholder="{trans('Kommentar')} *"></textarea>
+                </fieldset>
+                <fieldset>
+
+                    <cp:captcha width="200" height="80" audio="true" reload="true" />
+                    <input type="text" name="captcha" class="input" size="20" maxlength="6" placeholder="{trans('Sicherheitscode')} *" />
+                </fieldset>
+                <div class="tc">
+
+                    
+                    <button type="submit" accesskey="s" class="btn btn-primary">
+                        {trans('Kommentar Speichern')}
+                    </button>
+                    <button type="reset" accesskey="r" class="btn btn-default">
+                        {trans('Zurücksetzen')}
+                    </button>
+                    
+                </div>
+                <small class="gray">
+                    {trans('Angaben mit * sind erforderlich.')}
+                </small>
+            </div>
+        </form>
+    </section>
+</cp:hasperm>
+<cp:else>
+    <section class="comment-form note">
+        <span class="fa icon-comments">
+        </span>
+        <div>
+            {trans('Sie müssen angemeldet sein, um einen Kommentar schreiben zu können.')}
+            <p>
+                <a href="/auth">
+                    {trans('anmelden')}
+                </a>
+            </p>
+        </div>
+    </section>
+</cp:else>

@@ -1,0 +1,343 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+</cp:block>
+
+<cp:block name="content">
+
+<div class="box">
+    <h2>{trans('Gallerie')} "{$gallerie_title}"</h2>
+    <div class="box-inner">
+        {$gallerie_description}
+        
+        
+        <div id="upload-container-gal" style="display:block;"></div>
+    </div>
+</div>
+
+
+<form name="editForm" action="admin.php" method="post" id="editForm">
+    <input type="hidden" name="adm" value="gallery"/>
+    <input type="hidden" name="id" id="elID" value=""/>
+    <input type="hidden" name="ajax" value="1"/>
+    <input type="hidden" name="action" value="edit"/>
+    <input type="hidden" name="save" value="1"/>
+    <div id="FileEditCont">
+        <div id="FileEditContShadow"></div>
+        <div class="bg">
+            <fieldset>
+                <legend>{trans('Titel')}</legend>
+                <input type="text" name="title" id="etitle" value="" size="60" class="input"/>
+            </fieldset>
+            <fieldset>
+                <legend>{trans('Beschreibung')}</legend>
+                <textarea name="description" id="edescription" rows="6" class="textarea"></textarea>
+            </fieldset>
+            <div class="actBtn">
+                <input type="button" id="save-image" value="{trans('Übernehmen')}" class="button"/> 
+                <input type="button" value="{trans('Abbrechen')}" onclick="editImageClose();" class="button"/>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div id="container-gal">
+    
+    
+    <cp:block name="images">
+        <div class="box description" style="display:block;">
+            <div id="thumbnails" class="box-inner" style="display:block;">
+                
+                
+                <div style="display:inline-block;">
+                <cp:loop name="images" key="r">
+                    <div class="thumb_container" onmouseover="showImgOpt({$r.id});" onmouseout="hideImgOpt({$r.id});" id="CON{$r.id}">
+                        <div class="thumb_container_inner">
+                            <div class="thumb_container_image"><img src="{$r.image}" id="IMG{$r.id}" border="0" alt="" class="{iif($r.publish, 'pub', 'unpub')}" /></div>
+                            <div class="thumb_container_option" id="opt{$r.id}">
+                                <a href="javascript:void(0);" onclick="changeImagePublish({$r.id});"><img src="html/style/default/img/{iif($r.publish, 'online', 'offline')}.gif" id="IMGP{$r.id}" border="0" title="{trans('Change Publishing')}"/></a>
+                                <a href="javascript:void(0);" onclick="editImage({$r.id});"><img src="html/style/default/img/edit.png" border="0" title="{trans('Bild Titel und Beschreibung')}"/></a>
+                                <a href="javascript:void(0);" onclick="deleteImage({$r.id});"><img src="html/style/default/img/delete.gif" border="0" title="{trans('Bild löschen')}"/></a>
+                            </div>
+                        </div>
+                    </div>
+                </cp:loop>
+                <cp:else>
+                    <em>
+                        {trans('Es sind noch keine Bilder vorhanden')}
+                        
+                    </em>    
+                </cp:else>
+                </div>
+            </div>
+        </div>
+        <cp:if condition="$pages">
+            <div id="pager" class="fl w100 mt5 tr">
+                {$pages}
+            </div>
+        </cp:if>
+        
+    </cp:block>
+    
+</div>
+
+
+<script type="text/javascript" language="javascript">
+    //<![CDATA[
+    function makeFancyBoxes()
+    {
+        var images = $('#thumbnails').find('div.thumb_container_image img');
+        
+        images.each(function() {
+            
+            $(this).css('cursor', 'pointer');
+            $(this).attr('title', 'Bild anzeigen');
+            
+            var id = $(this).attr('id').replace(/^IMG/, '');
+            
+            $(this).parent().bind('click', function(){
+                
+                // alert(cmsurl+'admin.php?adm=gallery&action=thumb&show=original&id='+id);
+                $.fancybox({
+                    //'orig'            : $(this),
+                    'padding'         : 0,
+                    'href'            : cmsurl +'admin.php?adm=gallery&action=thumb&show=original&id='+id,
+                    'title'           : 'Bild ID:'+id,
+                    'titlePosition'   : 'outside',
+                    'type'            : 'image',
+                    'onClosed'        : function(){
+                        $.fancybox.close();                        
+                        $('body').focus();
+                    }
+                });
+            });
+        });
+    }
+
+    makeFancyBoxes();
+
+    $('#upload-container-gal').empty();
+    var upload = new DCMS_MultiUploadControl({
+            "control": "upload-container-gal",
+            "adm": "gallery",
+            "action": "upload",
+            "url": "admin.php",
+            "thegal" : "{$galerie_id}",
+            "file_type_mask": "*.jpg;*.jpeg;*.gif;*.png;*.tiff",
+            "file_type_text": "Alle Bilddateien",
+            "file_post_name": 'files',
+            "type": 'gal'
+        });
+
+
+
+
+
+
+
+function showImgOpt( obj )
+{
+    $('#opt'+obj).show();
+}
+
+function hideImgOpt( obj )
+{
+    $('#opt'+obj).hide();
+}
+
+function editImageClose()
+{
+    $('#FileEditCont').hide();
+    $('#FileEditContShadow').hide();
+    $('#maincontent').unmask();    
+}
+
+function addImgContainer( src )
+{
+    var objBody = $("#thumbnails");    
+
+    try{
+    
+        var thumb_container         = $('<div>').attr('id', 'CON'+src).addClass("thumb_container");
+        var thumb_container_inner   = $('<div>').addClass("thumb_container_inner");
+        
+        var thumb_container_image   = $('<div>').addClass("thumb_container_image");
+            thumb_container_image.append( $('<img>').attr({'src': "admin.php?adm=gallery&id="+src+"&action=thumb", id:"IMG"+src}) ) ;        
+            thumb_container_inner.append(thumb_container_image);
+        
+        var thumb_container_option  = $('<div>').addClass("thumb_container_option").attr('id', 'opt'+src);
+            
+            var option  = '<a href="javascript:void(0);" onclick="changeImagePublish('+src+');"><img src="html/style/default/img/online.gif" id="IMGP'+src+'" title="Change Publishing"/></a> ';
+                option += '<a href="javascript:void(0);" onclick="editImage('+src+');"><img src="html/style/default/img/edit.png" title="Bild Titel und Beschreibung"/></a> ';
+                option += '<a href="javascript:void(0);" onclick="deleteImage('+src+');"><img src="html/style/default/img/delete.gif" title="Bild löschen"/></a> ';
+                
+            thumb_container_option.append(option);
+            thumb_container_inner.append(thumb_container_option);
+        
+        thumb_container.append(thumb_container_inner);        
+        thumb_container.bind('mouseover', function(event){ $('#opt'+src).show();} );
+        thumb_container.bind('mouseout', function(event){ $('#opt'+src).hide();} );
+        
+        objBody.append(thumb_container);
+        
+    }
+    catch(e)
+    {
+        alert(e);
+    }
+    
+    $(thumb_container).fadeIn('slow');
+}
+
+
+
+
+function sendeditImage(id)
+{
+    var _addSave = '';
+    var _ImgFormEdit = $('#FileEditCont');
+    var _ImgFormEditShadow = $('#FileEditContShadow');
+    var post = $("#editForm").serialize();
+    
+    $('#maincontent').mask('arbeite...');
+    
+    $.post('admin.php', post, function(data) {
+        
+        if( responseIsOk(data)) {        
+            _ImgFormEdit.hide();
+            _ImgFormEditShadow.hide();
+            $('#maincontent').unmask();
+        }
+        else
+        {
+            jAlert(data.msg);
+            return;
+        }
+
+    }, 'json');
+}
+
+
+function editImage(id)
+{
+    $('#maincontent').mask('arbeite...');    
+    $('#save-image').unbind('click');
+
+    $.post('admin.php', 'adm=gallery&ajax=1&action=edit&id='+ id, function(data) {
+        if(responseIsOk(data)) {
+            $('#etitle').val( data.title );
+            $('#edescription').val(data.description);
+            $('#elID').val(id);
+            $('#save-image').bind('click', function(){sendeditImage(id);return false;});
+            $('#FileEditCont').show();
+            $('#FileEditContShadow').show();
+            $('#maincontent').unmask();        
+        }
+        else
+        {
+            $('#maincontent').unmask();    
+            $('#FileEditCont').hide();
+            $('#FileEditContShadow').hide();
+            
+            jAlert(data.msg);
+        }
+        
+    }, 'json');
+    
+}
+
+function changeImagePublish(id)
+{
+    var onlineGif  = 'online';
+    var offlineGif = 'offline';    
+    
+    $.post('admin.php', 'adm=gallery&ajax=1&action=publish&id='+id, function(data) {
+        if(responseIsOk(data)) {
+            var src = $('#IMGP'+id).attr('src');
+            
+            if ( data.publish == true)
+            {
+                $('#IMGP'+id).attr('src', src.replace(offlineGif, onlineGif) );                
+                $('#IMG'+id).removeClass('unpub');                
+                $('#IMG'+id).addClass('pub');
+            }
+            else
+            {
+                $('#IMGP'+id).attr('src', src.replace(onlineGif, offlineGif));                
+                $('#IMG'+id).removeClass('pub');                
+                $('#IMG'+id).addClass('unpub');
+            }
+        }
+        else
+        {
+            alert("Error:rn"+ data.msg);
+        }
+    }, 'json');
+    
+}
+
+function deleteImage(id)
+{
+    jConfirm("Wollen Sie das Bild wirklich löschen?", 'Confirmation Required', function(res) {
+        if(res)
+        {
+            $('#maincontent').mask('arbeite...');
+            $.get('admin.php?adm=gallery&action=delete&id='+id, {}, function(data) {
+                if(responseIsOk(data)) {
+                    $('#CON'+id).remove();
+                }
+                else
+                {
+                    alert("Error:rn"+ data.msg);
+                }
+            }, 'json');
+        }
+        
+        $('#maincontent').unmask();
+    });
+}
+
+function emptyGallery( id )
+{
+    jConfirm("Wollen Sie diese Gallerie wirklich leeren?", 'Confirmation Required', function(res) {
+        if(res)
+        {
+            $('#maincontent').mask('arbeite...');
+            
+            $.get('admin.php?adm=gallery&ajax=1&action=empty&id='+id, {}, function(data) {
+                if(responseIsOk(data)) {
+                    $("#thumbnails").empty();
+                    $('#pager').remove();
+                }
+                else
+                {
+                    alert("Error:rn"+ data.msg);
+                }
+            }, 'json');
+        }
+        
+        $('#maincontent').unmask();
+    });
+}
+
+function reloadGalImages(id)
+{
+    $('#global_tbl').mask('arbeite...');
+    $('#container-gal').empty();
+    
+    $.get('admin.php?adm=gallery&action=showpics&ajax=1&id='+ id, {}, function(data)
+    {        
+        $('#container-gal').html(data);        
+    }, 'html');
+    
+    $('#global_tbl').unmask();
+
+}
+
+
+
+//]]>
+</script>
+</cp:block>

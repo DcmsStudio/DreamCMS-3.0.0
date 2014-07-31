@@ -1,0 +1,33 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button class="action-button" onclick="openTab({url: 'admin.php?adm=user&action=add', obj: this, label: $(this).text() })"><span class="btn_new"></span>{trans('Benutzer hinzufügen')}</button>
+</cp:block>
+
+<cp:block name="content">
+    
+<div id="users-grid"></div>
+<script type="text/javascript" language="javascript">
+<cp:literal type="cdata_comment">
+
+        Application.Grid('users-grid', {
+        url: 'admin.php?adm=user',
+        labelColumn: '{$grid.labelColumn}',
+        currentFilter: {$grid.activeFilter},
+        colModel: {$grid.colModel},
+        gridActions: {$grid.gridActions},
+        searchitems: {$grid.searchitems},
+        datarows: {$grid.datarows},
+        sort: '{$grid.sort}',
+        orderby: '{$grid.orderby}',
+        total: {$grid.total},
+        key: 'userid',
+                        perpage: {$grid.perpage}
+        });
+
+
+</cp:literal>
+</script>
+
+
+</cp:block>

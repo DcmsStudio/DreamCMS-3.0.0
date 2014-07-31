@@ -1,0 +1,92 @@
+<?php
+
+function __faq_list( $rs ){
+global $cp, $fct;
+
+if ( $rs['show'] == 'cat' )
+{ 
+
+	$html = <<<EOF
+
+	<table cellpadding="3" cellspacing="1" border="0" class="tblborder" width="99%">
+		<tr class="tableheader">
+			<td>Kategorie</td>
+			<td width="30%">Zugriffsrechte</td>
+			<td width="5%" class="tc">Aktiv</td>
+			<td width="10%" class="tc">Funktionen</td>
+		</tr>
+EOF;
+
+	
+
+	foreach ($rs['rows'] as $r)
+	{
+		$css = ( $y++%2 ? 'firstrow' : 'secondrow');
+		
+		$del = ($r['fixed'] ? '<img src="images/delete_inact.gif" border="0">' : '<a href="admin.php?adm=faqadmin&amp;action=del_cat&amp;id='.$r['id_cat'].'&amp;ok=0"><img src="images/delete.gif" border="0" alt="Löschen"></a>');
+		
+		$ac = $fct->_build_access_list($r['access'], false, true);
+		
+		$html .= <<<EOF
+		<tr class="{$css}" onmouseover="over(this)" onmouseout="out(this)">
+			<td>{$r['categories']}</td>
+			<td>{$ac}</td>
+			<td class="tc">aktiv</td>
+			<td class="tc">
+			<a href="admin.php?adm=faqadmin&amp;action=FaqCatGo&amp;id_cat={$r['id_cat']}&amp;sid={$cp->session_id}"><img src="images/papers.gif" border="0" alt="Inhalte Bearbeiten"></a> 
+			<a href="admin.php?adm=faqadmin&amp;action=FaqCatEdit&amp;id_cat={$r['id_cat']}&amp;sid={$cp->session_id}"><img src="images/edit.png" border="0" alt="Kategorie Bearbeiten"></a> 
+			{$del}
+			</td>
+		</tr>
+EOF;
+	}
+
+	$html .= <<<EOF
+	</table>
+EOF;
+
+}
+else
+{
+
+	$html = <<<EOF
+
+	<table cellpadding="3" cellspacing="1" border="0" class="tblborder" width="99%">
+		<tr class="tableheader">
+			<td>Frage</td>
+			<td width="2%" class="tc">Aktiv</td>
+			<td width="10%">Funktionen</td>
+		</tr>
+EOF;
+
+	foreach ($rs['rows'] as $r)
+	{
+		$css = ( $y++%2 ? 'firstrow' : 'secondrow');
+		
+		$del = ($r['fixed'] ? '<img src="images/delete_inact.gif" border="0">' : '<a href="admin.php?adm=faqadmin&amp;action=del_cat&amp;id='.$r['id_cat'].'&amp;ok=0"><img src="images/delete.gif" border="0" alt="Löschen"></a>');		
+		
+		$html .= <<<EOF
+		<tr class="{$css}" onmouseover="over(this)" onmouseout="out(this)">
+			<td>Kategorie</td>
+			<td width="2%" class="tc">Aktiv</td>
+			<td width="10%">
+			<a href="admin.php?adm=faqadmin&amp;action=FaqCatGo&amp;id_cat={$r['id_cat']}&amp;sid={$cp->session_id}"><img src="images/papers.gif" border="0" alt="Inhalte Bearbeiten"></a> 
+			<a href="admin.php?adm=faqadmin&amp;action=FaqCatEdit&amp;id_cat={$r['id_cat']}&amp;sid={$cp->session_id}"><img src="images/edit.png" border="0" alt="Kategorie Bearbeiten"></a> 
+			{$del}
+			</td>
+		</tr>
+EOF;
+	}
+
+	$html .= <<<EOF
+	</table>
+EOF;
+
+
+}
+
+
+	return $html;
+}
+
+?>

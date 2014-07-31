@@ -1,0 +1,52 @@
+<cp:extends template="container" />
+<cp:block name="main_content">
+    <div class="error403">
+        <h1 class="decoration">
+            <span class="icon-warning-sign">
+            </span>
+            <cp:if condition="!$errorcode">
+                {trans('Fehler...')}
+            </cp:if>
+            <cp:else>
+                {trans('Fehler %s...', $errorcode)}
+            </cp:else>
+        </h1>
+        <form method="post" name="loginForm" id="loginForm" action="/auth/login">
+            <input type="hidden" name="action" value="login" />
+            <input type="hidden" name="send" value="send" />
+            <input type="hidden" name="url" value="{SERVER|request_uri_small}" />
+            <div class="tl m3" style="display:inline-block">
+                <div class="ajaxerror" id="loginerrorloginForm">
+                </div>
+                {$message}
+                <fieldset>
+                    <legend>
+                        {trans('Benutzername')}
+                    </legend>
+                    <input type="text" class="input" name="logusername" size="30" maxlength="50" />
+                    <br/>
+                </fieldset>
+                <fieldset>
+                    <legend>
+                        {trans('Kennwort')}
+                    </legend>
+                    <input type="password" class="input" name="logpassword" size="30" maxlength="30" />
+                </fieldset>
+                <p>
+                    <button type="submit">
+                        {trans('Login')}
+                    </button>
+                </p>
+                <div class="tc small">
+                    <a href="/register">
+                        {trans('Registrieren')}
+                    </a>
+                    « »
+                    <a href="/auth/lostpw">
+                        {trans('Passwort vergessen')}
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</cp:block>

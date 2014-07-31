@@ -1,0 +1,509 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="regenerate-templates" class="action-button"><span class="btn_new"></span>{trans('Templates erneuern')}</button>
+    <button id="back-btn" class="action-button" style="display:none"><span class="btn_back"></span>{trans('Zurück')}</button>
+</cp:block>
+
+<cp:block name="content">
+
+
+<div class="template-search">
+    <form id="search-template" name="search-template">
+        <div class="box">
+            <h2>{trans('Template Suche')}</h2>
+
+            <div class="box-inner">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="search-string" style="width: 100%">
+                            <input type="text" name="q" id="qstr" value="" class="form-control"/>
+                            <i class="fa fa-times-circle"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="search-btn" type="button" class="action-button"><span class="btn_search"></span>{trans('Templates Suchen')}</button>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="exact"><input type="checkbox" name="exact" id="exact" value="1"/> genaue suche</label>
+                    </div>
+                </div>
+                <small>{trans('Es wird im Code des Templates gesucht und nach der Bezeichnung des Templates')}</small>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="template-groups-container">
+
+    <div class="template-groups" id="template-groups-container">
+        <small class="templates-gray">{trans('Template Gruppen')}:</small>
+        <div>
+
+            <div id="template-groups">
+                <cp:loop name="templates" key="r">
+                    <div rel="{$r.group_name}">
+                        {$r.group_name}
+                        <small>
+                            <span class="total" total="{$r.totaltemplates}">({trans('%s Templates', $r.totaltemplates)})</span>
+                        </small>
+                    </div>
+                </cp:loop>
+            </div>
+            <div id="searched-template-groups"></div>
+        </div>
+    </div>
+
+    <div class="templates-list" id="templates-list">
+        <small class="templates-gray">{trans('Templates')}:</small>
+
+        <div class="templates-of-groups" id="result-list">
+            <div></div>
+        </div>
+        <div class="templates-of-groups" id="search-result-list">
+            <div></div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--
+
+    <div style="display: inline-block;width: 100%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div style="height:auto;display:block;position:relative;width:56%;margin-bottom:3px;float:left">
+
+            <div id="temlate-list">
+
+                <cp:loop name="templates" key="r">
+
+                    <div class="box" style="min-height:0;vertical-align:top;width:100%;display:inline-block!important;margin-bottom:5px;">
+                        <h2 style="line-height: 20px;padding: 0;margin: 0">
+
+
+
+                            <div style="width:79%;float:left;height:20px"><a href="#{$r.group_name}"></a>
+                                <span style="width:50%;float:left;display:inline-block;">{$r.group_name}</span>
+                                <span style="display:inline-block;width:40%;color: #c0c0c0;font-weight: normal"><small>({trans('%s Templates', $r.totaltemplates)})</small></span>
+                            </div>
+
+                            <div style="width:19%;float:left;height:20px">
+
+                                <a class="resizer-minus" rel="templates-{$r.group_name}" style="float:right"><img src="images/buttons/minus.png" title="{trans('weiter einklappen')}" width="16" height="16" /></a>
+                                <a class="resizer-plus" rel="templates-{$r.group_name}" style="float:right"><img src="images/buttons/plus.png" title="{trans('weiter ausklappen')}" width="16" height="16" /></a>
+                                <a href="admin.php?adm=skins&action=templates&id={$input.id}&tplgroup={$r.group_name}" class="get-template" rel="templates-{$r.group_name}" style="float:right"><img src="images/down.png" title="{trans('weiter ausklappen')}" width="16" height="16" /></a>
+
+                            </div>
+                        </h2>
+                        <div id="templates-{$r.group_name}" class="box-inner" style="width:100%;display:none;overflow:visible;padding:0"></div>
+                    </div>
+
+                </cp:loop>
+            </div>
+
+            <div id="result-list"></div>
+
+        </div>
+
+
+
+        <form id="search-template" name="search-template">
+
+            <div style="height:auto;display:block;width:39%;overflow:none;margin-left: 60%">
+                <div class="box">
+                    <h2 class="collapsible">{trans('Information zum Skin %s', $skintitle)}</h2>
+                    <div class="box-inner">
+
+                        {trans('Ihnen werden zunächst alle Template Gruppen angezeigt. Um die Templates aus einer Gruppe anzuzeigen klicken Sie bitte auf `Zeige Templates` um diese dann bearbeiten zu können.')}
+
+                    </div>
+                </div>
+
+                <div id="info-box" class="box">
+                    <h2>{trans('Template Information')}</h2>
+                    <div class="box-inner" id="info-box-content">
+                        {trans('Hier werden Ihnen die Template Informationen angezeigt, wenn Sie über ein Template auf der linken Seite fahren.')}
+                    </div>
+                </div>
+
+
+                <div class="box">
+                    <h2>{trans('Template Suche')}</h2>
+                    <div class="box-inner">
+                        <input type="text" name="q" id="qstr" value="" size="40" class="input"/>
+                        <div style="display: block">
+                            <label for="exact"><input type="checkbox" name="exact" id="exact" value="1"/> genaue suche</label>
+                            <button id="search-btn" type="button" class="action-button"><span class="btn_search"></span>{trans('Templates Suchen')}</button>
+                        </div>
+                        <br/>
+                        <small>{trans('Es wird im Code des Templates gesucht und nach der Bezeichnung des Templates')}</small>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+-->
+<script type="text/javascript">
+var tc = Core.getTabContent();
+
+setTimeout( function ()
+{
+    Tools.scrollBar( tc.find( '#template-groups' ) );
+}, 100 );
+
+var windowObj = tc;
+
+if ( typeof buildTemplateResult == 'undefined' ) {
+
+    var renameTemplate = "{trans('Template umbenennen')}";
+    var deleteTemplate = "{trans('Template löschen')}";
+
+    function buildTemplateResult( container, data, isSearch )
+    {
+        container.empty();
+        for ( var i = 0; i < data.templates.length; ++i ) {
+
+            var dat = data.templates[i];
+            var row = $( '<div/>' ).addClass( 'row' );
+            row.append( $( '<span/>' ).append( dat.templatename ) ).data( 'id', dat.id ).attr( 'title', title );
+
+            if ( isSearch ) {
+                row.append( $( '<em/>' ).append( ' (' + dat.group_name + ')' ) );
+            }
+
+            var rightSide = $( '<div/>' ).addClass( 'right-side' );
+            var title = "{trans('Template `%s` bearbeiten')}".replace( '%s', dat.templatename );
+            var editImage = $( '<img src="' + Config.get( 'backendImagePath' ) + 'edit.png" width="16" height="16" title="' + title + '"/>' );
+            var renameImage = $( '<img src="' + Config.get( 'backendImagePath' ) + 'document-rename.png" width="16" height="16" title="' + renameTemplate + '"/>' );
+            var deleteImage = $( '<img src="' + Config.get( 'backendImagePath' ) + 'delete.png" width="16" height="16" title="' + deleteTemplate + '"/>' );
+            var editlink = $( '<a/>' ).css( {'cursor': 'pointer', marginLeft: '10px'} ).attr( 'title', title ).data( 'id', dat.id );
+            editlink.append( editImage );
+            editlink.click( function ()
+            {
+                openTab( {url: 'admin.php?adm=skins&action=edittemplate&id=' + $( this ).data( 'id' ) + '&skinid={$input.id}', obj: this, label: $( this ).attr( 'title' ), isSingleWindow: false} );
+            } );
+            var dellink = $( '<a/>' ).css( {'cursor': 'pointer', marginLeft: '10px'} ).data( 'id', dat.id ).data( 'groupname', dat.group_name );
+            dellink.append( deleteImage );
+            dellink.click( function ()
+            {
+                var s = $( this );
+                jConfirm( "{trans('Wollen Sie das Template wirklich löschen?.')}", "{trans('Achtung...')}",
+                        function ( res )
+                        {
+                            if ( res ) {
+                                var url = 'admin.php?adm=skins&action=deltemplate&id=' + $( s ).data( 'id' );
+                                $.get( url + '&ajax=1', function ( data )
+                                {
+                                    if ( Tools.responseIsOk( data ) ) {
+
+                                        var groupRow = $( '#' + Win.windowID ).find( '#template-groups' ).find( 'div[rel="' + $( s ).data( 'groupname' ) + '"]' );
+                                        if ( groupRow && groupRow.length ) {
+                                            var totalTemplates = groupRow.find( 'span.total' ).attr( 'total' );
+                                            if ( totalTemplates > 0 ) {
+                                                totalTemplates--;
+                                                groupRow.find( 'span' ).attr( 'total', totalTemplates );
+                                            }
+
+                                            groupRow.find( 'span.total' ).html( "({trans('%s Templates')})".replace( '%s', totalTemplates ) );
+                                        }
+
+                                        $( s ).parents( 'div.row:first' ).slideUp( 400, function ()
+                                        {
+                                            $( this ).remove();
+                                        } );
+                                    }
+                                    else {
+                                        jAlert( data.msg );
+                                    }
+                                }, 'json' );
+                            }
+                        } );
+            } );
+            var renamelink = $( '<a/>' ).css( {'cursor': 'pointer', marginLeft: '10px'} ).data( 'id', dat.id ).data( 'name', dat.templatename );
+            renamelink.append( renameImage );
+            renamelink.click( function ()
+            {
+                var s = $( this );
+                jPrompt( "{trans('Template Bezeichnung:')}", $( this ).data( 'name' ), "{trans('Template Umbenennen...')}",
+                        function ( res )
+                        {
+                            if ( res ) {
+                                var url = 'admin.php?adm=skins&action=renametemplate&id=' + $( s ).data( 'id' ) + '&newname=' + res;
+                                $.get( url + '&ajax=1', function ( data )
+                                {
+                                    if ( Tools.responseIsOk( data ) ) {
+                                        jAlert( data.msg );
+                                        $( s ).parents( 'div.row:first' ).find( 'span' ).text( res );
+                                    }
+                                    else {
+                                        jAlert( data.msg );
+                                    }
+                                }, 'json' );
+                            }
+                        } );
+            } );
+            rightSide.append( editlink );
+            rightSide.append( renamelink );
+            rightSide.append( dellink );
+
+            row.on( 'dblclick', function ( e )
+            {
+                openTab( {url: 'admin.php?adm=skins&action=edittemplate&id=' + $( this ).data( 'id' ) + '&skinid={$input.id}', obj: this, label: $( this ).attr( 'title' ), isSingleWindow: false} );
+            } );
+
+            row.append( rightSide );
+            container.append( row );
+        }
+    }
+}
+
+windowObj.find( '#template-groups' ).find( 'div' ).each( function ()
+{
+    var btnContainer = $( '<div class="inline-buttons"></div>' );
+    var editImage = $( '<span><img src="' + Config.get( 'backendImagePath' ) + 'edit.png" width="16" height="16" /></span>' ).attr( 'title', "{trans('Template erstellen')}" );
+    var deleteImage = $( '<span><img src="' + Config.get( 'backendImagePath' ) + 'delete.png" width="16" height="16" /></span>' ).attr( 'title', "{trans('Template Gruppe löschen')}" );
+    //   var editlink1 = $('<button type="button"/>').attr('title', "{trans('Template erstellen')}");
+
+    btnContainer.append( editImage ).append( deleteImage );
+
+    editImage.click( function ()
+    {
+        var href = 'admin.php?adm=skins&action=edittemplate&id=&skinid={$input.id}&group=' + $( this ).parent().parents( 'div:first' ).attr( 'rel' );
+
+        jPrompt( "{trans('Template Bezeichnung:')}", '', "{trans('Template erstellen...')}",
+                function ( res )
+                {
+                    if ( res ) {
+                        if ( !res.match( /^([a-z0-9_\-]+)$/i ) ) {
+                            jAlert( "{trans('Bitte nur folgende Zeichen verwenden: (A-Za-z0-9_ und Bindestrich)')}" );
+                        }
+                        else if ( !res.match( /^([a-z0-9])/i ) ) {
+                            jAlert( "{trans('Templates müssen mit (A-Za-z0-9) beginnen')}" );
+                        }
+                        else {
+                            href += '&templatename=' + res;
+                            openTab( {url: href, obj: false, label: "{trans('Template erstellen')}", isSingleWindow: 0} );
+                        }
+                    }
+                } );
+
+    } );
+
+    deleteImage.click( function ()
+    {
+        var groupName = $( this ).parent().parents( 'div:first' ).attr( 'rel' );
+
+        // root group not allowed for delete
+        if ( !groupName || groupName.toLowerCase() === 'root' ) {
+            return;
+        }
+        else {
+            var groupRow = $( this ).parent().parents( 'div:first' );
+            jConfirm(
+                    "{trans('Sind Sie sicher, das die Template-Gruppe ´%s´ gelöscht werden soll?<br/>Achtung: Es werden alle dazugehörigen Templates unwiederbringlich gelöscht!')}"
+                            .replace( '%s', groupName ), "{trans('Template-Gruppe löschen...')}",
+                    function ( res )
+                    {
+                        if ( res ) {
+                            $.post( 'admin.php', {
+                                adm: 'skins',
+                                action: 'delgroup',
+                                group: groupName,
+                                skinid: '{$input.id}',
+                                token: Config.get( 'token' )
+                            }, function ( data )
+                            {
+                                if ( Tools.responseIsOk( data ) ) {
+                                    Notifier.info( data.msg );
+
+                                    var tc = Core.getTabContent();
+
+                                    if ( tc.data( 'currentGroup' ) == groupName ) {
+                                        $( '#result-list', tc ).find( 'div:first' ).empty();
+                                    }
+
+                                    groupRow.slideUp( 400, function ()
+                                    {
+                                        $( this ).remove();
+                                    } );
+                                }
+                                else {
+                                    Notifier.error( data && data.msg ? data.msg : "Unknown error" );
+                                }
+                            }, 'json' );
+                        }
+                    } );
+        } // end else
+
+    } );
+
+    btnContainer.appendTo( $( this ).find( 'small' ) );
+
+    $( this ).bind( 'dblclick.tpl', function ()
+    {
+        var tc = Core.getTabContent();
+
+        $( '#result-list', tc ).mask( '{trans("Hole Templates...")}' );
+        var rel = $( this ).attr( 'rel' );
+        $( '#template-groups', tc ).find( 'div.active' ).removeClass( 'active' );
+        $( this ).addClass( 'active' );
+        $.post( 'admin.php', {
+            adm: 'skins',
+            action: 'templates',
+            id: '{$input.id}',
+            tplgroup: rel,
+            token: Config.get( 'token' )
+        }, function ( data )
+        {
+            if ( Tools.responseIsOk( data ) ) {
+
+                $( '#result-list', tc ).unmask();
+
+                tc.data( 'currentGroup', rel );
+
+                buildTemplateResult( $( '#result-list', tc).find( 'div:first' ), data );
+
+                Tools.scrollBar( tc.find( '#result-list' ).find( 'div:first' ) );
+
+                setTimeout( function () { $( window ).trigger( 'resize' ); }, 500 );
+            }
+        }, 'json' );
+    } );
+} );
+
+windowObj.find( '#search-template .search-string i' ).unbind( 'click.tpl' ).on( 'click.tpl', function ()
+{
+    var tc = Core.getTabContent();
+    $( '#qstr', tc ).val( '' );
+    $( this ).hide();
+    $( '#result-list', tc).show();
+    $( '#search-result-list', tc).hide();
+} );
+
+windowObj.find( '#search-btn' ).unbind( 'click.tpl' ).on( 'click.tpl', function ()
+{
+    var tc = Core.getTabContent();
+    var q = $( '#qstr', tc ).val();
+    if ( q.length ) {
+        $( '#search-template .search-string i' ).show();
+        $( '#result-list', tc).mask( '{trans("Suche Templates...")}' );
+
+        $.post( 'admin.php', {
+            adm: 'skins',
+            action: 'search',
+            skinid: '{$input.id}',
+            q: q,
+            token: Config.get( 'token' )
+        }, function ( data )
+        {
+            $( '#result-list', tc).unmask();
+
+            if ( Tools.responseIsOk( data ) ) {
+
+                if ( data.results.length == 0 ) {
+                    jAlert( 'Es wurden keine Templates mit dem Suchmuster `%s` gefunden.'.replace( '%s', q ) );
+                }
+                else {
+                    data.templates = data.results;
+
+                    $( '#result-list', tc).hide();
+                    $( '#search-result-list', tc).show();
+                    $( '#search-result-list', tc).find( 'div:first' ).empty();
+
+                    buildTemplateResult( tc.find( '#search-result-list' ).find( 'div:first' ), data, true );
+                    Tools.scrollBar( tc.find( '#search-result-list' ).find( 'div:first' ) );
+                }
+            }
+        }, 'json' );
+    }
+    else {
+        tc.find( '#search-template .search-string span' ).trigger( 'click' );
+    }
+} );
+
+windowObj.find( 'form' ).unbind( 'keyup.tpl keypress.tpl' ).bind( "keyup.tpl keypress.tpl", function ( e )
+{
+    var code = e.keyCode || e.which;
+    if ( code == 13 ) {
+        var tc = Core.getTabContent();
+        $( '#search-btn', tc).trigger( 'click' );
+        e.preventDefault();
+        return false;
+    }
+} );
+
+$( '#buttons-' + Win.windowID.replace( 'tab-', '' ).replace( 'content-', '' ) ).find( '.subbuttons:visible #regenerate-templates' ).unbind( 'click.tpl' ).on( 'click.tpl', function ( e )
+{
+    var tc = Core.getTabContent();
+    tc.mask( "{trans('Regeneriere Templates...')}" );
+
+    e.preventDefault();
+
+    setTimeout( function ()
+    {
+
+        $.post( 'admin.php', {
+            adm: 'skins',
+            action: 'regenerate',
+            skinid: '{$input.id}',
+            token: Config.get( 'token' )
+        }, function ( data )
+        {
+            tc.unmask();
+
+            if ( Tools.responseIsOk( data ) ) {
+                Notifier.info( data.msg );
+            }
+            else {
+                Notifier.error( data && data.msg ? data.msg : "Unknown error" );
+            }
+        }, 'json' );
+
+    }, 100 );
+} );
+var tii;
+Core.addEvent( 'onResize', function ( tabContent )
+{
+    clearTimeout(tii);
+
+    $( '#result-list,#template-groups-container>div:first,#search-result-list', tabContent ).height(
+        $( '#content-container-inner' ).outerHeight() - $( '#search-template', tabContent ).outerHeight( true ) - 80
+    );
+
+    tii = setTimeout( function ()
+    {
+        var tc = Core.getTabContent();
+
+        Tools.scrollBar( tc.find( '#template-groups' ) );
+        Tools.scrollBar( tc.find( '#search-result-list' ).find( 'div:first' ) );
+        Tools.scrollBar( tc.find( '#result-list' ).find( 'div:first' ) );
+
+        $( window ).trigger( 'resize' );
+    }, 500 );
+} );
+
+setTimeout( function ()
+{
+    $( window ).trigger( 'resize' );
+}, 500 );
+
+
+</script>
+
+</cp:block>

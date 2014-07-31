@@ -1,0 +1,203 @@
+<cp:extends template="../main"/>
+<cp:block name="toolbar">
+    
+    [save:rform] [save_exit:rform] [reset:rform] [cancel:rform]
+</cp:block>
+
+<cp:block name="content">
+<div class="box">
+    <h2>{trans('Rechte für den Benutzer')}&nbsp;{$currentuser.username}</h2>
+    <div class="box-inner">
+        <span><strong>{$currentuser.username}</strong> {trans('%s hat die Benutzergruppe', $currentuser.username)}: <strong>{$currentuser.grouptitle}</strong></span>
+        <cp:if condition="$currentuser.dashboard"><br/><span style="color:red">{trans('Achtung: %s darf auch das Dashboard benutzen', $currentuser.username)}</span></cp:if> 
+        <cp:if condition="$create_newuser_access">
+            <p>{trans('Die aktuellen Einstellungen basieren auf den Einstellungen der Benutzergruppe, die dem Benutzer zugewiesen wurden. Diese Einstellungen sind für den Benutzer aber nicht gespeichert.')}</p>
+            
+        </cp:if> 
+        <cp:else>
+            <p>{trans('Um die Einstellungen wieder auf die Einstellung der Benutzergruppe zurückzusetzen die dem Benutzer zugewiesen wurden, demarkieren Sie bitte alles und speichern Sie anschließend die Einstellung.')}</p>
+        </cp:else>       
+    </div>
+</div>
+
+<div class="mb5">
+    <div class="fr mb5">
+        <input type="button" onclick="closeAll()" value="{trans('Alle Container Schließen')}" class="button"/> 
+        <input type="button" onclick="openAll()" value="{trans('Alle Container Öffnen')}" class="button"/>
+    </div>    
+    
+    <input type="button" onclick="switchSelections(true);" value="{trans('alles markieren')}" class="button"<cp:if condition="$hasperm !== true"> disabled="disabled"</cp:if>/> 
+    <input type="button" onclick="switchSelections(false);" value="{trans('alles demarkieren')}" class="button"<cp:if condition="$hasperm !== true"> disabled="disabled"</cp:if>/>
+</div>
+
+<form action="admin.php" method="post" id="rform">
+    <input type="hidden" name="adm" value="adminperms" />
+    <input type="hidden" name="action" value="edit_user"/>
+    <input type="hidden" name="send" value="send"/>
+    <input type="hidden" name="userid" id="userid-id" value="{$request.userid}"/>
+    <input type="hidden" name="type" value="{$request.type}"/>
+    
+    <div id="accessItems" style="display:inline-block">
+        {$tab_content}
+    </div>
+    
+</form>
+
+<script type="text/javascript" src="core/js/jquery/jquery.scrollTo.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+
+$(document).ready(function() {
+    var form = $('#rform').registerForm({
+        contentIdentifierID: 'userid-id',
+        exiturl: 'admin.php?adm=adminperms&type={$request.type}',
+        runAfterSubmit: function(){ menuObj.getMenu(); pagestree.rebuildTree(true); }
+    });
+
+
+    var accessItems = $('#accessItems').find('h2');
+    var iconopen  = 'html/style/default/img/down.gif';
+    var iconclose = 'html/style/default/img/up.gif';
+    var icon;
+    accessItems.each(function() 
+    {
+        $(this).css({cursor:'pointer'});
+        var container = $(this).parent().children('.box-inner');
+        var span = $(this).children('span');
+
+        icon = $('<img>').attr({'src': (!$(container).is(':visible') ? iconopen : iconclose),'width':'16'});
+        $(span).before(icon);
+        
+        icon = $('<img>').attr({'src': ($(container).is(':visible') ? iconopen : iconclose),'width':'16'}).css({display:'none'});
+        $(span).before(icon);
+        
+        $(this).css({'-moz-user-select':'none'});        
+        $(this).attr({'title': '{trans('Klick zum Öffnen/Schließen')}'});
+        
+
+        $(this).click(function(e)
+        {
+            $(container).slideToggle('fast'); 
+            $(this).children('img').toggle();
+
+        });
+    });
+});
+
+function jumpToItem( obj )
+{
+    var num = $(obj).val();
+
+    if ( num != '' )
+    {
+        var container = $('#items'+num).children('.box-inner');
+        if ( !$(container).is(':visible') )
+        {
+            $(container).slideDown('fast'); 
+            $('#items'+num).children('img').toggle();
+        }
+    }
+}
+    
+function closeAll()
+{
+    var accessItems = $('#accessItems').find('h2');
+    accessItems.each(function() 
+    {
+        var container = $(this).parent().children('.box-inner');
+        if ( $(container).is(':visible') )
+        {
+            $(container).slideUp('fast'); 
+            $(this).children('img').toggle();
+        }
+    });
+}
+function openAll()
+{
+    var accessItems = $('#accessItems').find('h2');
+    accessItems.each(function() 
+    {
+        var container = $(this).parent().children('.box-inner');
+        if ( !$(container).is(':visible') )
+        {
+            $(container).slideDown('fast'); 
+            $(this).children('img').toggle();
+        }
+    });
+}
+function switchSelections( sel )
+{
+    var accessItems = $('#accessItems').find('h2');
+    var allItems = $('#accessItems').find('input:checkbox');
+    if ( sel == true )
+    {
+        
+
+
+    accessItems.each(function(index, domEle)
+    {
+        var container = $(domEle).parent().children('.box-inner');
+        var Items = $(container).find('input:checkbox');
+
+        $(container).mask('{trans('es wird alles aktiviert...')}');
+
+        if ( !$(container).is(':visible') )
+        {
+     
+            $(container).slideDown('slow', function(){
+
+             Items.each(function(index2, domEle2)
+             {
+                if ( !$(domEle2).is(':checked'))
+                {
+                    $(domEle2).attr('checked','checked');
+                 }
+              });
+                $(container).unmask();
+             });
+             
+             $(domEle).children('img').toggle();
+        }
+        else
+        {
+
+             Items.each(function(index2, domEle2)
+             {
+                if ( !$(domEle2).is(':checked'))
+                {
+                    $(domEle2).attr('checked','checked');
+                 }
+              });
+              $(container).unmask();
+
+
+        }
+        
+
+
+    });
+
+
+    }
+    else
+    {
+        $('#maincontent').mask('{trans('es wird alles deaktiviert...')}');
+        
+        allItems.each(function() 
+        {
+            if ( $(this).is(':checked'))
+            {
+                $(this).attr('checked','');
+            }
+        });
+        
+        setTimeout(function() {  
+            $('#maincontent').unmask();
+            closeAll(); 
+        }, 500);
+    }
+}
+
+//]]>
+</script>
+</cp:block>

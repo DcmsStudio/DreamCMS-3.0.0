@@ -1,0 +1,70 @@
+<?php
+
+function __board_chooser( $default_perpage = 250 ){
+global $cp, $cfg, $fct, $adm_skin;
+
+	return <<<EOF
+
+<form  action="admin.php"  method="post"><input type="hidden" name="adm" value="forum_other" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="action" value="reindex" />
+<table width="100%" border="0" cellpadding="3" cellspacing="0" class="tblborder">
+    <tr>
+    	<td colspan="2" class="tableheader">
+    		Forum Index erzeugen
+    	</td>
+    </tr>
+    <tr class="secondrow">
+    	<td colspan="2">
+    	<b>Achtung:</b> If you are reindexing, you may want to empty the indexes. <a href="">Clear Index</a>
+    	</td>
+    </tr>
+    <tr class="firstrow">
+    	<td><b>Anzahl der Beiträge pro Seite:</b></td>
+    	<td><input type="text" class="input" name="perpage" value="$default_perpage" size="30" /></td>
+    </tr>
+    <tr class="secondrow">
+    	<td><b>ab Beitrags ID:</b></td>
+    	<td><input type="text" class="input" name="startid" size="30" /></td>
+    </tr>
+    <tr class="firstrow">
+    	<td><b>Total number of posts to process:</b><br /><i>(0 for unlimited)</i></td>
+    	<td valign="top"><input type="text" class="input" name="doprocess" value="0" size="30" /></td>
+    </tr>
+
+
+    <tr class="secondrow">
+    	<td><b>Automatische Weiterleitung:</b></td>
+    	<td><input class="radio" type="radio" name="autoredirect" value="1" tabindex="1" checked="checked" />  {$cp->lang['yes']} &nbsp;
+		<input class="radio" type="radio" name="autoredirect" value="0" tabindex="1" /> {$cp->lang['no']}
+    	</td>
+    </tr>
+
+
+    <tr class="firstrow">
+    	<td colspan="2" align="center">
+    	<input type="submit" value="Speichern" class="button" /> &nbsp;
+    	<input type="reset" value="Zurücksetzen" class="button" />
+    	</td>
+    </tr>
+</table>
+</form>
+
+EOF;;;
+
+
+
+
+
+
+
+
+
+
+
+
+// ==============================================================================================0
+//														KOMMENTARE
+}
+
+?>

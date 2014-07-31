@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooltip>
+  <can_comment title="Kommentare"><![CDATA[Kann diese Seite Kommentiert werden?]]></can_comment>
+  <access title="Zugriffsrechte"><![CDATA[Die Zugriffsrechte der Seite können speziellen Benutzergruppen sichtbar gemacht oder verwehrt werden. Ausgewählte Benutzergruppen werden die Seite sehen können.]]></access>
+  <reset_the_hitcounter title=""><![CDATA[]]></reset_the_hitcounter>
+  <layout title="Layout Template"><![CDATA[Wählen Sie ein Layout Template um den Inhalt der Seite im Frontent darzustellen. In Klammern sehen Sie den Skin des Templates.]]></layout>
+  <tags title="Tags"><![CDATA[Versehen Sie diese Seite mit einzelnen Tags.]]></tags>
+  <pagelayout title=""><![CDATA[]]></pagelayout>
+  <contentlayout title=""><![CDATA[]]></contentlayout>
+  <usefootnotes title="Fußnoten"><![CDATA[Erzeigt automatisch aus Links im Text Fußnoten und fügt diese am ende der Seite ein. Links im Text werden entfernt und ein Bookmark zur Fußnote hinzugefügt]]></usefootnotes>
+  <usesocialbookmarks title="Social Tools"><![CDATA[Zeigt verschiedene Social Bookmarks an]]></usesocialbookmarks>
+  <categorie title="Seiten Kategorie"><![CDATA[Dient zur Zeit nur der besseren Ordnung!<br/><br/>Siehe Seiten Tree (rechts).]]></categorie>
+  <useuserating title="Seiten Bewertung"><![CDATA[Ermöglicht es die Seite bewerten zu lassen]]></useuserating>
+  <useauthorinfos title="Seiten Autor"><![CDATA[Zeigt informationen des Autors der Seite an]]></useauthorinfos>
+  <parentpage title="Übergeordnete Seite"><![CDATA[Hiermit können Sie der Seite eine übergeordnete Seite zuweisen]]></parentpage>
+  <isindexpage title="Index Seite"><![CDATA[Dient als Fallback Seite falls der Router eine untergeordnete Seite nicht finden kann. Fängt somit auch 404 Seiten ab und gibt diese Seite aus.<br/><br/><p>(Optional)</p>]]></isindexpage>
+  <userating title=""><![CDATA[]]></userating>
+  <usetitle title=""><![CDATA[]]></usetitle>
+  <cssclass title=""><![CDATA[]]></cssclass>
+  <templateoptions title=""><![CDATA[]]></templateoptions>
+  <pagetype title=""><![CDATA[]]></pagetype>
+</tooltip>

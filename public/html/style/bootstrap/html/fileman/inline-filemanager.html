@@ -1,0 +1,217 @@
+<cp:if condition="$use_tinymce === true">
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title></title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"/>
+
+    <link rel="stylesheet" href="html/js/jquery/fancybox/style.css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.jquery-ui.css" type="text/css" />
+    <link rel="stylesheet" href="html/style/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/bootstrap-animations.css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="html/css/font-awesome/font-awesome.css" type="text/css"/>
+
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.box.css" type="text/css" />
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.tree-sprite.css" type="text/css" />
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.alerts.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.form-ui.css" type="text/css" />
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.contextmenu.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.grid.css" type="text/css" />
+    <link rel="stylesheet" href="html/style/bootstrap/css/new-style.css" type="text/css" />
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.fileman.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.scrolls.css" type="text/css" />
+    <script type="text/javascript">
+        var cmslang = {};
+        var isSeemodePopup = {iif($input.seemodePopup || $cookie.isSeemodePopup, 'true', 'false')};
+        var cookiePrefix = '{$cookieprefix}';
+        var webSite = '{$website.id}';
+        var seeMode = isSeemodePopup;
+        var session_id = '{$session_id}';
+        var token = '{gettoken()}';
+        var userid = '{user("userid", 0)}';
+
+
+    </script>
+    <script type="text/javascript" src="html/js/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="html/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript" src="admin.php?adm=lang"></script>
+    <script type="text/javascript" src="admin.php?adm=skins&action=getsense"></script>
+    <script type="text/javascript" src="html/style/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="html/js/backend/dcms.loader.js"></script>
+
+    <script type="text/javascript" language="javascript" rel="main-js">
+
+        var loadScripts = [
+            'html/js/backend/modernizr.js',
+            'html/js/TweenMax.js',
+            'html/js/jquery/jquery.gsap.min.js',
+
+            'html/js/jquery/jquery.contextMenu.js',
+            'html/js/jquery/jquery.scrollTo.js',
+
+            'html/js/backend/jquery.alert.js',
+            'html/js/backend/dcms.namespace.js',
+            'html/js/backend/dcms.functions.js',
+            'html/js/backend/dcms.notifier.js',
+            'html/js/backend/dcms.selectbox.js',
+            'html/js/backend/dcms.checkbox.js',
+            'html/js/backend/dcms.config.js',
+
+            'html/js/backend/dcms.tinymceFilemanager.js',
+            'html/js/backend/fileman/dcms.fileman.js',
+            'html/js/backend/fileman/dcms.fileman.layout.js',
+            'html/js/backend/fileman/dcms.fileman.commands.js',
+            'html/js/backend/fileman/dcms.fileman.quickview.js',
+
+
+
+            'html/style/bootstrap/js/dcms.scrollbar.js',
+            'html/style/bootstrap/js/dcms.tools.js',
+            'html/style/bootstrap/js/dcms.core.js',
+        ];
+
+
+
+        var DesktopConsole = {
+            setErrors: function() {
+
+            },
+            setDebug: function() {
+
+            }
+        };
+
+
+
+        Loader.require( loadScripts, function ()
+        {
+            Core.getContent = function() {
+                return $('body');
+            }
+
+
+            $.ajaxSetup(
+                    {
+                        dataType: "json",
+                        cache: false,
+                        async: false
+                    } );
+
+            var opts = {};
+            opts.SID = session_id;
+            opts.token = token;
+            opts.SkinPath = 'html/style/bootstrap/';
+            opts.TaskbarClockSeperatorBlinking = true;
+            opts.ShowTaskbarClock = true;
+
+            Core.loadBasicConfig(function(data) {
+
+                Config.set( data.config );
+
+                var baseUrl = Config.get( 'portalurl', '' );
+                Config.set( 'SSL_portalurl', baseUrl.replace( /https?:\/\//, 'https://' ) );
+                Config.set( 'SSL_MODE', false );
+
+                if ( document.location.href.match( /https:\/\//i ) ) {
+                    Config.set( 'SSL_MODE', true );
+                }
+
+
+                $('#fm-outer' ).height( $(window ).height() );
+                $('#fm' ).height( $(window ).height() - $('#fm-toolbar' ).parent().outerHeight(true) );
+                initFM();
+            });
+
+
+
+        } );
+
+    </script>
+</head>
+<body style="overflow: hidden">
+
+
+<div id="fm-outer" class="inline-window-slider mce-fm">
+    <div class="toolbar">
+        <div id="fm-toolbar" class="fm-toolbar inline-fm">
+            &nbsp;
+        </div>
+    </div>
+    <div class="inline-window-slider">
+        <div id="fm" class="fm inline-fm">
+            <div class="pathway"></div>
+            <div class="fm-container">
+                <div class="left-side">
+                    <div class="treelist">
+                        <div class="treelistInner">
+
+                        </div>
+                    </div>
+                    <div class="file-info">
+                        <!-- height resizeable -->
+                        <div class="preview-container"></div>
+                        <div class="fileinfos">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-side">
+                    <!-- width resizeable -->
+
+                    <div class="foldercontent">
+                        <div class="foldercontentInner"></div>
+                    </div>
+                    <div class="statusbar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+</cp:if>
+<cp:else>
+    <div id="fm-toolbar" class="fm-toolbar inline-fm">
+        &nbsp;
+    </div>
+    <div id="fm" class="fm inline-fm">
+        <div class="pathway"></div>
+        <div class="fm-container">
+            <div class="left-side">
+                <div class="treelist">
+                    <div class="treelistInner">
+
+                    </div>
+                </div>
+                <div class="file-info">
+                    <!-- height resizeable -->
+                    <div class="preview-container"></div>
+                    <div class="fileinfos">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-side">
+                <!-- width resizeable -->
+
+                <div class="foldercontent">
+                    <div class="foldercontentInner"></div>
+                </div>
+                <div class="statusbar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 5px; text-align: right" class="fm-footer inline-fm">
+        <button id="cancel-fm" type="button">{trans('Abbrechen')}</button>
+    </div>
+
+</cp:else>
+

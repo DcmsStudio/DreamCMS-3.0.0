@@ -1,0 +1,77 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="addlayout-btn" class="action-button"><img src="images/buttons/layout-design.png" width="16" height="16" alt=""/> {trans('Layout hinzufügen')}</button>
+</cp:block>
+
+<cp:block name="content">
+    <div id="layouter-grid{$skinid}"></div>
+    <script type="text/javascript">
+        var selectedSkin = '{$skinid}';
+        var opts = {url: 'admin.php?adm=layouter&skinid={$skinid}&load=1',
+                    currentFilter: {$grid.activeFilter},
+                colModel
+        :
+        {$grid.colModel}
+        ,
+        datarows: {$grid.datarows}
+        ,
+        gridActions: {$grid.gridActions}
+        ,
+        searchitems: {$grid.searchitems}
+        ,
+        sort: '{$grid.sort}',
+                orderby
+        :
+        '{$grid.orderby}',
+                total
+        :
+        {$grid.total}
+        ,
+        perpage: {$grid.perpage}
+        ,
+        key: 'id'
+        }
+        ;
+        opts.onAfterLoad = function ( data, self )
+        {
+            $('#'+ Win.windowID ).find( '#layouter-grid{$skinid}' ).find( 'a.duplicate' ).each( function ()
+            {
+                $( this ).unbind( 'click' ).bind( 'click', function ( e )
+                {
+                    e.preventDefault();
+                    var url = $( this ).attr( 'href' );
+                    $.get( url, function ( _data )
+                    {
+                        if ( Tools.responseIsOk( _data ) ) {
+                            if ( _data.msg ) {
+                                Notifier.display( 'info', _data.msg );
+                            }
+                            else {
+                                Notifier.display( 'info', '{trans("Das Layout wurde duplizier.")}' );
+                            }
+                        }
+                        else {
+                            Notifier.display( 'warn', (_data.msg ? _data.msg : 'Error to duplicate this item.') );
+                        }
+
+                    }, 'json' );
+                } );
+            } );
+
+        };
+
+        $('#addlayout-btn', Core.getToolbar() ).unbind( 'click' ).click( function ( e )
+        {
+            var href = 'admin.php?adm=layouter&action=edit&skinid=';
+            href += '{$skinid}' + (isSeemodePopup ? '&seemodePopup=1' : '');
+            openTab( {url: href, obj: this, label: $( this ).text(), isSingleWindow: false} );
+        } );
+
+        $( '#' + Win.windowID ).removeData( 'windowGrid' );
+        $('#'+ Win.windowID ).find( '#layouter-grid{$skinid}' ).removeData();
+        Application.Grid( 'layouter-grid{$skinid}', opts );
+
+
+    </script>
+</cp:block>

@@ -1,0 +1,283 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:if condition="$item.itemtype">
+        <div id="step-btns">
+            [save:articleform{$item.itemid}] [save_exit:articleform{$item.itemid}] [reset:articleform{$item.itemid}] [cancel:articleform{$item.itemid}]
+        </div>
+    </cp:if>    
+    <cp:else>
+        <div id="action-btns" style="display: none">
+            [save:articleform{$item.itemid}] [save_exit:articleform{$item.itemid}] [reset:articleform{$item.itemid}] [cancel:articleform{$item.itemid}]
+        </div>
+
+
+        <div id="step-edit-btns">
+            <button id="next-step" class="action-button"><img src="images/forward.png" width="16" height="16" alt="" />&nbsp;{trans('Weiter')}</button>
+        </div>
+    </cp:else>
+
+</cp:block>
+
+<cp:block name="content">
+
+    <cp:if condition="$item.itemtype">
+
+
+        <form action="admin.php" name="articleform{$item.itemid}" id="articleform{$item.itemid}" method="post">
+            <input type="hidden" name="adm" value="applicationitems"/>
+            <input type="hidden" name="action" value="save"/>
+            <input type="hidden" name="appid" value="{$app.appid}"/>
+            <input type="hidden" name="id" id="content-id" value="{$item.itemid}"/>
+            <input type="hidden" name="itemtype" value="{$item.itemtype}"/>
+
+            <cp:include template="../metadata"/>
+
+
+            <div>
+                <cp:jstabs tabs="{$apptabs}" usetrans="true" default="Allgemeiner Inhalt"/>
+            </div>
+
+
+            <div class="box description">
+                <div class="box-inner">
+
+                    <cp:set var="tabIndex" value="0"/>
+
+
+                    <cp:loop name="tabfields" key="r">                    
+                        <div id="tc{$tabIndex}" style="width:100%;" class="tl">
+                            <cp:set var="col" value="1"/>
+
+                            <cp:loop name="r.fields" key="rs">
+
+                                <cp:if condition="$rs.type != 'textarea' && $rs.type != 'richtext' && $rs.type != 'usergroups' && $col == 1">                                    
+
+                                    <cp:tag name="div" class="fieldset2"/>
+                                </cp:if>
+
+                                <cp:if condition="( $rs.type == 'textarea' || $rs.type == 'richtext' || $rs.type == 'usergroups') && $col > 1">
+                                    <cp:tag name="div" forceclose="true"/>
+                                    <cp:set var="col" value="1"/>
+                                </cp:if>
+
+
+
+                                <fieldset>
+                                    <legend>
+                                        <cp:if condition="$rs.grouplabel">
+                                            {$rs.grouplabel}
+                                        </cp:if>
+                                        <cp:else>
+                                            {$rs.label}
+                                        </cp:else>
+                                    </legend>
+                                    {$rs.field}
+
+                                    <cp:if condition="$rs.description"><br/><small>{$rs.description}</small></cp:if>
+
+                                </fieldset>
+
+                                <cp:if condition="( $rs.type != 'textarea' && $rs.type != 'richtext'&& $rs.type != 'usergroups' ) && ( $col == 2 || $rs.next_rs.id == null )">
+
+                                    <cp:tag name="div" forceclose="true"/>
+                                    <cp:set var="col" value="0"/>
+                                </cp:if>
+                                <cp:elseif condition="$rs.type == 'textarea' || $rs.type == 'richtext'|| $rs.type == 'usergroups' || $rs.next_rs.id == null">
+                                    <cp:set var="col" value="0"/>
+                                </cp:elseif>
+
+                                <cp:set var="col" value="$col + 1"/>
+                            </cp:loop>
+
+                        </div>
+                        <cp:set var="tabIndex" value="$tabIndex + 1"/>                    
+                    </cp:loop>
+
+
+                </div>
+            </div>
+
+
+        </form>
+
+
+        <script type="text/javascript" src="{$js_url}dcms.form-fields.js"></script>
+        <script type="text/javascript" src="{$js_url}jquery/jquery.autocomplete.pack.js"></script>
+        <script type="text/javascript">
+            //<![CDATA[
+
+            Form.registerForm('articleform{$item.itemid}', {
+                contentIdentifierID: 'content-id',
+                exiturl: 'admin.php?adm=app&action=items&appid={$app.appid}',
+                identifierType: '{$app.apptype}-{$item.itemtype}',
+                baseField: 'title',
+                runAfterSubmit: function(exit, data) {
+
+                }
+            });
+
+
+
+            //  registerContentTagInput('applications_items');
+
+
+
+
+// $('#tc2').addFields({$fields});
+
+//registerPageIdentifier('title', '{$app.apptype}-{$item.itemtype}', {iif($item.itemid, $item.itemid, '0')});
+
+            $("#searchTag").autocomplete("http://ws.geonames.org/searchJSON", {
+                dataType: 'jsonp',
+                parse: function(data) {
+                    var rows = new Array();
+                    data = data.geonames;
+                    for (var i = 0; i < data.length; i++) {
+                        rows[i] = {data: data[i], value: data[i].name, result: data[i].name};
+                    }
+                    return rows;
+                },
+                formatItem: function(row, i, n) {
+                    return row.name + ', ' + row.adminCode1;
+                },
+                extraParams: {
+// geonames doesn't support q and limit, which are the autocomplete plugin defaults, so let's blank them out.
+                    q: '',
+                    limit: '',
+                    country: 'US',
+                    featureClass: 'P',
+                    style: 'full',
+                    maxRows: 6,
+                    name_startsWith: function() {
+                        return $("#searchTag").val()
+                    }
+                },
+                max: 50
+            });
+
+            $('#availeble-tags').find('span').click(function() {
+                $(this).parent().remove();
+            });
+
+
+            $("#add-tag").click(function() {
+                if ($("#searchTag").val() == '')
+                    return;
+                var tag = $("#searchTag").val();
+
+                var removeTagBtn = $('<span/>');
+                var tagcontainer = $('<div/>').addClass('tag').append(removeTagBtn);
+
+                tagcontainer.append(tag);
+                tagcontainer.append($('<input/>').attr({type: 'hidden', name: 'tags[]', 'value': tag}));
+
+
+                removeTagBtn.click(function() {
+                    $(this).parent().remove();
+                });
+                $("#searchTag").val('');
+                $('#availeble-tags').append(tagcontainer);
+
+            });
+
+//]]>
+        </script>
+
+
+    </cp:if>
+    <cp:else>
+
+
+
+
+        <form action="admin.php" name="admItem{$item.catid}" id="admItem{$item.catid}" method="get">
+            <input type="hidden" name="adm" value="app"/>
+            <input type="hidden" name="action" value="edititem"/>
+            <input type="hidden" name="appid" value="{$app.appid}"/>
+            <input type="hidden" name="itemid" value="0"/>
+            <input type="hidden" name="catid" value="{$item.catid}"/>
+
+            <div class="box description">
+                <div class="box-inner">
+                    <fieldset>
+                        <legend>{trans('Typ')}</legend>
+                        <select name="itemtype" id="itemType">
+                            <option value="">{trans('Bitte den Typ wählen')}</option>
+                            <cp:loop name="app_grouptypes" key="r">
+                                <option value="{$r.type}">{$r.name}</option>
+                            </cp:loop>
+                        </select>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+
+        <script type="text/javascript">
+            //<![CDATA[
+
+            $('#next-step').disableButton();
+            var selectedText = '';
+            $('#itemType').change(function() {
+                if ($(this).val() != '')
+                {
+                    selectedText = $(this).find('option:selected').text();
+                    $('#next-step').enableButton();
+                }
+                else
+                {
+                    $('#next-step').disableButton();
+                }
+            });
+
+            $('#next-step').click(function(e) {
+
+
+                var winID = $(e.target).parents('.isWindowContainer').attr('id');
+                var opts = {};
+                opts.loadWithAjax = true;
+                opts.allowAjaxCache = false;
+                opts.WindowToolbar = false;
+                opts.DesktopIconWidth = 36;
+                opts.DesktopIconHeight = 36;
+                opts.UseWindowIcon = false;
+                opts.Controller = 'app';
+                opts.Action = 'edititem';
+                opts.WindowURL = Tools.prepareAjaxUrl('admin.php?' + $('#admItem{$item.catid}').serialize());
+                opts.WindowID = Desktop.getHash('admin.php?' + $('#admItem{$item.catid}').serialize());
+                opts.WindowTitle = $('#' + winID).data('WindowManager').get('WindowTitle') + ' ' + selectedText;
+                opts.isRootApplication = true;
+                
+                $('#' + winID).data('WindowManager').close();
+                setTimeout(function() {
+
+                    Application.setAppFromUrl(opts.WindowURL);
+                    
+                    opts.status = '';
+
+                    // create Dock Icon
+                    var dockIcon = Dock.createDockIcon(e, opts);
+                    if (dockIcon)
+                    {
+                        // reset current ajaxData
+                        Desktop.ajaxData = {};
+                        dockIcon.trigger('click');
+                    }
+                }, 700);
+
+                //    $('#' + winID).find('#step-edit-btns').hide();
+                //    $('#' + winID).find('#action-btns').show();
+
+                //    $('#' + winID).data('WindowManager').ReloadWindow();
+
+
+
+
+                // toolbarTabsCls.loadTabLocation('admin.php?' + $('#admItem{$item.catid}').serialize() + '&');
+            });
+
+
+//]]>
+        </script>
+    </cp:else>
+</cp:block>

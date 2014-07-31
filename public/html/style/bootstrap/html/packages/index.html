@@ -1,0 +1,198 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+    <button class="browse-button action-button"><img src="images/buttons/package-browser.png" width="16" height="16" alt="" />&nbsp;{trans("Pakete Durchsuchen")}</button>
+    <button class="check-button action-button"><img src="images/buttons/package-update.png" width="16" height="16" alt="" />&nbsp;{trans("auf Updates prüfen")}</button>
+</cp:block>
+
+
+<cp:block name="cssinline">
+    <style type="text/css">
+        #help-content, #help-content.box-inner {
+            margin: 0!important;
+            padding:0!important;
+        }
+        
+#widget-contents {
+    height:100%;
+    display:inline-block;
+}
+        
+        
+        iframe.package-browser {
+        background-color: #fff;
+        }
+        
+        
+        
+        td.status {
+        width: 240px;
+        }
+        
+        td.status img {
+        vertical-align: -3px;
+        }
+        
+        td.status.unknown {
+        color: #999;
+        }
+        
+        td.status.pending {
+        color: #666;
+        font-style: italic;
+        }
+        
+        td.status.update {
+        color: #ff0000;
+        font-weight: bold;
+        font-style: italic;
+        cursor: pointer;
+        }
+        
+        td.status.uptodate {
+        color: darkgreen;
+        font-weight: bold;
+        font-style: italic;
+        }
+        
+        td.status.nopackage {
+        color: blue;
+        font-style: italic;
+        }
+        
+        .tooltip-icon {
+        vertical-align: -3px;
+        margin: 4px 5px 4px 10px;
+        }
+        
+        .tooltip-content {
+        padding: 17px;
+        padding-top: 8px;
+        }
+        
+    </style>
+</cp:block>
+
+
+<cp:block name="content">
+    
+    <div class="box persist" id="package-intro">
+        <h2 class="collapsible">{trans("Paket Verwaltung")}</h2>
+        <div class="box-inner">
+            <p>{trans("Der Package Manager kann verwendet werden, um weitere Pakete zu installieren bzw vorhandene Pakete zu aktualisieren und das direkt aus dem DreamCMS Repository.")}</p>
+        </div>
+    </div>
+    
+    <div class="box">
+        <h2>{trans("Installed Pakete")}</h2>
+        <div class="box-inner" style="padding: 0;">
+            
+            <table style="width: 100%;margin:0" id="package-table" cellpadding="3">
+
+                    <tr class="tableheader">
+                        <td style="width: 20px;">&nbsp;</td>
+                        <td width="10%">{trans("Paket Type")}</td>
+                        <td>{trans("Paket")}</td>
+                        <td width="20%">{trans("Paket Status")}</td>
+                    </tr>
+
+
+                <cp:loop name="packages" key="package">
+                    {cycle('cyclename', 'firstrow,secondrow', 'css')}
+                    <tr class="{$css}" style="border-bottom:0">
+                        <td style="line-height:20px;border-bottom:0">
+                            <img class="tooltip-icon action-link" id="package::{escape($package.type)}::{$package.package}" src="images/info.png" width="16" height="16" alt="" />
+                        </td>
+                        <td style="line-height:20px;border-bottom:0">
+                            {$package.typename}
+                        </td>
+                        <td style="line-height:20px;border-bottom:0">
+                            {$package.name}
+                        </td>
+                        <td id="status_{$package.type}_{$package.package}" class="status unknown" style="line-height:20px;border-bottom:0">
+                            {trans("Unbekannt")}
+                        </td>
+                    </tr>
+                    <tr class="{$css}">
+                        <td colspan="4" style="padding-left: 20px; color: #999;">
+                            <em>
+                                {escape($package.description)}
+                            </em>
+                        </td>
+                    </tr>
+                </cp:loop>
+                <cp:else>
+                    {cycle('cyclename', 'firstrow,secondrow', 'css')}
+                    <tr class="{$css}">
+                        <td colspan="4" style="padding-left: 20px;">
+                            <em>
+                                {trans('Es wurden noch keine Packete installiert')}
+                            </em>
+                        </td>
+                    </tr> 
+                </cp:else>
+
+
+            </table>
+            
+            
+            
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            
+            $('#package-table tr:first td').css({
+                borderTop: 0
+            });
+            
+            $('.browse-button').click(function() {
+
+/*
+                var iframe = $('<iframe>', {
+                        id: 'help-content-iframe',
+                        width: '100%',
+                        height: '100%',
+                        border: 0,
+                        frameborder: 0,
+                        src: '{$repository_url}?cp=remote&action=browse&client_url={$client_url}',
+                        css: {
+                            margin: '0px 0px 0 0px',
+                            border: '0px solid #d0d0d0',
+                            borderTop:  0
+                        }
+                    }).addClass('package-browser');
+*/
+
+				var iframe = '<iframe src="{$repository_url}?cp=remote&action=browse&client_url={$client_url}" width="100%" height="100%" id="help-content-iframe" style="margin:0;border:0" frameborder="0" border="0" class="package-browser"></iframe>';
+
+
+                    // display_info( iframe , {'fullscreen': true, 'dragable': false}, 'Packet Browser');
+					createPopup(iframe,
+					{
+						title: cmslang.pack_browser_title,
+						width: 1024
+					});
+
+            });
+            
+            $('.check-button').click(function() {
+                var count = $('#package-table td.status').length;
+                $.pagemask.show('{trans("Prüfe Packet Status...")}');
+
+                
+
+                $('#package-table td.status').removeClass('unknown update uptodate nopackage').addClass('pending').html(getLoadingImage()).append('{trans("ausstehend...")}').unbind('click');
+                $('#package-table td.status *').css({opacity: 1});
+                checkPackage( );
+
+            });
+        });
+
+    </script>
+</cp:block>
+
+

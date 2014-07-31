@@ -1,0 +1,60 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+<!--
+    <ul class="sourceEditor-toolbar-buttons">
+        <li class="sourceEditor-undo disabled" onclick="Doc.diffUndo();" title="{trans('Rückgängig')}"><span></span>
+        </li>
+        <li class="sourceEditor-redo disabled" onclick="Doc.diffRedo();" title="{trans('Wiederholen')}">
+            <span></span></li>
+    </ul>
+-->
+    <select id="merge-targetversion">
+        <cp:loop name="diff.versions" key="r">
+            <option value="{$r.version}" cp:on="selected:$r.version==$targetVersion" parse:selected="selected">Version {$r.version} - {date('d.m.Y, H:i:s', $r.timestamp)} - {$r.username}</option>
+        </cp:loop>
+    </select>
+
+    <button type="button" id="version-remove" style="float: none" class="action-button"><span class="icn delete"></span><span class="label">{trans('Version löschen')}</span>
+    </button>
+
+    <button type="button" id="merge-versions" style="float: none">{trans('Versionen Vergleichen')}</button>
+
+</cp:block>
+
+<cp:block name="content">
+    <div id="merge-view">{$diff.html_diff}</div>
+
+    <script>
+
+        $('#' + Win.windowID).find('#merge-versions').bind('click', function (e) {
+
+            var sourceV = {$sourceVersion};
+            var targetV = $('#' + Win.windowID).find('#merge-targetversion').val();
+            $.post('admin.php', { adm: 'dashboard', action: 'diff', getdata: true, modul: '{$modul}', id: {$id}, sourceversion: sourceV, targetversion: targetV }, function (data) {
+                if (Tools.responseIsOk(data)) {
+                  //  $('#' + Win.windowID).find('#merge-view-source').get(0).innerHTML = data.source;
+                   // $('#' + Win.windowID).find('#merge-view-target').get(0).innerHTML = data.target;
+                    $('#merge-view').html( data.html_diff );
+
+
+
+
+                    //Doc.initDiff('merge-view');
+                }
+            });
+        });
+
+        setTimeout(function () {
+
+
+            var clone = $('#merge-targetversion').clone(false, false);
+
+
+
+
+            // Doc.initDiff('merge-view');
+        }, 1200);
+
+    </script>
+</cp:block>

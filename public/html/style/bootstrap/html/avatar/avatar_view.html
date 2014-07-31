@@ -1,0 +1,70 @@
+<?php
+
+function __avatar_view($avatar_viewbit = '',$countfrom = '', $countto = '', $avatarcount = '', $pagelinks = '', $sel_sortby = '', $sel_orderby = ''){
+global $cp, $cfg, $fct, $cp;
+
+	return <<<EOF
+<form method="post" action="admin.php">
+<input type="hidden" name="adm" value="avatar" />
+<input type="hidden" name="sid" value="$cp->session_id" />
+<input type="hidden" name="action" value="view" />
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+    	<td colspan="2">Avatar bearbeiten</td>
+    </tr>
+    <tr class="secondrow">
+        <td>
+            <form action="admin.php" method="post" onsubmit="">
+            <input type="hidden" name="adm" value="avatar" />
+            <input type="hidden" name="action" value="view" />
+            <input type="hidden" name="sid" value="$cp->session_id" />
+            <select name="sortby" class="select">
+                <option value="0"$sel_sortby[0]>ACP Avatare anzeigen</option>
+                <option value="1"$sel_sortby[1]>User-Avatare anzeigen</option>
+            </select>
+            &nbsp;
+            <select name="orderby" class="select">
+                <option value="ASC"$sel_orderby[ASC]>Aufsteigend sortieren</option>
+                <option value="DESC"$sel_orderby[DESC]>Absteigend sortieren</option>
+            </select>
+            &nbsp;
+            <input type="submit" value="Anzeigen" class="button" />
+        </td>
+		<td width="50%" align="right">{$pagelinks}</td>
+    </tr>
+</table>
+
+<p/>
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+        <td width="3%">Avatar</td>
+        <td width="30%">Avatarname</td>
+        <td width="35%">Gruppe</td>
+        <td width="10%" class="tc">Ab&nbsp;Beiträge</td>
+        <td class="tc">Optionen</td>
+    </tr>
+    
+    $avatar_viewbit
+    
+    <tr class="firstrow">
+        <td colspan="6">
+            <table border="0" width="100%">
+                <tr>
+                    <td>Anzeige der Avatare $countfrom bis $countto von $avatarcount</td>
+                    <td align="right">{$pagelinks}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+</form>
+
+
+
+
+EOF;
+}
+
+?>

@@ -1,0 +1,50 @@
+<cp:include group="usercontrol" template="tabpanel"/>
+<form method="post" action="index.php">
+    <input type="hidden" name="cp" value="mycp" />
+    <input type="hidden" name="send" value="send" />
+    <input type="hidden" name="action" value="blog" />
+    <input type="hidden" name="do" value="editblog" />
+    <input type="hidden" name="sid" value="{$cp->session_id}" />
+    <table cellpadding="3" cellspacing="1" width="100%" class="inner">
+        <tr>
+            <td width="30%">
+                {trans('Blog Titel')}
+            </td>
+            <td width="70%">
+                <input type="text" name="title" value="{$blog_title}" size="30" />
+            </td>
+        </tr>
+        <tr class="top">
+            <td width="30%">
+                {trans('Blog Beschreibung')}
+            </td>
+            <td width="70%">
+                <textarea cols="50" rows="5" name="description" class="textarea">{$blog_description}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td width="30%">
+                {trans('Blog aktivieren')}
+            </td>
+            <td width="70%">
+                <input type="radio" name="publish" id="pub1" value="1"<cp:if !empty="blog_publish" || empty="blog_title"> checked="checked"</cp:if> /><label for="pub1">{trans('Blog aktiviert')}</label>
+		<input type="radio" name="publish" id="pub0" value="0"<cp:if empty="blog_publish"> checked="checked"</cp:if> /><label for="pub0">{trans('Blog deaktiviert')}</label>
+            </td>
+        </tr>
+        <tr>
+            <td width="30%">
+                {trans('Zugriffsrechte für deinen Blog')}
+            </td>
+            <td width="70%">
+                <input type="checkbox" name="publish" id="chk1" value="1"<cp:if !empty="blog_publish" || empty="blog_title"> checked="checked"</cp:if> /><label for="chk1">{trans('Zugriff nur für registrierte Benutzer')}</label><br/>
+		<input type="checkbox" name="publish" id="chk0" value="0"<cp:if !empty="blog_publish"> checked="checked"</cp:if> /><label for="chk0">{trans('Zugriff nur für Freunde (Wenn Du das auswählst wird dein Blog automatisch nur für Freunde angezeigt! Alle anderen Einstellungen sind dann hinfällig.)')}</label>
+            </td>
+        </tr>
+        <tr class="tc">
+            <td colspan="2">
+                <input type="submit" value="{trans('Speichern')}" class="button" /> 
+                <input type="reset" value="{trans('Zurücksetzen')}" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>

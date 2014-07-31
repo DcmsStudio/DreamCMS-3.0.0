@@ -1,0 +1,492 @@
+<script language="javascript" type="text/javascript" src="{$cfg['portalurl']}/core/js/forum.js"></script>
+
+<block="multipages">
+&nbsp;<a href="{$link1}&amp;page={$current_page}{$link2}" title="Show results {$first_pagenumber} to {$last_pagenumber} of {$total_pages}">{$current_page}</a>
+</block="multipages">
+
+<block="lastpostby">
+<div class="small" style="width:90%;">
+   <div class="fl w100perc">
+      <div class="fl"><strong>{$lastpostdate}, {$lastposttime}</strong></div>
+      <div class="fr" style="width:16px;">
+         <a href="index.php?cp=showthread&amp;goto=lastpost&amp;t={$lastthreadid}"><img title="go_to_last_post" class="absmiddle" src="<#IMG_DIR#>/forum/post_latest.gif" width="16" height="11" alt="go_to_last_post" border="0"/></a>
+      </div>
+   </div>
+   <div class="fl w100perc">
+     <cp:if !empty="icon">{$icon} </cp:if><a href="index.php?cp=showthread&amp;goto=lastpost&amp;t={$lastthreadid}" class="b">{$lastthreadtitle}</a><br/>
+     {trans('von')} <cp:if var="lastposterid" op="!=" val="0"> <a href="index.php?cp=profile&amp;userid={$lastposterid}">{$lastposter}</a></cp:if>
+     <cp:else> {$lastposter}</cp:else>
+   </div>
+ </div>
+</block="lastpostby">
+
+<block="moderator">
+   <cp:loop name="mod"><cp:if var="mod.loop_index" op=">" val="1">, </cp:if><a href="index.php?cp=profile&amp;userid={mod.userid}">{mod.username}</a></cp:loop>   
+</block="moderator">
+
+
+
+<block="subforumbit">
+     <img alt="" src="<#IMG_DIR#>/forum/posticon<cp:if var="subforum_onoff" op="==" val="#on">new</cp:if>.gif" border="0" style="vertical-align:middle"/> <a href="index.php?cp=showforum&amp;f={$subboardid}">{$subforumtitle}</a>
+</block="subforumbit">
+
+
+
+
+<block="forumrow">
+
+<cp:loop name="forumbit">
+<switch code="forumrow1;forumrow2" return="css" switchname="sw1"/>
+   <cp:if var="forumbit.is_forumcat" op="==" val="1">
+<tr class="thead1">
+   <td<cp:if var="{$cfg['show_moderators']}" op="!=" val="0"> colspan="4"</cp:if><cp:else> colspan="3"</cp:else>><strong><a href="index.php?cp=showforum&amp;f={forumbit.boardid}">{forumbit.title}</a></strong></td>
+</tr>
+<cp:set var="forumbit.sw1" val="0"/>
+   </cp:if>
+   <cp:else>
+<tr class="{forumbit.css}">
+   <td width="1%"><img alt="" src="<#IMG_DIR#>/status/forum/{forumbit.onoff}.gif" border="0"/></td>
+   <td>
+        <a href="index.php?cp=showforum&amp;f={forumbit.boardid}" class="forumtitle">{forumbit.title}</a>
+
+        <cp:if var="forumbit.description" op="!=" val="">
+              <br/><span class="forumdesc">{forumbit.description}</span>
+        </cp:if>
+
+        <cp:if var="forumbit.subforums" op="!=" val="">
+              <br/><span class="subforums"><strong>Subforums:</strong> {forumbit.subforums}</span>
+        </cp:if>
+        <cp:if !empty="{$cfg['show_moderators']}" && !empty="forumbit.moderators">
+              <br/><span class="forummods"><strong>Moderator:</strong> {forumbit.moderators}</span>
+
+        </cp:if>
+
+   </td>
+   <td class="tc">{forumbit.threadcounter}</td>
+   <td class="tc">{forumbit.postcounter}</td>
+   <td>{forumbit.lastpostinfo}</td>
+</tr>
+   </cp:else>
+</cp:loop>
+</block="forumrow">
+
+<cp:if !empty="show_forumlist">
+<!-- Forum List -->
+
+<table cellpadding="3" cellspacing="0" border="0" width="100%" class="forumborder">
+<tr class="thead1">
+  <td<cp:if var="{$cfg['show_moderators']}" op="!=" val="0"> colspan="2"</cp:if>><span class="small"><strong>{trans('Forum')}</strong></span></td>
+  <td class="tc" width="85"><span class="small"><strong>{trans('Themen')}</strong></span></td>
+  <td class="tc" width="85"><span class="small"><strong>{trans('Beiträge')}</strong></span></td>
+  <td width="150" nowrap="nowrap"><span class="small"><strong>{trans('Letzter Beitrag')}</strong></span></td>
+</tr>
+{$forumbits}
+</table>
+<!-- / Forum List -->
+<div class="fl w100perc tc">
+<div class="p5 smallgtext">
+<img alt="" src="<#IMG_DIR#>/status/forum/on.gif" border=""/> {trans('Forum enthält neue Beiträge')} 
+<img alt="" src="<#IMG_DIR#>/status/forum/off.gif" border=""/> {trans('Forum enthält keine neuen Beiträge')} 
+<img alt="" src="<#IMG_DIR#>/status/forum/offclosed.gif" border=""/> {trans('Forum ist geschlossen')}
+</div>
+</div>
+</cp:if>
+
+<cp:if !empty="show_threadslist">
+
+<div class="w100perc spacertd_row mb5 mt5"><div class="tl p3"><strong>{$forum_title}</strong><br/><span class="smallgtext">{$forum_description}</span></div></div>
+
+<div class="tr w100perc mt5 mb5">
+        <!-- Post buttons -->
+	<cp:if empty="forumclosed">
+		<a href="index.php?cp=newthread&amp;f={$forumid}"><img title="{trans('Neues Thema erstellen')}" alt="{trans('Neues Thema erstellen')}" src="<#IMG_DIR#>/forum/newtopic.gif"/></a>
+    	</cp:if>
+	<cp:else><img title="{trans('Neues Thema erstellen')}" alt="{trans('Neues Thema erstellen')}" src="<#IMG_DIR#>/forum/closed.gif"/></cp:else>
+</div>
+
+
+<!-- Thread List -->
+
+<cp:if !empty="show_adminoptions">
+<form action="index.php" method="post" name="modform" onsubmit="if(document.modform.action.value==''){return(false)}else{ return true;}">
+   <input type="hidden" name="cp" value="forummod"/>
+   <input type="hidden" name="f" value="{$forumid}"/>
+</cp:if>
+
+
+
+<table cellpadding="3" cellspacing="0" border="0" class="tborder" width="100%">
+<!-- desc here -->
+<tr class="tcat">
+	<td<cp:if !empty="threadicons"> colspan="3"</cp:if><cp:else> colspan="2"</cp:else>><a href="index.php?cp=showforum&amp;f={$forumid}&amp;order=<cp:if var="input.order" op="==" val="#asc">desc</cp:if><cp:else>asc</cp:else>&amp;sort=title">{trans('Themen Titel')}</a></td>
+	<td class="tc" width="60" nowrap="nowrap"><a href="index.php?cp=showforum&amp;f={$forumid}&amp;order=<cp:if var="input.order" op="==" val="#asc">desc</cp:if><cp:else>asc</cp:else>&amp;sort=replys">{trans('Antworten')}</a></td>
+	<td class="tc" width="60" nowrap="nowrap"><a href="index.php?cp=showforum&amp;f={$forumid}&amp;order=<cp:if var="input.order" op="==" val="#asc">desc</cp:if><cp:else>asc</cp:else>&amp;sort=views">{trans('Hits')}</a></td>
+	<cp:if !empty="allowratings">
+	<td class="tc" width="60" nowrap="nowrap"><a href="index.php?cp=showforum&amp;f={$forumid}&amp;order=<cp:if var="input.order" op="==" val="#asc">desc</cp:if><cp:else>asc</cp:else>&amp;sort=votes">{trans('Bewertung')}</a></td>
+	</cp:if>
+	<td class="tc" width="100" nowrap="nowrap"><a href="index.php?cp=showforum&amp;f={$forumid}&amp;order=<cp:if var="input.order" op="==" val="#asc">desc</cp:if><cp:else>asc</cp:else>&amp;sort=time">{trans('Letzter Beitrag')}</a></td>
+       <cp:if !empty="show_adminoptions">
+        <td width="1">&nbsp;</td>
+       </cp:if>
+</tr>
+
+
+<cp:if !empty="hasannouncements">
+<!-- show announcement row -->
+<cp:loop name="announcements">
+<switch code="forumrow1;forumrow2" return="css" switchname="sw2"/>
+
+<tr class="<cp:if !empty="announcements.isdeleted">deleterow</cp:if><cp:else>{announcements.css}</cp:else>" id="pr{announcements.threadid}">
+	<td class="tc absmiddle"><img title="Announcement" src="<#IMG_DIR#>/status/forum/announcement{announcements.icon}.gif" border="0" alt="Announcement"/></td>
+        <td width="1%" class="tc absmiddle"><cp:if isset="showthreadicon"><img title="{announcements.threadicontitle}" style="vertical-align:middle;" src="{announcements.threadiconpath}" alt="{announcements.threadicontitle}" border="0"/></cp:if><cp:else><img title="{announcements.threadicontitle}" style="vertical-align:middle;" src="{announcements.threadiconpath}" alt="{announcements.threadicontitle}" border="0"/></cp:else></td>
+	<td class="tl" title="{announcements.preview}">
+<cp:if empty="announcements.isdeleted">
+        <div><span class="fl">&nbsp;
+            <cp:if !empty="announcements.showmoderated"><img alt="" class="inlineimg" src="<#IMG_DIR#>/status/forum/moderated_small.gif"/> </cp:if>
+            <cp:if !empty="announcements.showpaperclip"><img alt="" class="inlineimg" src="<#IMG_DIR#>/forum/paperclip.gif"/> </cp:if>
+            <cp:if !empty="announcements.must_moderate"><img title="{trans('Muss freigeschaltet werden')}" alt="{trans('Muss freigeschaltet werden')}" src="<#IMG_DIR#>/status/forum/moderate.gif" class="inlineimg"/> </cp:if>
+           </span>
+        </div>
+            {trans('Ankündigung')}: <a href="index.php?cp=showthread&amp;t={announcements.threadid}{announcements.highlight}" class="threadtitle">{announcements.title}</a><br/>
+            <span class="threadstart">{trans('von')} </span><a href="member.php?u={announcements.threadstarterid}" target="_blank">{announcements.threadstarter}</a>
+</cp:if>
+<cp:else>{trans('Ankündigung')}: 
+     <cp:if !empty="show_adminoptions"><a href="index.php?cp=showthread&amp;t={announcements.threadid}{announcements.highlight}" id="thread_title_{announcements.realthreadid}" class="threadtitle">{announcements.threadtitle}</a></cp:if>
+     <cp:else><span class="threadtitle">{announcements.threadtitle}</span></cp:else>
+     <br/>{trans('Thema wurde gelöscht von: ')} <a href="index.php?cp=profile&amp;userid={announcements.del_userid}">{announcements.del_username}</a>
+     <cp:if !empty="announcements.del_reason"><br/>{trans('Begründung:')} {announcements.del_reason}</cp:if>
+</cp:else>
+        </td>
+	<td class="tc absmiddle">-</td>
+	<td class="tc absmiddle">{announcements.views}</td>
+<cp:if !empty="allowratings">
+         <td class="tc absmiddle">
+			<cp:if isset="showthreadratings" && isset="showthreadrating">
+                            <img title="thread_rating_x_votes_y_average" class="inlineimg" src="rating_{announcements.rating}.gif" border="0" alt="thread_rating_x_votes_y_average"/>
+                        </cp:if><cp:else>&nbsp;</cp:else>
+         </td>
+</cp:if>
+         <td class="absmiddle">
+<cp:if empty="announcements.isdeleted">
+		<div class="small tr" style="white-space:nowrap">
+			{announcements.postdate}, <span class="time">{announcements.posttime}</span><br/>
+                        {trans('von')} 
+			<cp:if var="announcements.lastposterid" op=">" val="0"><a href="index.php?cp=profile&amp;userid={announcements.lastposterid}">{announcements.lastposter}</a></cp:if>
+                        <cp:else>{trans('Gast')}</cp:else>
+<!--
+                        <a href="index.php?cp=showthread&amp;goto=lastpost&amp;t={announcements.threadid}"><img title="go_to_last_post" class="inlineimg" src="<#IMG_DIR#>/forum/post_latest.gif" alt="go_to_last_post" border="0"/></a>
+-->
+		</div>
+</cp:if>
+<cp:else>-</cp:else>
+         </td>
+       <cp:if !empty="show_adminoptions">
+         <td class="tc absmiddle">
+             <a href="javascript:(void)" onclick="forum_toggle_tid('{announcements.threadid}');return false;"><img title="moderation" alt="moderation" src="<#IMG_DIR#>/forum/topic_unselected.gif" name="img{announcements.threadid}" id="img{announcements.threadid}" style="vertical-align:middle;"/></a>
+         </td>
+       </cp:if>
+
+</tr>
+</cp:loop>
+<!-- / end show announcement row -->
+
+<cp:if var="total_threads" op="!=" val="0">
+<tr class="tcat">
+     <td colspan="<cp:if !empty="show_adminoptions"><cp:if !empty="allowratings">7</cp:if><cp:else>6</cp:else></cp:if><cp:else><cp:if !empty="allowratings">7</cp:if><cp:else>6</cp:else></cp:else>">Allgemeine Themen</td>
+</tr>
+</cp:if>
+
+</cp:if>
+
+<cp:if var="total_threads" op="!=" val="0">
+<!-- Thread List -->
+<cp:loop name="thread">
+<switch code="forumrow1;forumrow2" return="css" switchname="sw3"/>
+<tr class="<cp:if !empty="thread.isdeleted">deleterow</cp:if><cp:else>{thread.css}</cp:else>" id="pr{thread.threadid}">
+	<td width="1%" id="td_status_{thread.threadid}" class="tc absmiddle">
+		{thread.openclose_editable}
+		<img title="{thread.foldericon}" class="absmiddle" alt="{thread.foldericon}" src="<#IMG_DIR#>/status/forum/thread{thread.foldericon}.gif" id="thread_status_{thread.realthreadid}" border="0"/>
+	</td>
+<cp:if !empty="threadicons">
+	<td width="1%" class="tc absmiddle"><cp:if isset="threadicons"><img title="{thread.threadicontitle}" class="absmiddle" src="{thread.threadiconpath}" alt="{thread.threadicontitle}" border="0"/></cp:if><cp:else><img title="{thread.threadicontitle}" class="absmiddle" src="{thread.threadiconpath}" alt="{thread.threadicontitle}" border="0"/></cp:else></td>
+</cp:if>
+	<td id="td_title_{thread.threadid}" title="{thread.preview}">
+	   <div>
+<cp:if empty="thread.isdeleted">
+		<span style="float:right">&nbsp;<cp:if !empty="thread.movedprefix">&nbsp;{trans('verschoben')}</cp:if><cp:if !empty="thread.stickyprefix">&nbsp;<img title="{trans('Wichtiges Thema')}" alt="{trans('Wichtiges Thema')}" src="<#IMG_DIR#>/status/forum/sticky.gif" class="inlineimg"/> </cp:if><cp:if !empty="thread.pollprefix">&nbsp;<img title="{trans('Wichtiges Thema')}" alt="{trans('Wichtiges Thema')}" src="<#IMG_DIR#>/status/forum/poll.gif" class="inlineimg"/> </cp:if><cp:if !empty="thread.must_moderate">&nbsp;<img title="{trans('Muss freigeschaltet werden')}" alt="{trans('Muss freigeschaltet werden')}" src="<#IMG_DIR#>/status/forum/moderate.gif" class="inlineimg"/> </cp:if><cp:if !empty="thread.showmoderated"> <img alt="" class="inlineimg" src="<#IMG_DIR#>/status/forum/moderated_small.gif"/> </cp:if><cp:if !empty="thread.showpaperclip"> <img alt="" class="inlineimg" src="<#IMG_DIR#>/forum/paperclip.gif"/> </cp:if>
+		<cp:if !empty="thread.showsubscribed"> <img title="you_are_subscribed_to_this_thread" class="inlineimg" src="<#IMG_DIR#>/status/forum/subscribed.gif" alt="you_are_subscribed_to_this_thread"/> </cp:if>
+		</span>
+
+		<cp:if !empty="thread.gotonewpost"><a href="index.php?cp=showthread&amp;goto=newpost&amp;t={thread.threadid}"><img title="go_to_first_new_post" class="inlineimg" src="<#IMG_DIR#>/forum/firstnew.gif" alt="go_to_first_new_post" border="0"/></a></cp:if>
+</cp:if>
+<cp:if empty="thread.isdeleted">
+		<cp:if !empty="thread.gotonewpost">
+		   <a href="index.php?cp=showthread&amp;t={thread.threadid}{thread.highlight}" id="thread_title_{thread.realthreadid}" class="threadtitle">{thread.threadtitle}</a>
+                </cp:if>
+		<cp:else>
+		   <a href="index.php?cp=showthread&amp;t={thread.threadid}{thread.highlight}" id="thread_title_{thread.realthreadid}" class="threadtitle">{thread.threadtitle}</a>
+		</cp:else>
+</cp:if>
+<cp:else>
+     <cp:if !empty="show_adminoptions"><a href="index.php?cp=showthread&amp;t={thread.threadid}{thread.highlight}" id="thread_title_{thread.realthreadid}" class="threadtitle">{thread.threadtitle}</a></cp:if>
+     <cp:else><span class="threadtitle">{thread.threadtitle}</span></cp:else>
+     <br/>{trans('Thema wurde gelöscht von: ')} <a href="index.php?cp=profile&amp;userid={thread.del_userid}">{thread.del_username}</a>
+     <cp:if !empty="thread.del_reason"><br/>{trans('Begründung:')} {thread.del_reason}</cp:if>
+</cp:else>
+
+<cp:if empty="thread.isdeleted">
+<cp:if !empty="thread.pagenav"><span class="small" style="white-space:nowrap">( <img title="multipage thread" class="inlineimg" src="<#IMG_DIR#>/forum/multipage.gif" alt="multipage thread" border="0"/> 
+     {thread.pagenav}
+     <cp:if !empty="thread.showpagenavmore"> ... <a href="index.php?cp=showthread&amp;t={thread.threadid}{thread.highlight}&amp;page={thread.totalpages}">{thread.totalpages}</a></cp:if> )</span></cp:if><br/>
+      <cp:if isset="showguestuser" || empty="thread.threadstarterid"><span class="threadstart">{trans('von')} {thread.threadstarter}</span></cp:if>
+      <cp:else>
+         <span class="threadstart">{trans('von')} </span>
+         <a href="index.php?cp=profile&amp;userid={thread.threadstarterid}" class="threadstart">{thread.threadstarter}</a>
+      </cp:else>
+</cp:if>
+		</div>
+         </td>
+         <td class="tc absmiddle">{thread.replycount}</td>
+         <td class="tc absmiddle">{thread.views}</td>
+<cp:if !empty="allowratings">
+         <td class="tc absmiddle">
+	    <cp:if isset="showthreadratings" && isset="showthreadrating">
+            <img title="thread_rating_x_votes_y_average" class="inlineimg" src="rating_{thread.rating}.gif" border="0" alt="thread_rating_x_votes_y_average"/>
+            </cp:if><cp:else>&nbsp;</cp:else>
+         </td>
+</cp:if>
+         <td class="absmiddle">
+<cp:if empty="thread.isdeleted">
+	    <div class="small tr" style="white-space:nowrap">
+		{thread.lastpostdate}, <span class="time">{thread.lastposttime}</span><br/>
+                {trans('von')} 
+		<cp:if !empty="thread.lastposterid"><a href="index.php?cp=profile&amp;userid={thread.lastposterid}">{thread.lastposter}</a></cp:if>
+                <cp:else>{trans('Gast')}</cp:else>
+                <a href="index.php?cp=showthread&amp;goto=lastpost&amp;t={thread.threadid}"><img title="go_to_last_post" class="absmiddle" src="<#IMG_DIR#>/forum/post_latest.gif" width="16" height="11" alt="go_to_last_post" border="0"/></a>
+	    </div>
+</cp:if>
+<cp:else>-</cp:else>
+         </td>
+       <cp:if !empty="show_adminoptions">
+         <td class="tc absmiddle">
+             <a href="javascript:(void)" onclick="forum_toggle_tid('{thread.threadid}');return false;"><img title="moderation" alt="moderation" src="<#IMG_DIR#>/forum/topic_unselected.gif" name="img{thread.threadid}" id="img{thread.threadid}" class="absmiddle"/></a>
+         </td>
+       </cp:if>
+
+</tr>
+</cp:loop>
+<!-- / Thread List -->
+</cp:if>
+<cp:else>
+<tr>
+      <td class="tc"<cp:if !empty="show_adminoptions"> colspan="9"</cp:if><cp:else> colspan="8"</cp:else>><span class="normal"><em>{trans('Keine Beiträge vorhanden.')}</em></span>
+</td>
+</tr>
+</cp:else>
+
+
+
+<cp:if !empty="show_adminoptions">
+<tr class="tfoot">
+  <td colspan="8" align="right">
+  <input type="hidden" name="selectedtids" value=""/>
+  <select name="action" class="select">
+     <option value="">{trans('Themen Moderieren')}</option>
+     <option value="">---------------------------------</option>
+     <cp:if !empty="can_delete_thread">
+        <option value="tmass_delete">{trans('Themen löschen')}</option>
+        <option value="tmass_undelete">{trans('Themen wiederherstellen')}</option>
+     </cp:if>
+     <cp:if !empty="can_thread_move"><option value="tmass_move">{trans('Themen Verschieben')}</option></cp:if>
+
+<cp:if !empty="can_change_thread">
+     <option value="tpublish">{trans('Themen Sticky')}</option>
+     <option value="tunpublish">{trans('Themen Unsticky')}</option>
+</cp:if>
+
+<cp:if !empty="can_publish_thread">
+     <option value="tpublish">{trans('Themen freischalten')}</option>
+     <option value="tunpublish">{trans('Themen nicht freischalten')}</option>
+</cp:if>
+
+<cp:if !empty="can_open_thread">
+     <option value="open">{trans('Themen öffnen')}</option>
+     <option value="close">{trans('Themen schließen')}</option>
+</cp:if>
+
+     <cp:if !empty="can_publish_posts"><option value="mass_ppublish">{trans('Beiträge freischalten')}</option></cp:if>
+  </select>
+
+  <input type="submit" name="gobutton" value="{trans('Ausführen')}" class="button"/>
+</form>
+   </td>
+</tr>
+
+
+</cp:if>
+
+
+<tr class="tfoot smallgtext absmiddle tc">
+   <td colspan="8">
+
+
+<form method="post" action="index.php">
+
+        {trans('Themen sortieren nach')} 
+	<select name="sort" class="select absmiddle">
+		<option value="title"{$sort_title}>{trans('Betreff')}</option>
+		<option value="lastpost"{$sort_lastpost}>{trans('Letztem Beiträge')}</option>
+		<option value="reply"{$sort_reply}>{trans('Anzahl der Antworten')}</option>
+		<option value="views"{$sort_views}>{trans('Anzahl der Hits')}</option>
+		<option value="username"{$sort_username}>{trans('Benutzername')}</option>
+		<cp:if !empty="foruminfo_allowratings"><option value="rating"{$sort_rating}>{trans('Bewertung')}</option></cp:if>
+	</select> &nbsp;
+
+
+	<select name="order" class="select absmiddle">
+		<option value="asc"{$order_asc}>{trans('Aufstreigend')}</option>
+		<option value="desc"{$order_desc}>{trans('Absteigend')}</option>
+	</select> &nbsp;
+
+	<select name="daysprune" class="select absmiddle">
+		<option value="1"{$dayssel1}>{trans('letzten Tag')}</option>
+		<option value="2"{$dayssel2}>{trans('2 Tage')}</option>
+		<option value="5"{$dayssel5}>{trans('5 Tage')}</option>
+                <option value="7"{$dayssel7}>{trans('letzte Woche')}</option>
+		<option value="10"{$dayssel10}>{trans('10 Tage')}</option>
+		<option value="14"{$dayssel14}>{trans('letzen 14 Tage')}</option>
+		<option value="30"{$dayssel30}>{trans('letzen Monat')}</option>
+		<option value="45"{$dayssel45}>{trans('45 Tage')}</option>
+		<option value="60"{$dayssel60}>{trans('letzen 2 Monate')}</option>
+		<option value="75"{$dayssel75}>{trans('75 Tage')}</option>
+		<option value="100"{$dayssel100}>{trans('100 Tage')}</option>
+		<option value="365"{$dayssel365}>{trans('letztes Jahr')}</option>
+		<option value="1000"{$dayssel1000}>{trans('von Anfang an')}</option>
+	</select> &nbsp;<input type="submit" value=" {trans('Themen anzeige')} " class="button absmiddle"/>
+
+<input type="hidden" name="cp" value="showforum"/>
+<input type="hidden" name="f" value="{$cp->input['f']}"/>
+</form>
+
+   </td>
+</tr>
+</table>
+
+
+
+
+<div class="w100perc fl tr mb5">
+	<cp:if empty="forumclosed">
+		<a href="index.php?cp=newthread&amp;f={$forumid}"><img title="{trans('Neues Thema erstellen')}" alt="{trans('Neues Thema erstellen')}" src="<#IMG_DIR#>/forum/newtopic.gif"/></a>
+    	</cp:if>
+	<cp:else><img title="{trans('Neues Thema erstellen')}" alt="{trans('Neues Thema erstellen')}" src="<#IMG_DIR#>/forum/closed.gif"/></cp:else>
+</div>
+
+<div class="fl tr mt5 w100perc">
+    {$jump_form}
+</div>
+
+
+<cp:if !empty="thread_pages">
+<div class="spacertd_row">
+   {$thread_pages}
+</div>
+</cp:if>
+
+
+</cp:if>
+<br/>
+
+
+
+
+
+
+
+
+<div class="w100perc fl">
+
+    <div class="fl w50perc">
+        <table cellpadding="3" cellspacing="1" border="0" width="100%" class="inner">
+          <tr>
+              <td class="innerhead">{trans('Aktuell sind %s Benutzer im Forum unterwegs')}</td>
+          </tr>
+          <tr>
+            <td class="small">
+                {trans('Zur Zeit sind %s Gäste, %s Mitglieder und %s Geister im Forum unterwegs.')}<br/>
+        <cp:loop name="activeusers">
+        <cp:if var="activeusers.loop_index" op=">" val="0" && var="activeusers.loop_index" op="<" val="activeusers.loop_max">, </cp:if><a href="index.php?cp=profile&amp;userid={activeusers.userid}">{activeusers.username}</a>
+        </cp:loop>
+            </td>
+          </tr>
+        </table>
+    </div>
+
+    <div class="fr w50perc">
+        <table cellpadding="3" cellspacing="1" border="0" width="100%" class="inner">
+          <tr>
+              <td class="innerhead">{trans('Moderatoren')}</td>
+          </tr>
+          <tr>
+            <td>{$moderators}</td>
+          </tr>
+        </table>
+    </div>
+
+
+    <div class="fl w1perc">&nbsp;</div>
+
+</div>
+
+
+
+
+<div class="fl w100perc">
+
+<div class="fl w60_perc">
+<table cellpadding="3" cellspacing="1" border="0" width="100%" class="smallgtext">
+    <tr class="bottom">
+        <td><img alt="" class="absmiddle" src="<#IMG_DIR#>/status/forum/thread_new.gif" border="0"/> <span class="absmiddle">{trans('Neue Beiträge')}</span></td>
+        <td><img alt="" class="absmiddle" src="<#IMG_DIR#>/status/forum/thread_hot_new.gif" border="0"/> <span class="absmiddle">{trans('Heißes Thema mit neuen Beiträgen')}</span></td>
+    </tr>
+    <tr class="bottom">
+        <td><img alt="" class="absmiddle" src="<#IMG_DIR#>/status/forum/thread.gif" border="0"/> <span class="absmiddle">{trans('Keine neuen Beiträge')}</span></td>
+        <td><img alt="" class="absmiddle" src="<#IMG_DIR#>/status/forum/thread_hot.gif" border="0"/> <span class="absmiddle">{trans('Heißes Thema ohne neue Beiträge')}</span></td>
+    </tr>
+    <tr class="bottom">
+        <td><img alt="" class="absmiddle" src="<#IMG_DIR#>/status/forum/thread_lock.gif" border="0"/> <span class="absmiddle">{trans('Thema ist Geschlossen')}</span></td>
+        <td><img alt="" class="absmiddle" src="<#IMG_DIR#>/status/forum/thread_lock_new.gif" border="0"/> <span class="absmiddle">{trans('Thema neu &amp; geschlossen')}</span></td>
+    </tr>
+    <tr class="bottom">
+        <td colspan="2"><img alt="" class="absmiddle" src="<#IMG_DIR#>/status/forum/thread_dot.gif" border="0"/> <span class="absmiddle">{trans('Sie haben in diesem Thema geschrieben')}</span></td>
+    </tr>
+    <tr class="absmiddle">
+        <td><img alt="" class="absmiddle" src="<#IMG_DIR#>/status/forum/announcement_new.gif" border="0"/> <span class="absmiddle">{trans('Ankündigung')}</span></td>
+        <td><img alt="" class="absmiddle" src="<#IMG_DIR#>/status/forum/sticky.gif" border="0"/> <span class="absmiddle">{trans('Wichtiges Thema')}</span></td>
+    </tr>
+</table>
+</div>
+
+<cp:if !empty="can_search">
+<form method="post" action="index.php">
+<div class="w40_perc tr">
+<div class="p3">
+
+<input type="hidden" name="cp" value="fsearch"/>
+<input type="hidden" name="f" value="{$cp->input['f']}"/>
+<input type="hidden" name="action" value="search"/>
+<input type="text" name="q" value="" class="input" size="40"/> <input type="submit" value="Suchen" class="button"/>
+<br/>
+<small><a href="index.php?cp=fsearch">{trans('erweitere Forensuche')}</a></small>
+
+
+</div>
+</div>
+
+</form>
+
+</cp:if>
+
+</div>
+
+<br/>

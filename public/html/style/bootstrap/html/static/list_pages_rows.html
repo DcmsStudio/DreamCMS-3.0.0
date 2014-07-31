@@ -1,0 +1,53 @@
+<?php
+
+function __list_pages_rows($row){
+global $cp, $cfg, $fct, $root_path;
+
+	static $page_x;
+
+	$class = $page_x++%2 ? 'firstrow' : 'secondrow';
+
+	if ($row['has_backup'] == 1)
+	{
+		$image_link = "<a href=\"admin.php?adm=static_pages&amp;sid=$cp->session_id&action=list_versions&id={$row['id']}\"><img src=\"images/doc_release.gif\" border=\"0\" alt=\"Dokument Versionen auflisten\" /></a>";
+	}
+	else
+	{
+		$image_link = "<img src=\"images/doc_release_off.gif\" border=\"0\" alt=\"keine Dokument Versionen vorhanden\" />";
+	}
+
+	$title_org = htmlspecialchars( $row['page_title'] );
+	$row['page_title'] = strlen($row['page_title']) > 25 ? substr($row['page_title'],0,23).'...' : $row['page_title'];
+
+
+	$file_name_org = htmlspecialchars( $row['file_name'] );
+	$row['file_name'] = strlen($row['file_name']) > 25 ? substr($row['file_name'],0,23).'...' : $row['file_name'];
+
+
+
+
+
+
+return <<<EOF
+
+        <tr onmouseover="over(this)" onmouseout="out(this)" class="$class">
+			<td width="1%"><input type="checkbox" value="{$row['id']}" name="id[]"/></td>
+			
+            <td title="$title_org">$row[page_title]</td>
+            <td title="$file_name_org">$row[file_name]</td>
+            <td align="center">$row[author_name]</td>
+            <td align="right">$row[size]</td>
+            <td align="center">{$row['hits']}</td>
+            <td align="center">{$row['status']}</td>
+            <td align="center">
+            $image_link 
+			<a href="admin.php?adm=static_pages&amp;sid=$cp->session_id&action=reload_page&id={$row['id']}"><img src="images/refresh.gif" border="0" alt="Dokument neu gennerieren" /></a>
+			&nbsp;&nbsp;
+            <a href="admin.php?adm=static_pages&amp;sid=$cp->session_id&action=edit_page&id={$row['id']}"><img src="images/edit.png" border="0" alt="Dokument bearbeiten" /></a> &nbsp;&nbsp;
+            <a href="admin.php?adm=static_pages&amp;sid=$cp->session_id&action=del_page&id={$row['id']}"><img src="images/delete.gif" border="0" alt="Dokument löschen" /></a>
+            </td>
+        </tr>
+EOF;
+}
+
+?>

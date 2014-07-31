@@ -1,0 +1,92 @@
+<?php
+
+function __list_languages( $r ){
+global $cp, $fct, $adm_skin, $cfg;
+
+	$list = '';
+	foreach ( $r['languages'] as $rs)
+	{
+		$list .= '<option value="'.$rs['langid'].'">'.$rs['title'].'</option>';
+	}
+
+	return <<<EOF
+		
+<div id="addLang" style="display:none">
+<form action="admin.php" method="post" name="addlangform" id="addlangform">
+<input type="hidden" name="adm" value="language" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="action" value="edit_settings" />
+<input type="hidden" name="langid" value="0" />
+<input type="hidden" name="send" value="send" />
+
+    <table class="tblborder" width="99%" cellpadding="3" cellspacing="1" border="0" align="center">
+        <tr class="tableheader">
+            <td colspan="2">Sprache Erstellen</td>
+        </tr>
+		<tr>
+			<td>
+			<fieldset>
+				<legend>Titel</legend>
+				{info:lang|title}<input type="text" name="title" value="" size="35" class="input required"/>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Aktiv</legend>
+				{info:lang|publish}
+				<label for="hidden1"><input type="radio" name="hidden" id="hidden1" value="1" class="radio" /> Ja &nbsp;</label>
+				<label for="hidden0"><input type="radio" name="hidden" id="hidden0" value="0" class="radio" checked="checked" /> Nein</label>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Standart Sprache</legend>
+				{info:lang|is_standart}
+				<label for="def1"><input type="radio" name="is_default" value="1" id="def1" class="radio" /> Ja &nbsp;</label>
+				<label for="def0"><input type="radio" name="is_default" value="0" id="def0" class="radio" checked="checked" /> Nein</label>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Sprach Code</legend>
+				{info:lang|code}<input type="text" name="languagecode" value="" size="35" class="input required"/><br/>
+				<small>Für mehr informationen sehen Sie <a href="http://lcweb.loc.gov/standards/iso639-2/englangn.html" target="_blank">hier</a> nach.</small>
+			</fieldset>
+			
+			<fieldset>
+				<legend>ISO Code</legend>
+				{info:lang|isocode}<input type="text" name="iso" value="" size="35" class="input required" />
+			</fieldset>
+			
+			<fieldset>
+				<legend>Sprachvorlage</legend>
+				{info:lang|template}
+				<select name="template" class="select">
+					<option value="">Selbst erstellen (Achtung hoher aufwandt)</option>
+					{$list}
+				</select>
+				
+			</fieldset>
+			
+			</td>		
+		</tr>
+        <tr class="secondrow">
+            <td>
+				<input type="submit" value="Speichern" class="button" /> 
+				<input type="reset" value="Zurücksetzen" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+		
+		
+    <table class="tblborder" width="99%" cellpadding="3" cellspacing="0" border="0" align="center">
+        <tr class="tableheader">
+            <td>Sprache</td>
+            <td align="center" width="15%">Übersetzen</td>
+            <td align="center" width="12%">Optionen</td>
+        </tr>
+        {$r['list']}
+    </table>
+EOF;
+}
+
+?>

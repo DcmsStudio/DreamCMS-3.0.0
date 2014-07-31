@@ -1,0 +1,41 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+</cp:block>
+<cp:block name="main_content">
+    <div class="columnSet2">
+        <div class="column">
+            <h1>
+                {trans('Allgemeines')}
+            </h1>
+            <cp:tree mode="ul" key="r" name="sitemap.generic" primarykey="id" parentkey="parentid" class="sitemap">
+                <li>
+                    <a href="{$r.url}">{$r.title}</a>
+                </li>
+            </cp:tree>
+        </div>
+    </div>
+    <cp:set var="idx" value="0" />
+    <cp:loop name="sitemap.modulesmap" key="r">
+        <cp:set var="idx" value="$idx + 1" />
+        <cp:if condition="$idx == 1">
+            <cp:tag name="div" class="columnSet3" />
+        </cp:if>
+        <div class="column">
+            <h1>
+                {$r.label}
+            </h1>
+            {$r.sitemap}
+        </div>
+        <cp:if condition="$idx == 3">
+            <cp:set var="idx" value="0" />
+            <cp:tag name="div" forceclose="true" />
+        </cp:if>
+    </cp:loop>
+    
+        <cp:if condition="$idx != 3 && $idx != 0 ">
+            <cp:set var="idx" value="0" />
+            <cp:tag name="div" forceclose="true" />
+        </cp:if>
+    
+    
+</cp:block>

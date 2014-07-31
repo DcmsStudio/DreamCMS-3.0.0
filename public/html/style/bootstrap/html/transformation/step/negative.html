@@ -1,0 +1,12 @@
+    <fieldset>
+        <legend>{trans("Einstellung")}</legend>
+        <label for="grayscale"><input type="checkbox" class="checkbox" id="grayscale" name="params[grayscale]" value="1"{iif($values.grayscale, ' checked="checked"', '')} /> {trans("Only negate grayscale channels")}</label>
+    </fieldset>
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+</script>
+

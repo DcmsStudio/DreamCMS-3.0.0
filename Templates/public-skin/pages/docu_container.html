@@ -1,0 +1,119 @@
+<cp:extends template="../container" />
+<cp:block name="right_content">
+	<cp:if condition="$news.show_voteform">
+		<div class="box">
+				<h3>                                
+
+						{trans('Bewertung')}
+
+			</h3>
+
+			<div class="rating-box">
+				<div class="vote-bubble sprite">
+					 <h6>
+                    {$page.ratingsum}
+                </h6>
+ <small>
+                    {trans('Wertung')}
+                </small>
+
+				</div>
+				<div id="rating"></div>[component name="jQueryRating" toObj="rating" stars="5" value="{$page.rating}" votes="{$page.votes}" rating="{iif($page.ratingsum > 0, $page.ratingsum, '0.00')}" url="/news/rate/{$page.id}/"]</div>
+		</div>
+	</cp:if>
+	
+	
+	
+	
+
+	<div class="author-box">
+		 <h3>
+            {trans('Über den Author')}
+            <a href="profile/{$page.author.userid}/{suggest($page.author.username,true)}">{$page.author.username}</a>
+        </h3>
+
+		<div class="author-box-inner">
+			<div class="bio">{truncate($page.author.bio, 250, 'a,strong,span')}</div>
+			<div class="photo">
+				<cp:if condition="$page.author.avatarowner != null">
+					<img alt="" src="{photo($page.author.userphoto, 'AuthorImageSmall', '')}" title="{escape($page.author.username, 'html')}" border="0" />
+				</cp:if>
+				<cp:else>
+					<img alt="" src="{photo($page.author.userphoto, 'AuthorImageSmall', '')}" title="{escape($page.author.username, 'html')}" border="0" />
+				</cp:else>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<cp:set var="tags" value="$page.tags" />
+	
+	<cp:include template="../cms/tags" />
+	
+	<div class="box last-row">
+		 <h3>
+            {trans('Bookmark')}
+        </h3>
+
+		<div class="box-inner">
+			<div>
+				<social_bookmarks title="{$news.title}" addthis_clone="1" addthis_clone_max_btn="4">
+					<social_sites>
+						<a href="[social_site_url]" target="_blank">
+							<img src="[social_site_img_url]" alt="[social_site_name]" title="[social_site_name]" />
+						</a>
+					</social_sites>
+				</social_bookmarks>
+			</div>
+		</div>
+	</div>
+</cp:block>
+<cp:block name="main_content">
+	<div class="item">
+		<div class="seemcontent">
+			<cp:if condition="$session.seemode">
+				<div class="seemaction edit">adm=page&amp;action=edit&amp;id={$page.id}</div>
+				<div class="seemaction delete">adm=page&amp;action=delete&amp;id={$page.id}</div>
+			</cp:if>
+			
+			<div class="item-header">
+				 <h1 class="item-name">
+                    {$page.title}
+                </h1>
+
+			</div>
+			<div cp:notempty="$news.show_comments" class="comments-bubble sprite">
+				<p> <a href="{$SERVER.REQUEST_URI}#comments-{$page.id}" class="scroll-to-comment">{$page.commentscounter}<small>{trans('Kommentare')}</small></a>
+
+				</p>
+			</div>{* Extract Footnotes and print content *}
+			<cp:footnote name="footnote-box" value="$page.content" auto="true" var="footnotes" template="../footnote" />
+			<cp:likethis sharebutton="true" showcount="true" networks="twitter,fb" />{* print Extracted Footnotes *}
+			<cp:footnote name="footnote-box" />
+		</div>
+	</div>
+	<cp:set var="document.pageing" value="$page.paging" />
+	<cp:include template="../pageing" />
+	
+	
+	
+	<cp:tag name="div" forceclose="true" />
+	<cp:tag name="div" forceclose="true" />
+	<cp:tag name="div" class="fullwidth" />
+	<cp:tag name="div" class="inside" />
+	
+	
+	
+	<cp:if condition="$page.can_comment">
+		<cp:set var="permissionkey" str:value="page/cancommentpages" />
+
+		<div class="box-comments">
+			<div class="box-comments-inner">
+				<a name="comments-{$page.id}"></a>[modul name="comments" section="page" id="{$page.id}"]</div>
+			<div class="clear">
+				<!-- -->
+			</div>
+			<div class="box-comments-form">[modul name="commentform" section="page" id="{$page.id}"]</div>
+		</div>
+	</cp:if>
+</cp:block>

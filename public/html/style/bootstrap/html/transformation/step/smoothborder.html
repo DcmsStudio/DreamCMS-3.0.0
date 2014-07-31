@@ -1,0 +1,44 @@
+    <fieldset>
+        <legend>{trans("Border Width")}</legend>
+        <input type="text" class="textbox" name="params[border]" id="border" value="{iif($values.border, $values.border, '1')}" style="width: 100px;" />
+    </fieldset>
+    
+    <fieldset>
+        <legend>{trans("Color 1")}</legend>
+        <div id="colorHolderSimple1"></div>
+        # <input type="text" class="textbox" name="params[color1]" id="color1" value="{iif($values.color1, $values.color1, 'ffffff')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Color 2")}</legend>
+        <div id="colorHolderSimple2"></div>
+        # <input type="text" class="textbox" name="params[color2]" id="color2" value="{iif($values.color2, $values.color2, '000000')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+    </fieldset>
+
+
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+
+    $('#color1').ColorPicker({
+        livePreview: true,
+        color: '{iif($values.color1, $values.color1, "ffffff")}',
+        onChange: function(hsb, hex, rgb) {
+            $('#color1').val(hex);
+        }
+    });
+
+    $('#color2').ColorPicker({
+        livePreview: true,
+        color: '{iif($values.color2, $values.color2, "000000")}',
+        onChange: function(hsb, hex, rgb) {
+            $('#color2').val(hex);
+        }
+    });
+    
+
+
+</script>

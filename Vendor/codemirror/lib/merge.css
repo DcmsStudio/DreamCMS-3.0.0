@@ -1,0 +1,188 @@
+.CodeMirror-merge {
+    position: relative;
+    border: 1px solid #ddd;
+    white-space: pre;
+    overflow: hidden;
+}
+
+.CodeMirror-merge, .CodeMirror-merge .CodeMirror {
+    height: 100%;
+    max-height: 100%;
+}
+
+.CodeMirror-merge-pane:first-child .CodeMirror-lines > div > div > div > div:first-child {
+    right: 25px!important;
+    left: 100%!important;
+}
+
+.CodeMirror-merge-pane .CodeMirror-gutters {
+    z-index: 2;
+}
+
+.CodeMirror-merge-pane:first-child .CodeMirror-gutters {
+    right: 0!important;
+    border-right: 0;
+    border-left: 1px solid #ddd;
+}
+
+
+
+
+.CodeMirror-merge-pane .CodeMirror-wrap {
+    margin-top: 20px;
+    position: relative;
+}
+
+
+.CodeMirror-merge-pane .CodeMirror-wrap .CodeMirror-linebackground { 
+    width: 120%;
+    z-index: 3;
+}
+
+.CodeMirror-merge-pane-rightmost .CodeMirror-wrap .CodeMirror-linebackground { 
+    width: 120%;
+    z-index: 3;
+    left: -20%;
+}
+
+
+
+
+
+.CodeMirror-merge-2pane .CodeMirror-merge-pane { width: 47.5%; }
+.CodeMirror-merge-2pane .CodeMirror-merge-gap { width: 5%; }
+.CodeMirror-merge-3pane .CodeMirror-merge-pane { width: 31%; }
+.CodeMirror-merge-3pane .CodeMirror-merge-gap { width: 3.5%; }
+
+.CodeMirror-merge-pane {
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+    overflow: hidden;
+    position: relative;
+}
+
+.CodeMirror-merge-pane .source-label, .CodeMirror-merge-pane .target-label {
+    border-bottom: 1px solid #ddd;
+    line-height: 20px;
+    padding-left: 5px;
+    font-weight: bold;
+    position: absolute;
+    width: 100%;
+    z-index: 5;
+}
+.CodeMirror-merge-pane-rightmost {
+    position: relative;
+    right: 0px;
+    z-index: 1;
+}
+
+.CodeMirror-merge-gap {
+    z-index: 2;
+    display: inline-block;
+    height: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    position: relative;
+    background: #f8f8f8;
+    padding-top: 24px;
+    width: 5%;
+}
+
+
+.CodeMirror-merge .CodeMirror-scroll {
+    margin-bottom: -10px;
+    padding-bottom: 10px;
+}
+
+.CodeMirror-merge:first-child .CodeMirror-vscrollbar {
+    height: 96%;
+    background: #FFF;
+    border-left: 1px solid #DDD!important;
+    border-top: 1px solid #DDD;
+    z-index: 9999;
+    min-width: 10px!important;
+    right: 0!important;
+}
+.CodeMirror-merge-pane:last-child .CodeMirror-wrap .CodeMirror-linebackground {
+    left: -20%!important;
+    z-index: 3;
+}
+
+.CodeMirror-merge-pane .CodeMirror-wrap .CodeMirror-hscrollbar {
+    display: none!important;
+}
+
+
+.CodeMirror-merge-pane:first-child .CodeMirror-wrap .CodeMirror-vscrollbar {
+    display: none!important;
+}
+
+.CodeMirror-merge .CodeMirror-wrap .CodeMirror-scroll>div:first-child {
+    padding-bottom: 20px;
+}
+
+
+
+
+.CodeMirror-merge-scrolllock-wrap {
+    position: absolute;
+    bottom: 0; left: 50%;
+}
+.CodeMirror-merge-scrolllock {
+    position: relative;
+    left: -50%;
+    cursor: pointer;
+    color: #555;
+    line-height: 1;
+}
+
+.CodeMirror-merge-copybuttons-left, .CodeMirror-merge-copybuttons-right {
+    position: absolute;
+    left: 0; top: 0;
+    right: 0; bottom: 0;
+    line-height: 1;
+    margin-top: 25px;
+}
+
+.CodeMirror-merge-copy {
+    position: absolute;
+    cursor: pointer;
+    color: #44c;
+}
+
+.CodeMirror-merge-copybuttons-left .CodeMirror-merge-copy { right: 2px; }
+.CodeMirror-merge-copybuttons-right .CodeMirror-merge-copy { left: 2px; }
+
+.CodeMirror-merge-r-inserted, .CodeMirror-merge-l-inserted {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAGUlEQVQI12MwuCXy3+CWyH8GBgYGJgYkAABZbAQ9ELXurwAAAABJRU5ErkJggg==);
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    margin: 0;
+    padding: 0;
+}
+
+.CodeMirror-merge-r-deleted, .CodeMirror-merge-l-deleted {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAGUlEQVQI12M4Kyb2/6yY2H8GBgYGJgYkAABURgPz6Ks7wQAAAABJRU5ErkJggg==);
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    margin: 0;
+    padding: 0;
+}
+
+.CodeMirror-merge-r-chunk { background: #ffffe0; }
+.CodeMirror-merge-r-chunk-start { border-top: 1px solid #ee8; }
+.CodeMirror-merge-r-chunk-end { border-bottom: 1px solid #ee8; }
+.CodeMirror-merge-r-connect { fill: #ffffe0; stroke: #ee8; stroke-width: 1px; }
+
+.CodeMirror-merge-l-chunk { background: rgba(150, 150, 241, 0.1); }
+.CodeMirror-merge-l-chunk-start { border-top: 1px solid #88e; }
+.CodeMirror-merge-l-chunk-end { border-bottom: 1px solid #88e; }
+.CodeMirror-merge-l-connect { fill: #eef; stroke: #88e; stroke-width: 1px; }
+
+.CodeMirror-merge-l-chunk.CodeMirror-merge-r-chunk { background: #dfd; }
+.CodeMirror-merge-l-chunk-start.CodeMirror-merge-r-chunk-start { border-top: 1px solid #4e4; }
+.CodeMirror-merge-l-chunk-end.CodeMirror-merge-r-chunk-end { border-bottom: 1px solid #4e4; }

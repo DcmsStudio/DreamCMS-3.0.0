@@ -1,0 +1,54 @@
+<div class="description">Übersicht der Fehlerhaften Downloads.</div>
+
+<script language="javascript">
+<!--
+  function select_all(name) {
+   for (i=0;i<document.broken.length;i++) {
+    temp=document.broken.elements[i].name;
+    pos=temp.indexOf('[');
+
+    fieldname=temp.substr(0,pos);
+
+    if(fieldname==name)
+    {
+	if (document.broken.elements[i].checked == true)
+        {
+		document.broken.elements[i].checked = false;
+        }
+        else
+	{
+		document.broken.elements[i].checked = true;
+        }
+    }
+
+   }
+  }
+//-->
+</script>
+
+<form action="admin.php" method="post" name="broken">
+<input type="hidden" name="adm" value="downloads" />
+<input type="hidden" name="sid" value="$cp->session_id" />
+
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+<tr class="tableheader">
+	<td>Titel</td>
+	<td align="center" width="8%">Von</td>
+	<td align="center" width="15%">IP</td>
+	<td width="15%" align="center">Optionen</td>
+	<td><input type="checkbox" name="c" value="1" onclick="javascript:select_all('lids')" /></td>
+</tr>
+$rows
+</table>
+<br />
+<div class="description"><div align="right" style="a {font-size:10px;}">
+
+<input type="hidden" name="back_to" value="list_broken" />
+<select name="action" class="select">
+	<option value="">-------------</option>
+	<option value="deaktivate_link">Deaktivieren</option>
+	<option value="del_link">Löschen</option>
+</select> <input type="submit" value="Abschicken" class="button" />
+</div></div>
+</form>

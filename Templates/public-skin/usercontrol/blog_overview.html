@@ -1,0 +1,58 @@
+<cp:include group="usercontrol" template="tabpanel"/>
+<cp:if !empty="create_blog">
+    <div class="warning3">
+        {trans('Du hast noch keinen Blog angelegt.')}
+        <a href="index.php?cp=mycp&amp;action=blog&amp;do=editblog">
+            {trans('Meinen Blog Anlegen')}
+        </a>
+    </div>
+</cp:if>
+<cp:else>
+    <h3>
+        {$blog_title}
+    </h3>
+
+    <div class="spacertd_row w100perc mb10">
+        <p class="info3 tl normal">
+                <span class="w60perc fl">
+			{trans('Blog Eigentümer')} {$user.'}<br/>
+			{trans('Blog Einträge')} {$total_blog_items}
+			{$blog_description}
+		</span>
+                <span class="w30perc fr tr mr10">
+                    <a href="index.php?cp=mycp&amp;action=blog&amp;do=editblog">
+                        {trans('Meinen Blog bearbeiten')}
+                    </a>
+                </span>
+        </p>
+    </div>
+
+    <cp:if empty="total_blog_items">
+        <div class="w100perc fl mb10">
+            <p class="warning3">
+                <span class="w50perc fl">
+                    {trans('Du hast noch keine Blog Einträge angelegt.')}
+                </span>
+                <span class="w30perc fr tr mr10">
+                    <a href="index.php?cp=mycp&amp;action=blog&amp;do=edititem">
+                        {trans('Blogeintrag Anlegen')}
+                    </a>
+                </span>
+            </p>
+        </div>
+    </cp:if>
+    <cp:else>
+        <div class="w100perc fl mb10">
+            <p class="info3">
+                <span class="w60perc fl">
+                    {trans('Dir bleiben noch %s Einträge von Maximal %s Einträgen zur Verfügung.')}
+                </span>
+                <span class="w30perc fr tr mr10">
+                    <a href="index.php?cp=mycp&amp;action=blog&amp;do=edititem">
+                        {trans('Blogeintrag Anlegen')}
+                    </a>
+                </span>
+            </p>
+        </div>
+    </cp:else>
+</cp:else>

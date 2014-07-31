@@ -1,0 +1,64 @@
+<cp:extends template="main"/>
+<cp:block name="toolbar">
+    <button type="button" id="create_tag" class="action-button save">{trans('Übernehmen')}</button>
+</cp:block>
+
+
+<cp:block name="content">
+    <form name="tagwizard" id="tag-wizard">
+        <div>
+            <div class="toolbar">
+
+            </div>
+
+            <input type="hidden" name="_tagname" value="{$request.tag}"/>
+
+            <div class="box description">
+                <div class="box-inner">
+                    <strong>{$tag.name}</strong>
+                    <cp:if condition="$tag.description">
+                        <p>{escape($tag.description, 'htmlall')}</p>
+                    </cp:if>
+
+                    <cp:loop name="attributes" key="r">
+
+                        <div style="margin-bottom:5px;">
+                            <div>
+                                <strong>{$r.label}</strong>
+
+                            </div>
+                            <cp:if condition="$r.type == 'text'">
+                                <input name="{$r.fieldname}" type="text" value="{$r.value}" size="{$r.size}" class="{iif($r.required, 'required', '')}"/>
+                            </cp:if>
+
+                            <cp:if condition="$r.type == 'select'">
+
+                                <select name="{$r.fieldname}">
+                                    <cp:loop name="r.values" key="rs">
+                                        <option value="{$rs.value}">{$rs.label}</option>
+                                    </cp:loop>
+                                </select>
+
+                            </cp:if>
+
+
+                            <cp:if condition="$r.type == 'textarea'">
+                                <textarea name="{$r.fieldname}" rows="{iif($rs.rows, $rs.rows, '4')}" cols="{iif($rs.cols, $rs.cols, '50')}" class="{iif($r.required, 'required', '')}"></textarea>
+                            </cp:if>
+
+                            <cp:if condition="$r.description"><br/><small>{$r.description}</small></cp:if>
+                        </div>
+
+
+                    </cp:loop>
+
+
+
+
+
+
+                </div>  
+            </div>  
+        </div> 
+    </form>
+</cp:block>

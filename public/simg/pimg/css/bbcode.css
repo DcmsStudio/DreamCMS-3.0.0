@@ -1,0 +1,84 @@
+div.bbcode {
+    display: inline-table;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.bbcode .markItUpContainer {
+    padding: 0!important;
+    margin: 0!important;
+}
+.markItUp * { margin: 0!important; }
+.hiddensmilielist {
+    width: 100%;
+    display: inline-block!important;
+}
+
+
+
+.markItUpHeader > ul {
+    list-style-image: none!important;
+    list-style: none!important;
+}
+.markItUpHeader > ul > li { list-style: none!important; list-style-image: none!important; display: inline-block!important; float: left!important; }
+
+
+
+.markItUpHeader ul li {
+    margin: 0!important;
+    padding: 0!important;
+    margin-right: 3px!important;
+}
+ul#smilielist {
+    width: 100%;
+    display: table;
+}
+
+.markItUpHeader {
+    clear: both!important;
+    width: 100%!important;
+}
+
+textarea.markItUpEditor {
+    width: 100%;
+    max-width: 900px;
+    font-size: 14px!important;
+    padding: 5px!important;
+}
+
+.markItUpPreviewFrame {
+    height: auto!important;
+    min-height: 150px;
+    max-height: 300px;
+    border: 1px solid #CCCCCC!important;
+    border-radius: 5px;
+}
+
+.markItUp li.smiliebit  {
+    margin: 0!important;
+    margin-right: 4px!important;
+}
+
+
+.xs {
+    font-size: 9px!important;
+}
+
+.s {
+    font-size: 11px!important;
+}
+
+.m {
+    font-size: 13px!important;
+}
+
+.l {
+    font-size: 24px!important;
+}
+.xl {
+    font-size: 36px!important;
+}
+
+.underline {
+    text-decoration: underline!important;
+}

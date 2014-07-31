@@ -1,0 +1,10 @@
+<div cp:notempty="$tags" class="box">
+    <h3>
+        {trans('Tags')}
+    </h3>
+    <div class="box-inner">
+        <cp:loop name="tags" key="r">
+            <a href="{@CONTROLLER}/tag/{escape($r.tag, 'url')}">{escape($r.tag, 'html')}</a>{iif($r.next_r.tag, ', ', '')}
+        </cp:loop>
+    </div>
+</div>

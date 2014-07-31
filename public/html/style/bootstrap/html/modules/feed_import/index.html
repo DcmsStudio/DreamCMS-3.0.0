@@ -1,0 +1,107 @@
+<div class="grid">
+
+<table border="0" cellpadding="3" cellspacing="0" width="100%" class="tblborder">
+    <tr class="tableheader">
+        
+        <td>{trans('Feed Url')}</td>
+        <td width="40%">{trans('News Kategorie')}</td>
+        
+        <td width="10%" class="tc">{trans('Optionen')}</td>
+    </tr>
+    <cp:loop name="feeds" key="r">
+        {cycle('cyclename', 'firstrow,secondrow', 'css')}
+        <tr class="{$css}">
+            <td><a href="javascript:void(0);" onclick="getInfoDataUrl('{$r.url}');">{$r.feed_url}</a></td>
+            <td>{$r.cat_title} - ({$r.feeds_counter})</td>
+            
+            <td class="tc">
+                <a rel="feed-{$r.feedid}" href="javascript:void(0);" class="import-feed"><img src="images/feed-load.png" alt="Feed importieren" title="Feed importieren" width="16" height="16"/></a> &nbsp; 
+                <a href="admin.php?adm=module&pl={$modulid}&amp;do=del_feed&amp;idx={$r.feedid}"><img src="images/delete.gif" alt="Feed löschen" title="Feed löschen" /></a>
+            </td>
+        </tr>
+    </cp:loop>    
+</table>
+</div>
+
+<form  action="admin.php" id="add-feed" method="post">
+    <input type="hidden" name="adm" value="plugin" />
+    <input type="hidden" name="pl" value="{$modulid}" />
+    <input type="hidden" name="do" value="addfeed" />
+    
+    
+    
+    <div class="box">
+        <h2>{trans('Neuen Feed Import')}</h2>
+        <div class="box-inner">
+            <fieldset>
+                <legend>{trans('News Kategorie')}</legend>
+                <select name="catid" id="catid" class="select">
+                    <option value="">---------------</option>
+                    <cp:loop name="newscats" key="r">
+                        <option value="{$r.id}">{$r.title}</option>
+                    </cp:loop>                   
+                </select>
+            </fieldset>
+            
+            
+            <fieldset>
+                <legend>{trans('Feed Url')}</legend>                
+                <input type="text" value="" name="feed_url" id="feed_url" class="input" size="70" />
+            </fieldset>
+            
+            
+                <input class="button" type="button" id="add-feed-btn" value="{trans('Feed hinzufügen')}" />
+                <input class="button" type="reset" value="{trans('Zurücksetzen')}" />
+            
+        </div>
+    </div>
+</form>
+
+
+<a href="admin.php?adm=module&pl={$modulid}&amp;do=cron_feed">cron_feed</a> 
+
+
+<script type="text/javascript">
+    //<![CDATA[
+$(document).ready(function() {
+
+    $('#add-feed').submit( function(e) {
+        if ( $('#catid').val() == '' )
+        {
+            jAlert('Bitte eine Kategorie wählen');
+            return;
+        }
+    });
+
+    $('#add-feed-btn').click(function(e) {
+        if ( $('#catid').val() == '' )
+        {
+            jAlert('Bitte eine Kategorie wählen');
+            return;
+        }
+
+        $('#add-feed').submit();
+    });
+
+
+    var modulurl = 'admin.php?adm=module&pl={$modulid}';
+
+    var imports = $('.grid').find('.import-feed');
+
+    imports.each(function(){
+        $(this).click( function(e) {        
+            var rel = $(this).attr('rel');
+
+            $.get(modulurl +'&do=cron_feed&id='+ rel.replace('feed-', ''), {}, function(data) {
+                if(responseIsOk(data)) { display_info( data.maincontent, false, 'RSS Feed Import' ); }
+                else { jAlert(data.msg); }
+            },'json');
+    
+
+        });
+    });
+
+});
+//]]>
+</script>
+

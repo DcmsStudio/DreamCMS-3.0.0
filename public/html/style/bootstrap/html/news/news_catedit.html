@@ -1,0 +1,96 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:editNewsCatForm{$id}] [save_exit:editNewsCatForm{$id}]
+        [reset:editNewsCatForm{$id}] [cancel:editNewsCatForm{$id}]
+    </cp:groupbutton>
+
+</cp:block>
+<cp:section name="meta">
+    <cp:include template="../metadata"/>
+</cp:section>
+<cp:block name="content">
+    <form action="admin.php" name="editNewsCatForm{$id}" id="editNewsCatForm{$id}" method="post">
+        <input type="hidden" name="adm" value="news"/>
+        <input type="hidden" name="action" value="edit_cats"/>
+        <input type="hidden" name="send" value="1"/>
+        <input type="hidden" name="id" id="catid" value="{$id}"/>
+
+        <div class="column-2">
+
+            <div class="post-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{trans('Titel')}</label>
+                        <input class="input form-control" type="text" name="title" id="title" value="{escape($title, 'quotes')}" size="45"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{trans('Teasertext')}</label>
+                        <cp:editor baseurl="$cfg.portalurl" name="description" value="$description" height="150"/>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="post-column">
+
+
+                <cp:section name="publishing"/>
+
+                <div class="postbox">
+                    <h3>{trans('Kategorie Optionen')}</h3>
+
+                    <div class="postbox-content" rel="newscats">
+                        <label for="cancomment"><input type="checkbox" name="cancomment" id="cancomment" value="1" cp:on="checked:$cancomment == 1 || !isset($cancomment)" parse:checked="checked"/> {trans('Kommentare für diese Kategorie erlauben')}</label>
+                    </div>
+                </div>
+
+                <div class="postbox">
+                    <h3>{trans('Übergeordnete Kategorie')}</h3>
+
+                    <div class="postbox-content" rel="newscatsparentid">
+                        <select name="parentid" size="6">
+                            <cp:set var="dataselect" value="$cat_options"/>
+                            <cp:include template="../select_option"/>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="postbox">
+                    <h3>{trans('Zugriffsrechte')}</h3>
+
+                    <div class="postbox-content" rel="newscatsaccess">
+                        <select name="access[]" class="select" size="6" multiple="multiple" style="width:99%">
+                            <cp:set var="dataselect" value="$access_options"/>
+                            <cp:include template="../select_option"/>
+                        </select>
+                    </div>
+                </div>
+
+                <cp:include template="../metadata"/>
+            </div>
+
+
+        </div>
+
+
+    </form>
+
+
+    <script type="text/javascript">
+
+        Form.registerForm('editNewsCatForm{$id}', {
+            contentIdentifierID: 'catid',
+            exiturl: 'admin.php?adm=news&action=list_cats',
+            identifierType: 'newscategorie',
+            baseField: 'title'
+        });
+
+
+    </script>
+
+</cp:block>

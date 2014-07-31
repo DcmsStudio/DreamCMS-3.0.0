@@ -1,0 +1,48 @@
+<cp:include template="header"/>
+            <!-- end header include -->
+
+            <div id="content">
+                <div class="container">
+                    <div id="breadcrumbs">                   
+                        <cp:if condition="$NAVIGATION">
+                            <a href="{cfg('portalurl')}/" class="first">{trans('Startseite')}</a>/{$NAVIGATION}
+                        </cp:if>
+                        <cp:else>
+                            <span class="first">{trans('Startseite')}</span>
+                        </cp:else>   
+                    </div>        
+                    
+                    <div class="clear">
+                        <!--  -->
+                    </div>
+                    
+                    
+                    <div class="col-s-content">
+                        
+                        <cp:block name="toolbar"/>                        
+                        <cp:block name="content"/>                        
+                        
+                        <div class="clear">
+                            <!--  -->
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="large-sidebar">
+                        <div class="side-section">
+                            
+                            <cp:block name="panel"/>
+                            
+                        </div>
+                    </div>        
+                    
+                    <div class="clear">
+                        <!--  -->
+                    </div>
+                    
+                </div>
+            </div>
+            
+<cp:include template="footer"/>

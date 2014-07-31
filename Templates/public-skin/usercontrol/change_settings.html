@@ -1,0 +1,224 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+    <div class="controlpanel-tabs">
+        <cp:include template="usercontrol/tabpanel" />
+    </div>
+    <form action="profile/settings" method="post" id="settings-form" name="settings-form">
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="uiqtoken" value="{$session.uiqtoken}" />
+        <div class="settings">
+            <div class="containerdiv">
+                <span class="changesettings">
+                </span>
+                <h3 class="">
+                    {trans('Allgemeine Angaben')}
+                </h3>
+                <fieldset>
+                    <label>
+                        {trans('Zeitzone')}
+                    </label>
+                    <select name="timezone" id="timezone">
+                        <cp:loop name="timezones" key="r">
+                            <option value="{$r.value}" cp:on="selected:$r.value == $user.timezoneoffset" parse:selected="selected">
+                                {$r.title}
+                            </option>
+                        </cp:loop>
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('Meine Beschreibung/Biographie')}
+                    </label>
+
+                    <script type="text/javascript" src="asset/js/jquery/bbcode/jquery.markitup"></script>
+                    <script type="text/javascript" src="asset/js/jquery/bbcode/sets/bbcode/set"></script>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('.bbcodeBioTextarea').markItUp(bbcodeBioTextarea);
+                        });
+                    </script>
+                    <textarea class="textarea bbcodeBioTextarea" name="usertext" rows="10" cols="40">{$user.usertext}</textarea>
+                    <small>
+                        {trans('Es sind nur die BBCodes erlaubt die du hier auswählen kannst. Wenn du andere verwendest, werden diese automatisch entfernt. HTML Code ist generell nicht erlaubt und wird daher umgewandelt in sichtbare Zeichen.')}
+                    </small>
+                    
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('Vorname')}*
+                    </label>
+                    <input type="text" class="input" name="name" value="{$user.name}" maxlength="100" size="50" />
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('Nachname')}*
+                    </label>
+                    <input type="text" class="input" name="lastname" value="{$user.lastname}" maxlength="100" size="50" />
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('Anschrift')}*
+                    </label>
+                    <input type="text" class="input" name="street" value="{$user.street}" maxlength="200" size="50" />
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('PLZ/Ort')}*
+                    </label>
+                    <input type="text" name="zip" value="{$user.zip}" title="{trans('Postleitzahl')}" maxlength="6" size="10" />
+                    <input type="text" name="user_from" value="{$user.user_from}" maxlength="60" size="36" title="{trans('Ort')}" />
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('Herkunft')}
+                    </label>
+                    <select name="country" id="codeS">
+                        <option value="" cp:on="selected:!$user.country" parse:selected="selected">
+                            --------------------------------
+                        </option>
+                        <cp:loop name="countries" key="r">
+                            <option value="{$r.tld}" cp:on="selected:$r.tld == $user.country" parse:selected="selected">
+                                {$r.name}
+                            </option>
+                        </cp:loop>
+                    </select>
+                    <img id="flag-icon" src="" width="16" height="16" alt="" style="padding-top:4px;padding-left:4px;" />
+                </fieldset>
+                <br/>
+                <small>
+                    {trans('* Diese angaben siehst nur du! Wir geben keine Daten zu deiner Person preis.')}
+                </small>
+            </div>
+        </div>
+        <div class="settings">
+            <div class="containerdiv">
+                <span class="messengersettings">
+                </span>
+                <h3 class="underlined">
+                    {trans('Angaben zu Messenging')}
+                </h3>
+                <fieldset>
+                    <label>
+                        {trans('ICQ')}
+                    </label>
+                    <input type="text" class="input" name="icq" value="{$user.icq}" maxlength="20" size="50" />
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('MSN')}
+                    </label>
+                    <input type="text" class="input" name="msn" value="{$user.msn}" maxlength="250" size="50" />
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('AIM')}
+                    </label>
+                    <input type="text" class="input" name="aim" value="{$user.aim}" maxlength="60" size="50" />
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('YIM')}
+                    </label>
+                    <input type="text" class="input" name="yim" value="{$user.yim}" maxlength="60" size="50" />
+                </fieldset>
+                <fieldset>
+                    <label>
+                        {trans('Skype')}
+                    </label>
+                    <input type="text" class="input" name="skype" value="{$user.skype}" maxlength="60" size="50" />
+                </fieldset>
+            </div>
+            <cp:if condition="count($profilefields)">
+                <div class="containerdiv">
+                    <span class="customsettings">
+                    </span>
+                    <h3 class="underlined">
+                        {trans('Benutzerdefiniert mit * gekennzeichnete Felder werden benötigt.')}
+                    </h3>
+                    <cp:if condition="count($profilefields)">
+                        <cp:set var="col" value="1" />
+                        <cp:loop name="profilefields" key="r">
+                            <fieldset>
+                                <label>
+                                    <cp:if condition="$r.grouplabel">
+                                        {$r.grouplabel}
+                                    </cp:if>
+                                    <cp:else>
+                                        {$r.label}
+                                    </cp:else>
+                                    {iif($r.required, ' *', '')}
+                                </label>
+                                
+                                {$r.field}
+                                
+                                <cp:if condition="$r.field_description">
+                                    <br/>
+                                    <small>
+                                        {$r.field_description}
+                                    </small>
+                                </cp:if>
+                            </fieldset>
+                        </cp:loop>
+                    </cp:if>
+                    <cp:else>
+                        {trans('Es wurden noch keine Benutzerdefinierten Felder angelegt.')}
+                    </cp:else>
+                </div>
+            </cp:if>
+            <p class="tc">
+                <input class="button save-button" type="button" value="{trans('Abschicken')}" />
+                <input class="button reset-button" type="reset" accesskey="R" value="{trans('Zurücksetzen')}" />
+            </p>
+        </div>
+    </form>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        $(document).ready(function() {
+            var backendImagePath = '{$backendImagePath}';
+            var selected = $('#codeS').find(':selected');
+            if ($(selected).val() != '') {
+                var loc = setLocaleCode($(selected).val());
+                var flag = loc + '.png';
+                $('#flag-icon').attr('src', backendImagePath + 'flags/' + flag);
+            }
+            $('#codeS').change(function() {
+                var selected = $('#codeS').find(':selected');
+                if ($(selected).val() != '') {
+                    var loc = setLocaleCode($(selected).val());
+                    var flag = loc + '.png';
+                    $('#flag-icon').attr('src', backendImagePath + 'flags/' + flag);
+                }
+            });
+            $('#settings-form').registerFormFE({
+                exit_url: 'user/controlpanel',
+                save: function(exit) {
+                    var self = this;
+                    post = $('#settings-form').serialize();
+                    $.post('user/settings', post, function(data) {if(responseIsOk(data)) {
+                            var button = $('<button/>').addClass('action-button').append('Weiter...');
+                            div.empty();
+                            span = $('<div/>').append(data.msg);
+                            $('#settings-form').hide();
+                            div.addClass('success').append(span).show();
+                            div.addClass('success').append($('<div/>').append(button));
+                            button.click(function() {
+                                document.location.href = self.exit_url
+                            });
+                        } else {
+                            self.error(data);
+                        }
+                    }, "json");
+                }
+            });
+        
+        });
+        
+        function setLocaleCode(str) {
+            return str.toLowerCase();
+        }
+        var div = $('<div id="form-message" class="validation"></div>');
+        div.insertBefore($('#settings-form'));
+        div.hide();
+        /* ]]> */
+    </script>
+</cp:block>

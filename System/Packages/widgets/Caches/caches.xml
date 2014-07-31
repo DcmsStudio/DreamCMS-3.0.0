@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+    <name>Caches</name>
+    <version>0.1</version>
+    <author>Marcel Domke</author>
+    <website>http://www.dcms-studio.de</website>
+    <collapsible>1</collapsible>
+    <configurable>0</configurable>
+    <multiple>0</multiple>
+    <description><![CDATA[Zeigt die aktuellen Cache-Informationen im Dashboard an]]>
+    </description>
+</widget>

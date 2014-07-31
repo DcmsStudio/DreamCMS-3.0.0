@@ -1,0 +1,151 @@
+<style type="text/css">
+
+    #wgt-mem ul, #wgt-mem li {
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    #wgt-mem li span:first-child {
+        display: inline-block;
+        width: 50%;
+        text-align: right;
+        padding-right: 10px;
+        white-space: nowrap;
+        float: left;
+    }
+
+    #wgt-mem li span:last-child {
+        display: inline-block;
+        text-align: left;
+        width: 35%;
+    }
+
+    #wgt-mem .progress {
+        width: 90%;
+        margin: 10px auto;
+        height: 15px;
+    }
+
+    .wgt-mem-flow {
+        position: absolute!important;
+        z-index: 99999;
+        left: 10px;
+        top: 60px;
+        margin: 0;
+        min-width: 200px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)!important;
+    }
+    .wgt-mem-flow li span:first-child {
+        width: 57%!important;
+    }
+</style>
+
+<div id="wgt-mem">
+    <ul>
+        <li><span>PHP Version</span><span>{phpversion()}</span></li>
+        <li><span>Memory limit</span><span class="wgt-mem_limit">{formatsize($mem_limit*1024*1024)}</span></li>
+        <li><span>Memory usage</span><span class="wgt-mem_usage">{formatsize($mem_usage*1024*1024)}</span></li>
+    </ul>
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar progress-bar-success"></div>
+    </div>
+</div>
+
+
+<script type="application/javascript">
+    var membar;
+
+    $(window).ajaxComplete(function (event, xhr, settings) {
+        if (typeof xhr.responseJSON == 'object') {
+            var data = xhr.responseJSON;
+
+            if (typeof data.mem_limit !== 'undefined') {
+                $('span.wgt-mem_limit').text(Tools.formatSize(data.mem_limit * 1024 * 1024));
+            }
+
+            if (typeof data.mem_usage !== 'undefined') {
+                $('span.wgt-mem_usage').text(Tools.formatSize(data.mem_usage * 1024 * 1024));
+            }
+
+            if (typeof data.mem_percent !== 'undefined') {
+                membar = $('#wgt-mem,div.wgt-mem-flow').find('div.progress-bar');
+                membar.width(data.mem_percent + '%').removeClass('progress-bar-warning progress-bar-danger ');
+
+                if (data.mem_percent > 80 && data.mem_percent < 95) {
+                    membar.addClass('progress-bar-warning');
+                }
+
+                if (data.mem_percent >= 95) {
+                    membar.addClass('progress-bar-danger');
+                }
+            }
+        }
+    });
+
+    $(window).ajaxSuccess(function (event, xhr, settings) {
+        if (typeof xhr.responseJSON == 'object') {
+            var data = xhr.responseJSON;
+
+            if (typeof data.mem_limit !== 'undefined') {
+                $('span.wgt-mem_limit').text(Tools.formatSize(data.mem_limit * 1024 * 1024));
+            }
+
+            if (typeof data.mem_usage !== 'undefined') {
+                $('span.wgt-mem_usage').text(Tools.formatSize(data.mem_usage * 1024 * 1024));
+            }
+
+            if (typeof data.mem_percent !== 'undefined') {
+                membar = $('#wgt-mem,div.wgt-mem-flow').find('div.progress-bar');
+                membar.width(data.mem_percent + '%').removeClass('progress-bar-warning progress-bar-danger ');
+
+                if (data.mem_percent > 80 && data.mem_percent < 95) {
+                    membar.addClass('progress-bar-warning');
+                }
+
+                if (data.mem_percent >= 95) {
+                    membar.addClass('progress-bar-danger');
+                }
+            }
+        }
+    });
+
+    $('.wgt-mem-flow').remove();
+
+    $('#wgt-mem').parents('.widget:first').find('.fa-refresh,.fa-thumb-tack').remove();
+    $('#wgt-mem').parents('.widget:first').find('h2 .fr').prepend(
+        $('<span class="fa fa-thumb-tack"></span>').bind('click', function () {
+            if ($('div.wgt-mem-flow').length) {
+                $('div.wgt-mem-flow').remove();
+            }
+            else {
+                var flow = $('#wgt-mem').parents('.widget:first').clone(false).addClass('wgt-mem-flow');
+                flow.find('.fa-refresh,.fa-thumb-tack,.collapsible').remove();
+                flow.find('.fa-times').unbind().click(function() {
+                    $(this).parents('.wgt-mem-flow:first').remove()
+                });
+                flow.draggable({
+                    handle: 'h2'
+                });
+                flow.appendTo($('#fullscreenContainer'));
+            }
+        })
+    );
+
+    var mem_percent = {iif($mem_percent >= 0, $mem_percent, '0')};
+
+    if (mem_percent >= 0) {
+        membar = $('#wgt-mem').find('div.progress-bar');
+        membar.width(mem_percent + '%').removeClass('progress-bar-warning progress-bar-danger');
+
+        if (mem_percent > 80 && mem_percent < 95) {
+            membar.addClass('progress-bar-warning');
+        }
+
+        if (mem_percent >= 95) {
+            membar.addClass('progress-bar-danger');
+        }
+    }
+</script>

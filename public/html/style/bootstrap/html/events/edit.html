@@ -1,0 +1,144 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    [save:formEvent{$input.event}] [save_exit:formEvent{$input.event}]
+    [reset:formEvent{$input.event}] [cancel:formEvent{$input.event}]
+
+</cp:block>
+
+<cp:block name="content">
+
+
+    <p class="bg-info mb10">
+        {trans('Die nachstehende Tabelle zeigt die Reihenfolge, in der die Hooks ausgeführt werden welche mit einem Haken versehen sind. Sie können die Reihenfolge der Hook Ausführung ändern indem Sie die mit einem Haken versehenen Einträge an die gewünschte Position ziehen.')}
+    </p>
+
+
+    <form action="admin.php" method="post" id="formEvent{$input.event}" name="formEvent{$input.event}">
+        <input type="hidden" name="adm" value="eventmanager" />
+        <input type="hidden" name="action" value="savehookorder" />
+        <input type="hidden" name="ajax" value="1" />
+        <input type="hidden" name="event" value="{$input.event}" />
+        <input type="hidden" name="hook" id="order" value="" />    
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{trans("Hooks")} - {$input.event}</div>
+            <div class="panel-body">
+                <ul id="hooks">
+
+                    <cp:loop name="hooks" key="hook">
+                        <li id="hook_{$hook.type}:{$hook.handler}:{$hook.event}" style="color: #999;line-height:22px">
+
+                            <strong class="hook-event">
+                                <cp:if condition="$hook.type == 'plugin'">
+                                    {trans('Plugin Ereignis')}:
+                                </cp:if>
+                                <cp:elseif condition="$hook.type == 'component'">
+                                    {trans('Komponente Ereignis')}:
+                                </cp:elseif>
+                            </strong> 
+
+                        <cp:if condition="$hook.type == 'plugin'">
+                            <span class="name">{ucfirst($hook.handler)}</span>
+                        </cp:if>
+                        <cp:elseif condition="$hook.type == 'component'">
+                            <span class="name">{$hook.handler}</span>
+                            <a class="delete-link" href="#"><small>({trans('Komponente für dieses Ereignis entfernen')})</small></a>
+                        </cp:elseif>
+
+                        <div style="float: right; display:inline">
+                            <label for="hook_{$hook.type}_{$hook.handler}_{$hook.event}">
+                                {trans('Ereignisse ist aktiviert')}
+                                <input type="checkbox" class="checkbox" name="hook_enabled[{$hook.type}][{$hook.handler}][{$hook.event}]" id="hook_{$hook.type}_{$hook.handler}_{$hook.event}" value="1" cp:on="checked:$hook.hook_enabled" parse:checked="checked"/>
+                            </label>
+                        </div>
+                        </li>
+                    </cp:loop>
+
+                </ul>
+            </div>
+        </div>
+
+
+
+    </form>
+
+    <script type="text/javascript">
+
+        var F = Form.registerForm('formEvent{$input.event}', {
+            contentIdentifierID: null,
+            exiturl: 'admin.php?adm=eventmanager',
+        });
+
+
+
+        var sortString = '';
+        $('#' + Win.windowID).find('#hooks').sortable({
+            containment: $('#' + Win.windowID),
+            forceHelperSize: true,
+            forcePlaceholderSize: true,
+            placeholder: 'ui-sortable-placeholder',
+            distance: 10,
+            revert: true,
+            tolerance: 'pointer',
+            update: updatehooks
+        });
+
+        $('#' + Win.windowID).find('#hooks').css({minHeight: '250px'});
+        sortString = $('#' + Win.windowID).find('#hooks').sortable("serialize").toString();
+        setOrder();
+        $('#' + Win.windowID).find('.delete-link').click(function(e) {
+            var el = $(this).parents('li:first');
+            var params = {};
+            params.hook = $(this).parents('li:first').attr('id');
+            jConfirm(sprintf(
+                    "{trans('Wollen Sie die Komponente `%s` wirklich aus dem Ereignis `%s` entfernen?')}",
+                    $(this).parents('li:first').find('span.name').text(), '{$input.event}'), "{trans('Achtung...')}", function(res) {
+                if (res) {
+
+                    $.get('admin.php?adm=eventmanager&action=removecomponenthook', params, function(data) {
+                        if (Tools.responseIsOk(data)) {
+
+                            $(el).fadeOut('slow', function() {
+                                $(el).remove();
+                            });
+                            
+                            $('.delete-link').show();
+
+                            Notifier.display('info', data.message);
+                        } else {
+                            jAlert(data);
+                        }
+                    }, "json");
+                }
+            });
+            
+            e.preventDefault();
+            return false;
+        });
+
+        function updatehooks() {
+            if (sortString != $('#' + Win.windowID).find('#hooks').sortable("serialize").toString()) {
+                sortString = $('#' + Win.windowID).find('#hooks').sortable("serialize").toString();
+
+                Form.setDirty(null, $('#' + Win.windowID).find('#formEvent{$input.event}'));
+                
+                
+                
+                setOrder();
+                // $('.delete-link').hide();
+            }
+        }
+
+        function setOrder() {
+            var _sortString = sortString.replace(/&?(hook\[\]=)/ig, '|');
+            _sortString = _sortString.replace(/^|/g, '');
+            $('#' + Win.windowID).find('#order').val(_sortString);
+        }
+
+
+    </script>
+
+</cp:block>

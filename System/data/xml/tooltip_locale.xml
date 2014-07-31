@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooltip>
+  <title title=""><![CDATA[]]></title>
+  <code title=""><![CDATA[]]></code>
+  <wincode title=""><![CDATA[]]></wincode>
+  <timezone title=""><![CDATA[]]></timezone>
+  <decimal title=""><![CDATA[]]></decimal>
+  <thousands title=""><![CDATA[]]></thousands>
+  <dateformat title=""><![CDATA[]]></dateformat>
+  <timeformat title=""><![CDATA[]]></timeformat>
+  <fulldate_format title=""><![CDATA[]]></fulldate_format>
+  <datetime_format title=""><![CDATA[]]></datetime_format>
+  <fulldatetime_format title=""><![CDATA[]]></fulldatetime_format>
+  <guicontentlang title=""><![CDATA[]]></guicontentlang>
+</tooltip>

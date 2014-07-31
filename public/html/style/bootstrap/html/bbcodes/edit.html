@@ -1,0 +1,120 @@
+<cp:extends template="../main"/>
+<cp:block name="toolbar">
+    [save:bbcodesform{$bbcode.bbcodeid}] [save_exit:bbcodesform{$bbcode.bbcodeid}]
+    [reset:bbcodesform{$bbcode.bbcodeid}] [cancel:bbcodesform{$bbcode.bbcodeid}]
+</cp:block>
+
+<cp:block name="content">
+    <h1 class="gray" style="font-size: 20px;margin-bottom: 10px">currently not implemented to use in the frontend... we work on it :)</h1>
+    <form method="post" action="admin.php" id="bbcodesform{$bbcode.bbcodeid}" name="bbcodesform{$bbcode.bbcodeid}">
+        <input type="hidden" name="adm" value="bbcode"/>
+        <input type="hidden" name="send" value="send"/>
+        <input type="hidden" name="action" value="edit"/>
+        <input type="hidden" name="id" id="bbcodeid{$bbcode.bbcodeid}" value="{$bbcode.bbcodeid}"/>
+
+
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <label>{trans('BBCode Tag')}</label>
+                <input type="text" name="bbcodetag" value="{escape($bbcode.bbcodetag, 'quotes')}" maxlength="250" size="40" class="required form-control"/>
+                <span class="note">{trans('Bezeichnung des BBCode Tags')}</span>
+
+            </div>
+            <div class="col-md-6">
+
+                <label>{trans('Beispiel für die Verwendung')}</label>
+                <input type="text" name="bbcodeexample" value="{escape($bbcode.bbcodeexample, 'quotes')}" maxlength="250" size="70" class="required form-control"/>
+                <span class="note">{trans('Dient für die Hilfe')}</span>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('wird ersetzt durch')}</label>
+                <textarea cols="50" rows="10" name="bbcodereplacement" style="width: 100%" class="required form-control">{$bbcode.bbcodereplacement}</textarea>
+                <span class="note">{trans('[param1] als erster Parameter 1, [param2] als erster Parameter 2 und [param3] als dritter Parameter 3')}</span>
+            </div>
+            <div class="col-md-6">
+                <label>{trans('Beschreibung')}</label>
+                <textarea cols="50" rows="10" name="bbcodeexplanation" style="width: 100%" class="required form-control">{$bbcode.bbcodeexplanation}</textarea>
+                <span class="note">{trans('Dient für die Hilfe')}</span>
+
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Anzahl Parameter')}</label>
+
+                <select name="params" class="select">
+                    <option value="1" cp:on="selected:$bbcode.params == 1 || empty($bbcode.params)" parse:selected="selected">1</option>
+                    <option value="2" cp:on="selected:$bbcode.params == 2" parse:selected="selected">2</option>
+                    <option value="3" cp:on="selected:$bbcode.params == 3" parse:selected="selected">3</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label>{trans('max. Anzahl der Verschachtelungen')}</label>
+                <input type="text" name="multiuse" value="{iif($bbcode.multiuse, $bbcode.multiuse, 1)}" maxlength="2" size="10" class="required form-control"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <label>{trans('erlaubte bbcodes im BBCode')}</label>
+                <span class="note">{trans('BBCodes die in diesem BBCode-Tag erlaubt sind')}</span>
+
+                <label for="c-none" style="display: block">
+                    <input type="checkbox" name="allowedchildren[]" value="none" id="c-none" cp:on="checked:inArray('none', $bbcode.allowedchildren) || empty($bbcode.allowedchildren)" parse:checked="checked"/> {trans('Kein unter BBCodes erlaubt')}
+                </label>
+                <cp:loop name="alltags" key="r">
+
+                    <label for="c-{$r.bbcodetag}" style="width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; margin-right: 10px">
+                        <input type="checkbox" name="allowedchildren[]" value="{escape($r.bbcodetag, 'quotes')}" id="c-{$r.bbcodetag}" cp:on="checked:inArray($r.bbcodetag, $bbcode.allowedchildren)" parse:checked="checked"/> [{$r.bbcodetag}]
+                    </label>
+                </cp:loop>
+
+            </div>
+        </div>
+
+
+
+
+
+    </form>
+
+    <script type="text/javascript">
+
+        Form.registerForm( 'bbcodesform{$bbcode.bbcodeid}', {
+            contentIdentifierID: 'bbcodeid{$bbcode.bbcodeid}'
+        } );
+
+        $( '#allowedchildren' ).find('#c-none').change( function ( e )
+        {
+            if ( $( this ).is( ':checked' ) ) {
+                $( '#allowedchildren' ).find( 'input:checkbox' ).each( function () {
+                    if ($( this ).is( ':checked' ) && $( this ).attr( 'value' ) != 'none') {
+                        $( this ).removeAttr( 'checked' ).prop( 'checked', false ).trigger( 'change' );
+                    }
+                } );
+            }
+        });
+
+        $( '#allowedchildren' ).find( 'input:checkbox' ).not('#c-none').change( function ( e )
+        {
+            if ( $( this ).is( ':checked' ) && $( '#allowedchildren' ).find('#c-none').is( ':checked' ) ) {
+                $( '#allowedchildren' ).find( 'input[value="none"]' ).removeAttr( 'checked' ).prop( 'checked', false ).trigger( 'change' );
+            }
+
+        } );
+
+
+    </script>
+
+
+</cp:block>

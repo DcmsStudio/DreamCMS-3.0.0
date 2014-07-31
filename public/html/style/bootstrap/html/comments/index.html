@@ -1,0 +1,30 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="content">
+    <div id="comments-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+
+        Application.Grid('comments-grid', {
+        url: 'admin.php?adm=comments',
+                currentFilter: {$grid.activeFilter},
+                colModel: {$grid.colModel},
+                gridActions: {$grid.gridActions},
+                searchitems: {$grid.searchitems},
+                datarows: {$grid.datarows},
+                sort: '{$grid.sort}',
+                orderby: '{$grid.orderby}',
+                total: {$grid.total},
+                perpage: {$grid.perpage},
+                onAfterLoad: function() {
+                $('#comments-grid').find('.doPopup').unbind('click.newpopup').bind('click.newpopup', function (e) {
+                e.preventDefault();
+                        Tools.popup($(this).attr('href'), '{trans("Kommentar:")} '+$(this).parents('tr').find('td[rel=title]').text().trim(), 450);
+                        return false;
+                });
+                }
+        });
+
+    </script>
+</cp:block>

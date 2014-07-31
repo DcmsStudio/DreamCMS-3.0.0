@@ -1,0 +1,129 @@
+{*
+    Next Template rewrite to cp:tree
+*}
+
+
+
+<section id="comments-container">
+    <cp:if condition="count($comments)">
+        <a name="page_comments" id="page_comments">
+        </a>
+        <h3>
+            {trans('Kommentare')}
+        </h3>
+        <cp:set var="replys" value="0" />
+        <cp:loop name="comments" key="r">
+            <a name="comment_{$r.id}" id="comment_{$r.id}">
+            </a>
+            <cp:set var="cssclass" value="post" />
+            <cp:if condition="$replys == 1">
+                <!-- start replys -->
+                <cp:tag name="div" class="replies" />
+            </cp:if>
+            <cp:if condition="$r.next_r.parentid > 0">
+                <cp:set var="replys" value="$replys + 1" />
+            </cp:if>
+            <cp:if condition="$r.parentid">
+                <cp:set var="cssclass" value="postreply" />
+            </cp:if>
+            <!-- post -->
+            <div class="{$cssclass}">
+                <cp:if condition="$r.parentid">
+                    <div class="ul-pointer">
+                        <!-- ui -->
+                    </div>
+                </cp:if>
+                <cp:if condition="$r.userid && $r.username">
+                    <div class="poster">
+                        <a href="{urlrewrite($r.username, true, '', 'user/')}">
+                            {escape($r.username, 'html')}
+                        </a>
+                        <div class="badges">
+                        </div>
+                    </div>
+                </cp:if>
+                <div class="comment-box">
+                    <div class="text">
+                        <div class="post-header">
+                            <cp:if condition="$r.username == $postauthor">
+                                <div class="author">
+                                    <small>
+                                        {trans('Autor')}
+                                    </small>
+                                    <div class="sash sprite">
+                                        <!-- -->
+                                    </div>
+                                </div>
+                            </cp:if>
+                            <div class="authorname">
+                                <cp:if condition="$r.userid && $r.username">
+                                    <a href="profile/{$r.userid}/{urlrewrite('', true, $r.username)}">
+                                        {escape($r.username, 'html')} 
+                                    </a>
+                                </cp:if>
+                                <cp:elseif condition="$r.username" >
+                                    {escape($r.username, 'htmlall')} 
+                                </cp:elseif>
+                                <cp:else>
+                                    {trans('Ein Gast')}
+                                </cp:else>
+                                <span class="says">{trans('sagt')}</span>
+                            </div>
+                            
+                            <cp:if condition="$r.title != ''">
+                                <h3>
+                                    {escape($r.title, 'html')}
+                                </h3>
+                            </cp:if>
+
+                            <small class="post-time">
+                                {date('d.m.Y, H:i', $r.timestamp)}
+                            </small>
+                        </div>
+                        <div class="clear">
+                        </div>
+                        <cp:if condition="$r.userid && $r.photo">
+                            <div id="comment_content_{$r.id}" class="post-content photo">
+                                <div class="user-photo">
+                                    <img alt="" src="{photo($r.photo, 'AuthorImageSmall', '')}" title="{escape($r.username, 'html')}" border="0" />
+                                </div>
+                                <div class="comment-text">
+                                    <p>
+                                        {parsetext($r.comment)}
+                                    </p>
+                                    <div class="post-tools">
+                                        <a href="javascript:replyComment({$r.id})" class="btn btn-primary">
+                                            {trans('Antworten')}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </cp:if>
+                        <cp:else>
+                            <div id="comment_content_{$r.id}" class="post-content">
+                                <p>
+                                    {parsetext($r.comment)}
+                                </p>
+                                <cp:hasperm permkey="$permissionkey">
+                                    <div class="post-tools">
+                                        <a href="javascript:replyComment({$r.id})" class="btn btn-primary">
+                                            {trans('Antworten')}
+                                        </a>
+                                    </div>
+                                </cp:hasperm>
+                            </div>
+                        </cp:else>
+                    </div>
+                </div>
+                <div class="post_clear">
+                </div>
+            </div>
+            <!-- close post -->
+            <cp:if condition="$r.next_r.parentid == 0 && $r.parentid > 0 && $replys ">
+                <cp:tag name="div" forceclose="true" />
+                <!-- close replys -->
+                <cp:set var="replys" value="0" />
+            </cp:if>
+        </cp:loop>
+    </cp:if>
+</section>

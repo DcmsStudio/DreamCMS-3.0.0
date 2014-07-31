@@ -1,0 +1,96 @@
+<div class="box description" id="tc0">
+    <div class="box-inner">
+        <div class="fieldset2">
+            <fieldset>
+                <legend>
+                    Layout Titel
+                </legend>
+                <input name="title" id="layout-title" type="text" value="{$title}" size="70" class="input required" />
+            </fieldset>
+            <fieldset>
+                <legend>
+                    Standardlayout?
+                </legend>
+                <label for="default-layout">
+                    <input type="checkbox" name="defaultlayout" value="1" id="default-layout" cp:on="checked:$defaultlayout" parse:checked="checked"/>
+                    Dieses Layout als Standardlayout verwenden
+                </label>
+            </fieldset>
+        </div>
+        <div class="fieldset2">
+            <fieldset>
+                <legend>
+                    Layout Vorlage
+                </legend>
+                <select name="template">
+                    <option value="frontend_page" cp:on="selected:empty($template)" parse:selected="selected">
+                        Default
+                    </option>
+                    <cp:loop name="layouts" key="r">
+                        <option value="{$r.value}" cp:on="selected:$template == $r.value" parse:selected="selected">
+                            {$r.title}
+                        </option>
+                    </cp:loop>
+                </select>
+                <br/>
+                <small>
+                    Layout Vorlage
+                </small>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    Dokumenttyp
+                </legend>
+                <select name="doctype">
+                    <option value="xhtml_strict" cp:on="selected:$doctype == 'xhtml_strict'" parse:selected="selected">
+                        XHTML 1.0 Strict
+                    </option>
+                    <option value="xhtml_trans" cp:on="selected:$doctype == 'xhtml_trans' || empty($doctype)" parse:selected="selected">
+                        XHTML 1.0 Transitional
+                    </option>
+                    <option value="xhtml_frames" cp:on="selected:$doctype == 'xhtml_frames'" parse:selected="selected">
+                        XHTML 1.0 Frameset
+                    </option>
+                    <option value="xhtml_basic" cp:on="selected:$doctype == 'xhtml_basic'" parse:selected="selected">
+                        XHTML 1.0 Basic
+                    </option>
+                    <option value="xhtml_11" cp:on="selected:$doctype == 'xhtml_11'" parse:selected="selected">
+                        XHTML 1.1
+                    </option>
+                    <option value="xhtml_2" cp:on="selected:$doctype == 'xhtml_2'" parse:selected="selected">
+                        XHTML 2.0
+                    </option>
+                    <option value="html_5" cp:on="selected:$doctype == 'html_5'" parse:selected="selected">
+                        HTML 5
+                    </option>
+                    <option value="html_4_trans" cp:on="selected:$doctype == 'html_4_trans'" parse:selected="selected">
+                        HTML 4.0 Transitional
+                    </option>
+                </select>
+                <br/>
+                <small>
+                    Bitte wählen Sie eine Dokumenttyp-Definition.
+                </small>
+            </fieldset>
+        </div>
+        <fieldset>
+            <legend>
+                Module
+            </legend>
+            <label for="modul-default" style="width:24%">
+                <input type="checkbox" name="modul" id="modul-default" value="-" cp:on="checked:inlist('-', $modules)" parse:checked="checked"/>
+                Default
+            </label>
+            <cp:loop name="modul_types" key="r">
+                <label for="modul-{$r.value}" style="width:24%">
+                    <input type="checkbox" name="modul[]" id="modul-{$r.value}" value="{$r.value}" cp:on="checked:inlist($r.value, $modules)" parse:checked="checked"/>
+                    {$r.title}
+                </label>
+            </cp:loop>
+            <br/>
+            <small>
+                Layout Vorlage verwenden für die markierten Module
+            </small>
+        </fieldset>
+    </div>
+</div>

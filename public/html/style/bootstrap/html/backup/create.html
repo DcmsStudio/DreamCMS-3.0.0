@@ -1,0 +1,179 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="create-backup" class="action-button"><img src="html/style/default/img/buttons/zip.png" width="16" height="16" alt="" /> {trans('Backup erstellen')}</button>
+</cp:block>
+
+<cp:block name="content">
+    <form action="admin.php" method="post" id="backup-form">
+        <input type="hidden" name="adm" value="backup"/>
+        <input type="hidden" name="action" value="create"/>
+        <input type="hidden" name="send" value="send"/>
+
+        <div class="box fl" style="width:48%">
+            <h2>Verzeichnisse</h2>
+            <div class="box-inner" style="padding:0">
+
+                <table border="0" cellpadding="3" cellspacing="0" width="100%">
+                    <tr class="tableheader">
+                        <td>
+                            {trans('Datei')}
+                        </td>
+                        <td width="25%" class="tr">
+                            {trans('Zum Backup hizufügen')} 
+                            <input type="checkbox" name="chkAllFiles" class="chk-files" value="1" title="alle Dateien markieren/demarkieren" />
+                        </td>
+                    </tr>
+
+                    <cp:loop name="files" key="r">
+
+                        <tr class="{cycle('cyclename', 'firstrow,secondrow', 'css')}">
+                            <td>
+                                <label for="file_{$files_index}" style="width:100%">
+
+
+                                    <cp:if condition="$r.icon != 'folder'">
+                                        <span class="jqic file ext_{$r.icon}"></span>
+                                    </cp:if>
+                                    <cp:else><span class="jqic directory"></span></cp:else>
+
+                                    {$r.name}
+                                </label>
+                            </td>
+                            <td class="tr">
+                                <input rel="files" type="checkbox" id="file_{$files_index}" name="files[]" 
+                                       value="{$r.name}" 
+                                       cp:on="checked:$r.checked != null" parse:checked="checked"/>
+                            </td>
+                        </tr>
+                    </cp:loop>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="box fr" style="width:48%">
+            <h2>Datenbanken</h2>
+            <div class="box-inner" style="padding:0">
+
+                <table border="0" cellpadding="3" cellspacing="0" width="100%">
+                    <tr class="tableheader">
+                        <td>
+                            {trans('Datenbank')}
+                        </td>
+                        <td width="30%" class="tr">
+                            {trans('Zum Backup hizufügen')}
+                        </td>
+                    </tr>
+                    
+                    <cp:set var="dbs_index" value="0"/>
+
+                    <cp:loop name="dbs" key="r">
+
+                            <cp:set var="dbs_index" value="$dbs_index + 1"/>
+                                <cp:if condition="$r.database != 'information_schema' && $r.database != 'mysql'">
+
+
+                                <tr class="{cycle('cyclename', 'firstrow,secondrow', 'css')}">
+                                    <td>
+                                        <label for="db_{$dbs_index}" style="width:100%">
+                                            <span class="jqic file ext_sql"></span>
+                                            {$r.database}
+                                        </label>
+                                    </td>
+                                    <td class="tr">
+                                        <input rel="dbs" type="checkbox" id="db_{$dbs_index}" name="db[]" value="{$r.database}" cp:on="checked:$globals.DB_NAME == $r.database" parse:checked="checked"/>
+                                    </td>
+                                </tr>
+                                <tr cp:on="style:$globals.DB_NAME != $r.database" parse:style="display:none" id="tables-{$dbs_index}">
+                                    <td colspan="2" style="padding:0">
+                                        <table border="0" cellpadding="3" cellspacing="0" width="100%">
+                                            <tr class="tableheader">
+                                                <td>
+                                                    {trans('Datenbank Tabelle')}
+                                                </td>
+                                                <td width="30%" class="tr">
+                                                    {trans('Zum Backup hizufügen')}
+                                                    <input type="checkbox" name="chkAll" class="chk-tables" value="db{$dbs_index}" title="alle Tabellen in dieser Datenbank markieren/demarkieren" cp:on="checked:$globals.DB_NAME == $r.database" parse:checked="checked"/>
+                                                </td>
+                                            </tr>
+                                            
+                                            <cp:set var="tables_index" value="0"/>
+                                            
+                                            <cp:loop name="r.tables" key="rs">
+                                                <cp:set var="tables_index" value="$tables_index + 1"/>
+                                                <tr class="{cycle('cyclename', 'firstrow,secondrow', 'css2')}">
+                                                    <td>
+                                                        <label for="tbl-db{$dbs_index}-{$tables_index}" style="width:100%">
+                                                            <em>{$rs.table}</em>
+                                                        </label>
+                                                    </td>
+                                                    <td class="tr">
+                                                        <input class="table" rel="tbl-db{$dbs_index}" type="checkbox" id="tbl-db{$dbs_index}-{$tables_index}" name="table[{$r.database}][]" value="{$rs.table}" cp:on="checked:$globals.DB_NAME == $r.database" parse:checked="checked"/>
+                                                    </td>
+                                                </tr>
+                                            </cp:loop>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </cp:if>
+                    </cp:loop>
+
+                </table>
+            </div>
+        </div>
+    </form>
+    <script language="javascript" type="text/javascript">
+
+
+            $('input[rel=dbs]').change(function() {
+                var name = $(this).attr('id').replace('db_', '');
+                $('#tables-'+ name ).toggle();
+            });
+
+            
+            $('.chk-tables').change(function() {
+                var relname = $(this).val();
+                var $ischecked = this.checked;
+                $('input[rel="tbl-'+ relname +'"]').each(function(){
+                    $(this).attr('checked', $ischecked).trigger('change');
+                });
+                
+
+            });
+
+            $('.chk-files').change(function() {
+                $('input[rel="files"]').attr('checked', this.checked).trigger('change');
+            });
+
+
+            $('#create-backup', $('#'+ Win.windowID) ).on('click', function() {
+                $.pagemask.show('Backup wird erstellt. Bitte warten...');
+                var post = $('#backup-form').serialize();
+
+                $.ajaxSetup({
+                    dataType: "json",
+                    cache: false,
+                    async: true,
+                    timeout: 250000
+                });
+
+                $.post('admin.php', post , function(data) {
+
+                    if(Tools.responseIsOk(data))
+                    {
+                        $.pagemask.hide();
+                        Notifier.info( data.msg );      
+                        
+                    }
+                    else {
+                        $.pagemask.hide();
+                        jAlert(data.msg);
+                    }
+                });
+
+
+            });
+
+    </script>
+</cp:block>

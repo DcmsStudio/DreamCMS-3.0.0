@@ -1,0 +1,537 @@
+body.frontpage #container,
+body.frontpage #container-main {
+    margin: 0;
+    padding: 0;
+}
+
+body.frontpage .container-main {
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+}
+body.frontpage #container-main {
+
+}
+body.frontpage .container-main #container-main-inner {
+    padding-bottom: 10px;
+}
+
+
+
+body.frontpage .container-main .teaser {
+    border-radius: 0;
+    border: 0;
+    background: #EFF9FF url('../img/headers/front/S-3_field_bg.jpg') no-repeat!important;
+    background-size: 100% 100%!important;
+    height: 348px;
+    overflow: hidden;
+    position: relative;
+}
+
+body.frontpage .logo {
+    display: none!important;
+}
+
+body.frontpage #container-main {
+    width: 100%;
+}
+
+body.frontpage #container-main-inner {
+    width:940px;
+    margin: 0 auto;
+}
+
+
+
+body.frontpage .offline-mode {
+    min-height: 450px;
+    background: #EFF9FF!important;
+    width: 100%!important;
+}
+body.frontpage .offline-mode> div {
+    display: inline-block;
+    position: relative;
+    width: 80%;
+    background: #FFF;
+    margin-top: 10%;
+    margin-left: 10%;
+    box-shadow: 0 0 1px #DDD;
+    padding: 20px;
+}
+
+
+
+body.frontpage .container-main .teaser > :first-child,
+.frontpage #container-main-inner {
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+
+body.frontpage .container-main .teaser > :first-child {
+    padding: 0;
+    border-radius: 0;
+    border: 0;
+}
+
+
+
+
+
+body.frontpage .cols0-content #main > div:first-child {
+    padding: 0;
+    margin: 0;
+}
+
+div.split-6.frontpage {
+    background: #D7EBF7;
+    margin: 0;
+    overflow: visible;
+}
+
+
+
+
+.frontpage div.split-4 > div.float-1 {
+
+}
+.frontpage div.split-4 > div {
+
+}
+.frontpage div.split-4 .float-4 {
+    margin: 0!important;
+}
+
+div.split-6.frontpage > div.float-1 {
+    display: table;
+    height: 330px;
+    font-family: "proxima-nova", helvetica, sans-serif;
+    font-size: 15px;
+    color: #557790;
+    display: inline-block;
+    margin: 0;
+    width: 45%;
+}
+div.split-6.frontpage div.float-1 h1 {
+    padding: 10px;
+    font-size: 25px;
+    margin-top: 80px!important;
+}
+div.split-6.frontpage div.float-1 > p {
+    padding: 10px;
+    width: inherit;
+    display: table-cell;
+    text-align: left;
+    font-size: 16px;
+    text-align: left;
+    line-height: 25px;
+}
+div.split-6.frontpage div.float-2 {
+    float: right;
+    display: inline-block;
+    text-align: right;
+    width: 52%;
+    overflow: visible;
+    position: relative;
+
+}
+.frontpage .float-2 {
+    padding-right: 10px;
+}
+.frontpage > .float-2 > p:first-child {
+    background: url("../img/dcms/front-dcms.jpg") no-repeat top right;
+    background-size: 525px 320px;
+    height: 320px;
+    width: 525px;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    -moz-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.14);
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.14);
+    left: -20px;
+    position: absolute;
+    top: 45px;
+    border-radius: 3px;
+}
+
+.frontpage .split-4 {
+    width: auto;
+    display: block;
+    margin-top: 16px;
+}
+div.split-4 div.float-2 {
+    padding: 0;
+}
+
+
+.frontpage section.teaser {
+    -webkit-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1);
+    background: #F7F7F7!important;
+    padding-bottom: 10px;
+}
+
+.frontpage .teaser > div > .contentcols {
+    overflow: visible;
+    min-height: 335px;
+}
+
+.frontpage section.teaser h1 {
+    overflow: visible;
+    transform: rotate(358deg) ;
+    -webkit-transform: rotate(358deg) ;
+    -moz-transform: rotate(358deg) ;
+    -o-transform: rotate(358deg) ;
+    -ms-transform: rotate(358deg) ;
+    color: #FFF;
+    background: rgba(60, 3, 133, 0.5);
+    padding: 5px;
+    position: absolute;
+    display: inline-table;
+    z-index: 10;
+    left: -30px;
+}
+.frontpage .teaser-label {
+    margin-top: 100px;
+    left: -4px;
+    z-index: 10;
+}
+.frontpage .teaser-label p {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 5px;
+    color: #FFF;
+    position: relative;
+    top: 50px;
+    transform: rotate(1.8deg) ;
+    -webkit-transform: rotate(1.8deg) ;
+    -moz-transform: rotate(1.8deg) ;
+    -o-transform: rotate(1.8deg) ;
+    -ms-transform: rotate(1.8deg) ;
+}
+
+
+
+.frontpage .teaser-image {
+    height: 320px;
+    width: 525px;
+    min-height: 330px;
+    min-width: 525px;
+    overflow: visible;
+    left: 35px;
+}
+.frontpage .teaser-image p {
+    background: url("../img/dcms/front-dcms.jpg") no-repeat top right;
+    background-size: 525px 320px;
+    height: 320px;
+    min-height: 320px;
+    width: 525px;
+    min-width: 525px;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    -webkit-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.14);
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.16);
+    right: 0;
+    position: absolute;
+    top: 45px;
+    border-radius: 3px;
+    content: ' ';
+    color: rgba(0, 0, 0, 0);
+}
+
+
+.frontpage article .contentcols.facts {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    min-height: 150px;
+}
+
+.frontpage article .contentcols.facts h3 {
+    margin: 0;
+    font-family: 'Exo 2 Light';
+    font-size: 20px;
+    letter-spacing: -0.1px;
+}
+.frontpage article .contentcols.facts>div {
+    background: #F7F7F7;
+    background: rgba(0, 0, 0, 0.02);
+    -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #F0F0F0;
+    min-height: 150px;
+}
+.frontpage article .contentcols.facts p {
+    text-align: left;
+    line-height: normal;
+}
+
+.frontpage article .contentcols.facts .c {
+    padding: 10px!important;
+    min-height: 150px;
+}
+
+
+
+.frontpage .split-4 > div {
+    width: 22%!important;
+    background: #F7F7F7;
+    padding: 10px!important;
+}
+.frontpage .split-4 > div:last-child {
+    clear: both;
+    background: none;
+    padding: 0!important;
+}
+
+div.clean {
+    clear: both;
+    background: none;
+    padding: 0!important;
+}
+
+.frontpage .content-menu {
+    position: relative;
+    top: 1px;
+    z-index: 10;
+}
+
+.content-menu,
+.frontpage .content-menu li {
+    margin: 0;
+    padding: 0;
+    background: none!important;
+    line-height: normal!important;
+}
+.content-menu {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.frontpage .content-menu li {
+    line-height: 36px!important;
+    display: inline-block;
+    margin-right: 10px;
+}
+.frontpage .content-menu li {
+    border: 1px solid transparent;
+    padding-left: 20px!important;
+    padding-right: 20px!important;
+    cursor: pointer;
+}
+
+.frontpage .content-menu li.active {
+    border: 1px solid #DEDEDE;
+    border-bottom: 1px solid #FFF!important;
+}
+
+.frontpage .content-menu-content {
+    margin-right: 10px;
+    margin-left: 10px;
+    border: 1px solid #EEE;
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+    background: #FFF;
+    -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #DEDEDE;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    overflow: visible;
+    min-height: 200px;
+    display: table;
+    width: 99%;
+    margin: 0;
+}
+
+.frontpage .tab-pane {
+    min-height: 224px;
+}
+.frontpage .tab-pane > div {
+    display: table;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    overflow: visible;
+}
+
+
+
+
+
+.frontpage .tab-pane > h1,
+.frontpage .tab-pane div.text {
+    float: left;
+    display: inline-block;
+    width: 59%;
+}
+.frontpage .tab-pane div.text {
+    min-height: 225px;
+}
+
+.frontpage .contentcols {
+    overflow: visible;
+    position: relative;
+    display: table;
+}
+
+
+.frontpage .contentcols .c {
+    min-height: 20;
+    display: inline-block;
+
+
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 27%, rgba(255,255,255,0) 100%)!important;
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0.75)), color-stop(27%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0)))!important;
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.75) 0%,rgba(255,255,255,0) 27%,rgba(255,255,255,0) 100%)!important;
+    background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.75) 0%,rgba(255,255,255,0) 27%,rgba(255,255,255,0) 100%)!important;
+    background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.75) 0%,rgba(255,255,255,0) 27%,rgba(255,255,255,0) 100%)!important;
+    background: radial-gradient(ellipse at center,  rgba(255,255,255,0.75) 0%,rgba(255,255,255,0) 27%,rgba(255,255,255,0) 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfffffff', endColorstr='#00ffffff',GradientType=1 )!important;
+
+
+}
+.frontpage .contentcols .c:first-child {
+    min-height: 230px;
+}
+
+.frontpage div.image {
+    display: inline-block;
+    height: 210px;
+    width: 360px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0px 1px 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0px 1px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0px 1px 8px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    background: #FFF;
+    position: absolute;
+
+}
+
+.frontpage .tab-pane:nth-of-type(2n+1) div.contentcols:nth-of-type(odd) div.image {
+    left: 0;
+}
+.frontpage .tab-pane:nth-of-type(2n+1) div.contentcols:nth-of-type(even) div.image {
+    left: -25px;
+}
+
+.frontpage .tab-pane:nth-of-type(2n+1) div.contentcols:nth-of-type(odd) div.image {
+    left: 0;
+}
+.frontpage .tab-pane:nth-of-type(2n+1) div.contentcols:nth-of-type(even) div.image {
+    left: -25px;
+}
+
+.frontpage .tab-pane:nth-of-type(2n) div.contentcols:nth-of-type(even) div.image {
+    left: 0;
+}
+.frontpage .tab-pane:nth-of-type(2n) div.contentcols:nth-of-type(odd) div.image {
+    left: -25px;
+}
+
+
+.frontpage .tab-pane div.row:nth-of-type(even) h1,
+.frontpage .tab-pane div.row:nth-of-type(even) div.text {
+    float: right;
+}
+.frontpage div.image img {
+    margin: 0!important;
+    float: none!important;
+}
+
+
+.frontpage .tab-pane>p {
+    display: none;
+}
+.frontpage .contentcols>.c62 {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.frontpage .tab-pane h3 {
+    font-family: 'Exo 2 Light';
+    font-size: 22px;
+    letter-spacing: -0.1px;
+}
+
+body.frontpage .container-main #container-main-inner {
+    margin-bottom: 0;
+}
+
+
+/**
+    For teaser animation
+*/
+.teaser .teaser-label > div,
+.teaser .teaser-image {
+    display: none;
+}
+
+.teaser .teaser-label div:first-child {
+    -webkit-animation-duration: 0.6s;
+    -moz-animation-duration: 0.6s;
+    -o-animation-duration: 0.6s;
+    animation-duration: 0.6s;
+}
+.teaser .teaser-label div:last-child {
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    -o-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+}
+
+.teaser .teaser-image {
+    -webkit-animation-duration: 0.9s;
+    -moz-animation-duration: 0.9s;
+    -o-animation-duration: 0.9s;
+    animation-duration: 0.9s;
+}
+
+
+.frontpage article .contentcols.facts > div {
+    display: none;
+    -webkit-animation-duration: 0.7s;
+    -moz-animation-duration: 0.7s;
+    -o-animation-duration: 0.7s;
+    animation-duration: 0.7s;
+
+    -webkit-transform: translateY(-150px);
+    -moz-transform: translateY(-150px);
+    -o-transform: translateY(-150px);
+    transform: translateY(-150px);
+}
+
+.fact-1 {
+    -webkit-animation-delay: 0s;
+    -moz-animation-delay: 0s;
+    -ms-animation-delay: 0s;
+    -o-animation-delay: 0s;
+    animation-delay: 0s;
+}
+.fact-2 {
+    -webkit-animation-delay: 0.3s;
+    -moz-animation-delay: 0.3s;
+    -ms-animation-delay: 0.3s;
+    -o-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+.fact-3 {
+    -webkit-animation-delay: 0.6s;
+    -moz-animation-delay: 0.6s;
+    -ms-animation-delay: 0.6s;
+    -o-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+}
+.fact-4 {
+    -webkit-animation-delay: 0.9s;
+    -moz-animation-delay: 0.9s;
+    -ms-animation-delay: 0.9s;
+    -o-animation-delay: 0.9s;
+    animation-delay: 0.9s;
+}

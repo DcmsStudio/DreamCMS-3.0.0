@@ -1,0 +1,21 @@
+<?php
+
+function __admin_rights_row( $row ){
+global $cp, $cfg, $fct, $root_path;
+
+	static $page_x;
+
+	$class = $page_x++%2 ? 'firstrow' : 'secondrow';
+	
+	$type = HTTP::input('type');
+
+return <<<EOF
+	<tr onmouseover="over(this)" onmouseout="out(this)" class="$class">
+		<td>$row[username]</td>
+		<td align="center">$row[group_title]</td>
+		<td align="center"><a href="admin.php?adm=admin_rm&amp;action=edit_user&amp;userid={$row['userid']}&amp;sid=$cp->session_id&type={$type}"><img src="images/icon_warning.gif" border="0" alt="Rechte Bearbeiten" /></a></td>
+	</tr>
+EOF;
+}
+
+?>

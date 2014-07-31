@@ -1,0 +1,18 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+</cp:block>
+
+<cp:block name="content">
+
+<div class="box">
+    <h2>Development Tools</h2>
+    <div class="box-inner">
+        <p>
+        <cp:loop name="actions" key="r">
+            <a href="javascript:void(0);" onclick="openTab({url: 'admin.php?adm=development&action={$r.action}{iif($r.fe_only, '&frontend=1', '')}', obj: this, label: $(this).text() })" class="action-button">{$r.title}</a> &nbsp; 
+        </cp:loop>
+        </p>
+    </div>
+</div>
+</cp:block>

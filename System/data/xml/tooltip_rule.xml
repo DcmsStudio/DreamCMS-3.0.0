@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooltip>
+  <controller title="Controller"><![CDATA[Der Modul Name.]]></controller>
+  <action title="Action"><![CDATA[Die aktion des Modules. Siehe Modulverzeichnis im ordner "Action".]]></action>
+  <publish title="Aktivieren der Route"><![CDATA[Soll diese Route aktiviert werden? Sollte die von Ihnen deklarierte Route fehlerhaft sein, können fehler bei der Verarbeitung entstehen.]]></publish>
+  <rule title="URL Rewrite"><![CDATA[Beginnend mit einem slash. Parameter beginnen mit einem ":" gefolgt von dem Parameter-Namen.<br/>Bsp: /news/rate/:id/:rate]]></rule>
+  <optionalmap title="Parameter"><![CDATA[Das erste Feld beinhaltet den Names des Parameters. Das Feld "Regex" enthält das Suchmuster. Siehe: <a target="_blank" href="http://webcheatsheet.com/php/regular_expressions.php#basics">Using Regular Expressions with PHP</a>]]></optionalmap>
+</tooltip>

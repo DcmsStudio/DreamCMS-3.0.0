@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+    <name>Backend Messenger</name>
+    <version>0.1</version>
+    <author>Marcel Domke</author>
+    <website>http://www.dcms-studio.de</website>
+    <collapsible>1</collapsible>
+    <configurable>0</configurable>
+    <multiple>1</multiple>
+    <description><![CDATA[]]>
+    </description>
+</widget>

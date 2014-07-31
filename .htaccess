@@ -1,0 +1,241 @@
+php_flag eaccelerator.enable 1
+php_flag eaccelerator.optimizer 1
+php_flag eaccelerator.compress_level 0
+php_flag eaccelerator.compress 0
+php_flag eaccelerator.shm_only 0
+php_flag eaccelerator.cache_dir /Daten/Web/eaccelerator
+php_flag eaccelerator.content shm_and_disk
+php_flag eaccelerator.sessions shm_and_disk
+php_flag eaccelerator.keys shm_and_disk
+php_flag eaccelerator.log_file /Daten/Web/eaccelerator/eaccelerator_log
+php_flag eaccelerator.shm_size 32
+php_flag eaccelerator.shm_max 32M
+php_flag eaccelerator.shm_ttl 43200
+php_flag eaccelerator.shm_prune_period 3600
+
+<FilesMatch \.php$>
+    SetHandler application/x-httpd-php
+</FilesMatch>
+
+AddType application/x-httpd-php .php
+AddType application/x-httpd-php5 .php
+AddType application/x-httpd-php53 .php
+AddType application/x-httpd-php54 .php
+
+
+php_value session.auto_start 0
+php_value upload_max_filesize 300M
+php_value post_max_size 300M
+
+Options SymLinksIfOwnerMatch
+
+### Don´t show directory listings for URLs which map to a directory.
+### Follow symbolic links in this directory.
+Options -MultiViews
+
+### disable directory browsing
+Options All -Indexes
+Options +FollowSymLinks
+IndexIgnore */*
+
+### disable the server signature
+ServerSignature Off
+
+# set the default character set
+AddDefaultCharset UTF-8
+
+### Set the default handler.
+DirectoryIndex public/index.php public/index.html index.php index.html
+
+#Header append X-FRAME-OPTIONS "GOFORIT"
+
+<IfModule mod_mem_cache.c>
+    # Enable memory caching
+    CacheEnable mem /
+
+    # Limit the size of the cache to x Megabyte
+    MCacheSize 12024
+</IfModule>
+    
+<IfModule mod_expires.c>
+    SetEnv HTTP_EXPIRES On
+    ExpiresActive On
+
+
+    ExpiresByType image/gif A5184000
+    ExpiresByType image/png A5184000
+    ExpiresByType image/jpeg A5184000
+    ExpiresByType application/x-javascript A5184000
+    ExpiresByType application/javascript A5184000
+    ExpiresByType text/javascript A5184000
+    ExpiresByType text/css A5184000
+
+    
+    # Webfonts
+    ExpiresByType font/truetype             "access plus 1 month 1 hour"
+    ExpiresByType application/x-font-ttf    "access plus 1 month 1 hour"
+    ExpiresByType font/opentype             "access plus 1 month 1 hour"
+    ExpiresByType application/x-font-woff   "access plus 1 month 1 hour"
+    ExpiresByType image/svg+xml             "access plus 1 month 1 hour"
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 month 1 hour"
+    
+
+</IfModule>
+
+
+### Compress ouput by mod_deflate
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/atom_xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE image/svg+xml application/vnd.ms-fontobject font/truetype application/x-font-ttf font/opentype application/x-font-woff
+ ##AddOutputFilterByType DEFLATE application/x-shockwave-flash
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+     <FilesMatch "\.(ttf|otf|eot|svg)$">
+       SetOutputFilter DEFLATE
+     </FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ttf|otf|eot|woff)$">
+	Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+  #Header set X-Content-Type-Options "nosniff"
+  #Header set X-XSS-Protection "1; mode=block"
+  #Header set X-Permitted-Cross-Domain-Policies "master-only"
+</IfModule>
+
+<IfModule mod_gzip.c>
+    mod_gzip_on       Yes
+    mod_gzip_dechunk  Yes
+    mod_gzip_item_include file      \.(html?|txt|css|js|pl)$
+    mod_gzip_item_include handler   ^cgi-script$
+    mod_gzip_item_include mime      ^text/.*
+    mod_gzip_item_include mime      ^application/x-javascript.*
+    mod_gzip_item_include mime      ^application/javascript
+    mod_gzip_item_include mime      ^application/x-font-ttf
+    mod_gzip_item_include mime      ^font/opentype
+    mod_gzip_item_include mime      ^font/truetype
+    mod_gzip_item_include mime      ^application/x-font-woff
+
+    mod_gzip_item_exclude mime      ^image/.*
+    mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    SetEnv HTTP_F_URL On
+    RewriteEngine On
+    
+    
+    ### Do comment it out if not work!
+    #RewriteBase /
+    #RewriteOptions MaxRedirects=1
+
+    ErrorDocument 400 /public/index.php?error=400
+    ErrorDocument 401 /public/index.php?error=401
+    ErrorDocument 403 /public/index.php?error=403
+    ErrorDocument 404 /public/index.php?error=404
+    ErrorDocument 500 /public/index.php?error=500
+
+    ### stop ZmEu and other attacks
+    RewriteCond %{HTTP_USER_AGENT} (.*)ZmEu(.*) [OR]
+    RewriteCond %{HTTP_USER_AGENT} ^-?$
+    RewriteRule ^.* http://www.google.com [R=301,L]
+
+
+
+
+    RewriteCond %{ENV:REDIRECT_STATUS} 200
+    RewriteRule .* - [QSA,L]
+
+
+
+    ### Direct script requests
+    RewriteCond %{REQUEST_URI} ^/public/index\.php.*$
+    RewriteRule ^public/index\.php(.*)$ public/index\.php [QSA,L]
+
+    RewriteCond %{REQUEST_URI} ^/(admin|index)\.php.*$
+    RewriteRule ^(admin|index)\.php(.*)$ public/$1\.php [QSA,L]
+
+
+
+
+    #RewriteRule ^public/(.*\.(js|css))$ public/$1 [L]
+    #RewriteRule ^public/(.*\.(js|css))\?(.*)$ public/$1 [L]
+
+
+
+    #RewriteCond %{REQUEST_FILENAME} !-f
+  #  RewriteCond %{REQUEST_FILENAME} !-d
+  #  RewriteRule ^(.*\.(js|css))$ public/index.php?_call=asset/$2/$1 [QSA,L]
+   # RewriteRule ^(.*\.(js|css))\?(.*)$ public/index.php?_call=asset/$2/$1&$3 [QSA,L]
+
+    ### css patch
+    RewriteCond %{REQUEST_URI} ^/?(img|flash|js|style|simg|pages|html)/.*$
+    RewriteRule ^/?(img|flash|js|style|simg|pages|html)/(.*)$ public/$1/$2 [QSA,L]
+
+
+    ### Rewrite cache request to hidden directory used for the new Ajax Filemanager
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    
+    RewriteCond %{REQUEST_URI} ^/pages/([0-9]*)/([\.]?)cache/.*$
+    RewriteRule ^pages/([0-9]*)/([\.]?)cache/(.*)$ public/pages/$1/.cache/$3 [QSA,L]
+    
+    ### sitemap 
+    RewriteCond %{REQUEST_URI} ^/?sitemap.*$
+    RewriteRule ^/?sitemap(\.xml) public/index.php?_call=sitemap [QSA,L]
+    
+
+
+    ### Rewrite (Packages/Modules) request
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    ### Rewrite Vendor request
+    RewriteCond %{REQUEST_URI} ^/?Vendor/.*$
+    RewriteRule ^/?Vendor/(.*)$ Vendor/$1 [QSA,L]
+
+    ### Rewrite (Packages/Modules) request
+    RewriteCond %{REQUEST_URI} ^/?Modules/.*$
+    RewriteRule ^Modules/(.*)$ System/Modules/$1 [QSA,L]
+
+    RewriteCond %{REQUEST_URI} ^/?Packages/.*$
+    RewriteRule ^Packages/(.*)$ System/Packages/$1 [QSA,L]
+
+    ### Rewrite setup request
+    RewriteCond %{REQUEST_URI} ^/setup/.*$
+    RewriteRule ^setup/(.*)$ setup/$1 [QSA,L]
+
+    ### Atom/RSS Requests
+    RewriteRule ^([^/]*)/.*/?([a-zA-Z0-9_]+)\.rss$ public/index.php?_call=$1/index/&getFeed=rss [QSA,L]
+    RewriteRule ^([^/]*)/.*/?([a-zA-Z0-9_]+)\.atom$ public/index.php?_call=$1/index/&getFeed=atom [QSA,L]
+
+    ### Rewrite (Packages/Modules) request
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    #### ALL OTHER REQUESTS TO index.php
+    RewriteCond %{REQUEST_URI} !^/?(img|flash|js|style|simg|pages|html)/.*$
+    RewriteCond %{REQUEST_URI} !^/?Vendor/.*$
+    RewriteCond %{REQUEST_URI} !^/?System/.*$
+    RewriteCond %{REQUEST_URI} !^/?public/.*$
+    RewriteRule ^(.*)$ public/index.php?_call=$1 [QSA,L]
+
+    RewriteRule .* - [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:If-Modified-Since}]
+</IfModule>
+
+<FilesMatch "\.(gif|jpg|jpeg|png|swf|css|js|html?|xml|txt|ico)$">
+	FileETag none
+</FilesMatch>

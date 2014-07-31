@@ -1,0 +1,19 @@
+    <fieldset>
+        <legend>{trans("Rotation")}</legend>
+        <input type="text" class="textbox" name="params[rotate]" id="rotate" value="{iif($values.rotate, $values.rotate, '0')}" style="width: 60px;" />°
+        <!--
+        <select name="params[rotate]">
+            <option value="0"{iif($values.rotate==0, ' selected="selected"', '')}>0</option>
+            <option value="90"{iif($values.rotate==90, ' selected="selected"', '')}>90</option>
+            <option value="180"{iif($values.rotate==180, ' selected="selected"', '')}>180</option>
+            <option value="270"{iif($values.rotate==270, ' selected="selected"', '')}>270</option>
+        </select> °
+        -->
+    </fieldset>
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+</script>

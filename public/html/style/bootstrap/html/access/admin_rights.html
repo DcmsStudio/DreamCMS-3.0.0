@@ -1,0 +1,33 @@
+<div class="box">
+    <h2 class="collapsible">Information</h2>
+    <div class="box-inner">
+        {trans('Um einem Benutzer spezielle Rechte zu geben, haben Sie hier die möglichkeit, diese dem Benutzer zuzuweisen. Diese Rechte sind unabhängig von der Benutzergruppe und diese Rechte überschreiben auch die Rechte der Benutzergruppe, wenn der Benutzer eingeloggt ist. Somit wird gewährleistet, das der Benutzer nur das darf, was ihm zugewiesen wurde.')}<br/><br/>
+        <cp:if condition="$request.type != 2">
+            {trans('Die folgenden Benutzer haben das Recht, das Dashboard zu benutzen. Das heißt, das diese Benutzer Administrative Rechte besitzen.')}
+        </cp:if>
+        <cp:else>
+            {trans('Die folgenden Benutzer haben eventuell Rechte das Dashboard zu benutzen.')}
+        </cp:else>
+    </div>
+</div>
+
+
+<table cellpadding="3" cellspacing="0" width="100%" class="tblborder">
+    <tr class="tableheader">
+        <td width="30%">{trans('Benutzername')}</td>
+        <td class="tl" colspan="2">{trans('Benutzer Gruppe')}</td>
+    </tr>    
+    
+    <cp:loop name="list" key="r">
+        {cycle('cyclename', 'firstrow,secondrow', 'css')}
+        <tr onmouseover="over(this)" onmouseout="out(this)" class="{$css}">
+            <td>{$r.username}</td>
+            <td width="20%">{$r.group_title}</td>
+            <td><a href="javascript:void(0)" onclick="openTab({url:'admin.php?adm=adminperms&amp;action=edit_user&amp;userid={$r.userid}&type={$request.type}', obj:this})"><img src="images/edit.png" border="0" title="{trans('Rechte für %s Bearbeiten', $r.username)}" alt="{trans('Rechte für %s Bearbeiten', $r.username)}" /></a></td>
+        </tr>
+    </cp:loop>
+    <cp:else>
+        <tr><td colspan="3">{trans('Keine Benutzer vorhanden die das Dashboard benutzen dürfen.')}</td></tr>
+    </cp:else>
+</table>
+

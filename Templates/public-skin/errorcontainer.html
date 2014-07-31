@@ -1,0 +1,219 @@
+<cp:extends template="errorpage" />
+<cp:block name="append-head">
+	<link rel="stylesheet" id="opensans-css" href="http://fonts.googleapis.com/css?family=Open+Sans%3A400%2C600%2C700%2C800%2C300&#038;ver=3.5.1" type="text/css" media="all" />
+	<link rel="stylesheet" id="opensanscondensed-css" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed%3A700&#038;ver=3.5.1" type="text/css" media="all" />
+</cp:block>
+<cp:block name="header">{*
+	<cp:do modul="news" show="getRecentnews" template="topnews" limit="5" />*}
+	<div class="header-bar">
+		<div id="language-selector">[plugin name="localeselect" function="run" cacheable="true"]</div>
+		<div id="navbar">
+			<div id="search-bar">
+				<form action="search/" method="post" class="active">
+					<input type="text" name="q" placeholder="Start Searching..." value="" />
+
+					<button type="submit">
+						<span>{trans('Suchen')}</span>
+					</button>
+				</form>
+			</div>
+			<!-- <ul class="main-nav"> -->[modul name="menues" run="Menu" key="test-menu2"] {* [component name="MenuBuilder" cacheable="false" noulstart="true"]
+			<cp:if condition="$user.userid">
+				<li class="submenu account-menu">
+					<a href="javascript:void(0)"> <span>{trans('Mein Account')}</span>
+
+						<cp:if condition="hasperm('user:canusepms')">
+							<img src="{$img_url}messenger/inbox.png" width="16" height="16" alt="" title="{trans('Du hast %s neue Nachrichten', $user.pmcounter)}" />
+						</cp:if>
+					</a>
+					<ul>
+						<li class="profile"> <a href="profile/">{trans('Mein Profil')}</a>
+
+						</li>
+						<li class="members"> <a href="members/">{trans('Mitgliederliste')}</a>
+
+						</li>
+						<cp:if condition="hasperm('user:canusepms')">
+							<li class="messenger"> <a href="messenger/">{trans('Messenger')}</a>
+
+							</li>
+						</cp:if>
+						<li class="logout"> <a href="auth/logout">{trans('Logout')}</a>
+
+						</li>
+					</ul>
+				</li>
+			</cp:if>*}
+			<!-- </ul> -->
+		</div>
+		<div id="user-bar">
+			<cp:if condition="!$user.userid">
+				<form action="./" id="loginform" name="loginform" method="post">
+					<input type="hidden" id="login-location" name="location" value="" />
+					<input type="hidden" name="cp" value="auth" />
+					<input type="hidden" name="action" value="login" />
+					<input id="username" name="username" type="text" class="signinbar-input" value="Username" />
+					<input id="password" name="password" type="password" class="signinbar-input" value="Password" />
+					<button class="login" type="button" onclick="document.forms.loginform.submit();
+                            return false;"> <span></span>
+{trans('Login')}</button>
+					<button class="register" type="button" onclick="document.location.href = 'register'"> <span></span>
+{trans('Registrieren')}</button>
+				</form>
+			</cp:if>
+			<cp:else> <span>
+                    {trans('Hallo, %s', $user.username)}
+                </span>
+
+			</cp:else>
+		</div>
+	</div>
+	<a href="./" class="logo">
+		<img src="{$img_url}global/logo.png" alt="DreamCMS Beta" title="DreamCMS Beta" />
+	</a>
+</cp:block>
+<cp:block name="footer">
+	<div class="bottom-corners">
+		<div id="copyright">
+			<div class="powered-by-dreamcms"> <span>
+                </span>
+ <a href="#">POWERED BY DREAM CMS {@VERSION}</a>
+
+			</div>
+			<div class="copyright">
+				<p> <span>
+                        COPYRIGHT &copy; 2007 - 2013
+                        <a href="http://www.dcms-studio.de">DREAM DESIGN STUDIO</a>
+                    </span>
+| <span>
+                        <a href="support.html">SUPPORT/HELP</a>
+                    </span>
+| <span>
+                        ICONS BY
+                        <a href="http://famfamfam.com/" target="_blank">FAMFAMFAM</a>
+                        +
+                        <a href="http://p.yusukekamiyamane.com/" target="_blank">p.yusukekamiyamane</a>
+                    </span>
+
+				</p>
+				<p class="trademarks">The DreamCMS works with PHP 5.2 and above, MySQL 5. Using jQuery &amp; jQuery UI, GeSHi and CKEditor</p>
+			</div>
+		</div>
+		<div id="footer-w">
+			<a href="http://www.de.redhat.com" target="_blank">
+				<img src="{$img_url}foot/footer_logo_linux.png" width="112" height="35" alt="" />
+			</a>
+			<a href="www.microsoft.com/germany/windows" target="_blank">
+				<img src="{$img_url}foot/footer_logo_windows.png" width="163" height="35" alt="" />
+			</a>
+			<a href="http://www.php.net" target="_blank">
+				<img src="{$img_url}foot/footer_logo_php.png" width="64" height="35" alt="" />
+			</a>
+			<a href="http://www.mysql.de" target="_blank">
+				<img src="{$img_url}foot/footer_logo_mysql.png" width="67" height="35" alt="" />
+			</a>
+		</div>	<span id="dbg-timer">
+            {trans('Render Time')}
+            <!--TIMING-->
+        </span>
+
+	</div>
+	<div id="ajax-feedback" class="ajax-feedback" style="display:none;">	<span>
+            <img src="{$img_url}common/loader.gif" width="126" height="22" alt="" />
+            Request processing...
+        </span>
+
+	</div>
+	<script type="text/javascript" src="{cfg('portalurl')}/html/js/dcmsTracker.js">
+	
+	</script>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+
+	$(document)
+		.ready(function () {
+		page = '{$request.page}';
+		if ($.browser.msie) {
+			var sliderConfig = {
+				rotate: true
+			};
+		} else {
+			var sliderConfig = {
+				effect: "fade",
+				fadeOutSpeed: "slow",
+				rotate: true
+			};
+		}
+
+		$('a.share,a.popup')
+			.bind("click", function (a) {
+			a.preventDefault();
+			var b = $(this),
+				a = b.attr("href");
+			(b = b.attr("title")) || (b = "Window...");
+			window.open(a, b, "toolbar=no, width=650, height=450");
+			return false;
+		});
+
+		if ($('#front-slideshow')
+			.length == 1) {
+			// add new effect to the tabs
+			$.tools.tabs.addEffect("slide", function (i, done) {
+
+				// 1. up on hiding, the active pane has a ruby background color
+				this.getPanes()
+					.slideUp()
+					.css({
+					backgroundColor: "#b8128f"
+				});
+
+				// 2. after a pane is revealed, its background is set to its original color (transparent)
+				this.getPanes()
+					.eq(i)
+					.slideDown(function () {
+					$(this)
+						.css({
+						backgroundColor: 'transparent'
+					});
+
+					// the supplied callback must be called after the effect has finished its job
+					done.call();
+				});
+			});
+
+
+			$('#front-slideshow')
+				.tabs("#slider li", sliderConfig)
+				.slideshow({
+				autoplay: true,
+				effect: 'slide',
+				interval: 3000,
+				autopause: false,
+				clickable: false
+			});
+		}
+
+		setTimeout(function () {
+			dcmsTracker();
+		}, 1000);
+	});
+
+	/* ]]> */
+	</script>
+</cp:block>
+<cp:block name="custom_header">
+	<div id="teaser-container">
+		<cp:block name="teaser" />
+		 <h1 class="page-title" title="{escape($current_pagetitle, 'html')}">
+            {$current_pagetitle}
+        </h1>
+
+	</div>
+</cp:block>
+<cp:block name="custom_footer"></cp:block>
+<cp:block name="left">
+	<cp:block name="left_content" /></cp:block>
+<cp:block name="right">
+	<cp:block name="right_content" /></cp:block>
+<cp:block name="main">
+	<cp:block name="main_content" /></cp:block>

@@ -1,0 +1,36 @@
+<?php
+
+function ___activate_sections_row($rows){
+	global $cp;
+	static $i;
+
+	$css = $i++ % 2 ? 'firstrow' : 'secondrow';
+
+	$checked1 = "";
+	$checked0 = '';
+
+	if ($rows['published'] == 1) $checked1 = ' checked="checked"';
+	else $checked0 = ' checked="checked"';
+
+	$langk = $cp->lang['a_'.$rows['section']];
+
+return <<<EOF
+    <tr onmouseover="over(this)" onmouseout="out(this)" class="$css">
+        <td>{$langk}</td>
+        <td align="center">		
+			<label for="{$rows['section']}_1"><input type="radio" id="{$rows['section']}_1" name="a[{$rows['section']}]" value="1"$checked1 /> {$cp->lang['yes']}&nbsp;</label> &nbsp;
+	        <label for="{$rows['section']}_0"><input type="radio" id="{$rows['section']}_0" name="a[{$rows['section']}]" value="0"$checked0 /> {$cp->lang['no']}</label>		
+		</td>		
+    </tr>
+EOF;
+
+
+
+
+
+// =======================================
+// News Übersicht
+// =======================================
+}
+
+?>

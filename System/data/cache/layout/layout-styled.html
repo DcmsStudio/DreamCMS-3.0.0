@@ -1,0 +1,128 @@
+{$layout.doctype_html}
+<html cp:on="xmlns:!empty($layout.html.xmlns) && $layout.doctype != 'html_5'" parse:xmlns="http://www.w3.org/1999/xhtml" cp:on="xml-lang:!empty($layout.html.xmllang)" parse:xml-lang="{$layout.html.xmllang}" cp:on="lang:!empty($layout.html.lang)" parse:lang="{$layout.html.lang}">
+    <head>
+        <base href="{cfg('portalurl')}/" />
+        <title>{$layout.pagetitle}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <cp:if condition="$layout.doctype != 'html_5'">
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    </cp:if>
+    <meta name="generator" content="DreamCMS {$version}" />
+
+
+        <meta content="article" property="og:type"/>
+        <meta content="{escape(cfg('pagename'), 'html')}" property="og:site_name"/>
+        <meta cp:if="$og.title" content="{$og.title}" property="og:title"/>
+        <meta cp:if="$og.url" content="{$og.url}" property="og:url"/>
+        <meta cp:if="$og.description" content="{$og.description}" property="og:description"/>
+        <cp:loop name="og.images" key="r">
+            <meta content="{$r.src}" property="og:image"/>
+            <meta cp:if="$r.width" content="{$r.width}" property="og:image:width"/>
+            <meta cp:if="$r.height" content="{$r.height}" property="og:image:height"/>
+        </cp:loop>
+
+
+    <cp:if condition="$META_KEYWORDS">
+        <meta name="keywords" content="{$META_KEYWORDS}" />
+    </cp:if>
+    <cp:if condition="$META_DESCRIPTION">
+        <meta name="description" content="{$META_DESCRIPTION}" />
+    </cp:if>
+    <cp:if condition="$META_COPYRIGHT && $layout.doctype != 'html_5'">
+        <meta name="copyright" content="{$META_COPYRIGHT}" />
+    </cp:if>
+    <cp:elseif condition="$META_COPYRIGHT && $layout.doctype == 'html_5'">
+        <meta name="dcterms.rightsHolder" content="{$META_COPYRIGHT}" />
+    </cp:elseif>
+    <cp:if condition="$META_AUTHOR">
+        <meta name="author" content="{$META_AUTHOR}" />
+    </cp:if>
+    <cp:if condition="$META_EXPIRES">
+        <meta name="expires" content="{$META_EXPIRES}" />
+    </cp:if>
+    <cp:if condition="$META_ROBOTS">
+        <meta name="robots" content="{$META_ROBOTS}" />
+    </cp:if>
+    <cp:if condition="$META_REVISIT_AFTER">
+        <meta name="revisit-after" content="{$META_REVISIT_AFTER}" />
+    </cp:if>
+    <cp:if condition="$META_LANGUAGE">
+        <meta name="language" content="{$META_LANGUAGE}" />
+    </cp:if>
+    {$layout.headtags}    
+    {$layout.stylesheets}
+    <script type="text/javascript" src="html/iepngfix/iepngfix_tilebg.js"></script>
+    {$layout.framework}    
+    {$layout.mooScripts}
+
+    <cp:block name="append-head" />
+    <cp:include template="seemode_include"/>
+    <!-- Layout -->
+</head>
+<body id="top">
+    <div id="wrapper-border" class="{$controller-action}{iif($layout.cols, ' ', '')}{$layout.cols}">
+        <div id="wrapper" class="{$controller-action}">
+            <cp:if condition="$layout.header">
+                <div id="header" class="{$controller-action}">
+                    <div class="inside">
+                        <cp:hook name="BeforeTop"/><cp:block name="header" /><cp:hook name="AfterTop"/></div>
+                </div>
+            </cp:if>
+
+            <cp:if condition="$layout.customheader">
+                <div id="customheader" class="">
+                    <cp:hook name="BeforeCustomtop"/><cp:block name="custom_header" /><cp:hook name="AfterCustomtop"/></div>
+            </cp:if>
+
+            <cp:if condition="$NAVIGATION">
+                <div id="breadcrumbs">
+                    <a href="{cfg('portalurl')}/" class="first">{trans('Startseite')}</a> / {$NAVIGATION}
+                </div>
+            </cp:if>
+
+            <div id="container" class="{$controller-action}">
+                <cp:block name="container-header" />
+
+                <div>
+                    <cp:if condition="$layout.left">
+                        <div id="left">
+                            <div class="inside">
+                                <cp:hook name="BeforeLeft"/><cp:block name="left" /><cp:hook name="AfterLeft"/></div>
+                        </div>
+                    </cp:if>
+
+                    <cp:if condition="$layout.right">
+                        <div id="right">
+                            <div class="inside">
+                                <cp:hook name="BeforeRight"/><cp:block name="right" /><cp:hook name="AfterRight"/></div>
+                        </div>
+                    </cp:if>
+
+                    <div id="main">
+                        <div class="inside">
+                            <cp:hook name="BeforeMiddle"/><cp:block name="main" /><cp:hook name="AfterMiddle"/></div>
+                    </div>
+                </div>
+
+                <cp:block name="container-footer" />
+
+            </div>
+
+            <cp:if condition="$layout.customfooter">
+                <div id="customfooter" class="inside">
+                    <cp:hook name="BeforeCustombottom"/><cp:block name="custom_footer" /><cp:hook name="AfterCustombottom"/></div>
+            </cp:if>
+
+            <cp:if condition="$layout.footer">
+                <div id="footer" class="{$controller-action}">
+                    <div class="inside">
+                        <cp:hook name="BeforeBottom"/><cp:block name="footer" /><cp:hook name="AfterBottom"/></div>
+                </div>
+            </cp:if>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    <cp:if condition="$provider.id > 0">
+        [save:pform{$provider.id}] [save_exit:pform{$provider.id}]
+    </cp:if>
+    <cp:else>
+        [save_exit:pform{$provider.id}]
+    </cp:else>
+    [reset:pform{$provider.id}] [cancel:pform{$provider.id}]
+
+</cp:block>
+
+<cp:block name="content">
+
+    <form action="admin.php" method="post" id="pform{$provider.id}" name="pform{$provider.id}">
+        <input type="hidden" name="adm" value="contentprovider" />
+        <input type="hidden" name="action" value="save" />
+        <input type="hidden" id="coretag-id" name="id" value="{$provider.id}" />
+        <input type="hidden" id="coretag" name="iscoretag" value="{$input.coretags}" />
+
+        <div class="box" id="provider-panel">
+            <h2>
+                <cp:if condition="!$input.coretags">
+
+                    <cp:if condition="$provider.id">
+                        {trans("Provider bearbeiten")}
+                    </cp:if>
+                    <cp:else>
+                        {trans("Provider hinzufügen")}
+                    </cp:else>
+                </cp:if>
+                <cp:else>
+                    <cp:if condition="$provider.id">
+                        {trans("Core-Tag bearbeiten")}
+                    </cp:if>
+                    <cp:else>
+                        {trans("Core-Tag hinzufügen")}
+                    </cp:else>
+                </cp:else>
+            </h2>
+            <div class="box-inner">
+
+
+
+                <fieldset>
+                    <label>{trans("Tag")}</label>
+                    <div>
+                        <input type="text" id="name" name="name" value="{escape($provider.name, 'quotes')}" size="40" class="required form-control" />
+
+
+                        <cp:if condition="!$input.coretags"><br/>{trans("Provider Ort")}</cp:if>
+                        <cp:else>
+
+                            {trans("Core-Tag Typ")}: 
+                            <select name="type" id="coretag-type">
+                                <option value="title" cp:on="selected:$provider.type == 'title'" parse:selected="selected">{trans('Titel')}</option>
+                                <option value="link" cp:on="selected:$provider.type == 'link'" parse:selected="selected">{trans('Link')}</option>
+                                <option value="url" cp:on="selected:$provider.type == 'url'" parse:selected="selected">{trans('Url')}</option>
+                            </select>
+                            <br/>
+                            {trans("Core-Tag Ort")} 
+                        </cp:else>: 
+                        <cp:if condition="$provider.file_exists">
+                            <img id="path-image" src="images/form-ok.png" width="16" height="16" alt="" title="" style="vertical-align: -4px;" />&nbsp;
+                        </cp:if>
+                        <cp:else>
+                            <img id="path-image" src="images/form-not-ok.png" width="16" height="16" alt="" title="" style="vertical-align: -4px;" />&nbsp;
+                        </cp:else>
+
+                        <cp:if condition="!$input.coretags">
+                            <span class="mono">{@PROVIDER_PATH}<span style="color: #333;" id="provider-path"><cp:if condition="$provider.name != ''">{$provider.name}/{$provider.name}.php</cp:if></span></span>
+                        </cp:if>
+                        <cp:else>
+
+                            <span class="mono">{@CORETAGS_PATH}<span style="color: #333;" id="coretag-path"><cp:if condition="$provider.name != ''">{$provider.name}/{$provider.name}.php</cp:if></span></span>
+                        </cp:else>  
+
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+                    <label>{trans("Titel")}</label>
+                    <input type="text" id="title" name="title" value="{escape($provider.title, 'quotes')}" size="40" class="required form-control" />
+                </fieldset>
+
+
+                <fieldset>
+                    <label>{trans("Beschreibung")}</label>
+                    <input class="form-control" type="text" id="description" name="description" value="{escape($provider.description, 'quotes')}" size="80" />
+                    <span class="note">{trans('Hier können Sie zu besseren Übersicht eine kurze Bechreibung eintragen')}</span>
+                </fieldset>
+
+
+                <cp:if condition="!$input.coretags">
+
+                    <fieldset>
+                        <label>{trans("Ausführung")}</label>
+                        <label for="runnable">
+                            <input type="checkbox" id="runnable" name="runnable" cp:on="checked:$provider.runnable" parse:checked="checked" value="1" /> {trans("Automatisches Parsen dieses Tags")}
+                        </label>
+                    </fieldset>
+                </cp:if>
+                <cp:else>
+                    <input type="hidden" id="runnable" name="runnable" value="1" />
+
+                </cp:else>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </form>
+
+    <script type="text/javascript">
+
+        Form.registerForm('pform{$provider.id}', {
+            contentIdentifierID: 'coretag-id',
+            exiturl: "admin.php?adm=contentprovider{iif($input.coretags, ' & coretags = 1', '')}"
+        });
+
+        $('#pform{$provider.id} #coretag-type').change(function () {
+            $('#pform{$provider.id} #name').change();
+        });
+
+        $('#pform{$provider.id} #name').change(function () {
+            if ($('#pform{$provider.id} #name').val() != '') {
+                $('#pform{$provider.id} #provider-path').html($('#pform{$provider.id} #name').val() + '/' + $('#pform{$provider.id} #name').val() + '.php');
+
+                $('#pform{$provider.id} #path-image').attr('src', Config.get('backendImagePath') + '/loading.gif');
+
+                $.get("admin.php?adm=contentprovider&action=check{iif($input.coretags, '&coretags = 1', '')}&{iif($input.coretags, 'coretag', 'provider')}=" + $('#pform{$provider.id} #name').val() + '&type=' + ($('#coretag-type').length ? $('#pform{$provider.id} #coretag-type').find(':selected').val() : ''), {}, function (data) {
+                    if (Tools.responseIsOk(data)) {
+                        if (data.file_exists == true) {
+
+                            if ($('#pform{$provider.id} #coretag-type').length)
+                            {
+                                //  $('#coretag-path').text( ucfirst( $('#coretag-type').find(':selected').val() ) +'.php');
+                            }
+
+                            $('#pform{$provider.id} #path-image').attr({
+                                src: Config.get('backendImagePath') + 'form-ok.png',
+                                title: '{trans("The content class file was found in the expected location.")}'
+                            });
+                        } else {
+                            $('#pform{$provider.id} #path-image').attr({
+                                src: Config.get('backendImagePath') + 'form-not-ok.png',
+                                title: '{trans("The content class file could not be found.")}'
+                            });
+                        }
+                    } else {
+                        alert(data.msg);
+                    }
+                });
+            } else {
+                $('#pform{$provider.id} #provider-path,#coretag-path').empty();
+                $('#pform{$provider.id} #path-image').attr({
+                    src: Config.get('backendImagePath') + 'form-not-ok.png',
+                    title: '{trans("The content class file could not be found.")}'
+                });
+            }
+        });
+
+    </script>
+</cp:block>

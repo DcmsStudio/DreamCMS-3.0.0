@@ -1,0 +1,24 @@
+<?php
+
+function __list_languages_rows($r){
+global $cp, $fct, $adm_skin, $cfg;
+	static $y;
+	$css = ( $y++%2 ? 'firstrow' : 'secondrow' );
+
+	$defaulticon = $r['is_default'] == 1 ? '<img src="images/bullet_green.png" alt="Standart" title="Standart" />' : '<img src="images/bullet_white.png" title="als Standart setzen" alt="als Standart setzen" />';
+	$pub_icon = $r['hidden'] == 0 ? '<img src="images/online.gif" alt="deaktivieren" title="deaktivieren" />' : '<img src="images/offline.gif" title="aktivieren" alt="aktivieren" />';
+
+	return <<<EOF
+        <tr class="$css">
+            <td>{$r['title']}</td>
+            <td class="tc"><a href="admin.php?adm=language&amp;sid={$cp->session_id}&action=edit&langid={$r['langid']}"><img src="images/translate.gif" title="Übersetzen" alt="Übersetzen" /></a></td>
+            <td class="tc">
+            <a href="admin.php?adm=language&amp;action=&amp;setdefault=1&amp;langid={$r['langid']}&amp;sid={$cp->session_id}">$defaulticon</a> 
+			<a href="admin.php?adm=language&amp;action=&amp;publish=1&amp;langid={$r['langid']}&amp;sid={$cp->session_id}">$pub_icon</a> 
+            <a href="javascript:void(0);" onclick="EditCon('admin.php?adm=language&amp;sid={$cp->session_id}&action=edit_settings&langid={$r['langid']}', true)"><img src="images/configure.gif" title="Einstellungen ändern" alt="Einstellungen ändern" /></a> <a href="admin.php?adm=language&amp;sid={$cp->session_id}&action=rebuild&langid={$r['langid']}"><img src="images/refresh.gif" title="PHP Code neu erzeugen" alt="PHP Code neu erzeugen" /></a>
+            </td>
+        </tr>
+EOF;
+}
+
+?>

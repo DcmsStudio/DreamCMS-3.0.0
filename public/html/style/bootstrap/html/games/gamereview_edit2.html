@@ -1,0 +1,175 @@
+<?php
+
+function __gamereview_edit2($r){
+global $cp, $cfg, $fct, $adm_skin;
+
+
+    $tab_controll = new tab_controll();
+    $tab_controll->add_tabs(
+                'Review Inhalt', array('Review Inhalt', 'Sonstiges'));
+
+    $js_header_code = $tab_controll->js_header_code;
+
+    $adm_skin->js .= $js_header_code;
+    $adm_skin->js .= "\n<script type=\"text/javascript\" language=\"javascript\" src=\"core/js/contentscript.js\"></script>\n";
+
+
+	if ( !isset($r['published']) ) $r['published'] = 1;
+	$c[0] = $r['published'] == 0 ? ' checked="checked"' : '';
+	$c[1] = $r['published'] == 1 ? ' checked="checked"' : '';
+
+	$myrate = explode("\n", $r['rateing'] );
+	$myrate_arr = array();
+
+	foreach ( $myrate as $idx => $line )
+	{
+		$s = explode('=', $line);
+		if ( !$s[0] || !trim((string)$line) ) continue;
+
+		$myrate_arr[$s[0]] = trim((string)$s[1]);
+	}
+
+	$ratings = '';
+
+	foreach ( $r['rating_arr'] as $aridx => $rsx)
+	{
+        if ( $rsx['display'] == 0 ) continue;
+        $options = '';
+        for ( $i=1; $i<=10; $i++)
+        {
+        	$sel = ($myrate_arr[$rsx['key']] == $i ? ' selected="selected"' : '');
+            $options .= '<option value="'.$i.'"'.$sel.'>'.$i.' Punkte</option>';
+        }
+
+        $css = $x++%2 ? 'firstrow' : 'secondrow';
+        $ratings .= '
+        <fieldset class="fl fieldset4">
+			<legend>Wertung für '.$rsx['title'].'</legend>
+			{info:review|rating_'.$rsx['key'].'}
+			<select name="rating_'.$rsx['key'].'" class="select absmiddle">'.$options.'</select>
+        </fieldset>';
+	}
+
+
+	$nextcss = $x++%2 ? 'firstrow' : 'secondrow';
+	
+	$btn = (HTTP::input('action')== 'add' ?  '[save_exit:gamereviewform]' : '[save:gamereviewform] [save_exit:gamereviewform] ' );
+
+	
+
+return <<<EOF
+<form  action="admin.php" id="gamereviewform" method="post" name="admform">
+<input type="hidden" name="adm" value="gamereviews" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="action" value="HTTP::input('action')" />
+<input type="hidden" name="id" value="{$r['id']}" />
+<input type="hidden" name="send" value="send" />
+<input type="hidden" name="game" value="{$r['gameid']}" />
+
+<div>
+{$tab_controll->tab_js_code}
+</div>
+<table class="tblborder" width="100%" border="0" cellpadding="3" cellspacing="0">
+<tr class="tableheader">
+	<td>
+		Review zu "{$r['title']}"
+	</td>
+</tr>
+<tr>
+	<td>
+	
+<div class="tab_pages">
+
+<div class="tcontent" id="tc0">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+		<td>		
+			<fieldset class="fl w49">
+				<legend>Review Titel</legend>
+				<input type="text" name="title" value="{$r['rtitle']}" class="input" size="50" />
+			</fieldset>
+		
+			<fieldset class="fl w49">
+				<legend>Aktiv</legend>
+				{info:review|publish}
+				<label for="pub1"><input type="radio" id="pub1" name="published" value="1" class="radio"{$c[1]} /> Ja </label>&nbsp;
+				<label for="pub0"><input type="radio" id="pub0" name="published" value="0" class="radio"{$c[0]} /> Nein</label>
+			</fieldset>		
+		</td>
+	</tr>
+	
+    <tr>
+		<td>
+			<fieldset>
+				<legend>Review</legend>
+				{$r['editor']}
+			</fieldset>	
+			
+		</td>
+	</tr>
+
+</table>
+</div>
+
+<div class="tcontent" id="tc1">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+		<td>
+			$ratings
+		</td>
+	</tr>
+	
+    <tr>
+		<td>
+			<fieldset>
+				<legend>Positive Bemerkung</legend>
+				{$r['editor_positive']}
+			</fieldset>	
+			
+			<fieldset>
+				<legend>Negative Bemerkung</legend>
+				{$r['editor_negative']}
+			</fieldset>	
+		</td>
+	</tr>
+
+</table>
+</div>
+
+
+
+
+</div>
+
+<btn>
+$btn <input type="reset" value="Zurücksetzen" class="button" />&nbsp;<input type="reset" value="Abbrechen" class="button" onclick="javascript:window.history.go(-2);" />
+</btn>
+     </td>
+	</tr>
+
+</table>
+
+</form>
+
+<script type="text/javascript">
+//<![CDATA[
+
+add_dirty_flag('gamereviewform');
+register_form_handler('savethis');
+exiturl = 'admin.php?adm=gamereviews';
+//]]>
+</script>
+EOF;
+
+
+
+
+
+
+
+
+
+
+}
+
+?>

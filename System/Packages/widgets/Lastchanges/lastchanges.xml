@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+    <name>zuletzt bearbeitete Inhalte</name>
+    <version>1.1</version>
+    <author>Marcel Domke</author>
+    <website>http://www.dcms-studio.de</website>
+    <collapsible>1</collapsible>
+    <configurable>1</configurable>
+    <multiple>0</multiple>
+    <externalconfig></externalconfig>
+    <description><![CDATA[Zeigt alle zuletzt bearbeitete Inhalte an.]]>
+    </description>
+</widget>

@@ -1,0 +1,25 @@
+<cp:loop name="formfields" key="r">
+	<cp:if condition="$r.grouplabel || $r.label">
+		<fieldset>
+			<label>
+				<cp:if condition="$r.grouplabel">
+					{$r.grouplabel}
+				</cp:if>
+				<cp:else>
+					{$r.label}
+				</cp:else>
+				{iif($r.required || $r.controls, ' *', '')}
+			</label>
+			
+			{$r.field}
+			
+			<cp:if condition="$r.field_description">
+				<br/>
+				<small>
+					{$r.field_description}
+				</small>
+			</cp:if>
+		</fieldset>
+	</cp:if>
+	<cp:else>{$r.field}</cp:else>
+</cp:loop>

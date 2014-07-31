@@ -1,0 +1,570 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:newsForm{iif($id, $id, "0")}] [save_exit:newsForm{iif($id, $id, "0")}]
+        [reset:newsForm{iif($id, $id, "0")}] [cancel:newsForm{iif($id, $id, "0")}]
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+<cp:section name="meta">
+    <cp:include template="../metadata"/>
+</cp:section>
+
+
+<cp:set var="ajaxaction" value="add"/>
+<cp:if condition=" $request.id != 0 ">
+    <cp:set var="ajaxaction" value="edit_news"/>
+</cp:if>
+
+<form action="admin.php" id="newsForm{iif($id, $id, '0')}" method="post" name="newsForm{iif($id, $id, '0')}" enctype="multipart/form-data">
+
+    <input type="hidden" name="adm" value="news"/>
+    <input type="hidden" name="action" value="save_news"/>
+    <input type="hidden" name="newsid" id="newsitem-id{iif($id, $id, '0')}" value="{$id}"/>
+
+
+    <cp:jstabs
+            tabs="{trans('Inhalt')},{trans('Content Gallery')},{trans('Optimierung')}"
+            usetrans="true" default="Inhalt"/>
+
+
+
+    <div id="tc0" class="column-2">
+
+        <div class="post-content">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{trans('Titel')}</label>
+                    <input class="required form-control" type="text" name="title" id="news-title" value="{escape($title, 'quotes')}" size="60" maxlength="255"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{trans("Teaser Bild")}</label>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" name="teaserimage" id="teaser-image" value="{escape($teaserimage, 'quotes')}" size="60" maxlength="250"/>
+                        </div>
+                        <div class="col-md-3">
+                            <input placeholder="{trans('Bezeichnung des Teaser Bildes')}" type="text" class="form-control" name="teaserimagetitle" id="teaser-image-title" value="{escape($teaserimagetitle, 'quotes')}" size="60" maxlength="250"/>
+                        </div>
+
+                        <button type="button" id="get-teaser-image">{trans('Auswählen')}</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{trans('Teaser')}</label>
+                    <cp:editor baseurl="$cfg.portalurl" name="teaser" value="$teaser" height="100" width="400px"/>
+                </div>
+
+                <div class="col-md-12">
+                    <label>{trans('Inhalt')}</label>
+                    <cp:editor baseurl="$cfg.portalurl" name="content" value="$text" height="350" width="400px" class="required"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="post-column">
+
+            <cp:section name="publishing"/>
+
+            <div class="postbox">
+                <h3>{trans("Kategorie")}</h3>
+                <div class="postbox-content" rel="newscat">
+                    <select name="cat_id" class="select required" size="5">
+                        <cp:data var="dataselect" value="$cat_options" template="../select_option"/>
+                    </select>
+
+                    <a href="javascript:void(0)" id="add-cat-toggle" style="margin-top: 10px;">{trans('Kategorie hinzufügen')}</a>
+                    <div id="add-cat-container" style="margin-top: 10px;display: none">
+
+                        <input id="ad-cat-title" type="text" class="form-control nodirty" value="" placeholder="{trans('Kategorie Titel')}"/>
+
+                        <div style="margin-top: 10px;">{trans('Übergeordnete Kategorie')}</div>
+                        <cp:set var="addcat_options" value="$cat_options"/>
+                        <cp:unset var="addcat_options.selected"/>
+                        <select id="ad-cat-parentid" class="select nodirty" size="5">
+                            <option value="0" parse:selected="selected"> ----- </option>
+                            <cp:data var="dataselect" value="$addcat_options" template="../select_option"/>
+                        </select>
+
+                        <div style="margin-top: 10px;">{trans('Zugriffsrechte')}</div>
+                        <select name="access[]" class="select nodirty" size="6" multiple="multiple">
+                            <cp:set var="dataselect" value="$access_options"/>
+                            <cp:include template="../select_option"/>
+                        </select>
+
+                        <button id="ad-cat-submit" style="margin-top: 10px;">{trans('Kategorie Speichern')}</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="postbox">
+                <h3>{trans('Kommentare möglich?')}</h3>
+                <div class="postbox-content" rel="newscommenting">
+                    <label for="can_comment1">
+                        <input type="radio" name="can_comment" id="can_comment1" value="1" cp:on="checked:$can_comment || !$id" parse:checked="checked"/>
+                        {trans('Ja')}
+                    </label>
+                    <label for="can_comment0">
+                        <input type="radio" name="can_comment" id="can_comment0" value="0" cp:on="checked:!$can_comment" parse:checked="checked"/>
+                        {trans('Nein')}
+                    </label>
+                </div>
+            </div>
+
+            <div class="postbox">
+                <h3>{trans('Tags')}</h3>
+                <div class="postbox-content" rel="newstags">
+                    <cp:set var="tagtable" value="news"/>
+                    <cp:include template="../generic/contenttags"/>
+                </div>
+            </div>
+
+            <div class="postbox">
+                <h3>{trans('Zugriffsrechte')}</h3>
+                <div class="postbox-content" rel="newsaccess">
+                    <select style="width:97%" name="access[]" class="select" size="6" multiple="multiple">
+                        <cp:set var="dataselect" value="$access_options"/>
+                        <cp:include template="../select_option"/>
+                    </select>
+                </div>
+            </div>
+
+
+            <cp:section name="meta"/>
+        </div>
+    </div>
+
+
+    <div class="box description" id="tc1">
+        <div class="box-inner">
+            <fieldset class="legend-top">
+                <div id="inline-images" style="display: none">
+                    <input type="hidden" name="reorder-contentimages" value="" id="reorder-contentimages"/>
+                    <ul>
+                        <cp:loop name="galleryimages" key="i">
+                            <li img="{$i.filepath}" imgtitle="{escape($i.title, 'html')}"
+                                imgdesc="{escape($i.description, 'html')}" rel="{$i.imageid}" id="newsimg-{$i.imageid}">
+                                <cp:thumb aspect="true" shrink="false" src="$i.filepath" width="120" height="90"/>
+                            </li>
+                        </cp:loop>
+                    </ul>
+                </div>
+
+                <div id="inline-image-upload">
+                    <div id="upload-drop-images" style="display:inner-block">
+                        <span class="drop-here">Drop Image Files here...</span>
+                        <span class="browse btn btn-default">Browse</span>
+                        <button id="browse-server" type="button" class="btn btn-default">{trans('Bilder vom Server')}</button>
+                            <span class="allowed-info">
+                                <span class="allowed-extensions"></span>
+                                <span class="allowed-filesize"></span>
+                            </span>
+                        <input type="file" name="Filedata" multiple="multiple" class="form-control"/>
+                    </div>
+
+                    <ul class="dropped-files">
+                        <!-- The file uploads will be shown here -->
+                    </ul>
+
+                </div>
+
+
+            </fieldset>
+        </div>
+    </div>
+
+
+    <div class="box description" id="tc2">
+        <div class="box-inner">
+            <cp:include template="../document-analyse" />
+        </div>
+    </div>
+</form>
+
+<div id="image-opts{$id}" class="row" style="display:none">
+    <div class="col-md-12">
+        <label>{trans('Titel')}</label>
+        <input type="text" id="img-label" class="form-control" size="54"/>
+    </div>
+    <div class="col-md-12">
+        <label>{trans('Beschreibung')}</label>
+        <textarea id="img-description" cols="40" class="form-control"></textarea>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+var inwin = $('#' + Win.windowID);
+var container = $('#' + Win.windowID).find('#inline-images');
+
+if ( container.find('li' ).length ) {
+    container.show();
+}
+
+
+
+
+if ($('#teaser-image', $('#' + Win.windowID)).val().trim()) {
+    $('#teaser-image-title', $('#' + Win.windowID)).addClass('required');
+}
+
+$('#teaser-image', $('#' + Win.windowID)).unbind().change(function() {
+    if ($(this).val().trim()) {
+        $('#teaser-image-title', $('#' + Win.windowID)).addClass('required');
+    }
+    else {
+        $('#teaser-image-title', $('#' + Win.windowID)).removeClass('required');
+    }
+});
+
+
+
+$('#add-cat-toggle', $('#' + Win.windowID)).unbind().bind('click', function(e){
+    e.preventDefault();
+    $('#add-cat-container', $('#' + Win.windowID)).slideToggle(0);
+    $(window).trigger('resizescrollbar');
+});
+
+
+$('#ad-cat-submit', $('#' + Win.windowID)).unbind().bind('click', function(e){
+    e.preventDefault();
+    var title = $('#ad-cat-title', $('#' + Win.windowID)).val().trim();
+    if (title) {
+        var parent = $('#ad-cat-parentid', $('#' + Win.windowID)).val();
+        var access = $('#ad-cat-access', $('#' + Win.windowID)).val();
+
+        $('#add-cat-container', $('#' + Win.windowID)).mask('{trans("Bitte warten")}');
+
+
+        $.post('admin.php', {
+            adm: 'news',
+            action: 'edit_cats',
+            catid: 0,
+            send: 1,
+            title: title,
+            cancomment: 1,
+            parentid: parent,
+            access: access,
+            cat_description: '',
+            published: 1,
+            addinline: true
+        }, function(data) {
+
+            $('#add-cat-container', $('#' + Win.windowID)).unmask();
+
+            if (Tools.responseIsOk(data)) {
+
+                if ( typeof data.cat_options == 'object' )
+                {
+                    var skip = false, currentSelected = $('select[name="cat_id"]', $('#' + Win.windowID)).val();
+
+                    $('#ad-cat-parentid,select[name="cat_id"]', $('#' + Win.windowID)).SelectBox('destroy');
+                    $('#ad-cat-parentid,select[name="cat_id"]', $('#' + Win.windowID)).empty().append( '<option value="0"> ----- </option>');
+                    for (var i = 0; i<data.cat_options.length;++i)
+                    {
+                        var d = data.cat_options[i];
+                        if (d.value == 0 && !skip) {
+                            $('#ad-cat-parentid', $('#' + Win.windowID)).empty();
+                            skip = true;
+                        }
+                        else if (d.value == 0 && skip) {
+                            continue;
+                        }
+
+                        $('#ad-cat-parentid,select[name="cat_id"]', $('#' + Win.windowID)).append( '<option value="'+ d.value +'">'+ d.label +'</option>' );
+                    }
+
+                    if ( currentSelected ) {
+                        $('select[name="cat_id"]', $('#' + Win.windowID)).find('option[value=' + currentSelected + ']')
+                            .attr('selected', 'selected')
+                            .prop('selected', true);
+
+                        $('#ad-cat-parentid', $('#' + Win.windowID)).find('option[value=0]')
+                            .attr('selected', 'selected')
+                            .prop('selected', true);
+
+                    }
+                    else {
+                        $('select[name="cat_id"],#ad-cat-parentid', $('#' + Win.windowID)).find('option[value=0]')
+                            .attr('selected', 'selected')
+                            .prop('selected', true);
+                    }
+
+                    $('#ad-cat-parentid,select[name="cat_id"]', $('#' + Win.windowID)).SelectBox();
+
+                }
+
+
+                $('#ad-cat-title', $('#' + Win.windowID)).val('');
+                $('#ad-cat-parentid,#ad-cat-access', $('#' + Win.windowID)).val('').trigger('change');
+
+            }
+            else {
+
+            }
+        });
+
+    }
+});
+
+
+
+
+
+
+
+
+
+
+if (typeof initNewsContentGallery != 'function') {
+    function initNewsContentGallery()
+    {
+        var images = $('#' + Win.windowID).find('#inline-images').find('img');
+        images.each(function ()
+        {
+            $(this).css('cursor','pointer');
+            $(this).attr('title',$(this).parent().attr('imgtitle'));
+            var id = $(this).parent().attr('rel');
+            $(this).fancybox({
+                'padding': 0,
+                'transitionIn': 'elastic',
+                'transitionOut': 'elastic',
+                'easingIn': 'swing',
+                'easingOut': 'swing',
+                'speedIn': 700,
+                'speedOut': 500,
+                'href': $(this).parent().attr('img'),
+                'title': 'Bild ID:' + id + ' - ' + ($(this).parent().attr('imgtitle') ? $(this).parent().attr('imgtitle') : ''),
+                'titlePosition': 'over',
+                'type': 'image',
+                onComplete: function (currentArray,currentIndex,currentOpts)
+                {
+                    $("#fancybox-inner").unbind('hover').hover(function ()
+                    {
+                        $("#fancybox-title-over").slideUp(300);
+                    },function ()
+                    {
+                        $("#fancybox-title-over").slideDown(300);
+                    });
+                },
+                'titleFormat': function (title,currentArray,currentIndex,currentOpts)
+                {
+                    var li = $(currentArray[ currentIndex ]).parents('li:first');
+                    var descriptionLayout = '<strong>' + 'Bild ID:' + li.attr('rel') + (li.attr('imgtitle') ? ' - ' + li.attr('imgtitle') : '') + '</strong><br />';
+                    if ($(currentArray[ currentIndex ]).parents('li:first').length) {
+                        var descr = $(currentArray[ currentIndex ]).parents('li:first').attr('imgdesc');
+                        descriptionLayout += (descr != 'undefined' && descr ? '<p>' + descr + '</p>' : '');
+                    }
+                    return '<span id="fancybox-title-over">' + descriptionLayout + '</span>';
+                }
+            });
+        });
+
+
+        if ( !images.length ) {
+            $('#' + Win.windowID).find('#inline-images').hide();
+        }
+        else {
+            $('#' + Win.windowID).find('#inline-images').show();
+        }
+
+
+    }
+}
+initNewsContentGallery();
+
+Core.addEvent('onContentTabInited',function (tab,hash)
+{
+    tab.unbind('click.stat').bind('click.stat',function (e) {
+        tinymce.triggerSave();
+        updateTextareaFields();
+
+        var hash = tab.parents('div.content-tabs:first').attr('id').replace('content-tabs-', '');
+        var area = $('#content-' + hash).find('form').find('[name=content]');
+        var contentid = area.attr('id');
+        var c = area.val();
+        if (typeof tinymce.editors[contentid] !== 'undefined') {
+            c = tinymce.editors[contentid].getContent();
+        }
+
+        var analyser = new contentAnalyser({
+            url: 'admin.php',
+            params: {
+                adm: 'news',
+                action: 'edit_news',
+                id: {iif($id, $id, '0')},
+                content: c //$('#newsForm{iif($id, $id, "0")}').find('[name=content]').val()
+            }
+        });
+    });
+});
+Form.registerForm('newsForm{iif($id, $id, "0")}',{
+    contentIdentifierID: 'newsitem-id{$id}',
+    exiturl: 'admin.php?adm=news',
+    identifierType: 'news',
+    baseField: 'news-title',
+    useContentTags: true,
+    onBeforeSerialize: function ()
+    {
+        var field = $('#' + Win.windowID).find('#reorder-contentimages');
+        var tmp = [];
+        $('#' + Win.windowID).find('#inline-images').find('li').each(function ()
+        {
+            var id = $(this).attr('rel');
+            if (id) {
+                tmp.push(id);
+            }
+        });
+        field.val(tmp.join(','));
+    }
+});
+
+$('#' + Win.windowID).find('#inline-images ul').sortable();
+
+if (typeof contentGallery == 'function')
+{
+    var newscontent_Gallery{iif($id, $id, '0')} = new contentGallery($('#inline-images', $('#' + Win.windowID)),{
+        delete: function (e,id,li)
+        {
+            $.post('admin.php',{
+                adm: 'news',
+                action: 'upload',
+                remove: id
+            },function (data)
+            {
+                if (Tools.responseIsOk(data)) {
+                    $(li).fadeOut('fast',function ()
+                    {
+                        $(this).remove();
+                        initNewsContentGallery();
+                    });
+                }
+            });
+        },
+        edit: function (e,id,li)
+        {
+            var clone = $('#' + Win.windowID).find('#image-opts{iif($id, $id, "0")}').clone();
+            jDialog(clone.show(),'{trans("Bild Optionen")}',function ()
+            {
+                $.post('admin.php',{
+                    adm: 'news',
+                    action: 'upload',
+                    title: clone.find('#img-label').val(),
+                    description: clone.find('#img-description').val(),
+                    update: id
+                },function (data)
+                {
+                    if (Tools.responseIsOk(data)) {
+                        li.attr('imgtitle',clone.find('#img-label').val());
+                        li.attr('imgdesc',clone.find('#img-description').val());
+                    }
+                });
+            },function ()
+            {
+                clone.find('#img-label').val(li.attr('imgtitle'));
+                clone.find('#img-description').val(li.attr('imgdesc'));
+            },{
+                okButton: '{trans("Übernehmen")}',
+                close: true
+            });
+        },
+        onAfterUploadDone: initNewsContentGallery,
+        postParams: {
+            adm: 'news',
+            action: 'upload',
+            usechain: true,
+            chainwidth: 120,
+            chainheight: 90,
+            chainaspect: true,
+            chainshrink: false
+        },
+        controllName: $('#upload-drop-images:first',inwin)
+    });
+
+
+    if (typeof newscontent_Gallery{iif($id, $id, "0")} == 'object') {
+        newscontent_Gallery{iif($id, $id, "0")}.initGalleryUpload();
+
+        $('#' + Win.windowID).find('#get-teaser-image').unbind().bind('click',function ()
+        {
+            Core.Tabs.toggleFileSelectorPanel(true);
+            $('#' + Win.windowID).find('#fm').registerEvents({
+                onSelectFile: function (filepath){
+                    if (filepath && filepath.match(/.*\.(jpe?g|gif|png)$/ig)) {
+                        $('#teaser-image', inwin ).val(filepath).trigger('change');
+                        Core.Tabs.toggleFileSelectorPanel(false);
+                    }
+                    else {
+                        jAlert('Only *.jpg, *.jpeg, *.gif, and *.png Files allowed!','Info');
+                    }
+                }
+            });
+        });
+
+
+        $('#' + Win.windowID).find('#browse-server').unbind().bind('click',function ()
+        {
+            Core.Tabs.toggleFileSelectorPanel(true);
+            $('#' + Win.windowID).find('#fm').registerEvents({
+                onSelectFile: function (filepath)
+                {
+                    if (filepath && filepath.match(/.*\.(jpe?g|gif|png)$/ig)) {
+
+                        // Core.Tabs.toggleFileSelectorPanel(false);
+                        $.post('admin.php',{
+                            adm: 'news',
+                            action: 'upload',
+                            usechain: true,
+                            chainwidth: 120,
+                            chainheight: 90,
+                            chainaspect: true,
+                            chainshrink: false,
+                            filepath: filepath
+                        },function (data)
+                        {
+                            if (Tools.responseIsOk(data)) {
+                                var img = $('<img/>').attr('src',data.fileurl).attr('id','preview-' + data.thumbid);
+                                var li = $('<li></li>').attr('rel',data.thumbid).attr('id','img-' + data.thumbid).attr('img',filepath);
+                                if (data.path) {
+                                    img.attr('src',data.path);
+                                }
+                                if (data.width) {
+                                    img.attr('width',data.width);
+                                }
+                                if (data.height) {
+                                    img.attr('height',data.height);
+                                }
+                                li.append(img);
+                                li.appendTo($('#inline-images').find('ul:first'));
+                                $('#inline-images').show();
+                                newscontent_Gallery.bindBackendEvents();
+                                initNewsContentGallery();
+                            }
+                        });
+                    }
+                    else {
+                        jAlert('Only *.jpg, *.jpeg, *.gif, and *.png Files allowed!','Info');
+                    }
+                }
+            });
+        });
+    }
+    else {
+        console.log('Invalid content_Gallery object');
+    }
+}
+
+</script>
+</cp:block>

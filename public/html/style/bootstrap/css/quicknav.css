@@ -1,0 +1,42 @@
+
+BODY {
+	FONT-FAMILY: Arial, Helvetica, sans-serif;
+	background: #F9F9F9 url(images/header.gif) repeat-x;
+	background-attachment: fixed;
+	color: #444444;
+	font-size: 11px;
+	margin:0px;
+	padding:0px;
+	font-weight: bold;
+}
+
+
+
+
+IMG.absmiddle { border: 0; width:25px; height:25px; }
+a:link, a:hover, a:visited { font-weight: bold; text-decoration : none; font-size: 11px; color:#ffffff;}
+a:hover {  font-weight: bold; }
+/* ======================================================
+ * Schnellnavigation Startseite
+ * ======================================================
+ */
+.quicknav_bg { height:50px; }
+#qnavbutton, #qnav { background-color: transparent;  }
+.quicknav_bg A {  font-weight: bold; }
+
+
+#arrow {
+	position:relative;
+	top:0px;
+	cursor:pointer;
+	height:100%;
+	width:100%;
+	text-align:center
+}
+
+.dbox { height:40px; border: 1px solid transparent; }
+.hbox {
+	height:40px;
+	background: #505050;
+	border: 1px solid #ececece;
+}

@@ -1,0 +1,49 @@
+<div class="toolbar">
+    [save:layoutmodulform] [save_exit:layoutmodulform] [reset:layoutmodulform]
+</div>
+
+<div style="padding:5px">
+    <form action="admin.php" name="layoutmodulform" id="layoutmodulform" method="post">
+        <input type="hidden" name="adm" value="layouter" />
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="action" value="editblock" />
+        <input type="hidden" name="dataid" id="data-id" value="{$blockdata.id}" />
+        <input type="hidden" name="layoutid" value="{$request.layoutid}" />
+        <input type="hidden" name="current" value="{$request.current}" />
+        <input type="hidden" name="block" value="{$request.block}" />
+        
+        <div class="box description">
+            <div class="box-inner">
+                
+                <fieldset>
+                    <legend>{trans('Titel')}</legend>
+                    <input type="text" name="title" size="65" maxLength="250" value="{escape($title)}" class="required" />
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Anzahl der angezeigten News')}</legend>
+                    <input type="text" name="modul[limit]" size="5" maxLength="3" class="required" value="{escape($modul.limit)}" />
+                </fieldset>
+                
+                
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function()  {
+
+setTimeout(function(){
+    $('#layoutmodulform').registerForm({
+        contentIdentifierID: 'data-id',
+        exiturl: '',
+        identifierType: ''
+    });
+}, 120);
+
+});
+</script>

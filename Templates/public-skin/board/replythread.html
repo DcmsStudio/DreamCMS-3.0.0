@@ -1,0 +1,267 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+</cp:block>
+<cp:block name="main_content">
+    <cp:if condition="hasperm('forum/canpostattachment')">
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            frontend = true;
+            session_id = '{$session_id}';
+            max_upload_size = "{$uploadsize}";
+            max_upload_limit = "{$uploadlimit}";
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="asset/js/backend/swfupload/swfupload"></script>
+        <script type="text/javascript" src="asset/js/backend/upload_frontend"></script>
+    </cp:if>
+    <cp:if condition="$submited">
+        <div class="">
+            <span>
+                {$submited}
+            </span>
+        </div>
+    </cp:if>
+    <cp:else>
+        <cp:if condition="count($error)">
+            <div class="error">
+                <ul>
+                    <cp:loop name="error" key="r">
+                        <li>
+                            {$r.msg}
+                        </li>
+                    </cp:loop>
+                </ul>
+            </div>
+        </cp:if>
+        <form name="bbform" id="bbform" action="forum/replythread/{$forumpost.threadid}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="send" value="send" />
+            <input type="hidden" name="posthash" value="{$posthash}" />
+            <input type="hidden" name="postid" value="{$forumpost.postid}" />
+            <input type="hidden" name="threadid" value="{$forumpost.threadid}" />
+            <input type="hidden" name="poststarttime" value="{$input.poststarttime}" />
+            <cp:if condition="!$user.userid">
+                <div class="row">
+                    <label>
+                        {trans('Dein Name')}
+                    </label>
+                    <input type="text" class="col-xs-6" name="username" value="{$input.username}" maxlength="60" size="50" />
+                </div>
+            </cp:if>
+            <div class="row">
+                <label>
+                    {trans('Themen Titel')}
+                </label>
+                <input type="text" class="col-xs-6" name="subject" value="{$input.subject}" maxlength="85" size="50" />
+            </div>
+            <cp:if condition="$forum.allowicons">
+                <div class="row">
+                    <label>
+                        {trans('Post Icon')}
+                    </label>
+                    <div class="posticons">
+                        <cp:loop name="posticons" key="r">
+                            <label for="icon{$r.iconid}" class="absmiddle">
+                                <input class="absmiddle" type="radio" name="iconid" value="{$r.iconid}" id="icon{$r.iconid}" cp:on="checked:($r.iconid == 0 && !$input.iconid) || ($input.iconid && $input.iconid == $r.iconid)" parse:checked="checked"/>
+                                <img src="{$r.icon}" border="0" class="absmiddle" />
+                            </label>
+                        </cp:loop>
+                    </div>
+                </div>
+            </cp:if>
+            <div class="row">
+                <label>
+                    {trans('Inhalt')}
+                </label>
+                <textarea name="message" rows="15" cols="50" wrap="virtual" tabindex="3" class="bbcodeTextarea" style="width:99%;height:250px">{$forumpost.message}</textarea>
+                <script type="text/javascript" src="asset/js/jquery/bbcode/jquery.markitup"></script>
+                <script type="text/javascript" src="asset/js/jquery/bbcode/sets/bbcode/set"></script>
+                <script type="text/javascript">
+                    /* <![CDATA[ */
+                    $(document).ready(function() {
+                        // $('.bbcodeTextarea').markItUp(commentBBCodeToolbar);
+                    });
+                    /* ]]> */
+                </script>
+            </div>
+            <div class="row">
+                <label>
+                    {trans('Optionen')}
+                </label>
+                <label for="cb_disablebbcode">
+                    <input type="checkbox" name="disablebbcode" value="1" id="cb_disablebbcode" cp:on="checked:$input.disablebbcode" parse:checked="checked" />
+                    {trans('BBCode nicht umwandeln.')}
+                </label>
+                <br/>
+                <label for="cb_parseurl">
+                    <input type="checkbox" name="parseurl" value="1" id="cb_parseurl" cp:on="checked:$input.parseurl" parse:checked="checked" />
+                    {trans('Urls automatisch parsen: fügt automatisch [url] und [/url] zu Internet Adressen hinzu.')}
+                </label>
+                <br />
+                <label for="cb_disablesmilies">
+                    <input type="checkbox" name="disablesmilies" value="1" id="cb_disablesmilies" cp:on="checked:$input.disablesmilies" parse:checked="checked" />
+                    {trans('Smilies nicht umwandeln: Sollen Smilies im Beitrag deaktiviert werden?')}
+                </label>
+                <cp:if condition="$user.userid">
+                    <br />
+                    <label for="cb_signature">
+                        <input type="checkbox" name="signature" value="1" id="cb_signature" cp:on="checked:$input.signature" parse:checked="checked" />
+                        {trans('Signature Anzeigen: Fügt Ihre Signatur im Beitrag an. Nur für registrierte Mitglieder.')}
+                    </label>
+                </cp:if>
+            </div>
+            <cp:if condition="hasperm('forum/canpostattachment')">
+                <div class="row">
+                    <label>
+                        {trans('Attachments')}
+                    </label>
+                    <ul id="attachment-container" class="attachments">
+                    </ul>
+                    <small>
+                        {trans('Elaubte Datei Erweiterungen')}: {group('forum/allowedattachmentextensions')}
+                        <br/>
+                        {trans('max. Dateigröße')}:
+                        <span id="fsize" class="small">
+                            {group('forum/maxuploadsize')}
+                        </span>
+                    </small>
+                    <p>
+                        <span id="buttonPlaceholder">
+                        </span>
+                        <button type="button" id="add_files_attach_0" class="btn upload-button" style="display: none; clear: both">
+                            {trans('Datei/-en auswählen')}
+                        </button>
+                    </p>
+                    <br/>
+                    <div id="upload-container">
+                    </div>
+                    <div id="upload-files">
+                    </div>
+                </div>
+            </cp:if>
+            <cp:if condition="$threadmanagement">
+                <div class="row">
+                    <label>
+                        {trans('Themen Management')}
+                    </label>
+                    <cp:if condition="$allowopenclose">
+                        <label for="cb_openclose">
+                            <input type="checkbox" name="openclose" value="1" id="cb_openclose" />
+                            <strong>
+                                <cp:if condition="$thread_open">
+                                    {trans('Dieses Thema nach dem Bearbeiten schließen')}
+                                </cp:if>
+                                <cp:else>
+                                    {trans('Dieses Thema nach dem Bearbeiten öffnen')}
+                                </cp:else>
+                            </strong>
+                            .
+                        </label>
+                        <br />
+                    </cp:if>
+                    <cp:if condition="$allowstickunstick">
+                        <label for="cb_stickunstick">
+                            <input type="checkbox" name="stickunstick" value="1" id="cb_stickunstick" />
+                            {trans('Dieses Thema nach dem Eintragen als')}
+                            <strong>
+                                <cp:if condition="!$input.stickunstick">
+                                    {trans('Unwichtig')}
+                                </cp:if>
+                                <cp:else>
+                                    {trans('Wichtig')}
+                                </cp:else>
+                            </strong>
+                            {trans('markieren.')}
+                        </label>
+                        <br />
+                    </cp:if>
+                </div>
+            </cp:if>
+            <div class="row">
+                <cp:captcha width="200" height="80" audio="true" reload="true" />
+                <br/>
+                <input type="text" name="securecode" class="input" size="15" maxlength="5" placeholder="{trans('Sicherheitscode')}" />
+            </div>
+            <div class="row tc">
+                <button type="button" class="save btn btn-primary" accesskey="s">
+                    {trans('Antwort eintragen')}
+                </button>
+                <button type="reset" class="btn btn-default" accesskey="r">
+                    {trans('Zurücksetzen')}
+                </button>
+            </div>
+        </form>
+        <script type="text/javascript">
+            <cp:if condition="hasperm('forum/canpostattachment')">
+            $(document).ready(function() {
+                $('#fsize').text(format_size($('#fsize').text() * 1024));
+                $('#upload-container').empty();
+                setTimeout(function() {
+                    Forum.initUpload({
+                        uploadid: 'attach_0',
+                        swfupload_swf: '',
+                        url: "index.php",
+                        post_params: {
+                            token: '{gettoken()}',
+                            cp: 'plugin',
+                            plugin: 'forum',
+                            action: 'upload',
+                            posthash: '{$posthash}',
+                        },
+                        token: '{gettoken()}',
+                        posthash: '{$posthash}',
+                        postid: {iif($forumpost.postid, $forumpost.postid, 0)},
+                        threadid: {$forumpost.threadid},
+                        attachmentContainer: '#attachment-container',
+                        maxUploadSize: {group('forum/maxuploadsize')} * 1024,
+                        allowedExtensions: '{group("forum/allowedattachmentextensions")}',
+                        template: '<li id="ali_[id]" class="attach_row" style="display: none"><div>' + '<h4 class="attach_name">[name]</h4>' + '<p class="info">[info]</p>' + '<span class="img_holder"></span>' + '<p class="progress_bar"><span style="width: 0%">0%</span></p>' + '<p class="links">' + '<a href="#" class="add_to_post" title="Adds a placeholder tag for the attachment in the post" tabindex="-1">Add to Post</a>' + ' | ' + '<a href="#" class="cancel delete" title="Delete this attachment" tabindex="-1">Delete</a>' + '</p></div></li>'
+                    });
+                }, 50);
+            });
+            </cp:if>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    Forum.setForumID({$forum.forumid}).initBBCodeEditor('textarea.bbcodeTextarea', {
+                        smiliepath: 'html/img/smilies/',
+                        smilies: {$smilies}
+                    });
+            
+                }, 50);
+                var div = $('<div id="form-message" class="validation"></div>');
+                div.insertBefore($('#bbform'));
+                div.hide();
+            
+                $('#bbform').registerFormFE({
+                    exiturl: '',
+                    save: function(exit) {
+                        var self = this;
+                        div.hide().empty();
+                        $('#bbform').find('textarea.wysibb-texarea').sync();
+                        post = $('#bbform').serialize();
+                        $.post('forum/replythread/{$forumpost.threadid}/', post, function(data) {
+                            if (responseIsOk(data)) {
+                                span = $('<span/>').append(data.msg);
+                                $('#bbform').hide();
+                                div.removeClass('error').addClass('success');
+                                div.append(span).show();
+            
+                                $(span).effect('pulsate', {
+                                    times: 3,
+                                    easing: 'easeInOutBounce'
+                                }, 300);
+                                setTimeout(function() {
+                                    document.location.href = 'forum/thread/' + data.threadid + '/{urlrewrite($forumpost.alias, $forumpost.suffix,$forumpost.title)}#post-' + data.postid;
+                                }, 2000);
+                            } else {
+                                self.error(data);
+                            }
+                        }, 'json');
+                    }
+                });
+                $(document).ajaxError(function(e, xhr, settings, exception) {
+                    alert('error in: ' + settings.url + ' \n' + 'error:\n' + xhr.responseText.replace(/<\/?([^>]*)>/, ''));
+                });
+            });
+        </script>
+    </cp:else>
+</cp:block>

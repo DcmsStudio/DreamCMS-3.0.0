@@ -1,0 +1,126 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="get-translations" class="action-button"><img src="images/back.png" width="16" height="16" alt="" border="0"/> {trans('Zurück')}</button>
+    <button id="save-translation" class="action-button"><img src="images/buttons/save.png" width="16" height="16" alt="" border="0"/> {trans('Speichern')}</button>
+</cp:block>
+
+<cp:block name="content">
+    <div id="translation-grid"></div>
+    <div id="translation-form" style="display:none;padding-left: 10px;padding-right: 10px">
+
+        <form id="trans-form" action="admin.php">
+            <input type="hidden" name="id" id="translation-id" value=""/>
+            <input type="hidden" name="adm" value="translations"/>
+            <input type="hidden" name="action" value="save_trans"/>
+
+            <div class="row">
+                <div class="col-md-5">
+
+                    <label>{trans('Original')}</label>
+                    <textarea name="original" id="original-text" rows="10" cols="50" readonly="readonly" class="form-control"></textarea>
+
+                </div>
+
+                <div class="col-md-1" style="text-align: center; padding-top: 50px">
+                    <span id="copy-original" class="btn btn-primary btn-sm"><span class="fa fa-share-square-o"></span></span>
+                </div>
+
+                <div class="col-md-6">
+
+                    <label>{trans('Übersetzung')}</label>
+                    <textarea name="translation" id="translation-text" rows="10" cols="50" class="form-control"></textarea>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <script type="text/javascript">
+
+
+        Core.getToolbar().find( '#save-translation' ).hide();
+        Core.getToolbar().find( '#get-translations' ).disableButton();
+        if ( Core.getToolbar().find( '.tablegrid-searchbar' ).is( ':visible' ) ) {
+            Core.getToolbar().find( '.tablegrid-searchbar' ).attr( 'reset', true ).hide()
+        }
+
+        Core.getToolbar().find( '#get-translations' ).click( function ()
+        {
+            Core.getToolbar().find( '#get-translations' ).disableButton();
+            $( '#' + Win.windowID ).find( '#translation-form' ).hide();
+            Core.getToolbar().find( '#save-translation' ).hide();
+            $( '#' + Win.windowID ).find( '#translation-grid' ).show();
+            if ( Core.getToolbar().find( '.tablegrid-searchbar' ).attr( 'reset' ) ) {
+                Core.getToolbar().find( '.tablegrid-searchbar' ).removeAttr( 'reset' ).show()
+            }
+            $( window ).trigger( 'resize' );
+        } );
+
+        Core.getToolbar().find( '#save-translation' ).click( function ()
+        {
+            Core.getToolbar().find( '#save-translation' ).hide();
+            Core.getToolbar().find( '#get-translations' ).disableButton();
+            $( '#' + Win.windowID ).find( '#translation-form' ).hide();
+            $( '#' + Win.windowID ).find( '#translation-grid' ).show();
+            if ( Core.getToolbar().find( '.tablegrid-searchbar' ).attr( 'reset' ) ) {
+                Core.getToolbar().find( '.tablegrid-searchbar' ).removeAttr( 'reset' ).show()
+            }
+
+            $( window ).trigger( 'resize' );
+            //  reloadTable($('#translation-grid'));
+        } );
+
+        $( '#' + Win.windowID ).find( '#copy-original' ).click( function ()
+        {
+            $( '#' + Win.windowID ).find( '#translation-text' ).val( $( '#' + Win.windowID ).find( '#original-text' ).val() );
+        } );
+
+        if ( typeof registerTransEdit != 'function' ) {
+            function registerTransEdit()
+            {
+                var editbuttons = $( '#' + Win.windowID ).find( '#translation-grid' ).find( '.edit' );
+                editbuttons.each( function ()
+                {
+                    $( this ).unbind( 'click' );
+                    var self = this;
+                    $( this ).click( function ( e )
+                    {
+                        e.preventDefault();
+                        $( '#' + Win.windowID ).find( '#translation-grid' ).hide();
+                        $( '#' + Win.windowID ).find( '#original-text' ).val( '' );
+                        $( '#' + Win.windowID ).find( '#translation-text' ).val( '' );
+                        $( '#' + Win.windowID ).find( '#translation-id' ).val( 0 );
+                        $( '#' + Win.windowID ).find( '#translation-form' ).show();
+                        $( '#' + Win.windowID ).find( '#translation-form' ).mask( "{trans('hole Daten...')}" );
+                        var href = $( self ).attr( 'href' );
+                        $.get( href, {ajax: true}, function ( data )
+                        {
+                            if ( Tools.responseIsOk( data ) ) {
+                                $( '#' + Win.windowID ).find( '#translation-form' ).unmask();
+                                Core.getToolbar().find( '#save-translation' ).show();
+                                $( '#' + Win.windowID ).find( '#original-text' ).val( data.original );
+                                $( '#' + Win.windowID ).find( '#translation-text' ).val( data.translation );
+                                $( '#' + Win.windowID ).find( '#translation-id' ).val( data.id );
+                            }
+                            else {
+                                $( '#' + Win.windowID ).find( '#translation-form' ).unmask();
+                                jAlert( "{trans('Die Übersetzung kann nicht gefunden werden.')}" );
+                                Core.getToolbar().find( '#save-translation' ).hide();
+                                Core.getToolbar().find( '#get-translations' ).disableButton();
+                                $( '#' + Win.windowID ).find( '#translation-form' ).hide();
+                                $( '#' + Win.windowID ).find( '#translation-grid' ).show();
+                            }
+                        }, 'json' );
+                        Core.getToolbar().find( '#get-translations' ).enableButton();
+                    } );
+                } );
+            }
+        }
+
+        Application.Grid( 'translation-grid', {$gridJson} );
+
+
+    </script>
+</cp:block>

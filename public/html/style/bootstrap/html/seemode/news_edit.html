@@ -1,0 +1,130 @@
+<cp:set var="ajaxaction" value="edit_news" />
+<cp:unset var="$globals.ckeditor_js_files" />
+
+
+<form action="admin.php" id="seemfrom" method="post" name="seemfrom">
+    <input type="hidden" name="adm" value="seemode"/>
+    <input type="hidden" name="sub-action" value="save"/>
+    <input type="hidden" name="contentid" value="{$id}"/>
+    <input type="hidden" name="mode" id="seem-mode" value=""/>
+    
+    <div class="box description" id="tc0">
+        <div class="box-inner">            
+            
+            <fieldset>
+                <legend>{trans('Titel')}</legend>
+                <input class="required input" type="text" name="title" value="{escape($title, 'html')}" size="60" maxlength="255" />        
+            </fieldset>                    
+            <fieldset>
+                <legend>{trans('Kategorie')}</legend>
+                {info:news|categorie}
+                <select name="cat_id" class="select">
+                    {$cat_options}
+                </select>
+            </fieldset>                    
+            
+            <fieldset>
+                <legend>{trans('Auf  der  Startseite anzeigen')}</legend>
+                {info:news|show_on_frontpage}
+                <input type="radio" name="frontpage" id="frontpage1" value="1"<cp:if  condition="{$frontpage}  == 1"> checked="checked"</cp:if>/> <label for="frontpage1">{trans('Ja')}</label>
+                <input type="radio" name="frontpage" id="frontpage0" value="0"<cp:if condition="{$frontpage}  == 0"> checked="checked"</cp:if>/> <label for="frontpage0">{trans('Nein')}</label>        
+            </fieldset>
+            
+            <fieldset>
+                <legend>{trans('Veröffentlichen')}</legend>
+                {info:news|publish}
+                <input type="radio" name="published" id="published1" value="1"<cp:if condition="{$published}  == 1"> checked="checked"</cp:if>/> <label for="published1">{trans('Ja')}</label>
+                <input type="radio" name="published" id="published0" value="0"<cp:if condition="{$published}  == 0"> checked="checked"</cp:if>/> <label for="published0">{trans('Nein')}</label>
+            </fieldset>
+            
+            
+            <cp:include template="pageidentifier/identifier_form"/>
+            
+            
+            
+            <fieldset>
+                <legend>{trans('Produkt')}</legend>
+                {info:news|product}
+                <select name="product" class="select" onclick="getSelectContent(this,'adm=news&action={$ajaxaction}&ajaxload=product&id={$id}');">
+                    {$product_options}
+                </select>            
+            </fieldset>
+            
+            <fieldset>
+                <legend>{trans('Hersteller')}</legend>
+                {info:news|company}
+                <select name="company" class="select" onclick="getSelectContent(this,'adm=news&action={$ajaxaction}&ajaxload=company&id={$id}');">
+                    {$company_options}
+                </select>
+            </fieldset>
+            
+            
+            
+            
+            <fieldset>
+                <legend>{trans('externe Links')}</legend>
+                {info:news|external_links}                      
+                <textarea class="textarea" cols="30" rows="3" name="links_extern">{$links_extern}</textarea>                    
+            </fieldset>
+            
+            
+            <fieldset>
+                <legend>{trans('Keywords')}</legend>
+                <input class="input" type="text" name="keywords" id="tags" value="{escape($keywords, 'html')}" size="120" maxlength="250" />
+                <span id="generate-tags" class="generate-tags"></span>
+            </fieldset>
+            
+            
+            <fieldset>
+                <legend>{trans('Inhalt')}</legend>                
+
+                <textarea class="textarea ckeditor" cols="30" rows="10" name="text">{escape($text, 'html')}</textarea>   
+            </fieldset>            
+            
+            
+            <fieldset>
+                <legend>{trans('Zugriffsrechte')}</legend>
+                {info:news|access}
+                <select style="width:97%" name="access[]" class="select" size="6" multiple="multiple">
+                    {$access_options}
+                </select>
+            </fieldset>
+            
+            
+        </div>
+    </div>
+    
+    
+</form>
+
+
+
+
+
+<script type="text/javascript">
+
+$(document).ready( function() {
+
+    $('#generate-tags').attr({'title': 'Tags automatisch aus dem Text erzeugen'}).click(function() {
+        var str = dcmsCKgetEditor('text').getData();        
+
+        str = str.replace(/<([^>]+)>/g, '');
+        str = str.replace(/(&[#a-zA-Z0-9_]+);/g, ' ');
+        str = str.replace(/[^a-zA-Z0-9_-]/g, ' ');
+        str = str.replace(/rn*/g, ' ');
+        str = str.trim();
+        str = str.replace(/[s]+?/g, ' ');
+        var temp = [];
+        $.each(str.split(' '), function(idx, val) {
+            if ( val.length >= 4 && temp.length < 25 )
+            {
+                temp.push(val);
+            }
+        });
+
+        $('#tags').val( temp.join(',') );
+    });
+
+    registerPageIdentifier('title', 'news', {iif($id, $id, '0')});
+});
+</script>

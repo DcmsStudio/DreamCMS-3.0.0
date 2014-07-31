@@ -1,0 +1,528 @@
+#dashboard {
+    overflow: visible;
+    position: relative;
+    z-index: 500;
+    top: -1px;
+    background: #F1F1F1;
+    color: #333;
+}
+
+
+
+
+
+
+
+
+
+#dashboard #add-widget {
+    position: absolute;
+    z-index: 9999;
+    right: -22px;
+    top: 25px;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    background: #FFF;
+}
+#dashboard #add-widget span {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 5px;
+    color: #8E8AFD;
+    font-size: 16px;
+}
+
+
+#install-widgets * {
+
+}
+#install-widgets h2 {
+    color: #aaa;
+    font-size: 20px;
+    width: 100%;
+    margin: 10px;
+    font-weight: bold;
+}
+.notinstalled-widgets,
+.available-widgets {
+    margin-left: 10px;
+    margin-right: 25px;
+    border: 1px solid #E5E5E5;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    background: #FFF!important;
+    border-radius: 0!important;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+.notinstalled-widgets button,
+.available-widgets button {
+    background: rgba(0, 0, 0, 0.36);
+    border: 0;
+    color: #000;
+    text-shadow: none;
+    margin-top: 5px;
+    border: 0!important;
+    font-size: 12px;
+    line-height: 25px!important;
+    height: 24px!important;
+}
+.notinstalled-widgets button:hover,
+.available-widgets button:hover {
+    background: rgba(0, 0, 0, 0.21);
+
+}
+
+
+.widget .row,
+.notinstalled-widgets .row,
+.available-widgets .row,
+.widget .firstrow,
+.widget .secondrow {
+    padding: 10px!important;
+    color: #333;
+    margin: 0;
+    width: 100%;
+}
+
+
+
+
+
+.notinstalled-widgets .row a,
+.available-widgets .row a {
+    color: #118fff;
+}
+
+.notinstalled-widgets .row:nth-child(odd),
+.available-widgets .row:nth-child(odd) {
+
+}
+
+.notinstalled-widgets .row:nth-child(even),
+.available-widgets .row:nth-child(even) {
+    background: rgba(0, 0, 0, 0.02)!important;
+    box-shadow: none!important;
+}
+
+.notinstalled-widgets .row > div:first-child,
+.available-widgets .row > div:first-child{
+    display: inline-block;
+    width: 100%;
+}
+
+.notinstalled-widgets .row >div:first-child > div:first-child,
+.available-widgets .row >div:first-child > div:first-child {
+    width: 55%;
+    float: left;
+}
+
+.notinstalled-widgets .row >div:first-child > div:last-child,
+.available-widgets .row >div:first-child > div:last-child {
+    margin-left: 55%;
+    text-align: right;
+    padding-right: 10px;
+}
+
+
+#install-widgets > button:first-child {
+    margin-left: 10px;
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.36);
+    border: 0;
+    color: #333;
+    text-shadow: none;
+    border: 0!important;
+    font-size: 12px;
+}
+
+#install-widgets > button:first-child:hover {
+    background: rgba(0, 0, 0, 0.21);
+}
+
+
+
+
+
+
+
+
+#dashboard .ui-sortable-placeholder {
+    margin: 10px!important;
+    background: transparent url('../img/bg/dropbg.png')!important;
+}
+#dashboard ::-webkit-scrollbar-track-piece, #dashboard .panel-inner *::-webkit-scrollbar-track-piece, #dashboard .panel-inner ::-webkit-scrollbar-track-piece {
+    background: rgba(0, 0, 0, 0);
+}
+#dashboard .pane  > .slider {
+    background: rgba(0,0,0,0.3);
+    width: 4px;
+}
+
+
+
+
+.widget {
+    cursor: default;
+    border: 1px solid #E5E5E5;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    background: #FFF!important;
+    border-radius: 0!important;
+    margin: 10px 0;
+}
+
+
+
+
+
+
+.widget.ui-sortable-helper {
+
+}
+#dashboard .ui-sortable-placeholder {
+    margin: 0!important;
+    padding: 0!important;
+}
+.widget.ui-sortable-helper {
+    position: absolute!important;
+    z-index: 99999;
+    margin: 0!important;
+    padding: 0!important;
+}
+
+
+.widget h2 {
+    width: 100%;
+    border-bottom: 1px solid #EEE;
+    background: #fefefe;
+    line-height: 25px;
+    padding: 0;
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    z-index: 1002;
+    position: relative;
+    font-size: 14px;
+    padding: 8px 12px;
+    margin: 0;
+    line-height: 1.4;
+    font-weight: bold;
+}
+
+.widget.closed h2{
+    border-bottom: 1px solid transparent;
+}
+
+.widget .panel-inner .pane {
+    background: transparent!important;
+}
+
+
+.widget .panel-inner .pane  > .slider {
+    background: rgba(0,0,0,0.3);
+}
+
+.widget h2 .widget-title {
+    display: block;
+    width: 80%;
+    cursor: move;
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.widget h2 > .fr {
+    position: absolute;
+    z-index: 2;
+    right: 5px;
+
+}
+.widget h2 span.fa {
+    position: relative;
+    top: 4px;
+    opacity: 1!important;
+    margin-left: 8px;
+    cursor: pointer;
+    display: inline-block;
+    color: #AAA;
+}
+
+
+
+
+
+.widget input,
+.widget textarea {
+    color: #333;
+}
+
+.widget legend {
+    color: #333;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+.widget fieldset {
+    padding: 0;
+}
+
+
+
+.widget .panel-inner {
+    position: relative;
+    color: #333;
+    z-index: 1000;
+    width: 100%;
+}
+.widget .panel-inner .row:nth-child(even),
+.widget .panel-inner .firstrow {
+    background: transparent!important;
+
+}
+
+.widget .panel-inner .row:nth-child(odd),
+.widget .panel-inner .secondrow {
+    background: rgba(0, 0, 0, 0.02)!important;
+    box-shadow: none!important;
+}
+
+
+
+.wg-header, .wg-header a {
+    background: transparent!important;
+    color: #333!important;
+}
+
+.widget .scroll-content {
+    background: transparent!important;
+    color: #333!important;
+}
+
+.wgt-weather {
+    border: 1px solid #ddd;
+}
+
+.wgt-weather h2 {
+    border-bottom: 0;
+    background: rgba(254, 254, 254, 0.2);
+}
+.wgt-weather .panel-configuration {
+    border-top: 1px solid #EEE;
+}
+.weather-next-days {
+    margin: 0!important;
+    background: transparent;
+    border-top: 1px solid #1F272F;
+    padding-top: 40px!important;
+}
+.weather-next-days > div {
+    margin: 0!important;
+    padding: 0!important;
+    width: auto!important;
+}
+.weather-next-days h3 {
+    color: #888!important;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 3px;
+}
+.weather-next-days li {
+    border: 0;
+    color: #000!important;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 0;
+    width: 32%!important;
+    float: left;
+    margin-bottom: 10px!important;
+    position: relative;
+    margin-left: 5px!important;
+    display: inline-block;
+    background: transparent;
+}
+.weather-next-days li:first-child {
+    margin-left: 6px!important
+}
+.weather-next-days li:last-child {
+
+}
+
+.weather-next-days li div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.weather-next-days li div > span:first-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    width: 100px;
+    text-align: left;
+    padding: 0;
+}
+
+.weather-next-days li div > span:last-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 13px;
+    position: absolute;
+    right: 3px;
+}
+
+.weather-current-icon span {
+    position: absolute;
+    top: 100px!important;
+    width: 100%;
+    font-size: 10px;
+    text-align: center;
+    z-index: 1000!important;
+    color: #333;
+    font-size: 14px!important;
+}
+
+.widget .panel-inner #weather-result {
+    border: 0!important;
+    box-shadow: none!important;
+}
+
+.hetzner .r {
+    box-shadow: none!important;
+    border: 0!important;
+}
+
+.hetzner .r:nth-child(even) {
+    background: rgba(0, 0, 0, 0.02)!important;
+}
+
+#wgt-logs .log-title {
+    padding: 0!important;
+}
+
+
+
+
+.widget-column {
+    min-height: 30px;
+}
+
+.w-column:nth-of-type(1),
+.w-column:nth-of-type(2) {
+    float: left;
+    width: 20%;
+    padding: 0 10px;
+}
+.w-column:nth-of-type(3),
+.w-column:nth-of-type(4) {
+    float: left;
+    width: 30%;
+    padding: 0 10px;
+}
+
+#widget-column-4 {
+    padding-right: 20px;
+}
+
+
+
+@media (max-width: 1600px) {
+
+    .w-column:nth-of-type(1),
+    .w-column:nth-of-type(2) {
+        width: 25%;
+    }
+    .w-column:nth-of-type(3) {
+        float: left;
+        width: 50%;
+    }
+    .w-column:nth-of-type(4) {
+        float: left;
+        width: 100%;
+    }
+    #widget-column-4 {
+        padding-right: 20px;
+    }
+    #widget-column-3 {
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 1084px) {
+    .weather-next-days li,
+    .weather-next-days li:first-child {
+        margin: 0!important;
+        width: 100%!important;
+        padding: 0 10px!important;
+        font-size: 11px!important;
+        line-height: normal!important;
+        margin-bottom: 10px!important;
+    }
+
+    .weather-next-days li div>span:last-child {
+        right: 15px!important;
+        line-height: normal!important;
+    }
+    .weather-next-days li div>span:first-child {
+        line-height: normal!important;
+    }
+}
+
+
+@media (max-width: 885px) {
+
+    .w-column:nth-of-type(1),
+    .w-column:nth-of-type(2),
+    .w-column:nth-of-type(3),
+    .w-column:nth-of-type(4) {
+        width: 50%;
+    }
+    #widget-column-4 {
+        padding-right: 20px!important;
+    }
+    #widget-column-3 {
+        padding-right: 20px!important;
+    }
+    #widget-column-2 {
+        padding-right: 20px!important;
+    }
+    .weather-current-day .weather-current-icon {
+        width: 290px!important;
+        height: 170px!important;
+        background-repeat: no-repeat!important;
+        background-size: cover!important;
+        top: -45px;
+    }
+}
+
+
+@media (max-width: 750px) {
+    .w-column:nth-of-type(1),
+    .w-column:nth-of-type(2),
+    .w-column:nth-of-type(3),
+    .w-column:nth-of-type(4) {
+        width: 100%!important;
+    }
+    #widget-column-4,
+    #widget-column-3,
+    #widget-column-2,
+    #widget-column-1 {
+        padding-right: 20px!important;
+    }
+    .weather-current-day .weather-current-icon {
+        background-repeat: no-repeat;
+        background-size: cover!important;
+        top: -45px;
+    }
+}

@@ -1,0 +1,31 @@
+<?php
+
+function __edit_lang_rows( $r ){
+global $cp, $fct, $adm_skin, $cfg;
+	static $y;
+	$css = ( $y++%2 ? 'firstrow' : 'secondrow' );
+
+	$original = '';
+	if ($r['original'])
+	{
+		$original = '<input type="button" onclick="javascript:_original('.$r['id'].');" name="do_original" value="Original wiederherstellen" class="button" />';
+	}
+
+	return <<<EOF
+        <tr class="$css">
+            <td id="td1_{$r['id']}" style="vertical-align:top;height:100%">
+            	<span class="absmiddle">{lang.</span><input type="text" name="var[{$r['varname']}]" value="{$r['varname']}" size="30" readonly="readonly" class="input" style="vertical-align:middle" /><span class="absmiddle">}</span> <a href="javascript:void()" onclick="_delete({$r['id']})"><img src="images/delete.gif" class="absmiddle" alt="Variable {lang.{$r['varname']}} Löschen" title="Variable {lang.{$r['varname']}} Löschen" /></a><br />
+            	$original
+            	<br /><br />
+            	<input type="button" class="button" onclick="switchheight({$r['id']},'up')" value="Grösser" />
+            	<input type="button" class="button" onclick="switchheight({$r['id']},'low')" value="Kleiner" />
+
+            </td>
+            <td id="td2_{$r['id']}" style="vertical-align:top;height:100%">
+            <textarea id="v{$r['id']}" name="val[{$r['varname']}]" cols="60" rows="10" class="langtextarea" style="height:90px;">{$r['varcontent']}</textarea>
+            </td>
+        </tr>
+EOF;;;
+}
+
+?>

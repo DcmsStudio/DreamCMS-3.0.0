@@ -1,0 +1,278 @@
+/* -------------------------------------------------------------------
+// markItUp! Universal MarkUp Engine, JQuery plugin
+// By Jay Salvat - http://markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+.markItUp * {
+    margin:0px;
+    padding:0px;
+    outline:none; 
+}
+.markItUp a:link,
+.markItUp a:visited {
+    color:#000;
+    text-decoration:none;
+}
+.markItUp  {
+    margin:5px 0 5px 0;
+    display:block;
+}
+.markItUpContainer  {
+    font:11px Verdana, Arial, Helvetica, sans-serif;
+    margin:0;
+    padding:10px;
+    background-color:transparent;
+    border:0;
+}
+.markItUpEditor {
+    font:12px 'Courier New', Courier, monospace;
+    margin:0;
+    padding:3px;
+    min-height:80px;
+    height:100px;
+    max-height:500px;
+    clear:both;
+    display:block;
+    line-height:16px;
+    overflow:auto;
+}
+.markItUpPreviewFrame {
+    overflow:auto;
+    background-color:transparent;
+    border:0;
+    margin:0;
+    padding:3px;
+    display:block;
+    height:300px;
+    margin:5px 0;
+    padding:3px;
+    position: relative;
+}
+
+
+
+.markItUpPreviewFrame strong { font-weight:bold!important; }
+.markItUpPreviewFrame em { font-style:italic!important; }
+.markItUpPreviewFrame span.underline { text-decoration:underline; }
+
+.markItUp .size .xs { font-size:8px!important; } 
+.markItUp .size .s{ font-size:10px!important; } 
+.markItUp .size .m{ font-size:12px!important; } 
+.markItUp .size .l{ font-size:18px!important; } 
+.markItUp .size .xl{ font-size:24px!important; } 
+
+.markItUp .size8  {margin:0;  font-size:8px!important; } 
+.markItUp .size10 {margin:0;  font-size:10px!important;  } 
+.markItUp .size12 {margin:0;  font-size:12px!important;  } 
+.markItUp .size18 {margin:0;  font-size:18px!important; line-height: 20px; } 
+.markItUp .size24 {margin:0; font-size:24px!important; line-height: 24px; } 
+
+
+.markItUp .size18 a {line-height: 20px; height: 24px;} 
+.markItUp .size24 a{ line-height: 24px; height: 24px; } 
+
+
+.markItUpPreviewFrame .xs { font-size:8px!important; } 
+.markItUpPreviewFrame .s{ font-size:10px!important; } 
+.markItUpPreviewFrame .m{ font-size:12px!important; } 
+.markItUpPreviewFrame .l{ font-size:18px!important; } 
+.markItUpPreviewFrame .xl{ font-size:24px!important; } 
+
+.markItUpFooter {
+    width:100%;
+}
+.markItUpResizeHandle {
+    overflow:hidden;
+    width:22px; 
+    height:5px;
+    margin-left:auto;
+    margin-right:auto;
+    background-image:url(images/handle.png);
+    cursor:n-resize;
+    position:relative;
+}
+/***************************************************************************************/
+/* first row of buttons */
+.markItUp .markItUpContainer .markItUpHeader:first-child {
+    display:block!important;
+    width:100%!important;
+}
+.markItUpHeader > ul:first-child {
+    padding: 0!important;
+}
+.markItUpHeader ul li {
+    list-style:none!important;
+    float:left!important;
+    position:relative!important;
+    list-style-image: none !important;
+    list-style-position: outside!important;
+    list-style-type: none!important;
+}
+
+.markItUpHeader ul li, 
+.markItUpHeader ul li ul li {
+    list-style:none!important;
+    list-style-image: none !important;
+    list-style-position: outside!important;
+    list-style-type: none!important;
+}
+
+
+.markItUpHeader ul li:hover > ul{
+    display:block!important;
+}
+
+/* next rows of buttons */
+.markItUpHeader ul ul {
+    display:none;
+    position:absolute;
+    top:18px; 
+    left:-20px;	
+    background:#FFF;
+    border:1px solid silver;
+    padding-bottom:5px;
+    z-index: 10;
+}
+.markItUpHeader ul ul li {
+    float:none!important;
+
+}
+
+
+.markItUpHeader ul .markItUpSeparator {
+    margin:0 10px!important;
+    width:1px!important;
+    height:16px!important;
+    margin-top:5px!important;
+    overflow:hidden!important;
+    background-color:#CCC!important;
+    max-width: 1px!important;
+}
+.markItUpHeader ul ul .markItUpSeparator {
+    width:1px!important;
+    height:1px!important;
+    margin:0px!important;
+
+}
+/* next rows of buttons */
+.markItUpHeader ul ul ul {
+    position:absolute;
+    z-index: 11;
+    left:150px; 
+    background-position: 0% 50%!important;
+}
+.markItUpHeader ul ul ul li {
+    float:none;
+    background-position: 0% 50%!important;
+}
+
+.markItUpHeader ul > li > a {
+    display:block!important;
+    width:16px!important;
+    height:16px!important;
+    text-indent:-10000px!important;
+    background-repeat:no-repeat!important;
+    padding:3px!important;
+    margin:0!important;
+    margin-bottom:5px!important;
+    border:1px solid transparent!important;
+
+}
+.markItUpHeader > ul > li > a > span { display: none!important;; }
+
+.markItUpHeader ul > li > a:hover {
+    display:block!important;
+    width:16px!important;
+    height:16px!important;
+    text-indent:-10000px!important;
+    background-repeat:no-repeat!important;
+    padding:3px!important;
+    margin:0px!important;
+    border:1px solid #ededed!important;
+    background-color: #F4F2E8!important;
+}
+.markItUpHeader > ul > li > ul > li {
+    line-height: 20px!important;
+}
+.markItUpHeader > ul > li > ul > li a {
+    display:block!important;
+    text-indent:0!important;
+    line-height: 20px!important;
+    padding:0px 0px 0px 25px!important;
+    padding-top:4px!important;
+    background-position:2px 40%!important;
+
+}
+.markItUpHeader > ul > li > ul > li a:hover  {
+    display:block!important;
+    line-height: 20px!important;
+    text-indent:0!important;
+    color:#000!important;
+    background-color:#ddeddd;
+    padding:0px 0px 0px 25px!important;
+    padding-top:4px!important;
+    background-position: 2px 40%!important;
+}
+
+.markItUpPreviewFrameRemove {
+    position: absolute;
+    top:0;
+    right: 15px;
+    z-index: 1000000;
+    width:16px!important;
+    height:16px!important;
+    display: inline-block!important;
+    background:#FFF url('images/close.png') no-repeat 0% 0%;
+    cursor:pointer!important;
+}
+
+
+.markItUpHeader ul .markItUpDropMenu, 
+.markItUpHeader ul ul .markItUpDropMenu {
+    background: transparent url(images/menu.png) no-repeat 110% 50%;
+    margin:0;
+}
+.markItUpHeader ul .markItUpDropMenu li {
+    margin:0;
+}
+.markItUpHeader ul .markItUpDropMenu ul {
+    width: 142px!important;
+    margin: 0!important;
+    padding: 2px!important;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+    top: 22px;
+    border: 0;
+
+}
+.markItUpHeader ul .markItUpDropMenu li {
+    list-style-image: none!important;
+    height:auto!important;
+    padding: 0!important;
+    margin: 0!important;
+
+    margin-top: 2px!important;
+    margin-bottom: 2px!important;
+    width: 120px!important;
+}
+.markItUpHeader ul .markItUpDropMenu:focus a:first-child,
+.markItUpHeader ul .markItUpDropMenu:active a:first-child {
+    padding:3px!important;
+    margin:0px!important;
+    border: 1px solid #CACACA!important;
+    background-color: #D9D9D9!important;
+}
+
+
+.markItUpHeader ul .markItUpDropMenu ul a {
+    height:auto!important;
+    padding: 0!important;
+    margin: 0!important;
+    border: 1px solid transparent;
+    width: 120px!important;
+    padding-left: 20px!important;
+}
+.markItUpHeader ul .markItUpDropMenu ul a:hover {
+    height:auto!important;
+    padding: 0!important;
+    margin: 0!important;
+    padding-left: 20px!important;
+}

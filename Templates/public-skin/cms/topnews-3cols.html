@@ -1,0 +1,36 @@
+<cp:if condition="count($topnews)">
+    <div class="columnSet3 bottom-shadowed">
+        <h2 cp:is="$showlabel">
+            {trans('Top Nachrichten')}
+        </h2>
+        <cp:set var="idx" value="1" />
+        <cp:loop name="topnews" key="r">
+            <article class="column">
+                <cp:seemodeitem modul="news" contentid="$r.id" edit="action=edit_news[&amp;]id=%s[&amp;]edit=1" publish="action=publish&id=%s" state="$r.published" delete="">
+                    <header>
+                        <cp:if condition="trim($r.image.src) != ''">
+                            <div class="thumb">
+                                <cp:thumb src="$r.image.src" width="294" height="150" title="escape($r.title, 'html')" cache="news/topnews/" aspect="true" shrink="false" />
+                            </div>
+                        </cp:if>
+                        <cp:else>
+                            <div class="no-thumb">
+                            </div>
+                        </cp:else>
+                        <h3>
+                            <a href="{$r.url}">
+                                {seemode(truncate($r.title, 50, false, '...'), 'title', true, 50, '...')}
+                            </a>
+                        </h3>
+                    </header>
+                    <p>
+                        {seemode(truncate($r.text, 250, false, ' [...]'), 'content', true, 250, false, '[...]')}
+                        <a href="{$r.url}">
+                            » {trans('weiterlesen')}
+                        </a>
+                    </p>
+                </cp:seemodeitem>
+            </article>
+        </cp:loop>
+    </div>
+</cp:if>

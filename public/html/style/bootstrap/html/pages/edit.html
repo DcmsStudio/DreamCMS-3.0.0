@@ -1,0 +1,490 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:pageForm{$id}] [save_exit:pageForm{$id}]
+        [reset:pageForm{$id}] [cancel:pageForm{$id}]
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+
+    <cp:section name="meta">
+        <cp:include template="../metadata"/>
+    </cp:section>
+
+
+
+
+    <cp:set var="ajaxaction" value="add"/>
+    <cp:if condition="$id != 0 ">
+        <cp:set var="ajaxaction" value="edit"/>
+    </cp:if>
+
+    <form action="admin.php" id="pageForm{$id}" method="post" name="pageForm{$id}">
+        <input type="hidden" name="adm" value="page"/>
+        <input type="hidden" name="action" value="edit"/>
+        {* <input type="hidden" name="pagetype" value="{$pagetype}"/> *}
+        <input type="hidden" name="pageid" id="page-id" value="{$id}"/>
+        <input type="hidden" name="send" value="save"/>
+
+        <cp:jstabs tabs="{trans('Inhalt')},{trans('Layout')},{trans('Optimierung')}" usetrans="true"/>
+
+
+        <div id="tc0" class="column-2">
+            <div class="post-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{trans('Titel')}</label>
+                        <input class="required form-control" type="text" name="title" id="page-title" value="{escape($title, 'html')}" size="60" maxlength="255"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{trans("Teaser Bild")}</label>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" name="teaserimage" data-toggle="file" data-editable="true" id="teaser-image" value="{escape($teaserimage, 'quotes')}" size="60" maxlength="250"/>
+                            </div>
+                            <div class="col-md-5">
+                                <input placeholder="{trans('Bezeichnung des Teaser Bildes')}" type="text" class="form-control" name="teaserimagetitle" id="teaser-image-title" value="{escape($teaserimagetitle, 'quotes')}" size="60" maxlength="250"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{trans('Teaser')}</label>
+                        <cp:editor baseurl="$cfg.portalurl" name="teaser" value="$teaser" height="100" width="400px"/>
+                    </div>
+
+                    <div class="col-md-12 mt10">
+                        <label>{trans('Inhalt')}</label>
+                        <cp:editor baseurl="$cfg.portalurl" name="content" value="$content" height="450" width="400px"/>
+                    </div>
+                </div>
+
+
+                <div id="customfields-html">
+                    <cp:block name="customfields"/>
+                </div>
+            </div>
+
+
+            <div class="post-column">
+
+                <cp:section name="publishing"/>
+
+                <div class="postbox">
+                    <h3>{trans('Seiten Typ')}</h3>
+                    <div class="postbox-content" rel="pagetype">
+                        <select name="pagetype" id="pagetype-opt" class="select">
+                            <option value="-" cp:on="selected:!$pagetype" parse:selected="selected"> ---</option>
+                            <cp:data var="dataselect" value="$pagetype_options" template="../select_option"/>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="postbox">
+                    <h3>{trans('Kategorie')}</h3>
+                    <div class="postbox-content" rel="pagecat">
+                        <select name="catid" class="select" size="5">
+                            <option value="0" cp:on="selected:!$catid" parse:selected="selected"> ----- </option>
+                            <cp:data var="dataselect" value="$cat_options" template="../select_option"/>
+                        </select>
+
+                        <div style="margin-top: 10px;">
+                            <a href="javascript:void(0)" id="add-cat-toggle">{trans('Kategorie hinzufügen')}</a>
+
+
+                            <div id="add-cat-container" style="margin-top: 10px; display: none">
+                                <input id="ad-cat-title" type="text" class="form-control nodirty" value="" placeholder="{trans('Kategorie Titel')}"/>
+
+                                <div style="margin-top: 10px;">{trans('Übergeordnete Kategorie')}</div>
+
+                                <cp:set var="addcat_options" value="$cat_options"/>
+                                <cp:unset var="addcat_options.selected"/>
+
+
+                                <select id="ad-cat-parentid" class="select nodirty" size="5">
+                                    <option value="0" parse:selected="selected"> ----- </option>
+                                    <cp:data var="dataselect" value="$addcat_options" template="../select_option"/>
+                                </select>
+
+                                <div style="margin-top: 10px;">{trans('Zugriffsrechte')}</div>
+                                <select id="ad-cat-access" class="select nodirty" size="5" multiple="multiple" style="width:99%">
+                                    <cp:data var="dataselect" value="$access_options" template="../select_option"/>
+                                </select>
+
+                                <button id="ad-cat-submit" style="margin-top: 10px;">{trans('Kategorie Speichern')}</button>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="postbox">
+                    <h3>{trans('übergeordnete Seite')}</h3>
+                    <div class="postbox-content" rel="parentpage">
+                        <select style="width:100%" name="parentid" size="5">
+                            <cp:data var="dataselect" value="$parent_options" template="../select_option"/>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="postbox">
+                    <h3>{trans('Kommentare möglich?')}</h3>
+                    <div class="postbox-content" rel="pagecommenting">
+                        <input type="radio" name="cancomment" id="can_comment1" value="1" cp:on="checked:$cancomment" parse:checked="checked"/>
+                        <label for="can_comment1">{trans('Ja')}</label>
+                        <input type="radio" name="cancomment" id="can_comment0" value="0" cp:on="checked:!$cancomment" parse:checked="checked"/>
+                        <label for="can_comment0">{trans('Nein')}</label>
+                    </div>
+                </div>
+
+                <div class="postbox">
+                    <h3>{trans('Tags')}</h3>
+                    <div class="postbox-content" rel="pagetags">
+                        <cp:include template="../generic/contenttags"/>
+                    </div>
+                </div>
+
+
+                <div class="postbox">
+                    <h3>{trans('Zugriffsrechte')}</h3>
+                    <div class="postbox-content" rel="pageaccess">
+                        <select style="width:100%" name="access[]" class="select" size="6" multiple="multiple">
+                            <cp:set var="dataselect" value="$access_options"/>
+                            <cp:include template="../select_option"/>
+                        </select>
+                    </div>
+                </div>
+
+
+                <cp:section name="meta"/>
+
+
+                <div class="postbox">
+                    <h3>{trans('Seiten &amp; Template Optionen')}</h3>
+                    <div class="postbox-content" rel="pageoptions">
+
+                        <span>{trans('Body Css Class')}</span>
+                        <input type="text" class="form-control" name="cssclass" value="{$cssclass}" style="width: 100%"/>
+                        <br/>
+
+                        <label for="inernalpage">
+                            <input class="fl" type="checkbox" name="inernalpage" id="inernalpage" value="1" cp:on="checked:$inernalpage" parse:checked="checked"/>
+                            <span>{trans('Seite nur Intern verwenden. Sprich diese Seite ist zwar verfügbar, aber nur für Interne zwecke! (Callback Page)')}</span>
+                        </label>
+
+                        <label for="isindexpage">
+                            <input type="checkbox" name="isindexpage" id="isindexpage" value="1" cp:on="checked:$isindexpage" parse:checked="checked"/>
+                            {trans('Seiten dient als Startseite')}
+                        </label><br/>
+                        <label for="useteaser">
+                            <input type="checkbox" name="useteaser" id="useteaser" value="1" cp:on="checked:$useteaser" parse:checked="checked"/>
+                            {trans('Teaser anzeigen')}
+                        </label><br/>
+                        <label for="usetitle">
+                            <input type="checkbox" name="usetitle" id="usetitle" value="1" cp:on="checked:$usetitle" parse:checked="checked"/>
+                            {trans('Titel anzeigen')}
+                        </label><br/>
+
+                        <label for="userating">
+                            <input type="checkbox" name="userating" id="userating" value="1" cp:on="checked:$userating" parse:checked="checked"/>
+                            {trans('Seiten Bewertung nutzen')}
+                        </label><br/>
+
+                        <label for="author-info">
+                            <input type="checkbox" name="useauthorinfo" id="author-info" value="1" cp:on="checked:$useauthorinfo" parse:checked="checked"/>
+                            {trans('Author Infos anzeigen')}
+                        </label><br/>
+
+                        <label for="usefootnotes">
+                            <input type="checkbox" name="usefootnotes" id="usefootnotes" value="1" cp:on="checked:$usefootnotes" parse:checked="checked"/>
+                            {trans('Fußnoten anzeigen')}
+                        </label><br/>
+
+                        <label for="usesocialbookmarks">
+                            <input type="checkbox" name="usesocialbookmarks" id="usesocialbookmarks" value="1" cp:on="checked:$usesocialbookmarks" parse:checked="checked"/>
+                            {trans('Social Bookmarks anzeigen')}
+                        </label>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div id="tc1" style="display: none">
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{trans('Layout')} <sup>*</sup></label>
+                    <select style="width:100%" name="layout" size="5">
+                        <cp:set var="dataselect" value="$layout_options"/>
+                        <cp:include template="../select_option"/>
+                    </select>
+
+                    <small>* {trans('Bitte nicht mehr nutzen!')}</small>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <div id="tc2">
+            <cp:include template="../document-analyse"/>
+        </div>
+
+    </form>
+    <script type="text/javascript">
+
+        Form.registerForm('pageForm{$id}', {
+            contentIdentifierID: 'page-id',
+            exiturl: 'admin.php?adm=page',
+            identifierType: 'page',
+            baseField: 'page-title',
+           // autosave: false,
+            useContentTags: true
+        });
+
+        $('#add-cat-toggle', $('#' + Win.windowID)).unbind().bind('click', function(e){
+            e.preventDefault();
+            $('#add-cat-container', $('#' + Win.windowID)).slideToggle(0);
+
+            $(window).trigger('resizescrollbar');
+        });
+
+        $('#ad-cat-submit', $('#' + Win.windowID)).unbind().bind('click', function(e){
+            e.preventDefault();
+            var title = $('#ad-cat-title', $('#' + Win.windowID)).val().trim();
+            if (title) {
+                var parent = $('#ad-cat-parentid', $('#' + Win.windowID)).val();
+                var access = $('#ad-cat-access', $('#' + Win.windowID)).val();
+
+                $('#add-cat-container', $('#' + Win.windowID)).mask('{trans("Bitte warten")}');
+
+
+                $.post('admin.php', {
+                    adm: 'page',
+                    action: 'editcat',
+                    catid: 0,
+                    send: 1,
+                    title: title,
+                    cancomment: 1,
+                    parentid: parent,
+                    access: access,
+                    password: '',
+                    description: '',
+                    published: 1,
+                    addinline: true
+                }, function(data) {
+
+                    $('#add-cat-container', $('#' + Win.windowID)).unmask();
+
+                    if (Tools.responseIsOk(data)) {
+
+                        if ( typeof data.cat_options == 'object' )
+                        {
+                            var skip = false, currentSelected = $('select[name=catid]', $('#' + Win.windowID)).val();
+
+                            $('#ad-cat-parentid,select[name=catid]', $('#' + Win.windowID)).SelectBox('destroy');
+                            $('#ad-cat-parentid,select[name=catid]', $('#' + Win.windowID)).empty().append( '<option value="0"> ----- </option>');
+                            for (var i = 0; i<data.cat_options.length;++i)
+                            {
+                                var d = data.cat_options[i];
+                                if (d.value == 0 && !skip) {
+                                    $('#ad-cat-parentid,select[name=catid]', $('#' + Win.windowID)).empty();
+                                    skip = true;
+                                }
+                                else if (d.value == 0 && skip) {
+                                    continue;
+                                }
+
+                                $('#ad-cat-parentid,select[name=catid]', $('#' + Win.windowID)).append( '<option value="'+ d.value +'">'+ d.label +'</option>' );
+                            }
+
+                            if ( currentSelected ) {
+                                $('select[name=catid]', $('#' + Win.windowID)).find('option[value=' + currentSelected + ']')
+                                    .attr('selected', 'selected')
+                                    .prop('selected', true);
+
+                                $('#ad-cat-parentid', $('#' + Win.windowID)).find('option[value=0]')
+                                    .attr('selected', 'selected')
+                                    .prop('selected', true);
+
+                            }
+                            else {
+                                $('select[name=catid],#ad-cat-parentid', $('#' + Win.windowID)).find('option[value=0]')
+                                    .attr('selected', 'selected')
+                                    .prop('selected', true);
+                            }
+
+                            $('#ad-cat-parentid,select[name=catid]', $('#' + Win.windowID)).SelectBox();
+
+                        }
+
+
+                        $('#ad-cat-title', $('#' + Win.windowID)).val('');
+                        $('#ad-cat-parentid,#ad-cat-access', $('#' + Win.windowID)).val('').trigger('change');
+
+                    }
+                    else {
+
+                    }
+                });
+
+            }
+        });
+
+        Core.addEvent('onShowFileman', function (container, input) {
+
+            //console.log('Filemans: ', container.find('#fm' ).length);
+
+            var tabcontent = container.parents('div.core-tab-content:first');
+            tabcontent.find('#fm').registerEvents({
+                onSelectFile: function (filepath) {
+                    if (filepath && filepath.match(/.*\.(jpe?g|gif|png)$/ig)) {
+
+                        input.val(filepath).parent().next('input.input-dummy').val(filepath);
+
+                        var inputID = input.attr('id');
+                        if (tabcontent.find('#' + inputID + '-preview').length) {
+                            var preview = tabcontent.find('#' + inputID + '-preview');
+                            preview.empty().append($('<img src="' + filepath + '"/>').css('maxWidth', preview.width() - 20).on('load', function () {
+                                $(window).trigger('resize');
+                            }));
+                        }
+
+                    }
+                    else {
+                        jAlert('Only *.jpg, *.jpeg, *.gif, and *.png Files allowed!', 'Info');
+                    }
+                }
+            });
+
+            if (input.val().trim()) {
+                tabcontent.find('#fm').selectFile(input.val().trim());
+            }
+        });
+
+
+
+        if ($('#teaser-image', $('#' + Win.windowID)).val().trim()) {
+            $('#teaser-image-title', $('#' + Win.windowID)).addClass('required');
+        }
+
+        $('#teaser-image', $('#' + Win.windowID)).unbind().change(function() {
+            if ($(this).val().trim()) {
+                $('#teaser-image-title', $('#' + Win.windowID)).addClass('required');
+
+                // first auto set useteaser
+                $('#useteaser', $('#' + Win.windowID)).attr('checked', 'checked').prop('checked', true).trigger('change'); // can change after
+            }
+            else {
+                $('#teaser-image-title', $('#' + Win.windowID)).removeClass('required');
+            }
+        });
+/*
+        $('#' + Win.windowID).find('#get-teaser-image').unbind().bind('click',function ()
+        {
+            Core.Tabs.toggleFileSelectorPanel(true);
+
+            $('#' + Win.windowID).find('#fm').registerEvents({
+                onSelectFile: function (filepath){
+                    if (filepath && filepath.match(/.*\.(jpe?g|gif|png)$/ig)) {
+                        $('#teaser-image', $('#' + Win.windowID) ).val(filepath).trigger('change');
+                        Core.Tabs.toggleFileSelectorPanel(false);
+                    }
+                    else {
+                        jAlert('Only *.jpg, *.jpeg, *.gif, and *.png Files allowed!','Info');
+                    }
+                }
+            });
+        });
+*/
+
+        $('#' + Win.windowID).find('#pagetype-opt').unbind('change.opt').bind('change.opt', function () {
+
+            $('#tc0 > div.post-content', $('#' + Win.windowID)).mask('{trans("Bitte warten...")}');
+
+            Doc.unloadTinyMce($('#customfields-html', $('#' + Win.windowID)));
+
+
+            $.ajax({
+                url: 'admin.php?adm=page&action=edit&id={$id}&changepagetype=' + $(this).find('option:selected').val(),
+                method: 'GET',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    if (Tools.responseIsOk(data)) {
+                        $('#' + Win.windowID).find('#customfields-html').html(data.customfields);
+
+                        Win.prepareWindowFormUi();
+                        Doc.loadTinyMce($('#' + Win.windowID).find('#customfields-html'));
+
+                        Form.bindChangeEvents('pageForm{$id}', Win.windowID);
+
+                        var contentTab = Core.getTabContent();
+                        Core.BootstrapInit(contentTab, null, Win.windowID.replace('content-', '') );
+                        $('#tc0 > div.post-content', $('#' + Win.windowID)).unmask();
+
+                        $(window).trigger('resize');
+                    }
+                }
+            });
+        });
+
+        Core.addEvent('onContentTabInited', function (tab, hash) {
+            tab.unbind('click.stat').unbind().bind('click.stat', function (e) {
+                updateTextareaFields();
+                var analyser = new contentAnalyser({
+                    url: 'admin.php',
+                    params: {
+                        adm: 'page',
+                        action: 'edit',
+                        id: {iif($id, $id, 0)},
+                        content: $('#pageForm{$id}').find('[name=content]').val()
+                    }
+                });
+            });
+        });
+
+    </script>
+</cp:block>
+
+
+<cp:block name="customfields">
+    <cp:loop name="customfields" key="r">
+        <div class="row">
+            <div class="col-md-12">
+                <label>{$r.label}</label>
+                {$r.field}
+                <cp:if condition="$r.description">
+                    <small>{$r.description}</small>
+                </cp:if>
+            </div>
+        </div>
+    </cp:loop>
+    <cp:else>
+        <em>{trans('Es sind keine Benutzerdefinierten Felder vorhanden.')}</em>
+    </cp:else>
+</cp:block>

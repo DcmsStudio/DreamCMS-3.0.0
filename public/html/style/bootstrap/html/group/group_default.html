@@ -1,0 +1,42 @@
+<?php
+
+function __group_default($options1='',$options2=''){
+global $cp, $cfg, $fct, $cp, $cp;
+
+return <<<EOF
+<html>
+
+<head>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+<form method="post"  action="admin.php"  onsubmit=""><input type="hidden" name="adm" value="group" />
+<input type="hidden" name="send" value="send">
+<input type="hidden" name="action" value="HTTP::input('action')">
+<input type="hidden" name="sid" value="{$cp->session_id}">
+ <table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+  <tr class="tableheader">
+   <td colspan="2">Standardgruppen festlegen</td>
+  </tr>
+  <tr class="firstrow">
+   <td><b>Standardgruppe für Besucher</b></td>
+   <td><select name="default1" class="select">$options1</select></td>
+  </tr>
+  <tr class="secondrow">
+   <td><b>Standardgruppe für neue Mitglieder</b></td>
+   <td><select name="default2" class="select">$options2</select></td>
+  </tr>
+  <tr class="firstrow">
+   <td colspan="2" align="center"><input type="submit" value="Speichern" class="button"> <input type="reset" value="Zurücksetzen" class="button" /> <input type="button" value="Abbrechen" onclick="history.back();" class="button" /></td>
+  </tr>
+ </table>
+</form>
+</body>
+</html>
+EOF;
+}
+
+?>

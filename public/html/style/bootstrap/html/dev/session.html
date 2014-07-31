@@ -1,0 +1,16 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    <input type="button" onclick="back()" value="{trans('Zurück')}" class="action-button" />
+
+</cp:block>
+
+<cp:block name="content">
+<div class="box">
+    <h2>Current Session Data Store</h2>
+    <div class="box-inner">
+        {$session}
+    </div>
+</div>
+</cp:block>

@@ -1,0 +1,273 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+    [save:layout-form{$id}] [save_exit:layout-form{$id}] [reset:layout-form{$id}] [cancel:layout-form{$id}]
+</cp:block>
+
+<cp:block name="content">
+<form action="admin.php" name="layout-form" id="layout-form{$id}" method="post" style="display: inline-block">
+    <input type="hidden" name="adm" value="layouter"/>
+    <input type="hidden" name="send" value="send"/>
+    <input type="hidden" name="action" value="edit"/>
+    <input type="hidden" name="skinid" id="skinid-id" value="{$skinid}"/>
+    <input type="hidden" name="id" id="layout-id{$id}" value="{$id}"/>
+
+    <div id="docking">
+    </div>
+    <div>
+        <cp:jstabs tabs="{trans('Globale Layout Einstellungen')},{trans('Visual Styler')},{trans('Sonstiges')}"
+                   usetrans="true"/>
+    </div>
+    <div class="box description fade in" id="tc0">
+
+
+        <div class="box-inner">
+            <div class="fieldset2">
+                <fieldset>
+                    <label>
+                        Layout Titel
+                    </label>
+                    <input name="title" id="layout-title" type="text" value="{escape($title, 'html')}" size="70"
+                           class="input required"/>
+                </fieldset>
+                <fieldset>
+                    <label>
+                        Standardlayout?
+                    </label>
+                    <label for="default-layout">
+                        <input type="checkbox" name="defaultlayout" value="1" id="default-layout"
+                               cp:on="checked:$defaultlayout" parse:checked="checked"/>
+                        Dieses Layout als Standardlayout verwenden
+                    </label>
+                </fieldset>
+            </div>
+            <div class="fieldset2">
+                <fieldset>
+                    <label>
+                        Layout Vorlage
+                    </label>
+                    <select name="template">
+                        <option value="frontend_page" cp:on="selected:empty($template)" parse:selected="selected">
+                            Default
+                        </option>
+                        <cp:loop name="layouts" key="r">
+                            <option value="{$r.value}" cp:on="selected:$template == $r.value" parse:selected="selected">
+                                {$r.title}
+                            </option>
+                        </cp:loop>
+                    </select>
+                    <br/>
+                    <small>
+                        Layout Vorlage
+                    </small>
+                </fieldset>
+                <fieldset>
+                    <label>
+                        Dokumenttyp
+                    </label>
+                    <select name="doctype">
+                        <option value="xhtml_strict" cp:on="selected:$doctype == 'xhtml_strict'"
+                                parse:selected="selected">
+                            XHTML 1.0 Strict
+                        </option>
+                        <option value="xhtml_trans" cp:on="selected:$doctype == 'xhtml_trans' || empty($doctype)"
+                                parse:selected="selected">
+                            XHTML 1.0 Transitional
+                        </option>
+                        <option value="xhtml_frames" cp:on="selected:$doctype == 'xhtml_frames'"
+                                parse:selected="selected">
+                            XHTML 1.0 Frameset
+                        </option>
+                        <option value="xhtml_basic" cp:on="selected:$doctype == 'xhtml_basic'"
+                                parse:selected="selected">
+                            XHTML 1.0 Basic
+                        </option>
+                        <option value="xhtml_11" cp:on="selected:$doctype == 'xhtml_11'" parse:selected="selected">
+                            XHTML 1.1
+                        </option>
+                        <option value="xhtml_2" cp:on="selected:$doctype == 'xhtml_2'" parse:selected="selected">
+                            XHTML 2.0
+                        </option>
+                        <option value="html_5" cp:on="selected:$doctype == 'html_5'" parse:selected="selected">
+                            HTML 5
+                        </option>
+                        <option value="html_4_trans" cp:on="selected:$doctype == 'html_4_trans'"
+                                parse:selected="selected">
+                            HTML 4.0 Transitional
+                        </option>
+                    </select>
+                    <br/>
+                    <small>
+                        Bitte wählen Sie eine Dokumenttyp-Definition.
+                    </small>
+                </fieldset>
+            </div>
+            <fieldset class="layout-modules">
+                <div>
+                    <label>
+                        Module
+                    </label>
+
+                </div>
+
+                <label for="modul-default" style="width:24%">
+                    <input type="checkbox" name="modul" id="modul-default" value="-"
+                           cp:on="checked:inlist('-', $modules)" parse:checked="checked"/>
+                    Default
+                </label>
+                <cp:loop name="modul_types" key="r">
+                    <label for="modul-{$r.value}" style="width:24%">
+                        <input type="checkbox" name="modul[]" id="modul-{escape($r.value, 'html')}" value="{escape($r.value, 'html')}"
+                               cp:on="checked:inlist($r.value, $modules)" parse:checked="checked"/>
+                        {$r.title}
+                    </label>
+                </cp:loop>
+                <br/>
+                <small>
+                    Layout Vorlage verwenden für die markierten Module
+                </small>
+            </fieldset>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="box description" id="tc2">
+        <div class="box-inner">
+            <fieldset>
+                <label>
+                    Zusätzliche head-Tags
+                </label>
+                <textarea name="headtags" rows="4" cols="50" class="textarea-resize">
+                    {escape($headtags, 'htmlall')}
+                </textarea>
+                <small>
+                    Hier können Sie dem Head-Bereich der Seite individuelle Tags hinzufügen.
+                </small>
+            </fieldset>
+            <fieldset>
+                <label>
+                    Eigener JavaScript-Code
+                </label>
+                <textarea name="script" rows="4" cols="50" class="textarea-resize">
+                    {escape($script, 'htmlall')}
+                </textarea>
+                <small>
+                    Der JavaScript-Code wird am Ende der Seite eingefügt.
+                </small>
+            </fieldset>
+        </div>
+    </div>
+
+</form>
+<div class="box description" id="tc1">
+    <div class="box-inner" style="position:relative">
+        <cp:include template="layout/layouter-tab1"/>
+    </div>
+</div>
+
+<div id="subcol-form-container" style="display:none">
+    <form id="subcol-form">
+        <div class="toolbar">
+            <button class="save-cols action-button">
+                    <span>
+                    </span>
+                {trans('Übernehmen')}
+            </button>
+            <button class="cancel-cols action-button">
+                    <span>
+                    </span>
+                {trans('Abbrechen')}
+            </button>
+        </div>
+        <div style="padding:5px;">
+            <div class="box description">
+                <div class="box-inner">
+                    {trans('Spalten Anzahl')}:
+                    <select name="cols">
+                        <option value="1">
+                            {trans('1 Spalte')}
+                        </option>
+                        <option value="2" selected="selected">
+                            {trans('2 Spalten')}
+                        </option>
+                        <option value="3">
+                            {trans('3 Spalten')}
+                        </option>
+                        <option value="4">
+                            {trans('4 Spalten')}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    var data = {
+        savedList: {$savedList},
+        templateColumns: {$templateColumns},
+        savedSubColLayout: {$savedSubColLayout},
+        savedItems: {$savedItems},
+        selectedLayouts: {$selectedLayouts},
+        nextDynID: {$nextDynID},
+        layoutID: '{$id}'
+    };
+
+    var layout = new Layouter();
+
+    layout.initLayouter( data );
+    /**
+     * Register the Layout Form
+     */
+    var windowObj = $( '#' + Win.windowID );
+    Form.registerForm( 'layout-form{$id}', {
+        contentIdentifierID: 'layout-id{$id}',
+        identifierType: '',
+
+        onAfterSubmit: function ( exit, data )
+        {
+
+            if ( Tools.exists( data, 'newid' ) && data.newid > 0 ) {
+                $( '#layout-id{$id}' ).attr( 'id', 'layout-id' + data.newid );
+                layout.set( 'layoutID', data.newid );
+            }
+
+            if ( exit === true ) {
+                $( '#' + Win.windowID ).getWindow().close();
+            }
+
+        },
+
+        onBeforeSend: function ( postData )
+        {
+            var p;
+            layout.saveColsLayout( function ()
+            {
+
+                $( '.layout-builder[windowid=' + Win.windowID + ']' ).each( function ()
+                {
+                    p = $( this ).find( 'form' ).serialize();
+                } );
+            } );
+
+            postData += '&' + p;
+            console.log( postData );
+            return postData;
+        }
+    } );
+
+    setTimeout( function ()
+    {
+        Win.prepareWindowFormUi( Win.windowID );
+        Win.redrawWindowHeight( Win.windowID, true );
+
+    }, 1600 );
+
+
+</script>
+</cp:block>

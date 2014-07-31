@@ -1,0 +1,127 @@
+<?php
+
+function __games_list($reviews, $countfrom, $countto, $pagelink, $plattform_options, $genre_options){
+global $cp, $cfg, $fct, $cp;
+	if (HTTP::input('sort')!= '')
+	{
+		$sel_sort[HTTP::input('sort')] = ' selected="selected"';
+	}
+
+	if (HTTP::input('order')!= '')
+	{
+		$sel_order[HTTP::input('order')] = ' selected="selected"';
+	}
+
+
+
+	if ( !$reviews ) $reviews = '<tr class="firstrow"><td colspan="5"><em>Es sind keine Spiele vorhanden.</em></td></tr>';
+
+
+
+return <<<EOF
+<form  action="admin.php"  method="post"><input type="hidden" name="adm" value="games" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="page" value="0" />
+
+<table cellpadding="3" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+<tr class="tableheader">
+    <td colspan="2">Ansichts Optionen</td>
+</tr>
+
+<tr class="firstrow">
+    <td>
+    <span class="bold">Plattform:</span>
+    <select name="plattform" class="select" style="vertical-align:middle">
+    	$plattform_options
+    </select>
+
+    <span class="bold">Genre:</span>
+    <select name="genre" class="select" style="vertical-align:middle">
+    	$genre_options
+    </select>
+    </td>
+    <td>
+    <span class="bold">Sortieren nach:</span>
+    <select name="order" class="select" style="vertical-align:middle">
+    	<option value="title"{$sel_order['title']}>Review Titel</option>
+    	<option value="gametitle"{$sel_order['gametitle']}>Spiele Titel</option>
+    	<option value="date"{$sel_order['date']}>Datum</option>
+    	<option value="plattform"{$sel_order['plattform']}>Plattform</option>
+    </select>
+
+    <span class="bold">Reihenfolge:</span>
+    <select name="sort" class="select" style="vertical-align:middle">
+    	<option value="asc"{$sel_sort['asc']}>Aufsteigend</option>
+    	<option value="desc"{$sel_sort['desc']}>Absteigend</option>
+    </select>
+    </td>
+</tr>
+<tr class="firstrow">
+	<td>
+		<span class="bold">Suche nach:</span> <input type="text" name="q" value="HTTP::input('q')" size="45" class="input" style="vertical-align:middle" />
+	</td>
+	<td><input type="submit" value="Anzeigen" class="button" style="vertical-align:middle" /></td>
+</tr>
+</table>
+</form>
+<br />
+
+
+
+
+<form  action="admin.php"  method="post" name="games"><input type="hidden" name="adm" value="games" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="page" value="HTTP::input('page')" />
+<input type="hidden" name="s" value="HTTP::input('s')" />
+<input type="hidden" name="sort" value="{HTTP::input('sort')}" />
+<input type="hidden" name="order" value="{HTTP::input('order')}" />
+<input type="hidden" name="plattform" value="HTTP::input('plattform')" />
+<input type="hidden" name="genre" value="HTTP::input('genre')" />
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+ <tr class="tableheader">
+  <td colspan="6">Spiele</td>
+ </tr>
+ <tr class="tableheader">
+  <td width="1%"><input type="checkbox" name="_all" value="" onclick="select_all('games','ids');" /></td>
+  <td align="center">Spiel Titel / Eingetragen / Kommentar</td>
+  <td align="center" width="20%">Plattform</td>
+  <td align="center" width="25%">Genre</td>
+  <td align="center" width="15%">Optionen</td>
+ </tr>
+
+$reviews
+
+
+ <tr class="tableheader">
+
+  <td colspan="2">
+  	<img src="images/arrow_left.png" border="0" width="40" height="16" alt="" class="absmiddle" />
+
+  	<select name="action" class="select">
+  		<option value="0">-----------</option>
+  		<option value="publish_open">Spiel Öffnen</option>
+  		<option value="publish_close">Spiel Schließen</option>
+  		<option value="mass_del">Spiel Löschen</option>
+  	</select> <input type="submit" value="Ausführen" class="button" style="vertical-align:middle" />
+  </td>
+
+  <td colspan="3" align="right"><input type="button" value="Spiel eintragen" class="button" style="vertical-align:middle" onclick="javascript:location.href='admin.php?adm=games&sid={$cp->session_id}&action=add';" /></td>
+ </tr>
+</table>
+</form>
+
+
+ <!--Pages-->
+<br />
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+ <tr class="firstrow">
+  <td align="right">$pagelink</td>
+ </tr>
+</table>
+<!--/Pages-->
+EOF;
+;;
+}
+
+?>

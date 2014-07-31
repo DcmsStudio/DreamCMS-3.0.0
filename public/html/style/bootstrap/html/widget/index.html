@@ -1,0 +1,232 @@
+<cp:block name="available_widgets">
+
+
+    <div class="available-widgets">
+        <cp:loop name="installed" key="r">
+
+            <div class="row">
+                <div>
+                    <div>
+                        <strong>{$r.title}</strong>
+
+                        <p>
+                            {trans('Version')}: {$r.version},&nbsp;
+                            {trans('Autor')}: <a href="{$r.website}" target="_blank">{$r.author}</a>
+                        </p>
+                    </div>
+                    <div>
+                        <cp:if condition="$r.userwidget && $r.multiple">
+                            <span>{trans('Dieses Widget ist bereits aktiv')}</span><br/>
+                            <button class="install-userwidget" rel="{$r.id}">
+                                {trans('Widget hinzufügen')}
+                            </button>
+                        </cp:if>
+                        <cp:elseif condition="$r.userwidget && !$r.multiple">
+                            <span>
+                                {trans('Dieses Widget ist schon aktiv und kann nur einmal verwendet werden.')}
+                            </span>
+                        </cp:elseif>
+                        <cp:elseif condition="!$r.userwidget">
+                            <button class="install-userwidget" rel="{$r.id}">
+                                {trans('Widget hinzufügen')}
+                            </button>
+                        </cp:elseif>
+                    </div>
+                </div>
+                <div cp:is="$r.description">
+                    {$r.description}
+                </div>
+
+            </div>
+        </cp:loop>
+    </div>
+</cp:block>
+
+
+<cp:block name="content">
+    <button id="cancel-button" class="action-button"><img src="images/back.png" width="16" height="16" alt=""/>{trans("Zurück")}
+    </button>
+
+    <cp:if condition="count($notinstalled)">
+        <h2>{trans('Nicht installierte Widgets')}</h2>
+        <div id="notinstalled-widgets" class="notinstalled-widgets">
+
+            <cp:loop name="notinstalled" key="r">
+                <div class="row">
+                    <div>
+                        <div>
+                            <strong>{$r.name}</strong>
+
+                            <p>
+                                {trans('Version')}: {$r.version},&nbsp;
+                                {trans('Autor')}: <a href="{$r.website}" target="_blank">{$r.author}</a>
+                            </p>
+                        </div>
+                        <div>
+                            <button class="install" rel="{$r.widget}">
+                                {trans('Widget Installieren')}
+                            </button>
+                        </div>
+                    </div>
+                    <div cp:is="$r.description">
+                        {$r.description}
+                    </div>
+                </div>
+            </cp:loop>
+        </div>
+    </cp:if>
+
+
+    <cp:if condition="count($installed)">
+        <div class="box">
+            <h2>{trans('Verfügbare Widgets')}</h2>
+            <div id="available-widgets">
+                <cp:block name="available_widgets"/>
+            </div>
+        </div>
+    </cp:if>
+    <cp:else>
+        <div class="box">
+            {trans('Es sind keine Wigets installiert.')}
+        </div>
+    </cp:else>
+
+
+    <script type="text/javascript">
+
+        if ( typeof reloadWidgetsTable != 'function' ) {
+            function reloadWidgetsTable()
+            {
+                var found = $( '#notinstalled' ).find( "tr" );
+                if ( found.length == 0 ) {
+                    $( '#notinstalled' ).remove();
+                }
+
+                $.pagemask.show( '{trans("Laden...")}' );
+                $.get( 'admin.php?adm=widgets&action=list&refresh=1', {}, function ( data )
+                {
+                    if ( Tools.responseIsOk( data ) ) {
+                        $( '#available-widgets' ).html( data.table );
+                        $.pagemask.hide();
+                        Notifier.info( 'Widget wurde hinzugefügt!' );
+
+                        bindWidgetEvents();
+
+                    }
+                    else {
+                        $.pagemask.hide();
+                        jAlert( data.msg );
+                    }
+                }, 'json' );
+            }
+
+            function bindWidgetEvents()
+            {
+                $( '#available-widgets button.install-userwidget' ).bind( 'click', function ( e )
+                {
+                    orgSrc = $( this ).html();
+                    var load = $(getLoadingImage());
+                    load.css({
+                        width: 12, height: 12, marginRight: 10, marginTop: 6
+                    });
+
+                    $( this ).before(load);
+
+                    $.get( 'admin.php?adm=widgets&action=userinstall&id=' + $( this ).attr( 'rel' ), function ( data )
+                    {
+                        if ( Tools.responseIsOk( data ) ) {
+
+                            Notifier.info( data.msg );
+
+
+                            var dash = Core.dashboard;
+                            var el = dash.createWidget( data.widget );
+
+                            $( '#widget-column-1').append( el );
+                            $( '#available-widgets img.loading' ).remove();
+
+
+                            $.ajax( {
+                                url: 'admin.php?adm=widgets&get=' + data.widget.key + '&id=' + data.widget.id,
+                                cache: false,
+                                timeout: 600000,
+                                async: true}).done(function ( d )
+                                    {
+                                        if ( Tools.responseIsOk( d ) ) {
+                                            var dat = d.output;
+                                            if ( $( dat ).find( 'img' ).attr( 'width' ) >= '16' ) {
+                                                $( dat ).find( 'img' ).attr( {
+                                                    width: 16,
+                                                    height: 16
+                                                } );
+                                            }
+
+                                            $( '#widget-' + d.id ).find( '.panel-inner' ).html( dat );
+                                            $( '#widget-' + d.id ).show().animate( {
+                                                opacity: 1
+                                            }, {
+                                                duration: 10,
+                                                queue: false
+                                            } );
+
+
+                                            $( window ).trigger( 'resize' );
+
+
+                                        } else {
+                                            // jAlert(data.error + id);
+                                        }
+                                    });
+
+
+                        }
+                        else {
+                            $( '#available-widgets img.loading' ).remove();
+                            jAlert( data.msg );
+                        }
+                    } );
+                } );
+            }
+        }
+
+        $( '#cancel-button' ).unbind().bind( 'click', function ()
+        {
+            $( '#widgets' ).show();
+            $( '#install-widgets' ).hide();
+
+            $(window).trigger('resize');
+        } );
+
+        var tbl = $( '#notinstalled' ).find( 'tr' );
+
+        $( '#notinstalled-widgets button.install' ).bind( 'click', function ( e )
+        {
+            var self = this;
+            var load = $(getLoadingImage());
+            load.css({
+                width: 12, height: 12, marginRight: 10, marginTop: 6
+            });
+            $( this ).before(load);
+            $.get( 'admin.php?adm=widgets&action=install&widget=' + $( this ).attr( 'rel' ), function ( data )
+            {
+                if ( Tools.responseIsOk( data ) ) {
+                    tbl.each( function ()
+                    {
+                        if ( $( this ).hasClass( $( self ).attr( 'id' ) ) ) {
+                            $( this ).remove();
+                        }
+                    } );
+                    tbl = $( '#notinstalled' ).find( 'tr' );
+                    reloadWidgetsTable();
+                }
+                else {
+                    $( '#notinstalled-widgets img.loading' ).remove();
+                    jAlert( data.msg );
+                }
+            } );
+        } );
+
+        bindWidgetEvents();
+
+    </script>
+</cp:block>

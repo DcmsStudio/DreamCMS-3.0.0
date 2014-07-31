@@ -1,0 +1,54 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+</cp:block>
+<cp:block name="main_content">
+    <cp:if condition="!$done">
+        <form method="post" action="register/verify">
+            <input type="hidden" name="cp" value="register" />
+            <input type="hidden" name="action" value="verify" />
+            <input type="hidden" name="send" value="1" />
+            <div class="activation-form">
+                <p>
+
+                        {trans('Hier können Sie mit dem in der Email enthaltenen Aktivierungscode Ihren Account aktivieren. Tragen Sie den Aktivierungscode im Eingabefeld ein.')}
+
+                </p>
+                <div style="text-align: center">
+                    <fieldset>
+                        <legend>
+                            {trans('Aktivierungscode:')}
+                        </legend>
+                        <input type="text" name="key" class="input" size="20" />
+                    </fieldset>
+                    <button type="submit" id="send-verify">
+                        {trans('Abschicken')}
+                    </button>
+                </div>
+            </div>
+        </form>
+        {*
+        <script type="text/javascript">
+            $(document).ready(function() {
+                                            	$('#send-verify').click(function(){
+                                            	    var post = $(this).parents('form:first').serialize();
+                                            	    $.post('register/verify', post, function() {
+                                            	    	if () {
+                                            	    		
+                                            	    	}
+                                            	    });
+                                            	});
+                                            })
+        </script>
+        *}
+    </cp:if>
+    <cp:else>
+        <div class="verify-success">
+            <p>
+                {trans('Dein Account wurde freigeschalten. Du kannst dich nun ganz normal einloggen.')}
+            </p>
+            <p>
+                {trans('Viel Spaß dein %s - Team', $cfg.pagename)}
+            </p>
+        </div>
+    </cp:else>
+</cp:block>

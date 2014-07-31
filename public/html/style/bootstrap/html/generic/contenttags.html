@@ -1,0 +1,16 @@
+<div class="contenttags">    
+    <div class="tag-inputs">
+        <cp:if condition="$tag_fields">
+            {$tag_fields}
+        </cp:if>
+        <cp:else>
+            <input type="hidden" name="tags" value="{$tags}"/>
+            <input type="text" name="tag_query" value="" size="30" data-table="{$tagtable}" class="content-tags nodirty" />
+        </cp:else>
+    </div>
+    <div class="tag-table">
+        <cp:loop name="contenttags" key="r">
+            <div class="content-tag" rel="{$r.id}"><span>{$r.tag}</span><span class="delete-tag" rel="{$r.id}"></span></div>
+        </cp:loop>
+    </div>
+</div>

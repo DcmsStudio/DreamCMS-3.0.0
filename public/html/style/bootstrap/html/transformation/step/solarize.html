@@ -1,0 +1,11 @@
+    <fieldset>
+        <legend>{trans("Threshold")}</legend>
+        <input type="text" class="textbox" name="params[threshold]" id="threshold" value="{iif($values.threshold, $values.threshold, '1')}" style="width: 100px;" />
+    </fieldset>
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+</script>

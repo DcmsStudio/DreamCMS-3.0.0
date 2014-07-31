@@ -1,0 +1,34 @@
+<?php
+
+function __csv_export_step1($selects){
+global $cp, $fct, $adm_skin, $cfg;
+
+	return <<<EOF
+<form  action="admin.php"  method="post" name="admform"><input type="hidden" name="adm" value="csv_export" />
+	<input type="hidden" name="sid" value="{$cp->session_id}" />
+	<input type="hidden" name="do" value="fields" />
+
+<table width="99%" border="0" cellpadding="3" cellspacing="1" class="tblborder">
+    <tr class="tableheader">
+        <td colspan="2">CSV Export: Step 1</td>
+    </tr>
+    <tr class="tableheader">
+        <td colspan="2">Tabelle auwählen</td>
+    </tr>
+    <tr class="firstrow">
+        <td width="30%"><b>Tabelle:</b><br/><small>Wählen Sie hier die Tabelle aus, aus der Sie Daten Exportieren möchten.</small></td>
+        <td width="70%">
+        $selects
+        </td>
+    </tr>
+    <tr class="secondrow">
+        <td colspan="2" align="center">
+            <input type="submit" value="Step 2 &gt;&gt;" class="button" /> <input type="reset" value="Zurücksetzen" class="button" />
+        </td>
+    </tr>
+</table>
+</form>
+EOF;;;
+}
+
+?>

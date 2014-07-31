@@ -1,0 +1,56 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+    <div id="doc-protection" class="document-protection-mode">
+        <div>
+            <div class="document-protection">
+            </div>
+            <div class="document-protection-msg">
+                <h3>
+                    Passwort gesichert...
+                </h3>
+                {$message}
+                <form id="check-password-protection" action="{$SERVER.REQUEST_URI}">
+                    <fieldset>
+                        <legend>
+                            {trans('Passwort')}
+                        </legend>
+                        <input type="password" name="unprotect" />
+                        <button type="button" id="protection-bth">
+                            {trans('Ok')}
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#check-password-protection').find('input:password').bind('keyup', function(){
+                if (e.keyCode == 13) {
+                    $('#protection-bth').trigger('click');
+                }
+            });
+            
+            $('#protection-bth').bind('click', function(){
+                $('#doc-protection').find('div.error').remove();
+            $('#doc-protection').mask("{trans('Bitte warten...')}");
+            
+            var postData = $('#check-password-protection').serialize();
+            $.post( $('#check-password-protection').attr('action'), postData, function(data){
+                $('#doc-protection').unmask();
+                if (responseIsOk(data)) {
+                    document.location.href = document.location.href;
+                }
+                else {
+                    if (data && typeof data.msg != 'undefined') {
+                        $('#doc-protection').append('<div class="error">' + data.msg + '</div>');
+                    }
+                    else {
+                        $('#doc-protection').append('<div class="error">Login error</div>');
+                    }
+                }
+                });	
+            });
+        });
+    </script>
+</cp:block>

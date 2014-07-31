@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tooltip>
+	<useusergroup title=""><![CDATA[]]></useusergroup>
+	<usethisgroup title=""><![CDATA[----]]></usethisgroup>
+	<can_view title=""><![CDATA[----]]></can_view>
+	<can_viewothers title=""><![CDATA[----]]></can_viewothers>
+	<can_search title=""><![CDATA[----]]></can_search>
+	<can_getattachment title=""><![CDATA[----]]></can_getattachment>
+	<can_postnew title=""><![CDATA[----]]></can_postnew>
+	<can_replyown title=""><![CDATA[----]]></can_replyown>
+	<can_replyothers title=""><![CDATA[----]]></can_replyothers>
+	<can_postattachment title=""><![CDATA[----]]></can_postattachment>
+	<can_threadrate title=""><![CDATA[----]]></can_threadrate>
+	<isalwaysmoderated title=""><![CDATA[----]]></isalwaysmoderated>
+	<can_editpost title=""><![CDATA[----]]></can_editpost>
+	<can_deletepost title=""><![CDATA[----]]></can_deletepost>
+	<newpostemail title=""><![CDATA[----]]></newpostemail>
+	<can_openclose title=""><![CDATA[----]]></can_openclose>
+	<can_deletethread title=""><![CDATA[----]]></can_deletethread>
+	<can_postpoll title=""><![CDATA[----]]></can_postpoll>
+	<can_vote title=""><![CDATA[----]]></can_vote>
+</tooltip>

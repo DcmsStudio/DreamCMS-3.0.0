@@ -1,0 +1,13 @@
+<fieldset>
+    <legend>{trans('Typ')}</legend>   
+    
+    <select name="message">
+        <option value="span" cp:on="selected:$message=='span' || empty($message)" parse:selected="selected"> SPAN Tag</option>
+        <option value="li" cp:on="selected:$message=='li'" parse:selected="selected"> LI Tag</option>
+        <option value="div" cp:on="selected:$message=='div'" parse:selected="selected"> DIV Tag</option>
+        <option value="hr" cp:on="selected:$message=='hr'" parse:selected="selected"> HR Tag</option>
+    </select>
+    
+</fieldset>
+
+

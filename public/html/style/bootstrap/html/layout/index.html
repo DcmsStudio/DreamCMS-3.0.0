@@ -1,0 +1,158 @@
+<cp:extends template="../main"/>
+
+<cp:block name="content">
+    <div id="skins" style="width:100%;" class="grid-table-wrapper">
+
+        <table border="0" cellpadding="3" cellspacing="0" style="width:100%;">
+            <tr class="grid-header">
+                <td>Skin</td>
+                <td width="10%" class="tc">Optionen</td>
+            </tr>
+            <cp:loop name="skins" key="r">
+                <tr class="{iif($r.__index%2, 'firstrow', 'secondrow')}">
+                    <td>{$r.title}</td>
+                    <td class="tc">
+                        <a href="#open" id="skin_{$r.id}" class="edit"><img src="images/edit.png" width="16" height="16" title="{trans('Layout `%s` bearbeiten', $r.title)}" alt="{trans('Layout `%s` bearbeiten', $r.title)}" border="0"/></a> 
+
+                    </td>
+                </tr>
+            </cp:loop>
+
+        </table>
+    </div>
+
+
+
+    <div id="layouts" style="display:none;min-height:150px"></div>
+
+    <script type="text/javascript">
+
+
+        var tb = Core.getToolbar();
+        tb.find('#back-button,#addlayout-button').hide();
+
+
+        
+        if (typeof loadLayouts === 'undefined')
+        {
+            function loadLayouts ()
+            {
+                //setupSeemode();
+                setLayoutSkin();
+                $('#skins').hide();
+                $('#layouts').mask('Layouts holen...');
+                $('#layouts').show();
+
+                var tb = Core.getToolbar();
+                tb.find('#addlayout-button,#back-button').show();
+                tb.find('#back-button').unbind().click(function (e) {
+                    $('#'+ Win.windowID).removeData('windowGrid');
+                    $('#layouts').empty().hide();
+                    tb.find('#back-button,#addlayout-button').hide();
+                    $('#skins').show();
+                });
+
+
+                tb.find('#addlayout-btn').unbind().click(function (e) {
+                    openTab({
+                        url: 'admin.php?adm=layouter&action=edit&skinid=' + selectedSkin
+                    });
+                });
+
+                $.get('admin.php?adm=layouter&skinid=' + selectedSkin + '&load=1&ajax=1' + (isSeemodePopup ? '&seemodePopup=1' : ''), {}, function (data)
+                {
+                    $('#layouts').unmask();
+                    if (Tools.responseIsOk(data))
+                    {
+                        $('#layouts').append(data.html);
+                        setLayoutActions();
+
+                        setTimeout ( function() {
+                            $('#' + Win.windowID ).trigger('winContentChange');
+                        }, 200);
+                        //Application.setActiveUrl('admin.php?adm=layouter&skinid='+ selectedSkin +'&load=1&ajax=1'+( isSeemodePopup ? '&seemodePopup=1' : ''));
+                    }
+                    else {
+                        $('#layouts').hide();
+                        $('#addlayout-button,#back-button', tb).disableButton();
+                        $('#skins').show();
+                        jAlert(data.msg);
+                    }
+
+                }, 'json');
+            }
+
+
+            function registerLayouts () {
+                
+                $('#skins .edit').each(function () {
+                    var url = $(this).attr('href');
+                    $(this).attr({'href': 'javascript:void(0)', 'rel': url});
+                    $(this).unbind().click(function (e) {
+
+                        selectedSkin = $(this).attr('id').replace('skin_', '');
+                        //loadLayouts();
+                        var url = 'admin.php?adm=layouter&skinid=' + selectedSkin + '&load=1';
+                        openTab({
+                            url: url,
+                            obj: this,
+                            label: $(this).parents('tr:first').children('td:first').text(),
+                            isSingleWindow: true,
+                            SingleWindowID: Win.windowID,
+                            nopadding: true,
+                            onAfterMenuCreated: function () {
+                                Application.setMenuUrlForID('menu-add-layout', url);
+                            }
+                        });
+                    });
+                });
+
+
+            }
+
+            function setLayoutSkin () {
+                requestString = 'adm=layouter&skinid=' + selectedSkin + (isSeemodePopup ? '&seemodePopup=1' : '');
+            }
+
+            function setLayoutActions () {
+                // setupSeemode();
+                $('#layouts .duplicate').each(function () {
+                    var url = $(this).attr('href');
+                    $(this).attr({'href': 'javascript:void(0)', 'rel': url});
+                    $(this).unbind().click(function () {
+
+                        $('#layouts').mask('Layout wird dupliziert...');
+                        var post = $.fn.ajaxGetToPost(url);
+
+                        $.post('admin.php', post, function (data)
+                        {
+                            $('#layouts').unmask();
+                            if (Tools.responseIsOk(data))
+                            {
+                                setFormStatusOk(data.msg);
+                                loadLayouts();
+                                setTimeout(function () {
+                                    setFormStatusDefault();
+                                    $('#form-status').hide();
+                                }, 2000);
+                            }
+                            else {
+                                jAlert(data.msg);
+                            }
+                        });
+
+                    });
+                });
+            }
+        }
+
+
+        registerLayouts();
+        //setupSeemode();
+
+        if ({iif($request.reload != 'maincontent' && $request.reload, 'true', 'false')}) {
+            selectedSkin = "{$request.skinid}";
+            loadLayouts();
+        }
+    </script>
+</cp:block>

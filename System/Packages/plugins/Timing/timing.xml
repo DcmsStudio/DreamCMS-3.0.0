@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>Timing</name>
+    <version>1.0</version>
+    <author>Marcel Domke</author>
+    <website>http://www.dcms-studio.de</website>
+    <description><![CDATA[Plugin that can be used to display page render times.]]></description>
+</plugin>

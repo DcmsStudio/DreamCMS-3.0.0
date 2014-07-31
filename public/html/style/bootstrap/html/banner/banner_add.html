@@ -1,0 +1,70 @@
+<?php
+
+function __banner_add($options){
+global $cp, $cfg, $fct;
+return <<<EOF
+   <form method="post"  action="admin.php"  onsubmit=""><input type="hidden" name="adm" value="marketing" />
+    <input type="hidden" name="send" value="send">
+    <input type="hidden" name="action" value="add">
+    <input type="hidden" name="sid" value="{$cp->session_id}">
+
+    <table cellpadding="4" cellspacing="1" width="99%" class="tblborder" align="center">
+            <tr class="tableheader">
+                <td colspan="2"><b>Banner hinzufügen</b></td>
+            </tr>
+            <tr class="secondrow">
+                <td valign="top"><b>Banner Typ:</b></td>
+                <td>{info:banner|bannertype}
+                <select name="banner_type" class="select">
+                     <option value="-">-------------</option>
+                     $options
+                </select
+
+                </td>
+            </tr>
+
+
+            <tr class="firstrow">
+                <td width="25%"><b>Partner Name:</b></td>
+                <td>{info:banner|partner}<input type="text" name="name" maxLength="200" size="60" class="input"/></td>
+            </tr>
+
+            <tr class="secondrow">
+                <td valign="top"><b>Url zum Anbieter:</b></td>
+                <td>{info:banner|partnerurl}<input type="text" name="url" maxLength="250" class="input" size="60"/></td>
+            </tr>
+
+            <tr class="firstrow">
+                <td><b>Kurze Beschreibung:</b><br />Wird in den Alt Tag übertragen.</td>
+                <td>{info:banner|shortdescription}<input type="text" name="alt" maxLength="250" class="input" size="60"/></td>
+            </tr>
+            <tr class="secondrow">
+                <td valign="top"><b>Klick Url:</b></td>
+                <td>{info:banner|clickurl}<input type="text" name="click_url" maxLength="250" class="input" size="60"/></td>
+            </tr>
+            <tr class="firstrow">
+                <td valign="top"><b>Bild Url:</b></td>
+                <td>{info:banner|bannerurl}<input type="text" name="img_url" maxLength="250" class="input" size="60"/></td>
+            </tr>
+            <tr class="secondrow">
+                <td valign="top"><b>Bild höhe:</b></td>
+                <td>{info:banner|height}<input type="text" name="img_height" maxLength="3" class="input" size="5"/> px</td>
+            </tr>
+            <tr class="firstrow">
+                <td valign="top"><b>Bild breite:</b></td>
+                <td>{info:banner|width}<input type="text" name="img_width" maxLength="3" class="input" size="5"/> px</td>
+            </tr>
+            <tr class="secondrow">
+                <td valign="top"><b>Anzeige Limit:</b> (optional)</td>
+                <td>{info:banner|maxlimit}<input type="text" name="maxlimit" maxLength="9" class="input" size="5"/></td>
+            </tr>
+
+            <tr class="firstrow">
+                <td colspan="2" align="center"><input type="submit" value="Speichern" class="button"/> <input type="reset" value="Zurücksetzen" class="button" /> <input type="button" value="Abbrechen" onclick="history.back();" class="button" /></td>
+            </tr>
+            </table>
+    </form>
+EOF;
+}
+
+?>

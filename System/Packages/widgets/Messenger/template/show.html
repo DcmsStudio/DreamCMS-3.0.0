@@ -1,0 +1,245 @@
+<style>
+    #{$container_id} {
+        width: 100%;
+        width: 500px;
+
+    }
+    .widget-container[wgt="messenger"] .widget-settings {
+        background: #7d7e7d;
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d7e7d), color-stop(100%,#0e0e0e));
+        background: -webkit-linear-gradient(top, #7d7e7d 0%,#0e0e0e 100%);
+        background: -o-linear-gradient(top, #7d7e7d 0%,#0e0e0e 100%);
+        background: -ms-linear-gradient(top, #7d7e7d 0%,#0e0e0e 100%);
+        background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 );
+        width: 250px;
+        height: 150px;
+        color: #FFF;
+        border: 2px solid #51A3A3;
+    }
+
+    .widget-container[wgt="messenger"] .widget-settings #widget-set {
+        padding: 10px;
+        text-align: center;
+        line-height: 22px;
+    }
+    .widget-container[wgt="messenger"] .widget-settings #widget-set img {
+        width: 48px;
+        height: 48px;
+    }
+    .widget-container[wgt="messenger"] .widget-settings small {
+        position: absolute;
+        bottom: 0px;
+        right: 5px;
+    }
+    #{$container_id} .msg-scroll {
+        height: 150px;
+        width: 500px;
+        overflow: hidden;
+    }
+
+    #{$container_id} ul {
+        overflow: auto;
+        overflow-y: hidden;
+        display: block;
+        height: 100%;
+    }
+
+    #{$container_id} li {
+        margin: 0;
+        padding: 0;
+        border-top: 1px dotted #d0d0d0;
+    }
+
+    #{$container_id} li:first-child {
+        border-top: 0;
+    }
+
+    #{$container_id} li > div:first-child {
+        height: 22px;
+        padding-left: 3px;
+        padding-right: 3px;
+
+        position: relative;
+
+    }
+
+    #{$container_id} .col-1 {
+        line-height: 22px;
+        height: 22px;
+        width: 40px;
+        float: left;
+    }
+    #{$container_id} .col-1 img {
+        float: left;
+        clear: none;
+        margin: 0;
+        padding: 0;
+        margin-right: 2px;
+    }
+    #{$container_id} .col-2 {
+        line-height: 22px;
+        height: 22px;
+        margin-left: 40px;
+        margin-right: 140px;
+        float: left;
+    }
+    #{$container_id} .col-3 {
+        line-height: 22px;
+        height: 22px;
+        width: 140px;
+        float: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+    #{$container_id} .col-msg {
+        line-height: 22px;
+        display: block;
+    }
+
+
+
+    .widget-container[wgt="messenger"] {
+        max-width: 500px;
+        width: 500px;
+    }
+
+
+    .widget-container[wgt="messenger"] .widget-container-inner {
+        border-radius: 5px;
+    }
+
+    .widget-container[wgt="messenger"] .widget-container-inner .widget-content {
+        display: inline-block;
+        border: 3px solid #71A8A6;
+        background: #eeeeee;
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc));
+        background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+        background: -o-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+        background: -ms-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+        background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+        padding: 0!important;
+        padding-top: 0!important;
+        padding-right: 0!important;
+    }
+
+    .widget-container[wgt="messenger"] .widget-settings {
+
+    }
+
+</style>
+
+
+<div id="{$container_id}">
+    <table cellpadding="3" cellspacing="0" style="width: 100%; margin: 0;" class="wg-messenger">
+        <tr>
+            <td style="text-align: right; padding-bottom: 10px; padding-top: 5px; padding-left: 10px;padding-right: 10px;line-height: 30px; vertical-align: top;">
+                <img src="Packages/widgets/Messenger/widget.png" width="32" height="32" alt="" style="" class="fl" />
+                <button id="wg-compose" class="action-button"><img src="{$backendImagePath}messenger/compose.png" width="16" height="16" alt="" style="vertical-align: -4px;" /> Compose</button>&nbsp;
+                <button id="wg-open-messenger" class="action-button"><img src="{$backendImagePath}messenger/message.png" width="16" height="16" alt="" style="vertical-align: -4px;" /> Open Messenger</button>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="msg-scroll">
+                    <ul>
+                        <cp:loop name="messages" key="message">
+                            <li>
+                                <div style="{iif($message.is_read,'','background-color: #FFFFDD;')}">
+                                    <div class="col-1">
+                                        <img src="{$backendImagePath}{iif($message.is_read,'spacer.gif','new.png')}" width="16" height="16" alt="" />
+
+                                        <cp:if condition="$message.important > 0">
+                                            <img src="{$backendImagePath}critical.png" width="16" height="16" alt="" title="{trans 'Wichtige Nachricht'}" />
+                                        </cp:if>
+                                        <cp:else>
+                                            <img src="{$backendImagePath}spacer.gif" width="16" height="16" alt="" />
+                                        </cp:else>
+                                    </div>
+                                    <div class="col-2">
+                                        {$message.username}: 
+                                        <a href="#" rel="msg-{$message.id}" style="display: inline-block;">
+                                            {truncate($message.title,60,true)}
+                                        </a>
+                                    </div>
+                                    <div class="col-3">
+                                        {$message.time}
+                                    </div>
+                                </div>
+
+                                <div class="col-msg" style="{iif($message.is_read,'','background-color: #FFFFDD;')}">
+                                    {truncate($message.message, 150, true, false, false)}
+                                </div>
+                            </li>
+                        </cp:loop>
+                        <cp:else>
+                            <li>
+                                {trans "Es sind keine Nachrichten vorhanden."}
+                            </li>
+                        </cp:else>
+                    </ul>
+
+                </div>
+            </td>
+        </tr>
+
+
+    </table>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function() {
+
+
+        Tools.scrollBar($('#{$container_id}').find('.msg-scroll ul:first'));
+
+        $('#wg-compose').bind('click', function(e) {
+            e.preventDefault();
+            Cookie.set('wg-compose', 1);
+            openTab({url: 'admin.php?adm=messenger', icon: Config.get('backendImagePath') + 'pulldownmenu/inbox.png', label: 'Messenger'});
+        });
+
+        $('#wg-open-messenger').bind('click', function(e) {
+            e.preventDefault();
+            openTab({url: 'admin.php?adm=messenger', icon: Config.get('backendImagePath') + 'pulldownmenu/inbox.png', label: 'Messenger'});
+        });
+
+        var msg = $('.msg-title a');
+
+        msg.each(function() {
+            var id = $(this).attr('rel').replace(/msg-/g, '');
+
+            $(this).parent().parent().css('cursor', 'pointer');
+            $(this).parent().parent().attr('title', '{trans "zum lesen der Nachricht einfach klick..."}');
+            $(this).parent().parent().bind('click', function(e)
+            {
+                e.preventDefault();
+                Cookie.set('wg-read-messenger', id);
+                openTab({url: 'admin.php?adm=messenger', icon: Config.get('backendImagePath') + 'pulldownmenu/inbox.png', label: 'Messenger'});
+
+            });
+
+            $(this).parent().parent().next().find('td.msg-body').css('cursor', 'pointer');
+            $(this).parent().parent().next().find('td.msg-body').attr('title', '{trans "zum lesen der Nachricht einfach doppelklick..."}');
+            $(this).parent().parent().next().find('td.msg-body').bind('dblclick', function(e)
+            {
+                e.preventDefault();
+                Cookie.set('wg-read-messenger', id);
+                openTab({url: 'admin.php?adm=messenger', icon: Config.get('backendImagePath') + 'pulldownmenu/inbox.png', label: 'Messenger'});
+
+            });
+
+        });
+
+
+
+    });
+    // ]]>
+</script>

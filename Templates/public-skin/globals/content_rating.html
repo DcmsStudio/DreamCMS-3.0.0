@@ -1,0 +1,47 @@
+<form action="{$crate_action}" method="post">
+    {$crate_hiddenfields}
+    <div class="fl w100perc">
+        <h3>
+            {$crate_title}
+        </h3>
+        <div class="fl w100perc">
+            <div class="fl p3 w100perc tc">
+                <img title="{$crate_votes} ({$crate_rating})" src="<#IMG_DIR#>/rating/{$crate_ratingimg_name}.gif"
+                alt="{$crate_votes} ({$crate_rating})" />
+                <br/>
+                <span class="votetext">
+                    {$crate_votes} {trans('Stimmen')} / ({trans('Bewertung')}: {$crate_rating})
+                </span>
+            </div>
+            <div class="fl p3 w100perc vote_option">
+                <input class="radio" type="radio" name="rate" value="5" alt="vote 5" title="vote 5"
+                />
+                <img title="vote 5" alt="vote 5" src="<#IMG_DIR#>/rating/_5.gif" class="absmiddle"
+                />
+                <br/>
+                <input class="radio" type="radio" name="rate" value="4" alt="vote 4" title="vote 4"
+                />
+                <img title="vote 4" alt="vote 4" src="<#IMG_DIR#>/rating/_4.gif" class="absmiddle"
+                />
+                <br/>
+                <input class="radio" type="radio" name="rate" value="3" alt="vote 3" title="vote 3"
+                checked="checked" />
+                <img title="vote 3" alt="vote 3" src="<#IMG_DIR#>/rating/_3.gif" class="absmiddle"
+                />
+                <br/>
+                <input class="radio" type="radio" name="rate" value="2" alt="vote 2" title="vote 2"
+                />
+                <img title="vote 2" alt="vote 2" src="<#IMG_DIR#>/rating/_2.gif" class="absmiddle"
+                />
+                <br/>
+                <input class="radio" type="radio" name="rate" value="1" alt="vote 1" title="vote 1"
+                />
+                <img title="vote 1" alt="vote 1" src="<#IMG_DIR#>/rating/_1.gif" class="absmiddle"
+                />
+            </div>
+            <div class="fl p3 w100perc tc">
+                <input type="submit" value="{trans('Bewerten')}" class="button" />
+            </div>
+        </div>
+    </div>
+</form>

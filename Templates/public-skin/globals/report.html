@@ -1,0 +1,26 @@
+<form action="report.#php_ext#" method="post">
+    <table border="0" cellpadding="3" cellspacing="1" width="100%" class="border">
+      <tr id="tabletitle">
+        <td colspan="2" class="smalltitle"><span class="normal"><strong>{trans('Beitrag melden')}</strong></span></td>
+      </tr>
+      <tr class="tablea">
+        <td width="30%"><span class="normal">{trans('Benachrichtigung an Moderator:')}</span></td>
+        <td><select name="modid" class="select">
+          <!-- M.MODERATOR_OPTIONS -->
+        </select></td>
+      </tr>
+      <tr class="tableb" >
+        <td valign="top"><span class="normal"><strong>{trans('Grund:')}</strong><br />
+        <span class="small">{trans('Diese Funktion ist ausschließlich zu verwenden bei: Spam, Werbung und anderen problematischen (rassistischen, gewaltverherrlichung, aggressiven, beleidigenden oder sexistischen) Beiträgen.')}</span></span></td>
+        <td>
+        <textarea name="reason" rows="14" cols="70" wrap="virtual" class="textarea">
+</textarea></td>
+      </tr>
+      <tr class="tablea">
+        <td colspan="2">
+          <p align="center"><input type="hidden" name="postid" value="$postid" /> <input type="hidden" name="sid" value="{$cp->session_id}" /> <input type="hidden" name="send" value="send" /> <input type="submit" value=
+          "{trans('Abschicken')}" class="button" /></p>
+        </td>
+      </tr>
+    </table>
+  </form>

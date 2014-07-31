@@ -1,0 +1,13 @@
+{*<script type="text/javascript" src="asset/js/jquery/bbcode/sets/bbcode/set.js"></script>
+<script type="text/javascript" src="asset/js/jquery/wysibb/jquery.wysibb.js"></script>
+*}
+<script type="text/javascript">
+
+$(document).ready(function() {
+    {* $('.bbcodeCommentTextarea').markItUp(commentBBCodeToolbar); *}
+    
+    $('.bbcodeCommentTextarea').comment({smiliepath:'html/img/smilies/', smilies:{iif($bbcode_smilies, $bbcode_smilies, 'null')}});
+    
+});
+
+</script>

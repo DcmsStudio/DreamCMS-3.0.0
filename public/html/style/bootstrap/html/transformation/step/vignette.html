@@ -1,0 +1,30 @@
+    <fieldset>
+        <legend>{trans("Blackpoint")}</legend>
+        <input type="text" class="textbox" name="params[blackpoint]" id="blackpoint" value="{iif($values.blackpoint, $values.blackpoint, '70')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Whitepoint")}</legend>
+        <input type="text" class="textbox" name="params[whitepoint]" id="whitepoint" value="{iif($values.whitepoint, $values.whitepoint, '70')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("X")}</legend>
+        <input type="text" class="textbox" name="params[x]" id="x" value="{iif($values.x, $values.x, '70')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Y")}</legend>
+        <input type="text" class="textbox" name="params[y]" id="y" value="{iif($values.y, $values.y, '70')}" style="width: 100px;" />
+    </fieldset>
+
+
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+</script>
+
+

@@ -1,0 +1,44 @@
+<form action="weblinks.php" method="post">
+<input type="hidden" name="action" value="edit_cat" />
+<input type="hidden" name="send" value="send" />
+<input type="hidden" name="sid" value="$cp->session_id" />
+<input type="hidden" name="cid" value="$r[cid]" />
+
+$modforms_dir
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="100%" align="center">
+<tr class="tableheader">
+   <td colspan="2">Kategorie bearbeiten</td>
+</tr>
+<tr class="firstrow">
+    <td>Titel</td>
+    <td><input type="text" name="title" value="$r[title]" size="50" maxlength="50" class="input" /></td>
+</tr>
+
+$catsel
+
+
+      <tr class="firstrow">
+      <td colspan="2">Verwandte Kategorien</td>
+      <tr class="firstrow">
+       <td colspan="2">
+       		$relcatsel
+       </td>
+      </tr>
+
+
+
+
+$access_sel
+
+<tr class="firstrow">
+    <td colspan="2" align="center">    
+    <input type="submit" value="Speichern" class="button" />&nbsp;
+    <input type="button" onClick="location='weblinks.php?action=del_cat&pid=$pid&cid=$cid&sid=$cp->session_id'" value="Löschen" class="button" />
+    &nbsp;<input type="button" value="Abbrechen" onclick="javascript:history.go(-1)" class="button" />
+
+    </td>
+</tr>
+</table>
+
+</form>

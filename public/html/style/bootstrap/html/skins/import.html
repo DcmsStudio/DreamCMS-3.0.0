@@ -1,0 +1,128 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    [run_exit:skinimportForm] [cancel:skinimportForm]
+</cp:block>
+
+
+<cp:block name="content">
+    <form method="post" action="admin.php" name="skinimportForm" id="skinimportForm">
+
+        <input type="hidden" name="adm" value="skins"/>
+        <input type="hidden" name="action" value="import"/>
+        <input type="hidden" name="send" value="1"/>
+        <input type="hidden" name="tempid" id="tempid" value="1"/>
+        <input type="hidden" name="uploadpath" id="upload-path" value=""/>
+
+        <div class="box">
+            <h2>{trans('Skin Importieren')}</h2>
+
+            <div class="box-inner">
+                <div class="fieldset2">
+                    <fieldset>
+                        <legend>{info:skins|importtitle}{trans('Skin Titel')}</legend>
+
+                        <input type="text" name="importtitle" id="importtitle" size="60" maxLength="250" value="" class="required"/>
+                        <br/>
+                        <small>{trans('Sollten Sie keine Angabe machen, so wird der Titel des Skins beibehalten aber ein Prefix (Bsp: Titel des Skins - Import 01.05.2013, 14:20:12) hinzugefügt.')}</small>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>{info:skins|skinimagedir}{trans('Skin Image Verzeichnis')}</legend>
+
+                        <input type="text" name="skinimagedir" id="skinimagedir" size="60" maxLength="250" value=""/>
+                        <br/>
+                        <small>{trans('Sollten Sie keine Angabe machen, so wird das Verzeichnis des Skins verwendet und der Prefix angehängt. (Bsp: ../skinbilder-prefix)')}</small>
+                    </fieldset>
+
+                </div>
+
+                <fieldset>
+                    <legend>{info:skins|templatefoldername}{trans('Bezeichnung des Template-Ordners?')}</legend>
+                    <input type="text" name="templatefoldername" id="templatefoldername" size="60" maxLength="250" value="" class="required"/>
+                    <br/>
+                    <small>{trans('In diesem Ordner werden die Templates abgelegt')}</small>
+                </fieldset>
+
+
+                <div class="fieldset2">
+
+                    <fieldset>
+                        <legend>{info:skins|localimport}{trans('Lokalen Skin Importieren')}</legend>
+
+                        <input type="text" name="filepath" id="filepath" size="60" maxLength="250" value="" class="input"/>
+                        <br/>
+                        <small>{trans('Die Skin Zip Datei muss sich unter "%s" befinden.', $defaultpath)}</small>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>{info:skins|upload}{trans('Upload')}</legend>
+
+                        <div id="upload-contain"></div>
+                        <div id="skinimport-upload-container">
+                            <span class="allowed-info">
+                                <span class="allowed-extensions"></span>
+                                <span class="allowed-filesize"></span>
+                            </span>
+
+                            <span class="drop-here">Drop Exported Skin File here...</span>
+                            <span class="browse">Durchsuchen</span>
+                            <input type="file" name="Filedata"/>
+
+                            <ul class="dropped-files">
+
+                            </ul>
+                        </div>
+                    </fieldset>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+
+        Form.registerForm( 'skinimportForm', {
+            autosave: false,
+            contentIdentifierID: 'tempid',
+            exiturl: 'admin.php?adm=skins'
+        } );
+
+        Core.getToolbar().find( '.run_exit' ).disableButton();
+
+
+        $('#'+ Win.windowID ).find('#filepath' ).change(function(){
+            if ( $(this ).val().trim() != '' ) {
+                Core.getToolbar().find( '.run_exit' ).enableButton();
+            }
+            else {
+                Core.getToolbar().find( '.run_exit' ).disableButton();
+            }
+        });
+
+
+        Tools.MultiUploadControl( {
+            control: "skinimport-upload-container",
+            url: "admin.php",
+            postParams: {
+                adm: "skins",
+                action: "import",
+                mode: "upload",
+                uploadpath: ''
+            },
+            file_type_mask: "*.zip,*.xml",
+            file_type_text: "{trans('Skin Dateien')}",
+            max_upload_files: 1,
+            onSuccess: function ( data, evaldata, file )
+            {
+                if ( data != null && data.path ) {
+                    $( '#' + Win.windowID ).find( '#upload-path' ).val( data.path );
+                    Core.getToolbar().find( '.run_exit' ).enableButton();
+                    Notifier.info( "{trans('Upload erfolgreich abgeschlossen. Klicken Sie nun einfach auf Ausführen')}" );
+                }
+            }
+        } );
+
+    </script>
+</cp:block>

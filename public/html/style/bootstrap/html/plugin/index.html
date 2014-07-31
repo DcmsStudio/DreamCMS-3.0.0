@@ -1,0 +1,81 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="install-plugins-btn" type="button" class="action-button btn-new"><img src="images/buttons/new.png" width="16" height="16" title="" alt="" border="0"/> {trans('Plugins Installieren')}</button>
+</cp:block>
+
+<cp:block name="content">
+    <div id="plugins-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+
+        $('#install-plugins-btn').bind('click', function(){
+            openTab({ url:'admin.php?adm=plugin&action=install', obj: this, label: '{trans('Plugins Installieren')}' });
+        });
+
+
+
+        if (typeof bindPluginGrid !== 'function') {
+            function bindPluginGrid(n, grid) {
+                grid.dataTable.find('a.uninstall' ).data('grid', grid ).unbind().bind('click', function(e) {
+                    e.preventDefault();
+
+                    var href = $(this).attr('href');
+                    var grid = $(this).data('grid');
+
+                    jConfirm('{trans("Soll das Plugin wirklich deinstalliert werden?")}', '{trans("Deinstallieren")}...', function (r) {
+                        if (r) {
+                            $.get(Tools.prepareAjaxUrl(href + '&send=1'), {}, function (data) {
+                                if (Tools.responseIsOk(data)) {
+                                    if (data.msg) {
+                                        Notifier.display('info', data.msg);
+                                    }
+                                    else {
+                                        Notifier.display('info', '{trans("Das Plugin wurde deinstalliert")}');
+                                    }
+
+                                    if (typeof grid.settings.onAfterDelConfirm == 'function') {
+                                        grid.settings.onAfterDelConfirm(e, data);
+                                    }
+
+                                    // refresh
+                                    grid.gridNavi.find('.refresh-grid').trigger('click');
+
+                                }
+                                else {
+                                    jAlert(data.msg);
+                                }
+                            }, 'json');
+                        }
+
+                    });
+                });
+            }
+        }
+        Application.Grid( 'plugins-grid', {$gridJson});
+
+
+/*
+
+                var table = new dcmsGrid('plugins-grid', {
+        url: 'admin.php?adm=plugin',
+                currentFilter: {$grid.activeFilter},
+                colModel: {$grid.colModel},
+                gridActions: {$grid.gridActions},
+                searchitems: {$grid.searchitems},
+                sort: '{$grid.sort}',
+                orderby: '{$grid.orderby}',
+                total: {$grid.total},
+                        perpage: {$grid.perpage},
+                onAfterDelConfirm: function(event, data)
+                {
+                    Launchpad.refresh();
+                },
+                onAfterPublishingChange: function(data){
+
+                }
+        });
+        */
+
+    </script>
+</cp:block>

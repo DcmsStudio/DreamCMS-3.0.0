@@ -1,0 +1,38 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+</cp:block>
+
+<cp:block name="content">
+<div class="box">
+    <h2>{trans('System Erweiterungen')}</h2>
+    <div class="box-inner mt5">
+        <cp:if condition="$cfg.allow_extensions == 1">
+            {trans('Erweiterungen sind aktiviert!')}&nbsp; {trans('Erweiterungen')} <a href="admin.php?adm=extension&amp;ext=&amp;action=toggleextension&amp;to=disable">{trans('deaktivieren')}</a>
+        </cp:if>
+        <cp:else>
+            {trans('Erweiterungen sind deaktiviert!')}&nbsp; {trans('Erweiterungen')} <a href="admin.php?adm=extension&amp;ext=&amp;action=toggleextension&amp;to=enable">{trans('aktivieren')}</a>
+        </cp:else>
+    </div>
+</div>
+
+<table class="tblborder" width="100%" cellpadding="3" cellspacing="0" border="0">
+    <tr class="tableheader">
+        <td>{trans('Extension')}</td>
+        <td>{trans('Dokumentation')}</td>
+        <td>{trans('Einstellung')}</td>
+        <td width="5%">{trans('Optionen')}</td>
+    </tr>
+    
+    <cp:loop name="list" key="r">
+        {cycle('cyclename', 'firstrow,secondrow', 'css')}
+        <tr onmouseover="over(this)" onmouseout="out(this)" class="{$css}">
+            <td>{$r.link}</td>
+            <td>{$r.docs_url}</td>
+            <td>{$r.settings_link}</td>
+            <td class="tc">{$r.installed}</td>
+        </tr>
+    </cp:loop>
+</table>
+</cp:block>

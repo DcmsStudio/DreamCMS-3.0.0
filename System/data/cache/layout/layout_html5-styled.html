@@ -1,0 +1,107 @@
+{$layout.doctype_html}
+<html cp:on="xml-lang:!empty($layout.html.xmllang)" parse:xml-lang="{$layout.html.xmllang}" cp:on="lang:!empty($layout.html.lang)" parse:lang="{$layout.html.lang}">
+<head>
+    <base href="{cfg('portalurl')}/"/>
+    <meta name="viewport" content="width=device-width"/>
+    <meta charset="UTF-8"/>
+    <meta name="generator" content="DreamCMS {escape($version, 'htmlall')}"/>
+    <meta cp:is="$META_LANGUAGE" name="language" content="{$META_LANGUAGE}"/>
+    <meta cp:is="$META_COPYRIGHT" name="dcterms.rights" content="{escape($META_COPYRIGHT, 'htmlall')}"/>
+    <meta cp:is="$META_AUTHOR" name="author" content="{escape($META_AUTHOR, 'htmlall')}"/>
+    <meta cp:is="$META_EXPIRES" name="expires" content="{$META_EXPIRES}"/>
+
+    {*
+    <meta cp:is="$META_ROBOTS" name="robots" content="{$META_ROBOTS}"/>
+    <meta cp:is="$META_REVISIT_AFTER" name="revisit-after" content="{$META_REVISIT_AFTER}"/>
+    *}
+
+    <cp:block name="prepend-css"/>
+    {$layout.stylesheets}
+    {$layout.layoutcss}
+    <cp:block name="append-css"/>
+    <cp:block name="prepend-javascript"/>
+    <cp:block name="append-javascript"/>
+    {$layout.javascripts}
+    <cp:block name="append-headtags"/>
+    {$layout.headtags}
+    <title>{escape($layout.pagetitle, 'htmlall')}</title>
+    <meta content="article" property="og:type"/>
+    <meta content="{escape(cfg('pagename'), 'htmlall')}" property="og:site_name"/>
+    <meta cp:is="$og.title" content="{$og.title}" property="og:title"/>
+    <meta cp:is="$og.url" content="{$og.url}" property="og:url"/>
+    <meta cp:is="$og.description" content="{$og.description}" property="og:description"/>
+
+    <cp:loop name="og.images" key="r">
+        <meta content="{$r.src}" property="og:image"/>
+        <meta cp:is="$r.width" content="{$r.width}" property="og:image:width"/>
+        <meta cp:is="$r.height" content="{$r.height}" property="og:image:height"/>
+    </cp:loop>
+
+    <meta cp:is="$META_KEYWORDS" name="keywords" content="{escape($META_KEYWORDS, 'htmlall')}"/>
+    <meta cp:is="$META_DESCRIPTION" name="description" content="{escape($META_DESCRIPTION, 'htmlall')}"/>
+
+
+
+</head>
+<body id="top" class="{$controller-action}{iif($session.seemode, ' seemode', '')}">
+
+<div id="wrapper-border" class="{iif($layout.cols, ' ', '')}{$layout.cols}">
+    <div id="wrapper">
+        <header cp:is="$layout.header">
+            <div id="header">
+                <div class="inside">
+                    <cp:hook name="BeforeTop"/><cp:block name="header"/><cp:hook name="AfterTop"/></div>
+            </div>
+        </header>
+
+        <div id="customheader" class="inside tplsect-customheader-inside" cp:is="$layout.customheader">
+            <section class="customheader">
+                <cp:block name="custom_header"/>
+            </section>
+        </div>
+
+        <nav class="breadcrumbs" cp:is="$NAVIGATION">
+            <div id="breadcrumbs">
+                <a href="{cfg('portalurl')}/" class="first">{trans('Startseite')}</a>{$NAVIGATION}
+            </div>
+        </nav>
+
+        <section id="container-main">
+            <div class="container-main">
+                <cp:block name="teaserblock"/>
+                <cp:block name="container-header"/>
+
+                <div id="container-main-inner">
+                    <div id="left" cp:is="$layout.left">
+                        <div class="inside">
+                            <cp:hook name="BeforeLeft"/><cp:block name="left"/><cp:hook name="AfterLeft"/></div>
+                    </div>
+
+                    <div id="main">
+                        <div class="inside">
+                            <cp:hook name="BeforeMiddle"/><cp:block name="main"/><cp:hook name="AfterMiddle"/></div>
+                    </div>
+
+                    <div id="right" cp:is="$layout.right">
+                        <div class="inside">
+                            <cp:hook name="BeforeRight"/><cp:block name="right"/><cp:hook name="AfterRight"/></div>
+                    </div>
+                </div>
+                <cp:block name="container-footer"/>
+            </div>
+        </section>
+
+        <footer cp:is="$layout.footer">
+            <div id="customfooter" class="inside" cp:is="$layout.customfooter">
+                <cp:hook name="BeforeCustombottom"/><cp:block name="custom_footer"/><cp:hook name="AfterCustombottom"/></div>
+            <div id="footer">
+                <div class="inside">
+                    <cp:hook name="BeforeBottom"/><cp:block name="footer"/><cp:hook name="AfterBottom"/></div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<cp:block name="append-bodyscripts"/>
+</body>
+</html>

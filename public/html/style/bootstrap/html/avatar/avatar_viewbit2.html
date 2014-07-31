@@ -1,0 +1,16 @@
+<?php
+
+function __avatar_viewbit2($rowclass='',$avatarchoice='',$row=''){
+global $cp, $cfg, $fct, $cp, $cp;
+
+	return <<<EOF
+<tr onmouseover="over(this)" onmouseout="out(this)" class="$rowclass">
+    <td>$avatarchoice</td>
+    <td align="center">$row[avatarname].$row[avatarextension]</td>
+    <td align="center"><a href="../admin.php?adm=index&amp;cp=profile&amp;userid=$row[userid]&amp;sid=$cp->session_id" target="_blank">$row[username]</a></td>
+    <td align="center"><a href="admin.php?adm=admin&amp;adm=avatar&amp;action=del&amp;avatarid=$row[avatarid]&amp;sid=$cp->session_id"><img src="images/delete.gif" alt="Avatar löschen" border="0" /></a></td>
+</tr>
+EOF;
+}
+
+?>

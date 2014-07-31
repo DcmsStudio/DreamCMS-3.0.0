@@ -1,0 +1,62 @@
+<?php
+
+function __faq_cats_edit($r){
+global $cp, $cfg, $fct, $cp, $cp;
+
+
+	$r['categories'] = htmlspecialchars($r['categories']);
+	$r['description'] = htmlspecialchars($r['description']);
+	
+	
+	$ac = $fct->_build_access_list($r['access'], false, false);
+
+return <<<EOF
+<form  action="admin.php"  method="post" id="faqf">
+<input type="hidden" name="adm" value="faqadmin" />
+<input type="hidden" name="action" value="FaqCatSave" />
+<input type="hidden" name="id" value="{$r['id_cat']}" />
+<input type="hidden" name="sid" value="$cp->session_id" />
+			
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+        <td colspan="2"><b>Kategorie "{$r['categories']}" bearbeiten</b></td>
+    </tr>
+
+    <tr class="firstrow">
+        <td width="20%"><b>Kategorie:</b></td>
+        <td>{info:faq|cattitle}<input type="text" name="categories" size="50" value="{$r['categories']}" class="input" /></td>
+    </tr>
+
+    <tr class="secondrow top">
+        <td width="20%"><b>Kurze Beschreibung:</b></td>
+        <td>{info:faq|catdescription}
+        	<textarea name="description" class="textarea" cols="60" rows="3" wrap="soft">{$r['description']}</textarea>
+        </td>
+    </tr>
+    <tr class="firstrow top">
+        <td width="20%"><b>Zugriffsrechte:</b></td>
+        <td>{info:faq|access}
+        	
+			<select name="access[]" size="4" multiple="multiple">
+			{$ac}
+			</select>
+			
+        </td>
+    </tr>
+    <tr class="secondrow">
+        <td colspan="2" align="center">
+            <input type="submit" value="Speichern" class="button" />
+            <input type="reset" value="Zurücksetzen" class="button" />
+            <input type="button" value="Abbrechen" onclick="history.back();" class="button" />
+        </td>
+    </tr>
+</table>
+</form>
+
+
+
+
+EOF;
+}
+
+?>

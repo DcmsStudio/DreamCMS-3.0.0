@@ -1,0 +1,16 @@
+<tr onmouseover="over(this)" onmouseout="out(this)" class="$row[css]">
+    <td>
+        <input type="checkbox" name="ids[$row[id]]" value="$row[opublish]" />
+    </td>
+    <td><b>$row[title] $row[version]</b> (<img src="images/comments.png" title="Kommentare" class="absmiddle"/> <a href="admin.php?adm=comments&type=link&id=$row[id]">$row[comments]</a>)<br /><small>$row[created]</small></td>
+    <td align="center">$row[cat_title]</td>
+    <td align="center">$row[hits_total]</td>
+    <td align="center">$row[hits_today]</td>    
+    <td align="center">$row[publish]</td>
+    <td align="center">
+    <a href="admin.php?adm=weblinks&action=edit_link&id=$row[id]&sid={$cp->session_id}"><img src="images/edit.png" width="16" height="16" alt="Bearbeiten" title="Bearbeiten" border="0" /></a> 
+
+    <a href="admin.php?adm=weblinks&action=move_weblinks&id=$row[id]&sid={$cp->session_id}"><img src="images/move.gif" width="16" height="16" alt="Verschieben" title="Verschieben" border="0" /></a> 
+    <a href="admin.php?adm=weblinks&action=del_link&id=$row[id]&sid={$cp->session_id}"><img src="images/delete.gif" width="16" height="16" alt="Löschen" title="Löschen" border="0" /></a>
+    </td>
+</tr>

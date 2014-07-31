@@ -1,0 +1,48 @@
+<fieldset>
+    <legend>{trans("Canvas Width")}</legend>
+    <input type="text" class="textbox" name="params[width]" id="width" value="{iif($values.width, $values.width, '1')}" style="width: 100px;" />
+</fieldset>
+
+<fieldset>
+    <legend>{trans("Canvas Height")}</legend>
+    <input type="text" class="textbox" name="params[height]" id="height" value="{iif($values.height, $values.height, '')}" style="width: 100px;" />
+</fieldset>
+
+<fieldset>
+    <legend>{trans("Background Colour")}</legend>
+    <div id="colorHolderSimple"></div>
+    # <input type="text" class="textbox" name="params[bgcolor]" id="bgcolor" value="{iif($values.bgcolor, $values.bgcolor, 'ff0000')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+    <br/>
+    <label for="transparent"><input type="checkbox" class="checkbox" id="transparent" name="params[transparent]" value="1" cp:on="checked:$values.transparent" parse:checked="checked"/> {trans("Use transparent background")}</label>
+</fieldset>
+
+<fieldset>
+    <legend>{trans("Horizontal Alignment")}</legend>
+    <label for="align_left"><input type="radio" name="params[align]" id="align_left" value="left" cp:on="checked:$values.align=='left' || !$values.align" parse:checked="checked"/>{trans("Left")}</label><br />
+    <label for="align_center"><input type="radio" name="params[align]" id="align_center" value="center" cp:on="checked:$values.align=='center'" parse:checked="checked" />{trans("Center")}</label><br />
+    <label for="align_right"><input type="radio" name="params[align]" id="align_right" value="right" cp:on="checked:$values.align=='right'" parse:checked="checked"/>{trans("Right")}</label>
+</fieldset>
+
+<fieldset>
+    <legend>{trans("Vertical Alignment")}</legend>
+    <label for="valign_top"><input type="radio" name="params[valign]" id="valign_top" value="top" cp:on="checked:$values.valign=='top' || !$values.valign" parse:checked="checked"/>{trans("Top")}</label><br />
+    <label for="valign_middle"><input type="radio" name="params[valign]" id="valign_middle" value="middle" cp:on="checked:$values.valign=='middle'" parse:checked="checked"/>{trans("Middle")}</label><br />
+    <label for="valign_bottom"><input type="radio" name="params[valign]" id="valign_bottom" value="bottom" cp:on="checked:$values.valign=='bottom'" parse:checked="checked"/>{trans("Bottom")}</label>
+</fieldset>
+
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+    $('#bgcolor').ColorPicker({
+        livePreview: true,
+        color: '{iif($values.bgcolor, $values.bgcolor, "ff0000")}',
+        changeColor: function(ev) {
+            $('#bgcolor').val(ev.color.toHex());
+        }
+    });
+
+</script>
+
+

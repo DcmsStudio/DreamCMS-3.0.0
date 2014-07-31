@@ -1,0 +1,80 @@
+html, body {
+  cursor: text;
+  width: 100%;
+  height: 100%;
+  line-height: 1em!important;
+  margin: 0;
+  padding: 0;
+}
+body { width: auto;}
+
+
+
+.editbox p {
+  margin: 0;
+}
+
+span.xml-tagname {
+  color: #A0B;
+}
+
+
+br {
+    display: block;   
+    margin: 0;
+    margin-left: auto;
+}
+
+
+
+
+span.xml-attribute {
+  color: #281;
+}
+
+span.xml-punctuation {
+  color: black;
+}
+
+span.xml-attname {
+  color: #00F;
+}
+
+span.xml-comment {
+  color: #A70;
+  color: silver;
+}
+
+span.xml-cdata {
+  color: #48A;
+}
+
+span.xml-processing {
+  color: #999;
+}
+
+span.xml-entity {
+  color: #A22;
+}
+
+span.xml-error {
+ color: #F00 !important;
+}
+
+span.xml-text {
+  color: black;
+}
+
+
+span.cp-tagname {
+	font-weight: bold;
+	color: #ff8a00;
+}
+span.cp-var {
+	font-weight: bold;
+	color: #9c9c9c;
+}
+span.cp-func {
+	font-weight: bold;
+	color: #AF832B;
+}

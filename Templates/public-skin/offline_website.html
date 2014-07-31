@@ -1,0 +1,135 @@
+{$layout.doctype_html}
+<html cp:on="xmlns:!empty($layout.html.xmlns) && $layout.doctype != 'html_5'" parse:xmlns="http://www.w3.org/1999/xhtml" cp:on="xml-lang:!empty($layout.html.xmllang)" parse:xml-lang="{$layout.html.xmllang}" cp:on="lang:!empty($layout.html.lang)" parse:lang="{$layout.html.lang}">
+    <head>
+        <title>
+            {$layout.pagetitle}
+        </title>
+        <base href="{cfg('portalurl')}/"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="UTF-8"/>
+        <meta name="generator" content="DreamCMS {escape($version, 'html')}"/>
+        <meta cp:is="$META_KEYWORDS" name="keywords" content="{$META_KEYWORDS}" />
+        <meta cp:is="$META_DESCRIPTION" name="description" content="{$META_DESCRIPTION}" />
+        <meta cp:is="$META_COPYRIGHT" name="dcterms.rightsHolder" content="{$META_COPYRIGHT}" />
+        <meta cp:is="$META_AUTHOR" name="author" content="{$META_AUTHOR}" />
+        <meta cp:is="$META_EXPIRES" name="expires" content="{$META_EXPIRES}" />
+        <meta cp:is="$META_ROBOTS" name="robots" content="{$META_ROBOTS}" />
+        <meta cp:is="$META_REVISIT_AFTER" name="revisit-after" content="{$META_REVISIT_AFTER}" />
+        <meta cp:is="$META_LANGUAGE" name="language" content="{$META_LANGUAGE}" />
+
+
+        <link rel="stylesheet" id="opensans-css" href="http://fonts.googleapis.com/css?family=Open+Sans%3A400%2C600%2C700%2C800%2C300&#038;ver=3.5.1" type="text/css" media="all" />
+        <link rel="stylesheet" id="opensanscondensed-css" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed%3A700&#038;ver=3.5.1" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold" type="text/css" media="all" />
+        {$layout.stylesheets}
+        {$layout.layoutcss}
+        <link rel="stylesheet" href="html/css/default.php" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}reset.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}bootstrap/bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}bootstrap/select/bootstrap-select.min.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}bootstrap/dcms.breadcrumbs.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}bootstrap/bootstrap-theme.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/html/js/jquery/fancybox/style.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}jquery-ui.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}wrapper.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}layout.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}typo.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}navi.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}style-base.css" type="text/css" />
+        <link rel="stylesheet" href="{cfg('portalurl')}/{$css_url}repo.css" type="text/css" />
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            // Test
+            var cookiePrefix = '{$cookieprefix}';
+            var systemUrl = '{cfg("portalurl")}';
+            var coreHtmlPath = '/html/';
+            var skinUrl = '{@SKIN_URL}';
+            var googleApiKey = '{cfg("googleapikey")}';
+            var token = '{gettoken()}';
+            
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="main/lang?_{$cookieprefix}"></script>
+        <script type="text/javascript" src="asset/js/jquery/jquery.202.min,jquery/jquery-ui.1.10.0.min,backend/modernizr,dcms-core,jquery/fancybox/jquery.easing-1.3.pack,jquery/fancybox/jquery.mousewheel-3.0.2.pack,jquery/fancybox/jquery.fancybox-1.3.1,jquery/jquery.scrollTo"></script>
+        <script type="text/javascript" src="{cfg('portalurl')}/{$img_url}js/skin.js"></script>
+        {$layout.javascripts}
+        <link rel="icon" href="asset/img/html/img/favicon.ico" type="image/x-icon"/>
+        <cp:include template="seemode_include"/>
+        {$layout.headtags}
+    </head>
+    <body id="top" class="{$controller-action} offline {$layout.cols}">
+        <div class="offline-mode">
+            <div class="offlinemod">
+            </div>
+            <div class="offline-message">
+                <h3>
+                    Upss... Offline...
+                </h3>
+                <cp:if condition="$offlinemessage">
+                    {$offlinemessage}
+                </cp:if>
+                <cp:else>
+                    {cfg('offlinemessage')}
+                </cp:else>
+            </div>
+        </div>
+        <script type="text/javascript" src="{cfg('portalurl')}/html/js/dcmsTracker.js"></script>
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            $(document).ready(function() {
+                page = '{$request.page}';
+                if ($.browser.msie) {
+                    var sliderConfig = {
+                        rotate: true
+                    };
+                } else {
+                    var sliderConfig = {
+                        effect: "fade",
+                        fadeOutSpeed: "slow",
+                        rotate: true
+                    };
+                }
+                $('a.share,a.popup').bind("click", function(a) {
+                    a.preventDefault();
+                    var b = $(this),
+                        a = b.attr("href");
+                    (b = b.attr("title")) || (b = "Window...");
+                    window.open(a, b, "toolbar=no, width=650, height=450");
+                    return false;
+                });
+                if ($('#front-slideshow').length == 1) {
+                    // add new effect to the tabs
+                    $.tools.tabs.addEffect("slide", function(i, done) {
+                        // 1. up on hiding, the active pane has a ruby background color
+                        this.getPanes().slideUp().css({
+                            backgroundColor: "#b8128f"
+                        });
+                        // 2. after a pane is revealed, its background is set to its original color (transparent)
+                        this.getPanes().eq(i).slideDown(function() {
+                            $(this).css({
+                                backgroundColor: 'transparent'
+                            });
+                            // the supplied callback must be called after the effect has finished its job
+                            done.call();
+                        });
+                    });
+                    $('#front-slideshow').tabs("#slider li", sliderConfig).slideshow({
+                        autoplay: true,
+                        effect: 'slide',
+                        interval: 3000,
+                        autopause: false,
+                        clickable: false
+                    });
+                }
+                setTimeout(function() {
+                    dcmsTracker();
+                }, 1000);
+            });
+            /* ]]> */
+        </script>
+    </body>
+</html>

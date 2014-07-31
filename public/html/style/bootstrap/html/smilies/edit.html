@@ -1,0 +1,115 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+        [save:admForm] [save_exit:admForm] [reset:admForm] [cancel:admForm] 
+
+</cp:block>
+
+<cp:block name="content">
+
+<form method="post" action="admin.php" id="admForm" name="admForm">
+    
+    <input type="hidden" name="adm" value="smilies" />
+    <input type="hidden" name="send" value="send" />
+    <input type="hidden" name="action" value="add" />
+    <input type="hidden" name="posthash" value="{$posthash}" />
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Smilie Gruppe')}</label>
+            <input class="required form-control" type="text" name="grouptitle" id="smilie-grouptitle" value="" size="60" maxlength="255"/>
+        </div>
+
+        <div class="col-md-6">
+            <label>{trans('Gruppe auswählen')}</label>
+            <select name="groupid" id="smilie-groupid" class="select">
+                <option value=""> --- </option>
+                <cp:loop name="smiliegroups" key="r">
+                    <option value="{$r.smilieid}">{$r.smilietitle}</option>
+                </cp:loop>
+            </select>
+        </div>
+    </div>
+
+    <div id="smilie-upload">
+        <div class="row">
+            <div class="col-md-12">
+                <label>{trans('Upload')}</label>
+
+
+                <div id="smilieupload-container" style="display:inner-block">
+                    <span class="drop-here">Drop Files here...</span>
+                    <span class="browse btn btn-default">Browse</span>
+                    <span class="allowed-info">
+                        <span class="allowed-extensions"></span>
+                        <span class="allowed-filesize"></span>
+                    </span>
+                    <input type="file" name="Filedata" multiple="multiple" class="form-control"/>
+                </div>
+
+                <ul class="dropped-files">
+                    <!-- The file uploads will be shown here -->
+                </ul>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="smilie-upload-preview" style="display: none">
+        <ul class="smilies"></ul>
+    </div>
+
+</form>
+
+
+
+
+<script type="text/javascript">
+
+
+Tools.MultiUploadControl({
+    control: "smilieupload-container",
+    adm: "smilies",
+    action: "upload",
+    url: "admin.php",
+    uploadpath: '',
+    file_type_text: "Alle Bild Dateien",
+    max_file_size: {cfg('smilies/maxuploadsize', 1024)} * 1024,
+    file_type_mask: '{cfg("smilies/allowedextensions", "*.zip,*.gif,*.png")}',
+    posthash: '{$posthash}',
+    postParams: {
+        adm: "smilies",
+        action: "upload",
+        posthash: '{$posthash}',
+    },
+    onError: function(data, evaldata, file) {
+        if (data.msg) {
+            Notifier.warn(data.msg);
+        }
+    },
+    onSuccess: function(data, evaldata, file)
+    {
+        if (data != null && data.fileurl && data.filename)
+        {
+            var smilie = $('<li rel="smilie-'+ data.smilieid +'"><i rel="'+ data.smilieid +'">x</i><div class="smilie"><img src="'+ data.smiliepath +'"/></div><div class="smilie-label"><input type="text" value="'+ data.smiliecode +'" name="smilie[{$posthash}]['+ data.smilieid +']"/></div></li>');
+            smilie.find('i:first').click(function() {
+
+                var li = $(this).parent();
+                $.get('admin.php?adm=smilies&action=upload&posthash={$posthash}&remove=' + $(this).attr('rel') , function(dat) {
+                    if (Tools.responseIsOk(dat)) {
+                        li.remove();
+                    }
+                });
+            });
+
+            $('#smilie-upload-preview ul').append(smilie).show();
+        }
+    }
+});
+
+</script>
+</cp:block>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<banner_types>
+	<banner width="468" height="60">Full Banner</banner>
+	<banner width="234" height="60">Half Banner</banner>
+	<banner width="120" height="240">Vertical Banner</banner>
+	<banner width="120" height="60">Button</banner>
+	<banner width="125" height="125">Square Button</banner>
+	<banner width="88" height="31">Micro Button</banner>
+	<banner width="120" height="600">Skyscraper</banner>
+	<banner width="160" height="600">Wide Skyscraper</banner>
+	<banner width="300" height="240">Rectangle</banner>
+	<banner width="none" height="none">Flash (SWF)</banner>
+</banner_types>

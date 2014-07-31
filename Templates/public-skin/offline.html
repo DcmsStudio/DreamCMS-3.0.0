@@ -1,0 +1,23 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+    <div class="offline-mode">
+        <div class="">
+            <div class="offlinemod">
+            </div>
+            <div class="offline-mode-msg">
+                <h3>
+                    Offline...
+                </h3>
+                <cp:if condition="$offlinemessage">
+                    {$offlinemessage}
+                </cp:if>
+                <cp:else>
+                    {cfg('offlinemessage')}
+                </cp:else>
+                <p>
+                    {trans('Vielen Dank für Ihr Verständnis.')}
+                </p>
+            </div>
+        </div>
+    </div>
+</cp:block>

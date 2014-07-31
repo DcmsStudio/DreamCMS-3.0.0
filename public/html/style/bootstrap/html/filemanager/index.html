@@ -1,0 +1,143 @@
+<cp:extends template="../main"/>
+<cp:block name="toolbar">
+
+    <div id="std-btn">
+        <button class="action-button" id="add-file-btn">
+            <img src="html/style/default/img/fileman/add.png" width="16" height="16" alt="" /> {trans('Datei Erstellen')}
+        </button>
+        <button class="action-button" id="add-folder-btn">
+            <img src="html/style/default/img/fileman/folder_add.png" width="16" height="16" alt="" /> {trans('Verzeichnis Erstellen')}
+        </button>
+        <button class="action-button" id="delete-btn">
+            <img src="html/style/default/img/fileman/delete.png" width="16" height="16" alt="" /> {trans('Löschen')}
+        </button>
+        <button class="action-button" id="edit-file-btn">
+            <img src="html/style/default/img/edit.png" width="16" height="16" alt="" /> {trans('Bearbeiten')}
+        </button>
+        <button class="action-button" id="rename-btn">
+            <img src="html/style/default/img/fileman/rename.png" width="16" height="16" alt="" /> {trans('Umbenennen')}
+        </button>
+        <button class="action-button" id="zip-btn">
+            <img src="html/style/default/img/buttons/zip.png" width="16" height="16" alt="" /> {trans('Zip Datei erstellen')}
+        </button>
+        <button class="action-button" id="upload-btn">
+            <img src="html/style/default/img/fileman/folder_go.png" width="16" height="16" alt="" /> {trans('Upload')}
+        </button>
+    </div>
+    
+    <!-- View Mode -->
+    <div id="back-btn" style="float:left;display:none">
+        <button class="action-button" id="fm-exitbtn">
+            <img src="html/style/default/img/back.png" width="16" height="16" alt="" /> {trans('Zurück')}
+        </button>
+    </div>
+    
+    <!-- View Mode -->
+    <div id="edit-add-btn" style="float:left;display:none">
+        
+        <button class="action-button" id="save-filebtn">
+            <img src="html/style/default/img/buttons/save.png" width="16" height="16" alt="" /> {trans('Speichern')}
+        </button>
+        
+        <button class="action-button" id="save-exitfilebtn">
+            <img src="html/style/default/img/buttons/save.png" width="16" height="16" alt="" /> {trans('Speichern & Schließen')}
+        </button>
+        
+        <button class="action-button" id="reset-filebtn">
+            <img src="html/style/default/img/refresh.png" width="16" height="16" alt="" /> {trans('Zurücksetzen')}
+        </button>
+    </div>
+    <div id="copymove_container">
+        <div id="copymove_cache">
+            <div id="copy_cache" style="display:none"><img src="html/style/default/img/folder_page.png" width="16" height="16" alt="" /></div>
+            <div id="move_cache" style="display:none"><img src="html/style/default/img/forward.png" width="16" height="16" alt="" /></div>        
+        </div>
+    </div>
+    <div id="viewmode_container">
+        <img id="mode_smaller" src="html/style/default/img/fileman/view_list.png" width="16" height="16" alt="" title="List View"/> 
+        <img id="mode_larger" src="html/style/default/img/fileman/view_largelist.png" width="16" height="16" alt="" title="Thumb List View" />    
+    </div>
+
+    
+</cp:block>
+
+<cp:block name="content">
+<div style="width:100%; display:block; margin-top:5px">
+    <div id="file-info">
+        <div>
+            <strong>{trans('Path')}</strong>: <a class="file-path-button file-path-root">Root</a>
+            <span id="path-container"></span>
+        </div>
+    </div>
+    
+    <div id="fmOuterContainer">
+        <div id="upload-container"></div>
+        <div id="fmContainer"></div>
+        <div id="fmFileView" style="display:none"></div>
+        <div id="fmFileEditAdd" style="display:none">
+            <form id="FileEditAdd_form" name="FileEditAdd_form" action="">
+                <fieldset>
+                    <legend>{trans('Dateiname')}</legend>
+                    <input class="input" type="text" id="filename" name="filename" value="" size="72" maxlength="80" />        
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Inhalt')}</legend>                    
+                    <textarea class="textarea" cols="30" rows="20" name="filecontent" id="filecontent"></textarea>
+                </fieldset>    
+            </form>
+        </div>
+        <div id="fileInformation">
+            
+        </div>
+    </div>
+</div>
+
+<ul id="FileContexMenu" class="dcmscontextmenu">
+    <li><a href="#edit" id="file_edit"><span class="file_edit"></span>Edit</a></li>
+    <li><a href="#cut" id="file_cut"><span class="file_cut"></span>Cut</a></li>
+    <li><a href="#copy" id="file_copy"><span class="file_copy"></span>Copy</a></li>
+    <li><a href="#past" id="file_paste"><span class="file_paste"></span>Paste</a></li>
+    <li><a href="#delete" id="file_delete"><span class="file_delete"></span>Delete</a></li>            
+    <li class="separator"><div class="menu-separator"></div></li>            
+    <li><a href="#addfolder" id="file_addfolder"><span class="file_addfolder"></span>Create Folder</a></li>                
+    <li><a href="#addfile" id="file_addfile"><span class="file_addfile"></span>Create File</a></li>
+    <li class="separator"><div class="menu-separator"></div></li>            
+    <li><a href="#refresh" id="file_refresh"><span class="file_refresh"></span>Refresh</a></li>            
+</ul>
+
+
+<script type="text/javascript" language="javascript" src="html/js/backend/dcmsfileman.js"></script>
+
+    <script type="text/javascript" language="javascript">
+
+$(document).ready( function() {
+
+
+    fileManager3 = new dcmsFileman();
+    fileManager3.init({
+        object: '#{$mediabrowser}fmContainer',
+        data_url: cmsurl + 'admin.php?adm=jqfiletree&ajax=1&readdir=',
+        path: '{iif($path != "", $path, '/')}',
+        image_types: 'jpg,jpeg,png,gif',
+        movie_types: 'swf,fly,flv,avi,mpg,mpeg',
+        client_source_path: 'html/',
+        media: false,
+        <cp:if condition="$imagebrowser">isImgBrowser: true</cp:if>
+    });
+
+    fileManager3.getData('{iif($path != "", $path, '/')}', ('{$path}' ? true : false) );
+    $('#maincontent').bind('click', function(e){ fileManager3.deselectNodes(e, fileManager3); });
+
+
+
+
+
+});
+
+    </script>
+
+
+
+
+</cp:block>

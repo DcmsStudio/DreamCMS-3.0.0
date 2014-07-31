@@ -1,0 +1,12 @@
+<cp:if condition="count($tags)">
+    <div class="box{iif($boxclass, $boxclass, '')}">
+        <h3 cp:if="$boxlabel">
+            {$boxlabel}
+        </h3>
+        <div>
+            <cp:loop name="tags" key="r">
+                <a href="{lower(@CONTROLLER)}/tag/{escape($r.tag, 'url')}">{escape($r.tag, 'html')}</a>
+            </cp:loop>
+        </div>
+    </div>
+</cp:if>

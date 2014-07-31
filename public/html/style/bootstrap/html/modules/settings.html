@@ -1,0 +1,69 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    [save:admForm] [save_exit:admForm] 
+    [reset:admForm] [cancel:admForm]
+
+</cp:block>
+
+<cp:block name="content">
+
+    <form method="post" action="admin.php" id="admForm" name="admForm">    
+        <input type="hidden" name="adm" value="modules" />
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="action" value="settings" />
+        <input type="hidden" name="id" id="modulid" value="{$modul.id}" /> 
+
+        <div class="box">
+            <h2>{trans('Einstellungen für das Modul %s', $modul.modultitle)}</h2>
+            <div class="box-inner top">
+
+                <cp:if condition="$modul.moduledescription">
+                    <p>{$modul.moduledescription}</p>
+                </cp:if>
+
+
+                <cp:if condition="count($modulfields)">
+                    <cp:set var="col" value="1"/>                    
+
+                    <cp:loop name="modulfields" key="r">
+                        <cp:if condition="$col == 1">                            
+                            <cp:tag name="div" class="fieldset2"/>
+                        </cp:if>
+
+                        <fieldset>
+                            <legend>
+                                <cp:if condition="$r.grouplabel">{$r.grouplabel}</cp:if>
+                                <cp:else>{$r.label}</cp:else> {iif($r.required, ' *', '')}
+                            </legend>
+                            {$r.field}                        
+                            <cp:if condition="$r.description">
+                                <br/><small>{$r.description}</small>
+                            </cp:if>                        
+                        </fieldset>
+
+                        <cp:if condition="$col >= 2 || !$r.next_r.id">
+                            <cp:set var="col" value="0"/>
+                            <cp:tag name="div" forceclose="true" class="fieldset2"/>
+                            
+                        </cp:if>
+
+                        <cp:set var="col" value="$col + 1"/>
+                    </cp:loop>
+                </cp:if>
+            </div>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+            <cp:literal type="cdata_comment">
+            $(document).ready( function() {    
+            $('#admForm').registerForm({
+                contentIdentifierID: 'modulid',
+                exiturl: 'admin.php?adm=modules'
+            });
+        });
+
+            </cp:literal>
+    </script>
+</cp:block>

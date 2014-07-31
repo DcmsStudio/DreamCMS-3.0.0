@@ -1,0 +1,294 @@
+.menu,
+#Start-Menu {    
+    max-width: 200px!important;
+    width: auto;
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    z-index:9000;
+    display: none;
+    color: #333;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 500;
+    -moz-user-select: none!important;
+    -webkit-user-select: none!important;
+    -ms-user-select: none!important;
+    cursor: auto!important;
+}
+
+.menu-separator {
+    border-top: 1px solid #000;
+}
+
+#main-menu {
+    font-size: 14px;
+}
+#main-menu a {
+    text-decoration: none!important;
+    color: #f1f1f1;
+    text-shadow: 0px 1px 0px #2c2c2c;
+    cursor: default;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+#main-menu span.item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+
+.menu ul,
+#main-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.menu > ul,
+#main-menu > ul {
+    cursor: default;
+}
+
+
+#main-menu > ul > li {
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: relative;
+    height: 24px;
+    line-height: 24px;
+}
+#menu-extras > span:hover,
+#main-menu > ul > li:hover,
+#main-menu > ul > li.active {
+    background: #333;
+    box-shadow: 1px 0 0 0 black inset, 1px 0 0 0 black, 0 1px 0 0 rgba(255,255,255,.15) inset;
+    color: #eff2fd;
+
+}
+
+#menu-extras > span {
+    padding-left: 7px;
+    padding-right: 6px;
+    position: relative;
+    height: 24px;
+    min-width: 16px;
+    line-height: 24px;
+    display: inline-block;
+    line-height: 24px;
+}
+#menu-extras > span > img {
+    position: relative;
+    top: 3px;
+    -webkit-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter:grayscale(100%);
+    -moz-osx-font-smoothing: grayscale;
+}
+#menu-extras .calOpen, #menu-extras > .active {
+    background: #333;
+    box-shadow: 1px 0 0 0 black inset, 1px 0 0 0 black, 0 1px 0 0 rgba(255,255,255,.15) inset;
+    color: #C5C5FD;
+}
+
+
+
+
+#menu-extras #console span {
+    height: 24px;
+    width: 16px;
+    line-height: 24px;
+    display: inline-block;
+}
+#menu-extras #user-login span {
+    height: 24px;
+    width: 16px;
+    line-height: 24px;
+    display: inline-block;
+}
+
+
+#contenttrans-selector img, #fav-selector img {
+    -webkit-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter:grayscale(100%);
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+#switch-fullscreen .fa-compress {
+    color: #f7ff98;
+}
+
+
+
+
+
+.menu > ul,
+#main-menu > ul > li .submenu {
+    margin: 0;
+    padding: 0;
+    background: #333;
+    border: 1px solid #00040a;
+    border-top: 0;
+    -moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.65);
+    -webkit-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.65);
+    box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.65);
+    overflow: visible;
+    width: auto;
+    min-width: 150px;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 24px;
+    z-index: 1000;
+    -webkit-animation-name: flipInX;
+    -moz-animation-name: flipInX;
+    -o-animation-name: flipInX;
+    animation-name: flipInX;
+    -webkit-animation-duration: .7s;
+    -moz-animation-duration: .7s;
+    -o-animation-duration: .7s;
+    animation-duration: .7s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+
+}
+.menu > ul {
+    display: inline-block;
+    position: relative;
+    left: 0;
+    top: 0;
+    color: #fff;
+}
+
+#main-menu > ul > li li .submenu {
+    left: 100%;
+    top: 0;
+    border: 1px solid #00040a!important;
+
+
+    -webkit-animation-name: flipInX;
+    -moz-animation-name: flipInX;
+    -o-animation-name: flipInX;
+    animation-name: flipInX;
+
+
+    -webkit-animation-duration: .4s;
+    -moz-animation-duration: .4s;
+    -o-animation-duration: .4s;
+    animation-duration: .4s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+
+
+#main-menu > ul > li li {
+    position: relative;
+    height: 22px;
+    line-height: 22px;
+    padding-left: 4px;
+    padding-right: 4px;
+    color: #f1f1f1;
+    text-shadow: 0px 1px 0px #2c2c2c;
+}
+#main-menu > ul > li li img {
+    display: inline-block;
+    margin-right: 3px;
+    vertical-align: middle;
+    -webkit-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter:grayscale(100%);
+    -moz-osx-font-smoothing: grayscale;
+}
+#main-menu > ul > li li img.spacer {
+
+}
+
+#main-menu > ul > li li em {
+    position: absolute;
+    right: 5px;
+    width: 10px;
+    height: 12px;
+    top: 6px;
+    background-image: url('../img/menu/submenu_arrow.gif');
+    background-repeat: no-repeat;
+    background-position: right -15px; 
+}
+
+
+.menu > ul li.active,
+.menu > ul li:hover,
+#main-menu > ul > li li.active,
+#main-menu > ul > li li:hover {
+    background-color: #262626;
+    color: #F5B53C;
+}
+
+
+#main-menu > ul > li li.active > a,
+#main-menu > ul > li li:hover > a {
+    color: #F5B53C;
+}
+
+
+.menu ul li {
+    line-height: 20px;
+    padding-left: 4px;
+    padding-right: 4px;
+    color: #f1f1f1;
+    text-shadow: 0px 1px 0px #2c2c2c;
+}
+.menu ul li span {
+    line-height: 20px;
+}
+.menu ul li img {
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+
+.menu li span.menu-group,
+#main-menu li span.menu-group {
+    margin-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.menu li.separator,
+#main-menu li.separator {
+    height: 3px!important;
+    line-height: 3px!important;
+    background-color: transparent!important;
+}
+.menu li .menu-separator
+#main-menu li .menu-separator {
+    margin: 2px 3px;
+    border-top: 1px solid #353535;
+    border-bottom: 1px solid #565656;
+    margin-bottom: 3px;
+}
+
+.menu li a span,
+#main-menu li a span{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 3px;
+}
+
+#main-menu li.active > .submenu {
+    display: block!important;
+}

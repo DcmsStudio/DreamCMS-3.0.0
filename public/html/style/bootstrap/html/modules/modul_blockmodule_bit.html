@@ -1,0 +1,106 @@
+<?php
+
+function ___modul_blockmodule_bit($row){
+global $adm_skin, $cp;
+
+
+	static $i;
+
+	$css = $i++%2 ? 'firstrow' : 'secondrow';
+
+        $row['description'] = str_replace("'", "\'", $row['title'].'<br>'.$row['description']);
+
+
+        $tdover = $row['description'] != '' ? " onmouseover=\"showtooltip('{$row['description']}', 'tooltip')\" onmouseout=\"hidetooltip('tooltip');\"" : '';
+
+        $code = <<<EOF
+				<tr onmouseover="over(this)" onmouseout="out(this)" class="$css">
+
+					<td{$tdover}>
+					{$row[module]}
+					</td>
+					<td>
+					{$row[author]}
+					</td>
+					<td align="center">
+					{$row[version]}
+					</td>
+					<td align="center">
+					{$row[date]}
+					</td>
+					<td align="center">
+					{$row[email]}
+					</td>
+					<td>
+EOF;
+
+        if ($row['url'] != "")
+        {
+            $code .= "<a href=\"" .(substr( $row[url], 0, 7) == 'http://' ? $row[url] : 'http://'.$row[url]) ."\" target=\"_blank\">{$row[url]}</a>";
+
+        }
+        else
+        {
+            $code .= "&nbsp;";
+        }
+
+        if ( $row['published'] == 1 )
+        {
+            $img = '<img src="images/online.gif" alt="Online" />';
+        }
+        else
+        {
+            $img = '<img src="images/offline.gif" alt="Offline" />';
+        }
+
+        $activate_link = '';
+
+        if ( $row['published'] == -1 && isset($row['published']) )
+        {
+            $activate_link = "<a href=\"admin.php?adm=modules&amp;action=blockmodule&amp;do=publish&amp;module_id={$row['modid']}&amp;blockmodule={$row['module']}&amp;sid={$cp->session_id}\"><img src=\"images/online.gif\" alt=\"Blockmodul Aktivieren\" title=\"Blockmodul Aktivieren\" border=\"0\" /></a> &nbsp; ";
+        }
+
+        if ( $row['published'] == 1 && isset($row['published']))
+        {
+			$activate_link = "<a href=\"admin.php?adm=modules&amp;action=blockmodule&amp;do=publish&amp;module_id={$row['modid']}&amp;blockmodule={$row['module']}&amp;sid={$cp->session_id}\"><img src=\"images/offline.gif\" alt=\"Blockmodul Deaktivieren\" title=\"Blockmodul Deaktivieren\" border=\"0\" /></a> &nbsp; ";
+        }
+
+        $del_link = '';
+        $install_link = '';
+
+        if ( isset($row['published']) )
+        {
+        	$del_link = "<a href=\"admin.php?adm=modules&amp;action=blockmodule&amp;do=uninstall&amp;module_id={$row['modid']}&amp;blockmodule={$row['module']}&amp;sid={$cp->session_id}\"><img src=\"images/delete.gif\" alt=\"DeInstallieren\" title=\"DeInstallieren\" border=\"0\" />";
+        }
+
+        if ( empty($row['published']) )
+        {
+        	$activate_link = '';
+        	$del_link = '';
+        	$install_link = "<a href=\"admin.php?adm=modules&amp;action=blockmodule&amp;do=install&amp;module_id={$row['modid']}&amp;blockmodule={$row['module']}&amp;sid={$cp->session_id}\"><img src=\"images/install.gif\" alt=\"Installieren\" title=\"Installieren\" border=\"0\" />";
+        }
+
+
+		$code .= <<<EOF
+					</td>
+					<td align="center">$img</td>
+					<td align="center">
+					$install_link
+					$activate_link
+					$del_link
+					</td>
+				</tr>
+EOF;
+
+
+	return $code;
+
+
+
+
+
+//-----------------------------------------------------
+// Container
+}
+
+?>

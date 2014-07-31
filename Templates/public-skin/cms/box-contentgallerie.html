@@ -1,0 +1,130 @@
+<cp:if condition="count($inlinegallery_images)">
+    <cp:if condition="!$jcarouselIndex">
+        <cp:set var="jcarouselIndex" value="1"/>
+    </cp:if>
+    <cp:set var="jcarouselIndex" value="$jcarouselIndex++"/>
+    <div id="jcarousel-{$jcarouselIndex}" class="jcarousel-wrapper">
+        <div class="jcarousel">
+            <ul>
+                <cp:loop name="inlinegallery_images" key="r">
+                    <li parse:rel="{replace('(/?public/)', '', $r.filepath)}">
+                        <div>
+                            <cp:thumb src="$r.filepath" aspect="true" height="90" width="120" title="$r.title" shrink="false"/>
+                        </div>
+                        <span cp:is="$r.description" class="description">
+                            {$r.description}
+                        </span>
+                    </li>
+                </cp:loop>
+            </ul>
+        </div>
+        <span class="jcarousel-control-prev">
+            &lsaquo;
+        </span>
+        <span class="jcarousel-control-next">
+            &rsaquo;
+        </span>
+        <p class="jcarousel-pagination">
+        </p>
+    </div>
+    <script type="text/javascript">
+        (function($) {
+            $(function() {
+            var jcarousel = $('#jcarousel-{$jcarouselIndex} .jcarousel');
+                var inner = jcarousel.find('ul').outerWidth(true);
+                if ( inner<=jcarousel.width() )
+                {
+                    $('#jcarousel-{$jcarouselIndex} .jcarousel-control-prev').hide();
+                    $('#jcarousel-{$jcarouselIndex} .jcarousel-control-next').hide();
+                    $('#jcarousel-{$jcarouselIndex} .jcarousel-pagination').hide();
+                }
+
+            
+            jcarousel.jcarousel({
+                animation: {
+                    duration: 500,
+                    easing:'linear',
+                    complete: function() {
+                    }
+                },
+                center: false,
+                wrap: 'circular'
+            });
+            
+
+            
+        $('#jcarousel-{$jcarouselIndex} .jcarousel-control-prev')
+        .jcarouselControl({
+            target: '-=5'
+        });
+        $('#jcarousel-{$jcarouselIndex} .jcarousel-control-next')
+        .jcarouselControl({
+            target: '+=5'
+        });
+        $('#jcarousel-{$jcarouselIndex} .jcarousel-pagination')
+        .on('jcarouselpagination:active', 'a', function() {
+            $(this).addClass('active');
+        })
+        .on('jcarouselpagination:inactive', 'a', function() {
+            $(this).removeClass('active');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselPagination({
+            perPage: 5,
+            item: function(page) {
+                return '<a href="#' + page + '">' + page + '</a>';
+            }
+        });
+        
+        
+        
+        jcarousel.find('li img').each(function() {
+            
+            
+            
+            
+            $(this).fancybox({
+                'padding': 10,
+                'transitionIn': 'elastic',
+                'transitionOut': 'elastic',
+                'easingIn': 'swing',
+                'easingOut': 'swing',
+                'speedIn': 700,
+                'speedOut': 500,
+                'titlePosition': 'over',
+                'titleShow': true,
+                'type': 'image',
+                'href': 'asset/img/'+$(this).parents('li:first').attr('rel'),
+                onComplete: function (currentArray, currentIndex, currentOpts) {
+                    $("#fancybox-inner").unbind('hover').hover(function () {
+                        $("#fancybox-title-over").slideUp(300, function(){
+                            $(this).width('');
+                        });
+                        }, function () {
+                            $("#fancybox-title-over").slideDown(300, function(){
+                                $(this).width('');
+                            });
+                        });
+                    },
+                    'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
+                        if (!title || title == 'Image') {
+                            return '';
+                        }
+                        
+                        var descriptionLayout = '<strong>' + title + '</strong><br/>';
+                        if ($(currentArray[ currentIndex ]).parents('li:first').find('span.description').length) {
+                            var descr = $(currentArray[ currentIndex ]).parents('li:first').find('span.description').html();
+                            descriptionLayout += (descr ? '<p>' + descr + '</p>' : '');
+                        }
+                        
+                        return '<span id="fancybox-title-over">' + descriptionLayout + '</span>';
+                    }
+                });
+            });
+        });
+        
+        })(jQuery);
+    </script>
+</cp:if>

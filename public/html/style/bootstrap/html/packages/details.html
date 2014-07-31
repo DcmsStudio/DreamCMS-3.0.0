@@ -1,0 +1,462 @@
+<cp:extends template="../repository"/>
+<cp:block name="cssinline">
+
+    <style type="text/css">
+
+        .external {
+            background: url({setting('base_url')}asset/img/icon/external-link.png) top right no-repeat;
+        padding: 0 18px 0 0;
+        }
+
+        .package-warning {
+            border: 1px solid #FFBBBB;
+            background: #ffdddd;
+        color: #333;
+        }
+        .package-warning img {
+        vertical-align: -3px;
+        }
+        .pack-description {
+            color: #333;
+        padding: 5px 10px;
+        }
+        .pack-description.install {
+            border: 1px solid orange;
+        background: cornsilk;
+        }
+        .comment-title {
+            border: 1px solid #d0d0d0;
+            background: #D5E1F3 url({setting('base_url')}asset/img/bg/bg-toolbar.png) repeat-x 0 top;
+            color: #333;
+            padding: 5px 10px;
+            margin: 5px 0 0 0;
+            -moz-border-radius-topleft: 5px;
+            -webkit-border-top-left-radius: 5px; 
+            -moz-border-radius-topright: 5px;
+        -webkit-border-top-right-radius: 5px; 
+        }
+        .comment {
+            border: 1px solid #d0d0d0;
+            border-top: 0;
+            background: #fff;
+            color: #333;
+            padding: 5px 10px;
+            margin: 0 0 5px 0;
+            -moz-border-radius-bottomleft: 5px;
+            -webkit-border-bottom-left-radius: 5px; 
+            -moz-border-radius-bottomright: 5px;
+            -webkit-border-bottom-right-radius: 5px;
+        font-size: 13px;
+        }
+        #star-message {
+            font-style: italic;
+        color: #777;
+        }
+        #star,
+        #rating {
+            float: left;
+            font-style: italic;
+        color: #777;
+        }
+        #rating {
+        margin-left: 20px;
+        }
+        .code-container {
+            font-size: 12px;
+            border: 1px solid #d0d0d0;
+        padding-left: 10px;
+        }
+        .code-title {
+            border: 1px solid #d0d0d0;
+            border-bottom: 0;
+            padding: 5px 10px;
+            font-weight: bold;
+        background: #D5E1F3 url(asset/img/bg/bg-toolbar.png) repeat-x 0 top;
+        }
+        .smiley {
+        vertical-align: -3px;
+        }
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+#widget-contents {
+    height:100%;
+    display:inline-block;
+}
+    #content {
+    overflow:auto;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function() {
+        $('#content').css({
+        height: $(window).height() - 60 +'px',maxHeight: $(window).height()- 60 +'px',minHeight: $(window).height()- 60 +'px'
+        });
+      });
+    </script>
+</cp:block>
+
+
+    <cp:block name="toolbar">
+        <button id="back-link" class="action-button back" rel="{$return_url}"><span></span> {trans('Zurück %s', $test, 's55', 'escape:htmlall')}</button>
+    </cp:block>
+
+    <cp:block name="content">
+        
+        <h2>{$package_type}: {$remote_package.name} - {$remote_package.version}</h2>
+        
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 105px; vertical-align: top;">
+                    <img src="{$repository_url}image/{$remote_package.type}/{$remote_package.key}/plugin-large.png" width="96" alt="" />
+                </td>
+                <td>
+                    <div class="box">
+                        <h2>{trans("Kurzbeschreibung")}</h2>
+                        <div class="box-inner pack-description">
+                            <em>{$remote_package.description}</em>
+                        </div>
+                    </div>
+                    
+                    
+                    <table style="width: 100%" cellpadding="0" cellspacing="0" id="author-info">
+                        <tr>
+                            <td style="padding-right: 5px;">
+                                
+                                <div class="box">
+                                    <h2>{trans("Author dieses Packetes")}</h2>
+                                    <div class="box-inner pack-description" style="height: 32px;">
+                                        {trans("This package was written by <strong>%s</strong>.", $remote_package.author)}
+
+                                        <cp:if condition="$remote_package.email != ''">
+                                            <br />{trans('The author´s email address is <strong>%s</strong>.', $remote_package.email)}
+                                        </cp:if>
+
+                                        <cp:if condition="$remote_package.website != ''">
+                                            <br />{trans('The author´s website is <a class="external" href="%s">%s</a>.', $remote_package.website, $remote_package.website)}
+                                        </cp:if>
+
+                                    </div>
+                                 </div>
+                                
+                            </td>
+                            <td style="padding-left: 5px; width: 400px;">
+                                
+                                <div class="box">
+                                    <h2>{trans("Bewertung")}</h2>
+                                    <div class="box-inner pack-description" style="height: 32px;">
+                                        <div id="star"></div>
+                                        <div id="rating">({$rating})</div>
+                                        <br class="clearer" />
+                                        <div id="star-message">
+
+
+                                            <cp:if condition="$remote_package.votes == 0">
+                                                {trans("No votes yet... be the first to rate this package!")}
+                                            </cp:if>
+                                            <cp:else>
+
+                                                <cp:if condition="!$remote_package.can_vote">
+                                                    {trans("Votes registered, including yours")}: {$remote_package.votes}
+                                                </cp:if>
+                                                <cp:else>
+                                                    {trans("Votes registered")}: {$remote_package.votes} <small>({trans("be sure to add your vote!")})</small>
+                                                </cp:else>
+
+                                            </cp:else>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                            </td>
+                        </tr>
+                    </table>
+                    
+
+                    <cp:if condition="$remote_package.long_description != '' ">
+                        <div class="box">
+                            <h2>{trans("Erweiterte Beschreibung des Packetes")}</h2>
+                            <div class="box-inner pack-description">
+                                {$remote_package.long_description}
+                            </div>
+                        </div>
+                    </cp:if>
+
+                <div class="box">
+                    <h2>{trans("Installation")}</h2>
+                    <div class="box-inner pack-description install">
+
+                        <cp:if condition="$status=='INSTALLED'">
+                            <span style="color: darkgreen;">
+                                <img src="images/package/package-repo.png" width="16" height="16" alt="" style="vertical-align: -3px;" />
+                                {trans("This package is installed and is up-to-date.")}
+                            </span>
+                            
+                            <button id="update-button" class="pretty-button">
+                                <img src="images/package/package-add.png" width="16" height="16" alt="" />
+                                {trans("Packet neu Installieren")}
+                            </button>
+                            
+                            <script type="text/javascript">
+                                $(function() {
+                                $('#update-button').click(function() {
+                                jConfirm('{trans("Are you sure you want to re-install the package?\n\nYou may lose saved data.")|escape:"javascript"}', 'Fruml CMS', function(res) {
+                                if(res) {
+                                $.pagemask.show('{trans("Please wait while the package is downloaded and installed...")}');
+                                document.location.href = 'admin.php?adm=packages&action=fetch&type={$remote_package.type}&key={$remote_package.key}';
+                                }
+                                });
+                                });
+                                });
+                            </script>
+                        </cp:if>
+
+                        <cp:elseif condition="$status == 'UPDATE'">
+                            <span style="color: darkorange;">
+                                <img src="images/package/package-repo.png" width="16" height="16" alt="" style="vertical-align: -3px;" />
+                                {trans("This package is installed but isn't up-to-date.")}
+                            </span>
+                            
+                            <button id="update-button" class="pretty-button">
+                                <img src="images/package/package-add.png" width="16" height="16" alt="" />
+                                {trans("Packet Aktualisieren")}
+                            </button>
+                            
+                            <script type="text/javascript">
+                                $(function() {
+                                $('#update-button').click(function() {
+                                jConfirm('{trans("Are you sure you want to update the package?")}', 'Fruml CMS', function(res) {
+                                if(res) {
+                                $.pagemask.show('{trans("Please wait while the package is downloaded and installed...")}');
+                                document.location.href = 'admin.php?adm=packages&action=fetch&type={$remote_package.type}&key={$remote_package.key}';
+                                }
+                                });
+                                });
+                                });
+                            </script>
+                        </cp:elseif>
+                        <cp:elseif condition="$status=='NEWER'">
+
+                            <img src="images/package/package-repo.png" width="16" height="16" alt="" style="vertical-align: -3px;" />
+                            {trans("This package is already installed and is newer than the version in the Fruml Repository.")}
+                            
+                        </cp:elseif>
+                        <cp:else>
+                            
+                            <button type="button" id="install-button" class="pretty-button">
+                                <img src="images/package/package-add.png" width="16" height="16" alt="" />
+                                {trans("Packet Installieren")}
+                            </button>
+                            
+
+                            <cp:if condition="$warning">
+                                <div class="package-warning" style="margin-top:5px">
+                                    <img src="images/form-not-ok.png" width="16" height="16" alt="" />
+                                    {$warning}
+                                </div>
+                                
+                                <script type="text/javascript">
+                                    $(function() {
+                                    $('#install-button').click(function() {            
+                                        jConfirm('{trans("Are you sure you want to overwrite the existing package?")}', 'DreamCMS', function(res) {
+                                        if(res) {
+                                        $.pagemask.show('{trans("Please wait while the package is downloaded and installed...")}');
+                                        document.location.href = 'admin.php?adm=packages&action=fetch&type={$remote_package.type}&key={$remote_package.key}';
+                                        }
+                                        });
+                                        });
+                                    
+                                    
+                                    });    
+                                </script>
+                            </cp:if>
+
+                            <cp:else>
+                                
+                                <script type="text/javascript">
+                                    $(function() {
+                                    $('#install-button').click(function() {
+                                    $.pagemask.show('{trans("Please wait while the package is downloaded and installed...")}');
+                                    document.location.href = 'admin.php?adm=packages&action=fetch&type={$remote_package.type}&key={$remote_package.key}';
+                                    });
+                                    });    
+                                </script>
+                            </cp:else>
+                        </cp:else>
+
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="box">
+                        <h2>{trans("Comments")}</h2>
+                        <div class="box-inner pack-description">
+                            <div id="comment-form" style="display: none;">
+                                <form id="action_form" action="package/comment" method="post">
+                                    <fieldset>
+                                        <input type="hidden" id="pid" name="pid" value="{$remote_package->id}" />
+                                        
+                                        <p>
+                                            <label for="name">{trans("Your Name")}:</label><br />
+                                            <input class="textbox" type="text" id="name" name="name" value="" />
+                                        </p>
+                                        
+                                        <p>
+                                            <label for="email">{trans("Your E-mail Address")}:</label><br />
+                                            <input class="textbox" type="text" id="email" name="email" value="" />
+                                        </p>
+                                        
+                                        <p>
+                                            <label for="message">{trans("Your Comment")}:</label><br />
+                                            <textarea class="textarea" id="message" name="message" cols="40" rows="6" style="width: 400px; height: 100px;"></textarea>
+                                        </p>
+                                        
+                                        <p>
+                                            <button class="pretty-button" id="submit-comment" name="submit-comment">
+                                                <img src="{setting('base_url')}asset/img/icon/comment-add.png" width="16" height="16" alt="" />
+                                                <span>{trans("Add Comment")}</span>
+                                            </button>
+                                            
+                                            {trans("Please note that all comments are moderated. It might take a short while before your comment is visible.")}
+                                            
+                                        </p>
+                                        
+                                    </fieldset>
+                                </form>
+                        </div>
+                        
+                        
+                            <cp:if condition="count($package_comments)">
+                                
+                                <p>{trans("Want to commend the author of this package?")} <a id="toggle-comment" href="#">{trans("Write a comment!")}</a><p>
+                                    
+                                    
+                                    <cp:loop name="$package_comments" key="comment">
+                                        <div class="comment-title">
+                                            <img src="{$comment.email}" width="16" height="16" alt="" style="vertical-align: -3px; margin: 0;" />
+                                            <strong>{$comment.name}</strong> 
+                                            <span style="float: right;">{$comment.added}</span>
+                                            <!-- <br class="clearer" /> -->
+                                        </div>
+                                        <div class="comment">
+                                            {$comment.message}
+                                        </div>
+                                    </cp:loop>
+                                    </cp:if>
+                                <cp:else>
+                                    <p>{trans("There are no comments for this package.")} <a id="toggle-comment" href="#">{trans("Write the first!")}</a></p>
+                                </cp:else>
+
+                            </div>
+                            </div>
+                            
+                            <script type="text/javascript">
+                                $(function() {
+                                $('#toggle-comment').click(function(e) {
+                                $(this).parent().hide();
+                                $('#comment-form').show('slow', function(){
+
+                                });
+                                e.preventDefault();
+                                return false;
+                                });
+                                
+                                $('#submit-comment').click(function(e) {
+                                $(this).find('img').attr('src', 'images/loading.gif');
+                                $(this).find('span').html('{trans("Submitting...")}').css({
+                                fontStyle: 'italic'
+                                });
+                                var self = this;
+                                $.alerts._overlay('show');
+                                var post = { };
+                                post.pid = $('#pid').val();
+                                if($('#name').val()!='') {
+                                post.name = $('#name').val();
+                                } else {
+                                jAlert('{trans("Please enter your name.")}');
+                                return false;
+                                }
+                                if($('#email').val()!='') {
+                                post.email = $('#email').val();
+                                } else {
+                                jAlert('{trans("Please enter your e-mail address.")}');
+                                return false;
+                                }
+                                if($('#message').val()!='') {
+                                post.message = $('#message').val();
+                                } else {
+                                jAlert('{trans("Please enter your comment.")}');
+                                return false;
+                                }
+                                
+                                $.post('/package/comment', post, function(data) {
+                                if(responseIsOk(data)) {
+                                jAlert(data.message, 'DreamCMS', function() {
+                                $('#comment-form').hide('slow');
+                                });
+                                } else {
+                                displayErrorDialog(data);
+                                }
+                                $(self).find('img').attr('src', 'images/comment-add.png');
+                                $(self).find('span').html('{trans("Add Comment")}').css({
+                                fontStyle: 'normal'
+                                });
+                                });
+                                
+                                e.preventDefault();
+                                return false;
+                                });
+                                });    
+                            </script>
+                            
+                            
+                            <!-- changelog goes here? -->
+                            
+                            </td>
+                            </tr>
+                            </table>
+                            
+                            
+                            
+    <script type="text/javascript">
+    $(function() {
+        // Add 'external' CSS class to all external links
+        $('a.external').click(function(e) {
+            window.open($(this).attr('href'));
+            e.preventDefault();
+            return false;
+        });
+        
+
+        $('#back-link').click(function(e) {
+            document.location.href = $(this).attr('rel');
+            e.preventDefault();
+            return false;
+        });
+
+        if({iif($request.install_ok, 'true', 'false')}) {
+            jAlert('{trans("The package was successfully installed/ updated!")}');
+        }
+
+
+        <cp:if condition="$remote_package.can_vote">
+            $.fn.raty.readOnly(true);
+        </cp:if>
+
+
+        //$('#author-info .description').css({ minHeight: $('#author-info').height() - 56 });
+
+    });
+
+    </script>
+</cp:block>
+
+
+
+
+

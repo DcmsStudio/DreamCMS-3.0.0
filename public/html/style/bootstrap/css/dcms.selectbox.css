@@ -1,0 +1,485 @@
+.inputS, .inputC, .inputR {
+    position: absolute;
+    left: -10000px;
+    top: -10000px;
+    visibility: hidden;
+}
+
+
+.select-box {
+    position: relative;
+    background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+    background-image: linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    color: #666666;
+    text-shadow: 0 0 1px #fff;
+    font-size: 11px;
+    display: inline-block;
+    margin-right: 3px;
+    min-width: 25px;
+    line-height: 24px;
+}
+
+.select-box-label {
+    padding: 0px 0px 0px 5px!important;
+    cursor: default;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 25px;
+    width: auto;
+    font-weight: normal!important;
+    font-size: 12px;
+    line-height: 22px;
+    margin-right: 21px;
+    display: inline;
+    color: #666666;
+    font-family: 'Open Sans',Monaco,monospace, sans-serif!important;
+    font-size: 14px!important;
+}
+
+.select-box-arrow {
+    background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+    background-image: linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    height: 20px;
+    width: 18px;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    -webkit-border-top-right-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    -moz-border-radius-topright: 2px;
+    -moz-border-radius-bottomright: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.select-box-arrow span { 
+    background: url("../img/gui/selectbox-arrow.png") no-repeat 50% 7px!important;
+    display: block!important;
+    height: 22px;
+    max-height: 22px;
+    position: absolute;
+    width: 18px;
+    line-height: 10px;
+    top: 2px;
+    min-height: 1px;
+}
+.select-box-arrow:before {
+    display: block;
+    width: 1px!important;
+    height: 13px!important;
+    border-left: 1px solid #B9B9B9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.select-box:hover {
+    border: 1px solid #bfbfbf!important;
+    background-color: #e0e0e0;
+    background-position: 0 -15px;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.select-box.active {
+    border: 1px solid #66AFE9 !important;
+    background-color: #e0e0e0;
+    background-position: 0 -15px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6) !important;
+}
+
+
+
+.select-box:hover .select-box-arrow, .select-box.active .select-box-arrow {
+    background-color: #e0e0e0;
+    background-position: 0 -15px;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.select-box.disabled {
+    opacity: 0.5;
+    background: #DEDEDE;
+    background: -moz-linear-gradient(center bottom,#DEDEDE 0%,white 100%);
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #DEDEDE),color-stop(1, white));
+    background: -moz-linear-gradient(center bottom,#DEDEDE 0%,white 100%);
+}
+.select-box.disabled:hover .select-box-arrow {
+
+    background: #DEDEDE;
+    background: -moz-linear-gradient(center bottom,#DEDEDE 0%,white 100%);
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #DEDEDE),color-stop(1, white));
+    background: -moz-linear-gradient(center bottom,#DEDEDE 0%,white 100%);
+}
+
+.select-box.listOpen .select-box-arrow {
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0.48, white),color-stop(0.53, #E6E6E6),color-stop(1, #CFCFCF));
+    background: -moz-linear-gradient(center bottom,white 48%,#E6E6E6 53%,#CFCFCF 100%);
+}
+
+.select-box-opts-container {
+    position: absolute;
+    z-index: 9999;
+    display: none;
+    background: white;
+    -webkit-box-shadow: 0 2px 8px #8A8A8A;
+    -moz-box-shadow: 0 2px 8px #8A8A8A;
+    box-shadow: 0 2px 8px #8A8A8A;
+    height: auto!important;
+    min-height: 24px;
+    max-height: 450px;
+
+    margin: 0!important;
+    margin-top: 20px!important;
+    margin-left: -10px!important;
+    width: auto;
+
+    -webkit-animation-name: fadeInDown;
+    -moz-animation-name: fadeInDown;
+    -o-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+
+    -webkit-animation-duration: .4s;
+    -moz-animation-duration: .4s;
+    -o-animation-duration: .4s;
+    animation-duration: .4s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.select-box .select-box-opts-container-inner {
+    position: relative;
+}
+.select-box-opts-container .scroll-content {
+    position: relative;
+}
+
+.select-box-options {
+    padding: 0!important;
+    margin: 0!important;
+}
+
+
+.select-box-opts-container li {
+    line-height: 16px;
+    padding: 2px 3px 2px 20px;
+    margin: 0;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+    color: #333;
+    cursor: default;
+    left: 0!important;
+    text-align: left;
+    float: none!important;
+    display: block;
+    position: relative;
+}
+.select-multilined-box li:hover,
+.select-box-opts-container li:hover {
+    background: #0337cb!important; /* Old browsers */
+    background: -moz-linear-gradient(top, #0337cb 0%, #337cbc 0%, #0338b2 100%)!important; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0337cb), color-stop(0%,#337cbc), color-stop(100%,#0338b2))!important; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0337cb', endColorstr='#0338b2',GradientType=0 )!important; /* IE6-9 */
+    background: linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* W3C */
+    color: white;
+}
+
+
+
+.select-box-opts-container li.selected span {
+    background: url("../img/gui/dot_blue.png") no-repeat 0 0;
+    height: 8px;
+    min-height: 8px;
+    max-height: 8px;
+    left: 5px;
+    position:absolute;
+    top: 6px;
+    width: 9px;
+}
+.select-multilined-box li.selected:hover span,
+.select-box-opts-container li.selected:hover span{
+    background-position: 0 -8px;
+}
+
+
+
+
+
+.select-multilined-box {
+    overflow: hidden;
+    border: 1px solid #CCC;
+    margin: 0;
+    display: block;
+    float: none;
+    clear: left;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 0;
+}
+.select-multilined-box.focus,
+.select-multilined-box:focus,
+.select-box.focus,
+.select-box:focus {
+    border-color: #66AFE9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+
+.select-multilined-box .select-box-opts-container-inner {
+    overflow: auto;
+    overflow-x: hidden;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    max-width: none;
+    z-index: 1;
+    background: #fff;
+}
+.select-multilined-box .select-box-options {
+    padding: 0!important;
+    max-width: none;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    margin: 0!important;
+
+}
+.select-multilined-box li {
+    line-height: 22px;
+    padding-left: 18px;
+    padding-right: 10px;
+    position: relative;
+    background-color: #fff;
+    white-space: nowrap;
+    color: #333;
+}
+.isMultiSelect li:nth-of-type(even), 
+.select-multilined-box li:nth-of-type(even) {
+    background-color: #F0F0F0;
+}
+
+
+.select-multilined-box li.selected span {
+    background: url("../img/gui/dot_blue.png") no-repeat 0 0;
+    height: 8px;
+    min-height: 8px;
+    max-height: 8px;
+    left: 5px;
+    position:absolute;
+    top: 7px;
+    width: 9px;
+}
+
+
+
+
+
+
+.Zebra_TransForm_Wrapper {
+    position: relative;
+    display: inline-block;
+
+    margin-right: 3px;
+}
+
+
+.Zebra_TransForm_Checkbox {
+    width      : 12px;
+    height     : 12px;
+    overflow   : hidden;
+    position   : relative;
+    /* left       : 2px;
+    top        : 2px; */
+    background : url("../img/gui/checkbox.png") no-repeat 0 -12px;
+    display: inline-block;
+    top: 1px;
+
+}
+.Zebra_TransForm_Checkbox:hover {
+    background-position : 0 -36px;
+}
+.Zebra_TransForm_Checkbox_Checked, 
+.Zebra_TransForm_Checkbox_Checked:hover {
+    background-position : 0 -24px;
+}
+
+.Zebra_TransForm_Radio {
+    width      : 12px;
+    height     : 12px;
+    overflow   : hidden;
+    position   : relative;
+    /* top:2px; */
+    left:0;
+    background : url("../img/gui/radio.png") no-repeat 0 -12px;
+    display: inline-block;
+    margin-right: 3px;
+}
+
+.Zebra_TransForm_Radio_Checked {
+    background-position: 0 -24px;
+}
+
+.Zebra_TransForm_Radio_Disabled {
+    background-position: 0 -0px;
+}
+
+.select-box-opts-container .scroll-content {
+    overflow: auto;
+    min-width: 60px;
+}
+
+.select-box-opts-container .pane {
+    width: 16px!important;
+}
+.select-box-opts-container .pane > .slider {
+    width: 5px!important;
+}
+.select-box-opts-container .pane > .slider > div {
+    width: 5px!important;
+}
+
+
+
+.select-wrap {
+    position: relative;
+    display: inline-block;
+    background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+    background-image: linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.select-wrap select {
+    position: relative;
+    display: inline-block;
+    color: #666;
+    padding: 0 20px 0 5px;
+    background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+    background-image: linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border: 0;
+    margin: 0;
+    font: inherit;
+    outline:none; /* remove focus ring from Webkit */
+    height: 18px;
+    line-height: 18px;
+    -webkit-appearance:none; /* remove the strong OSX influence from Webkit */
+}
+
+/* Select arrow styling */
+.select-wrap:after {
+    content: '\f0d7';
+    font-family: "FontAwesome";
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 7px;
+    color: #666;
+    pointer-events:none;
+}
+
+
+.grid-footer .select-wrap {
+    margin-top: 2px!important;
+}
+.grid-footer .select-wrap select {
+    height: 18px!important;
+    margin: 0!important;
+}
+.grid-footer .select-wrap:after {
+    height: 18px;
+    line-height: 18px;
+}
+
+.grid-footer .select-wrap select option {
+    font-size: 13px!important;
+}
+
+.select-wrap-multi {
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+.select-wrap-multi select {
+    width: 100%!important;
+    border: 0;
+    background: none;
+}
+.select-wrap-multi select option:nth-of-type(odd) {
+    background: #fff;
+}
+.select-wrap-multi select option:nth-of-type(even) {
+    background: #F0F0F0;
+}
+
+.select-wrap-multi select option:focus {
+    background: #0337cb!important; /* Old browsers */
+    background: -moz-linear-gradient(top, #0337cb 0%, #337cbc 0%, #0338b2 100%)!important; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0337cb), color-stop(0%,#337cbc), color-stop(100%,#0338b2))!important; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0337cb', endColorstr='#0338b2',GradientType=0 )!important; /* IE6-9 */
+    background: linear-gradient(top, #0337cb 0%,#337cbc 0%,#0338b2 100%)!important; /* W3C */
+    color: white;
+}
+
+
+.content-versions .select-wrap {
+    top: 3px;
+    height: 20px;
+}
+.content-versions .select-wrap select {
+    height: 18px;
+    font-size: 12px!important;
+}
+.content-versions .select-wrap:after {
+    height: 18px;
+    line-height: 18px;
+}

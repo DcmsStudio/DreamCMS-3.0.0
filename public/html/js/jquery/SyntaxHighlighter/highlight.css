@@ -1,0 +1,150 @@
+div.highlight { 
+    background:#FFFFFF!important;
+    border:1px solid #E0E0E0!important;
+    font-family:"Courier New",Courier,monospace!important;
+    overflow: hidden!important;
+}
+
+div.highlight  * { padding:0; line-height:18px!important; }
+
+div.highlight pre{
+    width: 100%!important;
+    overflow: auto!important;
+    padding:0!important;
+    margin:0!important;
+    font-size:13px!important;
+    clear: both!important;
+}
+
+/* tabs */
+div.highlight ul.tabs {
+    overflow: hidden!important;
+    padding: 5px 0 5px 0!important;
+    margin: 0!important;
+    list-style: none!important;
+    border-bottom: 1px solid #E0E0E0;
+    width: 100%!important;
+
+}
+div.highlight ul.tabs li {
+    padding: 0!important;
+    margin: 0 15px!important;
+    float: left!important;
+    background: none!important;
+    border-bottom: 1px dashed #CCC!important;
+    line-height:1.0em!important;
+    color: #CCC!important;
+    cursor: pointer!important;
+}
+div.highlight ul.tabs li.active {
+    border-bottom: none;
+    cursor: default;
+}
+
+/* pre */
+div.highlight pre.code ol {
+    margin: 0!important;
+    padding:0 0 0 45px!important;
+    background:#e7e5dc!important; 
+    line-height:auto!important;
+}
+div.highlight pre.code ul {
+    margin: 0!important;
+    padding:0!important;
+    line-height:auto!important;
+}
+div.highlight pre.code ol li,
+div.highlight pre.code ul li {
+    padding:0 0 0 5px!important;
+    border-left:3px solid #CCC!important;
+    background:#F8F8F8!important;
+    line-height:auto!important;
+}
+div.highlight pre.code ul li {
+    border-left:none!important;
+    line-height:auto!important;
+}
+div.highlight pre.code ol li.even,
+div.highlight pre.code ul li.even {
+    background-color:#FFFFFF!important;
+    line-height:auto!important;
+}
+div.highlight pre.source {
+    display: none;
+    padding:0 0 0 5px!important;
+    line-height:auto!important;
+}
+
+/* highligting */
+pre.code .str { 
+    color: #080!important; 
+}
+pre.code .kwd,
+pre.code .kwd span { 
+    color: #070!important;
+}
+pre.code .com,
+pre.code .com span { 
+    color:#080!important;
+    font-style: italic!important;
+    font-weight: normal!important; 
+}
+pre.code .typ { 
+    color: #606!important; 
+}
+pre.code .lit { 
+    color: #066!important;
+}
+pre.code .pun { 
+    color: #660!important; }
+pre.code .pln { 
+    color: #000!important; 
+}
+pre.code .tag { 
+    color: #008!important;
+    font-weight: bold!important;  
+    line-height:auto;
+} 
+pre.code .atn { 
+    color: #606!important; 
+}
+pre.code .atv { 
+    color: #080!important; 
+    line-height:auto;
+}
+pre.code .dec { 
+    color: #606!important; 
+    line-height:auto;
+}
+pre.code .fnc,
+pre.code .fnc span { 
+    color: #00b!important; 
+    line-height:auto!important;
+}
+
+/* css */
+.css pre.code .kwd,
+.css pre.code .kwd span { 
+    color: #008;
+    font-weight: bold; 
+    line-height:auto!important;
+}
+/* php */
+.php pre.code .str,
+.php pre.code .str span { 
+    color: #d00!important; 
+    line-height:auto!important;
+}
+.php pre.code .var,
+.php pre.code .var span { 
+    color: #00b!important; 
+    line-height:auto!important;
+}
+.php pre.code .com,
+.php pre.code .com span { 
+    color:#ff8000!important;
+    font-style: italic!important;
+    font-weight: normal!important; 
+    text-align:right;
+    line-height:auto!important;
+}

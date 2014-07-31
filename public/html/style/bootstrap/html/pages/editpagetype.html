@@ -1,0 +1,239 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:pageType{$id}] [save_exit:pageType{$id}]
+        [reset:pageType{$id}] [cancel:pageType{$id}]
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+    <form action="admin.php" id="pageType{$id}" name="pageType{$id}">
+        <input type="hidden" name="adm" value="page"/>
+        <input type="hidden" name="action" value="{escape($input.action, 'htmlall')}"/>
+        <input type="hidden" name="send" value="1"/>
+        <input type="hidden" id="pageType-id{$id}" name="id" value="{$id}"/>
+
+
+        <div>
+            <cp:jstabs tabs="{trans('Allgemein')},{trans('Felder')},{trans('Sonstiges')}" usetrans="true" default="Allgemein"/>
+        </div>
+
+
+
+
+
+        <div id="tc0">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{trans('Titel')}</label>
+                    <input class="required form-control" type="text" name="title" id="pagetype-title" value="{escape($title, 'html')}" size="60" maxlength="255" />
+                </div>
+
+                <div class="col-md-6">
+                    <label>{trans('Typ')}</label>
+                    <select name="pagetype" id="t-{$id}" class="select">
+                        <cp:set var="dataselect" value="$pagetypes"/>
+                        <cp:set var="dataselect.selected" value="$pagetype"/>
+                        <cp:include template="../select_option"/>
+                    </select>
+
+                    <span class="tpl">{trans('Template')}: {$pagetype}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{trans('Beschreibung')}</label>
+                    <textarea rows="4" name="description" class="form-control">{escape($description, 'html')}</textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="tc1">
+            <div class="row">
+                <div class="col-md-6">
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{trans('eingefügte Formular-Felder')}</div>
+                        <div class="panel-body" style="min-height: 80px">
+
+
+                                <ul class="ui-sortable" id="assigned-fields">
+                                    <cp:loop name="assigned" key="r">
+                                        <li id="field-{$r.fieldid}" class="pagefield {$r.fieldtype}">
+                                            <div style="display:inline-block;width:100%;">
+                                                <strong>{iif($r.options.grouplabel, $r.options.grouplabel, $r.options.label)}</strong><br/>
+                                                <small>(Name: {$r.fieldname} , Type: {$r.fieldtype})</small>
+                                            </div>
+                                            <br/><small>{$r.description}</small>
+                                        </li>
+                                    </cp:loop>
+                                </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="min-height: 80px">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{trans('verfügbare Formular-Felder')}</div>
+                        <div class="panel-body" style="min-height: 80px">
+
+                            <ul class="ui-sortable" id="available-fields">
+                                <cp:loop name="available" key="rs">
+                                    <li id="field-{$rs.fieldid}" class="pagefield {$rs.fieldtype}">
+                                        <div style="display:inline-block;width:100%">
+                                            <strong>{iif($rs.options.grouplabel, $rs.options.grouplabel, $rs.options.label)}</strong><br/>
+                                            <small>(Name: {$rs.fieldname} , Type: {$rs.fieldtype})</small>
+                                        </div>
+                                        <br/>
+                                        <small>{$rs.description}</small>
+                                    </li>
+                                </cp:loop>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div id="tc2">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{trans('Seiten-Layout')}</label>
+                    <select name="pagelayout" size="5">
+                        <option value="" cp:on="selected:empty($pagelayout)" parse:selected="selected">---</option>
+                        <cp:loop name="pagelayouts" key="r">
+                            <cp:if condition="$r.skintitle"><option value="{$r.id}" cp:on="selected:$pagelayout == $r.id" parse:selected="selected">{$r.skintitle} - {$r.title}</option></cp:if>
+                        </cp:loop>
+                    </select>
+                    <span class="note">Optional</span>
+                </div>
+
+                <div class="col-md-6">
+                    <label>{trans('Inhalts-Layout')}</label>
+                    <select style="width:100%" name="contentlayout" size="5">
+                        <cp:set var="dataselect" value="$contentlayouts"/>
+                        <cp:include template="../select_option"/>
+                    </select>
+                </div>
+            </div>
+
+
+
+        </div>
+    </form>
+
+
+    <script type="text/javascript">
+
+
+        Form.registerForm('pageType{$id}', {
+            autosave: false,
+            contentIdentifierID: 'pageType-id{$id}',
+            exiturl: 'admin.php?adm=page&action=pagetypes',
+            save: function (event, exit, isdraft)
+            {
+                var post = $('#pageType{$id}').serialize();
+                post += '&' + $('#assigned-fields').sortable("serialize");
+
+                if (typeof isdraft != 'undefined' && isdraft == true)
+                {
+                    post += '&savedraft=1';
+                }
+
+                $('#pageType{$id}').mask('Formular Speichern...');
+                $.post('admin.php', post, function (data) {
+
+                    $('#pageType{$id}').unmask();
+                    if (Tools.responseIsOk(data)) {
+                        Form.resetDirty($('#pageType{$id}'));
+                        Form.saveCallBack(event, data, exit, isdraft, 'pageType{$id}', Win.windowID);
+                    } else {
+                        Notifier.display('error', data.msg);
+                    }
+
+                }, 'json');
+            }
+        });
+
+
+        // $('<span>Template: ' + $('#t-{$id}').val() + '</span>').insertAfter($('#t-{$id}'));
+        $('#pageType{$id}').find('#t-{$id}').bind('change', function () {
+            var self = this;
+
+            var type = $(self).find(':selected').val();
+            $('#pageType{$id}').find('span.tpl').replaceWith($('<span class="tpl">Template: ' + type + '</span>'));
+
+
+        });
+
+
+
+
+
+
+        $('#assigned-fields', $('#' + Win.windowID)).sortable({
+            containment: $('#' + Win.windowID),
+            connectWith: $('#' + Win.windowID).find('#available-fields'),
+            forceHelperSize: true,
+            forcePlaceholderSize: true,
+            distance: 10,
+            tolerance: 'pointer',
+            cancel: '.nosort',
+            appendTo: $('body'),
+            zIndex: 9999,
+            update: updateFieldAssignment
+        });
+
+
+        $('#available-fields', $('#' + Win.windowID)).sortable({
+            containment: $('#' + Win.windowID),
+            connectWith: $('#' + Win.windowID).find('#assigned-fields'),
+            forceHelperSize: true,
+            forcePlaceholderSize: true,
+            cancel: '.nosort',
+            distance: 10,
+            appendTo: $('body'),
+            zIndex: 9999,
+            tolerance: 'pointer'
+        });
+
+        $('#available-fields,#assigned-fields', $('#' + Win.windowID)).css({minHeight: '250px'});
+
+        var sortString = $('#assigned-fields', $('#' + Win.windowID)).sortable("serialize");
+        if (typeof updateFieldAssignment === 'undefined') {
+            function updateFieldAssignment (event, ui) {
+                if (sortString != $('#assigned-fields', $('#' + Win.windowID)).sortable("serialize")) {
+                    sortString = $('#assigned-fields', $('#' + Win.windowID)).sortable("serialize");
+
+                    $('#form-fields-sorted', $('#' + Win.windowID)).val(sortString);
+                    $('button.save', $('#assigned-fields', $('#' + Win.windowID)).parents('.window-header:first')).enableButton();
+                    $('#assigned-fields li div div', $('#' + Win.windowID)).fadeIn(300, function () {
+                        $(this).css({display: 'inline-block'});
+                    });
+                    $('#available-fields li div div', $('#' + Win.windowID)).fadeOut(300);
+                }
+            }
+        }
+    </script>
+
+
+</cp:block>

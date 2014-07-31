@@ -1,0 +1,143 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+    <btn>
+        [save:staticpage] [save_exit:staticpage]
+        <input type="reset" value="{trans('Zurücksetzen')}" class="button" />
+        <input type="button" value="{trans('Abbrechen')}" onclick="history.back();" class="button" />
+    </btn>
+</cp:block>
+
+<cp:block name="content">
+    
+    <form method="post" name="staticpage" id="staticpage" action="admin.php" onSubmit="submit_form();">
+        <input type="hidden" name="adm" value="staticpages" />
+        <input type="hidden" name="action" value="edit_page">
+        <input type="hidden" name="send" value="send">
+        <input type="hidden" name="id" id="pageid" value="{$id}">  
+        
+        <div>
+            <cp:jstabs tabs="Inhalt,Seiten Einstellungen" usetrans="true" default="Inhalt"/>
+            
+        </div>
+        
+        
+        <cp:include template="../metadata"/>
+        
+        
+        
+        
+        <div class="tcontent" id="tc0">                        
+            <div class="box description">
+                <div class="box-inner">
+                    
+                    
+                    <fieldset>
+                        <legend>{trans('Seiten Titel')}</legend>
+                        <input name="page_title" type="text" value="{$page_title}" size="70" class="input required" />
+                    </fieldset>
+                    
+                    <input type="hidden" name="imagelist" id="imagelist" value="{$images}" />
+                    
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="width:0px;min-width:0px;vertical-align:top">
+                                <div id="inlinePictures" class="inlinePictures">
+                                    <fieldset>
+                                        <legend>{trans('Aktuelle Content  Bilder')}</legend>                                        
+                                        <div style="overflow:auto;"></div>
+                                    </fieldset>
+                                </div>
+                            </td>
+                            <td style="width:auto;vertical-align:top">
+                                <div class="contentEditor" id="contentEditor">
+                                    <fieldset>
+                                        <legend><label>{trans('Inhalt')}</label>
+                                            <label onclick="ContentEditorImages('inlinePictures',  'contentEditor',  'admin.php?adm=images&amp;contenttype=news&amp;contentid={$id}&images='+  $('#imagelist').val() );">{trans('Content Bilder')}</label>
+                                        </legend>
+                                        
+                                        <cp:editor baseurl="{$cfg.portalurl}" name="static_page" value="{$page_content}"/>
+                                    </fieldset>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="tcontent" id="tc1" style="display:none">
+            <div class="box description">
+                <div class="box-inner">
+                    
+                    <div style="display:inline-block;width:100%;">
+                        <div class="fieldset2 rows">                                
+                            <fieldset>
+                                <legend>{trans('Kommentare erlauben?')}</legend>
+                                <label for="cancom1"><input id="cancom1" type="radio" name="can_comment" value="1"{iif($can_comment != 0, ' checked="checked"', '')} /> {trans('Ja')}</label> 
+                                <label for="cancom0"><input id="cancom0" type="radio" name="can_comment" value="0"{iif($can_comment != 1, ' checked="checked"', '')} /> {trans('Nein')}</label>
+                            </fieldset>
+                            
+                            <fieldset>
+                                <legend>{trans('Seiten Container?')}</legend>
+                                {info:static|page_container}
+                                <select name="container" class="select">
+                                    {$container}
+                                </select>
+                            </fieldset>
+                        </div>
+                        
+                        <div class="fieldsetrows right">
+                            <fieldset>
+                                <legend>{trans('Zugriffsrechte')}</legend>
+                                {info:static|page_access}
+                                <select name="usergroups[]" class="select" multiple="multiple" size="5" style="height:80px;width:99%">
+                                    {$usergroups}
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <fieldset>
+                        <legend>{trans('Parent Dokument (Seite)')}</legend>
+                        <select name="parent_page" class="select" size="15" style="width:100%">
+                            
+                            {$parent_page_options}
+                        </select>
+                        
+                        <br/><small>{trans('Diese Struktur wird zur Seiten Navigation benötigt.')}</small>
+                    </fieldset>
+                </div></div>
+        </div>
+        
+      
+        
+        
+        
+    </form>
+    <script type="text/javascript">
+        //<![CDATA[
+
+$(document).ready( function() {
+
+
+        $('#staticpage').registerForm({
+            contentIdentifierID: 'pageid',
+            identifierType: 'staticpage',
+            baseField: 'page_title',
+            exiturl: 'admin.php?adm=staticpages'
+        });
+
+});
+    //]]>
+    </script>
+    
+</cp:block>
+

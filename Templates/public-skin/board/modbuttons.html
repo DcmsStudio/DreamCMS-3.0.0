@@ -1,0 +1,23 @@
+<div class="mod-buttons" cp:is="$mod.caneditpost || $mod.canpublishpost || $mod.candeletepost">
+    <span>
+        {trans('Moderation')}
+    </span>
+    <div>
+        <span cp:is="$mod.caneditpost">
+            {trans('Beitrag bearbeiten')}
+        </span>
+        <a href="forum/publishpost/{$forumpost.postid}/1" cp:is="$mod.canpublishpost && !$forumpost.published">
+            <span>
+                {trans('Beitrag freischalten')}
+            </span>
+        </a>
+        <a href="forum/publishpost/{$forumpost.postid}/0" cp:is="$mod.canpublishpost && $forumpost.published">
+            <span>
+                {trans('Beitrag verstecken')}
+            </span>
+        </a>
+        <span cp:is="$mod.candeletepost">
+            {trans('Beitrag löschen')}
+        </span>
+    </div>
+</div>

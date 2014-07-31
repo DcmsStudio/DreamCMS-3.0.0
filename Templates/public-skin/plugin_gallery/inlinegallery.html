@@ -1,0 +1,334 @@
+<cp:if condition="$request.id == null">
+		<div class="box gallerie-index">
+			<div class="box-inner">
+				<cp:loop name="galleries" key="r">
+					<div class="gallerie-item">
+						<cp:if condition="$r.thumbnail">
+							<img src="{$r.thumbnail}" border="0" alt="{escape($r.title, 'html')}" />
+						</cp:if>
+						<div>
+							<h3>
+								<a href="plugin/{$plugin}/{$r.id}">{$r.title}</a>
+							</h3>
+							<cp:if condition="$r.description">
+								<em>
+									{truncate($r.description, 60)}
+								</em>
+							</cp:if>
+						</div>
+					</div>
+				</cp:loop>
+				<cp:else>
+					{trans('Es wurde noch keine Bilder Gallerie angelegt')}
+				</cp:else>
+			</div>
+		</div>
+	</cp:if>
+	<cp:else>
+		<h3>
+			{$gallerie.title}
+		</h3>
+		<cp:if condition="$gallerie.description">
+			<p>
+				<em>
+					{$gallerie.description}
+				</em>
+			</p>
+		</cp:if>
+		<cp:if condition="count($gallerie.images)">
+			<div class="containerdiv p10 tr">
+				<cp:if condition="$session.gallery-mode == 'default'">
+					<a href="plugin/{$plugin}/{$gallerie.id}/slideshow">Slideshow</a>
+				</cp:if>
+				<cp:else>
+					<a href="plugin/{$plugin}/{$gallerie.id}/default">Slideshow beenden</a>
+				</cp:else>
+			</div>
+			<cp:if condition="$session.gallery-mode == 'default'">
+				<div class="gallerie-images">
+					<cp:set var="col" value="1" />
+					<cp:loop name="gallerie.images" key="r">
+						<cp:if condition="$col == 1">
+							<div class="subcolumns equalize">
+						</cp:if>
+						<div class="{iif($col == 3, 'c33r', 'c33l')}">
+							<div class="gallerie-image">
+								<div class="screenshot boximage">
+									<div class="action enlarge">
+										+
+									</div>
+									<div class="boximageTop">
+										<span>
+											&bull;
+										</span>
+									</div>
+									<div class="boximageContent">
+										<div>
+											<a class="imagepopup no-ajax" href="plugin/{$plugin}/image/{$r.id}/yes" rel="galpic">
+											<img title="{escape($r.title, 'htmlall')}" alt="{escape($r.title, 'htmlall')}" src="{$r.thumbnail}" width="{$r.width}" height="{$r.height}" />
+											</a>
+										</div>
+									</div>
+									<div class="boximageBottom">
+										<span>
+											<small>
+												{$r.hits} hits
+											</small>
+										</span>
+									</div>
+								</div>
+								<cp:if condition="$r.title">
+									<div class="gallerie-img-description">
+										<h3>
+											{$r.title}
+										</h3>
+										<cp:if condition="$r.description">
+											<span>
+												{$r.description}
+											</span>
+										</cp:if>
+									</div>
+								</cp:if>
+							</div>
+						</div>
+						<cp:if condition="$col == 3 || $r.next_r.id == null">
+							</div>
+							<cp:set var="col" value="0" />
+						</cp:if>
+						<cp:set var="col" value="$col + 1" />
+					</cp:loop>
+				</div>
+			</cp:if>
+			<cp:else>
+				<div class="gallery-slideshow">
+					<!-- Start Advanced Gallery Html Containers -->
+					<div class="navigation-container">
+						<div id="thumbs" class="navigation">
+							<a class="pageLink prev" style="visibility: hidden;" href="#" title="Previous Page"></a>
+							<ul class="thumbs noscript">
+								<cp:loop name="gallerie.images" key="r">
+									<li>
+										<a class="thumb no-ajax" rel="img-{$r.id}" name="leaf" href="plugin/{$plugin}/image/{$r.id}/yes" title="{escape($r.title, 'html')}">
+										<img src="{$r.thumbnail}" height="90" alt="{escape($r.title, 'html')}" />
+										</a>
+										<div class="caption">
+											<div class="image-title">
+												{$r.title}
+											</div>
+											<div class="image-desc">
+												{$r.description}
+											</div>
+											<div class="download">
+												<a href="plugin/{$plugin}/image/{$r.id}/yes" target="_blank">Download Original</a>
+											</div>
+										</div>
+									</li>
+								</cp:loop>
+							</ul>
+							<a class="pageLink next" style="visibility: hidden;" href="#" title="Next Page"></a>
+						</div>
+					</div>
+					<div class="slideshow-content">
+						<div class="slideshow-container">
+							<div id="controls" class="controls">
+							</div>
+							<div id="loading" class="loader">
+							</div>
+							<div id="slideshow" class="slideshow">
+							</div>
+						</div>
+					</div>
+					<div style="clear: both;">
+					</div>
+					<div id="caption" class="caption-container">
+						<div class="photo-index">
+						</div>
+					</div>
+					<div style="clear: both;">
+					</div>
+				</div>
+			</cp:else>
+		</cp:if>
+		<cp:if condition="$gallerie.pages">
+			<div class="pagination">
+				<div class="page_numbers">
+					{$gallerie.pages}
+				</div>
+			</div>
+		</cp:if>
+		<cp:if condition="$session.gallery-mode != 'default'">
+			<script type="text/javascript" src="dm/packages/plugin/{$plugin}/asset/js/jquery.history.js">
+			</script>
+			<script type="text/javascript" src="dm/packages/plugin/{$plugin}/asset/js/jquery.galleriffic.js">
+			</script>
+			<script type="text/javascript" src="dm/packages/plugin/{$plugin}/asset/js/jquery.opacityrollover.js">
+			</script>
+		</cp:if>
+		<script type="text/javascript">
+			//<![CDATA[
+			$(document).ready(function() {
+
+				$('head').append('<link rel="stylesheet" href="dm/packages/plugin/{$plugin}/asset/css/galleriffic-5.css" type="text/css"/>');
+				//$('head').append('<link rel="stylesheet" href="dm/packages/plugin/{$plugin}/asset/css/white.css" type="text/css"/>');
+				$('head').append('<link rel="stylesheet" href="asset/css/css/dcmscore.css" type="text/css"/>');
+
+
+				<cp:if condition="$session.gallery-mode == 'default'" > $('div.enlarge').click(function() {
+					var link = $(this).parent().find('a.imagepopup');
+					var url = $(link).attr('href');
+					var title = $(link).attr('title');
+					$.fancybox({
+						'padding': 10,
+						'transitionIn': 'elastic',
+						'transitionOut': 'elastic',
+						'easingIn': 'swing',
+						'easingOut': 'swing',
+						'speedIn': 700,
+						'speedOut': 500,
+						'titlePosition': 'over',
+						'titleShow': true,
+						'type': 'image',
+						'href': url,
+						'titleFormat': function(title, currentArray, currentIndex, currentOpts) {
+							return '<span id="fancybox-title-over">' + (title ? '<strong>' + title + '</strong><br/>' : '') + 'Bild ' + (currentIndex + 1) + ' von ' + currentArray.length + '</span>';
+						}
+					});
+				});
+				$("a[rel=galpic]").fancybox({
+					'padding': 10,
+					'transitionIn': 'elastic',
+					'transitionOut': 'elastic',
+					'easingIn': 'swing',
+					'easingOut': 'swing',
+					'speedIn': 700,
+					'speedOut': 500,
+					'titlePosition': 'over',
+					'titleShow': true,
+					'type': 'image',
+					'titleFormat': function(title, currentArray, currentIndex, currentOpts) {
+						return '<span id="fancybox-title-over">' + (title ? '<strong>' + title + '</strong><br/>' : '') + 'Bild ' + (currentIndex + 1) + ' von ' + currentArray.length + '</span>';
+					}
+				}); 
+				
+				
+				</cp:if>
+				<cp:else>
+				
+
+
+				
+				/ / We only want these styles applied when javascript is enabled $('div.slideshow-content').css('display', 'block');
+
+				// Initially set opacity on thumbs and add
+				// additional styling for hover effect on thumbs
+				var onMouseOutOpacity = 0.67;
+				$('#thumbs ul.thumbs li, div.navigation a.pageLink').opacityrollover({
+					mouseOutOpacity: onMouseOutOpacity,
+					mouseOverOpacity: 1.0,
+					fadeSpeed: 'fast',
+					exemptionSelector: '.selected'
+				});
+
+				// Initialize Advanced Galleriffic Gallery
+				var gallery = $('#thumbs').galleriffic({
+					delay: 5000,
+					numThumbs: 6,
+					preloadAhead: 10,
+					enableTopPager: false,
+					enableBottomPager: false,
+					imageContainerSel: '#slideshow',
+					controlsContainerSel: '#controls',
+					captionContainerSel: '#caption',
+					loadingContainerSel: '#loading',
+					renderSSControls: true,
+					renderNavControls: true,
+					playLinkText: 'Play Slideshow',
+					pauseLinkText: 'Pause Slideshow',
+					prevLinkText: '&lsaquo; Previous Photo',
+					nextLinkText: 'Next Photo &rsaquo;',
+					nextPageLinkText: 'Next &rsaquo;',
+					prevPageLinkText: '&lsaquo; Prev',
+					enableHistory: true,
+					autoStart: false,
+					syncTransitions: true,
+					defaultTransitionDuration: 300,
+					onSlideChange: function(prevIndex, nextIndex) {
+						// 'this' refers to the gallery, which is an extension of $('#thumbs')
+						this.find('ul.thumbs').children().eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end().eq(nextIndex).fadeTo('fast', 1.0);
+
+						// Update the photo index display
+						this.$captionContainer.find('div.photo-index').html('Photo ' + (nextIndex + 1) + ' of ' + this.data.length);
+					},
+					onPageTransitionOut: function(callback) {
+						this.fadeTo('fast', 0.0, callback);
+					},
+					onPageTransitionIn: function() {
+						var prevPageLink = this.find('a.prev').css('visibility', 'hidden');
+						var nextPageLink = this.find('a.next').css('visibility', 'hidden');
+
+						// Show appropriate next / prev page links
+						if (this.displayedPage > 0) prevPageLink.css('visibility', 'visible');
+
+						var lastPage = this.getNumPages() - 1;
+						if (this.displayedPage < lastPage) nextPageLink.css('visibility', 'visible');
+
+						this.fadeTo('fast', 1.0);
+					}
+				});
+
+				/**************** Event handlers for custom next / prev page links **********************/
+
+				gallery.find('a.prev').click(function(e) {
+					gallery.previousPage();
+					e.preventDefault();
+				});
+
+				gallery.find('a.next').click(function(e) {
+					gallery.nextPage();
+					e.preventDefault();
+				});
+
+				/****************************************************************************************/
+
+				/**** Functions to support integration of galleriffic with the jquery.history plugin ****/
+
+				// PageLoad function
+				// This function is called when:
+				// 1. after calling $.historyInit();
+				// 2. after calling $.historyLoad();
+				// 3. after pushing "Go Back" button of a browser
+
+				function pageload(hash) {
+					// alert("pageload: " + hash);
+					// hash doesn't contain the first # character.
+					if (hash) {
+						$.galleriffic.gotoImage(hash);
+					} else {
+						gallery.gotoIndex(0);
+					}
+				}
+
+				// Initialize history plugin.
+				// The callback is called at once by present location.hash. 
+				$.historyInit(pageload, "advanced.html");
+
+				// set onlick event for buttons using the jQuery 1.3 live method
+				$("a[rel='history']").live('click', function(e) {
+					if (e.button != 0) return true;
+
+					var hash = this.href;
+					hash = hash.replace(/^.*#/, '');
+
+					// moves to a new page. 
+					// pageload is called at once. 
+					// hash don't contain "#", "?"
+					$.historyLoad(hash);
+
+					return false;
+				});
+
+				</cp:else>
+			});
+			//]]>
+		</script>
+	</cp:else>

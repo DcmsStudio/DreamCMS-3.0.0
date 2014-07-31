@@ -1,0 +1,206 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:if condition="$showinstall">
+        <cp:groupbutton label="trans('Modul Registry')">
+            <button id="install-modules"><span class="icn"><img src="images/ta-grow.png"/></span><span class="label">{trans('Weitere Module installieren')}</span>
+            </button>
+            <button id="refresh-registry"><span class="icn"><img src="images/refresh.png"/></span><span class="label">{trans('Modul-Registry aktualisieren')}</span>
+            </button>
+        </cp:groupbutton>
+    </cp:if>
+</cp:block>
+
+<cp:block name="content">
+    <div id="modules-grid"></div>
+    <script type="text/javascript">
+
+        if ( typeof registerModulUpdate !== 'function' ) {
+            function registerModulUpdate( grid )
+            {
+
+                $( '#' + Win.windowID ).find( 'a.deinstall' ).each( function ()
+                {
+
+                    $( this ).click( function ( e )
+                    {
+                        e.preventDefault();
+                        var self = this;
+                        jConfirm( '{trans("Bist du dir sicher, das du dass Modul `%s` deinstallieren möchtest?")}'.replace( '%s', $( this ).attr( 'label' ) ), '{trans("Warnung...")}', function ( res )
+                        {
+                            if ( res ) {
+                                $.get( $( self ).attr( 'href' ) + '&ajax=1', {}, function ( data )
+                                {
+                                    if ( Tools.responseIsOk( data ) ) {
+                                        $( '#' + Win.windowID ).data( 'windowGrid' ).refresh();
+
+                                        delete top.menuItems;
+                                        $('#main-menu ul:first').empty().append('<li>reload ...</li>');
+
+                                        $.ajax({
+                                            type: "GET",
+                                            url: Tools.prepareAjaxUrl('admin.php?action=menu'),
+                                            success: function () {
+                                                DesktopMenu.coreMenuCache = top.menuItems;
+                                                DesktopMenu.createCoreMenu();
+                                                //top.menuItems = null;
+                                            },
+                                            dataType: "script",
+                                            cache: false
+                                        });
+
+                                        Notifier.display( 1, data.msg );
+                                    }
+                                    else {
+                                        jAlert( data.msg );
+                                    }
+
+                                } );
+                            }
+                        } );
+                        return false;
+                    } );
+                } );
+                $( '#' + Win.windowID ).find( 'a.edit' ).each( function ()
+                {
+                    var self = this;
+                    $( this ).click( function ( e )
+                    {
+                        e.preventDefault();
+                        if ( $( self ).hasClass( 'disabled' ) ) {
+                            return false;
+                        }
+                        else {
+
+                            openTab( {url: $( self ).attr( 'href' ), obj: self, label: $( self ).attr( 'title' ), isSingleWindow: 0 } );
+                            return false;
+                        }
+                    } );
+                } );
+
+                $( '#' + Win.windowID ).find( 'a.update' ).each( function ()
+                {
+                    var self = this;
+                    $( this ).click( function ( e )
+                    {
+                        e.preventDefault();
+                        if ( !$( self ).hasClass( 'disabled' ) ) {
+
+                            $( '#' + Win.windowID ).mask( "{trans('Das Modul wird aktualisiert...')}" );
+                            $.get( $( self ).attr( 'href' ) + '&ajax=1', {}, function ( data )
+                            {
+
+                                $( '#' + Win.windowID ).unmask();
+                                if ( Tools.responseIsOk( data ) ) {
+                                    delete top.menuItems;
+                                    $('#main-menu ul:first').empty().append('<li>reload ...</li>');
+
+                                    $.ajax({
+                                        type: "GET",
+                                        url: Tools.prepareAjaxUrl('admin.php?action=menu'),
+                                        success: function () {
+                                            DesktopMenu.coreMenuCache = top.menuItems;
+                                            DesktopMenu.createCoreMenu();
+                                            //top.menuItems = null;
+                                        },
+                                        dataType: "script",
+                                        cache: false
+                                    });
+                                    Notifier.display( 1, "{trans('Das Modul wurde aktualisiert.')}" );
+                                    //setFormStatusOk(data.msg);
+                                    //reloadTable($('#modules-grid'));
+                                    //setTimeout( unnotify, 5000);
+                                } else {
+                                    jAlert( data.msg );
+                                }
+                            }, 'json' );
+                        }
+
+                        return false;
+                    } );
+                } );
+            }
+
+        }
+
+
+        Application.Grid( 'modules-grid', {$gridJson});
+
+
+/*
+        Application.Grid( 'modules-grid', {
+                    url: 'admin.php?adm=modules',
+                    currentFilter: {$grid.activeFilter},
+                colModel
+        :
+        {$grid.colModel}
+        ,
+        gridActions: {$grid.gridActions}
+        ,
+        searchitems: {$grid.searchitems}
+        ,
+        datarows: {$grid.datarows}
+        ,
+        sort: '{$grid.sort}',
+                orderby
+        :
+        '{$grid.orderby}',
+                total
+        :
+        {$grid.total}
+        ,
+        perpage: {$grid.perpage}
+        ,
+        key: 'id',
+                onAfterLoad
+        :
+        function ( ev, grid )
+        {
+            registerModulUpdate( grid );
+        }
+        })
+        ;
+*/
+        $( '#install-modules' ).click( function ( e )
+        {
+            openTab( {url: 'admin.php?adm=modules&action=install', obj: this, label: $( this ).text(), isSingleWindow: 0 } );
+        } );
+
+        $( '#refresh-registry' ).click( function ( e )
+        {
+            $( '#' + Win.windowID ).mask( "{trans('Die Modul - Registry wird aktualisiert...')}" );
+            $.get( 'admin.php?adm=modules&action=registryrefresh&ajax=1', {}, function ( data )
+            {
+
+                $( '#' + Win.windowID ).unmask();
+                if ( Tools.responseIsOk( data ) ) {
+
+                    delete top.menuItems;
+                    $('#main-menu ul:first').empty().append('<li>reload ...</li>');
+
+                    $.ajax({
+                        type: "GET",
+                        url: Tools.prepareAjaxUrl('admin.php?action=menu'),
+                        success: function () {
+                            DesktopMenu.coreMenuCache = top.menuItems;
+                            DesktopMenu.createCoreMenu();
+                            //top.menuItems = null;
+                        },
+                        dataType: "script",
+                        cache: false
+                    });
+
+                    Notifier.display( 1, "{trans('Die Modul - Registry wurde aktualisiert.')}" );
+                    //setFormStatusOk(data.msg);
+                    //setTimeout( unnotify, 5000);
+                }
+                else {
+                    jAlert( data.msg );
+                }
+
+            } );
+        } );
+    </script>
+
+
+</cp:block>

@@ -1,0 +1,34 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <btn>
+        <button id="icon-add-button" onclick="openTab({url: 'admin.php?adm=icon&action=add', obj: this, label: $(this).text() })" class="action-button"><img src="images/buttons/new.png" width="16" height="16" alt="" /> {trans("Icon hinzufügen")}</button>
+        
+    </btn>
+
+</cp:block>
+
+<cp:block name="content">
+<div id="icon-grid"></div>
+<script type="text/javascript" language="javascript">
+
+    $(document).ready(function() {
+
+        var table = new dcmsGrid('icon-grid', {
+            url: 'admin.php?adm=icon',
+            currentFilter: {$grid.activeFilter},
+            colModel: {$grid.colModel},
+            gridActions: {$grid.gridActions},
+            searchitems: {$grid.searchitems},
+            sort: '{$grid.sort}',
+            orderby: '{$grid.orderby}',
+            total: {$grid.total},
+                        perpage: {$grid.perpage},
+            key: 'iconid'
+        });
+    });
+
+
+</script>
+
+</cp:block>

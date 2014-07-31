@@ -1,0 +1,288 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar"> <cp:groupbutton label="trans('Aktion')">
+        [save:admSettings]
+        [save_exit:admSettings]
+        [reset:admSettings]</cp:groupbutton>
+
+</cp:block>
+
+
+<cp:block name="content">
+
+    <style type="text/css">
+        #dock-positions .Zebra_TransForm_Wrapper {
+            float: none;
+        }
+        #dock-positions .Zebra_TransForm_Radio {
+            margin: 0;
+        }
+
+        #dock-positions .label-bottom {
+            width: 60px;
+            text-align: center;
+            display: inline-block;
+            margin-right: 10px;
+            float: left;
+        }
+
+    </style>
+
+
+    <form action="admin.php" name="admSettings" id="admSettings" method="post">
+        <input type="hidden" name="adm" value="personal"/>
+        <input type="hidden" name="action" value="index"/>
+        <input type="hidden" name="send" value="1"/>
+
+        <div class="box description">
+            <div class="box-inner">
+
+                <fieldset>
+                    <legend>{trans('Skin')}</legend>
+                    <select id="myskin" name="skin">
+                        <cp:loop name="skins" key="r">
+                            <option value="{$r.name}" cp:on="selected:$personal.skin == $r.name || (empty($personal.skin) && $r.name == 'default')" parse:selected="selected">{$r.title}</option>
+                        </cp:loop>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{trans('Desktop Hintergrund')}</legend>
+
+                    <div id="desktopbackgrounds">
+                        <div>
+                            <ul>
+                                <cp:loop name="desktopbackgrounds" key="r">
+                                    <cp:if condition="$r.original == $personal.desktopbackground">
+                                        <li class="current-bg" rel="{$r.original}">
+                                            <img src="{$r.path}{$r.filename}" height="94"/>
+                                        </li>
+                                    </cp:if>
+                                    <cp:else>
+                                        <li rel="{$r.original}">
+                                            <img src="{$r.path}{$r.filename}"  height="94"/>
+                                        </li>
+                                    </cp:else>
+                                </cp:loop>
+                            </ul>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+                <fieldset class="personal-dp">
+                    <legend>{trans('Dock')}</legend>
+                    <label for="dockautohide">
+                        <input type="checkbox" name="dockautohide" id="dockautohide" value="1" cp:on="checked:$dockopts.dockautohide" parse:checked="checked" /> 
+                        {trans('Dock automatisch ein- und ausblenden')} 
+                    </label>
+                    <br/>
+                    <label for="mintoappicon">
+                        <input type="checkbox" name="mintoappicon" id="mintoappicon" value="1" cp:on="checked:$dockopts.mintoappicon" parse:checked="checked" /> 
+                        {trans('Minimierte Fenster hinter Applicationsymbol ablegen')}
+                    </label>
+
+                    <br/>                   
+                    <div style="width: 100%;margin-top: 10px" id="dock-positions">
+                        <legend>{trans('Dock Position')}</legend>
+                        <div class="label-bottom">
+                            <label for="dockposition_left">
+                                <input type="radio" name="dockposition" id="dockposition_left" value="left" cp:on="checked:$dockopts.dockposition == 'left'" parse:checked="checked" />
+                                <br/> 
+                                {trans('Links')}
+                            </label>
+                        </div>
+
+                        <div class="label-bottom">
+                            <label for="dockposition_center">
+                                <input type="radio" name="dockposition" id="dockposition_center" value="center" cp:on="checked:empty($dockopts.dockposition) || $dockopts.dockposition == 'center'" parse:checked="checked" />
+                                <br/> 
+                                {trans('Unten')}
+                            </label>
+                        </div>
+
+                        <div class="label-bottom">
+                            <label for="dockposition_right">
+                                <input type="radio" name="dockposition" id="dockposition_right" value="right" cp:on="checked:$dockopts.dockposition == 'right'" parse:checked="checked" />
+                                <br/> 
+                                {trans('Rechts')}
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                </fieldset>
+
+
+
+
+
+                <fieldset>
+                    <legend>{trans('Standart Grid Einträge')}</legend>
+                    <input class="required input" type="text" name="gridlimit" value="{escape($personal.gridlimit, 'html')}" size="20" maxlength="2" />        
+                </fieldset>
+
+                <fieldset>
+                    <legend>{trans('Sprache der Benutzeroberfläche')}</legend>
+                    <select name="guilanguage">                        
+                        <cp:loop name="guilocales" key="r">
+                            <option value="{$r.code}" cp:on="selected:$personal.guilanguage == $r.code" parse:selected="selected">{$r.title}</option>
+                        </cp:loop>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{trans('Standart Inhaltssprache')}</legend>
+                    <select name="contenttranslation">                        
+                        <cp:loop name="contentlocales" key="r">
+                            <option value="{$r.id}" cp:on="selected:$personal.contenttranslation == $r.id" parse:selected="selected">{$r.title}</option>
+                        </cp:loop>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{trans('WYSIWYG Editor')}</legend>
+                    {info:personal|wysiwyg}
+                    <select name="wysiwyg" class="select">
+                        <option value="" cp:on="selected:$personal.wysiwyg == ''" parse:selected="selected">{trans('Standart Textarea')}</option>
+                        <!-- <option value="ckeditor"{iif($personal.wysiwyg == "ckeditor", ' selected="selected"', '')}>CKEditor</option> -->
+                        <option value="tinymce" cp:on="selected:$personal.wysiwyg == 'tinymce'" parse:selected="selected">TinyMCE</option>
+                    </select>
+                </fieldset>
+
+            </div>
+        </div>
+
+    </form>
+
+
+    <script type="text/javascript">
+
+        var currentSkin = '{$personal.skin}';
+
+        setTimeout(function () {
+
+            $('#desktopbackgrounds').width($('#desktopbackgrounds').parents('.box:first').width() - 30);
+            $('#desktopbackgrounds div:first').width($('#desktopbackgrounds').width() - 10);
+
+            $('#' + Win.windowID).data('WindowManager').set('onBeforeClose', function (event, _wm, callback) {
+
+                Dock.resetDockPosition();
+                Desktop.changeDesktopBackground(); // rest desktop background
+
+                callback();
+
+            });
+
+            $('#' + Win.windowID).data('WindowManager').set('onResize', function (event, ui, inst) {
+                $('#desktopbackgrounds').width($('#desktopbackgrounds').parents('.box:first').width() - 30);
+                $('#desktopbackgrounds div:first').width($('#desktopbackgrounds').width() - 10);
+
+            });
+
+            $('#' + Win.windowID).data('WindowManager').set('onResizeStop', function (event, ui, inst) {
+                $('#desktopbackgrounds').width($('#desktopbackgrounds').parents('.box:first').width() - 30);
+                $('#desktopbackgrounds div:first').width($('#desktopbackgrounds').width() - 10);
+            });
+
+
+
+        }, 1000);
+
+
+        $('#desktopbackgrounds div').find('li').click(function () {
+            $('#desktopbackgrounds .current-bg').removeClass('current-bg');
+            $(this).addClass('current-bg');
+
+
+            Desktop.changeDesktopBackground($(this).attr('rel'));
+
+        });
+
+
+        $('#dock-positions input').change(function () {
+            if ($(this).is(':checked'))
+            {
+                Dock.setDockPosition($(this).val());
+            }
+        });
+
+        $('#dockautohide').change(function () {
+            if ($(this).is(':checked'))
+            {
+                Dock.enableAutoHide();
+            }
+            else
+            {
+                Dock.disableAutoHide();
+            }
+        });
+
+
+
+        Form.registerForm('admSettings', {
+            contentIdentifierID: '-',
+            exiturl: 'admin.php?adm=personal',
+            save: function (e, exit)
+            {
+
+                var post = $('#admSettings').serialize();
+                post += '&ajax=1';
+                if (typeof $('#desktopbackgrounds').find('.current-bg').attr('rel') != 'undefined') {
+                    post += '&desktopbackground=' + $('#desktopbackgrounds').find('.current-bg').attr('rel');
+                }
+
+
+                $.post('admin.php', post, function (data) {
+
+                    $('#' + Win.windowID).unmask();
+
+
+                    if (Tools.responseIsOk(data))
+                    {
+                        // patch
+                        Form.updateSelectDefaultAttr($('#admSettings'));
+
+                        Form.resetDirty($('#admSettings'));
+
+                        if (currentSkin !== $('#myskin').find('option:selected').val()) {
+                            Notifier.info(data.msg);
+                            jAlert('Die Seite wird nun neu geladen um den Skin zu aktivieren.', 'Hinwweis...',
+                                    function () {
+                                        document.location.reload(true);
+                                    }
+                            );
+
+                            return;
+                        }
+
+                        var desktopBg = $('#desktopbackgrounds').find('.current-bg').attr('rel');
+                        if (desktopBg && desktopBg != Personal.get('desktopbackground', 'galaxy.jpg'))
+                        {
+                            Personal.set('desktopbackground', desktopBg);
+                            Desktop.changeDesktopBackground();
+                        }
+
+
+
+                        Notifier.info(data.msg);
+
+                        if (exit == true)
+                        {
+                            Win.close();
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }, 'json');
+            }
+        });
+
+    </script>
+
+
+</cp:block>

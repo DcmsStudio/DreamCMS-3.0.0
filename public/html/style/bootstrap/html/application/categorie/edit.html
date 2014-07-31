@@ -1,0 +1,117 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+    {iif('!$cat.catid', '[save_exit:admCats]', '[save:admCats] [save_exit:admCats]')}
+    [reset:admCats] [cancel:admCats]
+</cp:block>
+
+<cp:block name="content">
+    
+    <form action="admin.php" name="admCats" id="admCats" method="post">
+        <input type="hidden" name="adm" value="applicationcats"/>
+        <input type="hidden" name="action" value="save"/>
+        <input type="hidden" name="appid" value="{$app.appid}"/>
+        <input type="hidden" name="catid" id="cat-id" value="{$cat.catid}"/>
+        
+        <cp:include template="../metadata"/>
+        
+        
+        
+        <div class="box description">
+            <div class="box-inner">
+                <div class="fieldset2">
+                    <fieldset>
+                        <legend>{trans('Kategorie Titel')}</legend>
+                        <input type="text" name="title" id="title" value="{$cat.title}" size="70" class="input" />
+                    </fieldset>
+                    
+                    
+                    
+                    <fieldset>
+                        <legend>{trans('Übergeordnete Kategorie')}</legend>
+                        <select name="parentid" class="select">
+                            <option value="0"{iif($cat.catid == 0 || $cat.parentid == 0, ' selected="selected"', '')}>--------- {trans('Root')} ---------</option>
+                            <cp:loop name="cattree" key="r">
+                                <option value="{$r.catid}"<cp:if condition="$r.catid == $cat.parentid && $cat.parentid != 0"> selected="selected"</cp:if>>{$r.treename}</option>
+                            </cp:loop>
+                        </select>
+                    </fieldset>
+                </div>
+                
+                
+                <div class="fieldset2">
+                    
+                    <fieldset>
+                        <legend>{trans('Inhalte pro Seite')}</legend>
+                        <select name="perpage">
+                            <option value="10"{iif($cat.perpage == 10, ' selected="selected"', '')}>10 {trans('Einträge')}</option>
+                            <option value="15"{iif($cat.perpage == 15, ' selected="selected"', '')}>15 {trans('Einträge')}</option>
+                            <option value="20"{iif($cat.perpage == 20 || empty($cat.perpage), ' selected="selected"', '')}>20 {trans('Einträge')}</option>
+                            <option value="25"{iif($cat.perpage == 25, ' selected="selected"', '')}>25 {trans('Einträge')}</option>
+                            <option value="30"{iif($cat.perpage == 30, ' selected="selected"', '')}>30 {trans('Einträge')}</option>
+                            <option value="40"{iif($cat.perpage == 40, ' selected="selected"', '')}>40 {trans('Einträge')}</option>
+                            <option value="50"{iif($cat.perpage == 50, ' selected="selected"', '')}>50 {trans('Einträge')}</option>
+                        </select>
+                    </fieldset>
+                    
+                    
+                    
+                    <fieldset>
+                        <legend>{trans('Inhalte sortieren nach (Standart)')}</legend>
+                        <select name="order">
+                            <option value="hits"{iif($cat.order == "hits", ' selected="selected"', '')}>{trans('Aufrufe')}</option>
+                            <option value="title"{iif($cat.order == "title", ' selected="selected"', '')}>{trans('Titel')}</option>
+                            <option value="date"{iif($cat.order == "date" || empty($cat.perpage), ' selected="selected"', '')}>{trans('Datum')}</option>
+                        </select>
+                        
+                        <select name="sort">
+                            <option value="asc"{iif($cat.sort == "asc", ' selected="selected"', '')}> {trans('Aufsteigend')}</option>
+                            <option value="desc"{iif($cat.sort == "desc"|| empty($cat.sort), ' selected="selected"', '')}> {trans('Absteigend')}</option>
+                        </select> <small>{trans('Dies ist nur in der Kategorie-Ansicht möglich.')}</small>
+                    </fieldset>
+                </div>
+                
+                
+                
+                <fieldset>
+                    <legend>{trans('Kategorie Beschreibung')}</legend>
+
+                    <cp:editor baseurl="{$cfg.portalurl}" name="description" value="{$cat.description}" height="120px"/>
+                    
+                </fieldset>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+    </form>
+    
+    
+    <script type="text/javascript">
+        //<![CDATA[
+
+    $(document).ready(function()  {
+
+
+        $('#admCats').registerForm({
+            contentIdentifierID: 'cat-id',
+            exiturl: 'admin.php?adm=applicationcats&appid={$app.appid}',
+            savehandler: savethis,
+            identifierType: '{$app.apptype}-{$app.appid}-category',
+            baseField: 'title'
+            // runAfterSubmit: function() { menuObj.getMenu(); }
+        });
+
+
+
+    });
+
+
+
+//]]>
+    </script>
+    
+</cp:block>

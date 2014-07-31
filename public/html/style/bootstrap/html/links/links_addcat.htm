@@ -1,0 +1,41 @@
+<form action="weblinks.php" method="post">
+  <input type="hidden" name="cid" value="0" />
+  <input type="hidden" name="action" value="add_cat" />
+  <input type="hidden" name="sid" value="$cp->session_id" />
+
+    <table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+        <tr class="tableheader">
+            <td colspan="2">Kategorie hizufügen</td>
+        </tr>
+
+        <tr class="firstrow">
+           <td width="30%">Titel</td>
+           <td><input type="text" name="title" size="30" maxlength="50" class="input" /></td>
+        </tr>
+
+        <tr class="secondrow">
+            <td valign="top">Sichtbar für:</td>
+            <td>$groups</td>
+        </tr>
+
+
+      <tr class="firstrow">
+      <td colspan="2">Verwandte Kategorien</td>
+      <tr class="firstrow">
+       <td colspan="2">
+       		$relcatsel
+       </td>
+      </tr>
+
+
+
+        <tr class="secondrow">
+            <td colspan="2" align="center">
+                <input type="submit" value="Speichern" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+<br />
+
+$subcatform

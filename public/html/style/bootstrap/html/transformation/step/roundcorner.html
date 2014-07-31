@@ -1,0 +1,37 @@
+    <fieldset>
+        <legend>{trans("`x` Rounding")}</legend>
+        <input type="text" class="textbox" name="params[x_rounding]" id="x_rounding" value="{iif($values.x_rounding, $values.x_rounding, '5')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("`y` Rounding")}</legend>
+        <input type="text" class="textbox" name="params[y_rounding]" id="y_rounding" value="{iif($values.y_rounding, $values.y_rounding, '5')}" style="width: 100px;" />
+    </fieldset>
+
+
+<fieldset>
+    <legend>{trans("Borders")}</legend>
+    <label for="topleft">
+        <input type="checkbox" class="checkbox" name="params[topleft]" id="topleft" value="1" {iif($values.topleft==1, 'checked="checked"', '')} />{trans("Top Left")}</label><br />
+    <label for="bottomleft">
+        <input type="checkbox" class="checkbox" name="params[bottomleft]" id="bottomleft" value="1" {iif($values.bottomleft==1, 'checked="checked"', '')} />{trans("Bottom Left")}</label><br />
+    <label for="topright">
+        <input type="checkbox" class="checkbox" name="params[topright]" id="topright" value="1" {iif($values.topright==1, 'checked="checked"', '')} />{trans("Top Left")}</label>
+    
+    <br />
+    <label for="bottomright">
+        <input type="checkbox" class="checkbox" name="params[bottomright]" id="bottomright" value="1" {iif($values.bottomright==1, 'checked="checked"', '')} />{trans("Bottom Right")}</label>
+
+</fieldset>
+
+
+
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+</script>
+
+

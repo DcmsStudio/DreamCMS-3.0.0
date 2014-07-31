@@ -1,0 +1,59 @@
+<?php
+
+function __genre_list($plattform_list=''){
+global $cp, $cfg, $fct, $cp;
+
+	$sel = ( (HTTP::input('genretype') && HTTP::input('genretype')== -1 ) ? ' selected="selected"' : '' );
+
+$html = <<<EOF
+
+<form action="admin.php" method="post">
+<input type="hidden" name="adm" value="plattformgenre" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="action" value="list_genre" />
+
+<table cellpadding="3" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="firstrow">
+        <td>
+		Genre Typ: <select name="genretype" class="select">
+		<option value="-1"> -- Alles -- </option>
+EOF;
+
+
+	foreach ( $GLOBALS[ 'genre_types' ] as $id => $langkey )
+	{
+		$sel = ( (HTTP::input('genretype') && $id == HTTP::input('genretype')) ? ' selected="selected"' : '' );
+		$html .= '<option value="'. $id .'"'.$sel.'>'. $cp->lang['genretype_'.$langkey] .'</option>';
+	}
+	
+$html .= <<<EOF
+		</select> <input type="submit" value="Anzeigen" class="button"/>
+		</td>
+    </tr>
+</table>
+</form>
+<br />
+
+<table cellpadding="3" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+        <td>Genre</td>
+		<td width="20%" align="center">Typ</td>
+        <td width="1%" align="center">Icon</td>
+        <td align="center" width="20%">Optionen</td>
+    </tr>
+
+    $plattform_list
+
+    <tr class="firstrow">
+        <td colspan="4" align="right">
+            <input onclick="javascript:location.href='admin.php?adm=plattformgenre&action=edit_genre&type=add&genretype=HTTP::input('genretype')'" type="button" value="Genre hinzufügen" class="button" />
+        </td>
+    </tr>
+
+</table>
+
+EOF;
+	return $html ;
+}
+
+?>

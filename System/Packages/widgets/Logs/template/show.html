@@ -1,0 +1,196 @@
+<style type="text/css">
+
+    #wgt-logs .log-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 3px;
+        overflow: hidden;
+    }
+
+    #wgt-logs .log-title span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 14px
+    }
+
+</style>
+
+
+<div style="height: 150px;overflow-x: hidden" id="wgt-logs">
+    <div style="overflow-x: hidden">
+        <cp:loop name="logs" key="r">
+            <div class="row" style="overflow: hidden" rel="{$r.id}">
+                <div class="log-title">
+                    <span>{$r.action}</span><br/>
+                    <small>
+                        {date('d.m.Y, H:i:s', $r.time)} | {$r.ip}
+                        <cp:if condition="$r.username"> | {$r.username}</cp:if>
+                        <br/>
+                        {$r.browser}
+                    </small>
+                </div>
+            </div>
+        </cp:loop>
+        <cp:else>
+            <div class="row">
+                {trans("Es sind keine Log-Einträge vorhanden.")}
+            </div>
+        </cp:else>
+    </div>
+</div>
+
+<script type="application/javascript">
+
+    var winOpt = {
+        title: 'Erweiterte Log Infos...',
+        Resizable: true,
+        WindowToolbar: false,
+        Minimize: false,
+        minWidth: 400,
+        minHeight: 180,
+        Height: 450,
+        Width: 600,
+        Controller: 'logs',
+        app: 'logs',
+        Action: 'index',
+        WindowID: 'logs-advanced-window',
+        enableContentScrollbar: true,
+        nopadding: false,
+        onAfterClose: function ( e, wm, callback )
+        {
+            if ( Tools.isFunction( callback ) ) {
+                callback();
+            }
+        },
+        onResizeStart: function ( e, e2, wm, size )
+        {
+            $( wm.win ).addClass( 'popup-logs' );
+        },
+        onBeforeShow: function ( e, wm, callback )
+        {
+            wm.settings.enableContentScrollbar = true;
+            if ( Tools.isFunction( callback ) ) {
+                callback();
+                setTimeout( function () { $( wm.win ).addClass( 'popup-logs' ); }, 150 );
+            }
+        }
+    };
+    if ( typeof getAdvanced != 'function' ) {
+        function getAdvanced( d, windowid )
+        {
+            winOpt.opener = windowid;
+            var genid = new Date().getTime();
+            winOpt.WindowID += '-' + genid;
+
+            var container = $( '<div class="advancedlog"/>' );
+            if ( d.allow_add_ip ) {
+                container.append( '<button class="addbadip">{trans("Als Black-IP markieren")}</button>' );
+            }
+            container.append( '<div><span>Date</span>' + d.date + '</div>' );
+            container.append( '<div><span>IP</span>' + d.ip + ' (' + d.host + ')</div>' );
+            container.append( '<div><span>User Agent</span>' + d.browser + '</div>' );
+            container.append( '<div><span>Country</span>' + d.country + '</div>' );
+            container.append( '<div class="map" id="dcmsgmap-' + genid + '"></div>' );
+
+            container.append( '<div><span>Message</span>' + d.message + '</div>' );
+            if ( d.data ) {
+
+                if ( d.data.log ) {
+                    var _log = $( '<div></div>' );
+                    container.append( _log.append( '<span>Log</span>' + d.data.log ) );
+                }
+
+                if ( d.data.requestMethod ) {
+                    var _requestMethod = $( '<div></div>' );
+                    container.append( _requestMethod.append( '<span>Request Method</span>' + d.data.requestMethod ) );
+                }
+
+                if ( d.data.request ) {
+                    var _request = $( '<div></div>' );
+                    container.append( _request.append( '<span>Request Data</span>' + d.data.request ) );
+                }
+
+            }
+
+            var container2 = $( '<div class="advancedlog"/>' ).append( container );
+
+            winOpt.onAfterOpen = function ()
+            {
+                $( '#dcmsgmap-' + genid ).parent().find( 'button.addbadip' ).click( function ()
+                {
+                    $.post( 'admin.php', {
+                        adm: 'badips',
+                        action: 'add',
+                        send: true,
+                        ip: d.ip
+                    }, function ( data )
+                    {
+                        if ( Tools.responseIsOk( data ) ) {
+                            Notifier.info( data.msg );
+                        }
+                        else {
+                            if ( data.msg ) {
+                                Notifier.error( data.msg );
+                            }
+                            else {
+                                Notifier.error( '{trans("IP konnte nicht zur Blcklist hinzugefügt werden!")}' );
+                            }
+                        }
+                    } );
+                } );
+
+                if ( typeof d.lat != 'undefined' && typeof d.lon != 'undefined' ) {
+                    $( '#dcmsgmap-' + genid ).show();
+
+                    var ipnote = '<div id="content" style="width: 200px;overflow:hidden"><div id="siteNotice"></div>'
+                            + '<h1 id="firstHeading" class="firstHeading" style="margin-bottom: 10px">Herkunft Infos</h1>'
+                            + '<div id="bodyContent" style="width: 200px;overflow:hidden"><p>IP: ' + d.ip + '<br/>Host: ' + d.host + '<br/>Land: ' + d.country + '</p></div>'
+                            + '</div>';
+
+                    initMap( {
+                        mapElement: '#dcmsgmap-' + genid,
+                        lat: d.lat,
+                        lon: d.lon,
+                        useMarker: true,
+                        infoWindow: ipnote,
+                        markerTitle: 'IP'
+                    } );
+
+                }
+                else {
+                    $( '#dcmsgmap-' + genid ).hide();
+                }
+            }
+
+            Tools.createPopup( container2.html(), winOpt );
+
+        }
+
+    }
+
+    $( document ).ready( function ()
+    {
+
+        Loader.require( 'html/js/backend/dcms.googlemap.js', function ()
+        {
+            $( '#wgt-logs' ).find( 'div.row' ).unbind().dblclick( function ( e )
+            {
+                e.preventDefault();
+                winOpt.WindowID = HashGen.md5( 'admin.php?adm=logs&amp;action=showfull&id=' + $( this ).attr( 'rel' ) );
+
+                $.get( 'admin.php?adm=logs&action=showfull&id=' + $( this ).attr( 'rel' ), function ( data )
+                {
+                    if ( Tools.responseIsOk( data ) ) {
+                        getAdvanced( data, false );
+                    }
+                    else {
+                        jAlert( data.msg, cmslang.error );
+                    }
+                }, 'json' );
+            } );
+
+            Tools.scrollBar( $( '#wgt-logs>div:first' ) );
+        } );
+    } );
+</script>

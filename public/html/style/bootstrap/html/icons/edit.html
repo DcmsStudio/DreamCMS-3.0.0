@@ -1,0 +1,72 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    [save:admForm] [save_exit:admForm] [reset:admForm] [cancel:admForm]   
+</cp:block>
+
+<cp:block name="content">
+<form method="post" action="admin.php" id="admForm" name="admForm">
+    
+    <input type="hidden" name="adm" value="icon" />
+    <input type="hidden" name="send" value="send" />
+    <input type="hidden" name="action" value="edit" />
+    <input type="hidden" name="id" id="iconid" value="{$icon.iconid}" />    
+    
+    <div class="box description">
+        <div class="box-inner">
+            
+            <fieldset>
+                <legend>{trans('Icontitel')}</legend>
+                <input name="icontitle" type="text" value="{escape($icon.icontitle, 'quotes')}" size="70" class="input required" />
+            </fieldset>            
+            
+            <fieldset>
+                <legend>{trans('Icon Pfad')}</legend>
+                <input name="iconpath" id="iconpath" type="text" value="{escape($icon.iconpath, 'quotes')}" size="70" class="input required" />
+                <br/>
+                <small>
+                    {trans('Basis Pfad ist')} "{$base_iconpath}"
+                    {trans('Mit der Verwendung von "[imagefolder]" können Sie die Icons für jeden Frontend Skin in einer anderen Farbe darstellen.')}
+                </small>
+                <br/>
+                <span id="preview">
+                
+                </span>
+                
+            </fieldset>
+            
+        </div>
+    </div>
+
+</form>
+
+
+
+
+<script type="text/javascript">
+
+var baseSmiliePath = '{$base_iconpath}';
+
+    $(document).ready( function() {
+    
+        $('#admForm').registerForm({
+            contentIdentifierID: 'iconid',
+            exiturl: 'admin.php?adm=icon',
+            savehandler: savethis
+        });
+
+        if ( $('#iconpath').val() != '' )
+        {
+            $('#preview').append( $('<img>').attr('src', baseSmiliePath + $('#iconpath').val()) )
+        }
+
+
+        $('#iconpath').change(function() {
+            $('#preview').empty();
+            if ( $(this).val() != '' ) $('#preview').append( $('<img>').attr('src', baseSmiliePath + $(this).val()) )
+        });
+
+    });
+
+</script>
+</cp:block>

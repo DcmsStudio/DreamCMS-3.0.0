@@ -1,0 +1,94 @@
+<cp:extends template="../main"/>
+
+<cp:block name="content">
+
+    <div style="width:98%">
+
+        <cp:set var="x" value="1"/>
+        <cp:set var="col" value="1"/>
+        <cp:loop name="modules" key="r">
+            <cp:if condition="$col == 1">
+                <cp:tag name="div" style="width:98%" />
+            </cp:if>
+            
+            
+            <div class="box" style="min-height: 80px;width:48%{iif(($x % 2), ';display:inline-block', ';float:right;clear:both;display:inline-block')}">            
+                <div>
+                    <button type="button" class="install-this" name="{$r.modul}" style="float: right; margin-right: 5px;">
+                        <img src="images/brick_add.png"/> {trans('Installieren')}
+                    </button>
+
+                    <strong>{$r.modulelabel}</strong><br/>
+                    <small>
+                        {trans('Version')}: {$r.version}
+                    </small>
+                </div>
+                <div cp:is="$r.moduledescription" style="display: block">
+                    {$r.moduledescription}
+                </div>
+            </div>
+            <cp:set var="x" value="$x + 1"/>
+            
+            <cp:if condition="$col == 2 || (!$r.next_r.modulelabel && $col == 1)">
+                <cp:tag name="div" forceclose="true"/>
+                <cp:set var="col" value="0"/>
+            </cp:if>
+            
+            <cp:set var="col" value="$col+1"/>
+
+        </cp:loop>
+        <cp:else>
+            <em>{trans('Es sind keine Module vorhanden, die noch nicht installiert wurden.')}</em>
+        </cp:else>
+
+    </div>
+
+    <script language="javascript" type="text/javascript">
+
+        $('button.install-this').each(function () {
+
+            $(this).click(function () {
+
+                if ($(this).hasClass('disabled')) {
+                    return false;
+                }
+                var name = $(this).attr('name');
+                var self = $(this);
+
+                $('#' + Win.windowID).mask('{trans('Das Modul wird installiert...')}');
+                $.post('admin.php?ajax=1', {adm: 'modules', action: 'install', send: true, modul: name}, function (data) {
+                    $('#' + Win.windowID).unmask();
+
+                    if (Tools.responseIsOk(data))
+                    {
+                        Notifier.display('info', data.msg);
+                        self.addClass('disabled').unbind('click');
+
+                        var currentWin = $('#' + Win.windowID);
+                        var opener = $('#' + Win.windowID).attr('opener');
+                        if (opener)
+                        {
+                            $('#' + opener).data('WindowManager').focus();
+                            setTimeout(function () {
+                                $('#' + opener).data('windowGrid').refresh();
+                                 currentWin.data('WindowManager').focus();
+                            }, 100);
+                        }
+
+                        self.parents('.box:first').fadeOut(250, function () {
+                            $(this).remove();
+                        });
+
+                    } else {
+                        jAlert(data.msg);
+                    }
+                });
+
+
+            });
+
+        });
+
+
+    </script>
+</cp:block>

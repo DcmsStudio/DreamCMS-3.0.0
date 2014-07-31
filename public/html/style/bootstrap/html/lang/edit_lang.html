@@ -1,0 +1,369 @@
+<?php
+
+function __edit_lang( $rows, $lang_select, $group_select, $current_lang, $pages ){
+global $cp, $fct, $adm_skin, $cfg;
+
+	return <<<EOF
+
+<script language="javascript" type="text/javascript">
+<!--
+
+var h_step = 14;
+
+function _original(id) {
+
+    if (confirm("Soll das Original dieser Sprachvariable wirklich wiederhergestellt werder?"))
+    {
+    	self.location.href = 'language.php?sid={$cp->session_id}&action=save&langid=HTTP::input('langid')&groupid=HTTP::input('groupid')&page=HTTP::input('page')&id='+id;
+    }
+    else
+    {
+    	alert ("Wiederherstellung abgebrochen.");
+    }
+}
+
+function _delete(id) {
+
+    if (confirm("Soll das Sprachvariable wirklich gel�scht werder?"))
+    {
+    	self.location.href = 'language.php?sid={$cp->session_id}&action=deletekey&langid=HTTP::input('langid')&groupid=HTTP::input('groupid')&page=HTTP::input('page')&id='+id;
+    }
+    else
+    {
+    	alert ("L�schen wurde abgebrochen.");
+    }
+}
+
+function switchheight(id, type)
+{
+	var textarea = document.getElementById('v'+ id);
+	var td1 = document.getElementById('td1_'+ id);
+	var td2 = document.getElementById('td2_'+ id);
+
+	var height = parseInt(textarea.style.height);
+	if (height == 'NaN')
+	{
+		return;
+	}
+
+	if (type == 'low' && textarea.style.height == '90px')
+	{
+		return;
+	}
+
+	if (type == 'low')
+	{
+		textarea.style.height = (height - h_step)+'px';
+		td1.style.height = (height - h_step)+'px';
+		td2.style.height = (height - h_step)+'px';
+	}
+	else
+	{
+		textarea.style.height = (height + h_step)+'px';
+		td1.style.height = (height + h_step)+'px';
+		td2.style.height = (height + h_step)+'px';
+	}
+
+}
+
+//-->
+</script>
+
+
+
+
+
+
+<form  action="admin.php"  method="post" name="langgroupform">
+	<input type="hidden" name="adm" value="language" />
+	<input type="hidden" name="sid" value="{$cp->session_id}" />
+	<input type="hidden" name="action" value="edit" />
+
+    <table class="tblborder" width="99%" cellpadding="3" cellspacing="1" border="0" align="center">
+        <tr class="tableheader">
+            <td>Sprache ausw�hlen</td>
+        </tr>
+        <tr class="firstrow">
+            <td><span style="vertical-align:middle"><b>Sprache:</b> </span>
+            <select name="langid" id="langid" class="select" style="vertical-align:middle">
+            	$lang_select
+            </select>
+            <span style="vertical-align:middle"><b>Bereich:</b> </span>
+            <select name="groupid" id="groupid" class="select" style="vertical-align:middle">
+            	$group_select
+            </select> <input type="submit" value="Anzeigen" class="button" /></td>
+        </tr>
+    </table>
+</form>
+<br />
+
+
+
+    <table class="tblborder" width="99%" cellpadding="5" cellspacing="0" border="0">
+        <tr class="tableheader">
+            <td colspan="3">Sprache ($current_lang)</td>
+        </tr>
+        <tr class="tableheader">
+            <td width="1%"></td>
+            <td width="60%">�bersetzung</td>
+			<td width="40%">Anzahl Variablen</td>
+        </tr>
+        {$rows}
+    </table>
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+exit_url = 'admin.php?adm=language&ajaxsubmit=1';
+allowSiteLaunch = false;
+		
+function getentries(controller, force)
+{
+	el = $('img_' + controller);
+	if(el.src.indexOf('up')>-1 && !force)
+	{
+		el.src = el.src.replace('up', 'down');
+		str = 'contin_' + controller;
+		// Effect.BlindUp(str, { duration: 0.5 });
+		Effect.toggle(str, 'blind', {
+            duration: 0.5
+        });
+		
+		
+		
+		// $('contin_' + controller).innerHTML = '';
+	}
+	else
+	{
+		el.src = el.src.replace('down', 'up');
+		/*
+		if(!force) {
+			Element.show('contin_' + controller);
+			$('contin_' + controller).innerHTML = ajax_loading_content;
+			
+			Effect.BlindDown('contin_' + controller, { duration: 0.5 });
+		}
+		*/
+		addlangstr = '';
+		if ( $('langid') )
+		{
+			addlangstr = '&langid='+ $('langid').options[$('langid').selectedIndex].value;
+		}		
+		
+		url = exit_url + "&action=edit"+addlangstr+"&group="+controller;
+		
+		new Ajax.Request(url, {
+			method: 'get',
+			encoding: 'UTF-8',
+			onSuccess : function(resp) {
+				if(resp.responseText.length>0)
+				{
+					$('contin_' + controller).innerHTML = resp.responseText;
+					
+					//Effect.BlindDown('contin_' + controller, { duration: 0.5 });
+					Effect.toggle('contin_' + controller, 'blind', {
+						duration: 0.5
+					});
+				}
+				else
+				{
+					alert("No data found!");
+				}				
+			},
+			onFailure : function(resp) {
+				alert('error');
+			}
+		});
+
+	}
+}
+
+function update_parent(controller, base_value, value, perc)
+{
+	try {
+		$('base_count_' + controller).innerHTML = base_value;
+	} catch(e) {}
+	try {
+		$('lang_count_' + controller).innerHTML = value;
+	} catch(e) {}
+	try {
+		$('perc_count_' + controller).innerHTML = perc;
+	} catch(e) {}
+}
+
+function translate(controller, name, lang)
+{
+	display_info_popup(false);
+	$('info-popup').setStyle({
+		maxHeight: '350px'
+	});
+	$('info').setStyle({
+		height: '310px'
+	});
+	url = global_url + "/languages/admintranslate/" + controller + "/" + name + "/" + lang;
+	new Ajax.Updater('info', url, {
+		onFailure : function(resp) {
+			alert(global_error_message);
+		}
+	});
+}
+
+function save_translation(controller)
+{
+	mask();
+	Element.hide('error-display');
+	$('default_value').disabled=true;
+	post = Form.serialize('translate-frm');
+	$('translated_value').readonly=true;				
+	url = "index.php?cmd=icms/languages/adminsaveentry";
+	new Ajax.Request(url, {
+		method: 'post',
+		postBody: post,
+		onSuccess : function(resp) {
+			if(resp.responseText.length>0)
+			{
+				if(resp.responseText!=controller)
+				{
+					if(resp.responseText=='reload')
+					{
+						document.location.href = 'index.php?cmd=icms/languages/adminedit/1';
+					}
+					else
+					{
+						unmask();
+						$('error-message').innerHTML = resp.responseText;
+						Element.show('error-display');
+						$('translated_value').readonly=false;
+					}
+				}
+			}
+			else
+			{
+				hide_info_popup();
+				unmask();
+				$('cont_' + controller).setStyle({
+					height: $('cont_' + controller).getHeight() + 'px'
+				});
+				get_entries(controller, true);
+				notify('Entry Saved!');
+			}
+		},
+		onFailure : function(resp) {
+			alert(global_error_message);
+		}
+	});			
+}
+
+function delete_entry(controller, name, lang)
+{
+	if(confirm('WARNING: Deleting Language Entries can possibly render (sections of) the Dashboard inoperable! Do not continue unless you know what youre doing!'))
+	{
+		mask();
+		url = global_url + "/languages/deleteadminentry/" + controller + "/" + name + "/" + lang;
+		new Ajax.Request(url, {
+			method: 'get',
+			onSuccess : function(resp) {
+				if(resp.responseText.length>0)
+				{
+					unmask();
+					alert(resp.responseText);
+				}
+				unmask();
+				$('cont_' + controller).setStyle({
+					height: ($('cont_' + controller).getHeight()-24) + 'px'
+				});
+				get_entries(controller, true);
+				notify('Entry Deleted!');
+			},
+			onFailure : function(resp) {
+				alert(global_error_message);
+			}
+		});
+	}
+}
+
+function add_section()
+{
+	display_info_popup(false);
+	$('info-popup').setStyle({
+		maxHeight: '350px'
+	});
+	$('info').setStyle({
+		height: '310px'
+	});
+	url = global_url + "/languages/admintranslate/__newsection__/__newkey__/en";
+	new Ajax.Updater('info', url, {
+		onFailure : function(resp) {
+			alert(global_error_message);
+		}
+	});
+}
+	
+
+</script>
+
+
+
+<div id="addVar" style="display:none">
+<form action="admin.php" method="post" name="addform" id="addform">
+<input type="hidden" name="adm" value="language" />
+	<input type="hidden" name="sid" value="{$cp->session_id}" />
+	<input type="hidden" name="action" value="addlangkey" />
+	<input type="hidden" name="send" value="send" />
+	<input type="hidden" name="langid" value="HTTP::input('langid')" />
+
+    <table class="tblborder" width="99%" cellpadding="3" cellspacing="1" border="0" align="center">
+        <tr class="tableheader">
+            <td>Neue Sprachvariable hinzuf�gen</td>
+        </tr>
+		<tr>
+		<td>
+			<fieldset>
+				<legend>Sprach Gruppe</legend>
+				{info:lang|lang_group}
+					<select name="groupid" class="select" style="vertical-align:middle">
+						$group_select
+					</select>
+			</fieldset>
+
+			<fieldset>
+				<legend>Als Email Text</legend>
+				{info:lang|is_emailtext}
+					<label for="is_mail1"><input type="radio" value="1" name="is_mail" id="is_mail1" class="required" /> Ja</label> 
+					<label for="is_mail0"><input type="radio" value="0" name="is_mail" id="is_mail0" checked="checked" class="required" /> Nein</label>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Variable</legend>
+				{info:lang|var}
+				{lang.<input type="text" name="varname" value="" size="30" class="input required"/>}
+			</fieldset>
+			
+			<fieldset>
+				<legend>�bersetzung</legend>
+				{info:lang|varcontent}
+				<textarea name="varcontent" cols="60" rows="10" class="langtextarea required" style="height:100px;width:90%"></textarea>
+			</fieldset>
+		
+            </td>
+        </tr>
+
+        <tr class="secondrow tr">
+            <td>
+            <input type="submit" value="Speichern" class="button" /> <input type="reset" value="Zur�cksetzen" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+
+
+EOF;
+}
+
+?>

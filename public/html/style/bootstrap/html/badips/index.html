@@ -1,0 +1,34 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+</cp:block>
+
+<cp:block name="content">
+    <div id="badips-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+
+        Application.Grid( 'badips-grid', {$gridJson});
+
+
+
+
+        /*
+        Application.Grid('badips-grid', {
+        url: 'admin.php?adm=badips&action={$input.action}',
+                currentFilter: {$grid.activeFilter},
+                colModel: {$grid.colModel},
+                gridActions: {$grid.gridActions},
+                searchitems: {$grid.searchitems},
+                sort: '{$grid.sort}',
+                orderby: '{$grid.orderby}',
+                total: {$grid.total},
+                key: 'spammer_id',
+                perpage: {$grid.perpage}
+        });
+
+        */
+
+    </script>
+</cp:block>

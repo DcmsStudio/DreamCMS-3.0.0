@@ -1,0 +1,218 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+    <div id="field-type-edit-toolbar" style="display: none">
+        <button type="button" class="action-button save-btn" rel="{$field.type}"><img src="images/buttons/save.png" width="16" height="16" alt=""/> {trans('Speichern')}</button>
+    </div>
+</cp:block>
+
+
+<cp:block name="fieldeditform">
+
+
+
+    <form action="admin.php" name="fieldForm-{$field.fieldid}" id="fieldForm-{$field.fieldid}" method="post">
+        <input type="hidden" name="adm" value="app"/>
+        <input type="hidden" name="action" value="edit"/>
+        <input type="hidden" name="manage" value="elements"/>
+        <input type="hidden" name="do" value="savefield"/>
+        <input type="hidden" name="fieldid" id="field-id-{$field.fieldid}" value="{$field.fieldid}"/>
+        <input type="hidden" name="itemtype" value="{$input.element}"/>
+        <input type="hidden" name="appid" id="appid-{$field.fieldid}" value="{$input.appid}"/>
+        <input type="hidden" name="appkey" id="appkey-{$field.fieldid}" value="{$appkey}"/>
+        <input type="hidden" name="fieldtype" id="fieldtype-{$field.fieldid}" value="{$field.type}"/>
+        <input type="hidden" name="tab_label" value="{$tab_label}"/>
+
+
+        <div id="form-{$field.fieldid}" class="box description">
+            <div class="box-inner">
+                <fieldset>
+                    <legend></legend>
+                    {info:fields|name}
+                    <input type="text" name="fieldname" id="field-name-{$field.fieldid}" size="60" maxLength="250" value="{$fieldname}" class="required"/>
+                </fieldset>
+                <fieldset>
+                    {info:fields|description}
+                    <legend></legend>
+                    <textarea name="description" id="field-description-{$field.fieldid}" rows="3">{$description}</textarea>
+                </fieldset>
+                {$formcontent}
+            </div>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        $('#' + Win.windowID).find('#field-type-edit-toolbar').show();
+    </script>
+
+
+</cp:block>
+
+
+
+<cp:block name="content">
+    
+
+
+    <!-- <script type="text/javascript" src="{$js_url}backend/dcms.appelements.js"></script> -->
+
+    <div class="box description">
+        <div class="box-inner">
+            <strong>Felder der Anwendung {$app.title} - {$app.type} </strong>
+            <cp:if condition="$app.description != ''">
+                <br/>{$app.description}
+            </cp:if>
+        </div>
+    </div>
+
+
+    <div id="field-list" style="width:99%;display:inline-block">
+        <input type="hidden" name="appid" id="appid" value="{$appid}"/>
+        <input type="hidden" name="appkey" id="app-key" value="{$apptype}"/>
+
+
+        <div id="added-fields" style="width:60%;float:left;display:inline-block">
+            <div id="app-elements" class="el-{$input.element}">
+
+                <ul class="app-tabs" id="app-tabs">
+                    
+                    <cp:set var="fieldtabs_index" value="0"/>
+                    
+                    <cp:loop name="fieldtabs" key="r">
+                        <cp:set var="fieldtabs_index" value="$fieldtabs_index + 1"/>
+                        <li id="tab-{$fieldtabs_index}" class="tab{iif($fieldtabs_index == 1, ' core-tab', '')}">                               
+                            <span rel="#tab-content-{$fieldtabs_index}">{$r.label}</span>
+                        </li>
+                    </cp:loop>
+
+                    <li class="tab add-tab">                                
+                        <span class="add-tab icon"><img src="images/buttons/add-tab.png" width="16" height="16" title="Tab hinzufügen" alt="" /></span>
+                        <span class="tab-label add">Add Tab</span>
+                    </li>
+                </ul>
+
+
+                <cp:set var="addToTab" value="0"/>
+                <cp:set var="tabcontent_index" value="0"/>
+                <cp:loop name="fieldtabs" key="r">
+
+                    <cp:set var="tabcontent_index" value="$tabcontent_index + 1"/>
+
+                    <div id="tab-content-{$tabcontent_index}" class="tab-content" style="padding-bottom:10px;display:inline-block;position:relative">
+                        <ul class="sortable" style="padding-bottom:10px;display:inline-block;">
+
+                            <cp:loop name="fields" key="rs">
+
+                                <cp:if condition="$rs.totab != $addToTab">
+                                    <cp:continue/>
+                                </cp:if>
+
+                                <li class="appel">
+                                    <div class="element-holder" id="field-{$rs.fieldid}" rel="{$rs.fieldtype}">
+                                        <span class="{$rs.fieldtype}"></span><span class="tmpName">{$rs.fieldname}</span> ({$rs.fieldtype})
+                                        <cp:if condition="!$rs.iscore">
+                                            <img src="images/field-remove.png" width="16" height="16" alt="" title="{trans('Feld löschen')}" class="remove-btn" style="float:right"/>
+                                        </cp:if>
+                                        <img src="images/field-edit.png" width="16" height="16" alt="" class="edit-btn" style="float:right"/>
+                                    </div>
+                                </li>
+
+                            </cp:loop>
+
+                            <cp:set var="addToTab" value="$addToTab + 1"/>
+                        </ul>
+                    </div>
+
+
+
+                </cp:loop>
+
+
+                <cp:set var="stopcontainer" value="0"/>
+                <cp:set var="container" value="1"/>
+                <cp:loop name="fieldtabs" key="r">
+
+                    <cp:if condition=" $tabcontent_index >= $container && !$stopcontainer">
+                        <cp:set var="container" value="$container + 1"/>
+                        <cp:continue/>
+                    </cp:if>
+
+                    <div id="tab-content-{$tabcontent_index}" class="tab-content" style="padding-bottom:10px">
+                        <div style="height:100%;display:inline-block"><ul class="sortable"></ul></div>
+                    </div>                    
+                    <cp:set var="tabcontent_index" value="$tabcontent_index + 1"/>
+                    <cp:set var="stopcontainer" value="1"/>
+                </cp:loop>
+
+            </div>
+
+
+
+        </div>
+
+        <div id="add-fields" style="margin-left:10px;padding: 0;width:35%;float:left;display:inline-block">
+
+            <div class="accordion" style="height:300px;padding:0;margin:0;" id="field-elements">
+
+                <cp:set var="container" value="0"/>
+                <cp:set var="appInternSet" value="false"/>
+                <cp:loop name="available_elements" key="r">
+
+                    <cp:if condition="!$container">
+                        <cp:set var="container" value="1"/>      
+                          
+                        <h3><!-- <span></span> -->{$r.group}</h3>
+                        <cp:tag name="div"/>
+                        
+                        
+                        <cp:if condition="$appInternSet != true">
+                            <cp:tag name="ul" class="elements app-intern"/>
+                            <cp:set var="appInternSet" value="true"/>
+                        </cp:if>
+                        <cp:else>
+                            <cp:tag name="ul" class="elements"/>
+                        </cp:else>
+                    </cp:if>
+
+                    <li rel="{lower($r.fieldtype)}" class="appel"><span class="{lower($r.fieldtype)}"></span>{$r.title}</li>
+
+                    <cp:if condition="$r.next_r.group != $r.group && $container">
+                        <cp:tag name="ul" forceclose="true"/>
+                        <cp:tag name="div" forceclose="true"/>
+                        <cp:set var="container" value="0"/>              
+                    </cp:if>
+                </cp:loop>                                        
+
+                <h3>Web Services</h3>
+                <div>
+                    <ul class="elements">
+                        <li class="sortable">Youtube</li>
+                        <li class="sortable">Facebook</li>
+                        <li class="sortable">Twitter</li>
+                        <li class="sortable">Google Maps</li>
+                    </ul>                                
+                </div>
+
+                <h3>Tools</h3>
+                <div>
+                    <ul class="elements">
+                        <li>Youtube</li>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Google Maps</li>
+                    </ul>                                
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    
+    
+    <script type="text/javascript">
+        registerApplicationOptions('{$apptype}');
+    </script>
+
+</cp:block>

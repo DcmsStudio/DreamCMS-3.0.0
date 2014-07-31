@@ -1,0 +1,357 @@
+<cp:extends template="../main"/>
+<cp:block name="toolbar">
+</cp:block>
+
+<cp:block name="content">
+<form id="articleform" action="admin.php" method="post" name="articleform">
+    <input type="hidden" name="adm" value="article" />
+    <input type="hidden" name="sid" value="{$cp->session_id}" />
+    <input type="hidden" name="action" value="edit" />
+    <input type="hidden" name="send" value="send" />
+    <input type="hidden" name="id" value="{$request.id}" />
+    
+    
+    <div>
+        <cp:jstabs tabs="Inhalt,Optionen" default="Inhalt" usetrans="true" />
+    </div>
+    
+    
+    <div class="box description" id="tc0">
+        <div class="box-inner">
+            <div class="fieldset3">
+                <fieldset>
+                    <legend>{trans('Artikel Titel')}</legend>
+                    <input type="text" name="title" value="{$title}" size="35" class="input" />
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Artikel Untertitel')}</legend>
+                    <input type="text" name="subtitle" value="{$subtitle}" size="35" class="input" />
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Passwort')}</legend>
+                    {info:article|password}<input class="input" type="text" name="apassword" value="{$password}" size="45" />
+                </fieldset>
+            </div>
+            <div class="fieldset3">
+                
+                <fieldset>
+                    <legend>{trans('Aktiv?')}</legend>
+                    {info:article|publish}
+                    <input type="radio" name="published" value="1" class="radio"<cp:if condition="$published == 1 || !$request.id"> checked="checked"</cp:if>/> {trans('Ja')} &nbsp;
+                    <input type="radio" name="published" value="0" class="radio"<cp:if condition="$published == 0 && $request.id"> checked="checked"</cp:if> /> {trans('Nein')}
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Artikel Typ')}</legend>
+                    {info:article|type}
+                    <select name="type" id="articleType" class="select">
+                        {$type_options}
+                    </select>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Artikel Kategorie')}</legend>
+                    {info:article|categorie}
+                    <select name="catid" class="select">
+                        {$cat_options}
+                    </select>
+                </fieldset>
+                
+            </div>
+            
+            <fieldset>
+                <legend>{trans('Keywords')}</legend>
+                <input class="input" type="text" name="keywords" id="tags" value="{escape($keywords, 'html')}" size="120" maxlength="250" />
+                <span id="generate-tags" class="generate-tags"></span>
+            </fieldset>
+            
+            <fieldset>
+                <legend><label onclick="switchIframe('_images', '_images');">{trans('Content Bilder')}</label></legend>
+                <iframe onload="resizeIframe(this)" src="admin.php?adm=images&sid={$cp->session_id}&formid=articleform&contenttype=article&images={$r['images']}" style="border:0px;width:100%;display:none" width="100%" height="100%" frameborder="no" name="_images" id="_images" scrolling="auto"></iframe>
+                <input type="hidden" name="imagelist" id="imagelist" value="" />
+                
+            </fieldset>
+            
+            <fieldset>
+                <legend>{trans('Inhalt')}</legend>
+                <cp:editor baseurl="{$cfg.portalurl}" name="content" value="{$content}"/>
+            </fieldset>
+            
+            
+        </div>
+    </div>
+    
+    
+    <div class="box description" id="tc1">
+        <div class="box-inner" style="width:auto;display:block">
+            
+            <div style="width:100%;display:inline-block"> 
+                <div class="fieldset2 rows">                
+                    <fieldset>
+                        <legend>{trans('Produkt')}</legend>
+                        {info:article|products}
+                        <select name="product" class="select" onclick="getSelectContent(this,'adm=article&action=edit&ajaxload=product&id={$id}');">
+                            
+                            {$product_options}
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Hersteller')}</legend>
+                        {info:article|compaty}
+                        <select name="company" class="select" onclick="getSelectContent(this,'adm=article&action=edit&ajaxload=company&id={$id}');">
+                            {$company_options}
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Gallerie')}</legend>
+                        {info:article|gallery}
+                        <select name="galleryids" class="select" onclick="getSelectContent(this,'adm=article&action=edit&ajaxload=galleryids&id={$id}');">
+                            {$gallery_options}
+                        </select>
+                    </fieldset>
+                </div>
+                <div class="fieldsetrows">
+                    <fieldset>
+                        <legend>{trans('Zugriffsrechte')}</legend>
+                        {info:article|article_access}
+                        <select name="access[]" class="select" size="8" style="width:95%" multiple="multiple">
+                            {$access_options}
+                        </select>
+                    </fieldset>
+                    
+                </div>
+            </div>
+            
+            
+            
+            <div style="width:100%;display:inline-block"> 
+                <div class="fieldset2 rows">                 
+                    <fieldset>
+                        <legend>{trans('Start Veröffentlichung')}</legend>
+                        {info:article|startdate}
+                        <cp:jscalender name="_startdate" value="{$publish_on}" class="input" showtime="true" firstday="1" timeformat="%d.%m.%Y, %H:%M"/>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Ende  Veröffentlichung')}</legend>
+                        {info:article|enddate}
+                        <cp:jscalender name="_enddate" value="{$publish_off}" class="input" showtime="true" firstday="1" timeformat="%d.%m.%Y, %H:%M"/>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Kommentare  möglich?')}</legend>
+                        {info:article|can_comment}
+                        <input type="radio" name="can_comment" value="1" class="radio"<cp:if condition="{$can_comment} == 1"> checked="checked"</cp:if> /> {trans('Ja')} &nbsp;
+                        <input type="radio" name="can_comment" value="0" class="radio"<cp:if condition="{$can_comment} == 0"> checked="checked"</cp:if> /> {trans('Nein')}
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Bewertung möglich?')}</legend>
+                        {info:article|can_vote}
+                        <input type="radio" name="can_rate" value="1" class="radio"<cp:if condition="{$can_rate} == 1"> checked="checked"</cp:if> /> {trans('Ja')} &nbsp;
+                        <input type="radio" name="can_rate" value="0" class="radio"<cp:if condition="{$can_rate} == 0"> checked="checked"</cp:if>/> {trans('Nein')}
+                    </fieldset>
+                </div>
+                <div class="fieldsetrows">
+                    <fieldset>
+                        <legend>{trans('externe Links')}</legend>
+                        {info:article|externallinks}
+                        <textarea class="textarea" cols="30" rows="10" name="links_extern" style="width:95%">{$links_extern}</textarea>
+                    </fieldset>
+                </div>
+            </div>
+            
+            
+            
+            <!-- special & Interview -->
+            <div style="width:100%;display:inline-block" class="notallow_3 notallow_4"> 
+                <div class="fieldset2 rows">                 
+                    <fieldset>
+                        <legend>{trans('Genre')}</legend>
+                        {info:article|genre}
+                        <select name="genre" class="select" onclick="getSelectContent(this,'adm=article&action=edit&ajaxload=genre&id={$id}&type={$type}');">
+                            {$genre_options}
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Plattform')}</legend>
+                        {info:article|plattform}
+                        <select name="plattforms[]" class="select" size="8" multiple="multiple" onclick="getSelectContent(this,'adm=article&action=edit&ajaxload=plattforms&id={$id}');" style="width:95%">
+                            {$plattforms_options}
+                        </select>
+                    </fieldset>
+                </div>
+                
+                <div class="fieldsetrows">
+                    <fieldset>
+                        <legend>{trans('Release')}</legend>
+                        {info:article|releasedate}
+                        <input class="input" type="text" name="release" value="{$release}" size="45" />
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Shop Name')}</legend>
+                        {info:article|shoptitle}
+                        <input class="input" type="text" name="shoptitle" value="{$shoptitle}" size="45" />
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Shop Url')}</legend>
+                        {info:article|shopurl}
+                        <input class="input" type="text" name="shopurl" value="{$shopurl}" size="45" />
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Produkt Preis')}</legend>
+                        {info:article|price}
+                        <input class="input" type="text" name="price" value="{$price}" size="45" />
+                    </fieldset>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <!-- Vorschau -->
+            
+            <div style="width:100%;display:inline-block" id="type_2"> 
+                <div class="fieldset2 rows">                 
+                    <fieldset>
+                        <legend>{trans('Bewertung')}</legend>
+                        {info:article|specialvote}<textarea name="articlevotes" cols="55" rows="6">{$articlevotes}</textarea>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Positive Bemerkung')}</legend>
+                        {info:article|positiv_comments}<textarea name="positiv_comments" cols="55" rows="6">{$positiv_comments}</textarea>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Negative  Bemerkung')}</legend>
+                        {info:article|negativ_comments}<textarea name="negativ_comments" cols="55" rows="6">{$negativ_comments}</textarea>
+                    </fieldset>
+                </div>
+                <div class="fieldsetrows">
+                    
+                    <fieldset>
+                        <legend>{trans('Minimale Systemvorraussetzungen')}</legend>
+                        {info:article|minimal_system}<textarea name="minimal_conf" cols="55" rows="11">{$minimal_conf}</textarea>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>{trans('Optimale Systemvorraussetzungen')}</legend>
+                        {info:article|optimal_system}<textarea name="optimal_conf" cols="55" rows="11">{$optimal_conf}</textarea>
+                    </fieldset>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    <btn>
+        
+        <cp:if condition="$title != ''">           
+            [save:articleform] [save_exit:articleform]
+        </cp:if>
+        <cp:else>
+            [save_exit:articleform]
+        </cp:else>
+        
+        
+        <input type="reset" value="{trans('Zurücksetzen')}" class="button" />
+        <input type="button" value="{trans('Abbrechen')}" onclick="history.back();" class="button" />
+    </btn>
+</form>
+
+
+<script type="text/javascript">
+    //<![CDATA[
+    add_dirty_flag('articleform');
+    register_form_handler('savethis');
+    exiturl = 'admin.php?adm=article';
+    var currentType = '{$type}';
+
+    $(document).ready( function() {
+
+        $('#generate-tags').attr({'title': 'Tags automatisch aus dem Text erzeugen'}).click(function() {
+            var str = dcmsCKgetEditor('content').getData();
+            
+            str = str.replace(/(http|ftp|gopher|irc|ed2k)://((?:(?!["'/])S)+)(?:/((?:(?!["'?])S)*)(?:?((?:(?!["'])S)+))?)?/ig, ' ');
+            str = str.replace(/<([^>]+)>/g, '');
+            str = str.replace(/(&[#a-zA-Z0-9_]+);/g, ' ');
+            str = str.replace(/[^a-zA-Z0-9_-]/g, ' ');
+            str = str.replace(/rn*/g, ' ');
+            str = str.trim();
+            str = str.replace(/[s]+?/g, ' ');
+    
+            var temp = [];
+    
+            $.each(str.split(" "), function(idx, val) {
+                if ( val.length >= 4 && temp.length < 25 )
+                {
+                    temp.push(val);
+                }
+            });
+    
+            $('#tags').val( temp.join(',') );
+        });
+
+        if ( currentType != 3 && currentType != 4 )
+        {
+            $('.notallow_3').css('display', 'inline-block').show();
+        }
+        else
+        {
+            $('.notallow_3').hide();
+        }
+
+        if ( currentType == 2 )
+        {
+            $('#type_2').css('display', 'inline-block').show();
+        }
+        else
+        {
+            $('#type_2').hide();
+        }
+
+        $('#articleType').bind('change', function(e) { updateTypeSelection( $(this).find(':selected').val() ); } );
+    });
+
+    function updateTypeSelection(value)
+    {
+        var currentSelected = value;
+
+        if  (currentSelected != 3 && currentSelected != 4)
+        {
+            $('.notallow_3').css('display', 'inline-block').show();
+        }
+        else
+        {
+            $('.notallow_3').hide();
+        }
+
+        if ( currentSelected == 2 )
+        {
+            $('#type_2').css('display', 'inline-block').show();
+        }
+        else
+        {
+            $('#type_2').hide();
+        }
+    }
+
+//]]>
+</script>
+</cp:block>

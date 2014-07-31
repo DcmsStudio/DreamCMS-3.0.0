@@ -1,0 +1,211 @@
+/* -------------------------------------------------------------------
+// markItUp!
+// By Jay Salvat - http://markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+.markItUpHeader > ul > li > a > span { display: none!important; }
+.markItUpHeader > ul > li > a {
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+    opacity: .70;
+    padding:3px!important;
+    width: 20px!important;
+    height: 20px!important;
+    display: inline-block!important;
+    border: 1px solid transparent!important;
+}
+.markItUpHeader > ul > li > a:hover {
+    border: 1px solid #cacaca!important;
+    background-color: #d9d9d9!important;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    -moz-opacity:1;
+    opacity: 1;
+    padding:3px!important;
+    width: 20px!important;
+    height: 20px!important;
+    display: inline-block!important;
+}
+
+.markItUpHeader > ul > li ul {
+    display: none;
+    position: absolute!important;
+    z-index: 999!important;
+    margin: 0!important;
+    padding: 0!important;
+    background: #fff!important;
+}
+
+.markItUpHeader > ul > li ul li {
+    margin: 0!important;
+    padding: 0!important;
+    background: #fff!important;
+    border: 1px solid transparent!important;
+    background-repeat: no-repeat!important;
+    padding-left: 5px!important;
+    padding-right: 5px!important;
+}
+
+.markItUpHeader > ul > li ul li a {  background-repeat: no-repeat!important; padding-left: 22px; }
+
+
+
+
+.markItUpHeader > ul > li ul li:hover {
+    background: #ddd!important;
+    
+}
+
+
+.markItUpHeader li.markItUpSeparator {
+    width: 1px!important;
+    height: 20px!important;
+    display: inline-block!important;
+}
+.markItUpHeader li.markItUpSeparator span {display: none!important;}
+
+.markItUp .bold a {
+    background-image:url(images/bold.png) !important;
+}
+.markItUp .italic a {
+    background-image:url(images/italic.png) !important;
+}
+.markItUp .underline a {
+    background-image:url(images/underline.png) !important;
+}
+
+.markItUp .img a {
+    background-image:url(images/picture.png) !important;
+}
+.markItUp .url a {
+    background-image:url(images/link.png) !important;
+}
+.markItUp .size a {
+    background-image:url(images/fonts.png) !important;
+}
+
+.markItUp .size li{
+    background-position: 0 0!important;
+}
+
+.markItUp .list a {
+    background-image:url(images/list-bullet.png) !important;
+}
+.markItUp .numlist a {
+    background-image:url(images/list-numeric.png) !important;
+}
+.markItUp .listitem a {
+    background-image:url(images/list-item.png) !important;
+}
+.markItUp .quote a {
+    background-image:url(images/quotes.png)!important;
+}
+.markItUp .code a {
+    background-image:url(images/code.png)!important;
+}
+.markItUp .php a {
+    background-image:url(images/phpcode.gif)!important;
+}
+.markItUp .clean a {
+    background-image:url(images/clean.png)!important;
+}
+.markItUp .preview a {
+    background-image:url(images/preview.png)!important;
+}
+.markItUp .smilies a {
+    background-image:url(images/smile.png)!important;
+}
+
+
+.markItUp .markItUpContainer div#hiddensmilielist { 
+    text-align:left!important; 
+    display:inline-block;
+    width:100%!important; 
+    padding-right:20px!important;
+    margin-bottom:5px!important;
+
+}
+.markItUp .markItUpContainer div#hiddensmilielist ul#smilielist {
+    display:inline-block;
+    width:100%!important; 
+    min-height:24px!important;
+    margin-right:20px!important;
+    text-align:left!important;
+
+}
+
+.markItUp li.smiliebit {
+    text-align:left!important; 
+    float:left!important; 
+    width: 24px;
+    height: 24px;
+    display:inline-block!important;
+    list-style-image: none!important;
+    margin-bottom:2px!important; 
+}
+.markItUp li.smiliebit a {
+    border: 1px solid transparent; 
+    min-height:20px!important;
+    min-width:20px!important; 
+
+    max-height:24px!important;
+    min-width:24px!important;
+    margin: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.markItUp li.smiliebit a:hover {
+    border: 1px solid #CACACA!important;
+    background-color: #D9D9D9!important;
+}
+.markItUp li.smiliebit a img {
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.markItUpPreviewWindow {
+    background: #fff;
+    border: 10px solid rgba(0, 0, 0, 0.8);        
+    position: absolute;
+    z-index: 999;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 24%;
+    max-height: 50%;
+    display: none;    
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.markItUpPreviewWindow > div:first-child {
+    display: inline-block!important;
+    position: relative;
+    width: 99%;
+}
+
+.markItUpPreviewWindow .markItUpPreviewFrameRemove {
+    width: 20px!important;
+    height: 20px!important;
+    display: inline-block!important;
+    
+    position: absolute!important; right: 5px!important; top: 5px!important; z-index: 999999; background:#FFF url('./images/close.png') no-repeat 0% 0%;}
+
+.markItUpPreviewWindow ul {
+    margin: 0;
+    padding-left: 30px;
+}
+.markItUpPreviewWindow li {
+    list-style: disc;
+}

@@ -1,0 +1,79 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    <button type="button" id="run-scan" class="action-button">Scan Templates</button>    
+    <button type="button" id="run-compiler" class="action-button">Compile Templates</button>    
+
+</cp:block>
+
+<cp:block name="content">
+
+
+<div class="box">
+    <h2>Text Scan</h2>
+    <div class="box-inner">
+        lalala Beschreibung
+    </div>
+</div>
+
+
+<div id="container-runCompiler" style="display:none">
+    {$progress_bar}
+</div>
+
+<div id="container-runScan" style="display:none">
+    <div class="box description">
+        <div class="box-inner">
+            <img src="{$backendImagePath}please-wait.gif" alt="" />
+        </div>
+    </div>
+
+</div>
+    
+    
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+    //$("#run-compiler").disableButton();
+    $('#run-compiler').click(function(){
+        $('#container-runCompiler').show();
+        //$("#run-scan").disableButton();
+        //$("#run-compiler").disableButton();
+        dcmsRunProgress();
+    });
+
+    $('#run-scan').click(function(){
+        $("#run-scan").disableButton();
+        $("#run-compiler").disableButton();
+        $('#container-runScan').show();
+        runScan();
+    });
+});
+
+function runScan()
+{
+
+    // Start Remote
+    $.ajax({
+        timeout: 60000,
+        dataType: 'json',
+        url: "admin.php?adm=development&action=translations&do=scan", 
+        success: function(data) {
+    
+            $("#run-compiler").enableButton();
+            $('#container-runScan').hide();
+            
+            if(responseIsOk(data)) {
+                scaned = true;
+            }
+            else {
+                jAlert(data.msg);
+            }            
+        },
+    });
+}
+
+</script>
+</cp:block>

@@ -1,0 +1,235 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+
+    <button id="add-cat" class="action-button"><img src="images/buttons/new.png" width="16" height="16" alt="" />&nbsp;{trans('Kategorie anliegen')}</button>
+    <button id="update-order-cat" class="action-button"><img src="images/refresh.png" width="16" height="16" alt="" />&nbsp;{trans('Kategorie Sortierung speichern')}</button>
+
+</cp:block>
+
+
+<cp:block name="content">
+    <div class="box">
+        <h2>
+            Application {$app.title}
+        </h2>
+        <div class="box-inner">
+            {$app.description}
+        </div>
+    </div>
+    
+    <div class="sort-grid">
+        <table border="0" cellpadding="3" cellspacing="0" width="100%" class="tblborder">
+            <tr class="tableheader">
+                <td class="checkbox" width="1%">
+                    <input type="checkbox" name="checkAll" value="1" class="checkbox"/>
+                </td>
+                <td class="handle" width="1%"></td>
+                <td class="title">
+                    {trans('Kategorie')}
+                </td>
+                <td class="items tc" width="8%">
+                    {trans('Inhalte')}
+                </td>
+                <td class="options tc" width="6%">
+                    {trans('Optionen')}
+                </td>        
+            </tr>
+        </table>
+        <div class="tree-grid-list">
+            <ul class="tree-grid">
+                
+                <cp:set var="hasChilds" value="0"/>
+                <cp:set var="Childs" value="0"/>
+                <cp:loop name="cats" key="r">
+                    <cp:if condition="$hasChilds < 0"><cp:set var="hasChilds" value="0"/></cp:if>
+                    
+                    {math(($r.level - 1) * 16, '', 'addpadding')}
+                    <cp:if condition="$r.prev_r.level > $r.level">            
+                    </ul>
+                    </li>
+                        <cp:set var="ulopen" value="0"/>
+                    </cp:if>
+                    
+                    
+                    <li class="tree-grid-row level-{$r.level} {iif($r.level > 1, ' row', '')}" id="catid-{$r.catid}">
+                        <div class="secondrow">
+                            <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                    
+                                    <td class="checkbox" width="1%"><input type="checkbox" name="cid[]" value="{$r.catid}" /></td>
+                                    <td class="handle" width="1%"></td>
+                                    <td class="title">{$r.title}</td>
+                                    <td class="items" width="10%">{$r.totalitems}</td>
+                                    <td class="options" width="10%">                                        
+                                        <a href="javascript:void(0);" onclick="changePublish('pub{$r.catid}','admin.php?adm=applicationcats&appid={$app.appid}&action=publish&catid={$r.catid}')"><img src="images/{iif($r.published, 'online.gif', 'offline.gif')}" width="16" height="16" title="{trans('Kategorie bearbeiten')}" alt="" border="0" id="pub{$r.catid}"/></a> &nbsp;
+                                        
+                                        
+                                        <a class="doTab" href="admin.php?adm=applicationcats&appid={$app.appid}&action=edit&catid={$r.catid}"><img src="images/edit.png" width="16" height="16" title="{trans('Kategorie `%s` bearbeiten', $r.title)}" alt="" border="0"/></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        
+                        <cp:if condition="$r.next_r.level > $r.level && $r.next_r.id > 0">                
+                            <ul>
+                                <cp:set var="ulopen" value="1"/>
+                            </cp:if>
+                                <cp:else>
+                                </li>
+                                </cp:else>
+                                
+                            </cp:loop>
+                                <cp:else>
+                                    <li><em>{trans('Es wurden noch keine Kategorien angelegt.')}</em></li>               
+                                </cp:else>
+                                
+                                
+                                
+                                <cp:if condition="$ulopen">
+                                </ul>
+                                </li>
+                                </cp:if>
+                                
+                                
+                            </ul>
+                        </div>
+                        </div>
+                            
+                            
+                            
+                            <script type="text/javascript" src="{$js_url}jquery/jquery.ui.nestedSortable.js"></script>
+                            
+                            <script type="text/javascript">
+                                //<![CDATA[
+var newOrderData= "";
+
+$(document).ready(function()  {
+
+
+    $('#update-order-cat').disableButton();
+
+
+    $('#update-order-cat').click(function(e){
+        e.preventDefault();
+
+        newOrderData = '';
+        newOrderData = $('.tree-grid').nestedSortable('serialize');
+        parentId= 0;
+        findInvalidItems();
+
+        $(this).disableButton();
+        $('td.handle').addClass('updating');
+
+        $.get('admin.php?adm=applicationcats&appid={$app.appid}&action=reorder&' + newOrderData, {}, function(data) {
+            if(responseIsOk(data)) {                
+                
+                $('td.handle').removeClass('updating');
+                newOrderData = '';
+            }
+            else {
+
+                jAlert(data.msg);
+            }
+        }, 'json');
+    });
+
+
+    $('#add-cat').click( function(e) {        
+        e.preventDefault();
+        href = 'admin.php?adm=applicationcats&appid={$app.appid}&action=edit';
+        openTab({url:href, obj: this, label: $(this).text()} );
+    });
+
+    
+    var clearUpdate = false;
+
+    var newOrderData= "";
+
+
+    $('.tree-grid').nestedSortable({    
+        disableNesting: '.tree-grid',
+        forcePlaceholderSize: true,
+        forceHelperSize: false,
+        handle: 'td.handle',
+        items: 'li.tree-grid-row',
+        opacity: .6,
+        placeholder: 'ui-sortable-placeholder',
+        tabSize: 30,
+        scroll:false,
+        revert: false,
+        tolerance: 'pointer',
+        toleranceElement: '> div.secondrow',
+        stop: function(event, ui) { 
+
+            newOrderData = '';
+            newOrderData = $('.tree-grid').nestedSortable('serialize');
+            parentId= 0;
+            findInvalidItems();
+            /*
+            newOrderData = '';
+            parentId= 0;
+
+            $('.tree-grid').children().each(function () {
+
+                if ($(this).attr("id"))
+                {
+                    parentId = $(this).attr('id').replace('cat_', '');
+                    newOrderData = newOrderData + '&catid['+ parentId  + "]=" + "0";
+                    if ($(this).find('li').length > 0 )
+                    {
+                        processChildren( parentId  );
+                    }
+                }
+            });
+            */
+            $('#update-order-cat').enableButton();
+
+
+        }
+
+    });
+
+
+});
+
+function findInvalidItems()
+{
+    var items = $('ul.tree-grid>li');
+    $('.red').removeClass('red');
+
+    items.each(function() {
+        if ($(this).hasClass('row')) {
+            $(this).addClass('red');
+        }
+    });
+}
+
+function processChildren(parentId ) {
+    
+    var ulParentID= "cat_" + parentId;
+    $( '#'+ ulParentID +' > ul').children('li').each(function () {
+        
+        if ($(this).attr("id"))
+        {
+
+            newOrderData = newOrderData + '&catid['+ $(this).attr("id").replace('cat_', '') + "]=" + parentId;
+            
+            //Determine if this child is a containter
+            if ($(this).find('ul').length > 0 )
+            {
+                //Process the child elements of the container
+                parentId = $(this).attr("id").replace('cat_', '');
+                processChildren( parentId  );
+            }
+        }
+    });  //end of children loop
+    
+} //end of processChildren function
+
+
+//]]>
+                            </script>
+                        </cp:block>

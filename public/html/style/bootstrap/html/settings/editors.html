@@ -1,0 +1,225 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:if condition="$input.action == 'edit'">
+        <cp:groupbutton label="trans('Aktion')">
+            <button class="save action-button"><span class="icn"></span><span
+                    class="label">{trans('Einstellung Speichern')}</span></button>
+            <button class="remove delete action-button"><span class="icn"></span><span class="label">{trans('Einstellung löschen')}</span>
+            </button>
+            <button class="cancel action-button"><span class="icn"></span><span class="label">{trans('Abbrechen')}</span>
+            </button>
+        </cp:groupbutton>
+    </cp:if>
+</cp:block>
+
+<cp:block name="content">
+
+<cp:if condition="$input.action != 'edit'">
+    <table border="0" cellpadding="3" cellspacing="0" class="tblborder">
+        <tr class="tableheader">
+            <td>
+                {trans('Benutzergruppe')}
+            </td>
+            <td width="10%">
+                {trans('Toolbar')}
+            </td>
+            <td width="10%"></td>
+            <td width="10%">
+                {trans('Optionen')}
+            </td>
+        </tr>
+
+        <cp:loop name="usergroups" key="r">
+            <tr>
+                <td>
+                    {$r.title}
+                </td>
+                <td>
+                    <cp:if condition="$r.hastoolbar">
+                        <img src="images/tick.png" width="16" height="16" title="{trans('Toolbars Konfiguriert')}"
+                             alt="" border="0"/>
+
+                    </cp:if>
+                    <cp:else>
+                        <img src="images/tick_off.png" width="16" height="16"
+                             title="{trans('Toolbars nicht Konfiguriert')}" alt="" border="0"/>
+                    </cp:else>
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <a class="doTab" href="admin.php?adm=editorsettings&action=edit&groupid={$r.groupid}"><img
+                            src="images/edit.png" alt=""
+                            title="{trans('WYSIWYG Toolbar für `%s` einstellen', $r.title)}" width="16"
+                            height="16"/></a>
+                </td>
+            </tr>
+        </cp:loop>
+
+    </table>
+
+
+    <script type="text/javascript" language="javascript">
+
+        var _toolBar = Desktop.getActiveWindowToolbar();
+        _toolBar.find( 'button' ).remove();
+    </script>
+
+
+</cp:if>
+<cp:else>
+
+    <form id="mce-toolbars" name="mce-toolbars" action="admin.php">
+        <input type="hidden" name="adm" value="editorsettings"/>
+        <input type="hidden" name="action" value="save"/>
+        <input type="hidden" name="groupid" value="{$input.groupid}"/>
+
+        <div class="box dcmsSkin">
+            <h2>{trans('TinyMCE Toolbar Einstellungen')}</h2>
+
+            <div class="box-inner">
+                <p>{trans('Die Toolbar Einstellungen werden für die Benutzergruppe `%s` gesetzt', $group.title)}</p>
+
+                {$toolbars}
+            </div>
+        </div>
+
+    </form>
+    <script type="text/javascript">
+
+
+        var toolBar = Desktop.getActiveWindowToolbar();
+        toolBar.find( '.save' ).disableButton();
+
+        tadvSortable.init( 'mce-toolbars', Win.windowID );
+
+
+        $('form#mce-toolbars', $('#' + Win.windowID ) ).find('ul').sortable({
+            connectWith: '#' + Win.windowID +' .dcontainer',
+            items: '> li',
+            cursor: 'move',
+            change: function (event, ui) {
+                toolBar.find( '.save' ).enableButton();
+            },
+            stop: function (event, ui) {
+                var toolbar_id;
+                if (ui && ( toolbar_id = ui.item.parent().attr('id') )) {
+
+                    ui.item.find('input').remove();
+
+                    if (toolbar_id != 'tadvpalette') {
+                        ui.item.append('<input type="hidden" name="'+ toolbar_id + '[]" value="'+ ui.item.attr('id').replace('mce-', '') +'"/>');
+                    }
+                }
+            },
+            revert: 300,
+            opacity: 0.8,
+            // placeholder: 'tadv-placeholder',
+            forcePlaceholderSize: true,
+            containment: 'document'
+        });
+
+
+
+        toolBar.find( '.cancel' ).click( function ()
+        {
+            Core.closeTab();
+        } );
+
+        toolBar.find( '.remove' ).click( function ()
+        {
+            $.get( 'admin.php?adm=editorsettings&action=delete&groupid={$input.groupid}', {}, function ( data )
+            {
+                if ( Tools.responseIsOk( data ) ) {
+                    toolBar.find( '.save' ).disableButton();
+                    Notifier.display( 'info', data.msg );
+
+                    var tab = Core.Tabs.getActiveTab();
+
+                    if ( tab.length ) {
+                        var o = tab.attr( 'opener' );
+
+                        if ( o ) {
+                            Win.refreshOpenerWindow( o, function ()
+                            {
+                                tab.trigger( 'click' )
+                            } );
+                        }
+                    }
+
+                }
+                else {
+                    jAlert( data.msg );
+                }
+
+            }, 'json' );
+        } );
+
+        toolBar.find( '.save').unbind().click( function ()
+        {
+            if ( $( this ).hasClass( 'disabled' ) ) {
+                return false;
+            }
+
+            tadvSortable.serialize( 'mce-toolbars', Win.windowID );
+
+            var post = $( '#mce-toolbars' ).serialize();
+
+            $.post( 'admin.php', post, function ( data )
+            {
+                if ( Tools.responseIsOk( data ) ) {
+                    toolBar.find( '.save' ).disableButton();
+                    Notifier.display( 'info', data.msg );
+
+                    Form.makeReset( 'mce-toolbars', Win.windowID );
+
+                    if ( data.tinymce ) {
+                        Core.reloadAllTinyMCEs(data.tinymce, function(){
+                            $('#content-container-inner').find('div.core-tab-content').each(function(){
+                                var hash = $(this).attr('id').replace('content-', '').replace('tab-', '');
+                                $('#tab-' + hash).addClass('loaded');
+                                $('#buttons-' + hash).find('div.mce-tinymce-inline').hide().removeClass('forceVisible');
+                                $('#buttons-' + hash).find('div.mce-tinymce-inline:first').show().addClass('forceVisible');
+                            });
+
+                            setTimeout(function() { $(window).trigger('resize'); }, 500);
+                        });
+                    }
+
+                }
+                else {
+                    jAlert( data.msg );
+                }
+
+            }, 'json' );
+        } );
+
+        var cssCode = '';
+
+
+
+        $.ajax( {
+            url: 'Vendor/tinymce/themes/advanced/skins/dcms/ui.css',
+            dataType: 'text',
+            complete: function ( s )
+            {
+                var cssCode = s.responseText;
+                $( '#' + Win.windowID ).find( '.mceIcon' ).each( function ()
+                {
+                    var clsName = $( this ).attr( 'class' ).replace( /\s*mceIcon\s*/, '' );
+                    if ( clsName && clsName != '' ) {
+                        if ( !cssCode.match( clsName ) && clsName != 'mce_fontselect' && clsName != 'mce_styleselect' && clsName != 'mce_formatselect' && clsName != 'mce_fontsizeselect' && clsName != 'mce_tablecontrols' ) {
+                            $( this ).hide().next( 'span' ).show();
+                        }
+                    }
+                } );
+            }
+        } );
+
+    </script>
+
+</cp:else>
+
+</cp:block>

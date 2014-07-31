@@ -1,0 +1,6 @@
+<cp:if condition="$blockdata.title"><h3>{$blockdata.title}</h3></cp:if>
+<ul cp:on="style:$blockdata.style" parse:style="$blockdata.style">
+<cp:loop name="topnews" key="r">
+    <li><a href="{$r.url}">{truncate($r.title, 50)}</a></li>
+</cp:loop>
+</ul>

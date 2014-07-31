@@ -1,0 +1,27 @@
+@import url("../js/jquery/css/smoothness/jquery-ui.css"); 
+
+/* @import url("../style/default/css/layout.css"); */
+
+
+@import url("../style/default/css/base.css");
+@import url("../style/default/css/dcms.gui.css");
+@import url("../style/default/css/dcms.menu.css");
+
+@import url("../style/default/css/dcms.applications.css");
+@import url("../style/default/css/plugin.gallerie.css");
+
+@import url("../style/default/css/forms.css");
+@import url("../style/default/css/filemanager.css");
+@import url("../style/default/css/jqueryFileTree.css");
+@import url("../style/default/css/jquery.contextMenu.css");
+
+
+@import url("../style/default/css/grid.css");
+@import url("../style/default/css/tabstyle.css");
+
+
+/* @import url("../style/default/css/dcms.scrollbar.css"); */
+
+@import url("../js/jquery/fancybox/style.css");
+@import url("../style/default/css/langs.css");
+@import url("tadv-styles.css");

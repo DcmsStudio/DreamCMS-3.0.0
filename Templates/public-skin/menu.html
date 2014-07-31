@@ -1,0 +1,51 @@
+<cp:tree name="menu.items" key="rd" primarykey="itemid" parentkey="parentid" class="main-nav">
+    <li class="{iif($rd.active, 'active ', '')}{iif($rd.type=='spacer', ' spacer', '')}">
+        <cp:if condition="$rd.type == 'megamenu'">
+            <span>
+                {$rd.title}
+            </span>
+            <ul class="megamenu-container {$rd.cssclass}">
+                <li>
+                    {$rd.message}
+                </li>
+            </ul>
+        </cp:if>
+        <cp:elseif condition="$rd.type == 'folder'">
+            <cp:if condition="$rd.message == 'div'">
+                <div class="{$rd.cssclass}">
+                    {$rd.title}
+                </div>
+            </cp:if>
+            <cp:elseif condition="$rd.message == 'span'">
+                <span class="{$rd.cssclass}">
+                    {$rd.title}
+                </span>
+            </cp:elseif>
+            <cp:else>
+                {$rd.title}
+            </cp:else>
+        </cp:elseif>
+        <cp:elseif condition="$rd.type == 'spacer'">
+            <cp:if condition="$rd.message == 'li'">
+                <li class="{$rd.cssclass}">
+                </li>
+            </cp:if>
+            <cp:if condition="$rd.message == 'div'">
+                <div class="{$rd.cssclass}">
+                </div>
+            </cp:if>
+            <cp:if condition="$rd.message == 'span'">
+                <span class="{$rd.cssclass}">
+                </span>
+            </cp:if>
+            <cp:if condition="$rd.message == 'hr'">
+                <hr class="{$rd.cssclass}" />
+            </cp:if>
+        </cp:elseif>
+        <cp:else>
+            <a href="{$rd.url}">
+                {$rd.title}
+            </a>
+        </cp:else>
+    </li>
+</cp:tree>

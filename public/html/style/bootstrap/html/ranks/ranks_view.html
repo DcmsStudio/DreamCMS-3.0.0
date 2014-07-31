@@ -1,0 +1,43 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button class="action-button" onclick="openTab({url:'admin.php?adm=ranks&amp;action=add', obj:this, label:$(this).text()} )"><span class="btn_new"></span> {trans('Rang hinzufügen')}</button>
+</cp:block>
+
+<cp:block name="content">
+
+
+<form method="post" action="admin.php">
+    <input type="hidden" name="adm" value="ranks" />
+    <input type="hidden" name="action" value="add" />
+    
+    <table cellpadding="3" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+        <tr class="tableheader">
+            <td class="tl" width="10%">{trans('Rang Grafik')}</td>
+            <td>{trans('Rangname')}</td>
+            <td class="tl" width="10%">{trans('Geschlechter')}</td>
+            <td class="tl" width="20%">{trans('Gruppe')}</td>
+            <td class="tc" width="6%">{trans('ab Posts')}</td>
+            <td width="10%" class="tc">{trans('Optionen')}</td>
+        </tr>
+        
+        
+        <cp:loop name="list" key="r">
+            <tr class="{cycle('csssw', 'firstrow,secondrow', 'css')}">
+                <td>{$r.graphic}</td>
+                <td>{$r.ranktitle}</td>
+                <td>{$r.gender}</td>
+                <td>{$r.group_title}</td>
+                <td class="tr">{$r.needposts}</td>
+                <td class="tc">
+                    <a href="admin.php?adm=ranks&amp;action=edit&amp;rankid={$r.rankid}"><img src="images/edit.png" border="0" title="{trans('bearbeiten')}" /></a> &nbsp;&nbsp; 
+                    <a class="delconfirm ajax" href="admin.php?adm=ranks&amp;action=del&amp;rankid={$r.rankid}"><img src="images/delete.gif" border="0" title="{trans('löschen')}" /></a>
+                </td>
+            </tr>
+        </cp:loop>
+        
+    </table>
+    
+</form>
+
+</cp:block>

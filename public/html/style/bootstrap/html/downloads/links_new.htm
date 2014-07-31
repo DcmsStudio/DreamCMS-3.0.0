@@ -1,0 +1,121 @@
+
+<form action="modules.php" method="post">
+<input type="hidden" name="file" value="links">
+$modforms_dir
+
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="100%">
+   <tr class="tableheader">
+      <td width="100%" colspan="2">Neue Downloads</td>
+   </tr>
+    <tr class="firstrow">
+        <td><b>Hinzugefügt von:</b></td>
+        <td>$submitter</td>
+    </tr>
+    <tr class="secondrow">
+        <td><b>Titel:</b></td>
+        <td><input type="text" name="title" size="50" maxlength="100" value="$row[title]" class="input" /></td>
+    </tr>
+    
+    
+    <tr class="firstrow">
+        <td><b>Kategorie:</b></td>
+        <td>$catsel</td>
+    </tr>
+    
+    
+    <tr class="secondrow">
+      <td width="30%" valign="top" height="100"><b>Beschreibung:</b>
+      <br />
+Beschreiben Sie das Produkt so gut wie möglich, damit der User sich später auch ein "Bild" von dem Produkt machen kann.<br /><br />HTML Code ist nicht erlaubt!
+</td>
+      <td height="80">
+           <textarea class="textarea" name="description" cols="50" style="width:100%;" rows="10">$row[description]</textarea></td>
+    </tr>
+    
+    <tr class="firstrow">
+      <td width="30%" valign="top"><b>Version:</b></td>
+      <td><input type="text" name="version" value="$row[version]" size="20" class="input" /></td>
+    </tr>
+
+    <tr class="secondrow">
+      <td width="30%" valign="top"><b>OS:</b>
+      <br />
+      Falls mehrere Betriebssysteme, dann bitte durch
+      "/" oder durch "," trennen.</td>
+      <td>
+      <input type="text" name="os" value="$row[platform_new]" maxlenth="150" size="50" class="input" />
+      </td>
+    </tr>
+
+    <tr class="firstrow">
+      <td width="30%" valign="top"><b>Lizenz:</b></td>
+      <td>
+      	<!-- M.DL_LICESES -->
+      	$license
+      </td>
+    </tr>
+
+    <tr class="secondrow">
+      <td width="30%" valign="top"><b>Preis:</b>
+      <br />
+Wenn Freeware ausgewählt ist, wird falls Sie einen Preis eingegeben haben automatisch der Preis nicht gespeichert.
+	  </td>
+      <td valign="middle"><input type="text" name="price" value="$row[price]" size="20" class="input" /></td>
+    </tr>
+
+    <tr class="firstrow">
+      <td width="30%" valign="top"><b>Sprache:</b></td>
+      <td>
+      	$languages
+      </td>
+    </tr>
+
+    <tr class="secondrow">
+      <td width="30%"><b>Größe der Datei:</b>
+      <br />
+      Bitte geben Sie die größe der Datei in kb an. Bitte keine kommas oder punkte in der Größenangabe verwenden!</td>
+      <td><input type="text" name="size" value="$row[size]" size="20" class="input" /> kbyte</td>
+    </tr>
+    
+    <tr class="firstrow">
+        <td><b>Url:</b></td>
+        <td><input type="text" name="url" size="50" maxlength="100" value="$row[url]" class="input" />
+        &nbsp;[ <a href="$row[url]" target="_blank">Download Testen</a> ]
+        </td>
+    </tr>
+
+    <tr class="firstrow">
+        <td><b>Email:</b></td>
+        <td><input type="text" name="email" size="50" maxlength="60" value="$email" class="input" /></td>
+    </tr>
+    
+    
+    <tr class="secondrow">
+      <td>
+      <b>Homepage:</b>
+      <br />
+      Diese Angabe ist Optional.</td>
+      <td><input type="text" name="homepage" value="$row[homepage]" size="50" class="input" /></td>
+    </tr>
+
+    <tr class="firstrow">
+      <td>
+      <b>Url zum Screenshot:</b>
+      <br />
+      Diese Angabe ist Optional.</td>
+      <td><input type="text" name="logourl" value="$row[logourl]" size="50" class="input" /></td>
+    </tr>
+    
+    <tr class="firstrow">
+      <td colspan="2" align="center">
+        <input type="hidden" name="action" value="get_new" />
+        <input type="hidden" name="lid" value="$lid" />
+	<input type="hidden" name="send" value="send" />
+        <input type="hidden" name="sid" value="$cp->session_id" />
+        <input type="submit" value="Download Eintragen" class="button"> <input onClick="location='$this->modurl&file=links&action=del_link&lid=$lid'" type="button" value="Download Löschen" class="button" />
+      </td>
+    </tr>
+</table>
+<br />
+</form>

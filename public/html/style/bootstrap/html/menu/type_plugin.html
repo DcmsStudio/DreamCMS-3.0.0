@@ -1,0 +1,35 @@
+            
+<fieldset>
+    <legend>{trans('Link zum `Plugin`')}</legend>
+    {info:menutypes|page}
+    <input type="hidden" name="plug" id="plug" value=""/>
+    <select name="pluginurl" id="plugin-page" style="width:99%">
+        <cp:loop name="plugins" key="r">
+            <option rel="{$r.plugin}" value="{$r.controller}/{$r.action}/{$r.alias}.{$r.suffix}" cp:on="selected:$r.action == $action" parse:selected="selected"> {$r.title}</option>
+        </cp:loop>
+    </select>
+    <br/><small>{trans('Die Angabe des Titels ist nur obligatorisch, da der Titel der ausgewählten Seite verwendet wird!')}</small>
+</fieldset>
+
+
+
+<script language="javascript" type="text/javascript">
+<cp:literal type="cdata_comment">
+
+        var sel = $.trim( $('#plugin-page').find(':selected').text() );
+        var plug = $('#plugin-page').find(':selected').attr('rel');
+        $('#thisname').val( sel );
+        $('#plug').val( plug );
+
+        $('#plugin-page').change(function(){
+            var sel = $.trim( $(this).find(':selected').text() );
+            var plug = $(this).find(':selected').attr('rel');
+            $('#thisname').val( sel );
+            $('#plug').val( plug );
+        });
+        
+        
+        
+
+</cp:literal>
+</script>

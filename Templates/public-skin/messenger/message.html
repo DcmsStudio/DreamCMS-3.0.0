@@ -1,0 +1,162 @@
+<div class="box" style="margin: 0; padding: 0;">
+    <h2>
+        <div class="p3">
+            <button id="reply-button" class="action-button">
+                <img src="{$img_url}messenger/send.png" width="16" height="16" alt="" />
+                {trans('Antworten')}
+            </button>
+            <button id="replyall-button" class="action-button">
+                <img src="{$img_url}messenger/send.png" width="16" height="16" alt="" />
+                {trans('Antwort an alle')}
+            </button>
+            <button id="forward-button" class="action-button">
+                <img src="{$img_url}messenger/send.png" width="16" height="16" alt="" />
+                {trans('Weiterleiten')}
+            </button>
+            <button id="delete-button" class="action-button">
+                <img src="{$img_url}cancel.png" width="16" height="16" alt="" />
+                {trans('Löschen')}
+            </button>
+            <button id="cancel-button" class="action-button">
+                <img src="{$img_url}back.png" width="16" height="16" alt="" />
+                {trans('Zurück')}
+            </button>
+        </div>
+    </h2>
+    <div class="box-inner">
+        <table cellpadding="3" cellspacing="0" style="width: 100%; margin: 0;">
+            <tr>
+                <td width="20%">
+                    <strong>
+                        {trans('Von')}:
+                    </strong>
+                </td>
+                <td width="80%">
+                    {$username}
+                    <cp:if condition="$firstname != '' || $lastname != ''">
+                        ({$firstname} {$lastname})
+                    </cp:if>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>
+                        {trans('An')}:
+                    </strong>
+                </td>
+                <td>
+                    <cp:loop name="to_users" key="r">
+                        <cp:if condition="$r.username != '' && $to_users_index >
+                            1">,
+                        </cp:if>
+                        {$r.username}
+                    </cp:loop>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>
+                        {trans('C.c.')}:
+                    </strong>
+                </td>
+                <td>
+                    <cp:loop name="cc_users" key="r">
+                        <cp:if condition="$r.username != '' && $cc_users_index >
+                            1">,
+                        </cp:if>
+                        {$r.username}
+                    </cp:loop>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>
+                        {trans('B.c.c.')}:
+                    </strong>
+                </td>
+                <td>
+                    <cp:if condition="$bcc_users != 0">
+                        {$bcc_users}
+                    </cp:if>
+                </td>
+            </tr>
+            <tr>
+                <td class="header">
+                    <strong>
+                        {trans('Empfangen')}:
+                    </strong>
+                </td>
+                <td>
+                    {date('d.m.Y, H:i:s', $sendtime)}
+                </td>
+            </tr>
+            <cp:if condition="$receipt == 1">
+                <cp:if condition="$receipttime != 0">
+                    <tr>
+                        <td>
+                            <strong>
+                                {trans('Lesebestätigung gesendet')}:
+                            </strong>
+                        </td>
+                        <td>
+                            {date('d.m.Y, H:i:s', $receipttime)}
+                        </td>
+                    </tr>
+                </cp:if>
+                <cp:else>
+                    <tr>
+                        <td class="header messenger-receipt top">
+                            <strong>
+                                {trans('Lesebestätigung')}:
+                            </strong>
+                        </td>
+                        <td class="messenger-receipt">
+                            {trans('Eine Lesebestätigung für diese Nachricht wurde angefordert. Wollen Sie diese jetzt Senden?')}
+                            <ul>
+                                <li>
+                                    <a href="#" id="rcpt-accept">
+                                        {trans('Ja, Lesebestätigung senden.')}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" id="rcpt-decline">
+                                        {trans('Nein danke.')}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </cp:else>
+            </cp:if>
+            <cp:if condition="$replietime != 0">
+                <tr>
+                    <td>
+                        <strong>
+                            {trans('Zuletzt beantwortet')}:
+                        </strong>
+                    </td>
+                    <td>
+                        {date('d.m.Y, H:i:s', $replietime)}
+                    </td>
+                </tr>
+            </cp:if>
+            <tr>
+                <td>
+                    <strong>
+                        {trans('Betreff')}:
+                    </strong>
+                </td>
+                <td>
+                    {escape($title, 'html')}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-top: 1px solid #d0d0d0;">
+                    <div id="message-body">
+                        {$message}
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

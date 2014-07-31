@@ -1,0 +1,38 @@
+<cp:extends template="container" />
+
+<cp:block name="main_content">
+{*
+
+    [modul name="news" run="recentnews" limit="6" images="true" template="recent-news"]
+    
+    <div class="more-news">
+        <a href="news/">weitere Nachrichten</a>
+    </div>
+    
+
+    <div class="columnSet2 module bottom-shadowed">
+
+        <div class="column">
+            <h3>
+                {trans('Letzte Kommentare')}
+            </h3>
+            [modul name="comments" run="LastComments" limit="5" template="lastcomments" style="padding-left:0px;" cacheable="false"]
+
+        </div>
+        <div class="column">
+            <h3>
+                {trans('Neuste Mitglieder')}
+            </h3>
+            [modul name="members" run="lastmembers" limit="5" template="lastmembers" style="padding-left:0px;" cacheable="false"]
+
+            <!-- End members-->
+        </div>
+    </div>
+
+[modul name="news" run="topnews" limit="6" images="true" template="topnews-3cols" order="randum"]
+
+
+	
+*}
+
+</cp:block>

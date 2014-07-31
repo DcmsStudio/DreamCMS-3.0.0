@@ -1,0 +1,249 @@
+<?php
+
+function __games_edit($r){
+global $cp, $cfg, $fct, $adm_skin;
+
+
+    $tab_controll = new tab_controll();
+    $tab_controll->add_tabs('Spiel Inhalt', array('Spiel Inhalt', 'Optionen', 'Bilder'));
+    $adm_skin->js .= $tab_controll->js_header_code;
+	$adm_skin->js .= "\n<script type=\"text/javascript\" language=\"javascript\" src=\"{$cfg['portalurl']}/core/js/contentscript.js\"></script>\n";
+
+	if ( !isset($r['published']) ) { $r['published'] = 1; }
+	$c[0] = $r['published'] != 1 ? ' checked="checked"' : '';
+	$c[1] = $r['published'] == 1 ? ' checked="checked"' : '';
+	
+	$btn = (HTTP::input('action')== 'add' ?  '[save_exit:gameform]' : '[save:gameform] [save_exit:gameform] ' );
+	
+
+	$pathH = "pages/". SERVER_PAGE .'/mediacenter/images/games/himages/';
+	$pathB = "pages/". SERVER_PAGE .'/mediacenter/images/games/pboxes/';
+	$prev_header = '<img src="html/style/default/img/buttons/filefind.png" id="pheader" width="16" height="16" alt="Datei Auswählen" title="Datei Auswählen" style="vertical-align:middle"/> ';
+	$prev_box 	 = '<img src="html/style/default/img/buttons/filefind.png" id="pbox" width="16" height="16" alt="Datei Auswählen" title="Datei Auswählen" style="vertical-align:middle"/> ';
+	
+	if ( $r['headerimg'] && file_exists(ROOT_PATH.$pathH.$r['headerimg']) )
+	{
+		$prev_header .= <<<EOF
+		<a rel="lytebox[mainpreview]" href="{$cfg['portalurl']}/{$pathH}{$r['headerimg']}" title="{$r['headerimg']}"><img src="html/style/default/img/thumbnail.gif" width="16" height="16" alt="Vorschau" title="Vorschau" style="vertical-align:middle"/></a>
+EOF;
+
+	} else $r['headerimg'] = '';
+	
+	
+	if ( $r['screen'] && file_exists(ROOT_PATH.$pathB.$r['screen'])  )
+	{
+		$prev_box .= <<<EOF
+		<a rel="lytebox[mainpreview]" href="{$cfg['portalurl']}/{$pathB}{$r['screen']}" title="{$r['screen']}"><img src="html/style/default/img/thumbnail.gif" width="16" height="16" alt="Vorschau" title="Vorschau" style="vertical-align:middle"/></a>
+EOF;
+	
+	} else $r['screen'] = '';
+
+
+	$action = ACTION;
+
+return <<<EOF
+<form  action="admin.php" id="gameform" method="post">
+<input type="hidden" name="adm" value="games" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="action" value="{$action}" />
+<input type="hidden" name="id" value="{$r['id']}" />
+<input type="hidden" name="send" value="send" />
+
+<div>
+	{$tab_controll->tab_js_code}
+</div>
+
+<div class="tblborder">
+		<div id="tc0" class="p3">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			    <tr>
+					<td>
+						<div>
+						<fieldset class="fl w49">
+							<legend>Spiel Titel</legend>
+							{info:genre|title}<input type="text" name="title" value="{$r['title']}" class="input" size="50" />
+						</fieldset>
+
+						<fieldset class="fl w49">
+							<legend>Aktiv</legend>
+							{info:games|publish}
+					        <label for="pub1"><input type="radio" id="pub1" name="published" value="1" class="radio"{$c[1]} /> Ja </label>&nbsp;
+					        <label for="pub0"><input type="radio" id="pub0" name="published" value="0" class="radio"{$c[0]} /> Nein</label>
+						</fieldset>
+						</div>
+						<div class="fl w100">
+						<fieldset>
+							<legend>Inhalt</legend>
+							{info:genre|description}
+							{$r['editor']}
+						</fieldset>
+						</div>
+					</td>
+			    </tr>
+			</table>
+		</div>
+
+
+		<div id="tc1" class="p3">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<div class="fl fieldset2">
+						<fieldset>
+							<legend>Release</legend>
+							{info:games|releasedate}
+							<input type="text" name="releasedate" value="{$r['releasedate']}" class="input" size="50" />
+						</fieldset>
+						
+						<fieldset>
+							<legend>Hersteller</legend>
+							{info:games|developmer}
+					        <select name="developmer" class="select" onclick="getSelectContent(this,'adm=games&action={$action}&ajaxload=developmer&id={$r['id']}');">
+					            {$r['developmer_options']}
+					        </select>
+						</fieldset>
+						
+						<fieldset>
+							<legend>Publisher</legend>
+							{info:games|publisher}
+					        <select name="publisher" class="select" onclick="getSelectContent(this,'adm=games&action={$action}&ajaxload=publisher&id={$r['id']}');">
+					            {$r['publisher_options']}
+					        </select>
+						</fieldset>
+						
+						<fieldset>
+							<legend>Plattform</legend>
+							{info:games|plattform}
+					        <select name="plattform" class="select" onclick="getSelectContent(this,'adm=games&action={$action}&ajaxload=plattform&id={$r['id']}');">
+					            {$r['plattform_options']}
+					        </select>
+						</fieldset>
+						
+						<fieldset>
+							<legend>Genre</legend>
+					        {info:games|genre}
+					        <select name="genre" class="select" onclick="getSelectContent(this,'adm=games&action={$action}&ajaxload=genre&id={$r['id']}');">
+					            {$r['genre_options']}
+					        </select>
+						</fieldset>
+						
+						<fieldset>
+							<legend>Multiplayer</legend>
+					        {info:games|multiplayer}
+					        <select name="multiplayer" class="select" style="vertical-align:middle">
+					            {$r['multiplayer_options']}
+					        </select>
+						</fieldset>
+						
+					</div>
+					
+					<div class="fl fieldset2">
+						<fieldset>
+							<legend>Hardware Infos</legend>
+							{info:games|hardwareinfo}
+							<textarea name="hardwareinfo" cols="50" rows="8" class="textarea">{$r['hardwareinfo']}</textarea>
+						</fieldset>
+						
+						<fieldset>
+							<legend>Bemerkung</legend>
+							{info:games|comment}
+							<textarea name="comment" cols="50" rows="3" class="textarea">{$r['comment']}</textarea>
+							<br /><small>Optional (von Benutzern)</small>
+						</fieldset>
+						
+						<fieldset>
+							<legend>USK</legend>
+							{info:games|usk}
+					        <select name="usk" class="select" style="vertical-align:middle">
+					            {$r['usk_options']}
+					        </select>
+						</fieldset>
+						
+					</div>
+					
+				
+				</td>
+			</tr>
+		</table>
+		</div>
+
+		<div id="tc2" class="p3">
+			<table cellpadding="3" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+				<tr class="tableheader">
+					<td colspan="2">Bilder</td>
+				</tr>
+				
+				<tr class="secondrow">
+					<td width="40%"><b>Header Bild:</b><br/><small>Hier haben sie die möglichkeit dem Spiel ein individuelles Bild zu verpassen welches oberhalb von Cheats, Reviews, Bildergallerie und der Spielinformation angezeigt wird.</small></td>
+					<td width="60%">{info:games|headerimage}
+						<input type="text" id="headerimg" name="headerimg" value="{$r['headerimg']}" class="input" size="50" /> {$prev_header}<br/>
+						<small>Pfad des Bildes: /mediacenter/images/games/himages/ . Bitte diesen Pfad nicht mit angeben!</small>
+					</td>
+				</tr>
+				
+				<tr class="firstrow top">
+					<td width="40%"><b>Box Bild:</b></td>
+					<td width="60%">{info:games|boximage}
+						<input type="text" id="screen" name="screen" value="{$r['screen']}" class="input" size="50" /> {$prev_box}<br/>
+						<small>Pfad des Bildes: /mediacenter/images/games/pboxes/ . Bitte diesen Pfad nicht mit angeben!</small>
+					</td>
+				</tr>
+				<tr class="secondrow">
+					<td colspan="2">{info:games|screenshoots}
+			<iframe src="admin.php?adm=game_images&amp;id={$r['id']}" style="border:0px;width:100%;" width="100%" height="250" frameborder="no" name="_images" id="_images" scrolling="auto" class="tcontent"></iframe>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+<btn>
+	{$btn}
+	<input type="reset" value="Zurücksetzen" class="button" />&nbsp;<input type="reset" value="Abbrechen" class="button" onclick="back();" />
+</btn>
+
+</div>
+
+</form>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+$(document).ready( function() {
+	$('#pheader').css({'cursor':'pointer'});
+	$('#pheader').bind('click', 
+		function() {
+			var im = $('#headerimg').val();
+			im = im.replace(/\/mediacenter\/images\/games\/himages/g, '');
+			
+			var imagePath = im.replace(/^(.*?)\/?[a-z0-9_ \-]+?\.(jpeg|jpg|png|gif)$/gi, '$1');
+			
+			openImageBrowser( '/mediacenter/images/games/himages'+ (imagePath != null ? imagePath : '') , 'headerimg' );
+		}
+	);
+	$('#pbox').css({'cursor':'pointer'});
+	$('#pbox').bind('click', 
+		function() {
+			var im = $('#screen').val();
+			im = im.replace(/\/mediacenter\/images\/games\/pboxes/g, '');
+			var imagePath = im.replace(/^(.*?)\/?[a-z0-9_ \-]+?\.(jpeg|jpg|png|gif)$/gi, '$1');
+			openImageBrowser( '/mediacenter/images/games/pboxes'+ (imagePath != null ? imagePath : '') , 'screen' );
+		}
+	);
+});
+
+
+
+
+add_dirty_flag('gameform');
+register_form_handler('savethis');
+exiturl = 'admin.php?adm=games';
+//]]>
+</script>
+EOF;
+
+
+
+}
+
+?>

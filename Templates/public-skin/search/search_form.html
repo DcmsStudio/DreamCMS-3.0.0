@@ -1,0 +1,103 @@
+<cp:extends template="../container" />
+<cp:block name="teaser"></cp:block>
+<cp:block name="main_content">
+    <form name="search" action="search/" method="post">
+        <div class="box">
+            <div class="box-inner">
+                <fieldset>
+                    <input type="text" name="q" size="60" class="fl" style="width:300px;" placeholder="{trans('Suchen nach')}" value="{escape($input.q, 'html')}" />
+                    <button type="submit" class="btn btn-default">{trans('Suchen')}</button>
+                </fieldset>
+                <fieldset>
+                    <legend>
+                        Optionen
+                    </legend>
+                  <div style="display:inline;float: left;margin-right:15px">
+                        {trans('Ergebnisse pro Seite')}:
+                        <select name="perpage">
+                            <cp:for name="ppage" from="20" to="50" step="5">
+                                <option value="{$ppage.index}" cp:on="selected:$ppage.index == $input.perpage" parse:selected="selected">
+                                    {trans('%s Einträge pro Seite', $ppage.index)}
+                                </option>
+                            </cp:for>
+                        </select>
+                    </div>
+                    <div style="display:inline;float: left">
+                        {trans('Sortieren nach')}:
+                        <select name="order">
+                            <option value="date" cp:on="selected:$input.order == 'date'" parse:selected="selected">
+                                {trans('Datum')}
+                            </option>
+                            <option value="title" cp:on="selected:$input.order == 'title'" parse:selected="selected">
+                                {trans('Titel')}
+                            </option>
+                            <option value="relevance" cp:on="selected:$input.order == 'relevance' || !$input.order" parse:selected="selected">
+                                {trans('Relevance')}
+                            </option>
+                        </select>
+                        <select name="sort">
+                            <option value="asc" cp:on="selected:$input.sort == 'asc'" parse:selected="selected">
+                                {trans('aufsteigend')}
+                            </option>
+                            <option value="desc" cp:on="selected:$input.sort == 'desc' || !$input.sort" parse:selected="selected">
+                                {trans('absteigend')}
+                            </option>
+                        </select>
+                    </div>
+                    <cp:if condition="count($sections)">
+                        <div class="search-in">
+							<div style="display:block">{trans('Suchen in:')}</div>
+							<cp:loop name="sections" key="r">
+								<label for="sin_{$r.value}">
+									<input type="checkbox" id="sin_{$r.value}" name="searchin[]" value="{$r.value}" cp:on="checked:is_array($input.searchin) && in_array( $r.value, $input.searchin)" parse:checked="checked"/> {$r.label}
+								</label>
+							</cp:loop>
+                        </div>
+                    </cp:if>
+                </fieldset>
+            </div>
+        </div>
+
+    </form>
+    <br />
+    <cp:if condition="count($searchresult)">
+        <link rel="stylesheet" href="{$img_url}search_style.css" type="text/css" />
+        <div class="row" style="display: inline-block;clear:both">
+            <div class="col-md-6">
+
+				{trans('Ergebnis %s - %s von %s für %s', $result_start, $result_end, $found_sites, escape($input.q, 'html'))}
+
+            </div>
+            <div class="col-md-6 tr">
+
+                    {trans('Indizeierte Seiten %s', $indexed_sites)} - {trans('Zeit %s sekunden', $searchtime)}
+
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-inner items">
+                <cp:loop name="searchresult" key="r">
+                    <div class="item googleroot">
+                        <h3>
+                            <a href="{$r.url}" class="googlish" target="_self">{escape($r.title)}</a>
+							<a href="{$r.url}" target="_blank"><img src="{$img_url}img/arrow-small.png" width="16" height="16" alt="New Window" title="New Window"/></a>
+                        </h3>
+                        {$r.content}
+                        <br/>
+                        <span class="googlebottom">
+                            {trans('Relevance')}: {$r.score}% - Datum: {$r.contentdate} - {$r.contentsize}
+                        </span>
+                    </div>
+                </cp:loop>
+            </div>
+        </div>
+        <cp:include template="../pageing" />
+    </cp:if>
+    <cp:else>
+        <div class="box">
+            <div class="box-inner">
+                {trans('Die Suche ergab keine Übereinstimmungen.')}
+            </div>
+        </div>
+    </cp:else>
+</cp:block>

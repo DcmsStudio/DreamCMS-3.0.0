@@ -1,0 +1,28 @@
+<?php
+
+function __gamereview_list_rows( $r ){
+global $cp;
+	static $x;
+
+	$pubicon = $r['published'] ? '<img src="images/online.gif" border="0" width="16" height="16" alt="Review schließen" title="Review schließen" class="absmiddle" />' : '<img src="images/offline.gif" border="0" width="16" height="16" alt="Review öffnen" title="Review öffnen" class="absmiddle" />';
+
+	$css = ($x++%2 ? 'firstrow' : 'secondrow');
+
+
+
+return <<<EOF
+<tr onmouseover="over(this)" onmouseout="out(this)" class="$css">
+	<td><input type="checkbox" name="ids[]" value="$r[id]" /></td>
+    <td><b>{$r['gametitle']}</b> $hasreview</td>
+ 	<td>{$r['title']}<br /><small><a href="{$r['author']}">{$r['username']}</a> {$r['time']}</small></td>
+ 	<td align="center">{$r['plattform']}</td>
+ 	<td align="center">{$r['genre']}</td>
+ 	<td align="center">
+ 	<a href="admin.php?adm=gamereviews&amp;sid=$cp->session_id&action=publish&id=$r[id]">$pubicon</a> &nbsp; <a href="admin.php?adm=gamereviews&amp;sid=$cp->session_id&action=edit_review&id=$r[id]"><img src="images/edit.png" border="0" alt="Review bearbeiten" class="absmiddle" /></a> &nbsp; <a href="admin.php?adm=gamereviews&amp;sid=$cp->session_id&action=del_review&id=$r[id]"><img src="images/delete.gif" border="0" alt="Review löschen" class="absmiddle" /></a>
+ 	</td>
+</tr>
+
+EOF;;;
+}
+
+?>

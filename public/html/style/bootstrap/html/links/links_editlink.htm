@@ -1,0 +1,238 @@
+{$tab_controll->js_header_code}
+<script language="javascript" type="text/javascript">
+<!--
+
+	function check_url(el)
+	{
+		url = eval('document.dl.'+el+'.value');
+
+		if (url && url != 'http://')
+		{
+			var Win = window.open( url, 'LinkCheck', 'width=400,height=400,resizable=yes,scrollbars=yes,location=yes,directories=no,status=yes,menubar=yes,toolbar=yes');
+		}
+
+		return;
+	}
+
+
+
+
+	function check_form()
+	{
+		var form = document.dl;
+
+		if ( form.title.value == '' )
+		{
+			alert('Titel bitte angeben');
+			return false;
+		}
+		else if ( form.short_description.value == '' )
+		{
+			alert('Kurz Beschreibung bitte angeben');
+			return false;
+		}
+
+		else if ( form.short_description.value.length > 250 )
+		{
+			alert('Kurz Beschreibung ist zu lang');
+			return false;
+		}
+
+		else if ( form.cid.value == 0 )
+		{
+			alert('Kategorie bitte auswählen');
+			return false;
+		}
+
+		else {
+			return true;
+		}
+
+
+	}
+
+	function test_size()
+	{
+		var form = document.dl;
+
+		if(form.short_description.value.length < 255)
+		{
+        	document.getElementById('keys').innerHTML = 255 - form.short_description.value.length +' Zeichen noch';
+		}
+		else if (form.short_description.value.length > 255 )
+		{
+			form.short_description.value = 	form.short_description.value.substr(0,255);
+		}
+		else
+		{
+			document.getElementById('keys').innerHTML = 'Länge voll ausgenutzt.';
+		}
+	}
+
+
+//-->
+</script>
+
+
+
+<form action="admin.php" method="post" name="dl" id="dl">
+
+<input type="hidden" name="adm" value="weblinks">
+<input type="hidden" name="sid" value="{$cp->session_id}">
+<input type="hidden" name="id" value="$lid">
+<input type="hidden" name="action" value="$action_type">
+<input type="hidden" name="send" value="send">
+
+<div>
+{$tab_controll->tab_js_code}
+</div>
+
+<div class="tab_pages">
+<table cellpadding="0" cellspacing="0" width="100%" align="center">
+	<tr>
+	<td>
+
+		<div class="tcontent" id="tc0">
+			<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="100%" align="center">
+				<tr>
+					<td>
+						<div class="w100">
+							<fieldset class="fl fieldset3">
+								<legend>Titel</legend>
+								{info:links|title}
+								<input type="text" name="title" size="60" maxlength="149" value="$row[title]" class="input" />
+							</fieldset>
+						
+							<fieldset class="fl fieldset3">
+								<legend>Kategorie</legend>
+								{info:links|categorie}
+								$catsel
+							</fieldset>
+
+							<fieldset class="fl fieldset3">
+								<legend>Aktiv</legend>
+								<input type="radio" name="publish" id="pub1" value="1"$row[publish_1]/> <label for="pub1">Ja </label> 
+								<input type="radio" name="publish" id="pub0" value="0"$row[publish_0]/> <label for="pub0">Nein</label>
+							</fieldset>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<fieldset>
+							<legend>Kurz Beschreibung</legend>
+							<textarea onchange="test_size()" onkeypress="test_size()" onclick="test_size()" name="short_description" cols="60" rows="3" class="textarea">$row[short_description]</textarea><br /><small>max. 255 Zeichen</small> <small id="keys">&nbsp;</small>
+						</fieldset>
+						
+						<fieldset>
+							<legend>Vollständige Beschreibung</legend>
+							$editor
+						</fieldset>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+		
+		<div class="tcontent" id="tc1">
+			<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="100%" align="center">
+				<tr>
+					<td>
+						
+						<div class="fl fieldset2">
+						
+							<fieldset>
+								<legend>Link Url</legend>
+								<input type="text" name="link_url" size="60" maxlength="255" value="$row[link_url]" class="input" style="width:90%" /> &nbsp; <img src="images/button_preview.gif" width="16" height="16" onclick="check_url('link_url')" style="cursor:hand" border="0" alt="Link Check" />
+							</fieldset>
+							
+							<fieldset>
+								<legend>Name</legend>
+								<input type="text" name="name" size="50" maxlength="30" value="$row[name]" class="input" />
+							</fieldset>
+							
+							<fieldset>
+								<legend>Edit Passwort</legend>
+								<input type="text" name="userpassword" size="50" maxlength="30" value="$row[userpassword]" class="input" />
+							</fieldset>
+							
+							<fieldset>
+								<legend>Hits/Gesamt</legend>
+								<input type="text" name="hits_total" size="5" maxlength="5" value="$row[hits_total]" class="input" />
+							</fieldset>
+
+							<fieldset>
+								<legend>Gallerie</legend>
+								<select name="galleries[]" class="select" size="8" multiple="multiple" style="width:100%">
+								<option value="0">--------------</option>
+								   $gallery
+								</select>
+							</fieldset>
+							
+						</div>
+						<div class="fl fieldset2">
+						
+							<fieldset class="w100">
+								<legend>Screenshoot Url</legend>
+								<input type="text" name="picture_url" size="60" maxlength="255" value="$row[picture_url]" class="input" style="width:90%" /> &nbsp; <img src="images/button_preview.gif" width="16" height="16" onclick="check_url('picture_url')" style="cursor:hand" border="0" alt="Link Check" />
+							</fieldset>
+						
+							<fieldset class="w100">
+								<legend>Email</legend>
+								<input type="text" name="email" size="50" maxlength="30" value="$row[email]" class="input" />
+							</fieldset>
+							
+							<fieldset class="w100">
+								<legend>Homepage</legend>
+								<input type="text" name="homepage_url" size="50" maxlength="250" value="$row[homepage_url]" class="input" /> &nbsp; <img src="images/button_preview.gif" width="16" height="16" onclick="check_url('homepage')" style="cursor:hand" border="0" alt="Link Check" />
+							</fieldset>
+						
+							
+							<fieldset class="w100">
+								<legend>Hits/Heute</legend>
+								<input type="text" name="hits_today" size="5" maxlength="5" value="$row[hits_today]" class="input" />
+							</fieldset>
+							
+							<fieldset class="w100">
+								<legend>Sprache</legend>
+								$languages
+							</fieldset>
+							
+							<fieldset class="w100">
+								<legend>Kann bewertet werden</legend>
+								<input type="checkbox" value="1" name="can_vote"$row[can_vote] />
+							</fieldset>
+							
+							<fieldset class="w100">
+								<legend>Kann kommentiert werden</legend>
+								<input type="checkbox" value="1" name="can_comment"$row[can_comment] />
+							</fieldset>
+							
+						</div>
+						
+					</td>
+				</tr>
+			</table>
+		</div>
+	
+		<btn>
+			$btn
+			<input type="reset" class="button" value="Zurücksetzen" />
+			<input type="button" value="Abbrechen" onclick="history.back();" class="button" />
+		</btn>
+	
+	</td>
+	</tr>
+</table>
+</div>
+
+
+</form>
+
+<script type="text/javascript">
+    //<![CDATA[
+        add_dirty_flag('dl');
+        register_form_handler('savethis');
+        exiturl = 'admin.php?adm=weblinks&action=list_links';        
+    //]]>
+</script>

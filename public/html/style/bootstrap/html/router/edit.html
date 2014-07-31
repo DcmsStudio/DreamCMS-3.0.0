@@ -1,0 +1,176 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        <cp:if condition="$rule.id > 0">[save:ruleForm{$rule.id}] [save_exit:ruleForm{$rule.id}]</cp:if>
+        <cp:else>[save_exit:ruleForm{$rule.id}]</cp:else>
+        [reset:ruleForm{$rule.id}] [cancel:ruleForm{$rule.id}]
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+    <form action="admin.php" id="ruleForm{$rule.id}" name="ruleForm{$rule.id}">
+        <input type="hidden" name="adm" value="rules"/>
+        <input type="hidden" name="id" id="rule-id" value="{$rule.id}"/>
+        <input type="hidden" name="action" value="edit"/>
+        <input type="hidden" name="send" value="send"/>
+
+
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Controller')}</label>
+                <input type="text" id="mapcontroller" name="controller" size="60" maxLength="250" value="{escape($rule.controller, 'quotes')}" class="input form-control"/>
+            </div>
+            <div class="col-md-6">
+                <label>{trans('Action')}</label>
+                <input type="text" id="mapruleaction" name="ruleaction" size="60" maxLength="250" value="{escape($rule.action, 'quotes')}" class="input form-control"/>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Rule')}</label>
+                <input type="text" name="raction" id="mapraction" size="130" maxLength="250" value="{escape($rule.rule, 'quotes')}" class="form-control"/>
+            </div>
+            <div class="col-md-6">
+                <label>{trans('Rule Aktiv?')}</label>
+
+                <label for="published1"><input type="radio" name="published" value="1" id="published1" class="radio" cp:on="checked:$rule.published || !$rule.id" parse:checked="checked"/> {trans('Aktiv')}</label>
+                <label for="published0"><input type="radio" name="published" value="0" id="published0" class="radio" cp:on="checked:!$rule.published && $rule.id > 0" parse:checked="checked"/> {trans('Deaktiviert')}</label>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>{trans('Rule Parameter')}</label>
+
+                <div>
+                    <div id="optional-maps">
+                        <cp:loop name="maps" key="r">
+
+                            <div class="row-form">
+                                <div class="form-group">
+                                    <label class="sl">:</label>
+                                    <input type="text" name="maps[attribute][]" size="30" maxLength="250" value="{escape($r.attribute, 'quotes')}" class="attribute form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="sl">Regex:</label>
+                                    <input type="text" name="maps[match][]" size="40" maxLength="250" value="{escape($r.match, 'quotes')}" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="action-button"><img src="images/delete.png" width="16" height="16" alt="" border="0"/> {trans('Attribut löschen')}</button>
+                                </div>
+                            </div>
+
+
+
+                        </cp:loop>
+                    </div>
+
+                    <button type="button" onclick="addRuleParam($('#'+ Win.windowID ))" class="action-button"><img src="images/buttons/switch-plus.png" width="16" height="16" alt="" border="0"/> {trans('Attibute hinzufügen')}</button>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+    </form>
+
+    <script type="text/javascript">
+
+
+        if ( typeof changeMap !== 'function' ) {
+            function changeMap()
+            {
+                var params = '';
+
+                $('#'+ Win.windowID ).find( 'input.attribute' ).each( function ()
+                {
+                    params += '/:' + $( this ).val();
+                } );
+
+                var rule = '/';
+                rule += $('#'+ Win.windowID ).find( '#mapcontroller' ).val();
+                if ( $('#'+ Win.windowID ).find( '#mapruleaction' ).val() != '' ) {
+                    rule += '/' + $('#'+ Win.windowID ).find( '#mapruleaction' ).val();
+                }
+                rule += params;
+
+                $('#'+ Win.windowID ).find( '#mapraction' ).val( rule );
+
+            }
+
+            function addRuleParam(win)
+            {
+                var div = $( '<div/>' ).addClass( 'row-form' );
+                var attribute = $( '<input/>' ).addClass('form-control').attr( {type: 'text', name: "maps[attribute][]", 'size': '30', 'maxLength': '250'} ).addClass( 'attribute' );
+                var match = $( '<input/>' ).addClass('form-control').attr( {type: 'text', name: "maps[match][]", 'size': '40', 'maxLength': '250'} );
+                var link = $( '<button type="button"/>' ).addClass( 'action-button' );
+                link.click( function ( e )
+                {
+                    removeRuleParam( this )
+                } );
+
+                var img = $( '<img src="images/delete.png" width="16" height="16" title="{trans('Attribut löschen')}" alt="" border="0"/>' );
+                link.append( img );
+                link.append( ' {trans("Attribut löschen ")}' );
+
+
+
+                div.append( '<div class="form-group"><label class="sl">:</label></div>' );
+                div.append( '<div class="form-group"><label class="sl">Regex:</label></div>' );
+                div.append( '<div class="form-group"></div>' );
+
+                div.find('.form-group:eq(0)' ).append(attribute);
+                div.find('.form-group:eq(1)' ).append(match);
+                div.find('.form-group:eq(2)' ).append(link);
+
+                win.find( '#optional-maps' ).append( div );
+                // attribute.live('keyup', function(){ changeMap();} );
+            }
+
+            function removeRuleParam( obj )
+            {
+                if ($( obj, $('#'+ Win.windowID ) ).parents('.row-form:first' ).find('.form-control:first' ).val() == '' &&
+                    $( obj, $('#'+ Win.windowID ) ).parents('.row-form:first' ).find('.form-control:last' ).val() == '') {
+                    $( obj, $('#'+ Win.windowID ) ).parents('.row-form:first').remove();
+                    return;
+                }
+
+                jConfirm( '{trans("Wollen Sie dieses Router Attribut wirklich löschen ?")}',
+                        '{trans("Router Attribut löschen...")}',
+                        function ( ev )
+                        {
+                            if ( ev ) {
+                                $( obj, $('#'+ Win.windowID ) ).parents('.row-form:first').remove();
+                                //changeMap();
+                            }
+                        }
+                );
+            }
+        }
+
+
+        Form.registerForm( 'ruleForm{$rule.id}', {
+            contentIdentifierID: 'rule-id',
+            exiturl: 'admin.php?adm=rules',
+            identifierType: ''
+        } );
+        $('#'+ Win.windowID ).find( '#optional-maps' ).find( '.action-button' ).each( function ()
+        {
+            var self = this;
+            $( this ).click( function ( e ) { removeRuleParam( self ); } );
+        } );
+
+
+    </script>
+</cp:block>

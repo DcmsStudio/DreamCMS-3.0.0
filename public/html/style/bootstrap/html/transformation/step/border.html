@@ -1,0 +1,121 @@
+<label for="advanced">
+    <input type="checkbox" class="checkbox" id="advanced" name="params[advanced]" value="1" cp:on="checked:$values.advanced" parse:checked="checked"/> {trans("Specify advanced border parameters")}
+</label>
+
+
+<div id="config-simple" style="display: {iif($values.advanced, 'none', 'block')};">
+
+
+    <fieldset>
+        <legend>{trans("Width")}</legend>
+        <input type="text" class="textbox" name="params[width]" id="width" value="{iif($values.width, $values.width, '1')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Color")}</legend>
+        <div id="colorHolderSimple"></div>
+        # <input type="text" class="textbox" name="params[color]" id="color" value="{iif($values.color, $values.color, 'ff0000')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+    </fieldset>
+
+
+</div>
+
+<div id="config-advanced" style="display: {iif($values.advanced, 'block', 'none')};">
+
+
+
+    <fieldset>
+        <legend>{trans("Width Top Border")}</legend>
+        <input type="text" class="textbox" name="params[top][width]" id="width_top" value="{iif($values.top.width, $values.top.width, '')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Colour Top Border")}</legend>
+        <div id="colorHolderTop"></div>
+        # <input type="text" class="textbox" name="params[top][color]" id="color_top" value="{iif($values.top.color, $values.top.color, 'ff0000')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Width Right Border")}</legend>
+        <input type="text" class="textbox" name="params[right][width]" id="width_right" value="{iif($values.right.width, $values.right.width, '')}" style="width: 100px;" />
+    </fieldset>
+
+
+    <fieldset>
+        <legend>{trans("Colour Right Border")}</legend>
+        <div id="colorHolderRight"></div>
+        # <input type="text" class="textbox" name="params[right][color]" id="color_right" value="{iif($values.right.color, $values.right.color, 'ff0000')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+    </fieldset>
+
+
+    <fieldset>
+        <legend>{trans("Width Bottom Border")}</legend>
+        <input type="text" class="textbox" name="params[bottom][width]" id="width_bottom" value="{iif($values.bottom.width, $values.bottom.width, '')}" style="width: 100px;" />
+    </fieldset>
+
+
+    <fieldset>
+        <legend>{trans("Colour Bottom Border")}</legend>
+        <div id="colorHolderBottom"></div>
+        # <input type="text" class="textbox" name="params[bottom][color]" id="color_bottom" value="{iif($values.bottom.color, $values.bottom.color, 'ff0000')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+    </fieldset>
+
+
+    <fieldset>
+        <legend>{trans("Width Left Border")}</legend>
+        <input type="text" class="textbox" name="params[left][width]" id="width_left" value="{iif($values.left.width, $values.left.width, '')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Colour Left Border")}</legend>
+        <div id="colorHolderLeft"></div>
+        # <input type="text" class="textbox" name="params[left][color]" id="color_left" value="{iif($values.left.color, $values.left.color, 'ff0000')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+    </fieldset>
+
+
+
+</div>
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+
+    $('#color').buildColorPicker({
+        color: '{iif($values.color, $values.color, "ff0000")}',
+    });
+
+    $('#color_top').buildColorPicker({
+        color: '{iif($values.top.color, $values.top.color, "ff0000")}',
+    });
+
+    $('#color_right').buildColorPicker({
+        color: '{iif($values.right.color, $values.right.color, "ff0000")}',
+    });
+
+    $('#color_bottom').buildColorPicker({
+        color: '{iif($values.bottom.color, $values.bottom.color, "ff0000")}',
+    });
+
+    $('#color_left').buildColorPicker({
+        color: '{iif($values.left.color, $values.left.color, "ff0000")}',
+    });
+
+    $('#advanced').change(function() {
+        if ($(this).is(':checked')) {
+            $('#config-simple').hide();
+            $('#config-advanced').show();
+        } else {
+            $('#config-simple').show();
+            $('#config-advanced').hide();
+        }
+
+        Win.redrawWindowHeight(false, true);
+    });
+
+
+
+</script>
+
+

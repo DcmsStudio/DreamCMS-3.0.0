@@ -1,0 +1,37 @@
+<form action="admin.php" method="post">
+<input type="hidden" name="adm" value="downloads" />
+    <input type="hidden" name="action" value="edit_cat" />
+    <input type="hidden" name="send" value="send" />
+    <input type="hidden" name="sid" value="$cp->session_id" />
+    <input type="hidden" name="ids" value="$ids" />
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="100%" align="center">
+<tr class="tableheader">
+   <td colspan="2">Download/-s verschieben</td>
+</tr>
+<tr class="firstrow">
+    <td colspan="2">
+    $titles
+    </td>
+</tr>
+
+
+<tr class="secondrow">
+    <td>Kategorie:</td>
+    <td>
+    <select name="cid" class="select">
+    $options
+    </select>
+    </td>
+</tr>
+
+
+<tr class="firstrow">
+    <td colspan="2" align="center">
+    <input type="submit" value="Speichern" class="button" />
+    &nbsp;<input type="button" value="Abbrechen" onclick="javascript:history.go(-1)" class="button" />
+
+    </td>
+</tr>
+</table>
+</form>

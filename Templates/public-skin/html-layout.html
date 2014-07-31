@@ -1,0 +1,260 @@
+{$layout.doctype_html}
+<html cp:on="xml-lang:!empty($layout.html.xmllang)" parse:xml-lang="{$layout.html.xmllang}" cp:on="lang:!empty($layout.html.lang)" parse:lang="{$layout.html.lang}">
+    <head>
+        <base href="{cfg('portalurl')}/"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="UTF-8"/>
+        <meta name="generator" content="DreamCMS {escape($version, 'html')}"/>
+        <title>
+            {escape(trim($layout.pagetitle), 'html')}
+        </title>
+        <meta cp:is="$META_LANGUAGE" name="language" content="{$META_LANGUAGE}"/>
+        <meta cp:is="$META_COPYRIGHT" name="dcterms.rights" content="{escape($META_COPYRIGHT, 'html')}"/>
+        <meta cp:is="$META_AUTHOR" name="author" content="{escape($META_AUTHOR, 'html')}"/>
+        <meta cp:is="$META_EXPIRES" name="expires" content="{$META_EXPIRES}"/>
+        <meta cp:is="$META_ROBOTS" name="robots" content="{$META_ROBOTS}"/>
+        <meta cp:is="$META_REVISIT_AFTER" name="revisit-after" content="{$META_REVISIT_AFTER}"/>
+        <meta content="article" property="og:type"/>
+        <meta content="{escape(cfg('pagename'), 'htmlall')}" property="og:site_name"/>
+        <meta cp:is="$og.title" content="{escape($og.title, 'html')}" property="og:title"/>
+        <meta cp:is="$og.url" content="{$og.url}" property="og:url"/>
+        <meta cp:is="$og.description" content="{escape($og.description, 'html')}" property="og:description"/>
+        <cp:loop name="og.images" key="r">
+            <meta content="{$r.src}" property="og:image"/>
+            <meta cp:is="$r.width" content="{$r.width}" property="og:image:width"/>
+            <meta cp:is="$r.height" content="{$r.height}" property="og:image:height"/>
+        </cp:loop>
+        <meta cp:is="$META_KEYWORDS" name="keywords" content="{escape($META_KEYWORDS, 'html')}"/>
+        <meta cp:is="$META_DESCRIPTION" name="description" content="{escape($META_DESCRIPTION, 'html')}"/>
+        <cp:block name="prepend-css"/>
+        {$layout.stylesheets}
+        {$layout.layoutcss}
+        <cp:block name="append-css"/>
+        <cp:block name="prepend-javascript"/>
+        <cp:block name="append-javascript"/>
+        {$layout.javascripts}
+        <cp:block name="append-headtags"/>
+        {$layout.headtags}
+    </head>
+    <body id="top" class="{$controller-action}{iif($session.seemode, ' seemode', '')}{iif(user('userid'), ' hasuserpanel', '')}">
+        <div class="vert-logo">
+        </div>
+        <div class="mobile-nav-container">
+            <nav id="mobile-nav">
+                {* 
+                [modul name="menues" run="Menu" key="test-menu2"]
+                 *}
+                <cp:provider pname="modul" name="menues" run="Menu" key="test-menu2"/>
+            </nav>
+        </div>
+        <div id="wrapper-border" class="{iif($layout.cols, ' ', '')}{$layout.cols}">
+            <div id="wrapper">
+                <div class="top-nav">
+                    <div class="container">
+                        <div class="left-side">
+                            <i class="fa fa-map-marker">
+                            </i>
+                            Welzower Str. 4b, 03048 Cottbus
+                        </div>
+                        <div class="right-side">
+                            <a href="">
+                                <i class="fa fa-css3">
+                                </i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-html5">
+                                </i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-google-plus">
+                                </i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-twitter">
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <header cp:is="$layout.header">
+                    <div id="header">
+                        <cp:hook name="BeforeTop"/>
+                        <cp:block name="header"/>
+                        <cp:hook name="AfterTop"/>
+                    </div>
+                </header>
+                <div id="customheader" cp:is="$layout.customheader">
+                    <section class="customheader">
+                        <cp:block name="custom_header"/>
+                    </section>
+                </div>
+                {* 
+                <nav class="breadcrumbs" cp:is="$NAVIGATION">
+                    <div id="breadcrumbs">
+                        <a href="{cfg('portalurl')}/" class="first">
+                            {trans('Startseite')}
+                        </a>
+                        {$NAVIGATION}
+                    </div>
+                </nav>
+                 *}
+                <section id="container-main">
+                    <div class="container-main">
+                        <div class="logo" title="{cfg('pagename')}">
+                        </div>
+                        <cp:if condition="count($breadcrumb)">
+                            <nav class="btn-group btn-breadcrumb">
+                                <a href="{cfg('portalurl')}" class="btn btn-default">
+                                    <i class="fa fa-home">
+                                    </i>
+                                </a>
+                                <cp:loop key="r" name="breadcrumb">
+                                    <cp:if condition="$r.url && $r.r_index == 0">
+                                        <a href="{$r.url}" class="btn btn-default">
+                                            {$r.label}
+                                        </a>
+                                    </cp:if>
+                                    <cp:elseif condition="$r.url && $r.r_index >= 0">
+                                        <a href="{$r.url}" class="btn btn-default">
+                                            {$r.label}
+                                        </a>
+                                    </cp:elseif>
+                                    <cp:elseif condition="!$r.url && $r.r_index >= 0">
+                                        <span class="btn btn-default">
+                                            {$r.label}
+                                        </span>
+                                    </cp:elseif>
+                                </cp:loop>
+                            </nav>
+                        </cp:if>
+                        <cp:block name="teaserblock"/>
+                        <div class="content-header" cp:block="content-header">
+                            <cp:block name="content-header"/>
+                        </div>
+                        <div class="container-main-inner" id="container-main-inner">
+                            <div class="colspace-left">
+                                <div>
+                                </div>
+                            </div>
+                            <div class="colspace-right">
+                                <div>
+                                </div>
+                            </div>
+                            <div class="left" id="left" cp:is="$layout.left">
+                                <div class="inside">
+                                    <cp:hook name="BeforeLeft"/>
+                                    <cp:block name="left"/>
+                                    <cp:hook name="AfterLeft"/>
+                                </div>
+                            </div>
+                            <div class="main" id="main">
+                                <div class="inside">
+                                    <cp:hook name="BeforeMiddle"/>
+                                    <cp:block name="main"/>
+                                    <cp:hook name="AfterMiddle"/>
+                                </div>
+                            </div>
+                            <div class="right" id="right" cp:is="$layout.right">
+                                <div class="inside">
+                                    <cp:hook name="BeforeRight"/>
+                                    <cp:block name="right"/>
+                                    <cp:hook name="AfterRight"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-footer" cp:block="content-footer">
+                            <cp:block name="content-footer"/>
+                        </div>
+                    </div>
+                </section>
+                <div cp:is="match('contact', $document.body_css)" class="map-frame">
+                    <div class="contact-map-wrapper">
+                        <div>
+                        </div>
+                        <div class="map-bubble">
+                            <div>
+                                <p>
+                                    Hier kannst du uns finden...
+                                </p>
+                            </div>
+                        </div>
+                        <div id="contact-map" style="width: 100%;height: 350px">
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function() {
+                            var map;
+                        
+                            var style = [{
+                                    stylers: [{
+                                            saturation: "-100"
+                                        }, {
+                                            lightness: "20"
+                                        }
+                                    ]
+                                }, {
+                                    featureType: "poi",
+                                    stylers: [{
+                                            visibility: "off"
+                                        }
+                                    ]
+                                }, {
+                                    featureType: "transit",
+                                    stylers: [{
+                                            visibility: "on"
+                                        }
+                                    ]
+                                }, {
+                                    featureType: "road",
+                                    stylers: [{
+                                            lightness: "30"
+                                        }, {
+                                            visibility: "on"
+                                        }
+                                    ]
+                                }, {
+                                    featureType: "landscape",
+                                    stylers: [{
+                                            lightness: "10"
+                                        }
+                                    ]
+                                }
+                            ]
+                        
+                            var options = {
+                                zoom: 16,
+                                center: new google.maps.LatLng(51.7476035, 14.3201478),
+                                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                draggable: false,
+                                maxZoom: 14,
+                                minZoom: 14,
+                                disableDefaultUI: true
+                            };
+                        
+                            map = new google.maps.Map($('#contact-map')[0], options);
+                            map.setOptions({
+                                styles: style
+                            });
+                        
+                        });
+                    </script>
+                </div>
+                <footer cp:is="$layout.footer">
+                    <div id="customfooter" class="inside" cp:is="$layout.customfooter">
+                        <cp:hook name="BeforeCustombottom"/>
+                        <cp:block name="custom_footer"/>
+                        <cp:hook name="AfterCustombottom"/>
+                    </div>
+                    <div id="footer">
+                        <div class="inside">
+                            <cp:hook name="BeforeBottom"/>
+                            <cp:block name="footer"/>
+                            <cp:hook name="AfterBottom"/>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <cp:block name="append-bodyscripts"/>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+<cp:if condition="$mod.caneditthread || $mod.canpinhread || $mod.canpublishthread || $mod.canopenclosethread || $mod.canmove || $mod.candeletethread">
+    <span id="moderator-button" class="btn moderate"><span>{trans('Moderation')}</span></span>
+	<ul id="mod-menu" class="forum-menu">
+		<li cp:is="$mod.caneditthread">{trans('Thema bearbeiten')}</li>
+		<li cp:is="$mod.canpinthread && $thread.threadtype != 20"><a href="forum/pinthread/{$thread.threadid}/1">{trans('Thema pinnen')}</a></li>
+		<li cp:is="$mod.canpinthread && $thread.threadtype == 20"><a href="forum/pinthread/{$thread.threadid}/0">{trans('Thema unpinnen')}</a></li>
+		<li cp:is="$mod.canpublishthread && $thread.published"><a href="forum/publishthread/{$thread.threadid}/0">{trans('Thema verbergen')}</a></li>
+		<li cp:is="$mod.canpublishthread && !$thread.published"><a href="forum/publishthread/{$thread.threadid}/1">{trans('Thema anzeigen')}</a></li>
+		<li cp:is="$mod.canopenclosethread && !$thread.closed"><a href="forum/closethread/{$thread.threadid}/1">{trans('Thema schließen')}</a></li>
+		<li cp:is="$mod.canopenclosethread && $thread.closed"><a href="forum/closethread/{$thread.threadid}/0">{trans('Thema öffnen')}</a></li>
+		<li cp:is="$mod.canmove">{trans('Thema verschieben')}</li>
+		<li cp:is="$mod.candeletethread">{trans('Thema löschen')}</li>
+	</ul>
+
+</cp:if>

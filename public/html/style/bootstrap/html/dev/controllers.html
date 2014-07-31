@@ -1,0 +1,41 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <input type="button" onclick="back()" value="{trans('Zurück')}" class="action-button" />
+
+</cp:block>
+
+<cp:block name="content">
+
+<cp:if condition="$request.action == 'scancontrollers'">
+    <div class="box">
+        <h2>Missing Controllers</h2>
+        <div class="box-inner">
+            <div style="height:500px; overflow:auto;">
+                <cp:loop name="missing" key="r">
+                    <p class="mono">{$r.sql}</p>
+                </cp:loop>
+                <cp:else>
+                    {trans('Alle Controller sind in ordnung und müssen nicht aktualisiert werden!')}
+                </cp:else>
+            </div>
+        </div>
+    </div>
+</cp:if>
+<cp:else>
+    <div class="box">
+        <h2>Missing XML Controllers</h2>
+        <div class="box-inner">
+            <div style="height:500px; overflow:auto;">
+                
+                <cp:if condition="$missing">
+                    {$missing}
+                </cp:if>
+                <cp:else>
+                    {trans('Alle XML Controller sind in ordnung und müssen nicht aktualisiert  werden!')}
+                </cp:else>
+            </div>
+        </div>
+    </div>
+</cp:else>
+</cp:block>

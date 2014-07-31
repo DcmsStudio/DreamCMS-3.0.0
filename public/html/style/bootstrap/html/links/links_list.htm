@@ -1,0 +1,93 @@
+<form action="admin.php" method="post">
+<input type="hidden" name="adm" value="weblinks" />
+<input type="hidden" name="action" value="list_links" />
+<input type="hidden" name="sid" value="$cp->session_id" />
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+
+    <tr class="tableheader">
+       <td>Weblinks Sortieren</td>
+    </tr>
+
+    <tr class="secondrow">
+        <td valign="top" colspan="3">Sortieren nach:
+            <select name="order_by" class="select">
+            	<option value="title"$o_title>Titel</option>
+            	<option value="date"$o_date>Datum</option>
+            	<option value="hits"$o_hits>Hits</option>
+            	<option value="votes"$o_votes>Votes</option>
+            	<option value="rating"$o_rating>Rating</option>
+            	<option value="lastvisit"$o_lastvisit>Letzten besuch</option>
+            </select> in Reihenfolge
+            <select name="sort" class="select">
+            	<option value="asc"$sel_sort_1>Aufsteigend</option>
+            	<option value="desc"$sel_sort_2>Absteigend</option>
+            </select>
+
+            <select name="status" class="select">
+		<option value="0"$sel_status_0>Alle</option>
+            	<option value="1"$sel_status_1>nur Aktive Links</option>
+            	<option value="2"$sel_status_2>nur Deaktivierte Links</option>
+		<option value="3"$sel_status_3>nur Neue Links</option>
+            </select>
+
+
+        </td>
+    </tr>
+    <tr class="firstrow">
+        <td valign="top">
+        	Suche <input type="text" name="do_search" value="$t" size="30" maxlength="30" class="input" />
+            in
+            <select name="search_in" class="select">
+            	<option value="all"$sel_search_in_3>Titel & Beschreibung</option>
+            	<option value="title"$sel_search_in_1>Titel</option>
+            	<option value="description"$sel_search_in_2>Beschreibung</option>
+            </select>
+            in Kategorie $catsel
+        </td>
+	</tr>
+    <tr class="secondrow">
+        <td align="center">
+        	<input type="submit" value="Suchen / Sortieren" class="button" /> &nbsp; <input onClick="location='admin.php?adm=weblinks&action=add_link&sid=$cp->session_id'" type="button" value="Neuen Link eintragen" class="button" />
+        </td>
+    </tr>
+</table>
+
+</form>
+
+
+
+<form action="weblinks.php" method="post">
+<input type="hidden" name="sid" value="$cp->session_id" />
+
+<br />
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+<tr class="tableheader">
+	<td>&nbsp;</td>
+	<td>Titel / Eintrags Datum</td>
+	<td align="center" width="20%" nowrap="nowrap">Kategorie</td>
+	<td align="center" width="8%">Hits</td>
+	<td align="center" width="8%" nowrap="nowrap">Hits heute</td>
+	
+	<td align="center" width="5%">Status</td>
+	<td width="14%" align="center" nowrap="nowrap">Optionen</td>
+</tr>
+$link_rows
+</table>
+<br />
+<div class="description">
+
+<select name="action">
+   <option value="deaktivate_link">Deaktivieren / Aktivieren</option>
+   <option value="move_links">Verschieben</option>
+   <option value="del_link">Löschen</option>
+
+</select> <input type="submit" value="Abschicken" class="button" />
+
+</div>
+</form>
+
+<!--Pages-->
+
+<div class="description"><div align="right" style="a {font-size:10px;}">$pagelink</div></div>
+<!--/Pages-->  

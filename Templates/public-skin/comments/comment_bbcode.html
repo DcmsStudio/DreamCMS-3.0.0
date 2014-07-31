@@ -1,0 +1,45 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="1" class="bbcode_toolbar">
+    <tr class="tl w100perc">
+      <td>
+<img alt="" src="<#IMG_DIR#>/toolbar.start.gif" width="7" height="21"/> <select title="{trans('Schriftart')}" name="fontselect" id="fontselect" onchange="fontformat(this.form,this.options[this.selectedIndex].value,'FONT')" class="select">
+        <option value="0">
+          {trans('Schriftart')}
+        </option>
+{$bbcode_fonts}
+      </select> <select title="{trans('Größe')}" id="sizeselect" name="sizeselect" onchange="fontformat(this.form,this.options[this.selectedIndex].value,'SIZE')" class="select">
+        <option value="0">
+          {trans('Größe')}
+        </option>
+{$bbcode_fontsize}
+      </select> <select title="{trans('Farbe')}" id="colorselect" name="colorselect" onchange="fontformat(this.form,this.options[this.selectedIndex].value,'COLOR')" class="select">
+        <option value="0">
+          {trans('Farbe')}
+        </option>
+{$bbcode_fontcolors}
+      </select>
+      </td>
+    </tr>
+    <tr class="tl w100perc">
+      <td>
+        <img alt="" src="<#IMG_DIR#>/toolbar.start.gif" width="7" height="21"/>
+        <img title="{trans('Fett')}" src="<#IMG_DIR#>/bbcode_bold.gif" alt="{trans('Fett')}" onclick="bbcode(document.bbform,'B','')" class="clsCursor"/> <img title="{trans('Kursiv')}" src="<#IMG_DIR#>/bbcode_italic.gif" alt="{trans('Kursiv')}" onclick="bbcode(document.bbform,'I','')" class="clsCursor"/> <img title="{trans('Unterstrichen')}" src="<#IMG_DIR#>/bbcode_underline.gif" alt="{trans('Unterstrichen')}" onclick="bbcode(document.bbform,'U','')" class="clsCursor"/> <img title="{trans('Zentrieren')}" src="<#IMG_DIR#>/bbcode_center.gif" alt="{trans('Zentrieren')}" onclick="bbcode(document.bbform,'CENTER','')" class="clsCursor"/><img alt="" src="<#IMG_DIR#>/toolbar.separator.gif"/><img title="{trans('Hyperlink')}" src="<#IMG_DIR#>/bbcode_url.gif" alt="{trans('Hyperlink')}" onclick="namedlink(document.bbform,'URL')" class="clsCursor"/> <img title="{trans('Email an')}" src="<#IMG_DIR#>/bbcode_email.gif" alt="{trans('Email an')}" onclick="namedlink(document.bbform,'EMAIL')" class="clsCursor"/> <img title="{trans('Bild')}" src="<#IMG_DIR#>/bbcode_image.gif" alt="{trans('Bild')}" onclick="bbcode(document.bbform,'IMG','http:')" class="clsCursor"/> <img title="{trans('Zitat')}" src="<#IMG_DIR#>/bbcode_quote.gif" alt="{trans('Zitat')}" onclick="bbcode(document.bbform,'QUOTE','')" class="clsCursor"/> <img title="{trans('Liste')}" src="<#IMG_DIR#>/bbcode_list.gif" alt="{trans('Liste')}" onclick="dolist(document.bbform)" class="clsCursor"/><img alt="" src="<#IMG_DIR#>/toolbar.separator.gif"/><img title="{trans('Code')}" src="<#IMG_DIR#>/bbcode_code.gif" alt="{trans('Code')}" onclick="bbcode(document.bbform,'CODE','')" class="clsCursor"/> <img title="{trans('Code hervorheben')}" src="<#IMG_DIR#>/bbcode_php.gif" alt="{trans('Code hervorheben')}" onclick="bbcode(document.bbform,'PHP','')" class="clsCursor"/>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+ function openwindow(x,y) {
+    window.open("{$cfg['portalurl']}/index.php?cp=misc&action=bbcodepopup", "smilies", "toolbar=no,scrollbars=yes,resizable=yes,width="+x+",height="+y);
+ }
+//]]>
+</script>
+        <img alt="" src="<#IMG_DIR#>/toolbar.separator.gif" width="5" height="21"/>
+        <a href="javascript:openwindow(600,500)"><img title="-" src="<#IMG_DIR#>/bbcode_help.gif" alt="{trans('Hilfe')}" class="clsCursor"/></a>
+      </td>
+    </tr>
+    <tr class="tl w100perc">
+      <td>
+&nbsp;<img alt="" src="<#IMG_DIR#>/toolbar.start.gif" width="7" height="21"/>
+<input class="clsCursor" type="button" value=" X " accesskey="c" title="{trans('aktuellen Tag schließen')} (alt+c)" style="color:red; font-weight:bold" onclick="closetag(this.form)"/> {trans('aktuellen Tag schließen')} 
+<input type="button" value=" X " accesskey="x" title="{trans('Alle Tags schließen')} (alt+x)" style="color:red; font-weight:bold" onclick="closeall(this.form)" class="clsCursor"/> {trans('Alle Tags schließen')}
+     </td>
+    </tr>
+  </table>

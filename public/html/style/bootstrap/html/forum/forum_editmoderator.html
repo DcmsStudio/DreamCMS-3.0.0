@@ -1,0 +1,268 @@
+<?php
+
+function __forum_editmoderator($mod, $forums, $r){
+global $cp, $cfg, $fct, $adm_skin;
+
+	$options = '';
+
+	foreach($forums as $idx => $p)
+	{
+
+		$sel = "";
+		if ($mod['boardid'] == $p['boardid'] || HTTP::input('id')== $p['boardid']) $sel = ' selected="selected"';
+		$options .= '<option value="'.$p['boardid'].'"'.$sel.'>'.$p['title'].
+		(!($p['options'] & $GLOBALS['FORUMOPTIONS']['allowposting']) ? ' (no posting)' : '') .'</option>';
+	}
+
+
+	$a = "edit";
+	$h = '<input type="hidden" name="userid" value="'.$mod['userid'].'" />';
+	$t = $mod['username'] ." bearbeiten";
+
+	if (!$mod['userid'])
+	{
+		$a = "add";
+		$t = "erstellen";
+		$h = '';
+	}
+
+
+
+	$op_keys = array();
+
+
+	foreach($GLOBALS['BITFIELD']['moderatorpermissions'] as $k => $v)
+	{
+		# if ( !array_key_exists($k, $GLOBALS['BITFIELD']['moderatorpermissions']) ) continue;
+
+		if ( ($mod[$k] == 1) )
+		{
+			eval("\$".$k."_1 = ' checked=\"checked\"';");
+			eval("\${$k}_0 = '';");
+		}
+		elseif ( ($mod[$k] != 1) )
+		{
+			eval("\$".  "{$k}_0 = ' checked=\"checked\"';");
+			eval("\$".  "{$k}_1 = '';");
+		}
+	}
+
+	$h .= '<input type="hidden" name="f" value="'.HTTP::input('f').'" />';
+	$html = <<<EOF
+
+<form  action="admin.php"  method="post"><input type="hidden" name="adm" value="forum_moderator" />
+<input type="hidden" name="sid" value="{$cp->session_id}">
+<input type="hidden" name="action" value="{$a}">
+<input type="hidden" name="send" value="send">
+
+$h
+
+
+<table width="100%" border="0" cellpadding="3" cellspacing="0" class="tblborder">
+    <tr class="tableheader">
+    	<td colspan="2">Forum {$r['forumtitle']}</td>
+    </tr>
+    <tr class="tableheader">
+    	<td colspan="2">Moderator $t</td>
+    </tr>
+EOF;;;
+	if (!$mod['userid'])
+	{
+		$html .= <<<EOF
+    <tr class="secondrow">
+    	<td width="30%"><b>Username:</b><br /><small>Der Benutzername muß richtig geschrieben sein und existieren!</small></td>
+    	<td width="70%" valign="top">{info:forum|mod_username}
+    	<input type="text" name="username" value="{$r['username']}" class="input" size="40" />
+    	</td>
+    </tr>
+EOF;;;
+}
+
+$html .= <<<EOF
+
+    <tr class="firstrow">
+    	<td width="30%"><b>Forum:</b></td>
+    	<td width="70%">{info:forum|mod_for_board}
+    	<select name="id" class="select">
+    		$options
+    	</select>
+    	</td>
+    </tr>
+
+
+    <tr class="tableheader">
+    	<td colspan="2">Post / Thread / Attachment Rechte</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Kann Beiträge bearbeiten:</b></td>
+    	<td width="70%">{info:forum|can_editposts}
+    	<input type="radio" class="radio" name="mod[caneditposts]"{$caneditposts_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[caneditposts]"{$caneditposts_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="firstrow">
+    	<td width="30%"><b>Kann Beiträge löschen:</b></td>
+    	<td width="70%">{info:forum|can_deleteposts}
+    	<input type="radio" class="radio" name="mod[candeleteposts]"{$candeleteposts_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[candeleteposts]"{$candeleteposts_0} value="0" /> Nein
+    	</td>
+    </tr>
+
+    <tr class="secondrow">
+        <td><b>Kann Beiträge Physisch löchen<b><br /><small>(Vollständiges löschen aus der Datenbank)</small></td>
+        <td>{info:forum|can_removeposts}<span style="white-space:nowrap">
+            <input type="radio" class="radio" name="mod[canremoveposts]"{$canremoveposts_1} value="1" /> Ja &nbsp;
+            <input type="radio" class="radio" name="mod[canremoveposts]"{$canremoveposts_0} value="0" /> Nein
+        </span></td>
+    </tr>
+
+    <tr class="firstrow">
+    	<td width="30%"><b>Kann Themen öffnen / schließen:</b></td>
+    	<td width="70%">{info:forum|can_openclose}
+    	<input type="radio" class="radio" name="mod[canopenclose]"{$canopenclose_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canopenclose]"{$canopenclose_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Kann Themen bearbeiten:</b></td>
+    	<td width="70%">{info:forum|can_editthreads}
+    	<input type="radio" class="radio" name="mod[caneditthreads]"{$caneditthreads_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[caneditthreads]"{$caneditthreads_0} value="0" /> Nein
+    	</td>
+    </tr>
+
+    <tr class="firstrow">
+    	<td width="30%"><b>Kann Themen verwalten:</b></td>
+    	<td width="70%">{info:forum|can_managethreads}
+    	<input type="radio" class="radio" name="mod[canmanagethreads]"{$canmanagethreads_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canmanagethreads]"{$canmanagethreads_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Kann Umfragen bearbeiten:</b></td>
+    	<td width="70%">{info:forum|can_editpoll}
+    	<input type="radio" class="radio" name="mod[caneditpoll]"{$caneditpoll_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[caneditpoll]"{$caneditpoll_0} value="0" /> Nein
+    	</td>
+    </tr>
+
+    <tr class="tableheader">
+    	<td colspan="2">Froum Rechte</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Kann Ankündigungen erstellen:</b></td>
+    	<td width="70%">{info:forum|can_announce}
+    	<input type="radio" class="radio" name="mod[canannounce]"{$canannounce_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canannounce]"{$canannounce_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="firstrow">
+    	<td width="30%"><b>Kann Beiträge moderieren:</b></td>
+    	<td width="70%">{info:forum|can_moderateposts}
+    	<input type="radio" class="radio" name="mod[canmoderateposts]"{$canmoderateposts_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canmoderateposts]"{$canmoderateposts_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Kann Attachments moderieren:</b></td>
+    	<td width="70%">{info:forum|can_moderateattachments}
+    	<input type="radio" class="radio" name="mod[canmoderateattachments]"{$canmoderateattachments_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canmoderateattachments]"{$canmoderateattachments_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="firstrow">
+    	<td width="30%"><b>Kann mehrere Themen gleichzeitig verschieben:</b></td>
+    	<td width="70%">{info:forum|can_massmove}
+    	<input type="radio" class="radio" name="mod[canmassmove]"{$canmassmove_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canmassmove]"{$canmassmove_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Kann mehrere Themen gleichzeitig teilen:</b></td>
+    	<td width="70%">{info:forum|can_massprune}
+    	<input type="radio" class="radio" name="mod[canmassprune]"{$canmassprune_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canmassprune]"{$canmassprune_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="firstrow">
+    	<td width="30%"><b>Kann Forum mit Passwort versehen:</b></td>
+    	<td width="70%">{info:forum|can_setpassword}
+    	<input type="radio" class="radio" name="mod[cansetpassword]"{$cansetpassword_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[cansetpassword]"{$cansetpassword_0} value="0" /> Nein
+    	</td>
+    </tr>
+
+
+    <tr class="tableheader">
+    	<td colspan="2">Benutzer Rechte</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Kann Beitrags IP sehen:</b></td>
+    	<td width="70%">{info:forum|can_viewips}
+    	<input type="radio" class="radio" name="mod[canviewips]"{$canviewips_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canviewips]"{$canviewips_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="firstrow">
+    	<td width="30%"><b>Kann Mitglieder bannen:</b></td>
+    	<td width="70%">{info:forum|can_banusers}
+    	<input type="radio" class="radio" name="mod[canbanusers]"{$canbanusers_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canbanusers]"{$canbanusers_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Kann Mitglieder aus bannliste nehmen:</b></td>
+    	<td width="70%">{info:forum|can_unbanusers}
+    	<input type="radio" class="radio" name="mod[canunbanusers]"{$canunbanusers_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[canunbanusers]"{$canunbanusers_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="firstrow">
+    	<td width="30%"><b>Kann die Signatur von Mitgliedern bearbeiten:</b></td>
+    	<td width="70%">{info:forum|can_editsigs}
+    	<input type="radio" class="radio" name="mod[caneditsigs]"{$caneditsigs_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[caneditsigs]"{$caneditsigs_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Kann das Avatar eines Mitglieds bearbeiten:</b></td>
+    	<td width="70%">{info:forum|can_editavatar}
+    	<input type="radio" class="radio" name="mod[caneditavatar]"{$caneditavatar_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[caneditavatar]"{$caneditavatar_0} value="0" /> Nein
+    	</td>
+    </tr>
+
+    <tr class="tableheader">
+    	<td colspan="2">Email Benachrichtigung</td>
+    </tr>
+    <tr class="firstrow">
+    	<td width="30%"><b>Email Benachrichtigung wenn ein neues Thema erstellt wurde:</b></td>
+    	<td width="70%">{info:forum|newthreademail}
+    	<input type="radio" class="radio" name="mod[newthreademail]"{$newthreademail_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[newthreademail]"{$newthreademail_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="secondrow">
+    	<td width="30%"><b>Email Benachrichtigung wenn ein neuer Beitrag erstellt wurde:</b></td>
+    	<td width="70%">{info:forum|newpostemail}
+    	<input type="radio" class="radio" name="mod[newpostemail]"{$newpostemail_1} value="1" /> Ja &nbsp;
+    	<input type="radio" class="radio" name="mod[newpostemail]"{$newpostemail_0} value="0" /> Nein
+    	</td>
+    </tr>
+    <tr class="firstrow">
+    	<td colspan="2" align="center">
+    	<input type="submit" value="Speichern" class="button" /> &nbsp;
+    	<input type="reset" value="Zurücksetzen" class="button" /> &nbsp;
+    	<input type="reset" value="Abbrechen" onclick="cancel();" class="button">
+    	</td>
+    </tr>
+</table>
+
+</form>
+
+
+EOF;;;
+return $html;
+}
+
+?>

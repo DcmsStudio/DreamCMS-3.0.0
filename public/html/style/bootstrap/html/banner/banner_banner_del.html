@@ -1,0 +1,33 @@
+<?php
+
+function __banner_banner_del(){
+global $cp, $cfg, $fct, $cp, $cp;
+
+	return <<<EOF
+<center><font class="option"><b>Banner löschen</b></font>
+<br>
+<img src="$imageurl" border=0><br>
+<a href="$clickurl" target="_blank">$clickurl</a>
+<br><p>
+<table cellpadding=4 cellspacing=1 border=0 class="tblborder" width="95%" align="center">
+    <tr class="tableheader">
+        <td align="center">ID</td>
+        <td align="center">Einblendungen</td>
+        <td align="center">Verbleibende Einbl.</td>
+        <td align="center">Klicks</td>
+        <td align="center">% Klicks</td>
+        <td align="center">Kundenname</td>
+    </tr>
+    $banner
+    </td>
+    </tr>
+</table>
+
+Willst Du dieses Banner wirklich löschen?<br><br>
+[ <a href="admin.php?adm=admin&amp;adm=marketing&amp;action=BannersAdmin&amp;sid=$cp->session_id">Nein</a> | <a href="admin.php?adm=admin&amp;adm=marketing&amp;action=BannerDelete&amp;bid=$bid&amp;ok=1&amp;sid=$cp->session_id">Ja</a> ]</center>
+</center>
+
+EOF;
+}
+
+?>

@@ -1,0 +1,134 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+{$toolbar}
+    [save:rform_frm] [save_exit:rform_frm] [reset:rform_frm] [cancel:rform_frm]
+</cp:block>
+
+<cp:block name="content">
+
+
+    
+<form method="post" id="rform_frm" action="admin.php">
+    <input type="hidden" name="adm" value="ranks" />
+    <input type="hidden" name="send" value="send"/>
+    <input type="hidden" name="action" value="{$request.action}"/>
+    <input type="hidden" name="rankid" id="rankid" value="{$rank.rankid}"/>
+    
+    
+    
+    <div class="box description">
+        <div class="box-inner">
+            <div class="fieldset2">
+                <fieldset>
+                    <legend>{trans('Rang Titel')}</legend>
+                    {info:rank|title}<input type="text" size="70" name="title" value="{$rank.ranktitle}" maxlength="30" class="required"/>
+                </fieldset> 
+                <fieldset>
+                    <legend>{trans('Ab Beiträge')}</legend>
+                    {info:rank|quantity}
+                    <input type="text" name="quantity" value="{$rank.needposts}" maxlength="4" size="40"/>
+                    
+                    <br><small>{trans('Ab wievielen Beiträgen soll dieser Rang zur Verfügung stehen?')}</small>
+                </fieldset> 
+            </div>
+            
+            <div class="fieldset2">
+                <fieldset>
+                    <legend>{trans('Benutzergruppe')}</legend>
+                    {info:rank|group}
+                    <select name="groupid" class="select">
+                        <cp:loop name="usergroups" key="r">
+                            <option value="{$r.groupid}"{iif($r.groupid == $rank.groupid || ($usergroups_index == 1 && empty($rank.groupid) ) , ' selected="selected"', '')}>{$r.title}</option>
+                        </cp:loop>
+                    </select>
+                    <br><small>{trans('Welcher Benutzergruppe soll dieser Rang zur Verfügung stehen?')}</small>
+                </fieldset> 
+                <fieldset>
+                    <legend>{trans('Geschlecht')}</legend>
+                    {info:rank|gender}
+                    <select name="gender" class="select">
+                        <option value="0"<cp:if condition="empty($rank.gender)"> selected="selected"</cp:if>>{trans('ohne Angabe')}</option>
+                        <option value="1"<cp:if condition="$rank.gender == 1"> selected="selected"</cp:if>>{trans('männlich')}</option>
+                        <option value="2"<cp:if condition="$rank.gender == 2"> selected="selected"</cp:if>>{trans('weiblich')}</option>
+                        <option value="3"<cp:if condition="$rank.gender == 3"> selected="selected"</cp:if>>{trans('zwitter')}</option>
+                    </select>
+                    
+                    <br><small>{trans('Welchem Geschlecht soll dieser Rang zur Verfügung stehen?')}</small>
+                </fieldset> 
+            </div>
+            
+            
+            <fieldset>
+                <legend>{trans('Rang Grafik')}</legend>
+                <input name="iconpath" id="iconpath" type="text" value="{$rank.iconpath}" size="70" class="required" /> 
+                <input name="repeats" id="repeats" type="text" value="{iif($rank.repeats != "", $rank.repeats, '1')}" size="5" maxlength="2" class="required" />
+                <br/>
+                <small>
+                    {trans('Basis Pfad ist')} "{$base_iconpath}"
+                    {trans('Mit der Verwendung von "[imagefolder]" können Sie die Icons für jeden Frontend Skin in einer anderen Farbe darstellen.')}
+                </small>
+                <br/>
+                <span id="preview">
+                
+                </span>
+                
+            </fieldset>
+            
+        </div>
+    </div>
+
+</form>
+
+
+
+
+<script type="text/javascript">
+
+var baseSmiliePath = '{$base_iconpath}';
+
+    $(document).ready( function() {
+    
+        $('#rform_frm').registerForm({
+            contentIdentifierID: 'rankid',
+            exiturl: 'admin.php?adm=ranks',
+            savehandler: savethis
+        });
+
+        if ( $('#iconpath').val() != '' )
+        {
+            $('#preview').append( $('<img>').attr('src', baseSmiliePath + $('#iconpath').val()) )
+        }
+
+
+        $('#iconpath').change(function() {
+            $('#preview').empty();
+            if ( $(this).val() != '' ) 
+            {
+                
+
+                if ( $(this).val()!= '' && $('#repeats').val() >= 1 )
+                {
+                    for ( var i=0; i < $('#repeats').val(); i++) { $('#preview').append( $('<img>').attr('src', baseSmiliePath + $(this).val() ) ); }
+                }
+                else {
+                    $('#preview').append( $('<img>').attr('src', baseSmiliePath + $(this).val()) );
+
+                }
+
+
+            }
+        });
+
+        $('#repeats').change(function() {
+            $('#preview').empty();
+            if ( $('#iconpath').val()!= '' && $(this).val() >= 1 ) 
+            {
+                for ( var i=0; i < $(this).val(); i++) { $('#preview').append( $('<img>').attr('src', baseSmiliePath + $('#iconpath').val() ) ); }
+            }
+        });
+    });
+
+</script>
+
+</cp:block>

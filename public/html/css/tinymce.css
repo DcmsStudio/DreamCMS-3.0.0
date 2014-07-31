@@ -1,0 +1,47 @@
+.mce-content-body body {
+    font-family: arial,verdana;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.mce-content-body p>div {
+	border: 1px dotted #999;
+}
+
+.mce-content-body .subcolumns {
+	border: 0px!important;
+}
+
+.mce-content-body .subcolumns div {
+	border: 1px dotted #999;
+}
+
+
+.mce-content-body .megamenu {
+    display: inline-block;
+    width: 100%;
+}
+
+.mce-content-body .megamenu .items {
+    width: 60%;
+    min-height: 40px;
+}
+
+.mce-content-body .megamenu.rightpos .items {
+    float: right;
+}
+.mce-content-body .megamenu.leftpos .items {
+    float: left;
+}
+
+
+.mce-content-body .megamenu .menu-box-left {
+    width: 39%;
+    float: left;
+    min-height: 40px;
+}
+.mce-content-body .megamenu .menu-box-right {
+    width: 39%;
+    float: right;
+    min-height: 40px;
+}

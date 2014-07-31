@@ -1,0 +1,9 @@
+<tr onmouseover="over(this)" onmouseout="out(this)" class="$row[css]">
+    <td>{$row['spacer']} $row[title] &nbsp; <i>($row[total])</i></td>
+    <!-- <td class="secondrow">$row2[title]</td> -->
+    <td align="center">
+    <a href="admin.php?adm=weblinks_perm&cid=$row[cid]&amp;sid=$cp->session_id&amp;action=get_perm_for_cat"><img src="images/icon_warning.gif" width="16" height="16" border="0" alt="Zugriffsrechte für diese Kategorie setzen" /></a> &nbsp;&nbsp;
+    <a href="admin.php?adm=weblinks&cid=$row[cid]&amp;sid=$cp->session_id&amp;action=edit_cat"><img src="images/edit.png" width="16" height="16" border="0" alt="Einsehen und bearbeiten" /></a> &nbsp;&nbsp;
+    <a href="admin.php?adm=weblinks&cid=$row[cid]&amp;sid=$cp->session_id&amp;action=del_cat"><img src="images/delete.gif" width="16" height="16" border="0" alt="Eintrag Löschen" /></a>
+    </td>
+</tr>

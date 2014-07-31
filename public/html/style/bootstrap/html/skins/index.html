@@ -1,0 +1,176 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button class="action-button" onclick="openTab({url: 'admin.php?adm=skins&action=add', obj: this, label: $(this).text()})"><span class="btn_new"></span> Skin Erstellen</button>
+    <button class="action-button import-skin"><img src="images/document_import.png" width="16" alt=""/> Skin importieren</button>
+</cp:block>
+
+<cp:block name="content">
+    <script type="text/javascript">
+
+
+        $('.import-skin').unbind().click(function () {
+            href = 'admin.php?adm=skins&action=import';
+            openTab({url: href, obj: this, label: $(this).text(), isSingleWindow: 0 });
+        });
+
+        if (typeof registerSkinButtons != 'function') {
+            function registerSkinButtons() {
+
+                $('#skin-grid').find('a.compile-templates').each(function () {
+                    $(this).unbind().click(function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        var link = $(this);
+                        var orgIcon = $(this).find('img').attr('src');
+                        $(this).find('img').attr('src', Config.get('loadingImgSmall'));
+
+                        $(this).parents('tr:first').mask();
+
+                        $.ajax({
+                            url: 'admin.php',
+                            method: 'GET',
+                            async: true,
+                            data: {
+                                skinid: parseInt($(this).attr('rel').replace('skin_', '')),
+                                adm: 'skins',
+                                action: 'recompile'
+                            }
+                        }).done(function (data) {
+                            link.parents('tr:first').unmask();
+                            link.find('img').attr('src', orgIcon);
+                            if (Tools.responseIsOk(data)) {
+
+                                Notifier.info(data.msg);
+                            }
+                            else {
+                                Notifier.warn(data.msg);
+                            }
+                        });
+
+
+
+                    });
+                });
+
+                setTimeout(function () {
+                    $('#skin-grid').find('a[href*="action=templates"]').unbind('click.newtab').unbind('click').click(function (e) {
+                        e.preventDefault();
+                        openTab({url: $(this).attr('href'), obj: this, label: $(this).text(), isSingleWindow: true });
+                    });
+
+
+                    $('#skin-grid').find('a[href*="setdefault"]').unbind().click(function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        $(this).find('.fa-cog').addClass('fa-spin').show();
+
+                        var self = this;
+
+                        $.get($(this).attr('href'), {}, function (data) {
+                            $(self).find('.fa-cog').removeClass('fa-spin').hide();
+
+                            if (Tools.responseIsOk(data)) {
+
+                                $('#skin-grid').find('[rel="default_set"]').find('img').attr('src', $('#skin-grid').find('[rel="default_set"]').find('img').attr('src').replace(/online/ig, 'offline'));
+                                $('#skin-grid').find('a[href*="delete"]').removeClass('disabled');
+
+                                $(self).parents('tr:first').find('a[href*="delete"]').addClass('disabled');
+                                $(self).parents('tr:first').find('[rel="default_set"]').find('img').attr('src', $(self).parents('tr:first').find('[rel="default_set"]').find('img').attr('src').replace(/offline/ig, 'online'));
+                                if (data.msg) {
+                                    Notifier.info(data.msg);
+                                }
+                            }
+                            else {
+                                jAlert("Error:\r\n" + data.msg);
+                            }
+                        }, 'json');
+
+                    });
+
+
+                }, 200);
+
+
+                $('#skin-grid').find('a[href*=export]').each(function () {
+                    $(this).unbind('click').click(function (e) {
+                        e.preventDefault();
+                        var self = this;
+                        jConfirm("{trans('Wollen Sie dieses Skin wirklich exportieren?<br/>Dieser Vorgang kann je nach Server Auslasung, einige Minuten in anspruch nehmen.')}", '{trans("Achtung...")}',
+                            function (res) {
+                                if (res) {
+
+                                    var src = $(self).find('img').attr('src');
+                                    $(self).find('img').attr('src', Config.get('loadingImgSmall'));
+                                    $(self).find('.fa-cog').addClass('fa-spin').show();
+
+                                    setTimeout(function () {
+
+                                        $.ajax({
+                                            type: "GET",
+                                            url: $(self).attr('href'),
+                                            data: {},
+                                            async: true,
+                                            success: function (data) {
+                                                $(self).find('.fa-cog').removeClass('fa-spin').hide();
+                                                $(self).find('img').attr('src', src);
+                                                if (Tools.responseIsOk(data)) {
+
+                                                    Notifier.info(data.msg);
+                                                }
+                                                else {
+                                                    jAlert("Error:\r\n" + data.msg);
+                                                }
+                                            }
+                                        });
+                                    }, 100);
+                                }
+                            }
+                        )
+                        ;
+                        return false;
+                    });
+                });
+
+
+                $('#skin-grid').find('.regenerate-templates').unbind().click(function (e) {
+                    e.preventDefault();
+                    var self = this;
+                    jConfirm("{trans('Wollen Sie wirklich alle Templates dieses Skins erneuern?<br/>Dieser Vorgang kann je nach Server Auslasung, einige Minuten in anspruch nehmen.')}", '{trans("Achtung...")}',
+                        function (res) {
+                            if (res) {
+                                $.pagemask.show('{trans(" Generiere Template neu...")}'
+                                )
+                                ;
+                                $.get('admin.php?adm=skins&action=regenerate&id=' + $(self).attr('rel').replace('skin_', ''), {}, function (data) {
+                                    $.pagemask.hide();
+                                    if (Tools.responseIsOk(data)) {
+                                        Notifier.info("{trans('Templates wurden erfolgreich erneuert.')}");
+                                    }
+                                    else {
+
+                                        jAlert("Error:\r\n" + data.msg);
+                                    }
+
+                                }, 'json');
+                            }
+
+                        });
+                });
+            }
+        }
+
+        Application.Grid('skin-grid', {$gridJson});
+
+        Core.addEvent('onShowTabContent', function (content, hash) {
+            registerSkinButtons();
+        });
+
+    </script>
+
+
+    <div id="skin-grid">
+    </div>
+
+</cp:block>

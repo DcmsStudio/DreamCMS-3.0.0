@@ -1,0 +1,243 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:editForm{$form.formid}]
+        [save_exit:editForm{$form.formid}]
+        [reset:editForm{$form.formid}]
+        [cancel:editForm{$form.formid}]
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+    <form method="post" action="admin.php" id="editForm{$form.formid}" name="editForm{$form.formid}">
+
+        <input type="hidden" name="adm" value="forms"/>
+        <input type="hidden" name="send" value="send"/>
+        <input type="hidden" name="action" value="editform"/>
+        <input type="hidden" name="formid" id="formid{$form.formid}" value="{$form.formid}"/>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Formular Name')}</label>
+                <input name="name" type="text" value="{escape($form.name, 'html')}" size="30" class="form-control required"/>
+            </div>
+            <div class="col-md-6">
+                <label>{trans('Formular Sende Adresse')}</label>
+                <input data-tooltip="{trans('Diese Option ist Optional. Wenn nichts angegeben wird, wird das Formular mit dem Internen Formular Controller verarbeitet.')}" data-position="bottom-left" name="formaction" type="text" value="{iif($form.formaction, $form.formaction, 'index.php')}" size="30"
+                       class="form-control"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Formular Titel')}</label>
+                <input data-position="top-left" data-tooltip="{trans('ACHTUNG: z.Z. noch nicht als Translation Version')}" name="title" type="text" value="{escape($form.title, 'html')}" size="30" class="form-control required"/>
+            </div>
+            <div class="col-md-6">
+                <label>{trans('Formular Sende Methode')}</label>
+                <label for="method-post"><input name="method" id="method-post" type="radio" value="post" cp:on="checked:$form.method == 'post' || empty($form.method)" parse:checked="checked"/> POST
+                </label>
+                <label for="method-get"><input name="method" id="method-get" type="radio" value="get" cp:on="checked:$form.method == 'get'" parse:checked="checked"/> GET
+                </label>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+
+
+                <div id="formtypes">
+                    <label>{trans('Formular Typ')}</label>
+                    <label for="formtype-mail"><input name="formtype" id="formtype-mail" type="radio" value="mail" cp:on="checked:$form.formtype == 'mail' || empty($form.formtype)" parse:checked="checked"/> {trans('Email Versandt')}
+                    </label>
+                    <label for="formtype-data"><input name="formtype" id="formtype-data" type="radio" value="data" cp:on="checked:$form.formtype == 'data'" parse:checked="checked"/> {trans('Daten Speicher')}
+                    </label>
+                    <label for="formtype-other"><input name="formtype" id="formtype-other" type="radio" value="other" cp:on="checked:$form.formtype == 'other'" parse:checked="checked"/> {trans('Sonstiges')}
+                    </label>
+                </div>
+
+
+                <div class="formtype-mail typechange">
+                    <label>{trans('Absender Email-Adresse')}</label>
+                    <input data-position="top-left" data-tooltip="{trans('Sollte keine Email Adresse angegeben worden sein, so wird die Email Adresse in den System Einstellungen angegebene Email Adresse als Absender verwendet.')}" name="email" type="text" value="{escape($form.email, 'html')}" size="40"
+                           class="form-control"/>
+                    <label>{trans('Email-Template')}</label>
+                    <cp:editor baseurl="$cfg.portalurl" name="email_template" value="$form.email_template" height="200" width="400px"/>
+                    <span class="note">
+                        {trans('Um die Daten in der Email zu verwenden, schreiben Sie bitte die Platzhalter mit eckigen Klammern. Bsp: Hallo ich heiße [benutzer]. ACHTUNG: z.Z. noch nicht als Translation Version')}
+                    </span>
+                </div>
+
+
+                <div class="formtype-data typechange">
+                    <label>{trans('Speicher Pfad der Daten')}</label>
+                    <input name="datapath" type="text" value="{escape($form.datapath, 'html')}" size="30" class="form-control required"/>
+                    <br/>
+                    <label for="formtype-datacrypt"><input id="formtype-datacrypt" value="1" name="cryptdata" type="checkbox" cp:on="checked:$form.cryptdata" parse:checked="checked"/> {trans('Daten Verschlüsselt speichern')}</label>
+                </div>
+
+
+                <label>{trans('Beschreibung')}</label>
+                <cp:editor baseurl="$cfg.portalurl" name="description" value="$form.description" height="150"/>
+
+                <label>{trans('Text wenn das Formular erfolgreich abgeschickt wurde')}</label>
+                <textarea data-tooltip="{trans('HTML Code ist nicht erlaubt. ACHTUNG: z.Z. noch nicht als Translation Version')}" data-position="top-left" class="form-control" name="submitmsg" rows="2" cols="30">{$form.submitmsg}</textarea>
+
+                <label>{trans('Text wenn das Formular Fehler enthält')}</label>
+                <textarea data-tooltip="{trans('HTML Code ist nicht erlaubt. ACHTUNG: z.Z. noch nicht als Translation Version')}" data-position="top-left" class="form-control" name="errormsg" rows="2" cols="30">{$form.errormsg}</textarea>
+
+
+            </div>
+            <div class="col-md-6">
+                <div style="display:inline-block;width:100%;padding:0">
+
+
+                    <div class="panel panel-default" style="float: left;width:49%;">
+                        <div class="panel-heading">
+                            <h3>eingefügte Formular-Felder</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="ui-sortable" id="assigned-fields" style="min-height:35px">
+                                <cp:loop name="assigned" key="r">
+                                    <li id="field-{$r.field_id}">
+                                        <div style="display:inline-block;width:100%;">
+                                            <strong>{iif($r.options.grouplabel != "", $r.options.grouplabel, $r.options.label)}</strong><br/>
+                                            <small>{trans('Platzhalter')}: [{$r.name}], Type: {$r.type}</small>
+                                        </div>
+                                        <br/>
+                                        <small>{$r.description}</small>
+                                    </li>
+                                </cp:loop>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default" style="margin-left:50%;">
+                        <div class="panel-heading">
+                            <h3>verfügbare Formular-Felder</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="ui-sortable" id="available-fields" style="min-height:35px">
+                                <cp:loop name="available" key="rs">
+                                    <li id="field-{$rs.field_id}">
+                                        <div style="display:inline-block;width:100%;line-height:23px">
+                                            <strong>{iif($rs.options.grouplabel != "", $rs.options.grouplabel, $rs.options.label)}</strong><br/>
+                                            <small>{trans('Platzhalter')}: [{$rs.name}], Type: {$rs.type}</small>
+                                        </div>
+                                        <br/>
+                                        <small>{$rs.description}</small>
+                                    </li>
+                                </cp:loop>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+
+    <script type="text/javascript">
+
+        var sortString = '';
+        if (typeof updateFieldAssignment == 'undefined') {
+            function updateFieldAssignment(event, ui) {
+                if (sortString != $('#assigned-fields', $('#' + Win.windowID)).sortable("serialize")) {
+                    sortString = $('#assigned-fields', $('#' + Win.windowID)).sortable("serialize");
+                    $('#form-fields-sorted', $('#' + Win.windowID)).val(sortString);
+                    $('button.save', $('#assigned-fields', $('#' + Win.windowID)).parents('.window-header:first')).enableButton();
+                    $('#assigned-fields li div div', $('#' + Win.windowID)).fadeIn(300, function () {
+                        $(this).css({display: 'inline-block'})
+                    });
+                    $('#available-fields li div div', $('#' + Win.windowID)).fadeOut(300);
+                }
+            }
+        }
+
+        $('.typechange', $('#' + Win.windowID)).hide();
+        $('#formtypes input:radio', $('#' + Win.windowID)).each(function () {
+
+            $(this).bind('change', function () {
+                if ($(this).is(':checked')) {
+                    var type = $(this).val();
+                    $('div.show', $('#' + Win.windowID)).hide().removeClass('show');
+                    $('.formtype-' + type, $('#' + Win.windowID)).addClass('show').show();
+
+                }
+            });
+
+            if ($(this).is(':checked')) {
+                var type = $(this).val();
+                $('.formtype-' + type, $('#' + Win.windowID)).addClass('show').show();
+            }
+        });
+
+        Form.registerForm('editForm{$form.formid}', {
+            contentIdentifierID: 'formid{$form.formid}',
+            exiturl: 'admin.php?adm=forms',
+            save: function (event, exit, isdraft) {
+                var post = $('#editForm{$form.formid}', $('#' + Win.windowID)).serialize() + '&' + $('#assigned-fields').sortable("serialize");
+
+                if (typeof isdraft != 'undefined' && isdraft == true) {
+                    post += '&savedraft=1';
+                }
+
+                $('#editForm{$form.formid}', $('#' + Win.windowID)).mask('Formular Speichern...');
+
+                $.post('admin.php', post, function (data) {
+                    $('#editForm{$form.formid}').unmask();
+                    if (Tools.responseIsOk(data)) {
+                        Form.resetDirty($('#editForm{$form.formid}'));
+
+                        Form.saveCallBack(event, data, exit, isdraft, 'editForm{$form.formid}', Win.windowID);
+
+                    } else {
+                        Notifier.display('error', data.msg);
+                    }
+
+                }, 'json');
+            }
+        });
+
+        $('#assigned-fields', $('#' + Win.windowID)).sortable({
+            containment: $('#' + Win.windowID),
+            connectWith: $('#' + Win.windowID).find('#available-fields'),
+            forceHelperSize: true,
+            forcePlaceholderSize: true,
+            distance: 10,
+            tolerance: 'pointer',
+            appendTo: $('#' + Win.windowID),
+            zIndex: 9999,
+            update: updateFieldAssignment
+        });
+
+        $('#available-fields', $('#' + Win.windowID)).sortable({
+            containment: $('#' + Win.windowID),
+            connectWith: $('#' + Win.windowID).find('#assigned-fields'),
+            forceHelperSize: true,
+            forcePlaceholderSize: true,
+            distance: 10,
+            appendTo: $('#' + Win.windowID),
+            zIndex: 9999,
+            tolerance: 'pointer'
+        });
+
+        $('#available-fields,#assigned-fields', $('#' + Win.windowID)).css({minHeight: '250px'});
+
+        $('button.save', $('#assigned-fields', $('#' + Win.windowID)).parents('.window-header:first')).disableButton();
+
+        $('#assigned-fields', $('#' + Win.windowID)).find('input[type="checkbox"]').on('change', function () {
+            $('#toolbarfixed button.save').enableButton();
+        });
+
+        sortString = $('#assigned-fields', $('#' + Win.windowID)).sortable("serialize");
+
+
+    </script>
+</cp:block>

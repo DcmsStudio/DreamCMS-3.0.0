@@ -1,0 +1,16 @@
+<div class="box{iif($boxclass, $boxclass, '')}">
+    <h3 cp:if="$boxlabel">
+        {$boxlabel}
+    </h3>
+    <div>
+        <ul class="category-tree">
+            <cp:loop name="categories" key="r">
+                <li>
+                    <a href="{$r.caturl}">
+                        {$r.title}
+                    </a>
+                </li>
+            </cp:loop>
+        </ul>
+    </div>
+</div>

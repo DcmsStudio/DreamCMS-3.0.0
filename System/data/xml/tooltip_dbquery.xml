@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tooltip>
+	<runuploadsql title="Aus Datei vom Server"><![CDATA[führt eine SQL Datei vom Server aus (muss im Rootpfad liegen!) ]]></runuploadsql>
+	<runserversql title="Aus lokaler Datei vom Rechner"><![CDATA[führt eine SQL Datei von Ihrem Rechner aus. Achtung Upload Limit beachten.]]></runserversql>
+	<query title="SQL-Abfrage(n)"><![CDATA[<b>gehen sie bitte Vorsichtig mit den Querys um!!!</b>]]></query>
+</tooltip>

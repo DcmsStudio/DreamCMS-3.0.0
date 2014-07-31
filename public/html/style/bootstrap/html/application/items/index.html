@@ -1,0 +1,40 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button class="action-button" onclick="openTab({url: 'admin.php?adm=app&action=edititem&appid={$app.appid}', obj: this, label: $(this).text() })"><span class="btn_new"></span>{trans("Inhalt hinzufügen")}</button>
+</cp:block>
+
+<cp:block name="content">
+
+    <div id="appitem-grid{$app.appid}"></div>
+    <script type="text/javascript" language="javascript">
+                //<![CDATA[
+
+
+                var table = new dcmsGrid('appitem-grid{$app.appid}', {
+        url: 'admin.php?adm=app&action=items&appid={$app.appid}',
+                currentFilter: {$grid.activeFilter},
+                colModel: {$grid.colModel},
+                gridActions: {$grid.gridActions},
+                searchitems: {$grid.searchitems},
+                sort: '{$grid.sort}',
+                orderby: '{$grid.orderby}',
+                total: {$grid.total},
+                key: 'itemid'
+    });
+                var triggerItemsMenu = function(menucontainer)
+        {
+        var appID = '{$app.appid}';
+                var data = $(menucontainer).find('#appAddItem').data('itemData');
+                data.action += '&appid=' + appID;
+                $(menucontainer).find('#appAddItem').data('itemData', data);
+                
+                var data = $(menucontainer).find('#appAddCat').data('itemData');
+                data.action += '&appid=' + appID;
+                $(menucontainer).find('#appAddCat').data('itemData', data);
+        }
+
+
+        //]]>
+    </script>
+</cp:block>

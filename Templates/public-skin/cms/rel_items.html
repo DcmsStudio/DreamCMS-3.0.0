@@ -1,0 +1,8 @@
+<cp:if condition="count($related_items)">
+	<ul>
+		<cp:loop name="related_items" key="r">
+		<li><a href="{$r.url}">{$r.title}</a></li></cp:loop>
+	</ul>
+</cp:if>
+<cp:else>
+</cp:else>

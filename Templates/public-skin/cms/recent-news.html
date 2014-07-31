@@ -1,0 +1,33 @@
+<div class="columnSet3 bottom-shadowed">
+    <h2>
+        {trans('Aktuelle Nachrichten')}
+    </h2>
+    <cp:set var="idx" value="1" />
+    <cp:loop name="topnews" key="r">
+        <article class="column">
+            <cp:seemodeitem modul="news" contentid="$r.id" edit="action=edit_news&amp;id=%s&amp;edit=1" publish="action=publish&id=%s" state="$r.published" delete="">
+                <header>
+                    <div class="thumb-container">
+                        <cp:if condition="$r.image.src">
+                            <!--
+                            <img src="{$r.image.src}" alt="{escape($r.title, 'html')}" title="{escape($r.title, 'html')}" />
+                            -->
+                            <cp:thumb src="$r.image.src" width="294" height="160" title="escape($r.title, 'html')" cache="news/recent/" aspect="false" shrink="true" />
+                        </cp:if>
+                    </div>
+                    <a href="{$r.url}">
+                        <h3>
+                            {seemode(truncate($r.title, 50), 'title', true, 50)}
+                        </h3>
+                    </a>
+                </header>
+                <p>
+                    {seemode(truncate($r.text, 400, 'strong,b,em', '...'), 'content', true, 400, 'strong,b,em')}
+                    <a href="{$r.url}">
+                        » {trans('weiterlesen')}
+                    </a>
+                </p>
+            </cp:seemodeitem>
+        </article>
+    </cp:loop>
+</div>

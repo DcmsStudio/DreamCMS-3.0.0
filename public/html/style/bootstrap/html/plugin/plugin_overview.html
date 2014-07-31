@@ -1,0 +1,114 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+</cp:block>
+
+<cp:block name="content">
+<table width="100%" border="0" cellpadding="3" cellspacing="1" class="tblborder">
+    <tr class="tableheader">
+        <td colspan="4">{trans('Plugins installieren / updaten')}</td>
+    </tr>
+    <tr class="tableheader">
+        <td>{trans('Plugin')}</td>
+        <td width="10%" class="tc">{trans('Version')}</td>
+        <td width="20%" class="tc">{trans('Author')}</td>
+        <td width="20%" class="tc">{trans('Optionen')}</td>
+    </tr>
+    
+    <cp:loop name="installed" key="r">
+        
+        {cycle('cyclename', 'firstrow,secondrow', 'css')}
+        
+        <tr onmouseover="over(this)" onmouseout="out(this)" class="{$css}">
+            <td>{$r.plugin_title}</td>
+            <td class="tc">{$r.version}</td>
+            <td class="tc"><small>Author: {$r.author} | Email: {$r.author_email}</small></td>
+            <td class="tr">
+                <form action="admin.php"  method="post">
+                    <input type="hidden" name="adm" value="modules" />
+                    <cp:if condition="$r.installtype == 'install'">
+                        <input type="hidden" name="action" value="install" />
+                        <input type="hidden" name="key" value="$dirname" />
+                        <input type="submit" value="{$r.plugin_title} Installieren" class="button" />
+                    </cp:if>
+                    <cp:elseif condition="$r.installtype == 'update'">
+                        <input type="hidden" name="action" value="update" />
+                        <input type="hidden" name="key" value="$dirname" />
+                        <input type="submit" value="{$r.plugin_title} Update" class="button" />
+                    </cp:elseif>
+                    <input type="hidden" name="sid" value="{$cp->session_id}" />
+                </form>
+            </td>
+        </tr>
+        
+        
+        
+        
+        
+        
+    </cp:loop>
+</table>
+<br />
+
+
+
+<form action="admin.php"  method="post">
+    <input type="hidden" name="adm" value="modules" />
+    <table width="100%" border="0" cellpadding="3" cellspacing="0" class="tblborder">
+        <tr class="tableheader">
+            <td>{trans('Plugin / Infos')}</td>
+            <td width="20%">{trans('Plugin Menüpunkttile')}</td>
+            <td width="10%" class="tc">{trans('Version')}</td>
+            <td width="12%" class="tc">{trans('Online')}</td>
+            <td width="10%" class="tc">{trans('Optionen')}</td>
+        </tr>
+        <cp:loop name="list" key="r">
+            {cycle('cyclename', 'firstrow,secondrow', 'css')}
+            <tr class="{$css}" onmouseover="over(this)" onmouseout="out(this)">
+                <td>
+                    {$r.plugin_title}<small>
+                    
+                    <cp:if condition="$r.plugin_author != '' || $r.plugin_author_homepage != ''">
+                        
+                    </cp:if>
+                    <cp:if condition="$r.plugin_author != '' ">
+                        <br />{trans('Author')}: {$r.plugin_author}
+                    </cp:if>
+                    <cp:if condition="$r.plugin_author_homepage != ''">
+                        <cp:if condition="$r.plugin_author != ''"> | </cp:if><cp:else>
+                        <br />
+                        </cp:else> <a href="{$r.plugin_author_homepage}" target="_blank">{$r.plugin_author_homepage}</a>
+                    </cp:if>
+                    
+                    </small>
+                </td>
+                <td><input type="text" size="30" name="title[{$r.id}]" value="{$r.plugin_menutitle}" class="input" /></td>
+                <td class="tc">{$r.plugin_version}</td>
+                <td class="tc">
+                    <a href="admin.php?adm=modules&amp;id={$r.id}&amp;action=publish">
+                    <cp:if condition="$r.published">
+                        <img src="images/online.gif" alt="{trans('Plugin deaktivieren')}" title="{trans('Plugin deaktivieren')}" />
+                    </cp:if>
+                    <cp:else>
+                        <img src="images/offline.gif" title="{trans('Plugin aktivieren')}" alt="-" />
+                    </cp:else>
+                    </a></td>
+                <td class="tr">
+                    <cp:if condition="$r.config">
+                        <a href="admin.php?adm=module&amp;pl={$r.id}"><img src="images/configure.gif" title="{trans('Plugin einstellen')}" alt="-" /></a> 
+                    </cp:if>
+                    <cp:else>
+                        <img src="images/spacer.gif" width="15" height="15" title="" alt="" />
+                    </cp:else>
+                    
+                    
+                    <a href="admin.php?adm=modules&amp;id={$r.id}&amp;action=uninstall"><img src="images/delete.gif" title="{trans('Plugin deinstallieren')}" alt="-" /></a>
+                </td>
+            </tr>
+            
+        </cp:loop>
+    </table>
+</form>
+
+</cp:block>

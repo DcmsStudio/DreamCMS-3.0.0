@@ -1,0 +1,108 @@
+<?php
+
+function __users_add_userfield($rowclass='',$row){
+global $cp, $cfg, $fct, $cp, $cp;
+
+
+static $fieldnum;
+
+if ( !isset($fieldnum) ) { $fieldnum = 1; }
+$html = '';
+
+
+if ($row['field_type'] == 'text')
+{
+
+	$html = <<<EOF
+	<input type="text" class="input" id="field_{$row['field_id']}" name="field[{$row['field_id']}]" value="{$row['field_value']}" size="40" />
+EOF;
+
+}
+elseif ($row['field_type'] == 'select' || $row['field_type'] == 'singleselect' )
+{
+	$html = <<<EOF
+<select id="field_{$row['field_id']}" name="field[{$row['field_id']}]" class="select">
+{$row['field_value']}
+</select>
+EOF;
+
+}
+elseif ($row['field_type'] == 'multiselect')
+{
+	$html = <<<EOF
+<select id="field_{$row['field_id']}" name="field[{$row['field_id']}]" class="select" multible="multible">
+{$row['field_value']}
+</select>
+EOF;
+
+}
+elseif($row['field_type'] == 'date')
+{
+	$html = <<<EOF
+	<span id="span_{$row['field_id']}">
+<select id="day_{$row['field_id']}" name="dayfield[{$row['field_id']}]" class="select">
+{$row['day_value']}
+</select> <select id="month_{$row['field_id']}" name="monthfield[{$row['field_id']}]" class="select">
+{$row['month_value']}
+</select>
+
+
+<input type="text" class="input" id="year_{$row['field_id']}" name="yearfield[{$row['field_id']}]" value="{$row['year_value']}" size="5" style="vertical-align:middle" maxlength="4" />
+</span>
+EOF;
+
+}
+elseif($row['field_type'] == 'textarea')
+{
+	$html = <<<EOF
+<textarea name="field[{$row['field_id']}]" id="field_{$row['field_id']}" rows="5">{$row['field_value']}</textarea>
+EOF;
+
+}
+elseif($row['field_type'] == 'checkbox')
+{
+	$html = <<<EOF
+<input type="checkbox" class="input" name="field[{$row['field_id']}]" id="field_{$row['field_id']}" value="{$row['field_value']}"{$row['is_checked']} />
+EOF;
+
+}
+
+
+	$desc = "<br /><small>&nbsp;</small>";
+	if ( trim((string)$row['field_description']) )
+	{
+		$desc = "<br /><small>". $row['field_description'] ."</small>";
+	}
+
+	
+	if ( $fieldnum == 1 )
+	{
+		$_html = "\r\n\t<div class=\"w100 fl\">\r\n";
+	}
+	
+	$req = ($row['required'] == 1 ? ' *' : '');
+	
+	
+	
+	$_html .= <<<EOF
+				<div class="fl fieldset3">
+					<fieldset>
+						<legend>{$row['field_title']}{$req} {$row['field_id']}</legend>
+						{$html}
+						{$desc}
+					</fieldset>
+				</div>\r\n
+EOF;
+
+	
+	
+	if ( $fieldnum == 3 )
+	{
+		$_html .= "\r\n\t</div>";
+		$fieldnum = 0;
+	}
+	$fieldnum++;
+	return $_html;
+}
+
+?>

@@ -1,0 +1,1043 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar"></cp:block>
+
+
+<cp:block name="content">
+
+<div>
+<div id="menuitemForm-container" class="box" style="float: left; width: 30%; margin-right: 10px">
+    <!-- menu item types -->
+    <form action="admin.php" method="post" name="menuitemInsertForm" id="menuitemInsertForm" class="nodirty">
+        <fieldset>
+
+            <label>{info:menuitems|pagetype} {trans('Menüpunkt Typ')}</label>
+
+
+            <select name="type" id="page-type" class="nodirty">
+                <option value="" cp:on="selected:empty($type )" parse:selected="selected">---</option>
+                <option value="spacer" cp:on="selected:$type == 'spacer'" parse:selected="selected">
+                    {trans('Separator')}
+                </option>
+                <option value="megamenu" cp:on="selected:$type == 'megamenu'" parse:selected="selected">
+                    {trans('Megamenu')}
+                </option>
+                <option value="folder" cp:on="selected:$type == 'folder'" parse:selected="selected"> {trans('Untermenü Ordner')}
+                </option>
+                <option value="url" cp:on="selected:$type == 'url'" parse:selected="selected"> {trans('Externe URL')}
+                </option>
+                <option value="internal" cp:on="selected:$type == 'internal'" parse:selected="selected"> {trans('Interne Weiterleitung')}
+                </option>
+                <option value="page" cp:on="selected:$type == 'page'" parse:selected="selected"> {trans('"Statische Seite"')}
+                </option>
+                <!--  <option value="rootpage" cp:on="selected:$type == 'rootpage'" parse:selected="selected"> {trans('Startpunkt einer Webseite')}</option> -->
+                <option value="plugin" cp:on="selected:$type == 'plugin'" parse:selected="selected"> {trans('Plugin')}
+                </option>
+                <option value="newscat" cp:on="selected:$type == 'newscat'" parse:selected="selected"> {trans('News Kategorie')}
+                </option>
+                <!--
+                <option value="articlecat" cp:on="selected:$type == 'articlecat'" parse:selected="selected">
+                    {trans('Artikel Kategorie')}
+                </option>
+                <option value="appcat" cp:on="selected:$type == 'appcat'" parse:selected="selected"> {trans('Anwendungs Kategorie')}
+                </option>
+                -->
+            </select>
+            <span></span>
+            <input type="hidden" id="original-type" value="{$type}"/>
+        </fieldset>
+
+        <fieldset>
+            <label>{info:menuitems|title}{trans('Menüpunkt Titel')}</label>
+            <input style="width:90%" class="required input nodirty" type="text" name="title" id="thisname"
+                   value="{escape($title, 'quotes')}" size="20" maxlength="250"/>
+        </fieldset>
+
+        <fieldset class="access-items">
+            <label>{trans('Sichtbar für Benutzergruppen')}</label>
+
+
+            <label for="ug-all-new" style="width:80%">
+                <input class="chk-all" type="checkbox" id="ug-all-new" name="access[]" value="0" checked="checked"/>
+                {trans('alle Benutzergruppen')}
+            </label><br/>
+
+            <cp:loop name="usergroups" key="rx1">
+                <label for="ug-new-{$rx1.groupid}" style="width:80%;">
+                    <input type="checkbox" id="ug-new-{$rx1.groupid}" name="access[]" value="{$rx1.groupid}"/>
+                    {$rx1.title}
+                </label>
+                <br/>
+
+            </cp:loop>
+        </fieldset>
+
+
+        <div id="item-type-container" style="display:inline-block;width:100%;">
+            {$pagetypehtml}
+        </div>
+
+
+        <div style="display: inline-block;width: 100%; text-align: right">
+            <input type="hidden" name="adm" value="menues"/>
+            <input type="hidden" name="action" value="add"/>
+            <button type="button" id="insert-item">{trans('Hinzufügen')}</button>
+        </div>
+    </form>
+</div>
+
+
+<div style="margin-left: 32%; float: none;">
+
+    {*
+    <form id="menue-add-form" method="post" action="admin.php"> *}
+        <div class="content-tabs-wrapper">
+            <ul id="menu-tabs" class="tabs">
+                <cp:loop name="menu" key="r">
+                    <li><a href="#menu-tabs-{$r.id}" id="menuid-{$r.id}" tab="{$r.id}" class="tab" data-toggle="tab">{$r.title}</a></li>
+                </cp:loop>
+                <li><a href="#menu-tabs-9999" tab="9999" class="tab" id="menuid-9999"> + </a></li>
+            </ul>
+        </div>
+
+
+</div>
+
+
+<div style="margin-left: 32%; float: none; min-height: 300px" id="menuitems-container" class="box transparent">
+
+    <cp:loop name="menu" key="rs">
+        <div class="tab-content tab-pane fade" id="menu-tabs-{$rs.id}">
+
+            <div class="tab-content-header">
+                <form class="menuedit-form" action="admin.php">
+
+                    <input type="hidden" name="id" value="{$rs.id}"/>
+
+                    <div class="left">
+                        <fieldset>
+                            <label>Menü Titel</label>
+                            <input type="text" name="menutitle" value="{escape($rs.title, 'html')}"/>
+                        </fieldset>
+
+                        <fieldset>
+                            <label>Template Key</label>
+                            <input type="text" name="templatekey" value="{escape($rs.templatekey, 'html')}"/>
+                        </fieldset>
+                        <fieldset>
+                            <label>Aktivieren</label>
+                            <label for="pu{$rs.id}-1"><input type="radio" name="published" id="pu{$rs.id}-1" value="1"
+                                                             checked="checked"/> {trans('aktiviert')}</label>
+                            <label for="pu{$rs.id}-0"><input type="radio" name="published" id="pu{$rs.id}-0" value="0"/>
+                                {trans('deaktiviert')}</label>
+                        </fieldset>
+                    </div>
+                    <div class="right">
+                        <button type="button" class="menue-edit-btn">{trans('Menü Speichern')}</button>
+                        <button type="button" class="menue-delete-btn">{trans('Menü Löschen')}</button>
+                    </div>
+                </form>
+            </div>
+
+            <cp:tree name="rs.menues" key="rd" primarykey="itemid" parentkey="parentid" class="sortable-menu">
+                <li id="itemid-{$rd.itemid}">
+
+
+                    <div style="display: block">
+                        <span></span>
+                        <span class="disclose"><span></span></span>
+                        <span class="menu-item-label">{$rd.title}</span>
+                        <span class="delete"></span>
+                        <span class="edit"></span>
+                        <span rel="menuitems-form-{$rd.itemid}" class="save save-form-btn"> {trans('Speichern')}</span>
+                    </div>
+                    <div class="listitem-form-container" id="ajax-form-{$rd.itemid}" style="display: none">
+                        <form id="menuitems-form-{$rd.itemid}" action="admin.php">
+                            <input type="hidden" name="adm" value="menues"/>
+                            <input type="hidden" name="action" value="save"/>
+                            <input type="hidden" name="type" value="{$rd.type}"/>
+                            <input type="hidden" name="id" value="{$rd.itemid}"/>
+
+                            <div class="fieldset2">
+                                <fieldset>
+                                    <label>Menüpunkt Titel</label>
+                                    <input type="text" name="title" value="{escape($rd.title, 'quotes')}"/>
+                                </fieldset>
+
+                                <fieldset>
+                                    <label>Menüpunkt CSS Class</label>
+                                    <input type="text" name="cssclass" value="{escape($rd.cssclass, 'quotes')}"/>
+                                    <br/>
+                                    <small>{trans('Optional')}</small>
+                                </fieldset>
+
+                            </div>
+
+                            <fieldset class="access-items">
+                                <label>{trans('Sichtbar für Benutzergruppen')}</label>
+
+
+                                <label for="ug{$rd.itemid}-all" style="width:100%;float:left">
+                                    <input class="chk-all" type="checkbox" id="ug{$rd.itemid}-all" name="access[]"
+                                           value="0"
+                                           cp:on="checked:(is_array($rd.accesslist) && in_array(0, $rd.accesslist)) || empty($rd.accesslist)"
+                                           parse:checked="checked"/>
+                                    {trans('alle Benutzergruppen')}
+                                </label>
+
+
+                                <cp:loop name="usergroups" key="rx">
+                                    <label for="ug{$rd.itemid}-{$rx.groupid}" style="width:50%;float:left">
+                                        <input type="checkbox" id="ug{$rd.itemid}-{$rx.groupid}" name="access[]"
+                                               value="{$rx.groupid}"
+                                               cp:on="checked:is_array($rd.accesslist) && in_array($rx.groupid, $rd.accesslist)"
+                                               parse:checked="checked"/>
+                                        {$rx.title}
+                                    </label>
+
+                                </cp:loop>
+                            </fieldset>
+
+
+                            <div class="other-options">{iif($rd.pagetypehtml, $rd.pagetypehtml, '')}</div>
+                        </form>
+                    </div>
+
+
+                </li>
+            </cp:tree>
+        </div>
+    </cp:loop>
+
+
+    <div class="tab-content tab-pane fade" id="menu-tabs-9999">
+        <div class="tab-content-header">
+            <form id="menuadd-form" action="admin.php">
+                <div class="left">
+                    <fieldset>
+                        <label>Menü Titel</label>
+                        <input type="text" name="menutitle" value=""/>
+                    </fieldset>
+
+                    <fieldset>
+                        <label>Template Key</label>
+                        <input type="text" name="templatekey" value=""/>
+                    </fieldset>
+
+                    <fieldset>
+                        <label>Aktivieren</label>
+                        <label for="pu1"><input type="radio" name="published" id="pu1" value="1" checked="checked"/>
+                            {trans('aktiviert')}</label>
+                        <label for="pu0"><input type="radio" name="published" id="pu0" value="0"/>
+                            {trans('deaktiviert')}</label>
+                    </fieldset>
+                </div>
+                <div class="right">
+                    <button type="button" id="menue-add-btn">{trans('Menü Speichern')}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<div id="all-usergroups-container" style="display: none">
+    <cp:loop name="usergroups" key="rx">
+        <label for="ug[newid]-{$rx.groupid}" style="width: 50%;float:left">
+            <input type="checkbox" id="ug[newid]-{$rx.groupid}" name="access[]" value="{$rx.groupid}"
+                   cp:on="checked:is_array($r.accesslist) && in_array($rx.groupid, $r.accesslist)"
+                   parse:checked="checked"/>
+            {$rx.title}
+        </label>
+    </cp:loop>
+</div>
+
+<script type="text/javascript">
+
+var activeList = null;
+var type = $( '#page-type' ).val();
+
+if ( type == 'url' ) {
+    type = 'link';
+}
+
+if ( typeof refreshMenuSort !== 'function' ) {
+    function refreshMenuSort()
+    {
+
+        $( '#menuitems-container ul.sortable-menu' ).nestedSortable( {
+            // containment: $('#'+ Win.windowID),
+            forcePlaceholderSize: true,
+            forceHelperSize: true,
+            handle: 'div:first',
+            helper: 'clone',
+            items: 'li',
+            listType: 'ul',
+            opacity: .8,
+            // placeholder: 'menu-placeholder',
+            revert: 250,
+            tabSize: 25,
+            tolerance: 'pointer',
+            toleranceElement: '> div:first',
+            maxLevels: 10,
+            isTree: true,
+            expandOnHover: 700,
+            cursor: 'move',
+            startCollapsed: true,
+            zIndex: 9999,
+            appendTo: $( 'body' ),
+            start: function ( event, ui )
+            {
+                //    $(ui.helper).css({height: $(this).innerHeight()});
+            },
+            stop: function ( event, ui )
+            {
+                updateMenuSorting();
+            }
+        } );
+        $( '#' + Win.windowID ).find( '.disclose' ).unbind();
+        $( '#' + Win.windowID ).find( '.disclose' ).bind( 'click', function ()
+        {
+            $( this ).closest( 'li' ).toggleClass( 'mjs-nestedSortable-collapsed' ).toggleClass( 'mjs-nestedSortable-expanded' );
+            Win.refreshWindowScrollbars();
+        } );
+    }
+
+    function updateMenuSorting()
+    {
+        var act = $( '#' + Win.windowID ).find( '#menu-tabs' ).find( 'li.active a' );
+        if ( !act.attr( 'tab' ) || act.attr( 'tab' ) == 'add-9999' ) {
+            console.error( 'No tab selected' );
+            return;
+        }
+
+        var serialized = $( '#menuitems-container .tab-content:visible ul.sortable-menu' ).nestedSortable( 'toArray', {startDepthCount: 0} );
+        serialized.shift();
+        var object = $.extend( {}, serialized );
+        var items = new Array();
+        items['items'] = new Array();
+        $( object ).each( function ( i, item )
+        {
+            items['items'].push( item );
+        } );
+
+        var serialized = $.extend( {}, items );
+        var ordering = '', menuitems = '';
+        $( '#menuitems-container .tab-content:visible ul.sortable-menu' ).find( 'li' ).each( function ( i )
+        {
+            ordering += (ordering ? ',' + (i + 1) : (i + 1));
+            menuitems += (menuitems ? ',' + $( this ).attr( 'id' ).replace( 'itemid-', '' ) : $( this ).attr( 'id' ).replace( 'itemid-', '' ));
+        } );
+        serialized.ordering = ordering;
+        serialized.adm = 'menues';
+        serialized.action = 'savemenu';
+        serialized.ajax = true;
+        serialized.menuid = parseInt( act.attr( 'tab' ) );
+        serialized.menuitems = menuitems;
+        var object = $.extend( {}, serialized );
+        $.post( Tools.prepareAjaxUrl( 'admin.php' ), object, function ( data )
+        {
+            if ( Tools.responseIsOk( data ) ) {
+            }
+            else {
+            }
+        } );
+    }
+
+    function sendItemEditForm( btn, form )
+    {
+        var message = $( form ).find( 'textarea[name="message"]' );
+        var dataid = $( form ).attr( 'id' );
+
+        if ( message.length && dataid != null && typeof dataid == 'string' ) {
+            message.val( tinyMCE.activeEditor.getContent() );
+        }
+
+        var serialized = $( form ).serialize();
+        serialized += '&ajax=1';
+        console.log( serialized );
+        $.post( Tools.prepareAjaxUrl( 'admin.php' ), serialized, function ( data )
+        {
+            if ( Tools.responseIsOk( data ) ) {
+                $( form ).parents( 'li:first' ).find( '.menu-item-label:first' ).html( data.title );
+                if ( typeof data.msg == 'string' ) {
+                    Notifier.display( 'info', data.msg );
+                }
+
+                $( btn ).hide();
+            }
+            else {
+                if ( typeof data.msg == 'string' ) {
+                    Notifier.display( 'info', data.msg );
+                    console.error( data.msg );
+                }
+            }
+        }, 'json' );
+    }
+
+    function bindItemActions()
+    {
+
+
+        $( '#' + Win.windowID ).find( '#menuitems-container span.edit' ).each( function ()
+        {
+            $( this ).css( 'cursor', 'pointer' ).unbind( 'click.menuitem' ).bind( 'click.menuitem', function ()
+            {
+                var btn = $( this );
+                var saveBtn = $( this ).parent().find( '.save' );
+                var content = $( this ).parent().next();
+
+                if ( !content.is( ':visible' ) ) {
+                    content.show();
+                    btn.css( 'opacity', '1' );
+                    saveBtn.show();
+                }
+                else {
+                    content.hide();
+                    saveBtn.hide();
+                }
+
+                Win.refreshWindowScrollbars();
+
+            } );
+        } );
+
+        $( '#' + Win.windowID ).find( '#menuitems-container .listitem-form-container' ).each( function ()
+        {
+            if ( $( this ).find( 'form:first' ).length == 1 ) {
+                var $itemform = $( this ).find( 'form:first' );
+                var id = $itemform.attr( 'id' );
+                var saveBtn = $( '#menuitems-container' ).find( 'span[rel="' + id + '"]' );
+
+                saveBtn.unbind( 'click.menu' );
+                saveBtn.css( 'cursor', 'pointer' ).hide().bind( 'click.menu', function ()
+                {
+                    sendItemEditForm( $( this ), $itemform );
+                } );
+
+                var fields = $( $itemform ).find( 'input,select,textarea' );
+                fields.each( function ()
+                {
+                    $( this ).unbind( 'change.menu' ).bind( 'change.menu', function ( e )
+                    {
+                        saveBtn.show();
+                        e.preventDefault();
+                    } );
+                } );
+            }
+        } );
+        $( '#' + Win.windowID ).find( '#menuitems-container span.delete' ).each( function ()
+        {
+
+            $( this ).css( 'cursor', 'pointer' );
+            $( this ).unbind( 'click.menu' ).bind( 'click.menu', function ()
+            {
+
+                var container = $( this ).parent().parent();
+                var itemid = container.attr( 'id' ).replace( 'itemid-', '' );
+                var act = $( '#menu-tabs' ).find( '.activetab' );
+
+                if ( !act.attr( 'tab' ) || act.attr( 'tab' ) == 'add-9999' ) {
+                    console.error( 'No tab selected' );
+                    return;
+                }
+
+                if ( 0 >= parseInt( itemid ) ) {
+                    console.error( 'No Item selected' );
+                    return;
+                }
+
+                var title = $( this ).parent().find( '.menu-item-label:first' ).html();
+
+                jConfirm( "{trans('Möchen Sie den Menüpunkt ´%s´ wirklich löschen?')}".replace( '%s', title ), "{trans('Achtung')}", function ( ok )
+                {
+                    if ( ok ) {
+
+                        var serialized = {};
+                        serialized.adm = 'menues';
+                        serialized.action = 'delete';
+                        serialized.ajax = true;
+                        serialized.menuid = parseInt( act.attr( 'tab' ) );
+                        serialized.itemid = parseInt( itemid );
+                        $.post( Tools.prepareAjaxUrl( 'admin.php' ), serialized, function ( data )
+                        {
+                            if ( Tools.responseIsOk( data ) ) {
+                                $( container ).fadeOut( 300, function ()
+                                {
+                                    $( this ).remove();
+                                    Win.refreshWindowScrollbars();
+                                } );
+                            }
+                            else {
+                                if ( typeof data.msg == 'string' )
+                                    console.error( data.msg );
+                            }
+                        } );
+
+                    }
+
+                } );
+            } );
+        } );
+
+        $( '#' + Win.windowID ).find( '.access-items' ).each( function ()
+        {
+            var checkboxes = $( this ).find( ':checkbox' );
+            var checkboxesChkAll = $( this ).find( ':checkbox:not(.chk-all)' );
+            checkboxes.each( function ()
+            {
+                if ( $( this ).hasClass( 'chk-all' ) ) {
+
+                    $( this ).unbind( 'change.menu' ).bind( 'change.menu', function ( e )
+                    {
+
+                        if ( $( this ).is( ':checked' ) ) {
+                            // uncheck all usergroups item
+                            checkboxesChkAll.each( function ()
+                            {
+                                if ( $( this ).is( ':checked' ) ) {
+                                    $( this ).get( 0 ).checked = false;
+                                    $( this ).attr( "checked", false );
+                                    $( this ).change();
+                                }
+                            } );
+                        }
+                    } );
+                }
+            } );
+            checkboxesChkAll.each( function ()
+            {
+                if ( !$( this ).hasClass( 'chk-all' ) ) {
+
+                    $( this ).unbind( 'change.menu' ).bind( 'change.menu', function ( e )
+                    {
+                        if ( $( this ).is( ':checked' ) ) {
+                            // uncheck all usergroups item
+                            checkboxes.each( function ()
+                            {
+                                if ( $( this ).hasClass( 'chk-all' ) && $( this ).is( ':checked' ) ) {
+                                    $( this ).get( 0 ).checked = false;
+                                    $( this ).attr( "checked", false );
+                                    $( this ).change();
+                                }
+                            } );
+                        }
+                    } );
+                }
+            } );
+        } );
+        $( '#' + Win.windowID ).find( '#menuitems-container' ).find( '.menue-edit-btn' ).each( function ()
+        {
+            $( this ).unbind( 'click.menu' ).bind( 'click.menu', function ( e )
+            {
+                var _f = $( this ).parents( 'form:first' );
+                var newLabel = _f.find( 'input[name=menutitle]' ).val();
+                var serialized = _f.serialize();
+                serialized += '&adm=menues';
+                serialized += '&action=editmenu';
+                serialized += '&send=1';
+                $.post( Tools.prepareAjaxUrl( 'admin.php' ), serialized, function ( data )
+                {
+                    if ( Tools.responseIsOk( data ) ) {
+                        $( '#menu-tabs' ).find( '.activetab' ).text( newLabel );
+                        if ( typeof data.msg == 'string' ) {
+                            Notifier.display( 'info', data.msg );
+                        }
+                    }
+                } );
+            } );
+        } );
+        $( '.menue-delete-btn', $( '#' + Win.windowID ).find( '#menuitems-container' ) ).each( function ()
+        {
+            $( this ).unbind( 'click.menu' ).bind( 'click.menu', function ( e )
+            {
+                e.preventDefault();
+
+                var container = $( this ).parents( '.tab-content:first' );
+                var menuid = container.attr( 'id' ).replace( 'menu-tabs-', '' ), title = $( this ).parents( 'li:first' ).find( '.menu-item-label' ).text();
+                if ( !menuid ) {
+                    console.error( 'No tab selected' );
+                    return;
+                }
+
+                jConfirm( "{trans('Möchen Sie den Menüpunkt %s wirklich löschen?')}".replace( '%s', title ), "{trans('Achtung')}", function ( ok )
+                {
+                    if ( ok ) {
+                        var serialized = {};
+                        serialized.adm = 'menues';
+                        serialized.action = 'deletemenu';
+                        serialized.ajax = true;
+                        serialized.menuid = parseInt( menuid );
+                        $.post( Tools.prepareAjaxUrl( 'admin.php' ), serialized, function ( data )
+                        {
+                            if ( Tools.responseIsOk( data ) ) {
+
+                                $( '#menuid-' + menuid, $( '#menu-tabs' ) ).fadeOut( 300, function ()
+                                {
+                                    $( this ).remove();
+                                    $( '#menu-tabs :first-child' ).click(); // activate item
+                                } );
+                                $( container ).fadeOut( 300, function ()
+                                {
+                                    $( this ).remove();
+                                    Win.refreshWindowScrollbars();
+                                } );
+                                if ( typeof data.msg == 'string' ) {
+                                    Notifier.display( 'info', data.msg );
+                                }
+
+                            }
+                            else {
+                                if ( typeof data.msg == 'string' ) {
+                                    Notifier.display( 'info', data.msg );
+                                    console.error( data.msg );
+                                }
+                            }
+                        } );
+
+                    }
+
+                } );
+
+            } );
+        } );
+
+        /*
+         // onclick tab add menu
+         $( '#menu-tabs a' ).unbind( 'click.tabmenu' ).bind( 'click.tabmenu', function ( e )
+         {
+         $( '#menu-tabs a' ).removeClass( 'activetab' );
+         $( this ).addClass( 'activetab' );
+
+         if ( $( this ).attr( 'id' ) == 'menuid-9999' ) {
+
+         $( '#' + Win.windowID ).find( '.tab-content:visible' ).hide();
+         $( '#menu-tabs-9999' ).show();
+         $( '#menuitemForm-container' ).mask();
+
+         }
+         else {
+
+         $( '#' + Win.windowID ).find( '.tab-content:visible' ).hide();
+         $( '#' + Win.windowID ).find( '#menu-tabs-' + $( this ).attr( 'id' ).replace( 'menuid-', '' ) ).show();
+
+         $( '#menuitemForm-container' ).unmask();
+
+         }
+
+         Win.refreshWindowScrollbars();
+         } );
+
+         // set first active
+         $( '#menu-tabs a:eq(0)' ).trigger( 'click' );
+         */
+    }
+
+    function _rForm()
+    {
+        Form.registerForm( 'menuitemInsertForm', {
+            contentIdentifierID: 'item-id',
+            exiturl: 'admin.php?adm=menues&action=index',
+            identifierType: '',
+            baseField: 'title',
+            onBeforeSubmit: function ()
+            {
+
+                if ( $( '#thisname' ).val() == '' ) {
+                    jAlert( '{trans("Bitte geben Sie einen Titel an.")}' );
+                    _SubmitError = true;
+                    return true;
+                }
+
+                if ( $( '#url' ).val() == '' && $( '#page-type' ).find( ':selected' ).val() == 'url' ) {
+                    jAlert( '{trans("Bitte eine Url angeben.")}' );
+                    _SubmitError = true;
+                    return true;
+                }
+
+            },
+            runAfterSubmit: function ()
+            {
+                $( '#insert-after' ).val( '' );
+            }
+
+        } );
+    }
+
+    // _rForm();
+
+    function hideParents()
+    {
+        $( '#' + Win.windowID ).find( '#parents-menu' ).hide();
+        $( '#' + Win.windowID ).find( '#menu-access' ).removeClass( 'fieldsetrows' ).removeClass( 'right' ).addClass( 'fieldset2' ).addClass( 'rows' );
+    }
+
+    function enableParents()
+    {
+        $( '#' + Win.windowID ).find( '#parents-menu' ).show();
+        $( '#' + Win.windowID ).find( '#menu-access' ).removeClass( 'fieldset2' ).removeClass( 'rows' ).addClass( 'right' ).addClass( 'fieldsetrows' );
+    }
+
+    function enabaleIdentifier()
+    {
+        $( '#' + Win.windowID ).find( 'input[name="alias"]' ).removeAttr( 'disabled' );
+        $( '#' + Win.windowID ).find( 'select[name="suffix"]' ).removeAttr( 'disabled' );
+    }
+}
+
+$( '#' + Win.windowID ).find( '#menuitemInsertForm' ).find( '#insert-item' ).unbind( 'click.insert' ).bind( 'click.insert', function ()
+{
+
+    $( '#' + Win.windowID ).mask( '{trans("Speichern...")}' );
+
+    var serialized = $( this ).parents( 'form:first' ).serialize();
+    serialized += '&adm=menues';
+    serialized += '&action=add';
+    serialized += '&ajax=1';
+
+
+
+
+    var act = $( '#' + Win.windowID ).find( '#menu-tabs' ).find( 'li.active a' );
+    var tab = act.attr( 'tab' );
+
+    if ( !tab || tab == '9999' ) {
+        console.error( 'No tab selected' );
+        return;
+    }
+
+    serialized += '&menuid=' + tab;
+    $.post( Tools.prepareAjaxUrl( 'admin.php' ), serialized, function ( data )
+    {
+
+        $( '#' + Win.windowID ).unmask();
+
+        if ( Tools.responseIsOk( data ) ) {
+            // insert the LI Element
+            var contentOfMenuitems = $( '#menu-tabs-' + tab ).find( 'ul:first' );
+            if ( contentOfMenuitems.length == 0 ) {
+                contentOfMenuitems = $( '<ul/>' ).addClass( 'sortable-menu' );
+                contentOfMenuitems.appendTo( $( '#menu-tabs-' + tab ) );
+                refreshMenuSort();
+            }
+
+            var formContent = data.htmlCode;
+            $( contentOfMenuitems ).append( formContent );
+
+            refreshMenuSort();
+            $( '#' + Win.windowID ).find( '#menuitemInsertForm' ).get( 0 ).reset();
+            $( '#' + Win.windowID ).find( '#item-type-container' ).empty();
+
+            Win.resetWindowFormUi( Win.windowID, 'menuitemInsertForm' );
+            Win.prepareWindowFormUi( 'ajax-form-' + data.newid );
+
+            if ( $( '#ajax-form-' + data.newid ).find( '.tinymce-editor' ).length ) {
+                Doc.loadTinyMce( $( '#' + Win.windowID ) );
+            }
+
+            setTimeout( function ()
+            {
+                bindItemActions();
+                Desktop.Tools.rebuildTooltips();
+                Win.refreshWindowScrollbars();
+            }, 50 );
+        }
+        else {
+            if ( data.msg ) {
+                jAlert( data.msg );
+            }
+            else {
+                alert( 'Error...' );
+            }
+        }
+    }, 'json' );
+} );
+
+
+$( '#' + Win.windowID ).find( '#menuitems-container' ).find( '.listitem-form-container' ).hide();
+
+$( '#' + Win.windowID ).find( '#menue-add-btn' ).unbind( 'click.addmenu' ).bind( 'click.addmenu', function ( e )
+{
+    var _f = $( this ).parents( 'form:first' );
+    var serialized = $( this ).parents( 'form:first' ).serialize();
+    serialized += '&adm=menues';
+    serialized += '&action=addmenu';
+    serialized += '&ajax=1';
+    $.post( Tools.prepareAjaxUrl( 'admin.php' ), serialized, function ( data )
+    {
+        if ( Tools.responseIsOk( data ) ) {
+
+            var newTab = $( '<a/>' ).addClass( 'tab' );
+            $( '.tab', $( '#menu-tabs' ) ).removeClass( 'activetab' );
+            newTab.append( data.title );
+            newTab.attr( 'tab', data.newid );
+            newTab.attr( 'id', 'menuid-' + data.newid );
+            $( newTab ).insertBefore( $( '#menu-tabs' ).find( 'a:last' ) );
+            var tabContent = $( '<div/>' );
+            $( tabContent ).addClass( 'tab-content' );
+            $( tabContent ).attr( 'id', 'menu-tabs-' + data.newid );
+            $( tabContent ).hide();
+            var headerform = '<div class="tab-content-header">'
+                    + '<form class="menuedit-form" action="admin.php">'
+                    + '    <div class="left">'
+                    + '        <fieldset>'
+                    + '            <label>Menü Titel</label>'
+                    + '            <input type="text" name="menutitle" value="' + data.title + '" />'
+                    + '        </fieldset>'
+                    + '        <fieldset>'
+                    + '            <label>Template Key</label>'
+                    + '            <input type="text" name="templatekey" value="' + data.templatekey + '" />'
+                    + '        </fieldset>'
+                    + '    </div>'
+                    + '    <div class="right">'
+                    + '        <input type="hidden" name="menuid" value="' + data.newid + '" />'
+                    + '        <button type="button" class="menue-edit-btn">{trans("Menü Speichern")}</button> <button type="button" class="menue-delete-btn">{trans("Menü Löschen")}</button>'
+                    + '    </div>'
+                    + '</form>'
+                    + '</div>';
+            $( tabContent ).append( $( headerform ) );
+            $( '#menuitems-container' ).append( $( tabContent ) );
+            if ( data.content ) {
+                $( tabContent ).append( $( '<ul/>' ).addClass( 'sortable-menu' ).append( data.content ) );
+            }
+            else {
+                $( tabContent ).append( $( '<ul/>' ).addClass( 'sortable-menu' ) );
+            }
+
+            $( '.tab-content' ).hide();
+            Win.ContentTabs.initTabs( $( '.content-tabs-wrapper' ) );
+            if ( typeof data.msg == 'string' ) {
+                Notifier.display( 'info', data.msg );
+            }
+
+            refreshMenuSort();
+            $( newTab ).click();
+            _f.get( 0 ).reset();
+            $( '#menuitemForm-container' ).unmask();
+        }
+        else {
+            if ( data.msg ) {
+                jAlert( data.msg );
+            }
+            else {
+                alert( 'Error...' );
+            }
+        }
+    }, 'json' );
+} );
+
+$( '.content-tab:not(#add-menu)', $( '#' + Win.windowID ).find( '#menu-tabs' ) ).each( function ()
+{
+    $( this ).unbind( 'click.addmenu' ).bind( 'click.addmenu', function ( e )
+    {
+        e.preventDefault();
+        $.get( 'admin.php?adm=menues&action=index&getmenu=1&id=' + $( this ).attr( 'id' ).replace( 'menuid-', '' ), {}, function ( data )
+        {
+
+            $( '#reorder-menuitems' ).empty();
+            if ( Tools.responseIsOk( data ) ) {
+
+            }
+            else {
+
+            }
+
+        }, 'json' );
+    } );
+} );
+
+$( '#' + Win.windowID ).find( '#add-menu' ).unbind( 'click.addmenu' ).bind( 'click.addmenu', function ( e )
+{
+    $( '#' + Win.windowID ).find( '#menu-tabs-' + $( this ).attr( 'tab' ).replace( 'menuid-', '' ) ).show();
+    Win.refreshWindowScrollbars();
+} );
+
+$( '#metadata-default option.timecontrol' ).show();
+$( '#menu-access,#parents-menu,#documentmeta-alias,#documentmeta-activemenuitemid,#documentmeta-activemenuitemid' ).show();
+
+if ( type == 'rootpage' ) {
+    $( '#metadata-default option.timecontrol' ).hide();
+    $( '#documentmeta-alias,#documentmeta-activemenuitemid,#documentmeta-activemenuitemid' ).hide();
+    type = '';
+    hideParents();
+}
+
+var originalType = $( '#' + Win.windowID ).find( '#page-type' ).find( ':selected' ).text();
+$( '#' + Win.windowID ).find( '#page-type' ).unbind( 'change.menu' ).bind( 'change.menu', function ( e )
+{
+
+    //e.preventDefault();
+
+    var self = this;
+    var currentID = $( '#' + Win.windowID ).find( '#item-id' ).val();
+    var setType = $( this ).find( ':selected' ).val();
+    var cpageType = $( this ).find( ':selected' ).text();
+    //  $(this).find('option:selected').attr('selected', 'selected');
+    $( this ).find( ':selected' ).get( 0 ).selected = true;
+    $( '#' + Win.windowID ).find( '#item-type-container' ).mask( 'laden...' );
+    var u = (currentID > 0 ? '&id=' + currentID : '');
+    $.get( 'admin.php?adm=menues&action=edit&loadtype=' + setType + u, {}, function ( data )
+    {
+        if ( Tools.responseIsOk( data ) ) {
+            enabaleIdentifier();
+
+            if ( setType != 'spacer' ) {
+                $( '#' + Win.windowID ).find( '#item-type-container' ).empty().append( data.html );
+                Doc.loadTinyMce( $( '#' + Win.windowID ) );
+            }
+            else {
+                $( '#' + Win.windowID ).find( '#item-type-container' ).empty();
+            }
+
+            $( '#' + Win.windowID ).find( '#item-type' ).val( setType );
+            $( '#' + Win.windowID ).find( '#item-type-container' ).unmask();
+            type = setType;
+            if ( setType == 'url' ) {
+                type = 'link';
+            }
+
+            enableParents();
+            $( '#metadata-default option.timecontrol' ).show();
+            $( '#menu-access,#parents-menu,#documentmeta-alias,#documentmeta-activemenuitemid,#documentmeta-activemenuitemid' ).show();
+            if ( setType == 'rootpage' ) {
+                $( '#metadata-default option.timecontrol' ).hide();
+                $( '#documentmeta-alias,#documentmeta-activemenuitemid,#documentmeta-activemenuitemid' ).hide();
+                type = '';
+                hideParents();
+            }
+
+            console.log( 'prepare ' + Win.windowID );
+            Win.prepareWindowFormUi( Win.windowID );
+            Desktop.Tools.rebuildTooltips();
+            Win.refreshWindowScrollbars();
+        }
+        else {
+            $( '#item-type-container' ).unmask();
+            jAlert( data.msg );
+        }
+    }, 'json' );
+} );
+
+
+var firstTab = $( '#' + Win.windowID ).find( '#menu-tabs a:first' ).attr('href');
+$(firstTab ).addClass('in active');
+$( '#' + Win.windowID ).find( '#menu-tabs a:first' ).tab( 'show' );
+
+$( '#' + Win.windowID ).find( 'div.tab-content:not(.active)' ).each(function(){
+    $(this).hide();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$( '#' + Win.windowID ).find( '#menu-tabs li' ).click( function ( e )
+{
+    e.preventDefault();
+    var act = $(this ).parent().find('li.active');
+    var acthref = act.find( 'a' ).attr( 'href' );
+    var href = $( this ).find( 'a' ).attr( 'href' );
+
+    if ( $( this ).find( 'a' ).attr( 'id' ) != 'menuid-9999' ) {
+
+
+        $( this ).find( 'a' ).tab( 'show', function() {
+
+            $(acthref ).hide();
+            $(href).show();
+
+            $( '#' + Win.windowID ).find( '#menuitemForm-container' ).unmask();
+            Win.refreshWindowScrollbars();
+        } );
+    }
+    else {
+        $(href).show();
+        $( this ).find( 'a' ).tab( 'show', function() {
+            $(acthref ).hide();
+            $(href).show();
+            $( '#' + Win.windowID ).find( '#menuitemForm-container' ).mask();
+            Win.refreshWindowScrollbars();
+        });
+    }
+} );
+
+// Win.ContentTabs.initTabs( $( '.content-tabs-wrapper' ) );
+
+$( '#' + Win.windowID ).find( '#menue-add-form' ).find( 'a:first' ).trigger( 'click' );
+
+bindItemActions();
+refreshMenuSort();
+
+
+</script>
+</cp:block>
+
+
+<cp:block name="new-menuitem">
+    <li id="itemid-{$newitem.itemid}">
+        <div style="display: block">
+            <span></span>
+            <span class="disclose"><span></span></span>
+            <span class="menu-item-label">{$newitem.title}</span>
+            <span class="delete"></span>
+            <span class="edit"></span>
+            <span rel="menuitems-form-{$newitem.itemid}" class="save save-form-btn"> {trans('Speichern')}</span>
+        </div>
+        <div class="listitem-form-container" id="ajax-form-{$newitem.itemid}" style="display: none">
+            <form id="menuitems-form-{$newitem.itemid}" action="admin.php">
+                <input type="hidden" name="adm" value="menues"/>
+                <input type="hidden" name="action" value="save"/>
+                <input type="hidden" name="type" value="{$newitem.type}"/>
+                <input type="hidden" name="id" value="{$newitem.itemid}"/>
+
+                <div class="fieldset2">
+                    <fieldset>
+                        <label>Menüpunkt Titel</label>
+                        <input type="text" name="title" value="{escape($newitem.title, 'html')}"/>
+                    </fieldset>
+
+                    <fieldset>
+                        <label>Menüpunkt CSS Class</label>
+                        <input type="text" name="cssclass" value="{escape($newitem.cssclass, 'html')}"/>
+                        <br/>
+                        <small>{trans('Optional')}</small>
+                    </fieldset>
+
+                </div>
+
+                <fieldset class="access-items">
+                    <label>{trans('Sichtbar für Benutzergruppen')}</label>
+                    <label for="ug{$newitem.itemid}-all" style="width:100%;float:left">
+                        <input class="chk-all" type="checkbox" id="ug{$newitem.itemid}-all" name="access[]" value="0"
+                               cp:on="checked:(is_array($newitem.accesslist) && in_array(0, $newitem.accesslist)) || empty($newitem.accesslist)"
+                               parse:checked="checked"/>
+                        {trans('alle Benutzergruppen')}
+                    </label>
+                    <cp:loop name="usergroups" key="rx">
+                        <label for="ug{$newitem.itemid}-{$rx.groupid}" style="width:50%;float:left">
+                            <input type="checkbox" id="ug{$newitem.itemid}-{$rx.groupid}" name="access[]"
+                                   value="{$rx.groupid}"
+                                   cp:on="checked:is_array($newitem.accesslist) && in_array($rx.groupid, $newitem.accesslist)"
+                                   parse:checked="checked"/>
+                            {$rx.title}
+                        </label>
+
+                    </cp:loop>
+                </fieldset>
+                <div class="other-options">{iif($newitem.pagetypehtml, $newitem.pagetypehtml, '')}</div>
+            </form>
+        </div>
+    </li>
+</cp:block>

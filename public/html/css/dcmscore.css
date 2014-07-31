@@ -1,0 +1,134 @@
+/*-------------------------- Screenshots ------------------------*/
+/*
+
+
+
+<div class="boximage">
+        <div class="action enlarge">+</div>
+        <div class="boximageTop">
+                <span>&bull;</span>
+        </div>
+        <div class="boximageContent">
+                <a class="imagepopup" href="img/....png">
+                        <img title="..." alt="..." src="img/....png">
+                </a>
+        </div>
+        <div class="boximageBottom">
+                <span>&bull;</span>
+        </div>
+</div>
+*/
+
+
+
+.screenshot {
+    position: relative;
+}
+.screenshot a {
+    padding: 0;
+    display: block;
+    border: none;
+}
+.screenshot a img {
+    border: solid 1px transparent;
+}
+.boximage {
+    position: relative;
+    z-index: 0;
+    background-color: #fff;
+    font-size: small;
+    display: inline-block;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 5px;
+    width: 100%;
+}
+.boximage .action, .screenshot .action {
+    display: block;
+    position: absolute;
+    text-indent: -999em;
+    z-index: 10;
+}
+.boximage .action.enlarge, 
+.screenshot .action.enlarge {
+    width: 27px;
+    height: 27px;
+    cursor:pointer;
+    display: none;
+    background: transparent url("../../img/box/enlarge.png") no-repeat 0 0;
+}
+
+.boximage .boximageTop {
+    text-align: right;
+    /* background: transparent url("../../img/box/bgTopLeft.png") no-repeat 0 0; */
+}
+.boximage span {
+    height: 19px;
+    display: block;
+    color: #fff;
+}
+.boximage .boximageTop span {
+    padding-left: 13px;
+    /* background: transparent url("../../img/box/bgTopRight.png") no-repeat right 0; */
+}
+.boximage .boximageBottom {
+    text-align: right;
+    /* background: transparent url("../../img/box/bgBottomLeft.png") no-repeat 0 0; */
+}
+.boximage.small .boximageBottom {
+    /* background: #fff url("../../img/box/bgBottomLeft_small.png") no-repeat 0 0; */
+}
+.boximage .boximageBottom span {
+    padding-left: 167px;
+    /* background: url("../../img/box/bgBottomRight.png") no-repeat right 0; */
+    text-align:right;
+    padding-right:10px;
+    line-height: 10px;
+    vertical-align: top;
+    position: relative;
+}
+
+.boximage .boximageBottom span small{ 
+    font-size: 10px!important;
+    color:#999;
+    position: absolute;
+}
+
+.boximage.small .boximageBottom span {
+    padding-left: 102px;
+    /* background: #fff url("../../img/box/bgBottomRight_small.gif") no-repeat right 0; */
+}
+.boximage .boximageContent {
+    display: block;
+    text-align: center;
+    /* background: transparent url("../../img/box/bgLeft.gif") repeat-y 0 0; */
+    border: none;
+}
+.boximage .boximageContent a {
+    /*
+    padding-right: 23px;
+    padding-left: 20px;
+    */
+    display: block;
+    border: none;
+}
+.boximage .boximageContent div {
+    /* background: transparent url("../../img/box/bgRight.gif") repeat-y right 0; */
+    display: block;
+    width:100%;
+    height:100%;
+}
+
+
+.boximage .boximageContent a span {
+    padding: .5em .7em;
+    margin-top: 1em;
+    height: auto;
+    color: #333;
+    background-color: transparent;
+}
+.boximage .boximageContent img {
+    border: solid 1px transparent;
+    position: relative;
+    z-index: 1;
+    max-height: 160px;
+}

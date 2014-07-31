@@ -1,0 +1,26 @@
+<fieldset>
+    <legend>{trans("Color")}</legend>
+    <div id="colorHolder"></div>
+    <input type="hidden" name="params[color]" id="color" value="{iif($values.color, $values.color, 'ff0000')}" />
+</fieldset>
+
+<fieldset>
+    <legend>{trans("Alpha")}</legend>
+    <input type="text" class="input" name="params[alpha]" id="alpha" value="{iif($values.alpha, $values.alpha, '50')}" style="width: 80px;" /> %
+</fieldset>
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+    $('#colorHolder').ColorPicker({
+        flat: true,
+        livePreview: true,
+        color: '{iif($values.color, $values.color, "ff0000")}',
+        onChange: function(hsb, hex, rgb) {
+            $('#color').val(hex);
+        }
+    });
+
+
+</script>
+

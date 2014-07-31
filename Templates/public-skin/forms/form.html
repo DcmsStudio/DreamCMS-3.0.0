@@ -1,0 +1,87 @@
+<div>
+    <form action="{$form.formaction}" method="{$form.method}" name="{$form.name}" id="{$form.name}">
+        <cp:if condition="$form.description">
+            <div class="form-description">
+                {$form.description}
+            </div>
+        </cp:if>
+        <div id="{$form.name}_error" class="form-error alert alert-danger" style="display:none">
+        </div>
+        <cp:include template="forms/options" />
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">
+                {trans('Abschicken')}
+            </button>
+            <button type="reset" class="btn btn-default">
+                {trans('Zurücksetzen')}
+            </button>
+        </div>
+    </form>
+</div>
+<div id="{$form.name}_ok" class="form-ok" style="display:none">
+</div>
+<script type="text/javascript">
+    /* <![CDATA[ */
+    var formAction = '{$form.formaction}';
+    var formID = '{$form.formid}';
+    $(document).ready(function() {
+        $('#{$form.name}_ok,#{$form.name}_error').hide();
+        $('#{$form.name}').registerFormFE({
+            contentIdentifierID: '-',
+            exiturl: '',
+            save: function() {
+                send{$form.name}(false);
+            }
+        });
+    });
+    
+    function send{$form.name}(exit) {
+        $('#{$form.name}').mask('Sende Formular');
+    
+        var post = $('#{$form.name}').serialize();
+        $('#{$form.name}_ok,#{$form.name}_error').hide();
+        if (formAction == '') {
+            formAction = 'forms/send';
+        }
+    
+        post = post + (formID > 0 ? '&ajax=1&formid=' + formID : '&ajax=1');
+    
+        if (formAction.match(/\.(cgi|php|html)\??.*$/i)) {
+            formAction = formAction.replace(/^([^\?]*)/g, '');
+        } else {
+            if (formAction.match(/^\//)) {
+                formAction = formAction.replace(/^\//, '');
+            }
+            var opts = formAction.split('/');
+    
+            if (typeof opts[0] === 'string' && opts[0]) {
+                post += '&cp=' + opts[0];
+            }
+            if (typeof opts[1] === 'string' && opts[1]) {
+                post += '&action=' + opts[1];
+            }
+        }
+    
+        $('#error-display').remove();
+    
+        $.post(formAction, post, function(data) {
+    
+            $('#{$form.name}').unmask();
+    
+            if (responseIsOk(data)) {
+                $('form#{$form.name}').remove();
+                if (typeof data.msg != 'undefined' && data.msg != '') {
+                    $('#{$form.name}_ok').html(data.msg).show();
+                } else {
+                    $('#{$form.name}_ok').html("{trans('Das Formular wurde erfolgreich abgeschickt.')}").show();
+                }
+            } else {
+                if (typeof data.errors == 'object') {
+                    displayFormErrors(data, '{$form.name}', '#{$form.name}_error');
+                } else {
+                    $('#{$form.name}_error').html('Fehler:<br/>' + data.msg).show();
+                }
+            }
+        }, 'json');
+    } /* ]]> */
+</script>

@@ -1,0 +1,207 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar"> 
+    <button id="optimize-button" class="action-button"><img src="images/buttons/db-optimize.png" width="16" height="16" alt="" />&nbsp;{trans('Optimieren')}</button>
+    <button id="repaire-button" class="action-button"><img src="images/buttons/db-repaire.png" width="16" height="16" alt="" />&nbsp;{trans('Reparieren')}</button>
+</cp:block>
+
+<cp:block name="content">
+    <form action="admin.php" method="post" id="action_form">
+        <input type="hidden" name="adm" value="database"/>
+        <input type="hidden" name="action" value=""/>
+        <div class="grid-table-wrapper">
+            <table border="0" cellpadding="3" cellspacing="0" width="100%" class="table table-responsive">
+                <thead class="grid-header">
+                    <tr>
+                        <td width="10"><input type="checkbox" name="chkall" value="1" class="check-all-tbls" title="{trans('alle Tabellen')}"/></td>
+                        <td><b>{trans('Tabelle')}</b></td>
+                        <td class="tr" width="6%"><b>{trans('Einträge')}</b></td>
+                        <td class="tc" width="10%"><b>{trans('Type')}</b></td>
+                        <td class="tr" width="10%"><b>{trans('Größe')}</b></td>
+                        <td class="tr" width="10%"><b>{trans('Überhang')}</b></td>
+                    </tr>
+                </thead>
+                <cp:set var="totaltables" value="0"/>
+                <tbody>
+                <cp:loop name="tables" key="r">
+
+                    <cp:set var="totaltables" value="$totaltables + 1"/>
+                    <cp:set var="dbtbl_optimizerow" str:value=""/>
+
+                    <cp:if condition="$r.overhead != '-'"><cp:set var="dbtbl_optimizerow" str:value=" dbtbl_optimizerow"/></cp:if>
+                    <tr class="{$dbtbl_optimizerow}">
+                        <td><input type="checkbox" name="tables[]" value="{$r.name}" /></td>
+                        <td>{$r.name}</td>
+                        <td class="tr">{$r.rows}</td>
+                        <td class="tc">{$r.engine}</td>
+                        <td class="tr">{$r.size}</td>
+                        <td class="tr overhead">{$r.overhead}</td>
+                    </tr>
+                </cp:loop>
+                </tbody>
+                <tfoot>
+
+                    <tr>
+                        <td><b>&nbsp;</b></td>
+                        <td class="tl"><strong>{$totaltables} Tabellen</strong></td>
+                        <td class="tr"><strong>{$total_rows}</strong></td>
+                        <td class="tc"><strong>---</strong></td>
+                        <td class="tr"><strong>{$total_size}</strong></td>
+                        <td class="tr overhead-footer"><strong>{$total_overheadsize}</strong></td>
+                    </tr>
+
+                </tfoot>
+            </table>
+        </div>
+
+
+    </form>
+
+    <script type="text/javascript">
+
+        var optSelected = false;
+
+
+        if (typeof enableButtons === 'undefined') {
+            function enableButtons ()
+            {
+                var toolbar = Core.getToolbar();
+
+                $('#optimize-button,#repaire-button', toolbar ).disableButton();
+
+                var items = $("tbody", $('#' + Win.windowID)).find(":checkbox:checked");
+                optSelected = false;
+                items.each(function ()
+                {
+                    if ($(this))
+                    {
+                        $('#repaire-button', toolbar).disableButton();
+                        if (!optSelected) {
+                            $('#optimize-button', toolbar).disableButton();
+                        }
+                    }
+
+                    if ($(this).parents('tr:first').hasClass('dbtbl_optimizerow')) {
+                        $('#repaire-button', toolbar).disableButton();
+                        $('#optimize-button', toolbar).enableButton();
+                        optSelected = true;
+                    }
+
+                });
+            }
+        }
+
+
+        enableButtons();
+
+        $('#action_form tbody tr', $('#' + Win.windowID)).find('td').unbind('click').click(function (e) {
+
+            var cbk = $(this).parents('tr:first').find(":checkbox");
+            var isCheck = cbk.is(':checked');
+
+            if (isCheck) {
+                cbk.removeAttr('checked').prop('checked', false).trigger('change');
+                optSelected = false;
+                $('#optimize-button,#repaire-button', $('#' + Win.windowID)).disableButton();
+                enableButtons();
+            }
+            else {
+                cbk.attr('checked', 'checked').prop('checked', true).trigger('change');
+                enableButtons();
+            }
+
+        });
+
+        var toolbar = Core.getToolbar();
+
+        $('#action_form .check-all-tbls', $('#' + Win.windowID)).unbind('change').change(function (e) {
+
+            //$("#action_form :checkbox", $('#' + Win.windowID)).not('.check-all-tbls').checked = $(this).checked;
+            //$("#action_form :checkbox", $('#' + Win.windowID)).not('.check-all-tbls').click();
+            var isCheck = $(this).is(':checked') ? true : false;
+            $('#' + Win.windowID).find("tbody :checkbox").each(function () {
+                $(this).prop('checked', isCheck).trigger('change');
+            });
+
+            if (!isCheck)
+            {
+                optSelected = false;
+                $('#optimize-button,#repaire-button', $('#' + Win.windowID)).disableButton();
+                enableButtons();
+            }
+            else
+            {
+                enableButtons();
+            }
+        });
+
+
+
+
+        $('#optimize-button', toolbar).click(function ()
+        {
+            $('.tblborder', $('#' + Win.windowID)).mask("{trans('Die ausgewählten Tabellen werden optimiert...')}");
+
+            $('#action_form input[name="action"]', $('#' + Win.windowID)).val('optimize');
+
+            var post = $('#action_form', $('#' + Win.windowID)).serialize();
+            $.ajax({
+                type: "POST",
+                url: 'admin.php?adm=database&action=optimize',
+                'data': post,
+                timeout: 60,
+                dataType: "json",
+                cache: false,
+                async: false,
+                success: function (data) {
+                    //$.post('admin.php?adm=database&action=optimize', post , function(data) {
+
+                    $('.tblborder', $('#' + Win.windowID)).unmask();
+                    if (Tools.responseIsOk(data)) {
+
+                        Notifier.display('info', data.msg);
+
+                        setTimeout(function () {
+
+                            $('td.overhead-footer strong').empty().text(data.total_overheadsize);
+
+                            $('#' + Win.windowID).find('input:checked').each(function () {
+                                $(this).parents('tr:first').removeClass('dbtbl_optimizerow').find('.overhead').empty().text('-');
+                            });
+
+
+                        }, 100);
+                    } else {
+                        jAlert(data.msg);
+                    }
+                }
+            });
+        });
+
+
+        $('#repaire-button', toolbar).click(function ()
+        {
+
+
+            $('.tblborder', $('#' + Win.windowID)).mask("{trans('Die ausgewählten Tabellen werden repariert...')}");
+
+            $('#action_form input[name="action"]', $('#' + Win.windowID)).val('repaire');
+
+            var post = $('#action_form', $('#' + Win.windowID)).serialize();
+            $.post('admin.php?adm=database&action=repaire', post, function (data) {
+                $('.tblborder', $('#' + Win.windowID)).unmask();
+                if (Tools.responseIsOk(data)) {
+                    Notifier.display('info', data.msg);
+
+                } else {
+                    jAlert(data.msg);
+                }
+            });
+        });
+
+
+
+
+
+    </script>
+</cp:block>

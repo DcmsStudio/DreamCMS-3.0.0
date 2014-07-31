@@ -1,0 +1,19 @@
+<cp:if condition="count($guilocales)">
+    <div id="gui-locales" style="display:inline-block">
+        <cp:loop name="guilocales" key="r">
+            <a href="{$r.location}" class="gui-locale"><img src="{$r.icon}" width="16" height="16" alt="{$r.title}" title="{$r.title}" /></a> 
+        </cp:loop>
+    </div>
+    <script type="text/javascript" language="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function() {
+            $('#gui-locales a').click(function(e) {
+                $.get($(this).attr('href'), {}, function() {
+                    location.reload(true);
+                });
+                return false;
+            });
+        });
+        /*]]>*/
+    </script>
+</cp:if>

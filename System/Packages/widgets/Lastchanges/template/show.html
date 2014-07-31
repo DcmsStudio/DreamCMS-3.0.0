@@ -1,0 +1,111 @@
+<style>
+    .lastchanges-wg-bg {
+        background: #eeeeee; /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2NjY2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #cccccc)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* IE10+ */
+        background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc', GradientType=0); /* IE6-8 */
+
+        padding: 5px !important;
+        padding-top: 0 !important;
+        padding-right: 0 !important;
+        border: 3px solid #71A8A6;
+    }
+
+    .lastchanges-wg-bg .pane {
+        background: transparent;
+    }
+
+    .lastchanges-wg-bg small {
+        font-size: 10px;
+    }
+
+    .lastchanges-wg-bg form {
+        padding: 10px;
+    }
+
+    .lastchanges-wg > div .row {
+        position: relative;
+    }
+    .lastchanges-wg .changes-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 3px;
+        width: 90%;
+        overflow: hidden;
+        display: inline-block;
+        float: left;
+    }
+
+    .lastchanges-wg .changes-details {
+        padding: 3px;
+        padding-right: 16px;
+        float: right;
+        display: inline-block;
+        position: absolute;
+    }
+
+
+</style>
+<div class="lastchanges-wg" style="min-height: 80px; max-height: 120px;overflow-x: hidden" id="lastchanges-changes{$widgetid}">
+    <div style="overflow-x: hidden">
+        <cp:loop name="contentchanges" key="r">
+
+
+            <div style="overflow: hidden" class="row">
+                <div class="changes-title" title="{escape($r.title)}">
+                    <span style="overflow: hidden;text-overflow:ellipsis;height:14px">{$r.title}</span>
+                    <br/>
+                    <small>{$r.date} | {$r.username} {iif($r.recenttype, ' | ')}{$r.recenttype}</small>
+                </div>
+                <div class="changes-details">
+                    <span rel="{escape($r.contentlocation, 'htmlall')}" title="{trans('wieder bearbeiten')}" class="edit-changes" style="display:inline-block;"></span>
+                </div>
+            </div>
+        </cp:loop>
+        <cp:else>
+            <div class="row">
+                {trans("Es sind keine Inhalte vorhanden.")}
+            </div>
+        </cp:else>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    Tools.scrollBar($('#lastchanges-changes{$widgetid}>div:first'));
+
+
+    $('#lastchanges-changes{$widgetid}').parents('.widget-content:first').addClass('lastchanges-wg-bg');
+    $('#lastchanges-changes{$widgetid}').parents('.widget-container:first').find('.widget-settings:first').addClass('lastchanges-wg-bg');
+
+    $('#lastchanges-changes{$widgetid} .edit-changes').each(function () {
+        $(this).empty().append($('<img/>').attr('src', Config.get('backendImagePath', '') + 'edit.png'));
+        $(this).css({width: 16, height: 16, cursor: 'pointer'}).unbind().click(function (e) {
+            e.preventDefault();
+            rel = $(this).attr('rel');
+            rel = rel.replace('&amp;', '&');
+
+            rel = rel.replace(/(&?(reload|teaser|content|title|orderby|sort|send|page|_|ajax|q)=([^&]*))/g, '');
+
+            rel = rel.replace(/</, '&lt;', rel);
+            rel = rel.replace(/>/, '&gt;', rel);
+            var title = $(this).parent().parent().find('div.changes-title span:first').text();
+
+
+            openTab({
+                url: rel
+            });
+
+            //openTab(rel, $(this).find('img:first').attr('src'), '{trans "`%s` bearbeiten"}'.replace('%s', title.trim()));
+
+        });
+    });
+
+</script>

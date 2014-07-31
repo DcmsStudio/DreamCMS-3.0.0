@@ -1,0 +1,45 @@
+<?php
+
+function __static_page_import(){
+global $cp, $cfg, $fct, $root_path;
+
+return <<<EOF
+<form method="post" action="admin.php" enctype="multipart/form-data">
+<input type="hidden" name="adm" value="static_pages" />
+    <input type="hidden" name="action" value="import">
+    <input type="hidden" name="send" value="send">
+    <input type="hidden" name="sid" value="{$cp->session_id}">
+
+	<table cellpadding="3" cellspacing="1" width="99%" class="tblborder" align="center">
+        <tr class="tableheader">
+            <td colspan="2">Import</td>
+        </tr>
+		<tr class="firstrow">
+			<td width="20%"><b>XML Datei (Local):</b>
+			</td>
+			<td>
+				<input name="xml" value="" type="file" size="50" class="input" />
+			</td>
+		</tr>
+		<tr class="secondrow">
+			<td width="20%"><b>XML Datei (Server):</b><br />
+			Bitte nicht mit Slash beginnen.
+			</td>
+			<td>
+				<input name="xml_file" value="input/file.xml" type="text" size="50" class="input" />
+			</td>
+		</tr>
+		<tr class="firstrow">
+			<td align="center" colspan="2"><input type="submit" class="button" value="Dokumente Importieren" /> <input type="reset" value="Zurücksetzen" class="button" /> <input type="button" value="Abbrechen" onclick="history.back();" class="button" /></td>
+		</tr>
+	</table>
+</form>
+EOF;
+
+
+//-------------------------------------------------------------------------
+// Admin & Moderator Rechte Management
+//-------------------------------------------------------------------------
+}
+
+?>

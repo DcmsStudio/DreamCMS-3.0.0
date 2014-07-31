@@ -1,0 +1,35 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    <button onclick="openTab({url:'admin.php?adm=rules&action=edit', obj:this, label:$(this).text()})" class="action-button"><img src="images/buttons/new.png" width="16" height="16" title="" alt="" border="0"/> {trans('neue Router Rule')}</button>
+</cp:block>
+
+<cp:block name="content">
+
+    <div id="rule-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+        if ( typeof registerToggleEvent !== 'function' ) {
+            function registerToggleEvent()
+            {
+                $( '#rule-grid' ).find( '.rule' ).each( function ()
+                {
+                    var self = this;
+                    $( this ).prev().prev().css( 'cursor', 'pointer' ).click( function ( e )
+                    {
+                        e.preventDefault();
+                        $( self ).toggle(0 );
+                        return false;
+                    } );
+                } );
+            }
+
+        }
+
+        Application.Grid( 'rule-grid', {$gridJson} );
+
+
+    </script>
+
+</cp:block>

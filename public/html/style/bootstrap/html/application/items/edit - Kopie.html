@@ -1,0 +1,311 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+</cp:block>
+
+<cp:block name="content">
+
+<cp:if condition="!$item.itemid && !$item.itemtype">
+    
+    <form action="admin.php" name="admItem" id="admItem" method="get">
+        <input type="hidden" name="adm" value="applicationitems"/>
+        <input type="hidden" name="action" value="edit"/>
+        <input type="hidden" name="appid" value="{$app.appid}"/>
+        <input type="hidden" name="itemid" value="0"/>
+
+        <div class="box description">
+            <div class="box-inner">
+                <fieldset>
+                    <legend>{trans('Typ')}</legend>
+                    <select name="itemtype" id="itemType">
+                        <option value="">{trans('Bitte den Typ wählen')}</option>
+                        <cp:loop name="app_grouptypes" key="r">
+                            <option value="{$r.type}">{$r.name}</option>
+                        </cp:loop>
+                    </select>
+                </fieldset>
+            </div>
+        </div>
+        <div id="step-edit-btns" style="display:none">
+            <btn>
+                
+                <input type="button" value="{trans('Abbrechen')}" class="button" onclick="cancel()"/>
+                <button id="next-step" class="action-button"><img src="images/forward.png" width="16" height="16" alt="" />&nbsp;{trans('Weiter')}</button>
+                
+            </btn>
+        </div>
+    </form>
+    
+    <script type="text/javascript">
+        //<![CDATA[
+    $(document).ready(function()  {
+        $('#step-edit-btns').show();
+        $('#next-step').disableButton();
+        $('#itemType').change(function() {
+            if ( $(this).val() != '' )
+            {
+                $('#next-step').enableButton();
+            }
+            else
+            {
+                $('#next-step').disableButton();
+            }
+        });
+
+        $('#next-step').click(function(e) {
+            $('#admItem').get(0).submit();
+        });
+
+    });
+//]]>
+    </script>
+    
+</cp:if>
+<cp:else>
+
+    <form action="admin.php" name="articleform" id="articleform" method="post">
+        <input type="hidden" name="adm" value="applicationitems"/>
+        <input type="hidden" name="action" value="save"/>
+        <input type="hidden" name="appid" value="{$app.appid}"/>
+        <input type="hidden" name="id" id="content-id" value="{$item.itemid}"/>
+        <input type="hidden" name="itemtype" value="{$item.itemtype}"/>
+        
+        
+        <div>
+            <cp:jstabs tabs="{$apptabs}" usetrans="true" default="Allgemeiner Inhalt"/>
+        </div>
+        
+        
+        <div class="box description">
+            <div class="box-inner">
+                <!--
+                <div id="tc0">
+                    
+                    <div class="fieldset2">
+                        <fieldset>
+                            <legend>{trans('Titel')}</legend>
+                            <input class="input" type="text" name="title" size="70" value="{$item.title}" />
+                        </fieldset>
+                        
+                        <fieldset>
+                            <legend>{trans('Veröffentlichen')}</legend>
+                            {info:appitem|publish}
+                            <input type="radio" name="published" id="published1" value="1"{iif($item.published || !$item.itemid, ' checked="checked"', '')}/> <label for="published1">{trans('Ja')}</label>
+                            <input type="radio" name="published" id="published0" value="0"{iif('!$item.published && $item.itemid', ' checked="checked"', '')}/> <label for="published0">{trans('Nein')}</label>
+                        </fieldset>
+                    </div>
+                    <div class="fieldset2">
+                        <fieldset>
+                            <legend>{trans('Escape Core-Tags')}</legend>
+                            <label for="escapecoretags"><input type="checkbox" name="escapecoretags" id="escapecoretags" value="1"{iif($item.escapecoretags, ' checked="checked"', '')} /> {trans('Core-Tags für den Inhalt nicht parsen')}</label>
+                        </fieldset>
+                        
+                        <cp:include template="pageidentifier/identifier_form"/>
+                    </div>
+                    <div class="fieldset2">
+                        <fieldset>
+                            <legend>{trans('Kategorie')}</legend>
+                            <select name="catid" size="8">
+                                <cp:loop name="categories" key="r">
+                                    <option value="{$r.catid}"<cp:if condition="$item.catid == $r.catid"> selected="selected"</cp:if>>{$r.title}</option>
+                                </cp:loop>
+                            </select>
+                        </fieldset>
+                        
+                        
+                        <fieldset>
+                            <legend>{trans('Zugriffsrechte')}</legend>
+                            <select name="access[]" multiple="multiple" size="8">
+                                <cp:loop name="usergroups" key="r">
+                                    
+                                    <option value="{$r.groupid}"{inlist($r.groupid, $item.access, ' selected="selected"', '')}>{$r.title}</option>
+                                </cp:loop>
+                            </select>
+                        </fieldset>
+                    </div>
+                    
+                    <input type="hidden" name="imagelist" id="imagelist" value="{$item.images}" />
+                    
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td style="width:0px;min-width:0px;vertical-align:top">
+                                <div id="inlinePictures" class="inlinePictures">
+                                    <fieldset>
+                                        <legend>{trans('Aktuelle Content  Bilder')}</legend>                                        
+                                        <div style="overflow:auto;"></div>
+                                    </fieldset>
+                                </div>
+                            </td>
+                            <td style="width:auto;vertical-align:top">
+                                <div class="contentEditor" id="contentEditor">
+                                    <fieldset>
+                                        <legend><label>{trans('Inhalt')}</label>
+                                            <label onclick="ContentEditorImages('inlinePictures', 'contentEditor',  'admin.php?adm=images&amp;contenttype={$app.apptype}_{$app.appid}&amp;contentid={$item.itemid}&images='+  $('#imagelist').val() );">{trans('Content Bilder')}</label>
+                                        </legend>
+                                        
+                                        <cp:editor baseurl="{$cfg.portalurl}" name="content" value="{$item.content}" height="350px"/>
+                                    </fieldset>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                -->
+                <cp:set var="tabIndex" value="0"/>
+                
+                
+                <cp:loop name="tabfields" key="r">                    
+                    <div id="tc{$tabIndex}" style="width:100%;" class="tl">
+                        <cp:set var="col" value="1"/>
+                        
+                        <cp:loop name="r.fields" key="rs">
+                            
+                            <cp:if condition="$rs.type != 'textarea' && $col == 1">
+                           
+                            <div class="fieldset2">
+                                
+                            </cp:if>
+                            <cp:if condition="$rs.type == 'textarea' && $col > 1">
+                            
+                            </div>
+                            <cp:set var="col" value="1"/></cp:if>
+                                
+                                
+                                
+                            <fieldset>
+                                <legend>
+                                    <cp:if condition="$rs.spanlabel">
+                                        {$rs.spanlabel}
+                                    </cp:if>
+                                    <cp:else>
+                                        {$rs.label}
+                                    </cp:else>
+                                </legend>                           
+                                {$rs.field}
+                                <cp:if condition="$rs.description"><br/><small>{$rs.description}</small></cp:if>
+                                
+                            </fieldset>
+                                
+                            <cp:if condition="$rs.type != 'textarea' && $col == 2 || $rs.next_rs.id == null">
+                                    
+                            </div>
+                                
+                                <cp:set var="col" value="0"/>
+                            </cp:if>
+                            <cp:elseif condition="$rs.type == 'textarea' || $rs.next_rs.id == null">
+                                <cp:set var="col" value="0"/>
+                            </cp:elseif>
+
+                            <cp:set var="col" value="$col + 1"/>
+                        </cp:loop>
+                        
+                    </div>
+                    <cp:set var="tabIndex" value="$tabIndex + 1"/>                    
+                </cp:loop>
+
+
+            </div>
+        </div>
+        <div id="save-edit-btns" style="display:none">
+            <btn>
+                [save:articleform] [save_exit:articleform]
+                <input type="reset" value="{trans('Zurücksetzen')}" class="button" />
+                <input type="button" value="{trans('Abbrechen')}" class="button" onclick="cancel()"/>
+            </btn>
+        </div>
+    </form>
+    
+    
+    <script type="text/javascript" src="{$js_url}dcms.form-fields.js"></script>
+    <script type="text/javascript" src="{$js_url}jquery/jquery.autocomplete.pack.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+
+
+    //add_dirty_flag('articleform');
+    //register_form_handler('savethis');
+    //exiturl = 'admin.php?adm=applicationitems&appid={$app.appid}';
+
+$(document).ready(function()  {
+
+
+
+    $('#articleform').registerForm({
+        contentIdentifierID: 'content-id',
+        exiturl: 'admin.php?adm=applicationitems&appid={$app.appid}',
+        savehandler: savethis,
+        identifierType: '{$app.apptype}-{$item.itemtype}',
+        baseField: 'title',
+        runAfterSubmit: function(exit, data) {
+            
+        }
+    });
+
+
+
+
+
+
+
+
+    // $('#tc2').addFields({$fields});
+    $('#save-edit-btns').show();
+    $('#save-edit-btns').show();
+
+
+    //registerPageIdentifier('title', '{$app.apptype}-{$item.itemtype}', {iif($item.itemid, $item.itemid, '0')});
+
+    $("#searchTag").autocomplete("http://ws.geonames.org/searchJSON", {
+        dataType: 'jsonp',
+        parse: function(data) {
+            var rows = new Array();
+            data = data.geonames;
+            for(var i=0; i<data.length; i++){
+                rows[i] = { data: data[i], value: data[i].name, result: data[i].name };
+            }
+            return rows;
+        },
+        formatItem: function(row, i, n) {
+            return row.name + ', ' + row.adminCode1;
+        },
+        extraParams: {
+            // geonames doesn't support q and limit, which are the autocomplete plugin defaults, so let's blank them out.
+            q: '',
+            limit: '',
+            country: 'US',
+            featureClass: 'P',
+            style: 'full',
+            maxRows: 6,
+            name_startsWith: function () { return $("#searchTag").val() }
+        },
+        max: 50
+    }); 
+
+    $('#availeble-tags').find('span').click(function() {
+        $(this).parent().remove();
+    });
+
+
+    $("#add-tag").click(function() {
+        if ( $("#searchTag").val() == '' ) return;
+        var tag = $("#searchTag").val();
+
+        var removeTagBtn = $('<span>');
+        var tagcontainer = $('<div>').addClass('tag').append( removeTagBtn );
+
+            tagcontainer.append( tag );
+            tagcontainer.append( $('<input>').attr({type: 'hidden', name: 'tags[]', 'value': tag }) );
+
+
+            removeTagBtn.click(function() {
+                $(this).parent().remove();
+            });
+            $("#searchTag").val('');
+            $('#availeble-tags').append(tagcontainer);
+
+    });
+});
+//]]>
+    </script>
+</cp:else>
+</cp:block>

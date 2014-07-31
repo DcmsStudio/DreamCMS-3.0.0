@@ -1,0 +1,70 @@
+<ul id="ctabs" class="tabs">
+    <cp:if condition="$input.id != user('userid') && $input.id">
+        <li class="sprite tab_active">
+            <a href="profile/{$input.id}">
+                {trans('Profilansicht')}
+            </a>
+        </li>
+    </cp:if>
+    <cp:if condition="$user.userid">
+        <li class="sprite tab{iif($input.action != 'profile' && $input.cp != 'guestbook' && $input.action != 'photogallery' && $input.action != 'blog' && $input.id != user('userid'), '_active', '')}">
+            <a href="user/controlpanel">
+                {trans('Kontrollzentrum')}
+            </a>
+        </li>
+        <li class="sprite tab{iif(!$user.viewcontrolpanel && $profile.userid == user('userid'), '_active', '')}">
+            <a href="profile/{user('userid')}">
+                {trans('Meine Profil')}
+            </a>
+        </li>
+        <cp:hasperm permkey="user/userguestbook">
+            <li class="sprite tab{iif($input.cp == 'guestbook' && $user.userid == $gbuser.userid, '_active', '')}">
+                <a href="guestbook/{$user.username}/">
+                    {trans('Meine Gästebuch')}
+                    <span id="db-counter">
+                        ({$user.gbpostings})
+                    </span>
+                </a>
+            </li>
+        </cp:hasperm>
+        <li class="sprite tab{iif($input.action == 'photogallery', '_active', '')}">
+            <a href="user/photogallery">
+                {trans('Meine Fotos')}
+            </a>
+        </li>
+        <li class="sprite tab{iif($input.action == 'blog', '_active', '')}">
+            <a href="user/blog">
+                {trans('Mein Blog')}
+            </a>
+        </li>
+        <cp:if condition="hasperm('user/canusepms')">
+            <li class="sprite pmtab tab{iif($input.action == 'messenger', '_active', '')}">
+                <a href="messenger/">
+                    {trans('Private Nachtichten')}
+                    <span id="pm-counter">
+                        ({$user.pmcounter})
+                    </span>
+                </a>
+            </li>
+        </cp:if>
+    </cp:if>
+</ul>
+<script type="text/javascript" language="javascript">
+    /* <![CDATA[ */
+    $(document)
+    .ready(function () {
+        $('#ctabs')
+        .find('.tab_active')
+        .click(function (e) {
+            e.preventDefault();
+            return false;
+        });
+        $('#ctabs')
+        .find('.disabled')
+        .click(function (e) {
+            e.preventDefault();
+            return false;
+        });
+    });
+    /* ]]> */
+</script>

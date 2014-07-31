@@ -1,0 +1,82 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+</cp:block>
+
+<cp:block name="content">
+<table width="100%" border="0" cellpadding="3" cellspacing="0" class="tblborder">
+    <tr class="tableheader">
+        <td>{trans('Gallerie')}</td>
+        <td width="5%" class="tc">{trans('Bilder')}</td>
+        <td width="5%" class="tc">{trans('Aktiv')}</td>
+        <td width="10%" class="tc">{trans('Optionen')}</td>
+    </tr>
+    
+    <cp:loop name="galleries" key="r">
+        {cycle('cyclename', 'firstrow,secondrow', 'css')}
+        <tr class="{$css}">
+            <td>{$r.title}</td>
+            <td class="tc">{$r.pics}</td>
+            <td class="tc">
+                <a href="javascript:void(0)" onclick="changePublish('galpub{$r.id}', 'admin.php?adm=gallery&action=gpublish&id={$r.id}')"><img id="galpub{$r.id}" src="images/{iif($r.publish, 'online', 'offline')}.gif" border="0" alt="" title="" /></a>
+            </td>
+            <td nowrap="nowrap" class="tc">
+                <a href="javascript:jsaction('4',{$r.id});"><img src="images/edit.png" border="0" alt="" title="{trans('bearbeiten')}" /></a> &nbsp;
+                <a href="javascript:jsaction('1',{$r.id});"><img src="images/folder_add.png" border="0" alt="" title="{trans('Gallerie hier hinzufügen')}" /></a> &nbsp;
+                <a href="javascript:jsaction('2',{$r.id});"><img src="images/images.png" border="0" alt="" title="{trans('Bilder anzeigen')} ({$r.pics})" /></a> &nbsp;
+                
+                <a href="javascript:jsaction('0',{$r.id});"><img src="images/delete.gif" border="0" alt="" title="{trans('Gallerie löschen')}" /></a>
+            </td>
+        </tr>
+    </cp:loop>
+    <cp:else>
+        <tr>
+            <td colspan="4">
+                <em>
+                    {trans('Es ist noch keine Gallerie vorhanden')}
+                </em>
+            </td>
+        </tr>
+    </cp:else>
+    
+</table>
+
+
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+
+function jsaction(action, mfid) {
+
+    dothis = 1;
+    confirmaction = 0;
+
+    if ( action != '' ){
+        switch (action){
+            case '0': confirmaction = 1; page = "admin.php?adm=gallery&action=del_gal&id="; break;
+            case '1': page = "admin.php?adm=gallery&action=add_gal&subgal=1&id="; break;
+            case '2': page = "admin.php?adm=gallery&action=showpics&id="; break;
+            case '3': page = "admin.php?adm=gallery&action=newpics&id="; break;
+            case '4': page = "admin.php?adm=gallery&action=edit_gal&edit=1&id="; break;
+        }
+
+        jump = page + mfid ;
+
+        if(confirmaction == 1)
+        {
+            if(!confirm('Wollen Sie diese Gallerie Wirklich löschen?'))
+            {
+                dothis = 0;
+            }
+        }
+
+        if(dothis!=0)
+        {
+            self.location.href = jump;
+        }
+    }
+}
+//]]>
+
+</script>
+</cp:block>

@@ -1,0 +1,40 @@
+<div class="panel-inner" style="width: 400px;">
+    <em>{$package.description|escape|truncate:240}</em>
+    
+    <table style="width: 100%;">
+        <tr>
+            <td style="text-align: right; width: 30%; font-weight: bold;">{trans("Package Type")}</td>
+            <td style="padding-left: 30px;">{PackageManager::getType($package.type)}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right; font-weight: bold;">{trans("Installed Version")}</td>
+            <td style="padding-left: 30px;">{$package.version|escape}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right; font-weight: bold;">{trans("Package Author")}</td>
+            <td style="padding-left: 30px;">{$package.author|escape}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right; font-weight: bold;">{trans("Author's Website")}</td>
+            <td style="padding-left: 30px;">
+                <a href="{$package.website|escape}" target="_blank">
+                    {$package.website|escape}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: right; font-weight: bold;">{trans("Installation Date")}</td>
+            <td style="padding-left: 30px;">{Localization::formatFullDateTime($package.installed)}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right; font-weight: bold;">{trans("Date Updated")}</td>
+            <td style="padding-left: 30px;">
+                {if()}
+                    {Localization::formatFullDateTime($package.updated)}
+                {else}
+                    -
+                {/if}
+            </td>
+        </tr>
+    </table>
+</div>

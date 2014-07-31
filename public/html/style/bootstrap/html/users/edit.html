@@ -1,0 +1,414 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    {$toolbar}
+
+    [save:uform{$users.userid}] [save_exit:uform{$users.userid}] [reset:uform{$users.userid}] [cancel:uform{$users.userid}]
+</cp:block>
+
+<cp:block name="content">
+
+
+<form method="post" action="admin.php" id="uform{$users.userid}" name="uform">
+<input type="hidden" name="adm" value="user"/>
+<input type="hidden" name="send" value="send"/>
+<input type="hidden" id="user-id{$users.userid}" name="userid" value="{$users.userid}"/>
+<input type="hidden" name="action" value="{$input.action}"/>
+
+
+<cp:if condition="$users.userid == $user.userid && $request.action != 'add'">
+    <cp:set var="disable" value="1"/>
+    <input type="hidden" name="groupid" value="{$users.groupid}"/>
+    <input type="hidden" name="blocked" value="0"/>
+</cp:if>
+
+
+<div>
+    <cp:jstabs tabs="Allgemeine Angaben,Benutzerdefinierte Felder,Anmeldung Cookies & Privatsphäre,Email & Private Nachrichten,Datum & Zeit" usetrans="true" default="Allgemeine Angaben"/>
+</div>
+<div>
+    <div class="row m0">
+        <h3 class="bg-danger">{trans('Sperre')}</h3>
+
+        <div class="col-md-12">
+            <label>{trans('Benutzer sperren')}</label>
+            <label for="blocked1"><input type="radio" id="blocked1" name="blocked" value="1" class="radio" cp:on="checked:$users.blocked > 0" parse:checked="checked" cp:on="disabled:$users.disable" parse:disabled="disabled"/> {trans('Ja')} </label>&nbsp;
+            <label for="blocked0"><input type="radio" id="blocked0" name="blocked" value="0" class="radio" cp:on="checked:$users.blocked==0" parse:checked="checked" cp:on="disabled:$users.disable" parse:disabled="disabled"/> {trans('Nein')}</label>
+        </div>
+    </div>
+</div>
+<div id="tc0">
+
+    <h3 class="bg-success mt10">
+        {trans('Allgemeine angaben')}
+
+    </h3>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Benutzername *')}</label>
+            <input type="text" name="username" size="40" maxLength="50" value="{escape($users.username, 'quotes')}" class="required form-control"/>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('eMail *')}</label>
+            <input type="text" name="email" size="40" maxLength="150" value="{escape($users.email, 'quotes')}" class="required form-control"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Passwort *')}</label>
+            <input cp:on="disabled:$request.action != 'add'" parse:disabled="disabled" type="password" name="password" size="40" maxLength="50" value="{$users.password}" class="required form-control"/>
+
+            <label>{trans('alternativer Benutzertitel')}</label>
+            <input type="text" name="title" size="40" maxLength="50" value="{escape($users.title, 'quotes')}" class="form-control"/>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('Benutzergruppe *')}</label>
+            <select name="groupid" size="3" cp:on="disabled:$user.userid == $users.userid && $user.is_admin" parse:disabled="disabled">
+                <cp:loop name="user_groups" key="r">
+                    <option value="{$r.groupid}" cp:on="selected:$users.groupid == $r.groupid" parse:selected="selected">{$r.title}</option>
+                </cp:loop>
+            </select>
+        </div>
+
+        <span class="note">{trans('Allgemeine Angaben (mit * gekennzeichnete Felder werden benötigt.)')}</span>
+    </div>
+
+
+    <h3 class="bg-success mt10">{trans('Persönliche angaben')}</h3>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Nachname')}</label>
+            <input class="form-control" name="lastname" type="text" value="{escape($users.lastname, 'quotes')}" size="70" maxlength="50"/>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('Vorname')}</label>
+            <input class="form-control" name="name" type="text" value="{escape($users.name, 'quotes')}" size="70" maxlength="50"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Firmenname')}</label>
+            <input class="form-control" name="company_name" type="text" value="{escape($users.company_name, 'quotes')}" size="70" maxlength="50"/>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('USTID')}</label>
+            <input class="form-control" name="ustid" type="text" value="{escape($users.ustid, 'quotes')}" size="50" maxlength="50"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Telefon')}</label>
+            <input class="form-control" name="phone" type="text" value="{escape($users.phone, 'quotes')}" size="50" maxlength="50"/>
+
+            <label>{trans('Fax')}</label>
+            <input class="form-control" name="fax" type="text" value="{escape($fax, 'quotes')}" size="50" maxlength="50"/>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('Mobil Tel')}</label>
+            <input class="form-control" name="mobile_phone" type="text" value="{escape($users.mobile_phone, 'quotes')}" size="50" maxlength="50"/>
+
+            <label>{trans('Homepage')}</label>
+            <input type="text" name="homepage" size="70" maxLength="250" value="{escape($users.homepage, 'quotes')}" class="form-control"/>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+
+                <div class="col-md-5">
+                    <label>{trans('Land')}</label>
+                    <select name="country" class="select form-control">
+                        <cp:loop name="countries" key="r">
+                            <option value="{$r.tld}" cp:on="selected:$users.country == $r.tld" parse:selected="selected">{$r.name}</option>
+                        </cp:loop>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label>{trans('PLZ')}</label>
+                    <input class="form-control" name="zip" type="text" value="{escape($users.zip, 'quotes')}" size="8" maxlength="10"/>
+                </div>
+
+                <div class="col-md-5">
+                    <label>{trans('Ort')}</label>
+                    <input class="form-control" name="user_from" type="text" value="{escape($users.user_from, 'quotes')}" size="40" maxlength="50"/>
+                </div>
+            </div>
+            <label>{trans('Straße')}</label>
+            <input class="form-control" name="street" type="text" value="{escape($users.street, 'quotes')}" size="70" maxlength="80"/>
+
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{trans('Geburtsdatum')}</label>
+
+                    {trans('Tag')}
+                    <select name="day" class="select">
+                        <option value="0"></option>
+                        <cp:loop name="day_options" key="r">
+                            <option value="{$r.day}" cp:on="selected:$users.day== $r.day" parse:selected="selected">{$r.day}</option>
+                        </cp:loop>
+                    </select> {trans('Monat')} <select name="month" class="select">
+                    <option value="0"></option>
+                    <cp:loop name="month_options" key="r">
+                        <option value="{$r.month}" cp:on="selected:$users.month== $r.month" parse:selected="selected">{$r.name}</option>
+                    </cp:loop>
+                </select> {trans('Jahr')} <input type="text" class="input" name="year" value="{escape($users.year, 'quotes')}" maxlength="4" size="5"/>
+                </div>
+                <div class="col-md-12 mt5">
+                    <label>{trans('Geschlecht')}</label>
+
+                    <select name="gender" class="select">
+                        <option value="0">{trans('keine Angabe')}</option>
+                        <option value="1">{trans('männlich')}</option>
+                        <option value="2">{trans('weiblich')}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h3 class="bg-success mt10">{trans('Kontakt angaben')}</h3>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('ICQ')}</label>
+            <input type="text" name="icq" size="40" maxLength="30" value="{escape($users.icq, 'quotes')}" class="form-control"/>
+
+            <label>{trans('AIM')}</label>
+            <input type="text" name="aim" size="40" maxLength="30" value="{escape($users.aim, 'quotes')}" class="form-control"/>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('YIM')}</label>
+            <input type="text" name="yim" size="40" maxLength="30" value="{escape($users.yim, 'quotes')}" class="form-control"/>
+
+            <label>{trans('MSN')}</label>
+            <input type="text" name="msn" size="40" maxLength="30" value="{escape($users.msn, 'quotes')}" class="form-control"/>
+        </div>
+    </div>
+
+
+    <h3 class="bg-success mt10">{trans('Sonstige angaben')}</h3>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label>{trans('Persönliches Style wählen')}</label>
+            <select name="styleid" class="select">
+                <option value="0">{trans('Standard')}</option>
+                {$style_options}
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Benutzertext')}</label>
+            <textarea rows="3" cols="55" wrap="virtual" name="usertext" class="form-control">{$users.usertext}</textarea>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('Signatur')}</label>
+            <textarea rows="3" cols="55" wrap="virtual" name="signature" class="form-control">{$users.signature}</textarea>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div id="tc1">
+    <h3 class="bg-success mt10">{trans('Benutzerdefiniert (mit * gekennzeichnete Felder werden benötigt.)')}</h3>
+
+
+    <cp:if condition="count($profilefields)">
+        <cp:set var="col" value="1"/>
+
+
+        <cp:loop name="profilefields" key="r">
+
+            <cp:if condition="$col == 1">
+                <cp:tag name="div" class="row"/>
+            </cp:if>
+
+            <div class="col-md-4">
+                <label>
+                    <cp:if condition="$r.grouplabel">{$r.grouplabel}</cp:if>
+                    <cp:else>{$r.label}</cp:else>
+                    {iif($r.required, ' *', '')}
+                </label>
+                {$r.field}
+                <cp:if condition="$r.field_description">
+                    <br/>
+                    <small>{$r.field_description}</small>
+                </cp:if>
+            </div>
+            <cp:set var="col" value="$col + 1"/>
+
+            <cp:if condition="$col > 3 || ($col < 3 && !$r.next_r.field)">
+                <cp:tag name="div" forceclose="true"/>
+                <cp:set var="col" value="1"/>
+            </cp:if>
+
+        </cp:loop>
+    </cp:if>
+    <cp:else>
+        {trans('Es wurden noch keine Benutzerdefinierten Felder angelegt.')}
+    </cp:else>
+
+</div>
+
+
+<div id="tc2">
+    <h3 class="bg-success mt10">{trans('Anmeldung, Cookies & Privatsphäre')}</h3>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Geist-Modus benutzen?')}</label>
+
+            <label for="invisible1">
+                <input type="radio" id="invisible1" name="invisible" value="1" class="radio" cp:on="checked:$users.invisible" parse:checked="checked"/> Ja
+            </label>
+            <label for="invisible0">
+                <input type="radio" id="invisible0" name="invisible" value="0" class="radio" cp:on="checked:$users.invisible == 0" parse:checked="checked"/> Nein
+            </label>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('Cookies verwenden?')}</label>
+
+            <label for="invisible1"><input type="radio" id="nosessionhash1" name="nosessionhash" value="1" class="radio" cp:on="checked:$users.nosessionhash>0" parse:checked="checked"/> Ja </label>&nbsp;
+            <label for="invisible0"><input type="radio" id="nosessionhash0" name="nosessionhash" value="0" class="radio" cp:on="checked:$users.nosessionhash == 0" parse:checked="checked"/> Nein</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Automatisches Anmelden bei Rückkehr?')}</label>
+            <label for="usecookies1"><input type="radio" id="usecookies1" name="usecookies" value="1" cp:on="checked:$users.usecookies>0" parse:checked="checked" class="radio"/> Ja </label>&nbsp;
+            <label for="usecookies0"><input type="radio" id="usecookies0" name="usecookies" value="0" cp:on="checked:$users.usecookies == 0" parse:checked="checked" class="radio"/> Nein</label>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<div id="tc3">
+    <h3 class="bg-success mt10">{trans('Email & Private Nachrichten')}</h3>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label>{trans('Benutzer akzeptiert eMails vom Admin?')}</label>
+            <label for="admincanemail1"><input type="radio" id="admincanemail1" name="admincanemail" value="1" class="radio" cp:on="checked:$users.admincanemail>0" parse:checked="checked"/> Ja </label>&nbsp;
+            <label for="admincanemail0"><input type="radio" id="admincanemail0" name="admincanemail" value="0" class="radio" cp:on="checked:$users.admincanemail == 0" parse:checked="checked"/> Nein</label>
+        </div>
+        <div class="col-md-4">
+            <label>{trans('E-Mail Adresse verbergen?')}</label>
+            <label for="showemail1"><input type="radio" id="showemail1" name="showemail" value="1" class="radio" cp:on="checked:$users.showemail1>0" parse:checked="checked"/> Ja </label>&nbsp;
+            <label for="showemail0"><input type="radio" id="showemail0" name="showemail" value="0" class="radio" cp:on="checked:$users.showemail1 == 0" parse:checked="checked"/> Nein</label>
+        </div>
+
+        <div class="col-md-4">
+            <label>{trans('Benutzer akzeptiert eMails vom anderen Mitgliedern?')}</label>
+            <label for="usercanemail1"><input type="radio" id="usercanemail1" name="usercanemail" value="1" class="radio" cp:on="checked:$users.usercanemail1>0" parse:checked="checked"/> Ja </label>&nbsp;
+            <label for="usercanemail0"><input type="radio" id="usercanemail0" name="usercanemail" value="0" class="radio" cp:on="checked:$users.usercanemail1 == 0" parse:checked="checked"/> Nein</label>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label>{trans('eMail Benachrichtigung automatisch aktiviert?')}</label>
+            <label for="emailnotify1"><input type="radio" id="emailnotify1" name="emailnotify" value="1" class="radio" cp:on="checked:$users.emailnotify>0" parse:checked="checked"/> Ja </label>&nbsp;
+            <label for="emailnotify0"><input type="radio" id="emailnotify0" name="emailnotify" value="0" class="radio" cp:on="checked:$users.emailnotify == 0" parse:checked="checked"/> Nein</label>
+        </div>
+
+        <div class="col-md-4">
+            <label>{trans('Benutzer akzeptiert private Nachrichten vom anderen Mitgliedern?')}</label>
+            <label for="receivepm1"><input type="radio" id="receivepm1" name="receivepm" value="1" class="radio" cp:on="checked:$users.receivepm>0" parse:checked="checked"/> Ja </label>&nbsp;
+            <label for="receivepm0"><input type="radio" id="receivepm0" name="receivepm" value="0" class="radio" cp:on="checked:$users.receivepm == 0" parse:checked="checked"/> Nein</label>
+        </div>
+
+        <div class="col-md-4">
+            <label>{trans('Popup Fenster bei neuer privater Nachricht?')}</label>
+            <label for="pmpopup1"><input type="radio" id="pmpopup1" name="pmpopup" value="1" class="radio" cp:on="checked:$users.pmpopup>0" parse:checked="checked"/> Ja</label>&nbsp;
+            <label for="pmpopup0"><input type="radio" id="pmpopup0" name="pmpopup" value="0" class="radio" cp:on="checked:$users.pmpopup == 0" parse:checked="checked"/> Nein</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label>{trans('eMail Benachrichtigung bei neuer privater Nachricht?')}</label>
+            <label for="emailonpm1"><input type="radio" id="emailonpm1" name="emailonpm" value="1" class="radio" cp:on="checked:$users.emailonpm>0" parse:checked="checked"/> Ja </label>&nbsp;
+            <label for="emailonpm0"><input type="radio" id="emailonpm0" name="emailonpm" value="0" class="radio" cp:on="checked:$users.emailonpm == 0" parse:checked="checked"/> Nein</label>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<div id="tc4">
+    <h3 class="bg-success mt10">{trans('Datum & Zeit')}</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Datumsformat')}</label>
+            <input type="text" data-tooltip="Beispiel: d.m.Y weitere Infos entnehmen Sie bitte der [link=http://www.php.net/manual/en/function.date.php]PHP Dokumentation[/link]" data-position="top-left" name="udateformat" size="40" value="{escape($users.dateformat, 'quotes')}" class="required form-control"/>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('Zeitformat')}</label>
+            <input type="text" data-tooltip="Beispiel: H:i:s weitere Infos entnehmen Sie bitte der [link=http://www.php.net/manual/en/function.date.php]PHP Dokumentation[/link]" data-position="top-left" name="utimeformat" size="40" value="{escape($users.timeformat, 'quotes')}" class="required form-control"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>{trans('Zeitzone wählen')}</label>
+            <select name="timezoneoffset" class="select" size="7">
+                <cp:loop name="timezones" key="r">
+                    <option value="{$r.value}" cp:on="selected:$users.timezoneoffset == $r.value" parse:selected="selected">{$r.title}</option>
+                </cp:loop>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label>{trans('Erster Tag der Woche')}</label>
+
+            <select name="startweek" class="select" size="7">
+                <cp:loop name="startweek_options" key="r">
+                    <option value="{$r.day}" cp:on="selected:$users.startweek == $r.day" parse:selected="selected">{$r.name}</option>
+                </cp:loop>
+            </select>
+        </div>
+    </div>
+
+</div>
+
+
+</form>
+
+
+<script type="text/javascript">
+
+    Form.registerForm( 'uform{$users.userid}', {
+        contentIdentifierID: 'user-id{$users.userid}',
+        exiturl: 'admin.php?adm=user&action=show',
+        runAfterSubmit: function ()
+        {
+
+        }
+    } );
+
+</script>
+
+</cp:block>

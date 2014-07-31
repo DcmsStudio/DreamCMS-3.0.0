@@ -1,0 +1,111 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+    <cp:if condition="user('userid')">
+        <div class="controlpanel-tabs">
+            <cp:include template="usercontrol/tabpanel" />
+        </div>
+    </cp:if>
+    <cp:form floodcheck="true" name="bbform" id="bbform" action="/guestbook/submit" method="post">
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="username" value="{$input.username}" />
+        <cp:if condition="!$user.userid">
+            <div class="row">
+                <label>
+                    {trans('Benutzername')}
+                </label>
+                <input type="text" class="col-xs-6" name="username" value="{$name}" maxlength="60" size="50" />
+            </div>
+            <div class="row">
+                <label>
+                    {trans('Email')}
+                </label>
+                <input type="text" class="col-xs-6" name="email" value="{$email}" size="50" />
+            </div>
+            <div class="row">
+                <label>
+                    {trans('Homepage')}
+                </label>
+                <input type="text" class="col-xs-6" name="userwebsite" value="{$userwebsite}" size="50" />
+            </div>
+        </cp:if>
+        <div class="row">
+            <label>
+                {trans('Titel')}
+            </label>
+            <input type="text" class="col-xs-6" name="title" value="{$title}" size="50" maxlength="85" />
+        </div>
+        <div class="row">
+            <label>
+                {trans('Inhalt')}
+            </label>
+            
+            <cp:if condition="cfg('guestbook.allowbbcode')">
+                    <cp:include template="bbcode/bbcode_toolbar_comments" />
+                    <textarea class="textarea bbcodeCommentTextarea form-control" name="message" rows="10" cols="40" placeholder="{trans('Inhalt')} *" style="height:250px"></textarea>
+            </cp:if>
+            <cp:else>
+                <textarea name="message" rows="15" cols="50" wrap="virtual" class="form-control bbcodeTextarea bbcodeCommentTextarea" placeholder="{trans('Inhalt')}" style="height:250px"></textarea>
+            </cp:else>
+            
+        </div>
+        <div class="row">
+            <cp:captcha width="200" height="80" audio="true" reload="true" />
+            <br/>
+            <input type="text" name="securecode" size="10" maxlength="5" placeholder="{trans('Sicherheitscode')} *" />
+        </div>
+        <div class="row tc">
+            <button type="button" accesskey="s" class="btn btn-primary save-button">
+                {trans('Eintragen')}
+            </button>
+            <button type="reset" accesskey="r" class="btn btn-default">
+                {trans('Zurücksetzen')}
+            </button>
+        </div>
+    </cp:form>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        $(document).ready(function() {
+            var div = $('<div id="form-message" class="validation"></div>');
+            div.insertBefore($('#bbform'));
+            div.hide();
+        
+            $('.save-button').click(function(e) {
+                $(e.target).parents('form:first').trigger('save');
+            });
+        
+            $('#bbform').registerFormFE({
+                exiturl: '',
+                save: function(exit) {
+                    var self = this;
+                    $('#form-message').hide().empty();
+        
+                    $('textarea.bbcodeTextarea').sync();
+        
+        
+        
+                    var post = $('#bbform').serialize();
+                    $.post('guestbook/submit', post, function(data) {
+                        if (responseIsOk(data)) {
+                            span = $('<span/>').append(data.msg);
+                            $('#bbform').hide();
+                            $('#form-message').removeClass('error').addClass('success').append(span).show();
+                            $(span).effect('pulsate', {
+                                times: 3,
+                                easing: 'easeInOutBounce'
+                            }, 300);
+                            setTimeout(function() {
+                                document.location.href = 'guestbook/{$input.username}';
+                            }, 2000);
+                        } else {
+                            self.error(data);
+                        }
+                    }, 'json');
+                }
+            });
+            $(document).ajaxError(function(e, xhr, settings, exception) {
+                alert('error in : ' + settings.url + '\n' + 'error: \n ' + xhr.responseText.replace(/<([^>]*)>/, ''));
+            });
+        });
+        /* ]]> */
+    </script>
+</cp:block>

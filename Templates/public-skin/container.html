@@ -1,0 +1,390 @@
+<cp:extends template="html-layout" />
+{* 
+add css codes
+ *}
+<cp:block name="prepend-css">
+    <link rel="stylesheet" href="public/html/css/default.php" type="text/css" />
+    <cp:include template="../css-styles"/>
+    {* 
+    <cp:combine type="css" compress="false">
+        <link rel="stylesheet" href="{$css_url}reset.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}bootstrap/bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}bootstrap/select/bootstrap-select.min.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}bootstrap/dcms.breadcrumbs.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}bootstrap/bootstrap-theme.css" type="text/css" />
+        <link rel="stylesheet" href="html/js/jquery/fancybox/style.css" type="text/css" />
+        <link rel="stylesheet" href="html/css/dcmscore.css" type="text/css" />
+        <link rel="stylesheet" href="html/css/subcols.css" type="text/css" />
+        <link rel="stylesheet" href="html/css/contentgrid.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}jquery-ui.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}wrapper.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}layout.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}typo.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}form-ui.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}bubble.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}boxes.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}comments.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}bbcode.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}navi.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}memberslist.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}teas.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}dokumentation.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}style-base.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}dcms.page.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}user.css" type="text/css" />
+        <link rel="stylesheet" href="{$css_url}frontpage.css" type="text/css" />
+        <style type="text/css">
+            .dd {
+
+            asas
+            }
+        </style>
+        <link rel="stylesheet" href="{$css_url}repo.css" type="text/css" />
+    </cp:combine>
+     *}
+    <link rel="stylesheet" href="[asset name='donate-button.css' type='css']" type="text/css" />
+    {* 
+    todo: use combine for all stylesheets
+     *}
+</cp:block>
+{* 
+insert javascripts before the layout scripts
+ *}
+<cp:block name="prepend-javascript">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        // Test
+        var cookiePrefix = '{$cookieprefix}';
+        var systemUrl = '{cfg("portalurl")}';
+        var coreHtmlPath = '/html/';
+        var skinUrl = '{@SKIN_URL}';
+        var googleApiKey = '{cfg("googleapikey")}';
+        var token = '{gettoken()}';
+        
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="main/lang"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;key={cfg('googleapikey')}"></script>
+    <cp:include template="../javascripts"/>
+    {* 
+    <cp:combine type="js" compress="true">
+        <script type="text/javascript" src="html/js/jquery/jquery.202.min.js"></script>
+        <script type="text/javascript" src="html/js/jquery/jquery-ui.1.10.0.min.js"></script>
+        <script type="text/javascript" src="html/js/jquery/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="html/js/syntax/js/shCore.js"></script>
+        <script type="text/javascript" src="html/js/syntax/js/shBrushCss.js"></script>
+        <script type="text/javascript" src="html/js/syntax/js/shBrushSql.js"></script>
+        <script type="text/javascript" src="html/js/syntax/js/shBrushPhp.js"></script>
+        <script type="text/javascript" src="html/js/syntax/js/shBrushXml.js"></script>
+        <script type="text/javascript" src="html/js/syntax/js/shBrushPlain.js"></script>
+        <script type="text/javascript" src="html/js/syntax/js/shBrushjScript.js"></script>
+        <script type="text/javascript" src="html/js/jquery/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+        <script type="text/javascript" src="html/js/jquery/fancybox/jquery.fancybox-1.3.1.js"></script>
+        <script type="text/javascript" src="html/js/jquery/jquery.scrollTo.js"></script>
+        <script type="text/javascript" src="html/js/jquery/gsap/jquery.gsap.min.js"></script>
+        <script type="text/javascript" src="html/js/jquery/jquery.lazyload.js"></script>
+        <script type="text/javascript" src="html/js/TweenMax.min.js"></script>
+        <script type="text/javascript" src="html/js/backend/dcms.loader.js"></script>
+        <script type="text/javascript" src="html/js/dcms.googlemap.js"></script>
+        <script type="text/javascript" src="html/js/dcms-core.js"></script>
+        <script type="text/javascript">
+            alert('OK');
+        </script>
+        <script type="text/javascript" src="{$img_url}js/bootstrap/bootstrap.js"></script>
+        <script type="text/javascript" src="{$img_url}js/bootstrap/select/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="{$img_url}js/skin.js"></script>
+    </cp:combine>
+
+
+<script type="text/javascript" src="asset/js/jquery/jquery.202.min,jquery/jquery-ui.1.10.0.min,jquery/jquery.easing.1.3,syntax/js/shCore,syntax/js/shBrushCss,syntax/js/shBrushSql,syntax/js/shBrushPhp,syntax/js/shBrushXml,syntax/js/shBrushPlain,syntax/js/shBrushjScript,jquery/fancybox/jquery.mousewheel-3.0.2.pack,jquery/fancybox/jquery.fancybox-1.3.1,jquery/jquery.scrollTo,jquery/gsap/jquery.gsap.min,jquery/jquery.lazyload,TweenMax.min,backend/dcms.loader,dcms.googlemap,dcms-core"></script>
+<script type="text/javascript" src="{cfg('portalurl')}/{$img_url}js/bootstrap/bootstrap.js"></script>
+<script type="text/javascript" src="{cfg('portalurl')}/{$img_url}js/bootstrap/select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="{cfg('portalurl')}/{$img_url}js/skin.js"></script>
+ *}
+</cp:block>
+{* 
+insert layout javascripts after the core scripts
+ *}
+<cp:block name="append-javascript">
+</cp:block>
+{* 
+All other head Tags
+ *}
+<cp:block name="append-headtags">
+    <link rel="icon" href="asset/img/html/img/favicon.ico" type="image/x-icon"/>
+    <meta name="google-site-verification" content="eAmIHbHr6wZZdhGR6M3Ou6u_qkTjnJryylnNyddETXc" />
+    <cp:include template="seemode_include"/>
+</cp:block>
+{* 
+append scripts to body
+ *}
+<cp:block name="append-bodyscripts">
+    <div id="donate">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+            <input type="hidden" name="cmd" value="_s-xclick"/>
+            <input type="hidden" name="hosted_button_id" value="L4VTV5A6CNMYN"/>
+            <input type="hidden" name="item_name" value="Marcel Domke"/>
+            <input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen mit PayPal."/>
+            <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1"/>
+        </form>
+    </div>
+    <script type="text/javascript" src="asset/js/dcmsTracker.js"></script>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        $(document).ready(function() {
+        
+            $('img[data-src]').lazyload({
+                data_attribute: 'src'
+            });
+        
+            page = '{$request.page}';
+            if ($.browser.msie) {
+                var sliderConfig = {
+                    rotate: true
+                };
+            } else {
+                var sliderConfig = {
+                    effect: "fade",
+                    fadeOutSpeed: "slow",
+                    rotate: true
+                };
+            }
+            $('a.share,a.popup').bind("click", function(a) {
+                a.preventDefault();
+                var b = $(this),
+                    a = b.attr("href");
+                (b = b.attr("title")) || (b = "Window...");
+                window.open(a, b, "toolbar=no, width=650, height=450");
+                return false;
+            });
+            if ($('#front-slideshow').length == 1) {
+                // add new effect to the tabs
+                $.tools.tabs.addEffect("slide", function(i, done) {
+                    // 1. up on hiding, the active pane has a ruby background color
+                    this.getPanes().slideUp().css({
+                        backgroundColor: "#b8128f"
+                    });
+                    // 2. after a pane is revealed, its background is set to its original color (transparent)
+                    this.getPanes().eq(i).slideDown(function() {
+                        $(this).css({
+                            backgroundColor: 'transparent'
+                        });
+                        // the supplied callback must be called after the effect has finished its job
+                        done.call();
+                    });
+                });
+                $('#front-slideshow').tabs("#slider li", sliderConfig).slideshow({
+                    autoplay: true,
+                    effect: 'slide',
+                    interval: 3000,
+                    autopause: false,
+                    clickable: false
+                });
+            }
+            setTimeout(function() {
+                dcmsTracker();
+            }, 1000);
+        });
+        /* ]]> */
+    </script>
+</cp:block>
+<cp:block name="header">
+    {* 
+    <cp:do modul="news" show="getRecentnews" template="topnews" limit="5" />
+     *}
+    <div class="header-bar">
+        <div id="toggle-menu">
+        </div>
+        <div id="mobile-search">
+            <form action="./search/" method="post">
+                <input type="hidden" name="cp" value="search"/>
+                <input type="hidden" name="action" value="index"/>
+                <input type="text" name="q" placeholder="{trans('Suchen')}" value="" />
+            </form>
+        </div>
+        <div class="site-logo">
+            <span>
+            </span>
+        </div>
+        <div id="language-selector">
+            <cp:provider pname="plugin" name="localeselect" function="run" cacheable="true"/>
+            {* 
+            [plugin name="localeselect" function="run" cacheable="true"]
+             *}
+        </div>
+        <div id="navbar">
+            <div id="search-bar">
+                <form action="./search/" method="post" class="active">
+                    <input type="text" name="q" placeholder="Start Searching..." value="" />
+                    <button type="submit">
+                        <span>
+                            {trans('Suchen')}
+                        </span>
+                    </button>
+                </form>
+            </div>
+            <nav>
+                <cp:provider pname="modul" name="menues" run="Menu" key="test-menu2"/>
+                {* 
+                [modul name="menues" run="Menu" key="test-menu2"]
+                 *}
+            </nav>
+        </div>
+    </div>
+    <cp:if condition="user('userid')">
+        <div class="user-bar">
+            <div>
+                <ul id="user-menu">
+                    <li>
+                        <span class="username">
+                            <span class="fa fa-user">
+                            </span>
+                            {$user.username}
+                        </span>
+                        <div id="user-menu-container">
+                            <div>
+                                <cp:if condition="$user.userphoto != ''">
+                                    <a class="left-side" href="./profile/{$user.userid}/{suggest($user.username, true)}">
+                                        <img src="{photo($user.userphoto, 'thumbnail')}"/>
+                                    </a>
+                                </cp:if>
+                                <div class="right-side {iif($user.userphoto, '', ' no-photo')}">
+                                    <ul>
+                                        <li>
+                                            <a href="user/controlpanel">
+                                                {trans('Kontrollzentrum')}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="profile/{user('userid')}">
+                                                {trans('Meine Profil')}
+                                            </a>
+                                        </li>
+                                        <cp:hasperm permkey="user/userguestbook">
+                                            <li>
+                                                <a href="guestbook/{$user.username}/">
+                                                    {trans('Meine Gästebuch')}
+                                                </a>
+                                            </li>
+                                        </cp:hasperm>
+                                        <li>
+                                            <a href="user/photogallery/{$user.username}/">
+                                                {trans('Meine Fotos')}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="user/blog/{$user.username}/">
+                                                {trans('Mein Blog')}
+                                            </a>
+                                        </li>
+                                        <cp:if condition="hasperm('user/canusepms')">
+                                            <li>
+                                                <a href="messenger/">
+                                                    {trans('Private Nachtichten')}
+                                                </a>
+                                            </li>
+                                        </cp:if>
+                                        <li>
+                                            <a href="user/password">
+                                                {trans('Passwort ändern')}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="user/signatur">
+                                                {trans('Signatur ändern')}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="user/avatar">
+                                                {trans('Profilbild ändern')}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="./auth/logout">
+                            {trans('Logout')}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </cp:if>
+</cp:block>
+<cp:block name="custom_header">
+</cp:block>
+<cp:block name="footer">
+    <div class="bottom-corners">
+        <div id="copyright">
+            <div class="powered-by-dreamcms">
+                <span>
+                </span>
+                <a href="http://www.dcms-studio.de">
+                    powered by DreamCMS {@VERSION}
+                </a>
+            </div>
+            <div class="copyright">
+                <p>
+                    <span>
+                        COPYRIGHT © 2007 - 2013
+                        <a href="http://www.dcms-studio.de">
+                            DREAM DESIGN STUDIO
+                        </a>
+                    </span>
+                    |
+                    <span>
+                        <a href="page/support.html">
+                            SUPPORT/HELP
+                        </a>
+                    </span>
+                    |
+                    <span>
+                        ICONS BY
+                        <a href="http://famfamfam.com/" target="_blank">
+                            FAMFAMFAM
+                        </a>
+                        +
+                        <a href="http://p.yusukekamiyamane.com/" target="_blank">
+                            p.yusukekamiyamane
+                        </a>
+                    </span>
+                </p>
+                <p class="trademarks">
+                    The DreamCMS works with PHP {phpversion()} and above, MySQL 5. Using jQuery & jQuery UI, GeSHi, ACE and TinyMCE
+                </p>
+            </div>
+        </div>
+    </div>
+    <span id="dbg-timer">
+        {trans('Render Time')}
+        <cp:provider pname="plugin" name="timing" method="gettiming"/>
+        {* 
+        [plugin name="timing" method="gettiming"]
+         *}
+    </span>
+</cp:block>
+<cp:block name="teaserblock">
+    <section class="teaser" cp:block="teaser">
+        <div>
+            <cp:block name="teaser" notempty="true" />
+        </div>
+    </section>
+</cp:block>
+<cp:block name="custom_footer">
+</cp:block>
+<cp:block name="left">
+    <cp:block name="left_content" />
+</cp:block>
+<cp:block name="right">
+    <cp:block name="right_content" notempty="true" />
+</cp:block>
+<cp:block name="main">
+    <cp:block name="main_content" />
+</cp:block>

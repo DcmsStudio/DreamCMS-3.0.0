@@ -1,0 +1,6 @@
+<cp:set var="defaultSelected" value="$dataselect.selected"/>
+<cp:unset var="dataselect.selected"/>
+<cp:loop name="dataselect" key="opt">
+    <option value="{$opt.value}" cp:on="selected:$opt.value==$defaultSelected || (is_array($defaultSelected) && in_array($opt.value, $defaultSelected) )" parse:selected="selected">{$opt.label}</option>
+</cp:loop>
+<cp:set var="dataselect" value="null"/>

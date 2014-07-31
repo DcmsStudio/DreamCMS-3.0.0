@@ -1,0 +1,281 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    [save:menuitemForm] [save_exit:menuitemForm] [reset:menuitemForm] [cancel:menuitemForm]       
+
+</cp:block>
+
+<cp:block name="content">
+
+
+
+    <script language="javascript" type="text/javascript">
+            <cp:literal type="cdata_comment">
+
+    
+        $('#menuitemForm').change(function(){
+            GUI_ELEMENTS.prepareElements($('#menuitemForm'));
+        });
+    
+    
+        var type = $('#page-type').val();
+        
+        if (type == 'url')
+        {
+            type = 'link';
+        }
+        
+        _rForm();
+
+        function _rForm()
+        {
+            $('#menuitemForm').registerForm({
+                contentIdentifierID: 'item-id',
+                exiturl: 'admin.php?adm=menues&action=index',
+                identifierType: '',
+                baseField: 'title',
+                onBeforeSubmit: function(){
+                    if ( $('#thisname').val() == '' )
+                    {
+                        jAlert('{trans('Bitte geben Sie einen Titel an.')}');
+                        _SubmitError = true;
+                        return true;
+                    }
+                    if ( $('#url').val() == '' && $('#page-type').find(':selected').val() == 'url')
+                    {
+                        jAlert('{trans('Bitte eine Url angeben.')}');
+                        _SubmitError = true;
+                        return true;
+                    }
+                    
+                    //$('#page-type').find('option').attr('selected', false);
+                    
+                    //alert($('#page-type').find(':selected').val());
+                },
+                runAfterSubmit: function() {
+                    $('#insert-after').val('');
+                }
+
+            });
+        }
+        
+        function hideParents()
+        {
+            $('#parents-menu').hide();
+            $('#menu-access').removeClass('fieldsetrows');
+            $('#menu-access').removeClass('right');
+            $('#menu-access').addClass('fieldset2');
+            $('#menu-access').addClass('rows');
+        }
+        
+        function enableParents()
+        {
+            $('#parents-menu').show();
+            $('#menu-access').removeClass('fieldset2');
+            $('#menu-access').removeClass('rows');
+            $('#menu-access').addClass('right');
+            $('#menu-access').addClass('fieldsetrows');
+        }
+        
+        
+        
+        
+        
+        $('#metadata-default option.timecontrol').show();
+        $('#menu-access,#parents-menu,#documentmeta-alias,#documentmeta-activemenuitemid,#documentmeta-activemenuitemid').show();
+        if (type == 'rootpage')
+        {
+
+            $('#metadata-default option.timecontrol').hide();
+            $('#documentmeta-alias,#documentmeta-activemenuitemid,#documentmeta-activemenuitemid').hide();
+            type = '';
+            hideParents();
+        }
+
+        
+        //.rebuildIdentifier(type);
+        
+        //setTimeout(function() {form.rebuildIdentifier(type);}, 500);
+
+        var originalType = $('#page-type').find(':selected').text();
+            
+
+        $('#page-type').change(function(e) {
+            
+            e.preventDefault();
+
+            var self = this;
+            var currentID = $('#item-id').val();
+            var setType = $(this).find(':selected').val();
+            var cpageType = $(this).find(':selected').text();
+        
+            //  $(this).find('option:selected').attr('selected', 'selected');
+                $(this).find(':selected').get(0).selected = true;
+            
+            
+            // jConfirm('Möchtest du Typ der Seite wirklich ändern?', 'Bestätigung...', function(r) {
+            //     if(r) {
+                    
+            $('#item-type-container').mask('laden...');
+            var u = (currentID > 0 ? '&id='+ currentID : '');
+            
+            
+            
+               
+               
+            // alert('admin.php?adm=menues&action=edit&loadtype='+ setType + u);
+            $.get('admin.php?adm=menues&action=edit&loadtype='+ setType + u, {}, function(data) {
+                if(responseIsOk(data))
+                {
+                    if ($('#original-type').val() != setType )
+                    {
+                        $('#page-type').next().html('<em>Aktueller Seiten Typ: '+ originalType +'</em>');
+                    }
+                    else
+                    {
+                        $('#page-type').next().html('');
+                    }
+                        
+                    enabaleIdentifier();
+                    $('#item-type-container').html(data.html);
+                    $('#item-type').val(setType);
+                    $('#item-type-container').unmask();
+                            
+                    type = setType;
+                    if (setType == 'url')
+                    {
+                        type = 'link';
+                    }
+
+                    enableParents();
+                    
+                    $('#metadata-default option.timecontrol').show();
+                    $('#menu-access,#parents-menu,#documentmeta-alias,#documentmeta-activemenuitemid,#documentmeta-activemenuitemid').show();
+                    if (setType == 'rootpage')
+                    {
+                        $('#metadata-default option.timecontrol').hide();
+                        $('#documentmeta-alias,#documentmeta-activemenuitemid,#documentmeta-activemenuitemid').hide();
+                        
+                        
+                        type = '';
+                        hideParents();
+                    }
+                            
+                    //form.rebuildIdentifier(type);
+                            
+                    loadValidationForms();
+                    rebuildTooltips();
+                            
+                    GUI_ELEMENTS.prepareElements($('#menuitemForm'));
+
+                }
+                else {
+                    $('#item-type-container').unmask();
+                    jAlert(data.msg);
+                }
+            }, 'json');
+            //    }
+            //});
+        
+        });
+
+        function enabaleIdentifier()
+        {
+            $('input[name="alias"]').removeAttr('disabled');
+            $('select[name="suffix"]').removeAttr('disabled');
+        }
+
+            </cp:literal>
+    </script>
+
+
+    <form action="admin.php" method="get" name="menuitemForm" id="menuitemForm">
+        <input type="hidden" name="adm" value="menues" />
+        <input type="hidden" name="action" value="save" />
+        <input type="hidden" name="id" id="item-id" value="{$id}" />
+        <input type="hidden" name="insertafter" id="insert-after" value="{$request.after}" />
+
+        <cp:include template="../metadata"/>
+
+        <div class="box description">
+            <div class="box-inner">
+                <div class="fieldset2">
+                    <fieldset>
+                        <legend>{trans('Menü Titel')}</legend>
+                        {info:menuitems|title}
+                        <input class="required input" type="text" name="title" id="thisname" value="{escape($title, 'html')}" size="60" maxlength="255" />        
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>{trans('Seitentyp')}</legend>
+                        {info:menuitems|pagetype}        
+
+                        <select name="type" id="page-type">            
+                            <option value="url" cp:on="selected:$type == 'url' || empty($type )" parse:selected="selected"> {trans('Externe URL')}</option>
+                            <option value="internal" cp:on="selected:$type == 'internal'" parse:selected="selected"> {trans('Interne Weiterleitung')}</option>
+                            <option value="page" cp:on="selected:$type == 'page'" parse:selected="selected"> {trans('"Statische Seite"')}</option>
+                            <option value="rootpage" cp:on="selected:$type == 'rootpage'" parse:selected="selected"> {trans('Startpunkt einer Webseite')}</option>
+                            <option value="plugin" cp:on="selected:$type == 'plugin'" parse:selected="selected"> {trans('Plugin')}</option>
+                            <option value="newscat" cp:on="selected:$type == 'newscat'" parse:selected="selected"> {trans('News Kategorie')}</option>
+                            <option value="articlecat" cp:on="selected:$type == 'articlecat'" parse:selected="selected"> {trans('Artikel Kategorie')}</option>
+                            <option value="appcat" cp:on="selected:$type == 'appcat'" parse:selected="selected"> {trans('Anwendungs Kategorie')}</option>
+                        </select> 
+                        <span></span>
+                        <input type="hidden" id="original-type" value="{$type}" />
+                    </fieldset>        
+                </div>
+
+
+                <div id="item-type-container" style="display:inline-block;width:100%;">
+                    {$pagetypehtml}
+                </div>
+
+                <div style="width:100%;display:inline-block">
+                    <div id="parents-menu" class="fieldset2 rows">
+                        <fieldset>
+                            <legend>{trans('Übergeordneter Menüpunkt')}</legend>
+                            {info:menuitems|parent}
+
+                            <cp:if condition="$parentpages">
+                                <select name="parentid" id="parent-page" size="8" style="width:99%">
+                                    <cp:loop name="parentpages" key="r">
+                                        <option value="{$r.id}" cp:on="selected:$r.id == $parentid" parse:selected="selected"> {$r.treename}</option>
+                                    </cp:loop>
+                                </select>
+                            </cp:if>
+                            <cp:else>
+                                {trans('Übergeordneter Menüpunkte dieses Menüeintrages können nicht bearbeitet werden, da es sich um einen Hauptmenü-Eintrag handelt.')}
+                            </cp:else>
+                        </fieldset>            
+                    </div>
+
+                    <div id="menu-access" class="fieldsetrows right">
+                        <fieldset>
+                            <legend>{trans('Sichtbar für Benutzergruppen')}</legend>
+                            <select name="access[]" class="select" size="8" multiple="multiple" style="width:99%">
+                                <option value="0" cp:on="selected:(is_array($accesslist) && in_array(0, $accesslist)) || empty($accesslist)" parse:selected="selected"> {trans('alle Benutzergruppen')}</option>
+                                <cp:loop name="usergroups" key="r">
+                                    <option value="{$r.groupid}" cp:on="selected:is_array($accesslist) && in_array($r.groupid, $accesslist)" parse:selected="selected"> {$r.title}</option>
+                                </cp:loop>
+                            </select>
+                        </fieldset>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </form>
+    <script language="javascript" type="text/javascript">
+            <cp:literal type="cdata_comment">
+
+            
+            
+        
+
+            </cp:literal>
+    </script>
+</cp:block>

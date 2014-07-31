@@ -1,0 +1,247 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+  {*  <button type="button" id=""><img src="images/event-install.png" width="16" height="16"/> {trans("Hook Komponente hinzuzufügen")}</button> *}
+    <button type="button" id="scan-sys-events"><img src="images/event-scan.png" width="16" height="16"/> {trans("Prüfe System Ereignisse")}</button>
+    <button type="button" id="scan-plugin-events"><img src="images/event-scan.png" width="16" height="16"/> {trans("Prüfe Plugin Ereignisse")}</button>
+
+
+</cp:block>
+
+<cp:block name="content">
+
+{*
+<div id="event-introduction-text" class="box">
+    <h2 class="collapsible">{trans("Event Management")}</h2>
+
+    <div class="box-inner">
+
+        <p>{trans("Diese Seite zeigt eine Liste aller Ereignisse die innerhalb des DreamCMS enthalten sind. Die folgenden Befehle stehen zur Verfügung:")}</p>
+        <ul>
+            <li>
+                <strong>{trans("Verwalten von Ereignissen")}</strong><img src="images/event-edit.png" width="16" height="16" title="" alt="" border="0" class="fl p3"/><br/>
+                {trans("Hiermit können Sie das Ereignis verwalten. Aktivieren / Deaktivieren von Hooks oder löschen Sie Hook Komponenten aus dem Ereignis.")}
+            </li>
+            <li>
+                <strong>{trans("Hook Komponente hinzuzufügen")}</strong><img src="images/event-install.png" width="16" height="16" title="" alt="" border="0" class="fl p3"/><br/>
+                {trans("Diese Option ermöglicht es Ihnen, eine Komponente zu einem Ereignis hinzu zu fügen.")}
+            </li>
+            <li>
+                <strong>{trans("Prüfe Plugin Ereignisse")}</strong><img src="images/event-scan.png" width="16" height="16" title="" alt="" border="0" class="fl p3"/><br/>
+                {trans("Diese Option überprüft alle Plugins um zu sehen, ob es irgendwelche Methoden gibt, die als Ereignis eingehängt werden können.")}
+            </li>
+            <li>
+                <strong>{trans("Prüfe System Ereignisse")}</strong><img src="images/event-scan.png" width="16" height="16" title="" alt="" border="0" class="fl p3"/><br/>
+                {trans("Diese Option überprüft das gesamte System um zu sehen, ob es irgendwelche Änderungen an Ereignissen gibt, die in der Datenbank registriert werden müssen.")}
+            </li>
+        </ul>
+
+    </div>
+</div>
+*}
+<div id="eventmanager-grid">
+</div>
+
+<script type="text/javascript">
+
+
+if ( typeof eventmanagerCheckSelection !== 'function' )
+{
+    function eventmanagerCheckSelection()
+    {
+
+    }
+
+    function bindRowAction()
+    {
+        var trs = $( '#grid-table' ).find( '.gridRow' );
+        trs.each( function ()
+        {
+            var eventedit = $( this ).find( 'a.event-edit' );
+            var eventadd = $( this ).find( 'a.event-add' );
+
+            $( eventedit ).unbind( 'click' );
+            if ( $( eventedit ).hasClass( 'disabled' ) ) {
+                $( eventedit ).css( {'opacity': '0.5', cursor: 'default'} );
+            }
+            else {
+                $( eventedit ).click( function ()
+                {
+                    href = 'admin.php?adm=eventmanager&action=edit&event=' + $( eventedit ).attr( 'rel' );
+                    openTab( {url: href, obj: this} );
+                } );
+            }
+
+            $( eventadd ).unbind( 'click' );
+            if ( $( eventadd ).hasClass( 'disable' ) ) {
+                $( eventadd ).css( 'opacity', '0.5' );
+            }
+            else {
+                $( eventadd ).click( function ()
+                {
+                    href = 'admin.php?adm=eventmanager&action=add&event=' + $( eventadd ).attr( 'rel' );
+                    openTab( {url: href, obj: this } );
+                } );
+            }
+
+        } );
+    }
+
+    function eventManagerSetMessage( data )
+    {
+        if ( Tools.exists( data, 'add' ) ) {
+            Notifier.display( 'info', sprintf( '{trans("Es wurden %s Hooks entfernt und %s Hooks hinzugefügt in %s Events")}', data.delete, data.add, data.events ) );
+        }
+    }
+
+
+
+    function eventManagerGridonAfterLoad (data, gridInst) {
+        var trs = $( '#eventmanager-grid div.grid-data' ).find( 'td[rel=event],td[rel=options]' );
+        trs.each( function ()
+        {
+            var eventedit = $( this ).find( 'a[href*="edit"]' );
+            var eventadd = $( this ).find('a[href*="add"]' );
+            $( eventedit ).unbind('click');
+
+            if ( $( eventedit ).hasClass( 'disabled' ) ) {
+                $( eventedit ).css( {'opacity': '0.5', cursor: 'default'} ).click(function(e) {
+                    e.preventDefault();
+                });
+            }
+            else {
+                $( eventedit ).click( function ( e )
+                {
+                    e.preventDefault();
+                    openTab( {url: $(this).attr('href'), obj: $( this ), label: $( this ).attr( 'title' ) } );
+                    return false;
+                } );
+            }
+
+            $( eventadd ).unbind('click');
+
+            if ( $( eventadd ).hasClass( 'disable' ) ) {
+                $( eventadd ).css( {'opacity': '0.5', cursor: 'default'} ).click(function(e) {
+                    e.preventDefault();
+                });
+            }
+            else {
+                $( eventadd ).click( function ( e )
+                {
+                    e.preventDefault();
+                    openTab( {url: $(this).attr('href'), obj: $( this ), label: $( this ).attr( 'title' ) } );
+
+                    return false;
+                } );
+            }
+
+        } );
+    }
+
+}
+
+
+
+Application.Grid( 'eventmanager-grid', {$gridJson});
+
+
+
+$( '#event-scanhooks' ).bind( 'click', function ()
+{
+    jConfirm( '{trans("Scan nach Veränderungen der Hooks. Bitte beachten Sie, dass dieser Vorgang bis zu mehrere Minuten dauern kann und während dessen ist Ihre Webseite möglicherweise nicht voll funktionsfähig. Wollen Sie fortsetzen?")}', 'Achtung...', function ( res )
+    {
+        if ( res ) {
+            $.pagemask.show( '{trans("Scan nach Event hooks läuft... ")}' );
+            $.ajax( {
+                type: "POST",
+                url: 'admin.php',
+                data: 'adm=eventmanager&action=synchooks',
+                async: false,
+                timeout: 30000,
+                success: function ( data )
+                {
+                    if ( responseIsOk( data ) ) {
+                        $.pagemask.hide();
+
+                        //eval(listViewTbl+'.GetAdminList("admin.php?adm=eventmanager", true)');
+                        //notify('{trans("Event Hooks Synchronised!")}', true);
+                        setTimeout( unnotify, 3000 );
+                    } else {
+                        $.pagemask.hide();
+                        jAlert( data );
+                    }
+                }
+
+            } );
+
+        }
+    } );
+} );
+
+$( '#scan-sys-events' ).bind( 'click', function ()
+{
+    jConfirm( '{trans("Es wird nun eine Überprüfung des Systems durchgeführt um alle Ereignisse zu finden. Bitte beachten Sie, dass dieser Vorgang bis zu mehrere Minuten dauern kann und während dessen ist Ihre Webseite möglicherweise nicht voll funktionsfähig. Wollen Sie fortsetzen?")}', 'Achtung...', function ( res )
+    {
+        if ( res ) {
+            $.pagemask.show( '{trans(" Scan nach Events läuft...")}' );
+
+            $.ajax( {
+                type: "POST",
+                url: 'admin.php',
+                data: 'adm=eventmanager&action=scanevents',
+                async: true,
+                timeout: 30000,
+                success: function ( data )
+                {
+                    if ( Tools.responseIsOk( data ) ) {
+                        $.pagemask.hide();
+                        Notifier.info( '{trans("System Events wurden gescannt")}' );
+                        setTimeout( unnotify, 3000 );
+                    } else {
+                        $.pagemask.hide();
+                        jAlert( data.data_display );
+                    }
+                }
+
+            } );
+
+        }
+    } );
+} );
+
+$( '#scan-plugin-events' ).bind( 'click', function ()
+{
+    jConfirm( '{trans("Es wird nun eine Überprüfung des Systems durchgeführt um alle Ereignisse zu finden. Bitte beachten Sie, dass dieser Vorgang bis zu mehrere Minuten dauern kann und während dessen ist Ihre Webseite möglicherweise nicht voll funktionsfähig. Wollen Sie fortsetzen?")}', 'Achtung...', function ( res )
+    {
+        if ( res ) {
+            $.pagemask.show( '{trans("Scan nach Events läuft...")}' );
+
+            $.ajax( {
+                type: "POST",
+                url: 'admin.php',
+                data: 'adm=eventmanager&action=scanevents',
+                async: true,
+                timeout: 30000,
+                success: function ( data )
+                {
+                    if ( Tools.responseIsOk( data ) ) {
+                        $.pagemask.hide();
+                        Notifier.info( '{trans("Plugin Events wurden gescannt")}' );
+
+                    } else {
+                        $.pagemask.hide();
+                        jAlert( data.data_display );
+                    }
+                }
+
+            } );
+
+        }
+    } );
+} );
+
+</script>
+
+
+</cp:block>

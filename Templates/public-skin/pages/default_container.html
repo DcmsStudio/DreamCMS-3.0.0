@@ -1,0 +1,96 @@
+<cp:extends template="../container" />
+
+
+
+
+<cp:block name="teaser">
+    <cp:if condition="$page.teaser && !$page.teaserimage && $page.useteaser">
+        <div class="inside">
+            {$page.teaser}
+        </div>
+    </cp:if>
+    <cp:elseif condition="!$page.teaser && $page.teaserimage && $page.useteaser">
+        <cp:thumb src="$page.teaserimage" cache="pageteaser" width="910" height="150" chain="newsteaser" quality="80" alt="$page.teaserimagetitle" />
+    </cp:elseif>
+    <cp:elseif condition="$page.teaser && $page.teaserimage && $page.useteaser">
+    <cp:thumb src="$page.teaserimage" cache="pageteaser" width="910" height="150" chain="newsteaser" quality="80" alt="$page.teaserimagetitle" />
+        <div class="inside">
+            {$page.teaser}
+        </div>        
+    </cp:elseif>
+</cp:block>
+
+
+
+<cp:block name="right_content">
+    <cp:if condition="$page.userating">
+        <cp:set var="page.voteurl" value="/page/rate"/>
+        <cp:set var="page.dataid" value="$page.id"/>
+        <cp:box template="../cms/box-vote" data="$page" var="vote" class="iif($page.published, ' online-content',' offline-content')"/>
+    </cp:if>
+    <cp:box template="../cms/box-tags" var="tags" data="$page.tags" label="trans('Tags')" showlabel="true" class="tags" />
+</cp:block>
+<cp:block name="main_content">
+    <div class="item{iif($page.published, ' online-content', ' offline-content')}">
+        <div class="seemcontent">
+            <cp:seemodeitem modul="page" contentid="$page.id" edit="action=edit&amp;id=%s&amp;edit=1" publish="action=publish&amp;id=%s" state="$page.published">
+                <header class="item-header" cp:is="$page.usetitle">
+                    <h1>
+                        {seemode($page.title,'title')}
+                    </h1>
+                </header>
+                <div cp:notempty="$page.cancomment" class="comments-bubble sprite">
+                    <p>
+                        <a href="{$SERVER.REQUEST_URI}#comments-{$page.id}" class="scroll-to-comment">
+                            {$page.commentscounter}
+                            <small>
+                                {trans('Kommentare')}
+                            </small>
+                        </a>
+                    </p>
+                </div>
+                <article>
+                    <cp:if condition="$page.usefootnotes">
+                        <cp:footnote name="footnote-box" value="seemode($page.content,'content')" auto="true" var="footnotes" template="../footnote" />
+                    </cp:if>
+                    <cp:else>
+                        {seemode($page.content,'content')}
+                    </cp:else>
+                </article>
+                
+                <cp:if condition="$page.usesocialbookmarks">
+                    <cp:likethis sharebutton="true" showcount="true" networks="twitter,fb" />
+                </cp:if>
+                
+            </cp:seemodeitem>
+            
+            <cp:if condition="$page.usefootnotes">
+                <cp:footnote name="footnote-box" />
+            </cp:if>
+        </div>
+    </div>
+    
+    <cp:set var="document.pageing" value="$page.paging" />
+    <cp:include template="../pageing" />
+
+    <cp:if condition="$page.useauthorinfo">
+        <cp:box template="../cms/box-author" var="author" data="$page.author" class="iif($page.published, ' online-content',' offline-content')" />
+    </cp:if>
+    
+    <cp:if condition="$page.cancomment">
+        <cp:set var="permissionkey" str:value="page/cancommentpages" />
+        <div class="box-comments{iif($page.published, ' online-content', ' offline-content')}">
+            <div class="box-comments-inner">
+                <a name="comments-{$page.id}" id="comments-{$page.id}">
+                </a>
+                [modul name="comments" section="page" id="{$page.id}"]
+            </div>
+            <div class="clear">
+                <!-- -->
+            </div>
+            <div class="box-comments-form">
+                [modul name="commentform" section="page" id="{$page.id}"]
+            </div>
+        </div>
+    </cp:if>
+</cp:block>

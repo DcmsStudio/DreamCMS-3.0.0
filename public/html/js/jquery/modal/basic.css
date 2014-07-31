@@ -1,0 +1,183 @@
+/*
+ * SimpleModal Basic Modal Dialog
+ * http://www.ericmmartin.com/projects/simplemodal/
+ * http://code.google.com/p/simplemodal/
+ *
+ * Copyright (c) 2010 Eric Martin - http://ericmmartin.com
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Revision: $Id: basic.css 257 2010-07-27 23:06:56Z emartin24 $
+ */
+
+#basic-modal-content {display:none;}
+
+/* Overlay */
+#simplemodal-overlay {z-index:9989!important; background-color:#333; }
+#simplemodal-container.ui-draggable-dragging {box-shadow: 0!important; background-color:#DDDDDD!important; margin:0!important;padding: 0!important; border:0!important;border:1px solid #000!important;  }
+/* Container */
+#simplemodal-container {
+	background-color:#DDDDDD; 
+	border:1px solid #000; 
+	padding:0;
+	margin : 0;
+	padding-bottom:0px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    box-shadow: 0 2px 12px #555!important;
+    -webkit-box-shadow: 0 2px 12px #555!important;
+    -moz-box-shadow: 0 2px 12px #555!important;
+	overflow:hidden!important;
+	max-height:800px!important;
+	z-index:9990!important;
+	position:fixed!important;
+	display:inline-block!important;
+}
+
+.simplemodal-wrap {
+	display:block!important;
+	overflow:hidden!important;
+	cursor:default!important;
+	margin:0!important;
+	padding:0!important;
+	/*max-width:1024px; */
+	min-width:700px!important;
+	max-height:800px!important;
+}
+
+
+#simplemodal-container .simplemodal-data { 
+	margin:0!important;
+	padding:0!important;
+	display:inline-block!important;
+	overflow:hidden!important;
+	width:100%!important;
+	max-height:800px!important;
+
+}
+
+#modal-container {
+	margin:0!important;
+	padding:0!important;
+	display:inline-block!important;
+	overflow:hidden!important;
+	width:100%!important;
+	max-height:800px!important;
+}
+#modal-fixedheader {
+	float:none!important;
+	margin:0!important;
+	padding:0!important;
+	display:inline-block!important;
+	overflow:hidden!important;
+	width:100%!important;
+	clear:both;
+}
+
+#simplemodal-container #modal-header{
+	top:2px!important; 
+	left:0!important;
+    background-color : #e6e9f4;
+	font-weight:bold;
+	display:inline-block!important;
+	width:100%;
+	height :28px!important;
+	line-height: 28px!important;
+	margin:0!important;
+	padding:0!important;
+	border-bottom : 1px solid #000!important;
+	overflow: hidden;
+}
+
+
+#simplemodal-container #modal-header > span { line-height: 24px; display:block; padding-left: 3px; cursor:move; width:50%; min-width:50% }
+#simplemodal-container .toolbar { 
+	left:0px!important;
+	margin:0!important;
+	padding:0!important;
+	width:100%!important;
+	height :28px!important;
+	line-height :28px!important;
+	padding-top: 0px!important;
+	float:none!important;
+}
+#simplemodal-container .toolbar .action-button { color: #333; border: 1px solid transparent; display:inline-block; line-height :24px!important; margin-top: 3px; background: transparent; }
+#simplemodal-container .toolbar .action-button:hover { border: 1px solid #999; margin-top: 3px; background: auto; }
+#simplemodal-container .toolbar .action-button img { float: left; margin: 0; padding: 0;}
+#simplemodal-container .toolbar .action-button span { line-height :24px!important; }
+#modal-fixedheader .toolbar { 
+	left:0px!important;
+	margin:0!important;
+	padding:0!important;
+	padding-left: 3px!important;
+	padding-right: 3px!important;
+	
+	width:100%!important;
+	height :28px!important;
+	line-height :28px!important;
+	float:none!important;
+	border-bottom: 1px solid #999;
+}
+
+
+#modal-content {
+	margin:0px!important;
+	padding:5px!important;	
+	width:98%;
+	height:93%;	
+	overflow: auto!important;
+	overflow-x: hidden!important;
+	display:inline-block;
+	margin-bottom: 20px!important;
+}
+
+
+#modal-resizer {
+	display:inline-block;
+	width:100%;
+	height:16px;
+	margin:0px!important;
+	overflow:hidden!important;
+	background:url(./resizer.gif) top right no-repeat!important;
+	position:relative;
+	margin-top:5px;
+
+}
+#modal-resizer span { width:16px; height: 16px; display:block; float: right; }
+#simplemodal-container a.modalCloseImg {
+	background:url(./x.png) no-repeat!important;
+	
+	width:28px!important;
+	height:29px!important; 
+	
+	
+	display:block; 
+	z-index:9999; 
+	position:absolute; 
+	top:0px!important; 
+	right:5px!important; 
+	cursor:pointer;
+}
+#simplemodal-container a.modalClose, a.simplemodal-close {
+	z-index:9999;
+	position:absolute; 
+	top:3px!important; 
+	right:5px!important; 
+	cursor:pointer;
+	padding: 0!important;
+	height:18px!important;
+	max-height:18px!important;
+	line-height:18px!important;
+	padding-left: 5px!important;
+	padding-right: 5px!important;
+	background: none!important;
+	color:#fff;
+	border: #333 1px solid!important;
+}
+#simplemodal-container a.modalClose:hover,
+a.simplemodal-close:hover {
+	background: #333!important;
+}
+

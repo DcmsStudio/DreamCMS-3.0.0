@@ -1,0 +1,105 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+</cp:block>
+
+<cp:block name="content">
+
+
+    <div class="box description">
+        <div class="box-inner">
+            {trans('Bitte klicken Sie auf den Namen der Komponente, die Sie im Event ausführen möchten.')}
+        </div>
+    </div>
+
+
+    <cp:set var="lastCat" value="0"/>
+    <cp:loop name="components" key="component">
+
+        <cp:if condition="$lastCat != $component.category">
+            <cp:set var="lastCat" value="$component.category"/>
+
+
+            <cp:tag name="div" class="component panel panel-default"/>
+            <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> {$component.cat_name}</div>
+            <cp:tag name="div" class="panel-body"/>
+
+            <p>
+                {$component.cat_description}
+            </p>
+
+            <cp:tag name="div" class="panel-table" style="display:none"/>
+
+        </cp:if>
+
+        &nbsp;&nbsp;&nbsp;- <a class="comp-link" href="javascript:void(0)" rel="admin.php?adm=eventmanager&action=component&event={$input.event}&component={$component.name}">{$component.name}</a>
+        <cp:if condition="$component.description">
+            <small><em style="color: #999;">({$component.description})</em></small>
+        </cp:if>
+        <br/>
+
+        <cp:if condition="$lastCat != $component.next_component.category || empty($component.next_component.name) ">
+            <cp:tag name="div" forceclose="true"/>
+            <cp:tag name="div" forceclose="true"/>
+            <cp:tag name="div" forceclose="true"/>
+        </cp:if>
+
+
+    </cp:loop>
+    <cp:else>
+        <div class="panel panel-default">
+            <div class="panel-heading">{trans('Hinweis')}</div>
+            <div class="panel-body">
+                {trans('Es sind keine Komponenten / Komponenten Kategorien vorhanden. Bitte fügen Sie zuerst eine Komponente hinzu, bevor Sie dem Event eine Komponente zuweisen.')}
+            </div>
+        </div>
+    </cp:else>
+
+
+    <script type="text/javascript">
+
+        $('.component div.panel-heading' ).click(function() {
+            var head = $(this ).find('.glyphicon' );
+
+            $(this ).parent().find('.panel-table:first' ).slideToggle('fast', function() {
+                if ($(this ).is(':visible')) {
+                    head.addClass('glyphicon-chevron-up').removeClass('glyphicon-chevron-down');
+                    $(window ).trigger('resize');
+                }
+                else {
+                    head.addClass('glyphicon-chevron-down').removeClass('glyphicon-chevron-up');
+                    $(window ).trigger('resize');
+                }
+            });
+        });
+
+        $( '.comp-link' ).click( function ( e )
+        {
+            var self = this;
+            var message = '{trans("Komponente `<strong>%s</strong>` dem Event `<strong>%e</strong>` wirklich hinzufügen?")}'.replace( '%s', $( this ).html() ).replace( '%e', '{$input.event}' )
+            jConfirm( message, '{trans("Achtung...")}', function ( res )
+            {
+                if ( res ) {
+
+                    $.get( $( self ).attr( 'rel' ), {}, function ( data )
+                    {
+                        if ( Tools.responseIsOk( data ) ) {
+                            Notifier.display( 'info', data.msg );
+                        }
+                        else {
+                            Notifier.display( 'error', data.msg );
+                        }
+                    } );
+
+                    // document.location.href = $(self).attr('rel');
+                }
+            }
+            )
+            ;
+            e.preventDefault();
+            return false;
+        } );
+
+
+    </script>
+</cp:block>

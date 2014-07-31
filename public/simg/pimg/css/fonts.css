@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "TheSansBlackCaps";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/the_sans_black/thesansblack-caps-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/the_sans_black/thesansblack-caps-webfont.woff") format("woff"), url("../fonts/the_sans_black/thesansblack-caps-webfont.ttf") format("truetype"), url("../fonts/the_sans_black/thesansblack-caps-webfont.svg#TheSansBlackCaps") format("svg");
+}
+
+@font-face {
+    font-family: "TheSansBlackPlain";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/the_sans_plain/thesans-plain-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/the_sans_plain/thesans-plain-webfont.woff") format("woff"), url("../fonts/the_sans_plain/thesans-plain-webfont.ttf") format("truetype"), url("../fonts/the_sans_plain/thesans-plain-webfont.svg#TheSansPlain") format("svg");
+}
+
+@font-face {
+    font-family: "TheSansSemilightCaps";
+    src: url("../fonts/the_sans_semilight_caps/thesans_semilight_caps-webfont.eot");
+    src: url("../fonts/the_sans_semilight_caps/thesans_semilight_caps-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/the_sans_semilight_caps/thesans_semilight_caps-webfont.woff") format("woff"), url("../fonts/the_sans_semilight_caps/thesans_semilight_caps-webfont.ttf") format("truetype"), url("../fonts/the_sans_semilight_caps/thesans_semilight_caps-webfont.svg#TheSansSemilightCaps") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TheSansExtraLightCaps";
+    src: url("../fonts/the_sans_extra_light_caps/thesansextralight_caps-webfont.eot");
+    src: url("../fonts/the_sans_extra_light_caps/thesansextralight_caps-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/the_sans_extra_light_caps/thesansextralight_caps-webfont.woff") format("woff"), url("../fonts/the_sans_extra_light_caps/thesansextralight_caps-webfont.ttf") format("truetype"), url("../fonts/the_sans_extra_light_caps/thesansextralight_caps-webfont.svg#the_sans_extralightcaps") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}

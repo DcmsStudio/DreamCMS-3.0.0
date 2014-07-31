@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game_usk>
+	<option value="0" key="">unbekannt</option>
+	<option value="1" key="">keine Altersbeschränkung</option>
+	<option value="6" key="">ab 6 Jahren</option>
+	<option value="12" key="">ab 12 Jahren</option>
+	<option value="16" key="">ab 16 Jahren</option>
+	<option value="18" key="">ab 18 Jahren</option>
+</game_usk>

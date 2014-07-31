@@ -1,0 +1,107 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:cronjobForm{$job_id}] [save_exit:cronjobForm{$job_id}]
+        [reset:cronjobForm{$job_id}] [cancel:cronjobForm{$job_id}]
+    </cp:groupbutton>
+</cp:block>
+
+
+<cp:block name="content">
+
+
+    <form action="admin.php" id="cronjobForm{$job_id}" method="post" name="cronjobForm{$job_id}">
+        <input type="hidden" name="adm" value="cronjobs" />
+        <input type="hidden" name="action" value="edit" />
+        <input type="hidden" name="id" id="item-id{$job_id}" value="{$job_id}" />
+        <input type="hidden" name="send" value="send" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Titel')}</label>
+                <input class="required form-control" type="text" name="job_title" id="cronjob-title" value="{escape($job_title, 'quotes')}" size="60" maxlength="240" />
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>{trans('Beschreibung')}</label>
+                <textarea name="job_description" class="form-control" rows="3">{$job_description}</textarea>
+                <span class="note">{trans('Hier können Sie zu besseren Übersicht eine kurze Bechreibung eintragen')}</span>
+            </div>
+
+            <div class="col-md-6">
+                <label>{trans('Aktion')}</label>
+                <textarea name="job_filename" class="form-control" rows="3">{$job_filename}</textarea>
+                <span class="note">{trans('Datei oder PHP Code (ohne PHP Einleitung)')}</span>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-3">
+                <label>{trans('Monatstag')}</label>
+                <select name="job_month_day">
+                    <option value="-1" cp:on="selected:$job_month_day == -1" parse:selected="selected">*</option>
+                    <cp:for name="monthday" from="1" to="31">
+                        <option value="{$monthday.index}" cp:on="selected:$job_month_day == $monthday.index" parse:selected="selected">{$monthday.index}.</option>
+                    </cp:for>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>{trans('Wochentag')}</label>
+                <select name="job_week_day">
+                    <option value="-1" cp:on="selected:$job_week_day == -1" parse:selected="selected">*</option>
+                    <cp:for name="weekday" from="0" to="6">
+                        <option value="{$weekday.index}" cp:on="selected:$job_week_day == $weekday.index" parse:selected="selected">{date('dayname', $weekday.index)}</option>
+                    </cp:for>
+                </select>
+                <span class="note">{trans('(Hinweis: der `Monatstag` wird dadurch außer Kraft gesetzt)')}</span>
+            </div>
+
+            <div class="col-md-3">
+                <label>{trans('Stunde')}</label>
+                <select name="job_hour">
+                    <option value="-1" cp:on="selected:$job_hour == -1" parse:selected="selected">*</option>
+                    <cp:for name="hour" from="1" to="23">
+                        <option value="{$hour.index}" cp:on="selected:$job_hour == $hour.index" parse:selected="selected">{$hour.index}</option>
+                    </cp:for>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>{trans('Minute')}</label>
+                <select name="job_minute">
+                    <option value="-1" cp:on="selected:$job_minute == -1" parse:selected="selected">*</option>
+                    <cp:for name="minutes" from="0" to="59">
+                        <option value="{$minutes.index}" cp:on="selected:$job_minute == $minutes.index" parse:selected="selected">{$minutes.index}</option>
+                    </cp:for>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>{trans('Cronjobs Loggen?')}</label>
+                <label for="logging1"><input type="radio" name="job_log" id="logging1" value="1" cp:on="checked:$job_log" parse:checked="checked"/> {trans('Ja')}</label>
+                <label for="logging0"><input type="radio" name="job_log" id="logging0" value="0" cp:on="checked:!$job_log" parse:checked="checked"/> {trans('Nein')}</label>
+                <span class="note">{trans('Hiermit können die Aktionen des Cronjobs mitgeloggt werden')}</span>
+            </div>
+        </div>
+
+
+
+    </form>
+    <script type="text/javascript">
+
+        Form.registerForm('cronjobForm{$job_id}', {
+            contentIdentifierID: 'item-id{$job_id}',
+            exiturl: 'admin.php?adm=cronjobs'
+        });
+
+
+    </script>
+</cp:block>

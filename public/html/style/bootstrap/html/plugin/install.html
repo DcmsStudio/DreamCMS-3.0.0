@@ -1,0 +1,87 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar"></cp:block>
+
+<cp:block name="content">
+
+    <cp:loop name="plugins" key="r">
+        <div class="box">
+            <h2>{$r.modulelabel}</h2>
+            <div class="box-inner">
+
+                <table cellpadding="3" cellspacing="0" width="100%">
+                    
+                    <tr>
+                        <td rowspan="2" style="width:48px; text-align: center; padding: 5px;">
+                            <img src="../dcms/packages/plugin/{$r.key}/plugin.png" width="36" height="36" alt="" />
+                        </td>
+
+                        <td style="vertical-align: top;">
+                            {trans('Plugin Version:')} {$r.version}<br/>
+                            <div cp:is="$r.author">{trans('Plugin Autor:')} <a href="{$r.website}" class="plugin-author" cp:id="$r.website">{$r.author}</a></div>
+                            <p cp:is="$r.moduledescription">{$r.moduledescription}</p>
+                        </td>
+                        <td style="text-align: right; padding-right: 5px;vertical-align: top;">
+                            <button type="button" class="install-plugin" rel="{$r.key}">{trans('Installieren')}</button>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+    </cp:loop>
+    <cp:else>
+        <div class="box">
+            <h2>Hmmm...</h2>
+            <div class="box-inner">
+                {trans('Es sind keine weiteren Plugins zum installieren vorhanden.')}
+            </div>
+        </div>
+    </cp:else>
+
+    <script type="text/javascript">
+
+
+            $('.plugin-author').bind('click', function(e) {
+                window.open($(this).attr('href'));
+                e.preventDefault();
+                return false;
+            });
+            
+            var t;
+
+            $('.install-plugin').bind('click', function(e) {
+                clearTimeout(t);
+                $.pagemask.show('Plugin wird installiert...');
+
+                var self = this;
+
+                $.get('admin.php?adm=plugin&action=install&pluginname=' + $(this).attr('rel'), {}, function(data) {
+
+                    $.pagemask.hide();
+                    if (Tools.responseIsOk(data)) {
+                        $(self).parents('div.box:first').slideUp(300, function(){
+                            $(this).remove();
+                            Win.refreshOpenerWindow( $('#'+ Win.windowID).attr('opener') );
+                            
+                            t = setTimeout(function(){
+                                if (typeof Launchpad != 'undefined') { Launchpad.refresh(); }
+                                else {
+                                    if (typeof Core != 'undefined') {
+                                        Core.refreshMenu();
+                                    }
+                                }
+                            }, 300);
+                        });
+                    } else {
+                        jAlert(data.msg);
+                    }
+                }, 'json');
+                
+                return false;
+            });
+
+
+    </script>
+</cp:block>

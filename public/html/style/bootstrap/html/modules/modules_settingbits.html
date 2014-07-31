@@ -1,0 +1,19 @@
+<?php
+
+function __modules_settingbits($rowclass='',$modul=''){
+global $cp, $cfg, $fct, $cp, $cp;
+
+return <<<EOF
+<tr onmouseover="over(this)" onmouseout="out(this)" class="$rowclass">
+    <td><b>$modul[name]</b></td>
+    <td align="center">$modul[status]</td>
+    <td align="center"><i>$modul[groups]</i></td>
+
+    <td align="center" width="10%">
+    <a href="admin.php?adm=modules&amp;action=settings2&amp;modid={$modul[id]}&amp;sid=$cp->session_id"><img src="images/icon_warning.gif" border="0" alt="Benutzergruppen setzen" /></a>
+    </td>
+</tr>
+EOF;
+}
+
+?>

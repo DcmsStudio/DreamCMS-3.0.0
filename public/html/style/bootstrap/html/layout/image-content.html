@@ -1,0 +1,116 @@
+<cp:block name="toolbar">
+    <div class="toolbar">
+        [save:layoutmodulform{$blockdata.id}] [save_exit:layoutmodulform{$blockdata.id}] [reset:layoutmodulform{$blockdata.id}]
+    </div>
+</cp:block>
+
+
+<form action="admin.php" name="layoutmodulform" id="layoutmodulform{$layoutid}-{$blockdata.id}" method="post">
+    <input type="hidden" name="adm" value="layouter" />
+    <input type="hidden" name="send" value="send" />
+    <input type="hidden" name="action" value="editblock" />
+    <input type="hidden" name="dataid" id="data-id" value="{$blockdata.id}" />
+    <input type="hidden" name="layoutid" value="{$layoutid}" />
+    <input type="hidden" name="contentbox" value="{$input.contentbox}" />
+    <input type="hidden" name="layoutblock" value="{$input.layoutblock}" />
+    <input type="hidden" name="cols" value="{$input.cols}" />
+
+    <div class="box description">
+        <div class="box-inner">
+
+            <fieldset>
+                <legend>{trans('Titel')}</legend>
+                <input type="text" name="title" size="65" maxLength="250" value="{escape($blockdata.title)}" class="required" />
+                <br/><small>{trans('Der Titel wird nicht im Layout sichtbar sein. Er ist nur für den Layouter von Bedeutung.')}</small>
+            </fieldset>
+
+            <fieldset>
+                <legend>{trans('Bild')}</legend>
+
+                <input name="content" id="image-path" value="{escape($blockdata.value)}" size="65" />
+                <button id="browse-images" type="button" class="action-button browse"></button>
+
+                <div style="display: inline-block;width: 100%">
+                    <div id="preview" style="width: 90%;float: left;">
+
+                    </div>
+
+                    <div id="img-opts" style="margin-left: 91%">
+                        <div style="display: inline-block;width: 100%">
+                            <label for="proportional"><input type="checkbox" name="proportional" id="proportional" value="1" checked="checked"/> {trans('Proportional')}</label>
+                            <p style="display:block;width: 100%">
+                                {trans('Breite')} <input name="w" id="width" value="" size="5"/> 
+                                {trans('Höhe')} <input name="h" id="height" value="" size="5"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+
+
+        </div>
+    </div>
+</form>
+
+
+
+
+<script type="text/javascript">
+
+
+    var windows = $('#' + Win.windowID);
+
+
+    function makeResizeableImage()
+    {
+        var isProportional = windows.find('#proportional').is(':checked');
+        var img = windows.find('#preview').find('img');
+        var w = parseInt(img.width()), h = parseInt(img.height());
+
+        windows.find('#width').val(w);
+        windows.find('#height').val(h);
+
+        img.resizable({
+            resize: function(e, ui)
+            {
+                var isProportional = windows.find('#proportional').is(':checked');
+
+                windows.find('#width').val(ui.size.width);
+                windows.find('#height').val(ui.size.height);
+            }
+        });
+    }
+
+
+
+    windows.find('#image-path').droppable({
+        accept: '',
+        drop: function(e, ui)
+        {
+            var path = $(ui.droppable).find('img').attr('realpath');
+            $(this).val(path);
+            windows.find('#preview').empty().append($('<img/>').attr('src', path));
+            makeResizeableImage();
+        }
+    });
+
+    windows.find('#browse-images').click(function() {
+        
+    });
+
+
+    Form.registerForm('layoutmodulform{$layoutid}-{$blockdata.id}', {
+        contentIdentifierID: 'data-id',
+        exiturl: '',
+        identifierType: '',
+        onAfterSubmit: function(exit, data)
+        {
+            Layouter.onAfterSubmitBlockEdit(exit, data);
+        }
+    });
+
+
+
+</script>
+

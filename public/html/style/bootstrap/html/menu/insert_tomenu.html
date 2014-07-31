@@ -1,0 +1,236 @@
+
+<div class="toolbar"><!--TOOLBAR-->
+        [save_exit:menuitemForm]
+        
+        <input class="button" type="reset" value="{trans('Zurücksetzen')}" />
+        <input class="button" type="button" value="{trans('Abbrechen')}" onclick="javascript:removePopup();" />
+</div>
+
+
+
+<form action="admin.php" method="post" name="menuitemForm" id="menuitemForm">
+    <input type="hidden" name="adm" value="{$request.adm}" />
+    <input type="hidden" name="action" value="{$request.action}" />
+    <input type="hidden" name="{$form_keyname}" id="primary-key" value="{$id}" />
+    <input type="hidden" name="insert" value="1" />
+    <input type="hidden" name="tomenu" value="1" />
+    
+
+    
+    
+    <div style="padding:5px">
+        
+        
+        
+        <div class="fieldset2">
+            <fieldset>
+                <legend>{trans('Status')}</legend>
+                <div class="fl" style="display:inline-block;">
+                    <span class="state online"></span> 
+                    <select id="meta-published" name="documentmeta[published]">
+                        <option value="0"{iif($meta.published == 0 && $meta.contentid, ' selected="selected"', '')}> {trans('Offline')}</option>
+                        <option value="1"{iif($meta.published == 1 || !$meta.contentid, ' selected="selected"', '')}> {trans('Online')}</option>
+                        <option value="2" class="timecontrol"{iif($meta.published == 2, ' selected="selected"', '')}> {trans('Zeitgesteuert')}</option>
+                    </select>
+                </div>
+                <div id="time-control" class="fl" style="display:inline-block;margin-left: 10px;">
+                    Von <cp:jscalender name="documentmeta[publishon]" value="{$meta.publishon}" showtime="true" firstday="1" timeformat="%d.%m.%Y, %H:%M"/>
+                    &nbsp;
+                    Bis <cp:jscalender name="documentmeta[publishoff]" value="{$meta.publishoff}" showtime="true" firstday="1" timeformat="%d.%m.%Y, %H:%M"/>
+                </div>    
+            </fieldset>
+            
+            <div id="documentmeta-activemenuitemid">
+                <fieldset>
+                    <legend>{trans('Aktiver Navigationspunkt')}</legend>
+                    <select name="documentmeta[activemenuitemid]">
+                        <option value="0"{iif($documentmeta.activemenuitemid == 0, ' selected="selected"', '')}> {trans('Navigationspunkt automatisch auswählen')}</option>
+                        <cp:loop name="documentmeta_pages" key="r">
+                            <option value="{$r.id}" style="padding-left: {$r.indent}px!important;"{iif($documentmeta.activemenuitemid == $r.id, ' selected="selected"', '')}> {$r.treename}</option>
+                        </cp:loop>
+                    </select>
+                </fieldset>
+            </div>
+            
+        </div>
+        
+        
+        <div style="width:100%;display:inline-block">
+            <div class="fieldset2 rows">
+                <fieldset>
+                    <legend>{trans('Seiten Titel')}</legend>    
+                    <input name="documentmeta[pagetitle]" id="menu-title" value="{$meta.pagetitle}" size="70" type="text"/>
+                    <br/><small>{trans('(falls keiner eingetragen wird, wird der Titel des Dokumentes verwendet)')}</small>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>{trans('Schlüsselwörter')}</legend>                
+                    <input name="documentmeta[metakeywords]" value="{$meta.metakeywords}" size="70" type="text"/>
+                    <br/><small>{trans('(Bitte mit Komma trennen)')}</small>
+                </fieldset>
+            </div>                
+            
+            <div id="menu-access" class="fieldsetrows right">
+                <fieldset>
+                    <legend>{trans('Beschreibung')}</legend>
+                    <textarea name="documentmeta[metadescription]" rows="2" cols="50">{$meta.metadescription}</textarea>
+                    <br/><small>{trans('(Hier können Sie eine kurze Beschreibung der Seite eingeben, die von Suchmaschinen wie Google oder Yahoo ausgewertet wird. Suchmaschinen indizieren normalerweise zwischen 150 und 300 Zeichen.)')}</small>
+                </fieldset>
+            </div>            
+        </div>
+        
+        
+        <div class="fieldset2">
+            <fieldset>
+                <legend>{trans('Robot-Tags')}</legend>   
+                <select name="documentmeta[indexfollow]">
+                    <option value="index,follow"{iif($meta.indexfollow == "index,follow" || empty($meta.indexfollow), ' selected="selected"', '')}> index, follow</option>
+                    <option value="index,nofollow"{iif($meta.indexfollow == "index,nofollow", ' selected="selected"', '')}> index, nofollow</option>
+                    <option value="noindex,follow"{iif($meta.indexfollow == "noindex,follow", ' selected="selected"', '')}> noindex, follow</option>
+                    <option value="noindex,nofollow"{iif($meta.indexfollow == "noindex,nofollow", ' selected="selected"', '')}> noindex, nofollow</option>
+                </select>
+                <br/><small>{trans('(Hier legen Sie fest, wie Suchmaschinen die Seite behandeln.)')}</small>
+            </fieldset>
+            
+            <fieldset>
+                <legend>{trans('Target')}</legend>               
+                <select name="documentmeta[target]">
+                    <option value=""{iif($meta.target == "" || empty($meta.target), ' selected="selected"', '')}> {trans('selbes Fenster')}</option>
+                    <option value="_blank"{iif($meta.target == "_blank", ' selected="selected"', '')}> {trans('neues Fenster')}</option>
+                </select>
+                <br/><small>{trans('(beim Klick auf den Menüpunkt neues Fester öffnen?)')}</small>
+            </fieldset>
+        </div> 
+        
+        
+        <div class="fieldset2">
+            <fieldset>
+                <legend>{trans('Alias und Suffix')}</legend>
+                <input name="rw_controller" value="{$page_controller}" type="hidden" /><input name="rw_action" value="{$page_action}" type="hidden" />
+                <input name="identifier" value="{$page_identifier}" type="hidden" />
+                <input name="oldalias" value="{$page_alias}" type="hidden" />
+                <input name="oldsuffix" value="{$page_suffix}" type="hidden" />
+                <input name="alias" value="{$page_alias}" type="text" size="70" class="input pageident" /> .
+                <select name="suffix">
+                    <option value=""{iif('empty( $page_suffix )', ' selected="selected"', '')}>-</option>
+                    <option value="dcms"{iif($page_suffix=="dcms", ' selected="selected"', '')}>dcms</option>
+                    <option value="html"{iif($page_suffix=="html", ' selected="selected"', '')}>html</option>
+                    <option value="xhtml"{iif($page_suffix=="xhtml", ' selected="selected"', '')}>xhtml</option>
+                    <option value="phtml"{iif($page_suffix=="phtml", ' selected="selected"', '')}>phtml</option>
+                    <option value="php"{iif($page_suffix=="php", ' selected="selected"', '')}>php</option>
+                    <option value="txt"{iif($page_suffix=="txt", ' selected="selected"', '')}>txt</option>
+                    
+                </select>
+                <div style="width:100%;display:inline-block">
+                    <small>{trans('(falls keiner eingetragen wird, wird aus dem Titel des Dokumentes ein alias generiert)')}</small>
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>{trans('Schlüsselwörter')}</legend>               
+                <input name="documentmeta[metakeywords]" value="{$meta.metakeywords}" size="70" type="text"/>
+                <br/><small>{trans('(Bitte mit Komma trennen)')}</small>
+            </fieldset>
+        </div> 
+        
+        
+        
+        <div style="width:100%;display:inline-block">
+            <div id="parents-menu" class="fieldset2 rows">
+                <fieldset>
+                    <legend>{trans('Übergeordneter Menüpunkt')}</legend>
+                    {info:menuitems|parent}
+                    
+                    <cp:if condition="$parentpages">
+                        <select name="documentmeta[parent]" id="parent-page" size="8" style="width:99%">
+                            <cp:loop name="parentpages" key="r">
+                                <option value="{$r.id}"<cp:if condition="$r.id == $parent || ($parentpages_index == 1 && empty($parent) )"> selected="selected"</cp:if>> {$r.treename}</option>                    
+                            </cp:loop>
+                        </select>
+                    </cp:if>
+                    <cp:else>
+                        {trans('Übergeordneter Menüpunkte dieses Menüeintrages können nicht bearbeitet werden, da es sich um einen Hauptmenü-Eintrag handelt.')}
+                    </cp:else>
+                </fieldset>            
+            </div>
+            
+            <div id="menu-access" class="fieldsetrows right">
+                <fieldset>
+                    <legend>{trans('Zugriffsrechte')}</legend>
+                    <select name="access[]" class="select" size="8" multiple="multiple" style="width:99%">
+                        <option value="0"<cp:if condition="(is_array($accesslist) && in_array(0, $accesslist)) || empty($accesslist)"> selected="selected"</cp:if>> {trans('alle Benutzergruppen')}</option>
+                        <cp:loop name="usergroups" key="r">
+                            <option value="{$r.groupid}"<cp:if condition="is_array($accesslist) && in_array($r.groupid, $accesslist)"> selected="selected"</cp:if>> {$r.title}</option>
+                        </cp:loop>
+                    </select>
+                </fieldset>
+            </div>
+        </div>
+        
+    </div>
+
+</form>
+
+
+
+<script language="javascript" type="text/javascript">
+
+$(document).ready( function() {
+    rebuildPageIdentifier();
+
+
+    var selectedState = $('#meta-published').find(':selected').val();
+    if ( selectedState != 2 )
+    {
+        $('#time-control').hide();
+    }
+
+    if (selectedState == -1) { $('#meta-published').prev().removeClass('online offline').addClass('timecontrol');  }
+    else if (selectedState == 1) { $('#meta-published').prev().removeClass('timecontrol offline').addClass('online'); }
+    else { $('#meta-published').prev().removeClass('online timecontrol').addClass('offline');  }
+
+
+    $('#meta-published').change(function(){
+        if ( $(this).val() != 2 )
+        {
+            $('#time-control').hide();
+        }
+        else {
+            $('#time-control').show();
+        }
+        if ($(this).val()== 2) { $('#meta-published').prev().removeClass('online offline').addClass('timecontrol');  }
+        else if ($(this).val()== 1) { $('#meta-published').prev().removeClass('timecontrol offline').addClass('online'); }
+        else { $('#meta-published').prev().removeClass('online timecontrol').addClass('offline');  }
+
+    });
+
+    var form = $('#menuitemForm').registerForm({
+        contentIdentifierID: 'item-id',
+        exiturl: '',
+        identifierType: '{$pagetype}',
+        baseField: 'menu-title',
+        onBeforeSubmit: function(){
+            if ( $('#menu-title').val() == '' )
+            {
+                jAlert('{trans('Bitte geben Sie einen Titel an.')}');
+                _SubmitError = true;
+                return true;
+            }
+        },
+        runAfterSubmit: function() {
+            // reload menutree
+            // and close floatbox
+        }
+
+    });
+
+});
+
+function enabaleIdentifier()
+{
+    $('input[name="alias"]').removeAttr('disabled');
+    $('select[name="suffix"]').removeAttr('disabled');
+}
+
+
+</script>

@@ -1,0 +1,31 @@
+<div style="margin-top:10px">
+    <table class="tblborder" cellpadding="3" cellspacing="0" width="100%">
+        <thead>
+            <tr class="tableheader">
+                <th style="width: 30%;">{trans("Username")}:</th>
+                <th style="width: 40%;">{trans("Real Name")}:</th>
+                <th style="width: 30%; border-right: 0;">{trans("Hinzufügen zu")}:</th>
+            </tr>
+        </thead>
+        <tbody>
+        <cp:loop name="users" key="u">
+
+            <tr class="{cycle('cyclename2', 'firstrow,secondrow', 'css')}">
+                <td>{$u.username}</td>
+                <td>{$u.realname}</td>
+                <td>
+                    <a href="javascript: addAddress('{escape($u.username, 'javascript')}', 'to', {$u.userid});">{trans("`To`")}</a>&nbsp;|&nbsp;
+                    <a href="javascript: addAddress('{escape($u.username, 'javascript')}', 'cc', {$u.userid});">{trans("`C.c.`")}</a>&nbsp;|&nbsp;
+                    <a href="javascript: addAddress('{escape($u.username, 'javascript')}', 'bcc', {$u.userid});">{trans("`B.c.c.`")}</a>
+                </td>
+            </tr>
+
+        </cp:loop>
+        <cp:else>
+            <tr>
+                <td colspan="3">{trans("Es wurden keine User gefunden.")}</td>
+            </tr>
+        </cp:else>
+        </tbody>
+    </table>
+</div>

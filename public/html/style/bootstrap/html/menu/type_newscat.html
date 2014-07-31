@@ -1,0 +1,27 @@
+<fieldset>
+    <legend>{trans('Link zur `News Kategorie`')}</legend>
+    {info:menutypes|newscat}
+    <input type="hidden" name="catid" id="cat-id" value="" />
+    <select name="newscat" id="newscat-page" style="width:99%">
+        <cp:loop name="categories" key="r">
+            <option rel="{$r.id}" alias="{$r.alias}.{$r.suffix}" value="{$r.catlink}" cp:on="selected:$r.id == $contentid" parse:selected="selected"> {escape($r.title, 'html')}</option>
+        </cp:loop>
+    </select>
+    <br/><small>{trans('Die Angabe des Titels ist nur obligatorisch, da der Titel der ausgewählten Seite verwendet wird!')}</small>
+</fieldset>
+
+<script language="javascript" type="text/javascript">
+
+        $('#cat-id').val( $(this).find(':selected').attr('rel') );
+    
+        $('#newscat-page').change(function(){
+            if (!$('#thisname').val()) { $('#thisname').val( $.trim( $(this).find(':selected').text() ) ); }
+            $('#cat-id').val( $(this).find(':selected').attr('rel') );
+            var value = $(this).find(':selected').attr('alias');
+            value = value.split('.');
+            $('input[name="oldalias"]').val(value[0]);
+            $('input[name="oldsuffix"]').val(value[1]);
+        });
+
+
+</script>

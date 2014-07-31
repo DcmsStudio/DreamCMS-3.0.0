@@ -1,0 +1,46 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <btn>
+        [save:extf] 
+        [save_exit:extf] 
+        <input type="reset" value="Zurücksetzen" class="button" /> 
+        <input type="button" value="Abbrechen" onclick="history.back();" class="button" />
+    </btn>
+</cp:block>
+
+<cp:block name="content">
+
+<form action="admin.php" method="post" id="extf">
+    
+    <input type="hidden" name="adm" value="extension"/>
+    <input type="hidden" name="action" value="save_settings"/>
+    <input type="hidden" name="send" value="send"/>
+    <input type="hidden" name="sid" value="{$cp->session_id}"/>
+    <input type="hidden" name="ext" value="{$ext}"/>
+
+<div class="box">
+    <h2>Extension Einstellungen</h2>
+    <div class="box-inner">
+        Einstellungen für Extensions: {$extension_name} {$documentation}<br/>
+        Extension <a href="admin.php?adm=extension&amp;ext={$ext}&amp;action=toggleextension&amp;to=disable" onclick="if(!confirm('Wollen Sie die Erweiterung wirklich deaktivieren?\\r\\n\\r\\nACHTUNG!!!\\r\\nAlle bisherigen Einstellungen gehen verloren!'))return false;">deaktivieren</a>
+        
+                <cp:loop name="list" key="r">
+                    {$r.html}
+                </cp:loop>
+        
+        
+    </div>
+</div>
+
+
+</form>
+
+<script type="text/javascript">
+
+        add_dirty_flag('extf');
+        register_form_handler('savethis');
+        exiturl = 'admin.php?adm=extension';        
+
+</script>
+</cp:block>

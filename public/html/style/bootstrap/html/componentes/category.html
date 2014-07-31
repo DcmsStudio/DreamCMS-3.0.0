@@ -1,0 +1,257 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+    [save:compOrder] [save_exit:compOrder]
+
+    <button id="add-button" class="action-button"><img src="images/folder_add.png" alt=""/> {trans('Kategorie hinzufügen')}</button>         
+    [cancel:compOrder] 
+</cp:block>
+
+<cp:block name="content">
+
+
+
+    <div class="text-muted">
+        {trans("Diese Seite wird verwendet, um Komponente Kategorien zu verwalten. Die Reihenfolge, in der die Kategorien angezeigt werden, können durch Ziehen der Elemente in der Liste geändert werden. Sie können Gruppen bearbeiten oder löschen, indem Sie auf die entsprechenden Symbole klicken.")}
+    </div>
+    <p class="bg-info mb10">{trans("Kategorien, die Komponenten oder System definierte Kategorien enthalten, können nicht gelöscht werden.")}</p>
+
+
+
+    <form action="admin.php" method="post" id="compOrder" name="compOrder">
+        <input type="hidden" name="adm" value="component" />
+        <input type="hidden" name="action" value="savecategories" />
+        <input type="hidden" name="ajax" value="1" />
+        <input type="hidden" name="cat" id="catorder" value="" />
+
+
+        <ul id="comp-categories" style="list-style:none;display: block">
+
+            <cp:loop name="categories" key="cat">
+                <li id="cat_{$cat.id}">
+                    <div class="handle-container">
+                        <div class="handle"></div>
+                    </div>
+                    <div>
+                        <div class="fl" style="width:80%"><strong style="color: #333;" class="cat-name" id="catname-{$cat.id}">{$cat.name}</strong> ({$cat.counts})</div>
+                        <div class="fr tc" style="width:60px">
+                        <span class="action-link edit-link" rel="{$cat.id}">
+                            <img src="images/folder_edit.png" width="16" height="16" alt="" title="{trans('Kategorie bearbeiten')}" />
+                        </span>
+
+                            <cp:if condition="$cat.counts || $cat.system == 1">
+                                <img src="images/spacer.gif" width="16" height="16" alt=""  />
+                            </cp:if>
+                            <cp:else>
+                            <span class="action-link delete-link" rel="{$cat.id}">
+                                <img src="images/folder_delete.png" width="16" height="16" alt="" title="{trans('Kategorie löschen')}" />
+                            </span>
+                            </cp:else>
+                        </div>
+                        <br class="clearer" />
+                        <div class="cat-desc">{$cat.description}</div>
+                    </div>
+                </li>
+            </cp:loop>
+            <cp:else>
+                <li>{trans('Es sind noch keine Kategorien vorhanden.')}</li>
+            </cp:else>
+        </ul>
+
+    </form>
+
+
+
+    <script type="text/javascript">
+
+        var sortString = '';
+        Win.redrawWindowHeight(Win.windowID, true);
+        Form.registerForm('compOrder', {
+            contentIdentifierID: '_xx',
+            exiturl: 'admin.php?adm=component',
+            runAfterSubmit: function(exit, data) {
+                componentesAfterFromSend(exit, data);
+
+
+
+            }
+        });
+
+
+
+
+        Core.getToolbar().find('button.save').disableButton();
+        Core.getToolbar().find('button.save_exit').disableButton();
+
+        sortString = $('#comp-categories').filter(':ui-sortable').sortable("serialize").toString();
+        componentesSetOrder();
+
+
+        $('#' + Win.windowID).find('#comp-categories').css({minHeight: '250px'});
+
+        // set up edit and delete buttons
+        $('#compOrder .action-link').css({opacity: .5}).unbind().hover(
+                function() {
+                    $(this).css({opacity: 1});
+                },
+                function() {
+                    $(this).css({opacity: .5});
+                }
+        );
+
+        $('#comp-categories').find('.edit-link').add('#add-button').each(function() {
+            $(this).unbind().click(componentesAddCategory);
+        });
+        $('#comp-categories').find('.delete-link').unbind().click(function(e) {
+            
+            var relID = $(this).attr('rel');
+            var name = $('#catname-' + relID).text();
+            console.log('CLICK ' + name);
+            if (name != '') {
+                jConfirm('{trans("Sind Sie sicher, die Sie `%s` löschen möchten?")}'.replace('%s', name), "{trans('Kategorie löschen?')}", function(res) {
+                    if (res) {
+                        $.get('admin.php?adm=component&action=deletecategory&id=' + relID, {}, function(data) {
+                            if (Tools.responseIsOk(data)) {
+
+
+                                if (data.msg)
+                                {
+                                    Notifier.display('info', data.msg);
+                                }
+
+                                $('#cat_' + relID).slideUp(300, function() {
+                                    $(this).remove();
+                                    Win.redrawWindowHeight(Win.windowID, true);
+                                });
+
+                            } else {
+
+                                jAlert((data.msg ? data.msg : 'Error'));
+                            }
+                        }, 'json');
+                    }
+                });
+            }
+
+        });
+        if (typeof componentesUpdateCategories == 'undefined')
+        {
+            function componentesUpdateCategories(event, ui) {
+                if (sortString != $('#comp-categories').filter(':ui-sortable').sortable("serialize").toString()) {
+                    sortString = $('#comp-categories').filter(':ui-sortable').sortable("serialize").toString();
+                    componentesSetOrder();
+                    Form.makeDirty('compOrder', Win.windowID);
+                    Core.getToolbar().find('#add-button').disableButton();
+                    Core.getToolbar().find('.save').enableButton();
+                    Core.getToolbar().find('.save_exit').enableButton();
+                }
+            }
+
+            function componentesAfterFromSend(exit)
+            {
+                if (exit)
+                {
+                    Core.Tabs.closeActiveTab();
+                }
+                else
+                {
+                    Core.getToolbar().find('#add-button').enableButton();
+                    Core.getToolbar().find('.save').disableButton();
+                    Core.getToolbar().find('.save_exit').disableButton();
+                }
+
+            }
+
+
+            function componentesSetOrder()
+            {
+                _sortString = sortString.replace(/&?(cat\[\]=)/ig, ',');
+                _sortString = _sortString.replace(/^,/, '');
+
+                $('#catorder').val(_sortString);
+            }
+
+            function componentesAddCategory(e) {
+
+
+
+                if ($(this).parents('li:first').find('.cat-name').length > 0) {
+                    var name = $(this).parents('li:first').find('.cat-name').text();
+                    var desc = $(this).parents('li:first').find('.cat-desc').text();
+                    var id = $(this).parents('li:first').attr('id').replace('cat_', '');
+                } else {
+                    var name = '';
+                    var desc = '';
+                    var id = 0;
+                }
+
+
+                jPrompt('{trans("Bitte geben Sie den Namen der Kategorie ein:")}', name, "{trans('Kategorie')}", function(res) {
+                    if (res) {
+                        name = res;
+                        jPrompt('{trans("Bitte geben Sie eine kurze Beschreibung der Kategorie ein:")}', desc, "{trans('Kategorie')}", function(res) {
+                            if (res) {
+                                desc = res;
+                                $.pagemask.show();
+                                post = {};
+                                post.id = id;
+                                post.name = name;
+                                post.adm = 'component';
+                                post.action = 'addcategory';
+                                post.description = desc;
+                                $.post('admin.php?adm=component', post, function(data) {
+                                    if (Tools.responseIsOk(data)) {
+                                        $.pagemask.hide();
+
+
+                                        if (data.msg)
+                                        {
+                                            Notifier.display('info', data.msg);
+                                        }
+
+
+                                        //$('#' + Win.windowID).data('WindowManager').ReloadWindow(function() {
+                                        //    Win.redrawWindowHeight(Win.windowID, true);
+                                        //});
+
+
+                                    } else {
+                                        $.pagemask.hide();
+                                        jAlert((data.msg ? data.msg : 'Error'));
+                                    }
+                                }, 'json');
+                            }
+                        });
+                    }
+                });
+
+                e.preventDefault();
+                return false;
+            }
+        }
+
+        setTimeout(function() {
+
+            $('#' + Win.windowID).find('#comp-categories').sortable({
+                //  containment: '.isWindowContainer',
+                forceHelperSize: true,
+                forcePlaceholderSize: true,
+                placeholder: 'ui-sortable-placeholder',
+                distance: 10,
+                revert: true,
+                tolerance: 'pointer',
+                update: componentesUpdateCategories,
+                scroll: false,
+                handle: '.handle'
+                //    appendTo: 'body'
+            });
+
+            Win.redrawWindowHeight(Win.windowID, true);
+        }, 600);
+
+
+
+    </script>
+
+</cp:block>

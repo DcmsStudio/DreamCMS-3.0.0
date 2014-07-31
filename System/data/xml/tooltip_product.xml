@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tooltip>
+	<title title=""><![CDATA[]]></title>
+	<subtitle title=""><![CDATA[----]]></subtitle>
+	<published title=""><![CDATA[----]]></published>
+	<short_description title=""><![CDATA[----]]></short_description>
+	<description title=""><![CDATA[----]]></description>
+	<splash_picture title="Produkt Bild"><![CDATA[Bitte in das Verzeichnis "products" uploaden!!!]]></splash_picture>
+	<release_date title=""><![CDATA[----]]></release_date>
+	<version title=""><![CDATA[----]]></version>
+	<price title=""><![CDATA[----]]></price>
+	<links title=""><![CDATA[Beispiel:<br />http://www.web.de,Web.de<br />http://www.dcms-studio.de,DreamDesign Studio<br />http://www.google.de,Google<br /><br />Bitte Einen Eintrag pro Zeile.]]></links>
+	<shopurl title=""><![CDATA[----]]></shopurl>
+	<plattform title=""><![CDATA[----]]></plattform>
+	<company title=""><![CDATA[----]]></company>
+	<publisher title=""><![CDATA[----]]></publisher>
+	<gallery title=""><![CDATA[----]]></gallery>
+	<author title=""><![CDATA[----]]></author>
+	<isbn title=""><![CDATA[----]]></isbn>
+	<genre title=""><![CDATA[----]]></genre>
+	<fsk title=""><![CDATA[----]]></fsk>
+	<regie title=""><![CDATA[----]]></regie>
+	<studio title=""><![CDATA[----]]></studio>
+	<playtime title=""><![CDATA[----]]></playtime>
+	<acts title=""><![CDATA[----]]></acts>
+	<autor title=""><![CDATA[----]]></autor>
+	<lang title=""><![CDATA[----]]></lang>
+	<system title=""><![CDATA[----]]></system>
+	<license title=""><![CDATA[----]]></license>
+</tooltip>

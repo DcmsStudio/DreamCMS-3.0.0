@@ -1,0 +1,38 @@
+<cp:include template="header" />
+<!-- end header include -->
+<div id="content">
+    <div class="container">
+        <div id="breadcrumbs">
+            <cp:if condition="$NAVIGATION">
+                <a href="{cfg('portalurl')}/" class="first">{trans('Startseite')}</a>
+                / {$NAVIGATION}
+            </cp:if>
+            <cp:else>
+                <span class="first">
+                    {trans('Startseite')}
+                </span>
+            </cp:else>
+        </div>
+        <div class="clear">
+            <!-- -->
+        </div>
+        <div class="error">
+            <div>
+
+                <h1 class="decoration">
+                    {trans('Fehler...')}
+                </h1>
+                <cp:if condition="$message != ''">
+                    {$message}
+                </cp:if>
+                <cp:else>
+                    {trans('Es ist ein Fehler aufgetreten!')}
+                </cp:else>
+            </div>
+        </div>
+        <div class="clear">
+            <!-- -->
+        </div>
+    </div>
+</div>
+<cp:include template="footer" />

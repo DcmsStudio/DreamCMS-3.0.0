@@ -1,0 +1,179 @@
+<div id="metadata-container" style="display:inline-block">    
+    
+    <div id="metadata-default" style="display:inline-block">
+        <div class="meta-left">
+            <div style="display: inline-block">
+                <span class="state online"></span> Status: 
+                <select id="meta-published" name="documentmeta[published]">
+                    <option value="0" cp:on="selected:$documentmeta.published == 0 && $documentmeta.contentid > 0" parse:selected="selected"> {trans('Offline')}</option>
+                    <option value="1" cp:on="selected:$documentmeta.published == 1 || empty( $documentmeta.contentid )" parse:selected="selected"> {trans('Online')}</option>
+                    <option value="2" class="timecontrol" cp:on="selected:$documentmeta.published == 2" parse:selected="selected"> {trans('Zeitgesteuert')}</option>
+                </select>
+            </div>
+            
+            <div id="timecontrol" style="display:inline-block;margin-left: 10px;">
+                Von <!-- <cp:jscalender name="documentmeta[publishon]" value="{$documentmeta.publishon}" showtime="true" firstday="1" timeformat="%d.%m.%Y, %H:%M"/>
+                &nbsp;
+                Bis <cp:jscalender name="documentmeta[publishoff]" value="{$documentmeta.publishoff}" showtime="true" firstday="1" timeformat="%d.%m.%Y, %H:%M"/>
+                -->
+            </div>
+            <cp:if condition="$documentmeta.draft">
+                <span class="content-draft">{trans('Inhalts Entwurf')}</span>
+            </cp:if>
+        </div>
+        <div class="meta-right" style="display: inline; float: right;">
+            <!-- <span class="fr">{trans('Dokument Metadaten')}</span> -->
+            <button type="button" id="meta-advanced-toggle" style="display: block; float: right;"><span>{trans('Metadaten einblenden')}</span><span style="display:none">{trans('Metadaten ausblenden')}</span></button>
+        </div>
+    </div>
+    
+    <div id="meta-advanced-container" style="display:none;width:100%">
+
+        <div class="cols-l">
+            <span class="label">{trans('Seiten Titel')}<br/><span>{trans('(falls keiner eingetragen wird, wird der Titel des Dokumentes verwendet)')}</span></span>            
+            <input name="documentmeta[pagetitle]" value="{$documentmeta.pagetitle}" size="60" type="text" style="width:98%!important"/>
+            
+            <span class="label">{trans('Beschreibung')}<br/><span>{trans('(Hier können Sie eine kurze Beschreibung der Seite eingeben, die von Suchmaschinen wie Google oder Yahoo ausgewertet wird.)')}</span></span>
+            <textarea name="documentmeta[metadescription]" rows="2" cols="40" style="width:98%!important;max-width:98%!important">{$documentmeta.metadescription}</textarea>
+            
+            <span class="label">{trans('Schlüsselwörter')} <span>{trans('(Bitte mit Komma trennen)')}</span></span>
+            <input name="documentmeta[metakeywords]" value="{$documentmeta.metakeywords}" size="60" type="text" style="width:98%!important"/>
+            
+            <div style="width:100%!important;{iif($request.adm == 'application', 'display:none', '')}">
+                <div style="width:49%!important;float:left!important">
+                    <span class="label">{trans('Sprachen-Fallback')}</span>
+                    <label for="language-fallback"><input class="input" type="checkbox" name="documentmeta[languagefallback]" id="language-fallback" value="1" cp:on="checked:$documentmeta.languagefallback" parse:checked="checked"/> {trans('Sprachen-Fallback aktivieren')}</label>
+                </div>
+                <div style="width:49%!important;float:right!important">
+                    <span class="label">{trans('Sprache')}</span>
+                    <input class="input" type="text" name="documentmeta[language]" value="{escape($documentmeta.language, 'html')}" size="12" maxlength="2" />
+                    
+                </div>
+            </div>
+            
+            
+            
+        </div>
+        
+        <div class="cols-r">
+
+                <div id="documentmeta-alias" parse:style="min-height: 60px;{iif($request.adm == 'application', 'display:none', '')}">
+                    <span class="label">{trans('Alias und Suffix')}<br/><span>{trans('(falls keiner eingetragen wird, wird aus dem Titel des Dokumentes ein alias generiert)')}</span></span>
+                    
+                    <input name="rw_controller" value="{$documentmeta.controller}" type="hidden" />
+                    <input name="rw_action" value="{$documentmeta.action}" type="hidden" />
+                    
+                    <input name="identifier" value="{$page_identifier}" type="hidden" />
+                    <input name="oldalias" value="{$documentmeta.alias}" type="hidden" />
+                    <input name="oldsuffix" value="{$documentmeta.suffix}" type="hidden" />
+                    <input name="alias" value="{$documentmeta.alias}" type="text" size="70" class="input pageident" /> .
+                    <select name="suffix">
+                        <option value="" cp:on="selected:empty( $documentmeta.suffix )" parse:selected="selected">----</option>
+                        <option value="dcms" cp:on="selected:$documentmeta.suffix=='dcms'" parse:selected="selected">dcms</option>
+                        <option value="html" cp:on="selected:$documentmeta.suffix=='html'" parse:selected="selected">html</option>
+                        <option value="xhtml" cp:on="selected:$documentmeta.suffix=='xhtml'" parse:selected="selected">xhtml</option>
+                        <option value="phtml" cp:on="selected:$documentmeta.suffix=='phtml'" parse:selected="selected">phtml</option>
+                        <option value="php" cp:on="selected:$documentmeta.suffix=='php'" parse:selected="selected">php</option>
+                        <option value="txt" cp:on="selected:$documentmeta.suffix=='txt'" parse:selected="selected">txt</option>
+                        
+                    </select>
+                </div>
+                
+                <div style="width:100%!important;display:inline-block">
+                    <div style="width:30%!important;float:left!important">
+                        <span class="label">{trans('Robot-Tags')}</span>
+                        <select name="documentmeta[indexfollow]">
+                            <option value="index,follow" cp:on="selected:$documentmeta.indexfollow == 'index,follow' || empty($documentmeta.indexfollow)" parse:selected="selected"> index, follow</option>
+                            <option value="index,nofollow" cp:on="selected:$documentmeta.indexfollow == 'index,nofollow'" parse:selected="selected"> index, nofollow</option>
+                            <option value="noindex,follow" cp:on="selected:$documentmeta.indexfollow == 'noindex,follow'" parse:selected="selected"> noindex, follow</option>
+                            <option value="noindex,nofollow" cp:on="selected:$documentmeta.indexfollow == 'noindex,nofollow'" parse:selected="selected"> noindex, nofollow</option>
+                        </select>
+                    </div>
+                    <div style="width:68%!important;{iif($request.adm == 'application', 'display:none;', '')}float:left!important">
+                        <cp:if condition="$request.adm == 'menues'">
+                            <span class="label">{trans('Target')}</span>
+                            <select name="documentmeta[target]">
+                                <option value="" cp:on="selected:$documentmeta.target == ''" parse:selected="selected"> {trans('selbes Fenster')}</option>
+                                <option value="_blank" cp:on="selected:$documentmeta.target == '_blank'" parse:selected="selected"> {trans('neues Fenster')}</option>
+                            </select>
+                        </cp:if>
+                    </div>
+                    
+                </div>
+                
+                <div style="width:100%!important;display:inline-block" class="colbordert">
+                    <div style="width:49%!important;height:100%;display:block;float:left!important">
+                        <span class="label">{trans('Suchen &amp; Analysieren')}</span>
+                        <label for="searchable"><input name="documentmeta[searchable]" id="searchable" value="1" type="checkbox" cp:on="checked:$documentmeta.searchable" parse:checked="checked" /> {trans('Durchsuchbar')}</label>
+                        <label for="click-analyse"><input name="documentmeta[clickanalyse]" id="click-analyse" value="1" type="checkbox" cp:on="checked:$documentmeta.clickanalyse" parse:checked="checked"/> {trans('Klick-Analyse aktivieren')}</label>
+                        
+                        <div id="documentmeta-activemenuitemid" cp:on="style:$request.adm == 'application'" parse:style="display:none">
+                            
+                            <span class="label">{trans('Aktiver Navigationspunkt')}</span>
+                            <select name="documentmeta[activemenuitemid]" style="max-width:240px!important">
+                                <option value="0" cp:on="selected:$documentmeta.activemenuitemid == 0" parse:selected="selected"> {trans('Navigationspunkt automatisch auswählen')}</option>
+                                <cp:loop name="documentmeta_pages" key="r">
+                                    <option value="{$r.id}" style="padding-left: {$r.indent}px!important;" cp:on="selected:$documentmeta.activemenuitemid == $r.id" parse:selected="selected"> {$r.treename}</option>
+                                </cp:loop>
+                            </select>
+                            
+                        </div>
+                    </div>
+                    
+                    <div style="width:48%!important;height:100%;display:block;float:right!important" class="colborder">
+                        
+                        <div style="width:100%!important;display:inline-block">
+                            <div style="width:58%!important;float:left!important">
+                                <span class="label">{trans('Seiten Caching')}</span>
+                                <label for="cacheable"><input name="documentmeta[cacheable]" id="cacheable" value="1" type="checkbox" cp:on="checked:$documentmeta.cacheable" parse:checked="checked"/> {trans('Cache aktivieren')}</label>
+                            </div>
+                            <div style="width:40%!important;float:right!important">
+                                <span class="label">{trans('Cachezeit')}</span>
+                                <input class="input" type="text" name="documentmeta[cachetime]" value="{escape($documentmeta.cachetime, 'html')}" size="12" maxlength="10" title="{trans('in Sekunden')}" />
+                            </div>
+                        </div>
+                        
+                        <span class="label">{trans('Caching für Benutzergruppen')}</span>
+                        <select name="documentmeta[cachegroups][]" size="4" multiple="multiple" style="width:230px">
+                            <option value="0" cp:on="selected:(is_array($documentmeta.cachegroups) && in_array(0, $documentmeta.cachegroups)) || empty($documentmeta.cachegroups)" parse:selected="selected"> {trans('alle Benutzergruppen')}</option>
+                            
+                            <cp:if condition="!is_array($usergroups)">
+                                <cp:sql return="usergroups">
+                                    SELECT groupid, title FROM %tp%users_groups ORDER BY title
+                                </cp:sql>
+                            </cp:if>
+                            
+                            <cp:loop name="usergroups" key="r">
+                                <cp:if condition="$r.groupid == 0">
+                                    <cp:continue/>
+                                </cp:if>
+                                <option value="{$r.groupid}" cp:on="selected:is_array($documentmeta.cachegroups) && in_array($r.groupid, $documentmeta.cachegroups)" parse:selected="selected"> {$r.title}</option>
+                            </cp:loop>
+                        </select>
+                        
+                    </div>
+                </div>
+
+        </div>        
+    </div>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+
+    $(document).ready(function()  {
+        // Loader.require('html/js/backend/dcms.documentmeta.js', function(){ DOCUMENTMETA.initMetaData(); });
+        
+        
+        
+        
+        
+        $('.cols-l').appendTo( $('#documentsettings-content') );
+        $('.cols-r').appendTo( $('#documentsettings-content') );
+        
+        
+        
+        $('.documentsettings').show();
+    });
+//]]>
+</script>  

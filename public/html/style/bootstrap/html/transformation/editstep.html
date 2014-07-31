@@ -1,0 +1,99 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:if condition="$stepid">           
+        [save:action_formStep{$id}] [save_exit:action_formStep{$id}]
+    </cp:if>
+    <cp:else>
+        [save_exit:action_formStep{$id}]
+    </cp:else>
+
+    [reset:action_formStep{$id}] [cancel:action_formStep{$id}]
+</cp:block>
+
+<cp:block name="content">
+
+    <script type="text/javascript" src="{$js_url}jquery/jquery.colorpicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="{$css_url}jquery.colorpicker.css" />
+
+
+    <form action="admin.php" method="post" id="action_formStep{$id}" name="action_formStep{$id}">
+        <input type="hidden" name="adm" value="transform" />
+        <input type="hidden" name="action" value="savestep" />
+        <input type="hidden" id="transform_id{$id}" name="id" value="{$id}" />
+        <input type="hidden" id="stepid{iif($stepid, $stepid, '0')}" name="stepid" value="{iif($stepid, $stepid, '0')}" />
+
+        <div class="description">{trans("This page is used to define the parameters for the filter to be applied as part of the transformation.")}</div>
+
+        <div class="box">
+            <h2>{trans("Transformation Step Parameters")}</h2>
+            <div class="box-inner">
+
+
+                <fieldset>
+                    <legend>{trans("Step Type")}</legend>
+
+                    <select class="droplist" name="type" id="type">
+                        <cp:loop name="filters" key="r">
+                            <option value="{$r.value}" cp:on="selected:$type == $r.value" parse:selected="selected">{$r.label}</option>
+                        </cp:loop>
+                    </select> 
+                    <em id="step-description" style="display:none"></em>
+                </fieldset>
+
+                <div id="step-params" style="min-height: 150px;">
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </form>
+
+    <script type="text/javascript">
+
+        Form.registerForm('action_formStep{$id}', {
+            contentIdentifierID: 'stepid{iif($stepid, $stepid, '0')}',
+            exiturl: Tools.prepareAjaxUrl( 'admin.php?adm=transform&action=edit&id='+ $('#transform_id').val() )
+        });
+
+        function setStepDescription(description){
+            $('#step-description').hide();
+            
+            if ( typeof description != 'undefined' && description != '') {
+                $('#step-description').empty().append(description).show();
+            }
+        }
+        
+        function _getParameters() {
+            $('#step-params').mask('Formular laden...');
+            var _type = $('#action_formStep{$id}').find('#type').val();
+            var url = Tools.prepareAjaxUrl( 'admin.php?adm=transform&action=stepparams&type=' + _type + '&stepid=' + $('#stepid{iif($stepid, $stepid, '0')}').val() );
+            $.get(url, {}, function(data)
+            {
+                if(Tools.responseIsOk(data)) {
+                    $('#step-params').empty().html(data.html);
+                    
+                    Win.prepareWindowFormUi();
+                    Win.redrawWindowHeight(false, true);
+                    
+                    
+                } else {
+                    jAlert(data.msg);
+                }
+                $('#step-params').unmask();
+            }, 'json');
+        };
+
+
+
+        $('#action_formStep{$id}').find('#type').on('change', function() {
+            _getParameters(); 
+        });
+        
+        _getParameters();
+
+    </script>
+
+</cp:block>

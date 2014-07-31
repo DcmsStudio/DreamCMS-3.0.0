@@ -1,0 +1,11 @@
+<fieldset>
+    <legend>{trans('Tag')}</legend>   
+
+    <select name="message">
+        <option value="span" cp:on="selected:$message=='span' || empty($message)" parse:selected="selected"> SPAN Tag</option>
+        <option value="div" cp:on="selected:$message=='div'" parse:selected="selected"> DIV Tag</option>
+    </select>
+
+</fieldset>
+
+

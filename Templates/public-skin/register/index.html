@@ -1,0 +1,131 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+</cp:block>
+<cp:block name="main_content">
+    {*
+    uncomment if not use the ajax form
+    <cp:if condition="$done">
+        <p>
+            {$done}
+        </p>
+    </cp:if>
+    *}
+    <cp:if condition="is_array($errors)">
+        <div class="error">
+            <ul>
+                <cp:loop name="errors" key="r">
+                    <li>
+                        {$r.message}
+                    </li>
+                </cp:loop>
+            </ul>
+        </div>
+    </cp:if>
+    <div class="item shadowed">
+        <div class="inner-boundary">
+            <div class="inner-border items">
+                <cp:if condition="$done">
+                    <div id="form-message" class="validation success">
+                        <div>
+                            <p>
+                                {trans('Deine Registrierung ist nun abgeschlossen und du kannst dich nun einloggen.')}
+                            </p>
+                        </div>
+                    </div>
+                </cp:if>
+                <cp:elseif condition="$done_message">
+                    <div class="info success">
+                        <div>
+                            <p>
+                                {$done_message}
+                            </p>
+                        </div>
+                    </div>
+                </cp:elseif>
+                <cp:else>
+                    <form action="register/index" method="post" id="register-form">
+                        <input type="hidden" name="send" value="send" />
+                        <cp:token/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label>
+                                        {trans('Benutzername')}
+                                    </label>
+                                    <input type="text" class="form-control" name="username" value="{$username}" maxlength="60" size="50" />
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        {trans('Email')}
+                                    </label>
+                                    <input type="text" class="form-control" name="email" value="{$email}" maxlength="250" size="50" />
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        {trans('Email bestätigen')}
+                                    </label>
+                                    <input type="text" class="form-control" name="emailconfirm" value="{$emailconfirm}" maxlength="250" size="50" />
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        {trans('Passwort')}
+                                    </label>
+                                    <input type="password" class="form-control" name="password" value="{$password}" maxlength="250" size="50" />
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        {trans('Passwort bestätigen')}
+                                    </label>
+                                    <input type="password" class="form-control" name="passwordconfirm" value="{$passwordconfirm}" maxlength="250" size="50" />
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        {trans('Zeitzone')}
+                                    </label>
+                                    <select name="timezone" id="timezone" class="form-control">
+                                        <cp:if condition="!$timezones.selected">
+                                            <cp:set var="timezones.selected" value="$cfg.default_timezoneoffset" />
+                                        </cp:if>
+                                        <cp:data var="dataselect" value="$timezones" template="../select_option" />
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        {trans('Sicherheitscode')}
+                                    </label>
+                                    <cp:captcha width="200" height="80" audio="true" reload="true" />
+                                    <p>
+                                        <input type="text" size="12" maxlength="8" name="securecode" class="input" placeholder="{trans('Sicherheitscode')}" />
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            
+                                    <label>
+                                        {trans('Unsere Bedingungen')}
+                                    </label>
+                                    <div style="display:block; overflow: auto; min-height: 407px;max-height:410px;clear:both; padding:3px;" class="mb5 reg-disclaimer">
+                                        {$cfg.disclaimer_text}
+                                    </div>
+                                    <label for="accept">
+                                        <input type="checkbox" value="1" name="accept" id="accept" class="input absmiddle" />
+                                        {trans('Ich bin mit den Bedingungen einverstanden')}
+                                    </label>
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="row tc">
+                            <button type="button" accesskey="s" class="btn btn-primary save-button">
+                                {trans('Abschicken')}
+                            </button>
+                            <button type="reset" accesskey="r" class="btn btn-default">
+                                {trans('Zurücksetzen')}
+                            </button>
+                        </div>
+                    </form>
+                </cp:else>
+            </div>
+        </div>
+    </div>
+</cp:block>

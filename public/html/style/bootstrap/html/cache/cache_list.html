@@ -1,0 +1,43 @@
+<?php
+
+function __cache_list($list = array() ){
+global $cp, $cfg, $fct, $cp, $adm_skin;
+
+	//$adm_skin->js .= '<link rel="stylesheet" href="external/lightbox/css/lytebox.css" type="text/css" media="screen" />';
+	//$adm_skin->addJS('external/lightbox/js/lytebox');
+
+$html = <<<EOF
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+        <td>Cache</td>
+		<td width="8%">aktualisiert am</td>
+        <td align="center" width="8%">Cache Größe</td>
+        <td align="center" width="10%">Optionen</td>
+    </tr>
+EOF;
+
+	foreach($list as $row)
+	{
+		$datum = date('d.m.Y, H:i', $row['cachetime']);
+		$css = ($i++%2 ? 'firstrow' : 'secondrow');
+		$html .= <<<EOF
+    <tr onmouseover="over(this)" onmouseout="out(this)" class="{$css}">
+        <td><b>{$row[cache_var]}</b><br />{$row[cache_description]}</td>
+		<td id="updater{$i}">{$datum}</td>
+        <td class="tr">{$row[size]} kb</td>
+        <td class="tr">
+			<a href="javascript:void(0);" onclick="getContentUpdate(\$('#updater{$i}'), 'adm=cache_control&action=rebuild_all&id={$row[cache_var]}');return false;"><img src="images/refresh.gif" title="Cache aktualisieren" alt="Cache aktualisieren" /></a> 
+			<a href="javascript:void(0);" onclick="getInfoData('admin.php?adm=cache_control&action=view_cache&id={$row[cache_var]}');return false;"><img src="images/search.gif" title="Vorschau" alt="Vorschau" /></a>
+		</td>
+    </tr>
+EOF;
+	}
+	
+$html .= <<<EOF
+</table>
+EOF;
+return $html;
+}
+
+?>

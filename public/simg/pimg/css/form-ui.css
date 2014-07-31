@@ -1,0 +1,217 @@
+#container form {
+    position: relative;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding: 10px;
+    overflow: hidden;
+    display: block;
+    max-width: 920px;
+}
+form {
+    position: relative;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding: 10px;
+    overflow: hidden;
+    display: block;
+    max-width: 920px;
+}
+
+
+input, textarea, button, select {
+    font-family: 'Droid Sans', sans-serif, Arial, Helvetica;
+    font-size: 13px;
+    outline: none;
+}
+
+select {
+    padding: 0!important;
+}
+
+select option {
+    padding-left: 3px!important;
+    padding-right: 3px!important;
+}
+
+
+
+input[type=text], input[type=password], input[type=email], input[type=url], textarea {
+    border: 1px solid #ccc;
+    padding: 5px 5px;
+    margin: 0 5px 5px 0;
+    color: #555;
+    background: #fff;
+    cursor: text;
+    border-radius: 4px;
+    -webkit-user-select: text; 
+    -khtml-user-select: text; 
+    -moz-user-select: text; 
+    -o-user-select: text; 
+    user-select: text; 
+    outline: none;
+}
+select {
+    padding: 5px 5px;
+    height: 22px!important;
+}
+textarea {
+    outline: none;
+    border: 1px solid #ccc!important;
+    display: block;
+}
+
+
+input[type=checkbox], input[type=radio] {
+    border: 1px solid #BBB;
+    background: #FFF;
+    color: #555;
+    clear: none;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+    height: 16px;
+    margin: -4px 4px 0 0;
+    outline: 0;
+    padding: 0!important;
+    text-align: center;
+    vertical-align: middle;
+    width: 16px;
+    min-width: 16px;
+    -webkit-appearance: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    -webkit-transition: .05s border-color ease-in-out;
+    transition: .05s border-color ease-in-out;
+    border-radius: 0!important;
+}
+input[type=radio] {
+    border-radius: 16px!important;
+    margin: 0 4px 0 0;
+}
+input[type=checkbox]:checked:before {
+    font-family: 'FontAwesome';
+    content: '\f00c';
+    margin: -3px 0 0 0;
+    color: #1E8CBE;
+    font-size: 12px!important;
+}
+
+input[type=radio]:checked:before{
+    font-family: 'FontAwesome';
+    content: '\f111';
+    color: #1E8CBE;
+    font-size: 10px!important;
+    position: relative;
+    top: -1px;
+}
+
+
+/*
+input:focus,
+textarea:focus  {
+    -moz-box-shadow: 0 0 2px 1px rgba(88, 166, 255, .8), 0 0 4px 1px rgba(88, 166, 255, .8), inset 0 1px 2px rgba(0, 0, 0, 0.3)!important;
+    -webkit-box-shadow: 0 0 2px 1px rgba(88, 166, 255, .8), 0 0 4px 1px rgba(88, 166, 255, .8), inset 0 1px 2px rgba(0, 0, 0, 0.3)!important;
+    box-shadow: 0 0 2px 1px rgba(88, 166, 255, .8), 0 0 4px 1px rgba(88, 166, 255, .8), inset 0 1px 2px rgba(0, 0, 0, 0.3)!important;
+    border: 1px solid rgba(40, 120, 212, 0.7)!important;
+}
+*/
+
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+select[readonly],
+textarea[readonly] {
+    cursor: not-allowed;
+    background-color: #EEE!important;
+    box-shadow: 0px 1px 1px transparent!important;
+    -moz-box-shadow: 0px 1px 1px transparent!important;
+    -webkit-box-shadow: 0px 1px 1px transparent!important;
+}
+
+input[type=file]:hover, input[type=file]:focus {
+    border: none
+}
+input[type=button],
+input[type=reset],
+button {
+    margin: 0 4px 4px 0;
+    white-space: nowrap;
+    width: auto;
+    cursor: pointer;
+    outline: none;
+}
+input[type=button]:hover,
+input[type=reset]:hover,
+button:hover {
+    outline: none;
+}
+
+
+
+
+/**
+    When form is pretty maked
+*/
+
+fieldset.is-pretty {
+    margin-top: 5px;
+
+}
+fieldset.is-pretty:first-child {
+    margin: 0;
+}
+.pretty-from-spacer {
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+
+fieldset legend {
+    font-weight: bold;
+    border-bottom: 1px solid #cdcdcd;
+    width: 99%;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    font-size: 100%;
+
+}
+
+fieldset {
+    margin-bottom: 10px;
+
+}
+
+
+.markItUpPreviewFrameRemove {
+    background:#FFF url('../img/close.png') no-repeat 0% 0%!important;
+    cursor:pointer!important;
+}
+
+
+/* 
+    Reg Form
+*/
+form #timezone { margin-bottom: 50px!important; }
+form#settings-form #timezone { margin-bottom: 0px!important; }
+
+form label[for=accept] { 
+    position: relative;
+    top: 10px; 
+}
+
+.reg-disclaimer {
+    border: 1px solid #cdcdcd;
+    border-radius: 4px;
+    padding: 5px 10px!important;
+}
+
+#flag-icon {
+    position: relative;
+    top: -1px;
+    width: 22px;
+    height: 22px;
+}

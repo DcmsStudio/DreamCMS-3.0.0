@@ -1,0 +1,19 @@
+<tr onmouseover="over(this)" onmouseout="out(this)" class="$row[css]">
+    <td>
+        <input type="checkbox" name="ids[]" value="$row[id]" />
+    </td>
+    <td><b>$row[title] ($row[version])</b>$row[pw]<br /><small>$row[created]</small></td>
+    <td align="center">$row[cat_title]</td>
+    <td align="center">$row[hits_total]</td>
+    <td align="center">$row[hits_today]</td>
+
+    <td align="center">$row[publish]</td>
+
+
+    <td align="center">
+    <a href="admin.php?adm=downloads&action=edit_link&id=$row[id]&sid={$cp->session_id}"><img src="images/edit.png" width="16" height="16" alt="Bearbeiten" title="Bearbeiten" border="0" /></a>
+
+    <a href="admin.php?adm=downloads&action=move_downloads&id=$row[id]&sid={$cp->session_id}"><img src="images/move.gif" width="16" height="16" alt="Verschieben" title="Verschieben" border="0" /></a>
+    <a href="admin.php?adm=downloads&action=del_link&id=$row[id]&sid={$cp->session_id}"><img src="images/delete.gif" width="16" height="16" alt="Löschen" title="Löschen" border="0" /></a>
+    </td>
+</tr>

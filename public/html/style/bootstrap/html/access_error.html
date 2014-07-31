@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title>DreamCMS {$version} - {iif($pageTitle, $pageTitle, 'Administration')}</title>
+        <meta http-equiv="Content-Language" content="de"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" href="{$js_url}jquery/css/base/jquery.ui.base.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{$backend_css_url}layout.css" type="text/css" />
+        <link rel="stylesheet" href="{$backend_css_url}forms.css" type="text/css"  />
+        <link rel="stylesheet" href="{$backend_css_url}filemanager.css" type="text/css" />
+        <link rel="stylesheet" href="{$backend_css_url}jqueryFileTree.css" type="text/css" />
+        <link rel="stylesheet" href="{$backend_css_url}jquery.contextMenu.css" type="text/css" />
+        <link rel="stylesheet" href="{$js_url}jquery/fancybox/jquery.fancybox-1.3.1.css" type="text/css" />
+
+        <script type="text/javascript" language="javascript">
+
+    var seeMode = false;
+    var menuItems;
+    var filemanager = null;
+    var session_id = '{$session_id}';
+    var cmsurl = '{$cfg.portalurl}/';
+    var backendImagePath = '{$backendImagePath}';
+    var cms_pagepath = '{$pagepath}/';                
+    var cmsurl_regex = {$cmsurl_jsregex};
+    var colorPickerWidth = 12;
+    var exitpopup = 0;
+    var widgetcolumns = 4; // num of widget div cols for frontpage
+    var use_fancy_checkboxes = false;
+    var is_defaultheader = false;
+    var hasTrash = false;
+    var max_upload_size = "{$uploadsize} MB";
+    var max_upload_limit = "{$uploadlimit}";
+    var is_defaultheader = false;
+    var cookiePrefix = '{$cookieprefix}';
+    var fm_viewmode = '{$fileman_view_mode}';
+    var requestString = '{requeststring('post')}';
+    
+    var settings = {};
+        settings.base_url = cmsurl;
+        settings.session_id = session_id;
+        settings.sidebarOpen = {$sidebar.isopen};
+        settings.sidebarWidth = {$sidebar.width};
+
+    var pageTitle = '{$pageTitle}';
+    var pageCurrentTitle = '{$pageCurrentTitle}';
+    var menuObj;
+
+
+
+
+        </script>
+        <cp:include template="generic/js_lang.html"/>        
+        {$js_code}
+        {$js}  
+
+        <script type="text/javascript" language="javascript">
+
+$(document).ready( function() {
+    if($('#comp-runtime').text()!='') {
+        $('#comp-runtime').show();
+        window.setTimeout(function() {$('#comp-runtime').fadeOut();}, 4000);
+    }
+	$('#back').click(function() { cancel(); } );
+    $('#logoutbutton').click(function() { logout(); } );
+    $('#helpbutton').click(function() { dcmshelp('{$request.adm}', '{$request.action}'); } );
+
+});
+
+        </script>
+<style type="text/css">
+    #loginBody p {
+        margin-top:10px;
+        width: 390px;
+    }
+    
+    /*
+    *    Image Preloader
+    */
+    #preloadInfo {
+        width:100%;
+        text-align:center;
+        border-right: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+        border-top:1px solid #ccc;
+        border-left:1px solid #ccc;
+        color: #333;
+        font:15px arial;
+    }
+    #loginBody { position:absolute; display:none; }
+    .preloadInfo-inner {
+        padding:20px;
+        margin:0 auto 0 auto;
+        text-align:center;
+    }
+    #statusBar { border: 1px solid #aaa; width: 300px; background: #ddd url({$backendImagePath}preload/inset_hard.png) 50% repeat-x; }
+    #status {background: url({$backendImagePath}preload/diagonals_thick.png) 0 50% no-repeat; height: 12px; }
+    
+    #textStatus { width:100%; float:left; font-weight: bold; }
+    #textStatus span { float:none; width:auto; display:inline; }
+    #textStatus .numLoaded {font-weight: bold;}
+    #textStatus .numTotal {font-weight: bold;}
+    #textStatus .percentLoaded {font-weight: bold;}
+    #textStatus .currentImg {font-weight: bold; display: block;font-size: .8em;}
+    #textStatus .currentImg span {font-weight: normal;  }
+</style>
+        
+    </head>
+    <body id="cpbody" topmargin="0" leftmargin="0">
+
+        <div id="widget-contents">
+            <div id="header">
+                <div id="title-bar">
+                    <div id="copyright">&copy; {date('m/Y')} by DreamCMS Development</div>
+
+                    <h1 id="title-container" style="display:block">
+                        <img src="html/style/default/img/buttons/lock.png" class="absmiddle" width="16" height="16" alt="" /> {trans("angemeldet als")}&nbsp;{$user.username}
+                    </h1>
+                    <h1 id="tip-container" style="display:none"></h1>                    
+
+                </div>
+
+                <div class="toolbar" style="padding-left:10px;">
+                    <div class="toolbar-left"><!--TOOLBAR-->
+                        <button id="back" class="action-button back"><span></span> {trans("zurück")}</button>
+                    </div>
+                    <div class="toolbar-right">
+                    </div>
+                </div>
+                <div id="sidebar-tree" class="closed" style="width:5px;">
+                    <div id="node-container" style="display: none">
+						<div id="node-container-content"></div>
+                    </div>					
+                </div>
+			</div>
+			
+            <div id="content" style="margin-top: 80px">
+                <div id="maincontent">                    
+					<div class="panel">
+						<h2><img src="{$backendImagePath}icon_warning.gif" width="16" height="16" alt="" />&nbsp;Access Error</h2>
+						<div class="panel-inner">
+							{$message}
+						</div>
+					</div>
+                    <div style="display:inline-block;width:100%">{$session_history}</div>
+                    {$session_expiry}
+                </div>
+            </div>
+
+        </div>
+		
+		<div id="footerwrap" class="xx">
+		</div>
+		
+
+        <!-- Notepad Content -->
+        <div id="note_ajax"></div>
+        
+        <!-- ToolTip Box -->
+        <div id="tip" onclick="infohide();" style="display:none;">
+            <div id="tip-title"><img src="html/style/default/img/info.png" width="16" height="16" alt="" /><span id="tiptitle-text"></span></div>
+            <div id="tip-body"></div>
+        </div>
+
+    </body>
+</html>

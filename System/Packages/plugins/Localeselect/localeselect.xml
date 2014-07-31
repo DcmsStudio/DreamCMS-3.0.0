@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>Sprach Auswahl</name>
+    <version>1.0</version>
+    <author>Marcel Domke</author>
+    <website>http://www.dcms-studio.de</website>
+    <description><![CDATA[Mit diesem Plugin ist es möglich die Sprache der Benutzeroberfläache im Frontend auszuwählen.]]></description>
+</plugin>

@@ -1,0 +1,272 @@
+<form action="index.php" method="post">
+<input type="hidden" name="cp" value="mycp" />
+
+    <table cellpadding="3" cellspacing="1" width="100%" border="0" class="inner">
+      <tr class="innerhead">
+        <td colspan="2" class="innerhead"><strong>{trans('Profil bearbeiten')}</strong> <em>({trans('Benötigte Informationen')}</em></td>
+      </tr>
+      <tr class="tableb">
+        <td width="40%"><span class="normal"><strong>eMail Adresse:</strong></span></td>
+        <td><input type="text" class="input" name="r_email" value="{$user.'}" maxlength="150" size="40" />
+        </td>
+      </tr>
+
+<cp:ifset="show_required_fields">
+    
+<cp:loop name="profilefields_required">
+      <tr class="{profilefields_required.tdclass}">
+        <td><span class="normal"><strong>{profilefields_required.title}:</strong><br />
+        <span class="small">{profilefields_required.description}</span></span></td>
+        <td>
+
+<cp:if var="profilefields_required.field_type" op="==" val="#text">
+<input type="text" class="input" name="field[{profilefields_required.field_id}]" value="{profilefields_required.field_value}" size="40" />
+</cp:if>
+
+<cp:if var="profilefields_required.field_type" op="==" val="#select">
+<select name="field[{profilefields_required.field_id}]" class="select">
+{profilefields_required.field_value}
+</select>
+</cp:if>
+
+<cp:if var="profilefields_required.field_type" op="==" val="#multiselect">
+<select name="field[{profilefields_required.field_id}]" class="select" multible="multible">
+{profilefields_required.field_value}
+</select>
+</cp:if>
+
+<cp:if var="profilefields_required.field_type" op="==" val="#date">
+
+<select name="dayfield[{profilefields_required.field_id}]" class="select">
+{profilefields_required.day_value}
+</select>
+
+<select name="monthfield[{profilefields_required.field_id}]" class="select">
+{profilefields_required.month_value}
+</select>
+
+<select name="yearfield[{profilefields_required.field_id}]" class="select">
+{profilefields_required.year_value}
+</select>
+
+</cp:if>
+
+
+<cp:if var="profilefields_required.field_type" op="==" val="#checkbox">
+<input type="checkbox" class="input" name="field[{profilefields_required.field_id}]" value="{profilefields_required.field_value}"{profilefields_required.is_checked} />
+</cp:if>
+</td>
+
+      </tr>
+</cp:loop>
+
+</cp:ifset="show_required_fields">
+
+      <tr class="innerhead">
+        <td colspan="2" class="innerhead"><strong>{trans('Shop')}</strong></td>
+      </tr>
+      <tr>
+            <td width="30%" nowrap="nowrap" class="tablea">{trans('Anrede *')}</td>
+            <td width="70%" class="tableb">
+
+	    <select name="title" id="title">
+              <option value="1"<cp:if var="user.user_title" op="==" val="1"> selected="selected"</cp:if>>{trans('Herr')}</option>
+              <option value="2"<cp:if var="user.user_title" op="==" val="2"> selected="selected"</cp:if>>{trans('Frau')}</option>
+	      <option value="3"<cp:if var="user.user_title" op="==" val="3"> selected="selected"</cp:if>>{trans('Firma')}</option>
+            </select>
+
+            </td>
+      </tr>
+
+
+          <tr>
+            <td nowrap="nowrap" class="tablea">{trans('Firmenname')}</td>
+            <td class="tableb"><input name="company" type="text" id="company" value="{$user.'}" size="30" /></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap" class="tablea">{trans('UstID (Nur Deutschland &amp; EU)')}</td>
+            <td class="tableb"><input name="ustid" type="text" id="ustid" value="{$user.'}" size="30" /></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap" class="tablea">{$cp->lang['user_country']}</td>
+            <td class="tableb"><select name="country" class="select">
+<cp:loop name="countries">
+            <option value="{countries.code}"<cp:if var="countries.code" op="==" val="{$def_country}" && var="user.country" op="==" val=""> selected="selected"</cp:if><cp:elseif var="countries.code" op="==" val="user.country"> selected="selected"</cp:elseif>>{countries.val}</option>
+</cp:loop>
+
+            </select></td>
+          </tr>
+			
+
+
+
+          <tr>
+            <td nowrap="nowrap" class="tablea">{trans('Vorname *')}</td>
+            <td class="tableb"><input class="input" name="name" type="text" value="{$user.'}" size="30" maxlength="50" /></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap" class="tablea">{trans('Nachname *')}</td>
+            <td class="tableb"><input class="input" name="lastname" type="text" value="{$user.'}" size="30" maxlength="100" /></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap" class="tablea">{trans('Straße / Hausnr. *')}</td>
+            <td class="tableb"><input class="input" name="street" type="text" value="{$user.'}" size="30" maxlength="150" /></td>
+          </tr>
+
+          <tr>
+            <td nowrap="nowrap" class="tablea">{trans('Postleitzahl *')}</td>
+            <td class="tableb"><input class="input" name="zip" type="text" value="{$user.'}" maxlength="10" /></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap" class="tablea">{trans('Ort *')}</td>
+            <td class="tableb"><input class="input" name="user_from" type="text" value="{$user.'}" size="30" maxlength="100" /></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap" class="tablea">{trans('Telefon')}</td>
+            <td class="tableb"><input class="input" name="phone" type="text" value="{$user.'}" size="30" maxlength="100" /></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap" class="tablea">{trans('Fax')}</td>
+            <td class="tableb"><input name="fax" type="text" value="{$user.'}" size="30" maxlength="100" /></td>
+          </tr>
+
+      <tr>
+            <td nowrap="nowrap" class="tablea">{trans('Profil anzeigen')}</td>
+            <td class="tableb">
+	    {trans('Möchten Sie, dass Ihr Profil in der <a href="index.php?cp=members" target="_blank">Benutzerliste</a> angezeigt wird?')}<br />
+             <input type="radio" class="radio" name="show_public" value="0"<cp:if var="user.shop_only" op="==" val="0"> checked="checked"</cp:if> />
+             {trans('Ja')}&nbsp;&nbsp;&nbsp;
+             <input type="radio" class="radio" name="show_public" value="1"<cp:if var="user.shop_only" op="==" val="1"> checked="checked"</cp:if> />{trans('Nein')}
+            </td>
+       </tr>
+
+      <tr class="innerhead">
+        <td colspan="2" class="innerhead"><strong>{trans('Alle angaben sind optional')}</strong></td>
+      </tr>
+
+      <tr class="tableb">
+        <td><span class="normal"><strong>{trans('Homepage von')}</strong></span></td>
+        <td><input type="text" class="input" name="r_homepage" value="{$user.'}" maxlength="250" size="40" /></td>
+      </tr>
+      <tr class="tablea">
+        <td><span class="normal"><strong>{trans('ICQ')}</strong></span></td>
+        <td><input type="text" class="input" name="r_icq" value="{$icq}" maxlength="30" size="40" /></td>
+      </tr>
+      <tr class="tableb">
+        <td><span class="normal"><strong>{trans('AIM')}</strong></span></td>
+        <td><input type="text" class="input" name="r_aim" value="{$aim}" maxlength="30" size="40" /></td>
+      </tr>
+      <tr class="tablea">
+        <td><span class="normal"><strong>{trans('YIM')}</strong></span></td>
+        <td><input type="text" class="input" name="r_yim" value="{$yim}" maxlength="30" size="40" /></td>
+      </tr>
+      <tr class="tableb">
+        <td><span class="normal"><strong>{trans('MSN')}</strong></span></td>
+        <td><input type="text" class="input" name="r_msn" value="{$msn}" maxlength="30" size="40" /></td>
+      </tr>
+      <tr class="tablea">
+        <td><span class="normal"><strong>{trans('Geburtsdatum')}</strong></span></td>
+        <td>
+
+          <table class="small" cellpadding="1" cellspacing="0" border="0" width="10%">
+            <tr>
+              <td><span class="small">{trans('Tag')}</span></td>
+              <td><span class="small">{trans('Monat')}</span></td>
+              <td><span class="small">{trans('Jahr')}</span></td>
+            </tr>
+            <tr>
+              <td><select name="r_day" class="select">{$day_options}</select></td>
+              <td><select name="r_month" class="select">{$month_options}</select></td>
+              <td>
+
+<!--
+<select name="r_year" class="select">{$year_options}</select>
+-->
+
+        <select name="r_year" class="select">
+
+<for name="bd" start="startyear" end="endyear">
+ <option value="{bd.index}" <cp:if var="bd.index" op="==" val="user.birthday_year"> selected</cp:if> >{bd.index}</option>
+</for>
+
+        </select>
+
+
+
+
+</td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+      <tr class="tableb">
+        <td><span class="normal"><strong>{trans('Geschlecht')}</strong></span></td>
+        <td>
+        <select name="r_gender" class="select">
+          <option value="0">{trans('keine Angaben')}</option>
+          <option value="1"{$gender_m}>{trans('M�nnlich')}</option>
+          <option value="2"{$gender_f}>{trans('weiblich')}</option>
+        </select>
+        </td>
+      </tr>
+      <tr class="tablea">
+        <td valign="top"><span class="normal"><strong>{trans('Benutzertext')}</strong><br />
+        <span class="small">{trans('Hier haben Sie die Möglichkeit kurze Informationen über sich zu schreiben, die anschließend in Ihrem Profile dargestellt werden.')}</span></span></td>
+        <td><textarea name="r_usertext" rows="6" cols="40" class="textarea">{$usertext}</textarea></td>
+      </tr>
+
+
+<cp:ifset="show_other_fields">    
+<cp:loop name="profilefields_other"> 
+<switch code="tableb;tablea" return="css" />    
+      <tr class="{profilefields_other.css}">
+        <td><span class="normal"><strong>{profilefields_other.field_title}:</strong><br />
+        <span class="small">{profilefields_other.field_description}</span></span></td>
+        <td>
+<cp:if var="profilefields_other.field_type" op="==" val="#text">
+<input type="text" class="input" name="field[{profilefields_other.field_id}]" value="{profilefields_other.field_value}" size="40" />
+</cp:if>
+<cp:if var="profilefields_other.field_type" op="==" val="#select">
+<select name="field[{profilefields_other.field_id}]" class="select">
+{profilefields_other.field_value}
+</select>
+</cp:if>
+<cp:if var="profilefields_other.field_type" op="==" val="#multiselect">
+<select name="field[{profilefields_other.field_id}]" class="select" multible="multible">
+{profilefields_other.field_value}
+</select>
+</cp:if>
+<cp:if var="profilefields_other.field_type" op="==" val="#checkbox">
+<input type="checkbox" class="input" name="field[{profilefields_other.field_id}]" value="{profilefields_other.field_value}"{profilefields_other.is_checked} />
+</cp:if>
+<cp:if var="profilefields_other.field_type" op="==" val="#date">
+<select name="dayfield[{profilefields_other.field_id}]" class="select">
+{profilefields_other.day_value}
+</select> - 
+
+<select name="monthfield[{profilefields_other.field_id}]" class="select">
+{profilefields_other.month_value}
+</select> - 
+
+<select name="yearfield[{profilefields_other.field_id}]" class="select">
+{profilefields_other.year_value}
+</select>
+</cp:if>
+        </td>
+      </tr>
+
+</cp:loop>     
+</cp:ifset="show_other_fields">
+
+      <tr class="tablea">
+        <td colspan="2" align="center"><input type="submit" value="{trans('Speichern')}" class="button" /> <input type="reset" value="{trans('Zurücksetzen')}" class="button" />
+</td>
+      </tr>
+    </table>
+
+<input type="hidden" name="temp_email" value="{$user.'}" />
+<input type="hidden" name="action" value="{$request.'}" />
+<input type="hidden" name="send" value="send" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+</form>

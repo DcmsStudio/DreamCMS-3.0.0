@@ -1,0 +1,604 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+    <div cp:is="$forum.note" class="forum-note">{$forum.note}</div>
+</cp:block>
+
+<cp:block name="pageing">
+{$paging}
+</cp:block>
+
+<cp:block name="forumposts">
+    <cp:loop name="posts" key="r">
+        <li title="{escape($r.title,'htmlall')}" id="thread-{$r.threadid}" class="{iif($ismod, ' mod', '')}{iif($r.published == 0, ' unpublished', '')}">
+            <div class="{iif($r.threadtype == 20, 'is-pinned', '')}">
+            
+                <cp:if condition="$ismod">
+                    <p class="moderate-check">
+                        <label><input type="checkbox" name="thread[]" value="{$r.threadid}"/></label>
+                        <span class="jump-to-modmenu"></span>
+                    </p>
+                </cp:if>
+                
+                <div class="c1">
+                    <span class="thread-postfoldericon">
+                        <img src="{$pluginpath}asset/img/status/thread{$r.foldericon}.gif" alt="" width="16" height="16" />
+                    </span>
+                    <span class="post-icon">
+                        <img cp:if="$r.posticon" src="{$r.posticon}" alt="" width="19" height="19" />
+                    </span>
+                </div>
+                <div class="c2">
+                    <div class="thread-subject">
+                        <span cp:is="$r.threadtype == 20" class="thread-pinned">Pinned</span>
+                        <a href="forum/thread/{$r.threadid}/{urlrewrite($r.alias, $r.suffix, $r.title)}">
+                            {$r.title}
+                        </a>
+                        <span cp:if="$r.attachmentcounter" title="{trans('Enthält %s Attachment(s)', $r.attachmentcounter)}" class="attachments">
+                        </span>
+                    </div>
+                    <div class="thread-counters">
+                        <dl>
+                            <dt>
+                                {trans('Zugriffe')}
+                            </dt>
+                            <dd>
+                                {escape($r.hits,'hexentity')}
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                {trans('Antworten')}
+                            </dt>
+                            <dd>
+                                {escape($r.postcounter,'hexentity')}
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="thread-lastpost">
+                        <cp:if condition="$r.threadid">
+                            <div>
+                                <p>
+                                    <a href="forum/thread/{$r.threadid}/{urlrewrite($r.alias, $r.suffix, $r.title)}?postid={$r.lastpostid}#post-{$r.lastpostid}">
+                                        {$r.lastposttitle}
+                                    </a>
+                                </p>
+                                <div>
+                                    <div class="author">
+                                        {trans('geschrieben von')}:
+                                        <cp:if condition="$r.userid">
+                                            <a href="profile/{$r.userid}">
+                                                {$r.username}
+                                            </a>
+                                        </cp:if>
+                                        <cp:else>
+                                            {$r.username}
+                                        </cp:else>
+                                    </div>
+                                    -
+                                    <span class="time">
+                                        {date('d. M, Y - H:i', 'H:i', $r.lastposttime, true)}
+                                    </span>
+                                </div>
+                            </div>
+                        </cp:if>
+                        <cp:else>
+                            <div class="no-lastpost">
+                                <p>
+                                    {trans('noch keine Antworten vorhanden')}
+                                </p>
+                            </div>
+                        </cp:else>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </cp:loop>
+</cp:block>
+<cp:block name="main_content">
+    <ul class="forum-list">
+        <cp:loop name="forums" key="r">
+            <cp:set var="contains_subforums" value="true" />
+            <cp:if condition="$r.cat_start">
+                <cp:tag name="li" />
+                <cp:if condition="$r.forumid != $forum.forumid">
+                    <header>
+                        <a href="forum/{$r.forumid}/{urlrewrite($r.alias, $r.suffix, $r.title)}">
+                            {$r.title}
+                        </a>
+                    </header>
+                </cp:if>
+                <cp:else>
+                    <header>
+                        {trans('Foren der Kategorie "%s"', $forum.title)}
+                    </header>
+                </cp:else>
+                <cp:tag name="ul" class="forums" />
+                <cp:if condition="!$r.next_r.forumid">
+                    <li class="no-forums">
+                        <div>
+                            {trans('Es sind noch keine Foren vorhanden')}
+                        </div>
+                    </li>
+                </cp:if>
+            </cp:if>
+            <cp:elseif condition="$r.forumid">
+                <li>
+                    <div>
+                        <span>
+                            <img alt="" src="{$pluginpath}asset/img/status/folder{$r.forumicon}.png" border="0" />
+                        </span>
+                        <div>
+                            <div class="forum-conatiner">
+                                <h3>
+                                    <a href="forum/{$r.forumid}/{urlrewrite($r.alias, $r.suffix, $r.title)}" class="forumtitle">
+                                        {$r.title}
+                                    </a>
+                                </h3>
+                                <cp:if condition="isset($r.subforums) && is_array($r.subforums)">
+                                    <div class="subforums">
+                                        {*
+                                        <strong>
+                                            {trans('Unterforen')}:
+                                        </strong>
+                                        *}
+                                        <ul>
+                                            <cp:loop name="r.subforums" key="subforum">
+                                                <li>
+                                                    <a href="forum/{$subforum.forumid}/{urlrewrite($subforum.alias, $subforum.suffix, $subforum.title)}">
+                                                        {$subforum.title}
+                                                    </a>
+                                                </li>
+                                            </cp:loop>
+                                        </ul>
+                                    </div>
+                                </cp:if>
+                                <p cp:is="$r.description" class="forum-description">
+                                    {$r.description}
+                                </p>
+                                <cp:if condition="count($r.moderators)">
+                                    <div class="forum-mods">
+                                        <strong>
+                                            {trans('Moderatoren')}:
+                                        </strong>
+                                        <cp:loop name="r.moderators" key="mod">
+                                            {iif($mod.__index > 1,', ', '')} 
+                                            {$mod.username}
+                                        </cp:loop>
+                                    </div>
+                                </cp:if>
+                            </div>
+                            <div class="forum-stats">
+                                <dl>
+                                    <dt>
+                                        {trans('Themen')}
+                                    </dt>
+                                    <dd>
+                                        {escape($r.threadcounter,'hexentity')}
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>
+                                        {trans('Antworten')}
+                                    </dt>
+                                    <dd>
+                                        {escape(iif($r.postcounter>0,$r.postcounter, 0),'hexentity')}
+                                    </dd>
+                                </dl>
+                            </div>
+                            <aside class="forum-lastpost">
+                                <cp:if condition="$r.lastposttime">
+                                    <div>
+                                        <p>
+                                            <a href="forum/thread/{$r.lastpostthreadid}/{urlrewrite($r.alias, $r.suffix, $r.title)}?postid={$r.lastpostid}#post-{$r.lastpostid}">
+                                                {$r.lastposttitle}
+                                            </a>
+                                        </p>
+                                        <small>
+                                            <span class="author">
+                                                {trans('geschrieben von')}:
+                                                <cp:if condition="$r.lastpostuderid">
+                                                    <a href="profile/{$r.lastpostuserid}">
+                                                        {$r.lastpostusername}
+                                                    </a>
+                                                </cp:if>
+                                                <cp:else>
+                                                    {$r.lastpostusername}
+                                                </cp:else>
+                                            </span>
+                                            -
+                                            <span class="time">
+                                                {date('d. M, Y - H:i', 'H:i', $r.lastposttime, true)}
+                                            </span>
+                                        </small>
+                                    </div>
+                                </cp:if>
+                                <cp:else>
+                                    <div class="no-lastpost">
+                                        <p>
+                                            {trans('Kein Themen vorhanden')}
+                                        </p>
+                                    </div>
+                                </cp:else>
+                            </aside>
+                        </div>
+                    </div>
+                </li>
+            </cp:elseif>
+            <cp:if condition="$r.next_r.cat_end">
+                <cp:tag name="ul" forceclose="true" />
+                <cp:tag name="li" forceclose="true" />
+            </cp:if>
+        </cp:loop>
+    </ul>
+    <cp:if condition="count($forums)">
+        <div class="forum-legend">
+            <img alt="" src="{$pluginpath}asset/img/status/folder.png" border="0" />
+            {trans('Forum enthält keine neuen Beiträge')}
+            <img alt="" src="{$pluginpath}asset/img/status/folder-new.png" border="0" />
+            {trans('Forum enthält neue Beiträge')}
+            <img alt="" src="{$pluginpath}asset/img/status/folder-locked.png" border="0" />
+            {trans('Forum ist geschlossen')}
+        </div>
+    </cp:if>
+    <cp:if condition="$forum.forumid && $forum.containposts">
+        <div class="containerdiv" style="clear:both;position:relative">
+            <div class="thread-buttons top">
+                <cp:hasperm permkey="forum/canpostnew">
+                    <a class="btn newtopic" href="forum/newthread/{$forum.forumid}" title="{trans('Neues Thema')}">
+                        {trans('Neues Thema')}
+                        {* <img src="{$pluginpath}asset/img/newtopic.png" alt="{trans('Neues Thema')}" title="{trans('Neues Thema')}" /> *}
+                    </a>
+                </cp:hasperm>
+            </div>
+        </div>
+        <div class="threads">
+        {*
+            <h3>
+                {trans('Themen im Forum "%s"', $forum.title)}
+            </h3>
+            *}
+            
+            <cp:if condition="$ismod">
+                <div id="moderate-check-all" class="moderate-check-all">
+                    <input type="checkbox" id="mod-check-all"/>
+                    
+                    
+                    <ul>
+                        <li class="extra moderation">
+                            <span>
+                                Moderation
+                            </span>
+                        </li>
+                    </ul>
+                    
+                    
+                    
+                    
+                </div>
+            </cp:if>
+            <div class="filters">
+                <ul>
+                    <li class="{iif($input.order == 'date', 'active' , '' )}">
+                        <a href="forum/{$forum.forumid}/{suggest($forum.title, true)}?order=date">
+                            Letzter Beitrag
+                        </a>
+                    </li>
+                    <li class="{iif($input.order == 'posts', 'active' , '' )}">
+                        <a href="forum/{$forum.forumid}/{suggest($forum.title, true)}?order=posts">
+                            Anzahl Beiträge
+                        </a>
+                    </li>
+                    <li class="{iif($input.order == 'hits', 'active' , '' )}">
+                        <a href="forum/{$forum.forumid}/{suggest($forum.title, true)}?order=hits">
+                            Anzahl Zugriffe
+                        </a>
+                    </li>
+                    <li class="{iif($input.order == 'rating', 'active' , '' )}">
+                        <a href="forum/{$forum.forumid}/{suggest($forum.title, true)}?order=rating">
+                            Bewertung
+                        </a>
+                    </li>
+                    <li class="extra{iif($input.order != 'rating' && $input.order != 'hits' && $input.order != 'posts' && $input.order != 'date', ' active' , '' )}" id="threadlist-menu-extra">
+                        <span>
+                            Erweitert
+                        </span>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        <ul id="forumposts-list" class="forumposts-list">
+            <cp:block name="forumposts"/>
+            <cp:if condition="count($posts)">
+                <cp:if condition="$paging">
+                    <li class="thread-ajax-paging" id="thread-ajax-paging">
+                        <div>
+                            <span>
+                                {trans('weitere Themen anzeigen')}
+                            </span>
+                        </div>
+                    </li>
+                </cp:if>
+            </cp:if>
+            <cp:else>
+                <li>
+                    <div class="no-threads">
+                        <p>
+                            {trans('es sind noch keine Themen vorhanden')}
+                        </p>
+                    </div>
+                </li>
+            </cp:else>
+        </ul>
+        
+        <cp:if condition="$ismod">
+            <div id="forumposts-list-modoptions" class="forumposts-list-modoptions">
+                
+            </div>
+            
+            <ul id="forum-modmenu" class="forum-modmenu">
+                <li rel="close">{trans('Themen schließen')}</li>
+                <li rel="open">{trans('Themen öffnen')}</li>
+                <li rel="publish">{trans('Themen veröffentlichen')}</li>
+                <li rel="unpublish">{trans('Themen verbergen')}</li>
+                <li rel="pin">{trans('Themen Pinnen')}</li>
+                <li rel="unpin">{trans('Themen Unpin')}</li>
+                <li rel="move">{trans('Themen Verschieben')}</li>
+                <li rel="delete">{trans('Themen löschen')}</li>
+            </ul>
+            
+        </cp:if>
+        
+        
+        <div class="containerdiv" style="clear:both;position:relative">
+            <div class="thread-paging" id="thread-paging">
+                <cp:block name="pageing"/>
+            </div>
+
+                <div class="thread-buttons bottom">
+                    <cp:hasperm permkey="forum/canpostnew">
+                        <a class="btn newtopic" href="forum/newthread/{$forum.forumid}" title="{trans('Neues Thema')}">
+                            {trans('Neues Thema')}
+                            {* <img src="{$pluginpath}asset/img/newtopic.png" alt="{trans('Neues Thema')}" title="{trans('Neues Thema')}" /> *}
+                        </a>
+                    </cp:hasperm>
+                </div>
+
+        </div>
+        
+        
+
+ 
+
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                setTimeout(function(){
+                    Forum.initThreadList({
+                        page: {$input.page},
+                        pages: {$input.pages},
+                    });
+                    
+                    
+                    Forum.setForumID({iif($forum.forumid, $forum.forumid, false)});
+                    
+                    Forum.setFilter({
+                        order: '{$input.order}',
+                        sort: '{$input.sort}',
+                        timefilter: '{$input.timefilter}',
+                    });
+                }, 500);
+                
+            });
+        </script>
+
+
+
+        <cp:if condition="count($moderators)">
+            <div class="forum-moderators">
+                <strong>
+                    {trans('Moderatoren')}
+                </strong>
+                <ul>
+                    <cp:loop name="moderators" key="r">
+                        <li>
+                            {iif($r.__index > 0,', ', '')}{$r.username}
+                        </li>
+                    </cp:loop>
+                </ul>
+            </div>
+        </cp:if>
+        
+        
+        
+    </cp:if>
+    
+    
+    <cp:if condition="$forum.forumid">
+
+        <div class="threadlegend-div mb5">
+            <div class="threadlegend">
+                <strong>
+                    {trans('Legende')}
+                </strong>
+                <ul class="small">
+                    <li>
+                        <img alt="" class="absmiddle" src="{$pluginpath}asset/img/status/thread_new.gif" border="0" />
+                        <span class="absmiddle">
+                            {trans('Neue Beiträge')}
+                        </span>
+                    </li>
+                    <li>
+                        <img alt="" class="absmiddle" src="{$pluginpath}asset/img/status/thread_hot_new.gif" border="0" />
+                        <span class="absmiddle">
+                            {trans('Heißes Thema mit neuen Beiträgen')}
+                        </span>
+                    </li>
+                    <li>
+                        <img alt="" class="absmiddle" src="{$pluginpath}asset/img/status/thread.gif" border="0" />
+                        <span class="absmiddle">
+                            {trans('Keine neuen Beiträge')}
+                        </span>
+                    </li>
+                    <li>
+                        <img alt="" class="absmiddle" src="{$pluginpath}asset/img/status/thread_hot.gif" border="0" />
+                        <span class="absmiddle">
+                            {trans('Heißes Thema ohne neue Beiträge')}
+                        </span>
+                    </li>
+                    <li>
+                        <img alt="" class="absmiddle" src="{$pluginpath}asset/img/status/thread_lock.gif" border="0" />
+                        <span class="absmiddle">
+                            {trans('Thema ist Geschlossen')}
+                        </span>
+                    </li>
+                    <li>
+                        <img alt="" class="absmiddle" src="{$pluginpath}asset/img/status/thread_lock_new.gif" border="0" />
+                        <span class="absmiddle">
+                            {trans('Thema neu & geschlossen')}
+                        </span>
+                    </li>
+                    <li>
+                        <img alt="" class="absmiddle" src="{$pluginpath}asset/img/status/thread_dot.gif" border="0" />
+                        <span class="absmiddle">
+                            {trans('Sie haben in diesem Thema geschrieben')}
+                        </span>
+                    </li>
+                    <li>
+                        <img alt="" class="absmiddle" src="{$pluginpath}asset/img/status/announcement_new.gif" border="0" />
+                        <span class="absmiddle">
+                            {trans('Ankündigung')}
+                        </span>
+                    </li>
+                    <li>
+                        <img alt="" class="absmiddle" src="{$pluginpath}asset/img/status/sticky.gif" border="0" />
+                        <span class="absmiddle">
+                            {trans('Wichtiges Thema')}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="forumjump">
+                <strong>
+                    {trans('Gehe zu Forum')}
+                </strong>
+                <select name="fjump" id="forumjump">
+                    <cp:loop name="forumjump" key="r">
+                        <option value="{$r.forumid}" cp:on="selected:$input.forumid == $r.forumid" parse:selected="selected">
+                            {iif($r.depth > 0,'|', '')}
+                            <cp:if condition="$r.depth >
+                                0">{repeat('--', $r.depth)} 
+                            </cp:if>
+                            {$r.title}
+                        </option>
+                    </cp:loop>
+                </select>
+            </div>
+            <div class="rules">
+                <strong>
+                    {trans('Berechtigungen')}
+                </strong>
+                <ul>
+                    <li>
+                        Neue Themen erstellen:
+                        <cp:if condition="hasperm('forum/canpostnew')">
+                            {trans('Ja')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Nein')}
+                        </cp:else>
+                    </li>
+                    <li>
+                        Themen beantworten:
+                        <cp:if condition="hasperm('forum/canreplyothers')">
+                            {trans('Ja')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Nein')}
+                        </cp:else>
+                    </li>
+                    <li>
+                        Beiträge bearbeiten:
+                        <cp:if condition="hasperm('forum/caneditpost')">
+                            {trans('Ja')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Nein')}
+                        </cp:else>
+                    </li>
+                    <li>
+                        Anhänge hochladen:
+                        <cp:if condition="hasperm('forum/cangetattachment')">
+                            {trans('Ja')}
+                        </cp:if>
+                        <cp:else>
+                            {trans('Nein')}
+                        </cp:else>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </cp:if>
+    
+    <cp:if condition="!$input.forumid">
+        <div class="forum-userstats">
+            <h3>
+                {trans('Aktuell sind %s Benutzer im Forum unterwegs', $count.total)}
+            </h3>
+            <div>
+                <span>
+                </span>
+                <div>
+                    <div>
+                        {trans('Zur Zeit sind %s Gäste, %s Mitglieder und %s Geister im Forum unterwegs.', $count.guests, $count.users, $count.invisible)}
+                    </div>
+                    <cp:loop name="activeusers" key="r">
+                        <cp:if condition="$r.loop_index">
+                            ,
+                        </cp:if>
+                        <cp:if condition="$r.moderate">
+                            <strong>
+                                <a href="profile/{$r.userid}/{urlrewrite('', '', $r.username)}">
+                                    {$r.username}
+                                </a>
+                            </strong>
+                        </cp:if>
+                        <cp:else>
+                            <a href="profile/{$r.userid}/{urlrewrite('', '', $r.username)}">
+                                {$r.username}
+                            </a>
+                        </cp:else>
+                    </cp:loop>
+                </div>
+            </div>
+        </div>
+        <div class="forum-stats">
+            <h3>
+                {trans('Foren Statistik')}
+            </h3>
+            <div>
+                <span>
+                </span>
+                <div>
+                    <ul>
+                        <li>
+                            {trans('Themen')}: {iif($totalthreads, $totalthreads, '0')}
+                        </li>
+                        <li>
+                            {trans('Beiträge')}: {iif($totalposts, $totalposts, '0')}
+                        </li>
+                        <li>
+                            {trans('Umfragen')}: {iif($totalpolls, $totalpolls, '0')}
+                        </li>
+                        <li>
+                            {trans('Attachments')}: {iif($totalattachments, $totalattachments, '0')}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </cp:if>
+</cp:block>

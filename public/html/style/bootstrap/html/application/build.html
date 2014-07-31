@@ -1,0 +1,135 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+    <cp:if condition="$appid || $input.appid || $input.app">
+        [save:appForm] [save_exit:appForm] [reset:appForm] [cancel:appForm]
+    </cp:if>
+</cp:block>
+
+<cp:block name="content">
+
+    <cp:if condition="!$input.appid && !$input.app">
+        <cp:set var="x" value="0"/>
+        <cp:loop name="apps" key="r">
+
+            <cp:if condition="$x == 0">
+                <cp:tag name="div" style="display:inline-block;width: 100%;vertical-align: top" />
+            </cp:if>
+
+            <cp:set var="x" value="$x + 1"/>
+
+            <div class="box itm" style="display:inline-block;{iif($x == 1, '', 'margin-right:10px;')}margin-bottom:10px;min-width:47%;max-width:47%;float: left;height: 100%;max-height: 150px">
+                <h2>
+                    {$r.title}
+                </h2>
+                <div class="box-inner" style="display:inline-block;">
+                    <img src="{$html_path}img/apps/{$r.key}.png" width="64" height="64" title="" alt="" border="0" style="position: absolute;float: left;margin-right:5px"/>                
+                    <div style="margin-left: 80px;display:inline-block;">
+                        <span>{$r.description}</span>
+                        <br/>
+                        <span style="margin-top:10px;margin-bottom:4px;">{trans('Die neue Application wird auf basis der Application `%s` erstellt.', $r.title)}</span>
+                        <p><button id="{$r.key}" class="action-button"><img src="images/buttons/application-add.png" width="16" height="16" title="" alt="" border="0"/> {trans('Application erstellen')}</button></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <cp:if condition="$x == 2">
+                <cp:tag name="div" forceclose="true" />
+                <cp:set var="x" value="0"/>
+            </cp:if>
+
+
+        </cp:loop>
+    </cp:if>
+    <cp:else>
+
+
+
+        <cp:if condition="!$appid">
+            <div class="box">
+                <h2>
+                    Build new {$app_title}
+                </h2>
+                <div class="box-inner" style="display: inline-block">
+                    <img src="{$html_path}img/apps/{$appkey}.png" width="64" height="64" title="" alt="" border="0" style="float:left;padding-right: 5px; padding-bottom: 5px;"/>
+
+
+                    {$app_description}
+                </div>
+            </div>
+        </cp:if>
+
+
+        <form action="admin.php" name="appForm" id="appForm" method="post">
+            <input type="hidden" name="adm" value="app"/>
+            <input type="hidden" name="action" value="save"/>
+            <input type="hidden" name="appid" id="app-id" value="{$appid}"/>
+            <input type="hidden" name="appkey" value="{$appkey}"/>
+
+            <cp:include template="../metadata"/>
+
+            <div class="box">
+                <h2>
+                    {trans('Anwendungs Einstellungen')}
+                </h2>
+                <div class="box-inner">
+
+                    <cp:loop name="forms" key="r">
+                        <fieldset>
+                            <cp:if condition="!$r.grouplabel && $r.label != ''">
+                                <legend>{$r.label}</legend>                        
+                            </cp:if>
+                            <cp:else><legend>{$r.grouplabel}</legend></cp:else>
+
+
+                            {$r.element}
+                            <cp:if condition="$r.alias"><br/><strong>{trans('Anwendungs Alias')}: {$r.alias}</strong></cp:if>                        
+                            <cp:else>
+                                <cp:if condition="$r.description != ''">
+                                    <br/><small>{$r.description}</small>                       
+                                </cp:if>
+                            </cp:else>
+
+
+                        </fieldset>
+                    </cp:loop>
+                </div>
+            </div>
+        </form>    
+
+    </cp:else>
+
+    <script type="text/javascript">
+        <cp:literal type = "cdata_comment" >
+                var items = $('.itm').find('button');
+        items.each(function() {
+            var self = this;
+            var key = $(this).attr('id');
+            $(this).click(function(e) {
+                e.preventDefault();
+                href = 'admin.php?adm=app&action=edit&app=' + key;
+                openTab({url:href, obj:self, label: '{trans('Anwendung ` % s` erstellen')}'.replace('%s', $(self).parents('.box:first').find('h2').text()) });
+            });
+        });
+
+        <cp:if condition = "$input.appid || $appkey ">
+                Form.registerForm('appForm', {
+            contentIdentifierID: 'app-id',
+            identifierType: 'app',
+            baseField: 'field-title',
+            exiturl: 'admin.php?adm=app',
+            contentTable: 'application_trans',
+            runAfterSubmit: function(exit) {
+                menuObj.getMenu();
+                pagestree.rebuildTree(true);
+            }
+        });
+        </cp:if>
+
+
+                </cp:literal>
+    </script>
+
+</cp:block>

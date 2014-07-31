@@ -1,0 +1,2 @@
+Version 4.0 (2013-xx-xx)
+	Initial version of the spellchecker for TinyMCE 4.0.

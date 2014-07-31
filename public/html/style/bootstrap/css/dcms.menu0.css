@@ -1,0 +1,426 @@
+.menu,
+#Start-Menu {    
+    max-width: 200px!important;
+    width: auto;
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    z-index:9000;
+    display: none;
+    color: #333;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 500;
+    -moz-user-select: none!important;
+    -webkit-user-select: none!important;
+    -ms-user-select: none!important;
+    cursor: auto!important;
+}
+
+.menu .inner,
+#NavItems {
+    display: inline-block;
+}
+
+.menu .inner {
+    -webkit-border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 4px 4px;
+}
+
+
+.menu li,
+#NavItems li {
+    padding: 0;
+    margin: 0;
+}
+
+
+#NavItems a {
+    text-decoration: none!important;
+}
+.submenu ul {
+
+}
+#NavItems li > .submenu {
+    border-top: 0;
+    margin: 0;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.9);
+    -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), 0 8px 20px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), 0 8px 20px rgba(0, 0, 0, 0.5);
+    box-shadow:0 0 0 1px rgba(0, 0, 0, 0.18), 0 8px 20px rgba(0, 0, 0, 0.5);
+    -webkit-border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 4px 4px;
+    overflow: visible;
+    width: auto;
+    min-width: 150px;
+    max-width: 246px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 26px;
+    z-index: 1000;
+}
+#NavItems li {
+    position: relative;
+    height: 22px!important;
+}
+#NavItems ul li > .submenu {
+    top: 0;
+    left: 100%;
+    -webkit-border-radius: 0px 4px 4px 4px;
+    border-radius: 0px 4px 4px 4px;
+}
+
+
+
+.menu li:first-child,
+#NavItems li:first-child,
+.menu li:first-child:hover,
+#NavItems li:first-child:hover {
+    -webkit-border-radius: 0px 0px 0px 0px!important;
+    border-radius: 0px 0px 0px 0px!important;
+}
+
+.menu li:last-child,
+#NavItems li:last-child,
+.menu li:last-child:hover,
+#NavItems li:last-child:hover {
+    -webkit-border-radius: 0px 0px 4px 4px!important;
+    border-radius: 0px 0px 4px 4px!important;
+}
+
+
+
+
+
+/**
+    Item style
+*/
+.menu li>span,
+.menu span.menu-group,
+.menu a,
+#NavItems span.menu-group,
+#NavItems a {
+    line-height: 22px;
+    display: block;
+
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 10px;
+    cursor: default;
+}
+
+
+.menu li em:first-child,
+.menu li span.menu-group em,
+#NavItems li em,
+#NavItems li span.menu-group em {
+    background-image: url('../img/Apple/submenu_arrow.gif');
+    background-repeat: no-repeat;
+    background-position: 100% 0%; 
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    float: right;
+    margin-top: 7px;
+    position: absolute;
+    right: 0;
+}
+.menu li:hover em,
+.menu li:hover > span.menu-group em,
+#NavItems li:hover em,
+#NavItems li:hover > span.menu-group em {
+    background-position: 100% 100%; 
+}
+
+
+
+
+/*  Item Icons */
+.menu img, .menu .root-group img, .menu .menu-group img, .menu a img,
+
+#NavItems img,
+#NavItems .root-group img,
+#NavItems .menu-group img, 
+#NavItems a img {
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 3px;
+    float: left;
+    width: 16px;
+    height: 16px;
+}
+
+
+#NavItems a span.menu-sprite {
+    margin-left: 4px;
+    margin-top: 3px;
+    margin-right: 4px;
+}
+
+.menu >li,
+#NavItems >li {
+    float: left;
+    position: relative;
+}
+
+/*  Item hover style  */
+
+.menu li:hover,
+#Start-Menu > li:hover,
+#NavItems .fold:hover,
+#NavItems li:hover > span.menu-group,
+#NavItems li:hover > a {
+    /* background-position: 98% -7px!important; */
+    color: #fff!important;
+    /* background-color: #738499; */
+
+    background: #7793f5; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzc3OTNmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzQwNmRmMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNzVhZjEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #7793f5 0%, #406df2 50%, #275af1 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7793f5), color-stop(50%,#406df2), color-stop(100%,#275af1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #7793f5 0%,#406df2 50%,#275af1 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #7793f5 0%,#406df2 50%,#275af1 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #7793f5 0%,#406df2 50%,#275af1 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #7793f5 0%,#406df2 50%,#275af1 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7793f5', endColorstr='#275af1',GradientType=0 ); /* IE6-8 */
+
+
+
+}
+.menu li:first-child > span.menu-group,
+.menu li:first-child > a,
+#NavItems li:first-child > span.menu-group,
+#NavItems li:first-child > a {
+    -webkit-border-radius: 0px 4px 0px 0px!important;
+    border-radius: 0px 4px 0px 0px!important;
+}
+
+
+
+.menu li:last-child > span.menu-group,
+.menu li:last-child > a,
+#NavItems li:last-child > span.menu-group,
+#NavItems li:last-child > a {
+    -webkit-border-radius: 0px 0px 4px 4px!important;
+    border-radius: 0px 0px 4px 4px!important;
+}
+
+
+.menu li:hover > a, .menu li:hover > span {
+    color: #fff!important;
+}
+
+
+
+
+
+
+/**
+    Menu Separator
+*/
+.menu .separator,
+.menu .separator.hover,
+
+
+#NavItems .separator,
+#NavItems .separator.hover {
+    border-bottom: 1px solid #DADADA!important;
+    margin: 0;
+    padding: 0!important;
+    height: 0;
+    min-height: 1px!important;
+    max-height: 1px!important;
+    margin-top: 2px!important;
+    margin-bottom: 2px!important;
+    background-color: transparent!important;
+    font-size: 1px!important;
+    line-height: 0!important;
+}
+
+#App-Menu .menu-separator,
+#Start-Menu .menu-separator { display: none!important; }
+
+#userMenu .inner {
+    padding-right: 0;
+}
+#userMenu ul {
+    display: inline-block;
+}
+
+#userMenu li {
+    padding-right: 0;
+    cursor: default;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#userMenu li>span {
+    padding-right: 4px;
+    padding-left: 4px;
+    cursor: default;
+    white-space: nowrap;
+}
+
+
+
+/**
+    App Menu
+
+*/
+
+
+
+
+
+#App-Menu ul {
+    display: block;
+}
+
+
+#App-Menu>ul>li {
+    display: inline-block;
+    float: left;
+    margin-right: 0;
+    font-size: 14px;
+    line-height: 22px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#App-Menu>ul>li.active {
+    color: #fff!important;
+    /* background-color: #738499; */
+    background: #7793f5; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzc3OTNmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzQwNmRmMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNzVhZjEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #7793f5 0%, #406df2 50%, #275af1 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7793f5), color-stop(50%,#406df2), color-stop(100%,#275af1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #7793f5 0%,#406df2 50%,#275af1 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #7793f5 0%,#406df2 50%,#275af1 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #7793f5 0%,#406df2 50%,#275af1 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #7793f5 0%,#406df2 50%,#275af1 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7793f5', endColorstr='#275af1',GradientType=0 ); /* IE6-8 */
+
+
+}
+
+#App-Menu .submenu {
+    background-image: url('../img/Apple/startmenu-bg.png'); 
+    background-repeat: repeat;
+
+    -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), 0 8px 20px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), 0 8px 20px rgba(0, 0, 0, 0.5);
+    box-shadow:0 0 0 1px rgba(0, 0, 0, 0.18), 0 8px 20px rgba(0, 0, 0, 0.5);
+
+    -webkit-border-radius: 0px 4px 4px 4px;
+    border-radius: 0px 4px 4px 4px;
+}
+
+#App-Menu>ul>li.active .submenu { 
+    -webkit-border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 4px 4px;
+}
+
+
+
+#App-Menu>ul>li.active .submenu li {
+    position: relative;
+    clear: both;
+    padding-right: 10px;
+    min-width: 150px;
+}
+
+
+#App-Menu>ul>li.active .submenu li, 
+#App-Menu>ul>li.active .submenu li>span,
+#App-Menu>ul>li.active .submenu li a {
+    line-height: 22px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 4px;
+    cursor: default;
+    font-size: 13px;
+    display: block;
+}
+
+#App-Menu>ul>li.active .submenu li:hover,
+#App-Menu>ul>li.active .submenu li:hover>span, 
+#App-Menu>ul>li.active .submenu li:hover>a {
+    color: #fff!important;
+    /* background-color: #738499; */
+
+    background: #7793f5; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzc3OTNmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzQwNmRmMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNzVhZjEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #7793f5 0%, #406df2 50%, #275af1 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7793f5), color-stop(50%,#406df2), color-stop(100%,#275af1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #7793f5 0%,#406df2 50%,#275af1 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #7793f5 0%,#406df2 50%,#275af1 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #7793f5 0%,#406df2 50%,#275af1 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #7793f5 0%,#406df2 50%,#275af1 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7793f5', endColorstr='#275af1',GradientType=0 ); /* IE6-8 */
+
+
+}
+
+
+#App-Menu>ul>li.active .submenu li:first-child:hover,
+#App-Menu>ul>li.active .submenu li:first-child:hover>span, 
+#App-Menu>ul>li.active .submenu li:first-child:hover>a {
+    -webkit-border-radius: 0!important;
+    border-radius: 0!important;
+}
+
+#App-Menu>ul>li.active .submenu li:last-child:hover,
+#App-Menu>ul>li.active .submenu li:last-child:hover>span, 
+#App-Menu>ul>li.active .submenu li:last-child:hover>a {
+    -webkit-border-radius: 0px 0px 4px 4px!important;
+    border-radius: 0px 0px 4px 4px!important;
+}
+
+#App-Menu li span.InputCheckboxSpan { 
+    display: none!important;
+    width: 0!important;
+    height: 0!important;
+}
+
+#App-Menu li span.InputCheckboxContent {
+    display: inline-block!important;
+    clear: none;
+    padding: 0;
+    width: 15px!important;
+    float: none;
+    margin-left: 3px;  
+}
+#App-Menu .InputCheckboxContent,
+#App-Menu .InputCheckboxContent.checkboxFalse {
+    background:transparent!important;
+}
+
+#App-Menu .InputCheckboxContent.checkboxTrue {
+    background:url('../img/Apple/Core/menu_checkbox_true.png') no-repeat!important;
+}
+
+
+
+
+
+
+ul li.separator {
+    height: 0px;
+    background:transparent!important;
+    border-bottom: 1px solid #DADADA;
+    border-top: 0;
+    margin-left: 5px!important;
+    margin-right: 5px!important;
+    margin-top: 2px!important;
+    margin-bottom: 2px!important;
+}

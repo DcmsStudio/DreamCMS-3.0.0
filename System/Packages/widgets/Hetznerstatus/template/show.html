@@ -1,0 +1,231 @@
+
+<style>
+    #{$container_id} {
+        width: 100%;
+    }
+    #{$container_id} .toggle {
+        width: 100%;
+        display: inline-block;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #{$container_id} .toggle img { float: left; }
+    #{$container_id} .toggle strong { position: relative;left: 0; }
+    #{$container_id} p, #{$container_id} ul {margin: 0;padding: 0;}
+    #{$container_id} td > div { border: 1px solid #999!important; background: #f6f6f6; padding: 3px; }
+    #{$container_id} .r {  border-top: 1px solid #d0d0d0;}
+
+    #{$container_id} .r a { }
+
+
+    #{$container_id} .r:first-child {
+        border-top: 0;
+    }
+    .r div { overflow: hidden}
+
+    #{$container_id} .status-msg {
+        display: none;
+    }
+    #{$container_id} .status-msg > div.date {
+        padding: 0;
+        padding-left: 16px;
+        padding-right: 10px;
+        margin-bottom: 5px;
+        font-size: 10px;
+        font-style: italic;
+
+    }
+    #{$container_id} .status-msg > div.message {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        padding: 0;
+        padding-left: 16px;
+        padding-right: 10px;
+
+    }
+    .statusmsg-overflow {
+        overflow: auto;
+        overflow-x: hidden;
+        height: 250px;
+    }
+    .statusmsg-overflow .scroll-content {
+        padding-right: 0!important;
+    }
+    .statusmsg-overflow .pane {
+        background: #4C65A3; /* Old browsers */
+
+        background: -moz-linear-gradient(top,  #4C65A3 0%, #23538a 7%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4C65A3), color-stop(7%,#23538a)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #4C65A3 0%,#23538A 7%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,#4C65A3 0%,#23538A 7%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,#4C65A3 0%,#23538A 7%); /* IE10+ */
+        background: linear-gradient(to bottom, #4C65A3 0%,#23538A 7%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4C65A3', endColorstr='#23538a',GradientType=0 ); /* IE6-8 */
+
+    }
+
+    .statusmsg-overflow .slider > div {
+        background: rgba(2, 64, 99, 0.5)!important;
+    }
+
+    .wg-header {
+        display: block;
+        padding: 10px;
+        color: #fff;
+    }
+    .wg-header a {color: #fff;}
+    .{$container_id}bg {
+        width: 360px!important;
+        border: 2px solid #232421;
+        background: #a7cfdf; /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E3Y2ZkZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjI5JSIgc3RvcC1jb2xvcj0iIzIzNTM4YSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+        background: -moz-linear-gradient(top,  #a7cfdf 0%, #23538a 29%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a7cfdf), color-stop(29%,#23538a)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #a7cfdf 0%,#23538a 29%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #a7cfdf 0%,#23538a 29%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #a7cfdf 0%,#23538a 29%); /* IE10+ */
+        background: linear-gradient(to bottom,  #a7cfdf 0%,#23538a 29%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7cfdf', endColorstr='#23538a',GradientType=0 ); /* IE6-8 */
+
+    }
+
+    .{$container_id}bg2 {
+        width: 250px!important;
+        height: 100px!important;
+        border: 2px solid #51A3A3;
+        background: #7d7e7d; /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdkN2U3ZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwZTBlMGUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top,  #7d7e7d 0%, #0e0e0e 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d7e7d), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  #7d7e7d 0%,#0e0e0e 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-8 */
+        color: #FFF;
+        padding: 10px!important;
+        padding-top: 0!important;
+        text-align: center;
+    }
+    .{$container_id}bg2 p {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .{$container_id}bg2 small {
+        position: absolute;
+        bottom: 6px;
+        right: 5px;
+    }
+
+</style>
+
+<div class="hetzner" id="{$container_id}">
+
+    <div class="wg-header">
+        <strong style="font-size: 110%;"><a href="http://www.hetzner-status.de/" rel="external">Hetzner Status-Webseite</a></strong>
+        <br />
+        <small>Feed fetched: {date('d.m.Y, H:i:s', $rss_fetched)}</small>
+    </div>
+
+    <div class="statusmsg-overflow">
+        <div>
+            <cp:loop name="items" key="r">
+                <div class="row">
+                    <div class="toggle">
+                        <img src="{@BACKEND_IMAGE_PATH}plus.png" width="16" height="16" alt="" style="vertical-align: -3px;" /> 
+                        {$r.title}
+                    </div>
+                    <div class="status-msg">
+                        <div class="date">{$r.date}</div>
+                        <div class="message">{$r.content}</div>
+                    </div>
+                </div>
+            </cp:loop>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<script type="text/javascript">
+
+
+        var _idName = '#{$container_id}';
+
+
+        $(_idName).parents('.widget-content:first').addClass('{$container_id}bg').next().addClass('{$container_id}bg2');
+
+
+        var scrollContainer = $(_idName).find('.statusmsg-overflow div:first');
+        $(_idName).find('a[rel="external"]').unbind();
+        $(_idName).find('a[rel="external"]').bind('click', function(e) {
+            e.preventDefault();
+            window.open($(this).attr('href'));
+            return false;
+
+        });
+        $(_idName).find('.toggle').css({cursor: 'pointer'}).unbind();
+        $(_idName).find('.toggle').unbind('mouseover').on('mouseover', function() {
+            var src = $('img', $(this)).attr('src');
+
+            src = src.replace('plus-hover', 'plus');
+            src = src.replace('minus-hover', 'minus');
+
+            src = src.replace('plus', 'plus-hover');
+            src = src.replace('minus', 'minus-hover');
+
+
+
+            $('img', $(this)).attr('src', src);
+        });
+
+        $(_idName).find('.toggle').unbind('mouseleave').on('mouseleave', function() {
+
+            var src = $('img', $(this)).attr('src');
+            src = src.replace('plus-hover', 'plus');
+            src = src.replace('minus-hover', 'minus');
+
+
+
+            $('img', $(this)).attr('src', src);
+        });
+
+        Tools.scrollBar(scrollContainer);
+
+        $(_idName).find('.toggle').unbind().bind('click', function(e) {
+            var idstr = $(this).attr('id');
+            var obj = $(this).next();
+
+            var src = $('img', $(this)).attr('src');
+            src = src.replace('plus-hover', 'plus');
+            src = src.replace('minus-hover', 'minus');
+
+            if (!obj.is(':visible')) {
+
+
+
+                src = src.replace('plus', 'minus');
+
+
+                $('img', $(this)).attr('src', src);
+                obj.slideToggle(300, function() {
+                    Tools.scrollBar(scrollContainer);
+                });
+            } else {
+
+                src = src.replace('minus', 'plus');
+
+                $('img', $(this)).attr('src', src);
+                obj.slideToggle(300, function() {
+                    Tools.scrollBar(scrollContainer);
+                });
+            }
+        });
+
+
+</script>

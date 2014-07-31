@@ -1,0 +1,31 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        <button class="action-button btn_new" onclick="openTab({url: 'admin.php?adm=forms&action=editfield&formid={$form.formid}', obj: this, label: $(this).text() })"><span class="icn"></span><span class="label">{trans('Feld hinzufügen')}</span></button>
+</cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+    <div id="formfield-grid"></div>
+    <script type="text/javascript" language="javascript">
+
+        Application.Grid( 'formfield-grid', {$gridJson});
+/*
+        var table = new dcmsGrid('formfield-grid', {
+            url: 'admin.php?adm=forms&action=fields&formid={$form.formid}&ajax=1',
+            key: 'fieldid',
+            currentFilter: {$grid.activeFilter},
+            colModel: {$grid.colModel},
+            gridActions: {$grid.gridActions},
+            searchitems: {$grid.searchitems},
+            sort: '{$grid.sort}',
+            orderby: '{$grid.orderby}',
+            total: {$grid.total}
+        });
+        */
+
+
+    </script>
+
+</cp:block>

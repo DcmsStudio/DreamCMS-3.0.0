@@ -1,0 +1,41 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+    <div>
+        <h3>
+            {trans('Seiten mit dem Tag: "%s"', $input.tag)}
+        </h3>
+    </div>
+    <div class="list-items">
+        <cp:loop name="pages" key="r">
+            <article class="list-item{iif(!$r.next_r.id, ' last', '')}{iif($r.image.src, '', ' no-image')}{iif($r.published, ' online-content', ' offline-content')}">
+                <cp:seemode modul="page" contentid="$page.id" edit="action=edit&amp;id=%s&amp;edit=1" publish="action=publish&amp;id=%s" state="$r.published"/>
+                <h1>
+                    <a href="{$r.url}">
+                        {truncate($r.title, 60)}
+                    </a>
+                </h1>
+                <cp:if condition="$r.image.src">
+                    <div class="listview-image">
+                        <a href="{$r.url}">
+                            <img src="{$r.image.src}" alt="{escape($r.title,'html')}" title="{escape($r.title, 'html')}"/>
+                        </a>
+                    </div>
+                </cp:if>
+                <div>
+                    <small>
+                        <em>
+                            {trans('erstellt am')}: {date('d.m.Y', $r.created)}
+                        </em>
+                    </small>
+                    <p>
+                        {truncate($r.content, 150, null,'...')}
+                    </p>
+                    <a href="{$r.url}">
+                        » {trans('weiterlesen')}
+                    </a>
+                </div>
+            </article>
+        </cp:loop>
+    </div>
+    <cp:include template="pageing" />
+</cp:block>

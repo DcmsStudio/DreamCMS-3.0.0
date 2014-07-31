@@ -1,0 +1,51 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="create-backup" class="action-button"><img src="html/style/default/img/buttons/zip.png" width="16" height="16" alt="" /> {trans('Backup anlegen')}</button>
+</cp:block>
+
+<cp:block name="content">
+    <div id="backup-grid"></div>
+    <iframe id="backup-dl"></iframe>
+    <script language="javascript" type="text/javascript">
+        $('#create-backup').click(function(){
+            openTab({url: 'admin.php?adm=backup&action=create', obj: this, label: $(this).text() });
+        });
+
+        if (typeof registerBackupLoad !== 'function') {
+            function registerBackupLoad() {
+                $('#backup-grid a.download').each(function(){
+                    $(this).on('click', function(e){
+                        e.preventDefault();
+                        $('#backup-dl').attr('src', $(this).attr('href'));
+                    });
+                });
+            }
+        }
+
+        Application.Grid('backup-grid', {$gridJson});
+
+
+/*
+                Application.Grid('backup-grid', {
+                url: 'admin.php?adm=backup',
+                        currentFilter: {$grid.activeFilter},
+                        colModel: {$grid.colModel},
+                        gridActions: {$grid.gridActions},
+                        searchitems: {$grid.searchitems},
+                        datarows: {$grid.datarows},
+                        sort: '{$grid.sort}',
+                        orderby: '{$grid.orderby}',
+                        total: {$grid.total},
+                        perpage: {$grid.perpage},
+                        onAfterLoad: function(data)
+                        {
+                            registerBackupLoad();
+                        }
+                });
+                */
+
+
+
+    </script>
+</cp:block>

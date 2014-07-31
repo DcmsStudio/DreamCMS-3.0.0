@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Googlemaps</title>
+
+    <link rel="stylesheet" href="../../../../public/html/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="../../../../public/html/css/bootstrap/bootstrap-theme.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places,geometry,weather" type="text/javascript"></script>
+
+    <script src="../../../../public/html/js/bootstrap/bootstrap.min.js"></script>
+    <script src="../../../../public/html/js/bootstrap/dcms.bootstrap-input-spin.js"></script>
+
+
+    <script src="./js/dialog.js"></script>
+    <base target="_self"/>
+</head>
+<body onunload="unloadGooglemap()">
+
+
+<form id="g-maps" action="#">
+    <input type="hidden" name="akey" id="akey" value=""/>
+    <input type="hidden" name="zoomLevel" id="zoomLevel" value=""/>
+    <input type="hidden" name="mapType" id="mapType" value=""/>
+    <input name="coords" type="hidden" value=""/>
+
+
+    <div class="row">
+        <div class="col-xs-2">
+
+            <label class="control-label">Höhe</label>
+            <input class="form-control spin" id="height" name="height" value="300" type="text" data-toggle="spin" data-min="100"/>
+
+            <label class="control-label">Breite</label>
+            <input class="form-control spin" id="width" name="width" value="300" type="text" data-toggle="spin" data-min="100"/>
+
+            <label class="control-label">Zoom</label>
+            <input class="form-control spin" id="zoom" name="zoom" value="7" type="text" data-toggle="spin" data-min="1" data-max="20"/>
+
+
+            <hr/>
+
+            <label class="control-label">Optionen</label>
+            <label for="chkScale">
+                <input type="checkbox" name="chkScale" id="chkScale" onclick="toggleScale(this.checked);"/>
+                Scale
+            </label>
+        </div>
+        <div class="col-xs-10">
+
+            <div id="divLookup" class="row">
+                <label class="col-xs-2 control-label">Location</label>
+
+                <div class="col-xs-8" id="fsLookup">
+                    <input class="form-control" id="address" name="address" value="" type="text"/>
+                </div>
+
+            </div>
+            <label>Map</label>
+
+            <div id="map" style="position: relative; width: 100%; height: 360px; overflow: hidden">
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--
+
+
+<div class="mceActionPanel">
+    <div style="float: left">
+        <input type="button" id="insert" name="insert" value="{#insert}" onclick="ExampleDialog.insert();"/>
+    </div>
+    <div style="float: right">
+        <input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();"/>
+    </div>
+</div>
+
+
+-->
+</form>
+</body>
+</html>

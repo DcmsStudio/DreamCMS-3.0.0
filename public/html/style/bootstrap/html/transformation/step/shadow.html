@@ -1,0 +1,50 @@
+    <fieldset>
+        <legend>{trans("Shadow Colour")}</legend>
+        # <input type="text" class="textbox" name="params[color]" id="color" value="{iif($values.color, $values.color, '999999')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Distance")}</legend>
+        <input type="text" class="textbox" name="params[distance]" id="distance" value="{iif($values.distance, $values.distance, '5')}" style="width: 80px;" /> px
+    </fieldset>
+
+
+    <fieldset>
+        <legend>{trans("Opacity")}</legend>
+        <input type="text" class="textbox" name="params[opacity]" id="opacity" value="{iif($values.opacity, $values.opacity, '70')}" style="width: 80px;" /> %
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Image Alignment (Horizontal)")}</legend>
+        <label for="align_left"><input type="radio" class="checkbox" name="params[align]" id="align_left" value="left"{iif($values.align=='left', ' checked="checked"', '')} />{trans("Left")}</label><br />
+        <label for="align_center"><input type="radio" class="checkbox" name="params[align]" id="align_center" value="center"{iif($values.align=='center', ' checked="checked"', '')} />{trans("Center")}</label><br />
+        <label for="align_right"><input type="radio" class="checkbox" name="params[align]" id="align_right" value="right"{iif($values.align=='right', ' checked="checked"', '')} />{trans("Right")}</label>
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Image Alignment (Vertical)")}</legend>
+        <label for="valign_top"><input type="radio" class="checkbox" name="params[valign]" id="valign_top" value="top" {iif($values.valign=='top', 'checked="checked"', '')} />{trans("Top")}</label><br />
+        <label for="valign_middle"><input type="radio" class="checkbox" name="params[valign]" id="valign_middle" value="middle" {iif($values.valign=='middle', 'checked="checked"', '')} />{trans("Middle")}</label><br />
+        <label for="valign_bottom"><input type="radio" class="checkbox" name="params[valign]" id="valign_bottom" value="bottom" {iif($values.valign=='bottom', 'checked="checked"', '')} />{trans("Bottom")}</label>
+    </fieldset>
+
+
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+
+        $('#color').ColorPicker({
+            livePreview: true,
+            color: '{iif($values.color, $values.color, "ff0000")}',
+            onChange: function(hsb, hex, rgb) {
+                $('#color').val(hex);
+            }
+        });
+
+
+</script>
+
+

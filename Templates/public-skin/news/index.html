@@ -1,0 +1,137 @@
+<cp:extends template="../container" />
+{*
+<cp:set var="layout.right" value="false"/>
+<cp:set var="layout.cols" value="false"/>
+*}
+<cp:block name="right_content">
+    <cp:set var="panel" value="1" />
+    <div class="box">
+        <h3>
+            {trans('Kategorien')}
+        </h3>
+        <div class="box-inner">
+            <ul class="category-tree">
+                <cp:loop name="cats" key="r">
+                    <cp:if condition="$r.published">
+                        <li>
+                            <a href="{$r.caturl}">
+                                {$r.cat_title}
+                            </a>
+                        </li>
+                    </cp:if>
+                </cp:loop>
+            </ul>
+        </div>
+    </div>
+    
+    <cp:box template="../cms/box-basic" label="trans('Unsere News als Feed')" showlabel="true" class="iif($news.published, ' online-content',' offline-content')">
+            <cp:feedlink url="news/index" cacheable="true" cachetime="3600" mode="rss" icon="true" label="trans('als Rss')" />
+            <cp:feedlink url="news/index" cacheable="true" cachetime="3600" mode="atom" icon="true" label="trans('als Atom')" />
+    </cp:box>
+    
+</cp:block>
+<cp:block name="teaser">
+    <cp:if condition="$input.catid>
+        0 && $currentcat.id && trim($currentcat.description)">
+        <cp:seemode modul="news" contentid="$currentcat.id" edit="action=edit_cats&id=%s&edit=1" publish="action=catpublish&cat_id=%s" state="$currentcat.published" />
+        <h1>
+            {seemode($currentcat.title, 'title')}
+        </h1>
+        {seemode($currentcat.description, 'cat_description')}
+    </cp:if>
+</cp:block>
+<cp:block name="content-header">
+    [modul name="news" run="topnews" limit="3" images="true" template="topnews-3cols"
+    <cp:if condition="$input.catid>
+        0">
+        catid="{$input.catid}"
+    </cp:if>
+    ]
+</cp:block>
+<cp:block name="main_content">
+    <cp:lazyload enable="true"/>
+    <div class="list-items">
+        <cp:loop name="news" key="r">
+            <cp:seemodeitem modul="news" contentid="$r.id" edit="action=edit_news&amp;id=%s&amp;edit=1" publish="action=publish&id=%s" state="$r.published" delete="">
+                <article class="list-item{iif(!$r.next_r.id, ' last', '')}{iif($r.image.src, '', ' no-image')}{iif($r.published, '', ' offline-content')}">
+                    <div class="list-cal-left">
+                        <span>
+                            {date('Y', $r.created)}
+                        </span>
+                        <span>
+                            {date('M', $r.created)}
+                        </span>
+                        <span>
+                            {date('d', $r.created)}
+                        </span>
+                    </div>
+                    <h2>
+                        <a href="{$r.url}">
+                            {seemode(truncate($r.title, 60), 'title', true, 60)}
+                        </a>
+                    </h2>
+                    <cp:if condition="$r.image.src">
+                        <div class="listview-image">
+                            <a href="{$r.url}">
+                                <cp:thumb src="$r.image.src" width="685" height="300" aspect="true" cache="news/index/" alt="escape($r.title, 'html')" title="escape($r.title, 'html')" />
+                                {*
+                                <img src="{$r.image.src}" alt="{escape($r.title, 'html')}" title="{escape($r.title, 'html')}" />
+                                *}
+                            </a>
+                        </div>
+                    </cp:if>
+                    <cp:else>
+                        <div class="listview-image">
+                            <a href="{$r.url}" title="{escape($r.title, 'html')}">
+                            </a>
+                        </div>
+                    </cp:else>
+                    <div class="list-item-text">
+                        <p>
+                            {seemode(truncate($r.text, 450, false, ' [...]'), 'content', true, 450, false, ' [...]')}
+                        </p>
+                    </div>
+                    <div class="list-item-details">
+                        <ul class="meta">
+                            <li cp:is="!$input.catid" class="meta-cat">
+                                <i class="fa fa-folder-open"></i>
+                                <a href="{$r.caturl}">
+                                    {$r.cat_title}
+                                </a>
+                            </li>
+                            <li class="meta-author">
+                                <i class="fa fa-user"></i>
+                                <a href="/profile/{$r.author}">
+                                    {$r.author}
+                                </a>
+                            </li>
+                            <li class="meta-num-reads">
+                                <i class="fa fa-eye"></i>
+                                {$r.hits}
+                            </li>
+                            <li class="meta-comments">
+                                <i class="fa fa-comment"></i>
+                                {$r.comments}
+                            </li>
+                            <li class="meta-read-more">
+                                <a href="{$r.url}">
+                                    » {trans('weiterlesen')}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            </cp:seemodeitem>
+            <cp:lazyload enable="false"/>
+        </cp:loop>
+        <cp:else>
+            <div class="list-item last">
+                {trans('Keine News vorhanden')}
+                <div class="clear">
+                    <!-- -->
+                </div>
+            </div>
+        </cp:else>
+    </div>
+    <cp:include template="pageing" />
+</cp:block>

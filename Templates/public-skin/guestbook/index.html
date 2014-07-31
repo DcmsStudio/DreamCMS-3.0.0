@@ -1,0 +1,141 @@
+<cp:extends template="../container" />
+<cp:block name="teaser">
+</cp:block>
+<cp:block name="main_content">
+    <cp:if condition="user('userid')">
+        <div class="controlpanel-tabs">
+            <cp:include template="usercontrol/tabpanel" />
+        </div>
+    </cp:if>
+    <p style="text-align: right">
+        <a href="guestbook/submit/{$input.username}" class="action-button">
+            {trans('Eintrag schreiben')}
+            <span class="fa fa-pencil"></span>
+        </a>
+    </p>
+    <div id="gb-posts" class="list-items">
+        <cp:loop name="posts" key="r">
+            <div class="list-item">
+                <div class="left-side">
+                    <cp:if condition="$r.author.userphoto">
+                        <cp:if condition="$r.author.avatarowner != null">
+                            <img alt="" src="{photo($r.author.userphoto,'AuthorImageSmall', '')}" title="{escape($r.username, 'html')}" border="0" />
+                        </cp:if>
+                        <cp:else>
+                            <img alt="" src="{photo($r.author.userphoto,'AuthorImageSmall', '')}" title="{escape($r.username, 'html')}" border="0" />
+                        </cp:else>
+                    </cp:if>
+                    <cp:else>
+                        <span class="profile-photo-dummy">
+                            
+                        </span>
+                    </cp:else>
+
+                </div>
+                <div class="right-side">
+                    <cp:if condition="$r.title">
+                        <h3>
+                            {escape($r.title,'html')}
+                        </h3>
+                    </cp:if>
+                    <cp:else>
+                        <h3>
+                            {trans('Ohne Titel...')}
+                        </h3>
+                    </cp:else>
+                    <small>
+                        {date('d.m.Y, H:i', 'H:i', $r.timestamp, true)} - {trans('geschrieben von')} :
+                        <a href="profile/{$r.username}" cp:if="$r.userid">
+                            {$r.username}
+                        </a>
+                        {iif($r.email, ' - ', '')}
+                        <a cp:is="$r.email" href="mailto:{$r.email}">
+                            <span class="fa fa-envelope">
+                            </span>
+                        </a>
+                        {iif($r.homepage, ' - ', '')}
+                        <a cp:is="$r.homepage" href="{$r.homepage}" target="_blank">
+                            <span class="fa fa-home">
+                            </span>
+                        </a>
+                        <div class="fr">
+                            <cp:if condition="$r.ip">
+                                IP: {$r.ip}
+                            </cp:if>
+                            <cp:if condition="$r.published != 1 && $user.username == $request.username && $user.userid">
+                                {iif($r.ip && $r.published != 1 && $user.username == $request.username && $user.userid,' - ', '')}
+                                <a href="guestbook/{$request.username}/publish/{$r.id}" class="publishing">
+                                    {trans('freischalten')}
+                                </a>
+                            </cp:if>
+                            {iif($r.ip && $r.published != 1 && $user.username == $request.username && $user.userid, ' - ', '')}
+                            
+                            <cp:if condition="$user.userid && $user.username == $request.username">
+                                <a href="guestbook/{$request.username}/remove/{$r.id}" rel="post-{$r.id}" class="delconfirm">
+                                    {trans('löschen')}
+                                </a>
+                            </cp:if>
+                            <cp:elseif condition="$user.userid && $request.username && $user.grouptype == 'administrator'">
+                                <a href="guestbook/{$request.username}/remove/{$r.id}" rel="post-{$r.id}" class="delconfirm">
+                                    {trans('löschen')}
+                                </a>
+                            </cp:elseif>
+                            <cp:elseif condition="$user.userid && !$request.username && $user.grouptype == 'administrator'">
+                                <a href="guestbook/remove/{$r.id}" rel="post-{$r.id}" class="delconfirm">
+                                    {trans('löschen')}
+                                </a>
+                            </cp:elseif>
+                            
+
+                        </div>
+                    </small>
+                    <p>
+                        {$r.message}
+                    </p>
+                </div>
+            </div>
+        </cp:loop>
+        <cp:else>
+            <div class="info">
+                <span class="icon-info mr5 ml5" style="font-size:16px">
+                </span>
+                <em>
+                    {trans('Es sind noch keine Gästebuch Einträge vorhanden')}
+                </em>
+            </div>
+        </cp:else>
+    </div>
+    <cp:include template="pageing" />
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        $(document).ready(function() {
+            $('#gb-posts').find('.publishing').each(function() {
+                var self = this;
+                $(this).click(function(e) {
+                    $.get(systemUrl + '/' + $(self).attr('href'), {}, function(data) {if(responseIsOk(data)) {
+                            $(self).remove();
+                        } else {jAlert(data.msg);
+                        }
+                    }, 'json');
+                    e.preventDefault();
+                    return false;
+                });
+            });
+            $('#gb-posts').find('.delconfirm').each(function() {
+                var self = this;
+                $(this).click(function(e) {
+                    e.preventDefault();
+                    jConfirm('{trans("Soll der Eintrag wirklich gelöscht werden ?")}', '{trans("Eintrag löschen...")}', function(r) {if(r) {
+                            $.get(systemUrl + '/' + $(self).attr('href'), {}, function(data) {if(responseIsOk(data)) {
+                                    $('#' + $(self).attr('rel')).remove();
+                                } else {jAlert(data.msg);
+                                }
+                            }, 'json');
+                        }
+                    });
+                    return false;
+                });
+            });
+        }); /* ]]> */
+    </script>
+</cp:block>

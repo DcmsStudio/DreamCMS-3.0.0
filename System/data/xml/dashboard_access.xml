@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	(c) 2010 by Marcel Domke
+	erstellt: 16:10 Donnerstag, 8. April 2010
+        
+        <controller title description [hidden]>
+            <action title > defaultvalue </action>
+            ...
+        </controller>
+-->
+
+<dash_access>
+
+    <development type="array" title="development" description="" hidden="1">
+        <index title="sehen">1</index>
+        <session title="sehen">1</session>
+        <scancontrollers title="sehen">1</scancontrollers>
+    </development>
+
+
+    <admin_rm type="array" title="Dashboard Rechte" description="Achtung: Diese Option erlaubt dem User dieses Rechtesystem zu benutzen! Bitte diese Funktion nur dem Administrator zugängig machen!" default="true">
+        <edit_user title="darf Rechte vergeben">0</edit_user>
+        <index title="sehen">0</index>
+    </admin_rm>
+
+    <options type="array" title="System Konfiguration" description="Achtung: Bitte diese Funktion nur dem Administrator zugängig machen!">
+        <overview title="sehen">0</overview>
+        <edit title="darf die Konfiguration bearbeiten">0</edit>
+    </options>
+
+    <extension type="array" title="System Erweiterungen" description="">
+        <index title="sehen">0</index>
+        <settings title="darf die Einstellungen der System Erweiterungen bearbeiten">0</settings>
+        <toggleextension title="toggleextension">0</toggleextension>
+    </extension>
+
+
+    <active_sections type="array" title="Bereiche" description="">
+        <index title="sehen">0</index>
+        <edit title="darf die Einstellungen der System Bereiche bearbeiten">0</edit>
+    </active_sections>
+
+    <widget type="array" title="Widgets" description="">
+        <index title="sehen">1</index>
+        <edit title="darf die Widget Einstellungen bearbeiten">1</edit>
+    </widget>
+
+
+    <otherstuff type="array" title="Sessions" description="Achtung: Bitte diese Funktion nur dem Administrator zugängig machen!">
+        <adminsessions title="sehen">0</adminsessions>
+        <delete title="sehen">0</delete>
+    </otherstuff>
+
+    <plugins type="array" title="Module" description="">
+        <index title="sehen">0</index>
+        <publish title="darf Module aktivieren/deaktivieren">0</publish>
+        <install title="darf Module installieren">0</install>
+        <uninstall title="darf Module deinstallieren">0</uninstall>
+        <edit title="darf Module Einstellungen bearbeiten">0</edit>	
+    </plugins>
+
+    <plugin type="array" title="Modul" description="">
+        <index title="sehen">0</index>
+    </plugin>
+
+
+    <usergroups type="array" title="Benutzergruppen" description="">
+        <index title="sehen">0</index>
+        <setdefault title="darf die Standart Benutzergruppe ändern">0</setdefault>
+        <add title="darf Benutzergruppen hinzufügen">0</add>
+        <edit title="darf Benutzergruppen bearbeiten">0</edit>
+        <delete title="darf Benutzergruppen löschen">0</delete>
+    </usergroups>
+    <users type="array" title="Benutzer" description="">
+        <show title="sehen">0</show>
+        <add title="draf Benutzer hinzufügen">0</add>
+        <edit title="draf Benutzer bearbeiten">0</edit>
+        <blog title="draf Benutzer sperren">0</blog>
+        <delete title="draf Benutzer löschen">0</delete>
+    </users>
+
+    <news type="array" title="News" description="">
+        <edit_news title="darf News bearbeiten">0</edit_news>
+        <list_cats title="kann News Kategorien sehen">0</list_cats>
+        <edit_cats title="darf News Kategorien bearbeiten">0</edit_cats>
+        <delete_cats title="darf News Kategorien löschen">0</delete_cats>
+        <create_index title="darf News Index neu erstellen">0</create_index>
+        <delete_news title="darf News löschen">0</delete_news>
+        <publish_news title="darf News aktivieren/deaktivieren">0</publish_news>
+        <add title="darf News hinzufügen">0</add>
+        <unarchive title="darf News aus Archiv holen">0</unarchive>
+        <archive title="darf News ins Archiv verschieben">0</archive>
+        <catpublish title="darf News Kategorien aktivieren/deaktivieren">0</catpublish>
+        <index title="kann News sehen">0</index>
+    </news>
+
+
+
+    <adminlogs type="array" title="System Logs" description="">
+        <index title="sehen">0</index>
+        <delete title="löschen">0</delete>
+    </adminlogs>
+
+    <adminoptions type="array" title="Listen Darstellung" description="">
+        <edit title="ändern">0</edit>
+    </adminoptions>
+
+    <article type="array" title="Artikel" description="">
+        <index title="sehen">0</index>
+        <move title="verschieben">0</move>
+        <searchindex title="Index erzeugen">0</searchindex>
+        <delete title="löschen">0</delete>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <edit title="bearbeiten">0</edit>
+        <add title="erstellen">0</add>
+    </article>
+
+    <article_categories type="array" title="Artikel Kategorien" description="">
+        <index title="sehen">0</index>
+        <delete title="löschen">0</delete>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <edit title="bearbeiten">0</edit>
+        <add title="erstellen">0</add>
+    </article_categories>
+
+    <article_types type="array" title="Artikel Typen" description="">
+        <index title="sehen">0</index>
+        <delete title="löschen">0</delete>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <edit title="bearbeiten">0</edit>
+        <add title="erstellen">0</add>
+    </article_types>
+
+    <attachments type="array" title="Attachments" description="">
+        <index title="sehen">0</index>
+        <delete title="löschen">0</delete>
+        <edit title="bearbeiten">0</edit>
+        <add title="erstellen">0</add>
+    </attachments>
+
+    <avatar type="array" title="Avatare" description="">
+        <index title="sehen">0</index>
+        <del title="löschen">0</del>
+        <edit title="bearbeiten">0</edit>
+        <add title="erstellen">0</add>
+    </avatar>
+
+    <ban_ips type="array" title="Banned IPs" description="">
+        <index title="sehen">0</index>
+        <spamstat title="Spam Statistik im detail sehen">0</spamstat>
+    </ban_ips>
+
+    <bbcodes type="array" title="BB-Codes" description="">
+        <index title="sehen">0</index>
+        <del title="löschen">0</del>
+        <edit title="bearbeiten">0</edit>
+        <add title="erstellen">0</add>
+    </bbcodes>
+
+    <bugtracker type="array" title="Bug Tracker" description="">
+        <index title="sehen">0</index>
+        <delete title="löschen">0</delete>
+        <bugedit title="bearbeiten">0</bugedit>
+        <add title="eintragen">0</add>
+    </bugtracker>
+
+    <cache_control type="array" title="Cache System" description="">
+        <index title="sehen">0</index>
+        <view_cache title="Cache im detail sehen">0</view_cache>
+        <edit title="Cache aktualisieren">0</edit>
+		<cache_control title="">0</cache_control>
+		<clear title="">0</clear>
+		<clearfull title="">0</clearfull>
+    </cache_control>
+
+    <cheats type="array" title="Cheats" description="">
+        <index title="sehen">0</index>
+        <searchindex title="Index erneuern">0</searchindex>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <del_cheat title="löschen">0</del_cheat>
+        <edit_cheat title="bearbeiten">0</edit_cheat>
+        <add_cheat title="eintragen">0</add_cheat>
+    </cheats>
+
+    <comments type="array" title="Kommentare" description="">
+        <index title="sehen">0</index>
+        <show title="ansehen">0</show>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <delete title="löschen">0</delete>
+    </comments>
+
+    <companys type="array" title="Personen &amp; Hersteller" description="">
+        <index title="sehen">0</index>
+        <edit title="bearbeiten">0</edit>
+        <delete title="löschen">0</delete>
+        <indexing title="Index erzeugen">0</indexing>
+    </companys>
+
+    <container type="array" title="" description="">
+        <index title="sehen">0</index>
+    </container>
+
+    <cron_jobs type="array" title="Cronjobs" description="">
+        <index title="sehen">0</index>
+        <run title="ausführen">0</run>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <delete title="löschen">0</delete>
+        <edit title="bearbeiten">0</edit>
+        <add title="erstellen">0</add>
+    </cron_jobs>
+
+    <css type="array" title="" description="">
+        <index title="sehen">0</index>
+    </css>
+
+    <csv_export type="array" title="CSV Export" description="">
+        <index title="sehen">0</index>
+    </csv_export>
+
+    <csv_import type="array" title="CSV Import" description="">
+        <index title="sehen">0</index>
+    </csv_import>
+
+    <database type="array" title="Datenbank" description="">
+        <index title="sehen">0</index>
+        <exec title="SQL Befehle ausführen">0</exec>
+        <optimize title="Tabellen optimieren">0</optimize>
+        <repaire title="Tabellen reparieren">0</repaire>
+        <backup title="Backup erstellen">0</backup>
+        <import title="SQL Dateien importieren (ausführen)">0</import>
+    </database>
+
+    <downloads type="array" title="Downloads" description="">
+        <list_links title="Downloads sehen">0</list_links>
+        <list_cats title="Kategorien sehen">0</list_cats>
+	
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <delete title="löschen">0</delete>
+        <edit title="bearbeiten">0</edit>
+        <add title="erstellen">0</add>
+        <recount_links title="Counter aktualisieren">0</recount_links>
+        <new_links title="neue Downloads">0</new_links>
+        <list_broken title="fehlerhafte Downloads auflisten">0</list_broken>
+        <check_downloads title="Downloads auf Verfügbarkeit prüfen">0</check_downloads>
+        <create_index title="neue Downloads">0</create_index>
+    </downloads>
+
+    <downloads_perm type="array" title="" description="">
+        <index title="sehen">0</index>
+    </downloads_perm>
+
+    <faqadmin type="array" title="FAQ" description="">
+        <index title="sehen">0</index>
+        <index title="sehen">0</index>
+        <index title="sehen">0</index>
+        <index title="sehen">0</index>
+        <index title="sehen">0</index>
+        <index title="sehen">0</index>
+        <index title="sehen">0</index>
+    </faqadmin>
+
+    <filemanager type="array" title="Dateimanager" description="Achtung: Bitte diese Funktion nur dem Administrator zugängig machen!">
+        <index title="Dateimanager sehen">0</index>
+        <delete title="Dateien/Verzeichnisse löschen">0</delete>
+        <createdir title="Verzeichnisse erstellen">0</createdir>
+        <save title="Dateien bearbeiten/erstellen">0</save>
+        <upload title="Dateien Uploaden">0</upload>
+        <view title="Dateien anzeigen">0</view>
+        <rename title="Verzeichnisse/Dateien umbenennen">0</rename>
+        <copy title="Verzeichnisse/Dateien kopieren">0</copy>
+        <zip title="Zip Dateien erstellen">0</zip>
+    </filemanager>
+
+    <forms type="array" title="Formulare" description="">
+        <index title="sehen">0</index>
+        <create_form title="erstellen">0</create_form>
+        <delete_form title="löschen">0</delete_form>
+        <edit_form title="bearbeiten">0</edit_form>
+        <list_fields title="Formularfelder sehen">0</list_fields>
+        <edit_fields title="Formularfelder bearbeiten">0</edit_fields>
+        <change_fieldtype title="Typ des Formularfelds ändern">0</change_fieldtype>
+    </forms>
+
+    <forum type="array" title="Foren" description="">
+        <index title="sehen">0</index>
+        <delete title="löschen">0</delete>
+        <add title="erstellen">0</add>
+        <edit title="bearbeiten">0</edit>
+        <empty title="leeren">0</empty>
+        <move title="verschieben">0</move>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <reorder title="umsortieren">0</reorder>
+    </forum>
+
+    <forum_moderator type="array" title="Foren Moderatoren" description="">
+        <index title="sehen">0</index>
+        <add title="hinzufügen">0</add>
+        <edit title="bearbeiten">0</edit>
+        <delete title="löschen">0</delete>
+    </forum_moderator>
+
+
+    <forum_permission type="array" title="Foren Rechte" description="">
+        <index title="sehen">0</index>
+        <add title="hinzufügen">0</add>
+        <edit title="bearbeiten">0</edit>
+        <delete title="löschen">0</delete>
+    </forum_permission>
+
+    <gallery type="array" title="Gallerie" description="">
+        <index title="sehen">0</index>
+        <del_gal title="löschen">0</del_gal>
+        <edit_gal title="bearbeiten">0</edit_gal>
+        <add_gal title="erstellen">0</add_gal>
+        <upload title="Dateien uploden">0</upload>
+        <publish title="Dateien aktivieren/deaktivieren">0</publish>
+        <delete title="Dateien löschen">0</delete>
+        <edit title="Dateien bearbeiten">0</edit>
+    </gallery>
+
+    <gamereviews type="array" title="Reviews" description="">
+        <index title="sehen">0</index>
+        <searchindex title="Index erneuern">0</searchindex>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <add_review title="erstellen">0</add_review>
+        <edit_review title="bearbeiten">0</edit_review>
+        <del_review title="löschen">0</del_review>
+    </gamereviews>
+
+    <games type="array" title="Games" description="">
+        <index title="sehen">0</index>
+        <searchindex title="Index erneuern">0</searchindex>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <add title="sehen">erstellen</add>
+        <edit title="sehen">bearbeiten</edit>
+        <del title="sehen">löschen</del>
+    </games>
+
+
+    <help type="array" title="Hilfe/Credits/Lizense" description="">
+        <help title="Hilfe sehen">1</help>
+        <credits title="Credits sehen">1</credits>
+        <license title="Lizense einsehen">0</license>
+    </help>
+
+    <icon type="array" title="Icons" description="">
+        <index title="sehen">0</index>
+        <add title="sehen">erstellen</add>
+        <edit title="sehen">bearbeiten</edit>
+        <del title="sehen">löschen</del>
+    </icon>
+
+    <language type="array" title="Sprachen" description="">
+        <index title="sehen">0</index>
+        <edit_settings title="Sprach Einstellungen bearbeiten">0</edit_settings>
+        <edit title="bearbeiten">0</edit>	
+        <addgroupkey title="Sprach Gruppen hinzufügen">0</addgroupkey>
+        <rebuild title="Sprachdateien neu erzeugen">0</rebuild>
+        <export title="exportieren">0</export>
+        <import title="importieren">0</import>
+        <add_new title="sehen">0</add_new>
+        <delete title="löschen">0</delete>	
+        <addlangkey title="Variablen hinzufügen">0</addlangkey>
+        <deletekey title="Variablen löschen">0</deletekey>
+    </language>
+
+    <language_groups type="array" title="" description="">
+        <index title="sehen">0</index>
+    </language_groups>
+
+    <links type="array" title="Weblinks" description="">
+        <index title="Kategorien sehen">0</index>
+        <create_index title="Index erneuern">0</create_index>	
+        <list_broken title="als Broken gekennzeichnete Links sehen">0</list_broken>
+        <del_broken title="als Broken gekennzeichnete Links löschen">0</del_broken>
+        <del_votes title="bewertungen löschen">0</del_votes>
+        <list_cats title="Kategorien sehen">0</list_cats>
+        <add_cat title="Kategorien hinzufügen">0</add_cat>
+        <edit_cat title="Kategorien bearbeiten">0</edit_cat>
+        <del_cat title="Kategorien löschen (Links in dieser Kategorie werden auch gelöscht)">0</del_cat>
+        <new_links title="Neue Links sehen">0</new_links>
+        <get_new title="Neue Links freischalten">0</get_new>
+        <move_links title="verschieben">0</move_links>
+        <add_link title="hinzufügen">0</add_link>
+        <edit_link title="bearbeiten">0</edit_link>
+        <del_link title="löschen">0</del_link>
+        <check_links title="Links auf erreichbarkeit prüfen">0</check_links>
+        <deaktivate_link title="aktivieren/deaktivieren">0</deaktivate_link>
+        <list_links title="sehen">0</list_links>
+	
+    </links>
+
+    <marketing type="array" title="Banner" description="">
+        <index title="sehen">0</index>
+        <add title="hinzufügen">0</add>
+        <edit title="bearbeiten">0</edit>
+        <delete title="löschen">0</delete>
+	
+    </marketing>
+
+    <mediamanager type="array" title="" description="">
+        <index title="sehen">0</index>
+    </mediamanager>
+
+    <mediamanager_dirs type="array" title="" description="">
+        <index title="sehen">0</index>
+    </mediamanager_dirs>
+
+    <menues type="array" title="Menüs" description="">
+        <list_menuitems title="Menüpunkte sehen">0</list_menuitems>
+        <edit_menuitem title="Menüpunkte bearbeiten">0</edit_menuitem>
+        <add_menuitem title="Menüpunkte hinzufügen">0</add_menuitem>
+        <publish_menuitem title="Menüpunkte aktivieren/deaktivieren">0</publish_menuitem>
+        <delete_menuitem title="Menüpunkte löschen">0</delete_menuitem>
+        <edit_menu title="bearbeiten">0</edit_menu>
+        <add_menu title="hinzufügen">0</add_menu>
+        <delete_menu title="löschen">0</delete_menu>
+        <menu_publish title="aktivieren/deaktivieren">0</menu_publish>
+        <reorder title="umsortieren">0</reorder>
+        <index title="sehen">0</index>
+    </menues>
+
+    <newsletter type="array" title="Newsletter" description="">
+        <index title="sehen">0</index>
+        <send_newsletter title="verschicken">0</send_newsletter>
+        <view_users title="Abbonenten sehen">0</view_users>
+        <view_list title="Archiv sehen">0</view_list>
+        <view title="Archivierte anzeigen">0</view>
+        <delete title="löschen">0</delete>
+    </newsletter>
+
+    <plattformgenre type="array" title="Plattformen/Genres" description="">
+        <list_plattforms title="Plattformen sehen">0</list_plattforms>
+        <edit_plattform title="Plattformen bearbeiten/erstellen">0</edit_plattform>
+        <del_plattform title="Plattformen löschen">0</del_plattform>
+        <list_genre title="Genres sehen">0</list_genre>
+        <edit_genre title="Genres bearbeiten/erstellen">0</edit_genre>
+        <del_genre title="Genres löschen">0</del_genre>
+    </plattformgenre>
+
+    <poll type="array" title="Umfragen" description="">
+        <index title="sehen">0</index>
+        <reset title="zurücksetzen">0</reset>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <create title="erstellen">0</create>
+        <editpoll title="bearbeiten">0</editpoll>
+        <delete title="löschen">0</delete>
+        <edititems title="Einträge bearbeiten">0</edititems>
+        <delete_item title="Einträge löschen">0</delete_item>
+    </poll>
+
+    <products type="array" title="Produkte" description="">
+        <overview title="sehen">0</overview>
+        <edit title="bearbeiten">0</edit>
+        <add title="hinzufügen">0</add>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <delete title="löschen">0</delete>
+    </products>
+
+    <profilefield type="array" title="Profil Felder" description="">
+        <view title="sehen">0</view>
+        <add title="hinzufügen">0</add>
+        <edit title="bearbeiten">0</edit>
+        <del title="löschen">0</del>
+    </profilefield>
+
+    <ranks type="array" title="Benutzer Ränge" description="">
+        <view title="sehen">0</view>
+        <add title="hinzufügen">0</add>
+        <edit title="bearbeiten">0</edit>
+        <del title="löschen">0</del>
+    </ranks>
+
+    <search_indexer type="array" title="" description="">
+        <index title="sehen">0</index>
+    </search_indexer>
+
+    <sections type="array" title="" description="">
+        <index title="sehen">0</index>
+    </sections>
+
+    <site_statistic type="array" title="" description="">
+        <index title="sehen">0</index>
+    </site_statistic>
+
+    <skin_import_export type="array" title="" description="">
+        <index title="sehen">0</index>
+    </skin_import_export>
+
+    <skins type="array" title="Skins" description="">
+        <index title="sehen">0</index>
+        <setdefault title="Standart Skin ändern">0</setdefault>
+        <publish title="aktivieren/deaktivieren">0</publish>
+        <copy_templates title="Templates kopieren">0</copy_templates>
+        <export title="exportieren">0</export>
+        <remove title="löschen">0</remove>
+        <edit title="bearbeiten">0</edit>
+        <addset title="erstellen">0</addset>
+    </skins>
+
+    <smilie type="array" title="" description="">
+        <index title="sehen">0</index>
+    </smilie>
+
+    <sql_errors type="array" title="" description="">
+        <index title="sehen">0</index>
+    </sql_errors>
+
+    <static_pages type="array" title="Statische Seiten" description="">
+        <index title="sehen">0</index>
+        <add_page title="erstellen">0</add_page>
+        <edit_page title="bearbeiten">0</edit_page>
+        <del_page title="löschen">0</del_page>
+        <deaktivate_page title="deaktivieren">0</deaktivate_page>
+        <aktivate_page title="aktivieren">0</aktivate_page>
+        <restore title="wiederherstellen">0</restore>
+        <del_backup title="backups löschen">0</del_backup>
+        <reload_page title="neu laden">0</reload_page>
+        <export title="exportieren">0</export>
+        <import title="importieren">0</import>
+        <create_index title="Index erneuern">0</create_index>
+
+    </static_pages>
+
+    <sys type="array" title="Systeminformationen" description="">
+        <index title="Systeminformationen sehen">0</index>
+        <help title="Hilfe sehen">1</help>
+        <credits title="Credits sehen">1</credits>
+    </sys>
+
+    <templates type="array" title="" description="">
+        <index title="sehen">0</index>
+    </templates>
+
+    <tooltip type="array" title="" description="">
+        <index title="sehen">0</index>
+    </tooltip>
+
+    <trash type="array" title="Papierkorb" description="">
+        <index title="sehen">0</index>
+        <restore title="wiederherstellen">0</restore>
+        <delete title="leeren">0</delete>
+    </trash>
+
+    <userfiles type="array" title="" description="">
+        <index title="sehen">0</index>
+    </userfiles>
+
+    <weblinks type="array" title="" description="">
+        <index title="sehen">0</index>
+    </weblinks>
+
+    <weblinks_perm type="array" title="" description="">
+        <index title="sehen">0</index>
+    </weblinks_perm>
+
+
+
+
+
+
+    <CKEditorToolbars type="array" title="CKEditorToolbars" description="" hidden="1">
+        <index title="sehen">1</index>
+    </CKEditorToolbars>
+    
+    <component type="array" title="Componenten" description="">
+        <index title="sehen">1</index>
+        <delete title="sehen">0</delete>
+        <save title="sehen">0</save>
+        <addcategory title="sehen">0</addcategory>
+        <category title="sehen">1</category>
+        <edit title="sehen">0</edit>
+        <add title="sehen">0</add>
+        <deletecategory title="sehen">0</deletecategory>
+        <view title="sehen">1</view>
+        <savecategories title="sehen">0</savecategories>
+    </component>
+
+    <eventmanager type="array" title="Eventmanager" description="">
+        <index title="sehen">1</index>
+        <removecomponenthook title="sehen">0</removecomponenthook>
+        <synchooks title="sehen">0</synchooks>
+        <savehookorder title="sehen">0</savehookorder>
+        <scanevents title="sehen">0</scanevents>
+        <component title="sehen">1</component>
+        <add title="sehen">0</add>
+    </eventmanager>
+
+
+    <pluginmanager type="array" title="Plugin Manager" description="">
+	<config title="einstellungen vornehmen">0</config>
+	<index title="sehen">0</index>
+	<install title="installieren">0</install>
+	<run title="ausführen">0</run>
+	<uninstall title="deinstallieren">0</uninstall>
+    </pluginmanager>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dash_access>

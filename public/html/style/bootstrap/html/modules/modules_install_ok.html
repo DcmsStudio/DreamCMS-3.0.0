@@ -1,0 +1,33 @@
+<?php
+
+function __modules_install_ok($reload_frame='', $html_out='', $mod_name=''){
+global $cp, $cfg, $fct, $cp, $cp;
+
+return <<<EOF
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+<tr class="tableheader">
+	<td width="20%">Modul installation</td>
+</tr>
+
+$html_out
+
+<!--
+<tr class="firstrow">
+<td>
+Das Modul <b>$mod_name</b> wurde erfolgreich installiert.<br>
+(Die installierten Module findest du vorerst in dem Service Block!)<br><br>
+In der nächsten Version wird es dann möglich sein jedes Modul in einem beliebigen Block zu erstellen.
+</td></tr>
+<tr class="secondrow">
+<td align="center">
+<a href="admin.php?adm=modules&amp;action=install&amp;sid=$cp">Weitere Module installieren</a>
+</td></tr>
+-->
+
+</table>
+
+EOF;
+}
+
+?>

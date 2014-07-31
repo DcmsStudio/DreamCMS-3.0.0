@@ -1,0 +1,268 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <button id="component-add-button" class="action-button"><img src="images/component-add.png" width="16" height="16" alt="" />&nbsp;{trans("Komponente hinzufügen")}</button>
+    <button id="manage-category-button" class="action-button"><img src="images/component-category.png" width="16" height="16" alt="" />&nbsp;{trans("Kategorien")}</button>    
+    <button id="close-preview-button" class="action-button"><img src="images/back.png" width="16" height="16" alt="" />&nbsp;{trans("Zurück")}</button>
+</cp:block>
+
+<cp:block name="content">
+
+
+    <div id="preview" style="padding-bottom: 10px;margin-right: 10px; display:none">
+
+        <style type="text/css" id="component-code-css"></style>
+        <div class="panel panel-info">
+            <div class="panel-heading">{trans("Komponente")}</div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+
+                    <dt>{trans("Name")}:</dt>
+                    <dd id="component-name">{$component.name}</dd>
+
+                    <dt>{trans("Beschreibung")}:</dt>
+                    <dd id="component-description">{$component.description|escape}</dd>
+
+                    <dt>{trans("Kategorie")}:</dt>
+                    <dd id="component-cat">{$category.name}</dd>
+
+                </dl>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">{trans("Inhalt")}</div>
+            <div class="panel-body" style="max-height: 400px; overflow: auto; padding: 0;">
+                <div style="padding: 10px;" id="component-code">
+                    {$output.code}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="componentes" style="padding-bottom: 10px;margin-right: 10px">
+        <cp:set var="lastCat" value="0"/>
+        <cp:loop name="components" key="comp">
+
+            <cp:if condition="$lastCat != $comp.cat_id">
+                <cp:tag name="div" class="panel panel-default"/>
+
+
+                <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> {$comp.cat_name} ({$comp.cat_component_count})</div>
+                <cp:tag name="div" class="panel-body"/>
+                <p class="text-muted">
+                    {$comp.cat_description}
+                </p>
+
+                <cp:tag name="div" forceclose="true"/>
+
+                <cp:tag name="div" class="panel-table" style="opacity: 0; display:none"/>
+                <cp:tag name="table" class="table table-hover" cellpadding="3" cellspacing="0"/>
+                <thead>
+                    <tr class="tableheader">
+                        <th style="width: 20%;min-width: 20%;max-width: 20%;">{trans("Komponentenname")}</th>
+                        <th style="width: auto">{trans("Komponente Beschreibung")}</th>
+                        <th style="width:90px; border-right: 0; text-align: center;">{trans("Aktionen")}</th>
+                    </tr>
+                </thead>
+                <cp:tag name="tbody"/>
+            </cp:if>
+
+            <cp:set var="lastCat" value="$comp.cat_id"/>
+     
+            <cp:if condition="$comp.cat_component_count">
+                
+                <tr class="top">
+                    <td class="top">{$comp.name}</td>
+                    <td class="top">{$comp.description}</td>
+                    <td style="text-align: center;" class="top">
+                        <a class="action-link preview-link" href="javascript:void(0);" rel="admin.php?adm=component&action=view&id={$comp.id}">
+                            <img src="images/document-code.png" width="16" height="16" alt="" title="{trans('Zeige Komponente')}" />
+                        </a> 
+
+                        <a class="action-link edit-link" href="javascript:void(0);" rel="admin.php?adm=component&action=edit&id={$comp.id}">
+                            <img src="images/component-edit.png" width="16" height="16" alt="" title="{trans('Bearbeiten dieser Komponente')}" />
+                        </a> 
+
+                        <a class="action-link delete-link" href="javascript:void(0);" rel="admin.php?adm=component&action=delete&id={$comp.id}">
+                            <img src="images/component-delete.png" width="16" height="16" alt="" title="{trans('Lösche diese Komponente')}" />
+                        </a>
+                    </td>
+                </tr>
+            </cp:if>
+            <cp:else>
+                <tr class="">
+                    <td colspan="3">{trans("Es gibt keine Komponenten in dieser Kategorie.")}</td>
+                </tr>
+            </cp:else>
+
+            <cp:if condition="$lastCat != $comp.next_comp.cat_id">
+                <cp:tag name="tbody" forceclose="true"/>
+                <cp:tag name="table" forceclose="true"/>
+
+                <cp:tag name="div" forceclose="true"/>
+                <cp:tag name="div" forceclose="true"/>
+                <cp:set var="lastCat" value="0"/>
+            </cp:if>
+
+        </cp:loop>
+        <cp:else>
+            <cp:if condition="$total_components == 0">
+                <div class="panel panel-info">
+                    <div class="panel-heading">{trans('Hinweis')}</div>
+                    <div class="panel-body">
+                        {trans('Es sind keine Komponente vorhanden. Bitte fügen Sie zuerst eine Komponente hinzu, bevor Sie dem Event eine Komponente zuweisen.')}
+                    </div>
+                </div>
+            </cp:if>
+
+        </cp:else>
+    </div>
+
+    <script type="text/javascript">
+
+
+
+
+            <cp:if condition="$total_categories == 0">
+            $('#component-add-button').disableButton();
+            </cp:if>
+
+
+
+        $('#componentes div.panel-heading' ).click(function() {
+            var $head = $(this ).find('.glyphicon' );
+            $(this ).parent().find('.panel-table:first' ).toggleDisplay(350, function(visible) {
+                if ( !visible ) {
+                    $head.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                }
+                else {
+                    $head.addClass('glyphicon-chevron-up').removeClass('glyphicon-chevron-down');
+                }
+                $(window ).trigger('resize');
+            });
+
+
+/*
+
+            if ( $(this ).parent().find('.panel-table:first' ).is(':visible') ) {
+                head.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                $(window ).trigger('resize');
+
+                $(this ).parent().find('.panel-table:first' ).animate({
+                    height: "toggle",
+                    opacity: "0"
+                }, {
+                    duration: 300,
+                    complete: function() {
+                        $(this ).hide().css({height: ''});
+                    }
+                });
+            }
+            else {
+                head.addClass('glyphicon-chevron-up').removeClass('glyphicon-chevron-down');
+                $(window ).trigger('resize');
+                $(this ).parent().find('.panel-table:first' ).animate({
+                    height: "toggle",
+                    opacity: "1"
+                }, {
+                    duration: 300,
+                    complete: function() {
+                        $(this ).show();
+
+                    }
+                });
+
+            }
+*/
+
+        });
+
+            $('#preview', $('#'+ Win.windowID)).hide();
+
+        $('#close-preview-button').hide().click(function() {
+            $('#preview').hide();
+            $('#component-add-button').show();
+            $('#manage-category-button').show();
+            $('#close-preview-button').hide();
+            $('#componentes').show();
+            
+            Win.redrawWindowHeight(Win.windowID, true);
+        });
+
+        $('#component-add-button').click(function() {
+            href = 'admin.php?adm=component&action=edit';
+            openTab({url: href, obj:this, label:$(this).text()});
+        });
+
+        $('#manage-category-button').click(function() {
+            href = 'admin.php?adm=component&action=category';
+            openTab({url: href, obj:this, label:$(this).text()});
+        });
+
+
+
+        $('.edit-link', $('#'+ Win.windowID)).bind('click', function(e) {
+            var link = $(this).attr('rel');
+            name = $(this).parents('tr:first').children('td:first').html();
+            openTab({url: link, obj:this, label:name, opener: $('#'+ Win.windowID).attr('id')});
+        });
+
+        $('.preview-link', $('#'+ Win.windowID)).bind('click', function(e) {
+            var link = $(this).attr('rel');
+
+            $.pagemask.show('{trans('Hole die Komponente...')}');
+            
+            $.get(link, {}, function(data) {
+                if(Tools.responseIsOk(data)) {
+
+                    $('#component-name').html(data.name);
+                    $('#component-description').html(data.description);
+                    $('#component-cat').html(data.category);
+                    $('#component-code-css').empty().html(data.css);
+                    $('#component-code').html(data.code);
+
+                    $('#preview').show();
+                    $('#componentes').hide();
+                    $('#component-add-button').hide();
+                    $('#manage-category-button').hide();
+                    $('#close-preview-button').show();
+                    
+                    
+                    Win.redrawWindowHeight(Win.windowID, true);
+
+                    $.pagemask.hide();
+
+                } else {
+                    $.pagemask.hide();
+                    jAlert(data.msg);
+                }
+            }, 'json');
+        });
+
+        
+        $('.delete-link', $('#'+ Win.windowID)).bind('click', function(e) {
+            var link = $(this).attr('rel');
+            name = $(this).parents('tr:first').children('td:first').html();
+            jConfirm('{trans("Sind Sie sicher, dass Sie die Komponente %s löschen?")}'.replace('%s', name), '{trans('Achtung...')}', function(res) {
+                if(res==true) {
+                    $.pagemask.show('');
+                    $.get(link, {}, function(data) {
+                        if(Desktop.responseIsOk(data)) {
+                            //document.location.href = 'admin.php?adm=component';
+                            toolbarTabsCls.reloadActiveTab();
+                        } else {
+                            $.pagemask.hide();
+                            jAlert(data);
+                        }
+                    });
+                }
+            });
+            e.preventDefault();
+            return false;
+        });
+
+    </script>
+</cp:block>

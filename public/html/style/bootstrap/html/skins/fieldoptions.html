@@ -1,0 +1,161 @@
+<cp:if condition="in_array('grouplabel', $attributes)">
+    <fieldset>
+        <legend>{trans("Group Label")}:</legend>
+
+        <input type="text" class="required{iif($field.iscore, ' disabled', '')}" id="grouplabel-{$field.fieldid}" name="grouplabel" value="{$field.grouplabel}" size="70" />
+
+    </fieldset>
+</cp:if> 
+
+
+
+<cp:if condition="in_array('label', $attributes)">
+    <fieldset>
+        <legend>{trans("Label")}:</legend>
+
+            <input type="text" class="required{iif($field.iscore, ' disabled', '')}" id="label-{$field.fieldid}" name="label" value="{$field.label}" size="70" />
+
+    </fieldset>
+</cp:if>
+
+
+
+<cp:if condition="in_array('size', $attributes)">
+    <fieldset>
+        <legend>{trans("Field Size")}:</legend>
+
+            <input type="text" class="textbox" id="size-{$field.fieldid}" name="size" value="{$field.size}" style="width: 60px" />
+
+    </fieldset>
+</cp:if>
+
+
+
+<cp:if condition="in_array('maxlength', $attributes)">
+    <fieldset>
+        <legend>{trans("Maximale länge der Eingabe")}:</legend>
+            <input type="text" class="textbox" id="maxlength-{$field.fieldid}" name="maxlength" value="{iif($field.maxlength, $field.maxlength, '255')}" style="width: 60px" />
+
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('style', $attributes)">
+    <fieldset>
+        <legend>{trans("Field Styles")}:</legend>
+
+            <input type="text" class="textbox" id="style-{$field.fieldid}" name="style" value="{$field.style}" style="width: 400px;" />
+
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('class', $attributes)">
+    <fieldset>
+        <legend>{trans("Field Class")}:</legend>
+
+            <input type="text" class="textbox" id="class" name="class" value="{$field.class}" />
+
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('value', $attributes) && $field.type == 'text'">
+    <fieldset>
+        <legend>{trans("Standart Wert")}:</legend>
+
+            <input type="text" class="textbox" id="value-{$field.fieldid}" name="value" value="{$field.value}" />
+
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('value', $attributes) && ($field.type =='textarea' || $field.type == 'richtext')">
+    <fieldset>
+        <legend>{trans("Standart Wert")}:</legend>
+            <textarea class="textbox" id="value-{$field.fieldid}" name="value" cols="40" rows="6">{$field.value}</textarea>
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('value', $attributes) && $field.type == 'checkbox'">
+    <fieldset>
+        <legend>{trans("Standart Wert")}:</legend>
+            <input type="text" class="textbox" id="value-{$field.fieldid}" name="value" value="{iif($field.value, $field.value, '1')}" />
+            
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('value', $attributes) && $field.type == 'author'">
+    <fieldset>
+        <legend>{trans("Standart Author")}:</legend>
+
+        <select id="value-{$field.fieldid}" name="value">
+            
+            <option value="0"{iif($field.value == 0, ' selected="selected"', '')}>{trans('Keine Angabe')}</option>
+            <cp:loop name="field.authors" key="rs">
+                <option value="{$rs.authorid}"{iif($field.value == $rs.authorid, ' selected="selected"', '')}>{$rs.author}</option>
+            </cp:loop>
+        
+        </select>
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('value', $attributes) && $field.type == 'datetime'">
+    <fieldset>
+        <legend>{trans("Datums Format")}:</legend>
+            <input type="text" class="textbox" id="value-{$field.fieldid}" name="value" value="{iif($field.value, $field.value, '')}" /> 
+        <br/><small>{trans("Format: YYYY-MM-DD hh:mm:ss")}</small>
+
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('cols', $attributes) && $field.type == 'textarea'">
+    <fieldset>
+        <legend>{trans("Spalten")}:</legend>
+        <input type="text" class="textbox" id="cols-{$field.fieldid}" name="cols" value="{iif($field.cols, $field.cols, '80')}" style="width: 60px" />
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('rows', $attributes) && $field.type == 'textarea'">
+    <fieldset>
+        <legend>{trans("Zeilen")}:</legend>
+        <input type="text" class="textbox" id="rows-{$field.fieldid}" name="rows" value="{iif($field.rows, $field.rows, '10')}" style="width: 60px" />
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('controls', $attributes)">
+    <fieldset>
+        <legend>{trans("Feld erforderlich")}:</legend>
+        <label for="controls-{$field.fieldid}"><input type="checkbox" id="controls-{$field.fieldid}" name="controls" value="1" {iif($field.controls, 'checked="checked"', '')} /> {trans("Dieses Feld ist erforderlich")}</label>
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('checked', $attributes)">
+    <fieldset>
+        <legend>{trans("Checked")}:</legend>
+        <label for="checked-{$field.fieldid}"><input type="checkbox" id="checked-{$field.fieldid}" name="checked" {iif($field.checked, 'checked="checked"', '')} />{trans("Yes, checkbox is checked by default")}</label>
+
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('multiple', $attributes) && $field.type !='select' && $field.type !='usergroups'">
+    <fieldset>
+        <legend>{trans("Mehrfach")}:</legend>
+        <label for="multiple-{$field.fieldid}"><input type="checkbox" id="multiple-{$field.fieldid}" name="multiple" {iif($field.multiple, 'checked="checked"', '')} />{trans("dieses kann mehrfach verwendet werden")}</label>
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('multiple', $attributes) && $field.type =='usergroups'">
+    <fieldset>
+        <legend>{trans("Mehrfachauswahl")}:</legend>
+        <label for="multiple-{$field.fieldid}"><input type="checkbox" id="multiple-{$field.fieldid}" name="multiple" {iif($field.multiple, 'checked="checked"', '')} />{trans("Als mehrfach auswahl werden")}</label>
+    </fieldset>
+</cp:if>
+
+<cp:if condition="in_array('values', $attributes)">
+    <fieldset>
+        <legend>{trans("Feld Werte")}:</legend>
+        <textarea class="required" id="values-{$field.fieldid}" name="values" cols="40" rows="10" style="width: 400px; height: 80px;">{$field.values}</textarea>
+        <br/><small>{trans('Bsp: value|label|checked')}</small>
+    </fieldset>
+</cp:if>
+
+
+
+

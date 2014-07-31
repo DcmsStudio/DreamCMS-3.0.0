@@ -1,0 +1,35 @@
+<?php
+
+function __genre_list_bit($r){
+global $cp, $cfg, $fct;
+
+	static $x;
+	$css = $x++%2  ? 'secondrow' : 'firstrow';
+
+
+	if ($r['icon']) $r['icon'] = '<img src="../images/cheaticons/'.$r['icon'].'" border="0" alt="" />';
+	else $r['icon'] ='';
+
+	$t = '';
+	@reset($GLOBALS[ 'genre_types' ]);
+	foreach ( $GLOBALS[ 'genre_types' ] as $id => $langkey )
+	{
+		if ($id == $r['type']) $t = $cp->lang['genretype_'.$langkey];
+	}
+
+
+return <<<EOF
+    <tr onmouseover="over(this)" onmouseout="out(this)" class="$css">
+        <td>{$r['name']}</td>
+		<td align="center">{$t}</td>
+        <td align="center">{$r['icon']}</td>
+		
+        <td align="center" width="20%">
+        <a href="admin.php?adm=admin&amp;adm=plattformgenre&amp;sid=$cp->session_id&action=edit_genre&id=$r[id]&type=edit&genretype=HTTP::input('genretype')"><img src="images/edit.png" border="0" alt="Genre bearbeiten" title="Genre bearbeiten" /></a> &nbsp;&nbsp;
+        <a href="admin.php?adm=admin&amp;adm=plattformgenre&amp;sid=$cp->session_id&action=del_genre&id=$r[id]"><img src="images/delete.gif" border="0" alt="Genre löschen" title="Genre löschen" /></a>
+        </td>
+    </tr>
+EOF;
+}
+
+?>

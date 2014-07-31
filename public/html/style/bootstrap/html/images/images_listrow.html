@@ -1,0 +1,63 @@
+<cp:if condition="{$upload} != null">
+    <tr>
+        <td colspan="2">
+            
+            <table style="width:100%" cellpadding="0" cellspacing="0" width="100%">
+                <tr class="secondrow">
+                    <td nowrap="nowrap">
+                        <fieldset>
+                            <legend>{trans('Titel')}</legend>
+                            <input type="text" name="title" value="" size="60" class="input"/>
+                        </fieldset>
+                        <fieldset>
+                            <legend>{trans('Beschreibung')}</legend>
+                            <textarea name="description" rows="2" class="textarea"></textarea>
+                        </fieldset>
+                        <fieldset>
+                            <legend>{trans('Eistellungen')}</legend>
+                            
+                            <small>{trans('Breite')}:</small> <input type="text" name="width" value="" size="3" class="input absmiddle" onkeyup="SizeChanged('{$r.id}','w',this.value);" />     
+                            <small>{trans('Höhe')}:</small> <input type="text" name="height" value="" size="3" class="input absmiddle" onkeyup="SizeChanged('{$r.id}','h',this.value);" /><br/>
+                            <small>hspacing:</small> <input type="text" name="hspacing" value="3" size="3" class="input absmiddle" />                     
+                            <small>vspacing:</small> <input type="text" name="vspacing" value="3" size="3" class="input absmiddle" /><br/>
+                            <small>{trans('Reihenfolge')}</small> <input type="text" name="ordering" size="3" value="" class="input" />                    
+                            <small>{trans('Ausrichtung')}</small>
+                            <select name="position" class="select">
+                                <option value="" selected="selected">{trans('Ohne')}</option>
+                                <option value="left">{trans('Links')}</option>
+                                <option value="middle">{trans('Mitte')}</option>
+                                <option value="right">{trans('Rechts')}</option>
+                            </select>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr class="secondrow">
+                    <td style="vertical-align:top;">
+                        <fieldset>
+                            <legend>{trans('Bild auswählen')}</legend>
+                            {info:contentimage|contentimages_browsserver} <input name="localfile" id="localfile" size="30" value="" class="input" />             
+                            <input type="button" value="{trans('Server durchsuchen')}" class="button" onclick="imgBrowse('localfile');" /><br />
+                            
+                        </fieldset><input type="button" value="{trans('Bild hinzufügen')}" class="button" style="margin:5px" onclick="uplodThisImage()" />
+                    </td>
+                </tr>
+            </table>
+            
+            
+        </td>
+    </tr>
+</cp:if>
+<cp:else>
+    <cp:loop name="list" key="r">
+        {cycle('cyclename', 'firstrow,secondrow', 'css')}
+        <tr class="{$css}" onmouseover="over(this)" onmouseout="out(this)">
+            <td onmouseover="sPrev(this, 'admin.php?adm=images&id={$r.id}&action=thumb');">
+                <a href="#" onclick="insertImage({$r.id});" title="{trans('Einfach den link anklicken um dieses Bild einzufügen.')}">{content_image_{$r.id}}</a>
+            </td>
+            <td width="20%">
+                <a href="#" onclick="doEditImage({$r.id})"><img src="html/style/default/img/edit.png" id="img_{$r.id}" title="{trans('bearbeiten')}" /></a>&nbsp;
+                <a href="#" onclick="delContentImage('{$r.id}')"><img src="html/style/default/img/delete.gif" title="{trans('löschen')}" /></a>
+            </td>
+        </tr>        
+    </cp:loop>
+</cp:else>

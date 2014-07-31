@@ -1,0 +1,98 @@
+<?php
+
+function __gamereview_edit1($r, $plattform_options, $genre_options){
+global $cp, $cfg, $fct, $adm_skin;
+
+$html = <<<EOF
+<form  action="admin.php"  method="post"><input type="hidden" name="adm" value="gamereviews" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="action" value="HTTP::input('action')" />
+<table cellpadding="3" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+    <tr class="tableheader">
+    	<td>Spiel suchen</td>
+    </tr>
+
+    <tr class="firstrow">
+     <td><b>Plattform:</b>
+        <select name="plattform" class="select" style="vertical-align:middle">
+            $plattform_options
+        </select>
+        <b>Genre:</b>
+        <select name="genre" class="select" style="vertical-align:middle">
+            $genre_options
+        </select>
+        <input type="text" name="q" value="HTTP::input('q')" size="40" class="input" style="vertical-align:middle" />
+        <input type="submit" value="Suchen" class="button" />
+     </td>
+    </tr>
+</table>
+</form>
+EOF;;;
+
+if (HTTP::input('q') )
+{
+
+    $html .= <<<EOF
+    <form  action="admin.php"  method="post"><input type="hidden" name="adm" value="gamereviews" />
+    <input type="hidden" name="sid" value="{$cp->session_id}" />
+    <input type="hidden" name="action" value="HTTP::input('action')" />
+    <input type="hidden" name="step" value="2" />
+<br />
+    <table cellpadding="3" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+        <tr class="tableheader">
+            <td colspan="3">Spiel wählen</td>
+        </tr>
+        <tr class="tableheader">
+            <td width="1%">&nbsp;</td>
+            <td>Spiel</td>
+            <td>Plattform</td>
+        </tr>
+EOF;;;
+	foreach ( $r as $rs)
+	{
+
+		$css = $x++%2 ? 'firstrow' : 'secondrow';
+		$hasreview = ($rs['isok'] ? ' (<small>Review vorhanden</small>)' : '');
+		$disabled = ($rs['isok'] ? ' disabled="disabled"' : '');
+
+
+
+        $html .= <<<EOF
+            <tr onmouseover="over(this)" onmouseout="out(this)" class="$css">
+                <td width="1%"><input type="radio" name="game" value="{$rs['id']}" class="radio"$disabled /></td>
+                <td>{$rs['gametitle']}$hasreview</td>
+                <td>{$rs['plattform']}</td>
+            </tr>
+EOF;;;	}
+
+
+	if ( !count($r) )
+	{
+        $html .= <<<EOF
+            <tr class="firstrow">
+                <td colspan="3"><em>Es wurde kein Spiel gefunden.</em></td>
+            </tr>
+            <tr class="tableheader">
+                <td colspan="3" align="right"><input type="button" value="Spiel eintragen" class="button" style="vertical-align:middle" onclick="javascript:location.href='games.php?sid={$cp->session_id}&action=add';" /></td>
+            </tr>
+            </table>
+            </form>
+EOF;;;
+		return $html;
+	}
+
+
+$html .= <<<EOF
+    <tr class="secondrow">
+     <td colspan="3" align="center"><input type="submit" value="Weiter zu Step 2" class="button" />&nbsp;<input type="reset" value="Abbrechen" class="button" onclick="javascript:cancel();" /></td>
+    </tr>
+</table>
+
+</form>
+EOF;;;
+}
+
+return $html;
+}
+
+?>

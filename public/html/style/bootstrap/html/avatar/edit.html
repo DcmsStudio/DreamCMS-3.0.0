@@ -1,0 +1,126 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+    <cp:if condition="$avatarid">[save:avatarf{$avatarid}]</cp:if> [save_exit:avatarf{$avatarid}]
+    [reset:avatarf{$avatarid}] [cancel:avatarf{$avatarid}]</cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+
+    <cp:if condition="$avatarid">
+        <form method="post" action="admin.php" id="avatarf{$avatarid}">
+            <input type="hidden" name="adm" value="avatar" />
+            <input type="hidden" name="send" value="1" />
+            <input type="hidden" name="id" value="{$avatarid}" />
+            <input type="hidden" name="action" value="edit" />
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label>{trans('Benutzergruppe')}</label>
+                    <select name="groupid" class="form-control">
+                        <cp:set var="dataselect" value="$usergroups"/>
+                        <cp:include template="../select_option"/>
+                    </select>
+
+                    <span class="note">{trans('Für welche Benutzergruppe soll das Avatar nutzbar sein?')}</span>
+                </div>
+                <div class="col-md-3">
+                    <label>{trans('Ab Beiträge')}</label>
+                    <input class="required form-control" type="text" name="needposts" value="{escape($needposts, 'quotes')}" size="60" maxlength="5" />
+                    <span class="note">{trans('Ab wievielen Beiträgen soll dieser Avatar zur Verfügung stehen?')}</span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{trans('Originalname')}</label>
+                    <span>{$avatarname}.{$avatarextension}</span>
+                    <div style="display:block;">
+                        <div><strong>{trans('Bild')}</strong></div>
+                        <img src="{$avatarurl}" width="{$width}" height="{$height}" alt="{$avatarname}.{$avatarextension}"/>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+
+
+    </cp:if>
+    <cp:else>
+        <form method="post" action="admin.php" id="avatarf">
+            <input type="hidden" name="action" value="add" />
+            <input type="hidden" name="adm" value="avatar" />
+            <input type="hidden" name="send" value="1" />
+            <input type="hidden" name="filename" value="" />
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{trans('Benutzergruppe')}</label>
+                    <select name="groupid" class="form-control">
+                        <cp:set var="dataselect" value="$usergroups"/>
+                        <cp:include template="../select_option"/>
+                    </select>
+
+                    <span class="note">{trans('Für welche Benutzergruppe soll das Avatar nutzbar sein?')}</span>
+                </div>
+                <div class="col-md-6">
+                    <label>{trans('Ab Beiträge')}</label>
+                    <input class="required form-control" type="text" name="needposts" value="{escape($needposts, 'html')}" size="60" maxlength="5" />
+                    <span class="note">{trans('Ab wievielen Beiträgen soll dieser Avatar zur Verfügung stehen?')}</span>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{trans('Upload')}</label>
+                    <div id="avatarupload-container"></div>
+                    <div id="avatarupload-preview"></div>
+                </div>
+            </div>
+        </form>
+    </cp:else>
+
+
+
+
+    <script type="text/javascript">
+
+
+        Form.registerForm('avatarf{$avatarid}', {
+            contentIdentifierID: 'avatarid',
+            exiturl: 'admin.php?adm=avatar',
+            identifierType: 'avatar',
+            useContentTags: false
+        });
+
+<cp:if condition="!$avatarid">
+        Tools.MultiUploadControl({
+            control: "avatarupload-container",
+            adm: "avatar",
+            action: "upload",
+            url: "admin.php",
+            uploadpath: '',
+            file_type_mask: "*.jpg,*.jpeg,*.gif,*.png",
+            file_type_text: "Alle Bild Dateien",
+            onSuccess: function(data, evaldata, file)
+            {
+                if (data != null && data.fileurl && data.filename)
+                {
+                    
+                    $('#avatarf{$id}').find('[name=filename]').val(data.filename);
+                    //$('#avatarupload-preview', $('#avatarf{$id}')).hide().empty().append($('<img src="'+ data.fileurl +'" />')).show();
+                }
+            }
+        });
+</cp:if>
+
+    </script>
+
+</cp:block>

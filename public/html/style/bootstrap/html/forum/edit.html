@@ -1,0 +1,185 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:admCats{$forum.forumid}] [save_exit:admCats{$forum.forumid}]
+        [reset:admCats{$forum.forumid}] [cancel:admCats{$forum.forumid}]
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+
+    <cp:section name="meta">
+        <cp:include template="../metadata"/>
+    </cp:section>
+
+    <form action="admin.php" name="admCats{$forum.forumid}" id="admCats{$forum.forumid}" method="post">
+        <input type="hidden" name="adm" value="plugin"/>
+        <input type="hidden" name="plugin" value="forum"/>
+        <input type="hidden" name="action" value="{$input.action}"/>
+        <input type="hidden" name="send" value="1"/>
+        <input type="hidden" name="id" id="forum-id{$forum.forumid}" value="{$forum.forumid}"/>
+
+        <div>
+            <cp:jstabs tabs="Allgemein,Forum Einstellungen" usetrans="true" default="Allgemein"/>
+        </div>
+
+
+        <div id="tc0" class="column-2">
+
+            <div class="post-content">
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{trans('Forum Titel')}</label>
+                        <input type="text" name="title" id="forum-title{$forum.forumid}" value="{$forum.title}" size="70" class="form-control"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{trans('Forum kann Beiträge enthalten')}</label>
+                        <label for="cancontainposts">
+                            <input type="checkbox" name="containposts" id="cancontainposts" value="1" cp:on="checked:$forum.containposts || empty($forum.forumid)" parse:checked="checked"/>
+                            {trans('Dieses Forum darf Beiträge enthalten')}
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label>{trans('Umleitung')}</label>
+                        <input type="text" name="redirect_url" value="{$forum.redirect_url}" maxlength="250" size="70" class="form-control"/>
+                    </div>
+                    <div class="col-md-4">
+                        <label>&nbsp;</label>
+                        <label for="redirect_on">
+                            <input type="checkbox" name="redirect_on" id="redirect_on" value="1" cp:on="checked:$forum.redirect_on" parse:checked="checked"/>
+                            {trans('Umleitung aktivieren')}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{trans('Forum Beschreibung')}</label>
+                        <textarea name="description" data-tooltip="{trans('Bitte möglichst kein HTML verwenden')}" data-position="top-left" rows="3" cols="50" class="form-control">{$forum.description}</textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>{trans('Forum Notiz / Extra Teaser')}</label>
+                        <cp:editor baseurl="$cfg.portalurl" name="note" value="$forum.note" height="200" width="400px"/>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="post-column">
+
+                <cp:section name="publishing"/>
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <label>{trans('Zugriffsrechte')}</label>
+                        <select name="access[]" size="6" multiple="multiple" style="width:99%">
+                            <cp:set var="dataselect" value="$access_options"/>
+                            <cp:include template="../select_option"/>
+                        </select>
+                    </div>
+                </div>
+
+
+                <cp:section name="meta"/>
+            </div>
+
+        </div>
+
+
+        <div id="tc1" style="display:none">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{trans('Forum Passwort')}</label>
+                    <input type="text" class="form-control" data-position="bottom-left" data-tooltip="{trans('Keine 100%ige Sicherheit, da ein Benutzer, der das Passwort besitzt dieses weiter reichen kann!!!')}" name="forumpassword" value="{$forum.forumpassword}" size="60"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{trans('Themen pro Seite')}</label>
+                    <select name="threadsperpage" size="5">
+                        <option value="10" cp:on="selected:$forum.threadsperpage == 10" parse:selected="selected">10 {trans('Einträge')}</option>
+                        <option value="15" cp:on="selected:$forum.threadsperpage == 15" parse:selected="selected">15 {trans('Einträge')}</option>
+                        <option value="20" cp:on="selected:$forum.threadsperpage == 20 || empty($forum.threadsperpage)" parse:selected="selected">20 {trans('Einträge')}</option>
+                        <option value="25" cp:on="selected:$forum.threadsperpage == 25" parse:selected="selected">25 {trans('Einträge')}</option>
+                        <option value="30" cp:on="selected:$forum.threadsperpage == 30" parse:selected="selected">30 {trans('Einträge')}</option>
+                        <option value="40" cp:on="selected:$forum.threadsperpage == 40" parse:selected="selected">40 {trans('Einträge')}</option>
+                        <option value="50" cp:on="selected:$forum.threadsperpage == 50" parse:selected="selected">50 {trans('Einträge')}</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label>{trans('Übergeordnetes Forum')}</label>
+                    <select name="parent" class="select" size="5">
+                        <option value="0" cp:on="selected:$forum.forumid == 0 || $forum.parent == 0" parse:selected="selected">--------- {trans('Root')} ---------</option>
+                        <cp:loop name="forumtree" key="r">
+                            <option value="{$r.forumid}" cp:on="selected:$r.forumid == $forum.parent && $forum.parent != 0" parse:selected="selected">{$r.title}</option>
+                        </cp:loop>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label>{trans('Themen & Post Icon')}</label>
+                    <label for="allowposticon">
+                        <input type="checkbox" name="allowicons" id="allowposticon" value="1" cp:on="checked:$forum.allowicons == 1 || empty($forum.forumid)" parse:checked="checked"/>
+                        {trans('Themen & Post Icon sind erlaubt')}
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <label>{trans('BBCode')}</label>
+                    <label for="allowbbcode">
+                        <input type="checkbox" name="allowbbcode" id="allowbbcode" value="1" cp:on="checked:$forum.allowbbcode == 1 || empty($forum.forumid)" parse:checked="checked"/>
+                        {trans('BBCodes sind erlaubt')}
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <label>{trans('Bilder')}</label>
+                    <label for="allowimg">
+
+                        <input type="checkbox" name="allowimg" id="allowimg" value="1" cp:on="checked:$forum.allowimg == 1" parse:checked="checked"/>
+                        {trans('Bilder sind erlaubt')}
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <label>{trans('HTML Code')}</label>
+                    <label for="allowhtml">
+                        <input type="checkbox" name="allowhtml" id="allowhtml" value="1" cp:on="checked:$forum.allowhtml == 1" parse:checked="checked"/>
+                        {trans('HTML Tags sind erlaubt')}
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+
+    </form>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            Form.registerForm('admCats{$forum.forumid}', {
+                contentIdentifierID: 'forum-id{$forum.forumid}',
+                exiturl: 'admin.php?adm=forum',
+                identifierType: 'forum',
+                baseField: 'forum-title{$forum.forumid}',
+                contentTable: 'board_trans',
+                onAfterSubmit: function () {
+
+                }
+
+            });
+        });
+
+    </script>
+</cp:block>

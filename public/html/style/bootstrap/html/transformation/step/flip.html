@@ -1,0 +1,14 @@
+    <fieldset>
+        <legend>{trans("Flip or Flop?")}</legend>
+        <label for="axis_x"><input type="radio" class="checkbox" name="params[axis]" id="axis_x" value="x"{iif($values.axis=='x', ' checked="checked"', '')} />{trans("Flip along the x-axis (top to bottom)")}</label><br />
+        <label for="axis_y"><input type="radio" class="checkbox" name="params[axis]" id="axis_y" value="y"{iif($values.axis=='y', ' checked="checked"', '')} />{trans("Flop along the y-axis (left to right)")}</label><br />
+    </fieldset>
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+
+</script>
+
+

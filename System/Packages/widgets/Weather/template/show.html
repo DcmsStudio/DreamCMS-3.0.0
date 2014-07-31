@@ -1,0 +1,272 @@
+
+<style>
+
+    .wgt-weather-bg {
+
+        width: 500px!important;
+        border: 3px solid #848F9D;
+        padding: 0!important;
+        background: rgb(72,93,117); /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ4NWQ3NSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNjNiNTEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top,  rgba(72,93,117,1) 0%, rgba(38,59,81,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(72,93,117,1)), color-stop(100%,rgba(38,59,81,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(72,93,117,1) 0%,rgba(38,59,81,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(72,93,117,1) 0%,rgba(38,59,81,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(72,93,117,1) 0%,rgba(38,59,81,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(72,93,117,1) 0%,rgba(38,59,81,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#485d75', endColorstr='#263b51',GradientType=0 ); /* IE6-8 */
+
+
+    }
+    .wgt-weather-bg .widget-name{
+        display: none;
+    }
+
+    .wgt-weather-settings-bg {
+        width:300px!important;
+        height: 200px!important;
+    }
+
+
+    .weather-bottom {
+        background: url('Packages/widgets/Weather/img/bottom-bg.png');
+        background-position: 0 0;
+        background-repeat: repeat-x;
+        height: 0;
+        display: inline-block;       
+        width: 100%;
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+
+    }
+
+    .weather-container {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+        width: 100%;
+        overflow: visible;
+    }
+
+    .weather-current-day {
+        height: 90px;
+        position: relative;
+        overflow: visible;
+        background: transparent url('Packages/widgets/Weather/img/top-bg.png') repeat-x;
+        background: -moz-linear-gradient(top,  rgba(72,93,117,1) 0%, rgba(38,59,81,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(72,93,117,1)), color-stop(100%,rgba(38,59,81,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(72,93,117,1) 0%,rgba(38,59,81,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(72,93,117,1) 0%,rgba(38,59,81,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(72,93,117,1) 0%,rgba(38,59,81,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(72,93,117,1) 0%,rgba(38,59,81,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#485d75', endColorstr='#263b51',GradientType=0 ); /* IE6-8 */
+
+    }
+
+    .weather-current-detail {
+        font-size: 11px;
+        padding: 10px;
+        position: absolute;
+        z-index: 1000;
+        top: 20px;
+        color: #fff;
+        cursor: default;
+    }
+
+    .weather-current-detail .weather-city {
+        font-size: 12px;
+        font-weight: bold;
+        display: block;
+    }
+
+    .weather-current-temp {
+        font-size: 36px;
+        font-weight: normal;
+        position: absolute;
+        top: 30px;
+        right: 20px;
+        color: #fff;
+        text-shadow: -1px 0px 15px rgba(0, 0, 0, 0.7);
+        cursor: default;
+        z-index: 1000;
+    }
+
+    .weather-current-icon {
+        position: absolute;
+        top: -60px;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        display: inline-block;
+        width: 320px;
+        height: 206px;
+        margin: 0 auto;
+        z-index: 999;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        color: #FCFCFC;
+        font-weight: bold;
+    }
+
+    .weather-current-icon span {
+        position: absolute;
+        bottom: 15px;
+        width: 100%;
+        font-size: 10px;
+        text-align: center;
+    }
+
+
+    .weather-next-days {
+        position: relative;
+        width: 100%;
+        display: none;
+        padding-top: 50px;
+        cursor: default;
+
+
+    }
+    .weather-next-days>div {
+        position: relative;
+        width: 96%;
+        font-size: 12px;
+        font-weight: normal;
+        text-shadow: none;
+        margin: 0 auto;
+    }
+
+    .weather-next-days ul, 
+    .weather-next-days li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .weather-next-days ul {
+        display: inline-block;
+        width: 100%;        
+    }
+    .weather-next-days li {
+        display: inline-block;
+        float: left;
+        width: 33%;
+        overflow: hidden;
+        color: #fff;
+        padding-bottom: 10px;
+    }
+    .weather-next-days li:last-child {
+        margin: 0;
+    }
+
+    .weather-next-days h3 {
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+    }
+    .weather-next-days .forecast-icon {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 0px;
+        margin-top: 5px;
+        text-align: center;
+    }
+    .weather-next-days img {
+        margin: 0 auto;
+        width: 128px;
+    }
+    .forecast-daytext {
+        display: block;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    .weather-next-days li div {
+        display: inline-block;
+        width: 100%;
+        text-align: right;
+        padding-right: 10px;
+    }
+    .weather-next-days li div span {
+        display: inline-block;
+        float: left;
+        padding-left: 10px;
+    }
+
+    .weather-next-days li:first-child div span {
+        padding-left: 0;
+    }
+    .weather-next-days li:last-child div {
+        padding: 0;
+    }
+    .weather-next-days .forecast-daytext {
+        text-align: center;
+    }
+</style>
+
+
+
+<div id="weather-container{$widgetid}" class="weather-container">
+    <div class="weather-current-day">
+
+        <div class="weather-current-detail">
+
+            <span>Gefühlte Temper.: {$weather_realfeel}</span>
+            <span class="weather-city">{$weather_city}</span>
+            <span>Luftfeuchtigkeit: {$weather_humidity}</span>
+
+        </div>
+        <div class="weather-current-icon" style="background:url('{$weather_icon}');"><span>{$weather_text}</span></div>
+        <div class="weather-current-temp">{$weather_temp}</div>
+    </div>
+
+    <div id="weather-next-days{$widgetid}" class="weather-next-days">
+        <div>
+            <ul>
+                <cp:set var="x" value="1"/>
+                <cp:loop name="weather_forecast" key="item">
+                    <li>
+                        <h3>{$item.date}</h3>                   
+                        <div class="forecast-icon">
+                            <img src="{$item.day_icon}"/>
+                        </div>
+                        <div class="forecast-daytext">{$item.day_text}</div>
+
+                        <div class="forecast-sunrise"><span>{trans('Sonnenaufgang')}</span><span>{$item.sunrise}</span></div>
+                        <div class="forecast-sunset"><span>{trans('Sonnenuntergang')}</span><span>{$item.sunset}</span></div>
+
+                        <div class="forecast-heightemp"><span>{trans('Höchsttemp.')}</span><span>{$item.day_heightemp}</span></div>
+                        <div class="forecast-lowtemp"><span>{trans('Mindesttemp.')}</span><span>{$item.day_lowtemp}</span></div>
+
+                        <div class="forecast-realfeellow"><span>{trans('gefühlte Mindesttemp.')}</span><span>{$item.day_realfeellow}</span></div>
+                        <div class="forecast-realfeelhigh"><span>{trans('gefühlte Höchsttemp.')}</span><span>{$item.day_realfeelhigh}</span></div>
+
+                    <cp:if condition="$item.day_windspeed > 0">
+                        <div class="forecast-windspeed"><span>{trans('Windgeschwindigkeit')}</span><span>{$item.day_windspeed}</span></div>
+                        <div class="forecast-winddirection"><span>{trans('Windrichtung')}</span><span>{$item.day_winddirection}</span></div>
+                    </cp:if>
+                    <cp:if condition="$x == 3">
+                        <cp:stop/>
+                    </cp:if>
+                    <cp:set var="x" value="$x + 1"/>
+                    </li>
+                </cp:loop>
+            </ul>       
+        </div>
+    </div>
+    <div class="weather-bottom"></div>
+</div>
+
+
+<script type="text/javascript">
+    $('#weather-container{$widgetid}').parents('.widget-content:first').addClass('wgt-weather-bg').next().addClass('wgt-weather-settings-bg');
+    $('#weather-container{$widgetid}').parents('.widget:first' ).addClass('wgt-weather');
+
+    $('#weather-container{$widgetid}').find('.weather-current-icon' ).unbind().click(function() {
+        $('#weather-next-days{$widgetid}' ).slideToggle(400, function(){
+            $( window ).trigger( 'resize' );
+        });
+    });
+</script>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{desc}</title>
+    <link rel="stylesheet" href="../../../../public/html/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="../../../../public/html/css/bootstrap/bootstrap-theme.css"/>
+    <script type="text/javascript" src="js/loremipsum.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+
+<form onsubmit="LoremIpsumDialog.insert();return false;" action="#">
+
+    <div id="general_panel" class="panel-body">
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label">{sentences}:</label>
+            </div>
+            <div class="col-md-6">
+                <select class="form-control" name="sentences" id="sentences">
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label">{amount}:</label>
+            </div>
+            <div class="col-md-6">
+                <input class="form-control" id="amount" name="amount" type="text" size="2" value="5"/>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label">{formating}:</label>
+            </div>
+            <div class="col-md-6">
+                <select class="form-control" name="formating" id="formating">
+                    <option value="0">{unformated}</option>
+                    <option value="1">{paragraphs}</option>
+                    <option value="2">{list}</option>
+                    <option value="3">{orderedlist}</option>
+                </select>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</form>
+
+<script type="application/javascript">
+    LoremIpsumDialog.init();
+</script>
+</body>
+</html>

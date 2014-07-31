@@ -1,0 +1,228 @@
+/* 
+    Created on : 11.12.2013, 01:18:03
+    Author     : marcel
+*/
+
+/* patch for old browsers 
+
+<!--[if lt IE 9]>
+<script>
+document.createElement('section');
+document.createElement('nav');
+document.createElement('article');
+document.createElement('aside');
+document.createElement('header');
+document.createElement('footer');
+</script>
+<![endif]-->
+*/
+nav,article,section,aside,header,footer {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+section.article-teaser {
+
+}
+
+section.teaser {
+    padding: 0;
+    margin: 0;
+    background: #eee url('../img/bg/heaser-noise.png');
+    border-bottom: 1px solid #F0F0F0;
+    border-top: 1px solid #F0F0F0;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.05);
+    font-size: 14px!important;
+}
+section.teaser > :first-child {
+    padding: 25px;
+    font-family: 'Exo 2 Light Italic', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    font-size: 16px;
+    margin-bottom: 0;
+    color: #B3B3B3;
+    position: relative;
+    word-spacing: 2px;
+    letter-spacing: 0.5px;
+    display: table;
+    width: 100%;
+
+}
+section.teaser>:first-child > img {
+    width: 100%;
+    height: 100%;
+    max-height: 250px;
+    margin: 0;
+}
+section.teaser >:first-child:empty { display: none; }
+
+
+section.teaser p {
+    margin-bottom: 10px;
+    font-size: 14px!important;
+}
+section.teaser p:first-child {
+    margin-top: 0!important;
+}
+section.teaser p:last-child{
+    margin-bottom: 0!important;
+}
+
+section.teaser h1, section.teaser h2, section.teaser h3 {
+    font-weight: 200;
+    line-height: 1.25;
+    margin: 0!important;
+    margin-bottom: 3px!important;
+    font-size: 26px;
+    letter-spacing: -0.1px;
+    /* text-transform: uppercase; */
+    font-family: 'Exo 2 Light';
+    color: #777;
+
+}
+
+
+
+section.rating {
+
+}
+
+section.author {
+
+}
+
+section.article-tags {
+
+}
+
+section.cat-list {
+
+}
+
+section.rel-articles {
+
+}
+
+details {
+
+}
+
+/* Artikel Listen Darstellung */
+
+/*  Artikel mit bild */
+article.list-item {
+
+}
+/*  Artikel ohne bild */
+article.list-item.no-image {
+
+}
+
+article.list-item h1, 
+article.list-item h2, 
+article.list-item h3 {
+
+}
+
+article.list-item .listview-image {
+
+}
+
+article.list-item .list-item-text {
+    line-height: normal;
+}
+article.list-item .list-item-text p {
+    margin: 0 0 10px;
+}
+article.list-item .list-item-text p:first-child {
+    margin-top: 0;
+}
+article.list-item .list-item-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Darstellung einzelner Artikel */
+article.article {
+
+}
+
+article.article h1, 
+article.article h2, 
+article.article h3 {
+
+}
+
+article.article img {
+    border: 0;
+}
+
+article.article img.fullwidth {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+article.article p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+article.article p:first-child {
+    margin-top: 0;
+}
+article.article p:last-child {
+    margin-bottom: 0;
+}
+
+
+/**
+    Kommentar Form
+*/
+section.comment-form {
+    margin: 10px;
+    position: relative;
+    padding: 0;
+    padding-bottom: 1px;
+}
+section.comment-form .comment-form-toggle a {
+    color: #8B8B8B;
+    padding: 0;
+    line-height: 33px;
+}
+section.comment-form .comment-form-toggle span {
+    float: left;
+    margin-right: 10px;
+}
+section.comment-form form {
+    display: none;
+
+    background: #FAFAFA;
+    box-shadow: inset 0 0 3px #B9B9B9;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+}
+
+
+a.action-button {
+    border-radius: 3px;
+    background: #4f4f4f;
+    color: #fff;
+    line-height: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block;
+}
+
+a.action-button:hover {
+    background: #6c6c6c;
+}
+
+.cols2-content-right .syntaxhighlighter {
+    max-width: 597px;
+}

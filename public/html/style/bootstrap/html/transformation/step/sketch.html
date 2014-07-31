@@ -1,0 +1,28 @@
+    <fieldset>
+        <legend>{trans("Radius")}</legend>
+        <input type="text" class="textbox" name="params[radius]" id="radius" value="{iif($values.radius, $values.radius, '10')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Sigma")}</legend>
+        <input type="text" class="textbox" name="params[sigma]" id="sigma" value="{iif($values.sigma, $values.sigma, '5')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Angle")}</legend>
+        <input type="text" class="textbox" name="params[angle]" id="angle" value="{iif($values.angle, $values.angle, '45')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Sonstiges")}</legend>
+        <label for="grayscale"><input type="checkbox" class="checkbox" id="grayscale" name="params[grayscale]" value="1"{iif($values.grayscale, ' checked="checked"', '')} /> {trans("Grayscale Sketch")}</label>
+    </fieldset>
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+</script>
+
+

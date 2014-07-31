@@ -1,0 +1,167 @@
+<fieldset>
+    <legend>{trans('Anwendungs Kategorie')}</legend>
+    {info:menutypes|appcats}
+    {trans('Anwendung:')} 
+    <select name="appid" id="selected-app">
+        <option value="0"> ------ </option>
+        <cp:loop name="apps" key="r">
+            <option value="{$r.appid}" cp:on="selected:$r.appid == $appid" parse:selected="selected"> {$r.title}</option>
+        </cp:loop>
+    </select>                                        
+    <div id="app-page" style="margin-left:10px;display:inline">{trans('Kategorie:')} <select name="appcatid" id="module-page"></select></div>
+
+    <div id="app-page-link" style="display:none;margin-top:3px;"><input type="text" name="current-url" size="80" id="current-url" value="{$link}"/></div>
+
+</fieldset>
+
+<fieldset id="application-item-link" style="display:none" style="position:relative">
+    <legend>{trans('Anwendungs Inhalt')}</legend>
+    {info:menutypes|appcats}
+    {trans('Suche:')}     
+    <input type="text" id="live-searcher" name="q" value="" size="40" style="position:relative;width: 250px!important" />
+    <div id="live-searcher-pages" class="live-tag-result"></div>
+</fieldset>
+
+<input type="hidden" name="current-contentid" id="current-contentid" value="{$contentid}"/>
+
+<script language="javascript" type="text/javascript">
+        <cp:literal type="cdata_comment">
+        var currentCat = '';
+    var livesearchurl = '';
+
+    $('#app-page').hide();
+    currentCat = $('#current-contentid').val();
+    var currentAppid = $('#selected-app').find(':selected').val();
+    if ( currentAppid ) 
+    {        
+        getAppRequest( currentAppid );
+    }
+
+    $('#selected-app').change(function(){
+        var appid = $(this).find('option:selected').val();
+        if ( appid  )
+        {       
+            getAppRequest( appid );
+            livesearchurl = 'admin.php?adm=dashboard&action=&pagetype=app&appid='+ appid  +'&findpage=1&q=';
+            updateLiveSearcher();
+        }
+        else { $('#app-page').hide(); }
+    });
+
+    $('#module-page').change(function(){
+        var selected = $(this).find(':selected');
+        if ( !$(selected).hasClass('itemurl') ) {
+            $('#application-item-link,#app-page-link').hide();
+            $('#cat-id').val( $(selected).attr('rel') );
+            $('#thisname').val( $.trim($(selected).text()).replace('· ', '') );
+            var value = $(selected).val();
+            value = value.replace(' · ', '');
+            $('#controller-url').val('/'+ value);
+        }
+        else
+        {
+
+            $('#application-item-link,#app-page-link').show();
+        }
+    });
+
+    $('input[name="alias"]').change(function(){
+        var value = $('#module-page').find(':selected').val();        
+        $('#controller-url').val('/'+ value);
+    });
+    
+    $('select[name="suffix"]').change(function(){
+
+        var value = $('#module-page').find(':selected').val();
+        $('#controller-url').val('/'+ value);
+    });
+
+
+
+
+    function updateLiveSearcher(){
+
+        $('#live-searcher-pages').empty().hide();
+        $('#live-searcher').removeData().liveSearch({
+            url: livesearchurl , 
+            id: 'live-searcher-pages',
+            onAfterResultSet: function() {
+
+                $('#live-searcher-pages').find('li').each(function(){
+                    $(this).css({cursor: 'pointer'}).unbind('click').bind('click',function(){
+                        var rel = $(this).attr('rel');
+                        var class = $(this).attr('class');
+
+                        $('#thisname').val( $.trim($(this).text()) );
+                        $('#current-url').val(rel );
+                        $('#current-contentid').val( class.replace('contentid-', '') );
+                        $('#live-searcher-pages').hide();
+                    });
+
+                });
+            }
+        });
+    }
+
+
+
+
+    function getAppRequest( appid )
+    {
+        if (appid > 0)
+        {alert('admin.php?adm=menues&action=edit_menuitem&loadapp='+ appid);
+            $.get('admin.php?adm=menues&action=edit_menuitem&loadapp='+ appid , {}, function(data) {        
+                if(responseIsOk(data)) {
+                    $('#module-page').empty();
+
+                    var option = $('<option/>').attr( {'value': ''} );
+                    option.append('{trans('Übersicht')}');
+                    if ( !currentCat )
+                    {
+                        option.attr('selected', 'selected');
+                        $('#cat-id').val( 0 );
+                    }
+
+                    var itemSelector = $('<option class="itemurl"/>').append('--- Inhalt ---');
+
+                    $('#module-page').append( itemSelector );
+                    $('#module-page').append(option);                
+                    $('#module-page').append($('<option/>').append('----------'));
+            
+                    var foundSelect = false;
+                    for(var r in data.cats) {
+                        var option = $('<option/>').attr( {'value': data.cats[r].catid} );
+                        option.append( data.cats[r].treename );
+
+                        if ( data.cats[r].catid == currentCat )
+                        {
+                            foundSelect = true;
+                            option.attr('selected', 'selected');
+                        }
+    
+                        $('#module-page').append(option);
+
+                    }
+
+
+                    $('#app-page').show();
+
+                    if (!foundSelect ) { 
+                        itemSelector.attr('selected', 'selected');
+                        itemSelector.selected = true;
+                        $('#application-item-link,#app-page-link').show();
+                    }
+                
+    
+                }
+                else {
+                    jAlert(data.msg);
+                }
+            }, 'json');
+        }
+    }
+
+
+
+        </cp:literal>
+</script>

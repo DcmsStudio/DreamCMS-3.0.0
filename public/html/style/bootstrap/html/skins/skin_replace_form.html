@@ -1,0 +1,146 @@
+<?php
+
+function __skin_replace_form($skin_options){
+global $cp, $cfg, $fct;
+
+
+		$before_org = urldecode( $fct->unclean_value(HTTP::input('searchfor') ) );
+		$after_org  = urldecode( HTTP::input('replacewith'));
+
+
+
+        $before_org = str_replace( "#__"  ,"<" ,  $before_org);
+        $before_org = str_replace( "__#"  ,">" ,  $before_org);
+        $before_org = str_replace( "_##_","\"",  $before_org);
+
+
+        $after_org = str_replace( "#__"  ,"<" ,  $after_org);
+        $after_org = str_replace( "__#"  ,">" ,  $after_org);
+        $after_org = str_replace( "_##_","\"",  $after_org);
+
+
+
+
+
+
+return <<<EOF
+
+<form  action="admin.php"  method="get"><input type="hidden" name="adm" value="templates" />
+<input type="hidden" name="action" value="simplesearch">
+<input type="hidden" name="sid" value="{$cp->session_id}">
+    <table width="100%" cellspacing="1" cellpadding="3" align="center" border="0" class="tblborder">
+    <tr class="tableheader">
+        <td colspan="2"><b>Einfache Suche</b></td>
+    </tr>
+    <tr>
+    	<td class="firstrow"  width="40%"  valign="middle"><b>Suchen nach...</b><br />
+    		<span style="color:gray">einfaches Keyword oder HTML block für die suche</span>
+    	</td>
+    	<td class="secondrow" width="60%" valign="middle">
+    		<input type="text" name="searchkeywords" value="HTTP::input('searchkeywords')" size="45" class="input" />
+    	</td>
+    </tr>
+    <tr>
+    <td class="firstrow" width="40%" valign="middle"><b>Suche in Skin...</b></td>
+    <td class="secondrow" width="60%" valign="middle">
+
+        <select name="set_id" class="select">
+$skin_options
+    	</select>
+
+    	<br />
+    	<input type="checkbox" name="searchall" value="1" /> Suchen im gewählten und im Master Skin.</td>
+    </tr>
+    <tr>
+        <td align="center" class="firstrow" colspan="2" >
+            <input type="submit" value="Suchen" class="button" accesskey="s" />
+        </td>
+    </tr>
+    </table>
+
+</form>
+<br />
+
+
+
+<form  action="admin.php"  method="post"><input type="hidden" name="adm" value="templates" />
+<input type="hidden" name="action" value="searchandreplace">
+<input type="hidden" name="sid" value="{$cp->session_id}">
+
+
+<table width="100%" cellspacing="1" cellpadding="3" align="center" border="0" class="tblborder">
+<tr class="tableheader">
+    <td colspan="2"><b>Suchen und Ersetzen</b></td>
+</tr>
+<tr>
+    <td class="firstrow"  width="40%"  valign="middle"><b>Suchen nach...</b><br />
+    	<span style="color:gray">
+    		Keyword oder HTML Code für die suche.<br />
+    		If enabling "regex mode" you may enter a regular expression here.
+    	</span>
+    </td>
+    <td class="secondrow" width="60%" valign="middle">
+    	<textarea name="searchfor" cols="60" rows="5" wrap="soft" class="textarea" style="font-family:courier;font-size:12px">{$before_org}</textarea>
+    </td>
+</tr>
+<tr>
+    <td class="firstrow" width="40%" valign="middle"><b>Ersetzen mit...</b><br />
+    	<span style="color:gray">HTML Code zum ersetzen<br />
+    	If enabling "regex mode" you may enter a regular expression here.</span>
+    </td>
+    <td class="secondrow" width="60%" valign="middle">
+    	<textarea name="replacewith" cols="60" rows="5" wrap="soft" class="textarea" style="font-family:courier;font-size:12px">{$after_org}</textarea>
+    </td>
+</tr>
+<tr>
+    <td class="firstrow" width="40%"  valign="middle"><b>Suchen im Skin...</b><br />
+    	<span style="color:gray">
+    	NOTE: Das suchen und ersetzen erfolgt jeweils im ausgewählten Skin.
+    	Der Master Skin wird nicht verwendet, es sei den er ist ausgewählt.</span>
+    </td>
+    <td class="secondrow" width="60%" valign="middle">
+
+        <select name="set_id" class="select">
+$skin_options
+        </select>
+
+    </td>
+</tr>
+<tr>
+    <td class="firstrow" width="40%" valign="middle"><b>Test Suchen und Ersetzen?</b><br />
+    <span style="color:gray">Wenn ja gewählt ist erhaltenSie erst eine Vorschau, wie der zu ersetzende Code nach dem ersetzen aussieht.</span></td>
+    <td class="secondrow" width="60%" valign="middle">
+    	Ja &nbsp; <input type="radio" name="testonly" value="1" checked="checked" />&nbsp;&nbsp;&nbsp;
+    	<input type="radio" name="testonly" value="0" /> &nbsp; Nein</td>
+</tr>
+<tr>
+	<td class="firstrow" width="40%"  valign="middle"><b>"regex" Mode?</b><br />
+        <span style="color:gray">
+         <br /><b>Beispiel 1:</b><br />Ersetzte alle &lt;br&gt; oder &lt;br /&gt; Tags mit &lt;br clear="all" /&gt;
+
+         <br />Suchen nach: <b>&lt;br\s*(/)?&gt</b>
+         <br />Ersetzen mit: <b>&lt;br clear="all"\\1&gt</b>
+
+         <br /><br /><b>Beispiel 2:</b><br />Ersetzte alle class=&quot;cssname&quot; mit class=&quot;cssname_new&quot;
+         <br />Suchen nach: <b>([\s]*)class=&quot;cssname&quot;</b>
+         <br />Ersetzen mit: <b>\\1class=&quot;cssname_new&quot;</b>
+        </span>
+    </td>
+	<td class="secondrow" width="60%" valign="middle">
+        Ja &nbsp;
+        <input type="radio" name="regexmode" value="1" />&nbsp; &nbsp;
+        <input type="radio" name="regexmode" value="0" checked="checked" /> &nbsp; Nein
+	</td>
+</tr>
+<tr>
+<td align="center" class="firstrow" colspan="2">
+	<input type="submit" value="Suchen & Ersetzen" class="button" accesskey="s" />
+</td>
+</tr>
+</table>
+</form>
+<br />
+EOF;
+}
+
+?>

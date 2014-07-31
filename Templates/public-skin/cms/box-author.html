@@ -1,0 +1,21 @@
+<div class="box author-box{iif($boxclass, $boxclass, '')}">
+    <h3>
+        {trans('Über den Author %s', $author.username)}
+    </h3>
+    <div class="author-box-inner">
+        <div class="bio{iif(!$author.userphoto, ' no-photo', '')}">
+            {truncate($author.bio, 300, 'a,strong,span' , ' [...]')}
+            <a href="profile/{$author.userid}/{suggest($author.username,true)}">
+                {trans('mehr')}
+            </a>
+        </div>
+        <div cp:if="$author.userphoto" class="photo">
+            <cp:if condition="$author.avatarowner != null">
+                <img alt="" src="{photo($author.userphoto, 'AuthorImageSmall', '')}" title="{escape($author.username, 'html')}" border="0" />
+            </cp:if>
+            <cp:else>
+                <img alt="" src="{photo($author.userphoto, 'AuthorImageSmall', '')}" title="{escape($author.username, 'html')}" border="0" />
+            </cp:else>
+        </div>
+    </div>
+</div>

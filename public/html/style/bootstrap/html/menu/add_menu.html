@@ -1,0 +1,58 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    
+
+        <button class="action-button" onclick="cancel()"><img src="images/cross.png" width="16" height="16" alt="" /> {trans('Abbrechen')}</button>
+        <button id="get-next" class="action-button"><img src="images/forward.png" width="16" height="16" alt="" /> {trans('Weiter')}</button>
+
+</cp:block>
+
+<cp:block name="content">
+
+<form action="admin.php" method="post" id="addMenuitem">
+    <input type="hidden" name="adm" value="menues" />
+    <input type="hidden" name="action" value="add_menuitem" />
+    <input type="hidden" name="sub_action" value="edit" />
+    <input type="hidden" name="type_action" value="{$type_action}" />
+    <input type="hidden" name="id" value="0" />
+    <input type="hidden" name="parent" value="{$parent}" />
+    <input type="hidden" name="menutype" value="{$menu_type}" />
+    
+    
+    <div class="box description" id="tc0">
+        <div class="box-inner">
+            
+            <fieldset>
+                <legend>{trans('Modul Type')}</legend>
+                <select name="type" id="modul_type" class="select" style="width:100%">
+                    {$menutypes}
+                </select>      
+            </fieldset>
+            
+            
+        </div>
+    </div>
+
+    
+</form>
+<script type="text/javascript">
+
+$(document).ready( function() {
+
+    $('#get-next').click(function() {
+        var val = $('#modul_type').val();
+
+        if ( !val )
+        {
+            jAlert("{trans('Bitte einen Modul Typ wählen bevor Sie vortsetzen.')}");
+            return;
+        }
+        $('#addMenuitem').get(0).submit();
+
+    });
+
+});
+
+</script>
+</cp:block>

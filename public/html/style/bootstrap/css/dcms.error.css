@@ -1,0 +1,907 @@
+@import "../../../css/font-awesome/font-awesome.css";
+
+
+#error-screen h1, #error-screen h2,#error-screen h3,#error-screen a {
+    color: #fff!important;
+}
+
+h2 img {
+    position: relative;
+    top: 3px;
+}
+
+#error-screen {
+    color: #fff;
+    background: #484848;
+    height: 100%!important;
+    overflow: auto!important;
+}
+#error-screen #header {
+    height:20px!important;
+    margin:0!important;
+    padding:0!important;
+
+}
+#error-screen #title-bar {
+    display: none;
+}
+#error-screen #dcms-menu {
+    margin: 0;
+    margin-left: 10px;
+    display: inline-block;
+    padding: 0;
+}
+#error-screen #menu-bar {
+    height: 30px;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    line-height: 30px;
+
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: #222;
+    border-bottom: 1px solid #3e3e3e;
+}
+
+#error-screen #content>.viewport>.overview {
+    position: relative!important;
+}
+
+#error-screen #content {
+    width: 99%!important;
+    margin: 5px!important;
+    overflow:hidden;
+    position: relative;
+    top: 20px;
+}
+#error-screen .xml.code-container {
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+    margin: 0!important;
+    width:99%!important;
+    background:transparent;
+    font-size: 12px!important;
+}
+
+
+#error-screen .box {
+    background: transparent;
+    background-color: rgba(5,5,5,.5);
+    color: #fff;
+    border: 1px solid #000;
+    padding: 4px;
+    margin: 10px;
+}
+
+#error-screen .box-inner {
+    background: transparent;
+    margin:0;
+    margin-top:4px;
+    padding: 5px;
+    width:99.3%;
+    font-size: 12px!important;
+}
+
+#error-screen pre { overflow: auto; white-space: pre-wrap; }
+
+#error-screen div.content { padding: 0.4em 1em 1em; overflow: hidden; }
+#error-screen pre.source {
+    font-size: 12px!important;
+    margin: 0 0 1em;
+    padding: 0;
+    color: #fff;
+    border: 1px solid #111;
+    min-height: 20px;
+}
+
+
+#error-screen pre.source span.line span.number { color: #fff; padding-left: 5px; }
+#error-screen pre.source span.line { display: block; font-size: 12px; line-height: 20px; color: #fff;}
+#error-screen pre.source .highlight {
+    /* background: #000;  */
+    background-color: rgba(92, 0, 0, 0.5);
+}
+
+#error-screen ol.trace { display: block; max-width:99%; margin: 0 0 0 3px; padding: 0; list-style: decimal; padding-left: 35px; }
+#error-screen ol.trace li { margin: 0; padding: 0; }
+#error-screen ol.trace li > p {
+    color: #fff;
+    line-height: 20px;
+}
+#error-screen ol.trace li a {
+    color: #1DC116!important;
+}
+#error-screen table.args
+{
+    width:100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #fff;
+    border: 1px solid #111;
+}
+
+#error-screen table.args td {
+    line-height: 14px;
+    display: inline-table;
+}
+#error-screen table.args tr td:first-child {
+    color: #fff;
+    padding-left: 10px!important;
+    vertical-align: top;
+    display: inline-table;
+    float: left;
+    margin-right: 10px;
+}
+
+#error-screen table.args td pre {
+    margin: 0!important;
+    font-size: 13px!important;
+    overflow: hidden!important;
+    margin: 0;
+    padding: 0;
+    color: #9AFCEC;
+}
+#error-screen table.args td small {
+    font-size: 13px!important;
+    color: #A68BEE;
+}
+
+#error-screen table.args i.op {
+    font-style: normal!important;
+    color: #4AD54A!important;
+}
+
+#error-screen table.args .nu {
+    font-style: normal;
+    color: #5A9946;
+}
+#error-screen table.args .bo {
+    font-style: normal;
+    color: #F1A6FF;
+}
+#error-screen table.args .flo {
+    font-style: normal;
+    color: #DCE296;
+}
+#error-screen table.args .num {
+    font-style: normal;
+    color: #DCE296;
+}
+
+
+
+
+
+
+
+
+#error-screen div pre { width:auto; }
+#error-screen .collapsed { display: none; background-color: rgba(80, 80, 80, 0.5); }
+#error-screen .code-container {
+    padding: 0;
+    background-color: rgba(80, 80, 80, 0.5);
+    color: #fff;
+}
+#error-screen .code-container li {
+    line-height: 20px;
+    padding-left: 3px;
+    color: #fff;
+}
+#error-screen span.file {
+    font-size: 12px!important;
+    display: inline-block;
+    color: #fff;
+}
+#error-screen pre a {
+    display: inline-block;
+    color: #fff;
+}
+
+#error-screen #widget-contents { display: block!important; }
+
+#error-screen .sql.code-container .ln-xtra, .sql.code-container li.ln-xtra, .sql.code-container div.ln-xtra,
+div.ln-xtra, .ln-xtra, li.ln-xtra
+{
+    background-color: rgba(20, 20, 20, 0.5)!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+html, body {
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans",Arial,Helvetica,Sans-Serif!important;
+    color: #fff;
+    font-size: 13px;
+    cursor: default;
+    overflow: hidden!important;
+    background: #555;
+    color: #fff;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+h3 {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    background: #7d7e7d;
+    background: -moz-linear-gradient(top,  #7d7e7d 0%, #333333 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d7e7d), color-stop(100%,#333333));
+    background: -webkit-linear-gradient(top,  #7d7e7d 0%,#333333 100%);
+    background: -o-linear-gradient(top,  #7d7e7d 0%,#333333 100%);
+    background: -ms-linear-gradient(top,  #7d7e7d 0%,#333333 100%);
+    background: linear-gradient(to bottom,  #7d7e7d 0%,#333333 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#333333',GradientType=0 );
+
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 24px;
+    height: 24px;
+}
+.fa {
+    font-size: 18px;
+    margin-right: 10px;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+h3 span:before {
+    content: "\f107";
+}
+h3 .open:before {
+    content: "\f107";
+}
+h3 .close:before {
+    content: "\f106";
+}
+
+
+
+
+
+
+
+
+.tabs {
+    margin-top: 10px;
+    padding-left: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.tabs li {
+    display: inline-block;
+    margin-right: 4px;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #7d7e7d;
+    background: -moz-linear-gradient(top,  #7d7e7d 0%, #0e0e0e 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d7e7d), color-stop(100%,#0e0e0e));
+    background: -webkit-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%);
+    background: -o-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%);
+    background: -ms-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%);
+    background: linear-gradient(to bottom,  #7d7e7d 0%,#0e0e0e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 );
+
+
+    cursor: pointer;
+}
+
+.tabs li.active {
+    background: #7d7e7d;
+    background: -moz-linear-gradient(top,  #7d7e7d 0%, #333333 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d7e7d), color-stop(100%,#333333));
+    background: -webkit-linear-gradient(top,  #7d7e7d 0%,#333333 100%);
+    background: -o-linear-gradient(top,  #7d7e7d 0%,#333333 100%);
+    background: -ms-linear-gradient(top,  #7d7e7d 0%,#333333 100%);
+    background: linear-gradient(to bottom,  #7d7e7d 0%,#333333 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#333333',GradientType=0 );
+
+}
+
+
+.tabcontent {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(51, 51, 51, 0.51);
+    position: relative;
+}
+
+.tabcontent .tabcontent-inner {
+    margin: 10px;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+
+
+
+
+#header {
+    overflow: hidden;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    clear: both;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background: rgb(181,189,200);
+    background: -moz-linear-gradient(top,  rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(181,189,200,1)), color-stop(36%,rgba(130,140,149,1)), color-stop(100%,rgba(40,52,59,1)));
+    background: -webkit-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+    background: -o-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+    background: linear-gradient(to bottom,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 );
+
+    width: 100%;
+}
+
+#header .buttons {
+    display: inline-block;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+#header .copyright {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    right: 30px;
+}
+
+
+#main {
+    overflow: hidden;
+    margin: 10px;
+    top: 35px;
+    position: relative;
+}
+
+
+
+
+
+.exception-message-container {
+    overflow: hidden;
+    margin: 0!important;
+    padding: 0!important;
+    position: relative;
+}
+.exception-message-container > div {
+    background-color: rgba(51, 51, 51, 0.51);
+    margin: 0!important;
+    padding: 10px!important;
+    position: relative;
+    height: 84px;
+}
+.exception-message {
+    overflow: auto;
+    width: 39%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border: 1px solid #333;
+    position: absolute;
+    left: 10px;
+    padding: 10px;
+    height: 64px;
+    background: #555;
+}
+.exception-info {
+    overflow: auto;
+    display: inline-block;
+    position: absolute;
+    background: #555;
+    margin-left: 40%;
+    border: 1px solid #333;
+    left: 20px;
+    right: 10px;
+    height: 84px;
+}
+
+.exception-info dl {
+    margin: 0;
+    display: block;
+    min-height: 21px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.exception-info dt {
+    width: 100px;
+    float: left;
+    line-height: 21px;
+}
+.exception-info dd {
+    margin-left: auto;
+    line-height: 21px;
+}
+
+.exception-info dl:nth-last-child(even) {
+    background-color: #666;
+}
+
+
+.input-vars {
+    overflow: hidden;
+    border: 1px solid #333;
+    padding: 0!important;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 32px!important;
+}
+
+
+
+.input-vars dl:nth-last-child(even) {
+    background-color: #666;
+}
+.input-vars dl {
+    width: 100%;
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.input-vars dt {
+    float: left;
+    width: 180px;
+    line-height: 18px;
+}
+.input-vars dd {
+    margin-left: auto;
+    line-height: 18px;
+}
+
+.input-vars pre {
+    margin: 0;
+}
+
+.input-vars h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+.executed-sql {
+    overflow: hidden;
+    border: 1px solid #333;
+    margin-bottom: 32px!important;
+}
+.sql-code {
+    overflow: auto;
+    position: relative;
+    margin: 0!important;
+    padding: 0!important;
+}
+
+.sql-args {
+    overflow: auto;
+    margin: 0!important;
+    padding: 0!important;
+    border-top: 1px solid #333;
+    margin-top: 10px!important;
+}
+
+
+.sql-args dl:nth-last-child(even) {
+    background-color: #666;
+}
+.sql-args dl {
+    width: 100%;
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.sql-args dt {
+    float: left;
+    width: 180px;
+    line-height: 18px;
+}
+.sql-args dd {
+    margin-left: auto;
+    line-height: 18px;
+}
+
+.sql-args pre {
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+.sql-code pre {
+    margin: 0;
+}
+.sql-code .line {
+    display: block;
+    line-height: 20px;
+    position: relative;
+}
+.sql-code .line:nth-last-child(odd) {
+    background-color: #666;
+}
+.sql-code .line.highlight {
+    background-color: darkred;
+}
+.sql-code .number {
+    width: 50px;
+    float: left;
+    padding-left: 5px;
+}
+
+.sql-code .line > div {
+    padding-right: 10px;
+    position: absolute;
+    left: 60px;
+    right: 0;
+    z-index: 1;
+    top: 0;
+}
+.sql-code .col-sep {
+    position: absolute;
+    left: 54px;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    border-right: 3px solid #00467b;
+}
+
+
+
+
+
+
+
+.compiler-error {
+    overflow: hidden;
+    padding: 0!important;
+    margin: 0!important;
+}
+.compiler-message {
+    overflow: auto;
+}
+.compiler-template {
+    overflow: auto;
+    position: relative;
+    border: 1px solid #333;
+    padding: 0!important;
+    margin: 0!important;
+}
+.compiler-template li {
+    line-height: 20px;
+    display: block;
+}
+.compiler-error .toggle-container {
+    padding: 0;
+}
+.compiler-template pre {
+    margin: 0;
+}
+.compiler-template .line {
+    display: block;
+    line-height: 20px;
+    position: relative;
+}
+.compiler-template .line:nth-last-child(odd) {
+    background-color: #666;
+}
+.compiler-template .line.highlight {
+    background-color: darkred;
+}
+.compiler-template .number {
+    width: 50px;
+    float: left;
+    padding-left: 5px;
+}
+
+.compiler-template .line > div {
+    padding-right: 10px;
+    position: absolute;
+    left: 60px;
+    right: 0;
+    z-index: 1;
+    top: 0;
+}
+
+.compiler-template .sql.code-container .ln-xtra, .compiler-template .sql.code-container li.ln-xtra, .compiler-template .sql.code-container div.ln-xtra, .compiler-template div.ln-xtra, .ln-xtra, .compiler-template li.ln-xtra {
+    background: none!important;
+}
+.compiler-template ol {
+    height: 20px;
+    line-height: 20px;
+}
+
+.compiler-template .col-sep {
+    position: absolute;
+    left: 54px;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    border-right: 3px solid #00467b;
+}
+
+
+
+
+
+
+
+ul, ol, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.trace-content-wrapper {
+    overflow: hidden;
+    height: auto!important;
+}
+
+.trace-content-container {
+    overflow: hidden;
+    position: absolute;
+    padding: 0!important;
+    margin: 0!important;
+    top: 0;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    height: auto!important;
+}
+
+.trace-list {
+    overflow: auto;
+    width: 38%;
+    float: left;
+    height: 100%;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border: 1px solid #333;
+    background: #555;
+}
+.trace-list li {
+    line-height: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.trace-list li:nth-last-child(even) {
+    background: #333;
+}
+
+.trace-list li.selected {
+
+    background: #45484d!important;
+    background: -moz-linear-gradient(top,  #45484d 0%, #000000 100%)!important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000))!important;
+    background: -webkit-linear-gradient(top,  #45484d 0%,#000000 100%)!important;
+    background: -o-linear-gradient(top,  #45484d 0%,#000000 100%)!important;
+    background: -ms-linear-gradient(top,  #45484d 0%,#000000 100%)!important;
+    background: linear-gradient(to bottom,  #45484d 0%,#000000 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 )!important;
+
+    color: #B7BB50;
+}
+
+
+.trace-content {
+    overflow: hidden;
+    right: 0;
+    display: inline-block;
+    position: absolute;
+    background: #555;
+    left: 38%;
+    top: 0;
+    bottom: 0;
+    margin-left: 10px;
+    border: 1px solid #333;
+
+}
+.traceheader {
+    font-size: 14px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 20px;
+    line-height: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #008000;
+    border-bottom: 1px solid #000;
+    position: relative;
+    z-index: 11;
+}
+.traceheader.error {
+    background-color: darkred;
+}
+.traceheader em {
+    color: #fff;
+}
+.scrollable {
+    width: 100%;
+    overflow: hidden;
+    background-color: #666;
+    top: 20px;
+    bottom: 0;
+    position: absolute;
+}
+
+
+.traceinner {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    display: inline-block;
+    overflow: auto;
+}
+.traceparams {
+    background-color: #444;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: absolute;
+    height: 160px;
+    overflow: auto;
+    margin: 0;
+    display: block;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    border-bottom: 1px solid #000;
+
+}
+.traceparams dl, .traceparams pre {
+    margin: 0;
+}
+.traceparams dl:nth-last-child(even) {
+    background-color: #444;
+}
+.traceparams dt {
+    width: 200px;
+    float: left;
+}
+
+.traceparams dd {
+    margin-left: 210px;
+}
+
+
+.tracesourcecode i {
+    font-style: normal!important;
+}
+
+.tracesourcecode {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+}
+
+
+
+.tracesourcecode pre {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    margin: 0;
+}
+.tracesourcecode code {
+    width: 100%;
+    display: block;
+}
+.tracesourcecode .line {
+    display: block;
+    line-height: 20px;
+}
+.tracesourcecode .line > div {
+    width: 100%;
+}
+.scrollable .col-sep {
+    position: absolute;
+    left: 54px;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    border-right: 3px solid #00467b;
+}
+.tracesourcecode .line > div > div.number {
+    width: 50px;
+    float: left;
+    padding-left: 5px;
+
+
+}
+.tracesourcecode .line > div > div:last-child {
+    margin-left: 60px;
+    padding-right: 10px;
+}
+.tracesourcecode .line:nth-last-child(even) {
+    background-color: #444;
+}
+.tracesourcecode .line:nth-last-child(odd) {
+    background-color: #666;
+}
+.traceinner .line.highlight {
+    background-color: #24bd00;
+}
+.traceinner.error .line.highlight {
+    background-color: #8B0000;
+    color: #fff;
+}
+
+.tracesourcecode .line .number {
+    height: 100%;
+}
+
+
+.has-params .traceparams {
+    height: 30%;
+    overflow-x: hidden;
+}
+.has-params .traceinner {
+    top: 30%;
+    overflow-x: auto;
+    height: auto;
+    overflow-x: auto;
+}

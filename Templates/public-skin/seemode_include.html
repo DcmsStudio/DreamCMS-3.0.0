@@ -1,0 +1,53 @@
+<cp:if condition="$click_logger">
+    <!-- Seemode Click Logger -->{$click_logger}
+</cp:if>
+
+<cp:if condition="user('dashboard') ">
+
+    <link href="public/html/css/dcms.seemode.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript">
+        var cmslang = {};
+        var backendImagePath = 'html/style/bootstrap/img/';
+        var cmsurl = '{cfg("portalurl")}';
+        var exitpopup = false;
+        var seeMode = true;
+        var session_id = '{$session_id}';
+        var token = '{gettoken()}';
+        var userid = '{user("userid", 0)}';
+        var isSeemodePopup = seeMode;
+    </script>
+
+    <script type="application/x-javascript" src="admin.php?adm=lang"></script>
+    <script type="application/x-javascript" src="admin.php?adm=skins&amp;action=getsense"></script>
+    <script type="text/javascript" src="public/html/js/backend/dcms.loader.js"></script>
+    <script type="text/javascript" src="public/html/style/bootstrap/js/scripts.php?useSeemode=1"></script>
+
+    <script type="text/javascript" src="public/html/js/seemode.analyseclicks.js"></script>
+    <script type="text/javascript" src="public/html/js/dcms.seemode.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajaxSetup({
+                dataType: "json",
+                cache: false,
+                async: false
+            });
+
+            var opts = {};
+            opts.isSeemode = isSeemodePopup;
+            opts.baseURL = '{$cfg.portalurl}/';
+            opts.portalurl = '{$cfg.portalurl}';
+            opts.EnableBootScreen = false;
+            opts.enableDebug = true;
+            opts.SID = session_id;
+            opts.SkinPath = 'html/style/apple/img/';
+            opts.popupEaseIn = 'bounceInDown';
+            opts.popupEaseOut = 'bounceOutUp';
+            opts.debugger = {iif(@DEBUGGING, 'true', 'false')};
+            opts.firewall = {iif(@USE_FIREWALL, 'true', 'false')};
+
+            SeemodeEdit.init(opts);
+
+        });
+    </script>
+</cp:if>

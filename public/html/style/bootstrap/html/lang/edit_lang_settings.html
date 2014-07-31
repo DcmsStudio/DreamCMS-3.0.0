@@ -1,0 +1,73 @@
+<?php
+
+function __edit_lang_settings( $r ){
+global $cp, $fct, $adm_skin, $cfg;
+
+	$h[$r['hidden']] = ' checked="checked"';
+	$s[$r['is_default']] = ' checked="checked"';
+
+
+
+
+	return <<<EOF
+<form  action="admin.php" method="post" name="langform">
+<input type="hidden" name="adm" value="language" />
+	<input type="hidden" name="sid" value="{$cp->session_id}" />
+	<input type="hidden" name="action" value="edit_settings" />
+	<input type="hidden" name="langid" value="{$r['langid']}" />
+	<input type="hidden" name="send" value="send" />
+    <table class="tblborder" width="99%" cellpadding="3" cellspacing="1" border="0" align="center">
+        <tr class="tableheader">
+            <td colspan="2">Einstellung der Sprache</td>
+        </tr>
+		<tr>
+			<td>
+			<fieldset>
+				<legend>Titel</legend>
+				{info:lang|title}<input type="text" name="title" value="{$r['title']}" size="35" class="input required"/>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Aktiv</legend>
+				{info:lang|publish}
+				<label for="hidde1"><input type="radio" name="hidden" id="hidde1" value="1" class="radio"{$h[1]} /> Ja &nbsp;</label>
+				<label for="hidde0"><input type="radio" name="hidden" id="hidde0" value="0" class="radio"{$h[0]} /> Nein</label>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Standart Sprache</legend>
+				{info:lang|is_standart}
+				<label for="d1"><input type="radio" name="is_default" value="1" id="d1" class="radio"{$s[1]} /> Ja &nbsp;</label>
+				<label for="d0"><input type="radio" name="is_default" value="0" id="d0" class="radio"{$s[0]} /> Nein</label>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Sprach Code</legend>
+				{info:lang|code}<input type="text" name="languagecode" value="{$r['languagecode']}" size="35" class="input required"/><br/>
+				<small>Für mehr informationen sehen Sie <a href="http://lcweb.loc.gov/standards/iso639-2/englangn.html" target="_blank">hier</a> nach.</small>
+			</fieldset>
+			
+			<fieldset>
+				<legend>ISO Code</legend>
+				{info:lang|isocode}<input type="text" name="iso" value="{$r['iso']}" size="35" class="input required" />
+			</fieldset>
+			
+			</td>		
+		</tr>
+        <tr class="secondrow">
+            <td>
+				<input type="submit" value="Speichern" class="button" /> 
+				<input type="reset" value="Zurücksetzen" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+	
+
+
+EOF;
+
+
+}
+
+?>

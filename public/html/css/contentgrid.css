@@ -1,0 +1,72 @@
+@media all
+{
+    .contentcols {
+        width:100%;
+        overflow:hidden;
+        padding: 0!important;
+        border: 0!important;
+        background: none!important;
+        position: relative;
+    }
+
+    .contentcols:before, .contentcols:after {
+        display: table;
+        content: "";
+    }
+
+    .contentcols > [class*="c"] {
+        float: left;
+        margin-left: 1%;
+        padding: 0;
+    }
+    .contentcols > [class*="c"]:first-child {
+        margin-left: 0;
+    }
+
+    .contentcols > [class*="c"] > .c {
+        padding: 5px!important;
+        border: 0!important;
+        background: none!important;
+        position: relative;
+    }
+
+    .contentcols > .c20 {
+        width: 19.199%;   /* 20% */
+        float: left;
+    }
+
+    .contentcols > .c25 {
+        width: 24.250%;   /* 25% */
+        float: left;
+    }
+
+    .contentcols > .c50 {
+        width: 49.48%;   /* 50% */
+        float: left;
+    }
+    .contentcols > .c33 {
+        width: 32.6588%;     /* 33% */
+        float: left;
+    }
+    .contentcols > .c38 {
+        width: 37.3333%;   /* 38% */
+        float: left;
+    }
+    .contentcols > .c62 {
+        width: 61.333%;   /* 62% */
+        float: left;
+    }
+    .contentcols > .c66 {
+        width: 66.345%;   /* 66% */
+        float: left;
+    }
+    .contentcols > .c75 {
+        width: 74.75%;   /* 75% */
+        float: left;
+    }
+
+    .contentcols > .c80 {
+        width: 79.799%;   /* 80% */
+        float: left;
+    }
+}

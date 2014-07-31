@@ -1,0 +1,61 @@
+{*<cp:loop name="news" key="r">
+    <cp:if condition="$session.seemode">
+        <div class="seemode_btn news" id="seem-item{$r.id}"></div>
+    </cp:if>
+    
+    <h2 class="title"><a href="{$r.url}" title="{escape($r.title, 'html')}">{truncate($r.title, 60)}</a></h2>
+    <div class="small"><span class="created">{date('d.m.Y, H:i', $r.created)}</span> | {trans('Kommentare')} {$r.comments}</div>
+    <p class="introtext">
+        {$r.text}
+    </p>
+    
+</cp:loop>
+*}
+
+<div>
+
+    <cp:set var="x" value="1" />
+    <cp:loop name="topnews" key="r">
+            <cp:if condition="$x == 1">
+            
+
+                <article class="large-article">
+                    <cp:seemodeitem modul="news" contentid="$r.id" edit="action=edit_news&amp;id=%s&amp;edit=1" publish="action=publish&id=%s" state="$r.published" delete="">
+                        <header>
+                            <cp:if condition="trim($r.image.src) != ''">
+                                <div class="thumb" style="text-align:center">
+                                    <cp:thumb src="$r.image.src" width="309" height="180" title="escape($r.title, 'htmlall')" cache="news/topnews/" aspect="false" shrink="true" crop="true" />
+                                </div>
+                            </cp:if>
+                            <cp:else>
+                                <div class="no-thumb">
+                                </div>
+                            </cp:else>
+                        </header>
+                            <h2><a href="{$r.url}">
+                                
+                                    {seemode(truncate($r.title, 50, 's', '...'), 'title', true, 50)}
+                                
+                            </a></h2>
+                        <div class="meta">
+                            {seemode(truncate($r.text, 300, 's', '...'), 'content', true, 300, 's')}</div>
+                            <div><a href="{$r.url}">
+                                » {trans('weiterlesen')}
+                            </a></div>
+                        
+                    </cp:seemodeitem>
+                </article>
+            </cp:if>
+            <cp:else>
+                 <article class="small-article">
+                    <div class="thumb" style="text-align:center;float:left;margin-right: 5px;width:54px;overflow:hidden"><cp:thumb src="$r.image.src" width="54" height="54" title="escape($r.title, 'htmlall')" cache="news/topnews/" aspect="false" shrink="true" crop="true" /></div>
+                    <div style="margin-left:59px">
+                        <div class="meta-title">{seemode(truncate($r.title, 32, 's', '...'), 'title', true, 35)}</div>
+                        <p class="meta">{seemode(truncate($r.text, 32, 's', '...'), 'content', true, 40, 's')}</p>
+                        <div class="meta-bottom"><span class="meta-date">{date('d.m.Y, H:i', $r.created)}</span> | <a href="{$r.url}">{trans('weiterlesen')}</a></div>
+                    </div>
+                </article>
+            </cp:else>
+            <cp:set var="x" value="$x + 1"/>
+    </cp:loop>
+</div>

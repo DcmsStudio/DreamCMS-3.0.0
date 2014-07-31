@@ -1,0 +1,70 @@
+<?php
+
+function __db_main($tblcount=0,$rowcount=0,$sizecount=0, $tables = '', $overhead_size = 0){
+global $cp, $cfg, $fct, $cp;
+
+	$sqldb = DB_NAME;
+	
+	
+	
+	
+return <<<EOF
+<script language="javascript">
+function setCheckboxes(do_check){
+ var evnt = document.thetable.elements['tables[]'];
+ var evnt_count=(typeof(evnt.length)!='undefined')?evnt.length:0;
+ if(evnt_count){
+  for (var i=0; i < evnt_count; i++) {
+   evnt[i].checked=do_check;
+  }
+ }
+}
+</script>
+
+<form method="post" action="admin.php" name="thetable">
+<input type="hidden" name="sid" value="{$cp->session_id}"/>
+<input type="hidden" name="action" value="extra"/>
+<input type="hidden" name="tool" value="1"/>
+<input type="hidden" name="adm" value="database"/>
+
+<table cellspacing="1" cellpadding="3" border="0" width="100%" align="center" class="tblborder">
+	<tr class="tableheader">
+		<td colspan="6">Datenbank "$sqldb"</td>
+	</tr>
+	<tr class="tableheader">
+		<td width="10">&nbsp;</td>
+		<td><b>Name</b></td>
+		<td class="tc" width="6%"><b>Einträge</b></td>
+		<td class="tc" width="10%"><b>Type</b></td>
+		<td class="tc" width="6%"><b>Größe</b></td>
+		<td class="tc" width="6%"><b>Überhang</b></td>
+	</tr>
+{$tables}
+	<tr class="firstrow">
+		<td><b>&nbsp;</b></td>
+		<td class="tl"><b>$tblcount Tabellen</b></td>
+		<td class="tr"><b>$rowcount</b></td>
+		<td class="tc"><b>---</b></td>
+		<td class="tr"><b>$sizecount</b></td>
+		<td class="tr"><b>$overhead_size</b></td>
+	</tr>
+	<tr class="secondrow tr">
+		<td colspan="6">
+			<a href="javascript: setCheckboxes(true);">Alle auswählen</a> | 
+			<a href="javascript: setCheckboxes(false);">Auswahl entfernen</a>
+			makierte:
+			<select name="what" size="1" class="select">
+			<option value="repair"> Tabellen Reparieren </option>
+			<option value="optimize" selected="selected"> Tabellen Optimieren</option>
+			</select> <input type="submit" value=" Ausführen " class="button" />
+		</td>
+	</tr>
+</table>
+
+
+</form>
+
+EOF;
+}
+
+?>

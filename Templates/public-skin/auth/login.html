@@ -1,0 +1,29 @@
+<cp:extends template="../container" />
+<cp:block name="main_content">
+	<a name="login_block"></a>
+	<form method="post" name="loginForm" id="loginForm" action="/auth/login">
+		<input type="hidden" name="action" value="login" />
+		<input type="hidden" name="send" value="send" />
+		<input type="hidden" name="url" value="{SERVER|request_uri_small}" />
+		<div class="tl m3" style="display:inline-block">
+			<div class="ajaxerror" id="loginerrorloginForm"></div>
+			<fieldset>
+				<legend>{trans('Benutzername')}</legend>
+				<input type="text" class="input" name="logusername" size="30" maxlength="50" />
+				<br/>
+			</fieldset>
+			<fieldset>
+				<legend>{trans('Kennwort')}</legend>
+				<input type="password" class="input" name="logpassword" size="30" maxlength="30" />
+			</fieldset>
+			<p>
+				<button type="submit">{trans('Login')}</button>
+			</p>
+			<div class="tc small"> 
+				<a href="/register">{trans('Registrieren')}</a>
+				« » <a href="/auth/lostpw">{trans('Paßwort vergessen')}</a>
+
+			</div>
+		</div>
+	</form>
+</cp:block>

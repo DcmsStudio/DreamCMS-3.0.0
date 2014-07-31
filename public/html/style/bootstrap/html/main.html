@@ -1,0 +1,617 @@
+<html>
+<head>
+    <title>{iif($pageTitle,$pageTitle,'Administration')}</title>
+
+    <meta http-equiv="Content-Language" content="de"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <base href="{cfg('portalurl')}/"/>
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"/>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Armata&subset=latin,latin-ext"/>
+    <!--  <link rel="stylesheet" href="public/html/css/jquery-ui.css"/> -->
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.jquery-ui.css" type="text/css"/>
+    <link rel="stylesheet" href="html/js/jquery/fancybox/style.css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/bootstrap-animations.css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/bootstrap-theme.css"/>
+
+
+    <link rel="stylesheet" href="html/css/font-awesome/font-awesome.css" type="text/css"/>
+
+    <link rel="stylesheet" type="text/css" href="Vendor/codemirror/lib/codemirror.css"/>
+    <link rel="stylesheet" type="text/css" href="Vendor/codemirror/lib/util/simple-hint.css"/>
+    <link rel="stylesheet" type="text/css" href="Vendor/codemirror/lib/util/dialog.css"/>
+    <link rel="stylesheet" type="text/css" href="Vendor/codemirror/lib/merge.css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.bootstrap.widget.css"/>
+
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.tree-sprite.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/colorpicker.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.alerts.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.box.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.grid.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/new-style.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.form-notification.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.form-ui.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.sidepanel-tree.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.scrolls.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.menu.sprite.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.menu.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.contextmenu.css" type="text/css"/>
+
+
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.selectbox.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/growl.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.sourceedit.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.layouter.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/layoutbuilder.css" type="text/css"/>
+
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.fileman.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.notepad.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.console.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.indexer.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.widget.css" type="text/css"/>
+    <link rel="stylesheet" href="html/style/bootstrap/css/dcms.autocomplete.css" type="text/css"/>
+
+    <link rel="stylesheet" href="Vendor/tinymce4/skins/dcms/skin.min.css" type="text/css"/>
+    <link rel="icon" href="asset/img/html/img/favicon.ico" type="image/x-icon" />
+
+
+    <script type="text/javascript">
+        var cmslang = {};
+        var isSeemodePopup = {iif($input.seemodePopup || $cookie.isSeemodePopup, 'true', 'false')};
+        var cookiePrefix = '{$cookieprefix}';
+        var webSite = '{$website.id}';
+        var seeMode = isSeemodePopup;
+        var session_id = '{$session_id}';
+        var token = '{gettoken()}';
+        var userid = '{user("userid", 0)}';
+
+    </script>
+
+    <script type="text/javascript" data-pace-options='{"ghostTime": 200, "document": true, "restartOnRequestAfter":true, "ajax": false }' src="public/html/js/pace.js"></script>
+    {*
+    <script type="text/javascript" src="public/html/js/jquery/jquery.202.min.js"></script>
+    <script type="text/javascript" src="public/html/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+    *}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+
+    <script type="text/javascript" src="admin.php?adm=lang"></script>
+    <script type="text/javascript" src="admin.php?adm=skins&action=getsense"></script>
+    <script type="text/javascript" src="public/html/js/backend/dcms.loader.js"></script>
+    <script type="text/javascript" src="public/html/style/bootstrap/js/scripts.php"></script>
+
+    <cp:block name="inlinejs"/>
+
+</head>
+<body class="start boot">
+<div id="boot-mask" class="fade in"></div>
+<div id="boot-maskmsg" class="fade in">
+    <div id="preload">
+        <div>
+            <span class="a">0</span>
+            {trans('von')}
+            <span class="b">0</span>
+            {trans('Dateien wurden erfolgreich vorgeladen...')}
+        </div>
+        <div class="description"></div>
+
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" language="javascript" rel="main-js">
+    /*
+     var loadScripts = [
+     'public/html/js/backend/modernizr.js',
+     //     'public/html/js/jquery/jquery.animate-enhanced.js',
+
+     // better animation as jquery ^^, jquery is very very slow
+     'public/html/js/TweenMax.js',
+     'public/html/js/jquery/jquery.gsap.min.js',
+     //
+     // for tinyMCE 3         'Vendor/tinymce/plugins/AtD/atd.core.js',
+     'public/html/js/jquery/jquery.scrollTo.js',
+     'public/html/js/jquery/jquery.tools.min.js',
+     'public/html/js/jquery/jquery-css-transform.js',
+     'public/html/js/jquery/jquery.quicksand.js',
+     'public/html/js/jquery/jquery.colorpicker.js',
+     'public/html/js/jquery/jquery.ui.widget.js',
+     'public/html/js/jquery/jquery.fileupload.js',
+     'public/html/js/jquery/fancybox/jquery.fancybox-1.3.1.js',
+
+
+
+
+     //         'Vendor/tinymce/tiny_mce_src.js',
+     //         'Vendor/tinymce/jquery.tinymce.js',
+
+     'Vendor/tinymce4/plugins/atd/atd.core.js',
+     //          'Vendor/tinymce4/plugins/atd/atd-nonvis-editor-plugin.js',
+     'Vendor/tinymce4/plugins/atd/jquery.atd.js',
+     'Vendor/tinymce4/plugins/atd/atd-autoproofread.js',
+     'Vendor/tinymce4/tinymce.js',
+
+
+     'public/html/js/jquery/jquery.contextMenu.js',
+     // get backend scripts
+     'public/html/js/backend/phpjs.js',
+
+     'public/html/js/backend/dcms.websocket.js',
+     'public/html/js/backend/dcms.serialize.js',
+     'public/html/js/backend/jquery.mjs.nestedSortable.js',
+     'public/html/js/backend/jquery.alert.js',
+     'public/html/js/backend/dcms.namespace.js',
+     'public/html/js/backend/dcms.functions.js',
+     'public/html/js/backend/dcms.indexer.js',
+     'public/html/js/backend/dcms.autocomplete.js',
+     'public/html/js/backend/dcms.scrollbar.js',
+     'public/html/js/backend/dcms.utf8.js',
+     'public/html/js/backend/dcms.config.js',
+     'public/html/js/backend/dcms.debug.js',
+     'public/html/js/backend/dcms.string.js',
+     'public/html/js/backend/dcms.hashgen.js',
+     'public/html/js/backend/dcms.template.js',
+     'public/html/js/backend/dcms.notifier.js',
+     'public/html/js/backend/dcms.selectbox.js',
+     'public/html/js/backend/dcms.checkbox.js',
+     'public/html/js/backend/dcms.layouter.js',
+     'public/html/js/backend/dcms.form.js',
+     'public/html/js/backend/dcms.console.js',
+     //    'public/html/js/backend/dcms.application.js',
+     'public/html/js/backend/dcms.grid-new.js',
+     'public/html/js/backend/dcms.content.js',
+     'public/html/js/backend/dcms.sourceeditor.js', // the new Source Code Editor use ACE
+     'public/html/js/backend/fileman/dcms.fileman.js',
+     'public/html/js/backend/fileman/dcms.fileman.layout.js',
+     'public/html/js/backend/fileman/dcms.fileman.commands.js',
+     'public/html/js/backend/fileman/dcms.fileman.quickview.js',
+     // the old Source Code Editor !!!
+     // @deprecated
+
+
+     'public/html/js/backend/tpleditor/placeholder.js',
+     'public/html/js/backend/tpleditor/html5.js',
+     //   'public/html/js/backend/tpleditor/dcms.editor.js', // use codemirror (Old diff mode only)
+
+
+     'public/html/js/xregexp.js',
+     'public/html/js/dcms.googlemap.js',
+
+     // skin js files
+
+     'public/html/style/bootstrap/js/dcms.bootstrap-widget.js',
+     'public/html/style/bootstrap/js/dcms.bootstrap-fileinput.js',
+     'public/html/style/bootstrap/js/dcms.bootstrap-input-tooltip.js',
+     'public/html/style/bootstrap/js/dcms.bootstrap-inputtrigger.js',
+     'public/html/style/bootstrap/js/dcms.bootstrap-init.js',
+
+     'public/html/style/bootstrap/js/dcms.tools.js',
+     'public/html/style/bootstrap/js/dcms.core.js',
+     'public/html/style/bootstrap/js/dcms.core.tabs.js',
+     'public/html/style/bootstrap/js/dcms.tooltip.js',
+     'public/html/style/bootstrap/js/dcms.menu.js',
+     'public/html/style/bootstrap/js/dcms.auth.js',
+     'public/html/style/bootstrap/js/dcms.contenttree.js',
+     'public/html/style/bootstrap/js/dcms.scrollbar.js',
+     'public/html/style/bootstrap/js/dcms.advanced-menus.js',
+     'public/html/style/bootstrap/js/dcms.panel.js',
+     'public/html/style/bootstrap/js/dcms.dashboard.js',
+
+     'public/html/js/backend/dcms.googlemap.js',
+     //
+     'public/html/js/backend/templates/dcms.desktop.contextmenu.js',
+     'public/html/js/backend/templates/dcms.desktop.icon.js',
+     'public/html/js/backend/templates/dcms.desktop.icongroup.js',
+     'public/html/js/backend/templates/dcms.desktop.balloon.js',
+     'public/html/js/backend/templates/dcms.taskbar.notification.js',
+     'public/html/js/backend/templates/dcms.form.notification.js',
+     'public/html/js/backend/templates/dcms.user.menu.js',
+     'public/html/js/backend/templates/dcms.desktop.mask.js',
+     'public/html/js/backend/templates/dcms.window.mask.js'
+     ];
+
+
+     $(document).ready(function(){
+
+
+     if ('{user("userid", 0)}' == 0) {
+
+
+     $(window).resize(function () {
+     var top = ($('#auth').outerHeight() / 2) - ($('#auth-form-container').outerHeight() / 2) ;
+
+     $('.auth-logo').css({
+     top: top - ($('.auth-logo').outerHeight() + 30),
+     left: ($('#auth').width() / 2) - $('.auth-logo').width() / 2
+     });
+
+     $('#auth-form-container').css({
+     top: top + $('.auth-logo').outerHeight(),
+     left: $('#auth').width() / 2 - $('#auth-form-container').width() / 2
+     });
+
+
+     });
+     }
+
+     $('#version-info' ).css({
+     left: ( ($('#fullscreenContainer').width()/2) - ($('#version-info' ).outerWidth(true)/2))
+     });
+
+
+     Loader.require(loadScripts, function() {
+
+     $.ajaxSetup(
+     {
+     dataType: "json",
+     cache: false,
+     async: false
+     });
+
+     var opts = {};
+     opts.SID = session_id;
+     opts.token = token;
+     opts.SkinPath = 'html/style/bootstrap/';
+     opts.TaskbarClockSeperatorBlinking = true;
+     opts.ShowTaskbarClock = true;
+
+     //Initialize the Desktop
+     Core.init(opts);
+     });
+
+
+     });
+
+     */
+    $(document).ready(function () {
+
+
+
+
+
+        if ('{user("userid", 0)}' == 0) {
+            $(window).resize(function () {
+                var top = ($('#auth').outerHeight() / 2) - ($('#auth-form-container').outerHeight() / 2);
+
+                $('.auth-logo').css({
+                    top: top - ($('.auth-logo').outerHeight() + 30),
+                    left: ($('#auth').width() / 2) - $('.auth-logo').width() / 2
+                });
+
+                $('#auth-form-container').css({
+                    top: top + $('.auth-logo').outerHeight(),
+                    left: $('#auth').width() / 2 - $('#auth-form-container').width() / 2
+                });
+            });
+        }
+
+        $('#version-info').css({
+            left: ( ($('#fullscreenContainer').width() / 2) - ($('#version-info').outerWidth(true) / 2))
+        });
+
+        $.ajaxSetup(
+            {
+                dataType: "json",
+                cache: false,
+                async: false
+            });
+
+        var opts = {};
+        opts.SID = session_id;
+        opts.token = token;
+        opts.SkinPath = 'html/style/bootstrap/';
+        opts.TaskbarClockSeperatorBlinking = true;
+        opts.ShowTaskbarClock = true;
+        opts.autosave = false;
+
+        opts.popupEaseIn = 'bounceInDown';
+        opts.popupEaseOut = 'bounceOutUp';
+
+
+        //Initialize the Desktop
+        Core.init(opts);
+
+
+    })
+</script>
+
+
+<div id="auth" class="fade">
+
+    <span class="auth-logo"></span>
+
+    <div id="auth-form-container">
+
+
+        <form action="admin.php" method="post">
+            <input type="hidden" name="adm" value="auth"/>
+            <input type="hidden" name="action" value="login"/>
+
+            <fieldset>
+                <input type="text" name="logusername" autocomplete="off" placeholder="Benutzer"/>
+            </fieldset>
+            <fieldset>
+                <input type="password" name="logpassword" autocomplete="off" placeholder="Passwort"/>
+
+            </fieldset>
+            <input type="submit" class="submit"/>
+        </form>
+    </div>
+</div>
+
+<div id="fullscreenContainer" class="fade">
+
+    <div id="version-info" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="VersionLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="VersionLabel"></div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard-container">
+        <div id="header">
+            <div id="menu-bar">
+                <!-- Menu Buttons -->
+                <div id="menu">
+                    <div id="main-menu">
+                        <ul>
+                            <li>{trans('Lade Menü...')}</li>
+                        </ul>
+                    </div>
+                    <div id="App-Menu">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div id="menu-extras">
+                    <button id="note-create" title="Press this button to create a new Note">
+                        <img src="images/edit-note.png" width="16" height="16" alt=""/> {trans('neue Notiz')}
+                    </button>
+                    <button id="note-toggle" title="You can use this button to toggle the visibility of your Notes">
+                        <img src="images/notes.png" width="16" height="16" alt=""/>
+                        <span id="notes-message">{trans('Notiz öffnen')} </span>
+                    </button>
+                    <button id="help-button">
+                        <img src="images/pulldownmenu/help.png" width="16" height="16" alt=""/> {trans('Hilfe')}
+                    </button>
+                    <span class="spacer"></span>
+                    <button id="logout-button">
+                        <img src="images/buttons/decrypted.png" width="16" height="16" alt=""/> {trans('Logout')}
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div id="main">
+
+            <div id="main-header">
+                <div id="panel">
+                    <div id="panel-buttons">
+                        <ul>
+                            <li id="toggle-pane-content"><span></span></li>
+                            <li rel="sites" class="sites active"><span></span></li>
+                            <li rel="messages" class="messages"><span></span></li>
+                            <li rel="logs" class="logs"><span></span></li>
+                            <li rel="files" class="files" style="display: none"><span></span></li>
+                            <li rel="documentsettings" class="documentsettings" style="display: none"><span></span></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- the page tabs -->
+                <div id="main-tabs">
+                    <ul>
+
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <div id="main-content">
+
+                <div id="panel-content">
+                    <div id="panel-documentsettings" style="display: none">
+                        <div class="header">{trans('Inhalts Einstellung')}</div>
+                        <div class="panel-content" id="documentsettings-content">
+                            <div class="scroll-content">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="panel-sites">
+                        <div class="header">{trans('Seiten')}</div>
+                        <div class="panel-content" id="pages-tree-content">
+                            <div class="scroll-content">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="panel-files">
+                        <div class="header">{trans('Dateien')}</div>
+                        <div id="files-tree-content">
+                            <div id="files-tree">
+
+
+                            </div>
+                            <div id="files-info" class="files-info">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="panel-messages">
+                        <div class="header">{trans('Nachrichten')}</div>
+                        <div class="panel-content" id="messages-content">
+                            <div class="scroll-content">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="panel-logs">
+                        <div class="header">{trans('Logs')}</div>
+                        <div class="panel-content" id="logs-content">
+                            <div class="scroll-content">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="main-content-inner">
+                    <div id="main-content-inner-wrap">
+                        <div id="main-content-header">
+                            <div id="main-content-buttons">
+                                <!-- the save, reset, cancel and other buttons -->
+                                {*
+                                <cp:block name="toolbar"/>
+                                *}
+                            </div>
+                            <div id="main-content-tabs"></div>
+                        </div>
+
+                        <div id="main-content-mid">
+                            <!-- only the dashboard -->
+                            <div id="dashboard" class="no-padding">
+                                <div id="system-version-notifier">{iif($version_info, $version_info, '')}</div>
+
+
+                                <div id="dropbox" style="height:auto;float:none">
+
+                                    <div id="widgets" style="width:100%!important;">
+                                        <div class="w-column">
+                                            <div id="widget-column-1" class="widget-column"></div>
+                                        </div>
+                                        <div class="w-column">
+                                            <div id="widget-column-2" class="widget-column"></div>
+                                        </div>
+                                        <div class="w-column">
+                                            <div id="widget-column-3" class="widget-column"></div>
+                                        </div>
+                                        <div class="w-column">
+                                            <div id="widget-column-4" class="widget-column"></div>
+                                        </div>
+
+
+                                        <div id="add-widget"><span class="fa fa-plus"></span></div>
+                                    </div>
+
+                                    <div id="install-widgets" style="width:100%!important;display: none">
+                                    </div>
+
+                                    <div style="clear: both;"></div>
+                                </div>
+
+                            </div>
+                            <div id="content-container">
+                                <div id="content-container-inner">
+                                    {*
+                                    <cp:block name="content"/>
+                                    *}
+                                </div>
+                            </div>
+                        </div>
+                        <div id="copyright">DreamCMS {@VERSION} | ©{date('Y')} by marcel domke - all rights reserved.</div>
+                        <div id="main-content-statusbar">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="gui-console">
+                <div id="gui-console-base" style="display: none;">
+                    <div class="gui-console-buttons">
+                        <div class="left-btn">
+                            <div class="console">Console</div>
+                            <div class="debuginfo act">Debug Infos</div>
+                            <div class="errors">Errors</div>
+                        </div>
+                        <div class="right-btn">
+                            <div class="clear"></div>
+                            <div class="close"></div>
+                        </div>
+                    </div>
+                    <div id="gui-console-content">
+                        <div>
+                            <div id="gui-console-matrix" style="display: none"></div>
+                            <div id="gui-console-text" style="display: none"></div>
+                            <div id="gui-console-debug"></div>
+                            <div id="gui-console-errors" style="display: none"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="gui-console">
+
+                    <div class="left">
+                        <div class="icon"></div>
+                        <div class="text">
+                            <input name="consoleexec" id="console-exec" type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="right">
+                        <div id="toggle"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+<!-- maincontent -->
+<cp:block name="content"/>
+<!-- end_maincontent -->
+<div id="masking">
+    <div id="masking-msg">
+        <img src="images/loading.gif" border="0" width="16" height="16"/><span id="mask-msg"></span>
+    </div>
+</div>
+
+
+
+
+
+
+<div id="tab-template" style="display: none">
+    <li>
+        <span class="first"></span>
+        <span class="label"><i></i><span>laden...</span></span>
+        <span class="remove-tab"><i></i></span>
+        <span class="last"></span>
+    </li>
+</div>
+
+
+
+
+<div id="loadedimages"></div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<ul class="last-comments-list">
+    <cp:loop name="lastcomments" key="r">
+        <li cp:is="$r.commentlink">
+            <a href="{$r.commentlink}">
+                <cp:if condition="$r.title">
+                    {truncate($r.title, 50)}
+                </cp:if>
+                <cp:else>
+                    {truncate($r.comment, 50)}
+                </cp:else>
+            </a>
+            <div class="comment-details">
+                {trans('von')}&nbsp;
+                <cp:if condition="$r.userid > 0">
+                    <a href="profile/{$r.userid}/{suggest($r.username, true)}">{$r.username}</a>
+                </cp:if>
+                <cp:else>
+                    {$r.username}
+                </cp:else>
+                 - 
+                <span class="comment-time">{date('', '', $r.timestamp)}</span>
+            </div>
+            
+            <div class="comment">
+                {parsetext(truncate($r.comment, 300))}
+                
+            </div>
+        </li>
+    </cp:loop>
+    <cp:else>
+        <li>
+            <em>{trans('Es sind keine Kommentare vorhanden')}</em>
+        </li>
+    </cp:else>
+</ul>

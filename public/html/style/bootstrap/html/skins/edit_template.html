@@ -1,0 +1,183 @@
+<cp:extends template="main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:edittplform{$id}] [save_exit:edittplform{$id}]
+        [reset:edittplform{$id}] [cancel:edittplform{$id}]
+    </cp:groupbutton>
+
+
+    <div style="margin-left: -5px;margin-top: 3px;display: block">
+
+
+        <ul class="sourceEditor-toolbar-buttons">
+            <li class="sourceEditor-undo disabled" onclick="dcmsEditorUndo();" title="{trans('Rückgängig')}"><span></span></li>
+            <li class="sourceEditor-redo disabled" onclick="dcmsEditorRedo();" title="{trans('Wiederholen')}"><span></span></li>
+            <li class="sourceEditor-toolbar-sep"></li>
+
+            <li class="sourceEditor-strong" onclick="insTag('strong');" title="{trans('Fett')}"><span></span></li>
+            <li class="sourceEditor-italic" onclick="insTag('italic');" title="{trans('Kursiv')}"><span></span></li>
+            <li class="sourceEditor-underline" onclick="insTag('underline');" title="{trans('Unterstrichen')}"><span></span></li>
+            <li class="sourceEditor-headline-selects">
+                <select style="margin-left:10px!important;" onchange="if (this.value != '-1') {
+                            insTag(this.value);
+                        }" class="nodirty headlines">
+                    <option value="-1">--- Headlines ---</option>
+                    <option value="h6" class="h6">Headline 6</option>
+                    <option value="h5" class="h5">Headline 5</option>
+                    <option value="h4" class="h4">Headline 4</option>
+                    <option value="h3" class="h3">Headline 3</option>
+                    <option value="h2" class="h2">Headline 2</option>
+                    <option value="h1" class="h1">Headline 1</option>
+                </select>
+            </li>
+
+            <li class="sourceEditor-toolbar-sep"></li>
+
+            <li class="sourceEditor-reindent" onclick="reindent();" title="{trans('Code neu einrücken')}"><span></span></li>
+            <li class="sourceEditor-wrap">        
+                <label for="wrapcheck" style="white-space: nowrap">
+                    <input type="checkbox" class="nodirty" name="wrapcheck" id="wrapcheck" onchange="setWrapping($(this).is(':checked'))" checked="checked" value="1" hidefocus="hidefocus" /> 
+                    Zeilenumbruch
+                </label>                
+            </li>
+
+            <li class="sourceEditor-toolbar-sep"></li>
+            <li class="sourceEditor-tag-wizard" onclick="toggleWizard($('#wizard'));"><span></span></li>
+            <li class="sourceEditor-specialchars" onclick="toggleSpecialChars($('#specialchars'));"><span></span></li>
+            <li class="sourceEditor-toolbar-sep"></li>
+            <li class="sourceEditor-fullscreen" onclick="toggleFullScreen();" title="{trans('Vollbild öffnen/schließen')}"><span></span></li>
+        </ul>
+
+
+
+    </div>
+</cp:block>
+
+<cp:block name="inlinejs">
+
+</cp:block>
+
+<cp:block name="content">
+
+    <form method="post" name="edittplform{$id}" id="edittplform{$id}" action="admin.php" class="edittplform">
+        <input type="hidden" name="adm" value="skins" />
+        <input type="hidden" name="action" value="{$input.action}"/>
+        <input type="hidden" name="send" value="send"/>
+        <input type="hidden" name="skinid" value="{$input.skinid}"/>
+        <input type="hidden" name="group_name" value="{$group_name}"/>
+        <input type="hidden" name="id" id="tpl-id" value="{$id}" class="tpl-id"/>
+        <input type="hidden" name="template" id="template" value=""/>
+
+
+        <div id="rename-template" style="display: none">
+            <fieldset style="margin:5px;position: relative;z-index: 5">
+                <legend>{trans('Template Name')}</legend>
+                <input name="templatename" type="text" value="{iif($input.templatename && !$id, $input.templatename, $templatename)}" size="70" class="input required" />
+                <small>{trans('Bitte verwenden Sie nur folgende Zeichen (A-Z a-z 0-9 _ ). Achtung: Verwenden Sie keine Sonderzeichen außer den unterstrich sind erlaubt!')}</small>
+            </fieldset>
+        </div>
+        <cp:include template="skins/editor"/>
+
+    </form>
+
+    <script type="text/javascript">
+
+
+        $('#' + Win.windowID).addClass('no-padding ace-source').find('#source{$id}').data('tpl', $('#' + Win.windowID).find('#source{$id}').val());
+
+        Form.registerForm('edittplform{$id}', {
+            autosave: false,
+            contentIdentifierID: 'tpl-id{$id}',
+            exiturl: 'admin.php?adm=skins&action=templates&id={$input.skinid}#{$group_name}',
+            save: function (event, exit, isdraft, formID, windowID) {
+                saveTemplateForm(event, exit, isdraft, formID, windowID);
+            },
+            onReset: function (formID, config)
+            {
+                var tc = Core.getTabContent();
+                tc.find('.sourceEdit').val(tc.find('.sourceEdit').data('tpl')).data('ace').reset();
+            }
+        });
+
+        $('#' + Win.windowID).find('#send').val('');
+
+        if (typeof saveTemplateForm == 'undefined') {
+
+            function saveTemplateForm (event, exit, isdraft, formID, windowID, postData)
+            {
+                var tc = Core.getTabContent();
+                if (!tc || (tc && tc.length == 0) ) {
+                    Debug.error('Invalid Template Editor');
+                    return false;
+                }
+
+                var isfromnew = tc.find('#tpl-id').attr('isnew'), id = null;
+
+                if (isfromnew) {
+                    if (!tc.find('.sourceEdit').data('ace'))
+                    {
+                        Debug.error('Invalid Ace');
+                        return false;
+                    }
+
+                    id = '';
+                }
+                else {
+                    id = tc.find('#tpl-id').val();
+                    if (!tc.find('.sourceEdit').data('ace'))
+                    {
+                        Debug.error('Invalid Ace');
+                        return false;
+                    }
+                }
+
+
+
+                $('#' + windowID).mask("{trans('Template Speichern...')}");
+                tc.find('textarea[name="source"]').val(tc.find('.sourceEdit' ).data('ace').getValue());
+
+
+                var post = tc.find('#' + formID).serialize();
+
+                $.post("admin.php", post, function (data) {
+
+                    $('#' + windowID).unmask();
+
+                    if (Tools.responseIsOk(data))
+                    {
+                        if (typeof data.newid != 'undefined')
+                        {
+                            tc.find('#tpl-id').val(data.newid);
+                        }
+
+                        if (typeof data.msg != 'undefined' && data.msg != '')
+                        {
+                            Notifier.display('info', data.msg);
+                        }
+                        else {
+                            Notifier.display('info', "Template wurde gespeichert.");
+                        }
+
+                        Form.resetDirty($('#' + formID));
+
+                        if ($('#' + windowID).data('sourceCodeEditor')) {
+                            $('#' + windowID).data('sourceCodeEditor').isDirty = false;
+                        }
+
+                        if (exit === true) {
+                           // $('#' + windowID).data('WindowManager').close();
+                        }
+                    }
+                    else
+                    {
+                        jAlert(data.msg, 'Fehler...', function () {
+                            Notifier.display('info', 'Daten können nicht gespeichert werden...', true);
+                        });
+                    }
+                }, 'json');
+            }
+        }
+    </script>
+
+</cp:block>

@@ -1,0 +1,147 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <cp:groupbutton label="trans('Aktion')">
+        [save:pagesCatForm{$catid}] [save_exit:pagesCatForm{$catid}]
+        [reset:pagesCatForm{$catid}] [cancel:pagesCatForm{$catid}]
+    </cp:groupbutton>
+</cp:block>
+
+<cp:block name="content">
+    <form action="admin.php" name="pagesCatForm{$catid}" id="pagesCatForm{$catid}" method="post">
+        <input type="hidden" name="adm" value="page" />
+        <input type="hidden" name="action" value="editcat" />
+        <input type="hidden" name="send" value="1" />
+        <input type="hidden" name="catid" id="catid{$catid}" value="{$catid}" />
+
+        <cp:include template="../metadata"/>
+        <div class="box description">
+            <div class="box-inner">
+
+                <div class="fieldsetwrapper">
+                    <div class="fieldset2 rows">
+                        <fieldset>
+                            <legend>{trans('Titel')}</legend>
+                            <input class="input" type="text" name="title" id="pagecategorie" value="{$title}" size="45" />
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>{trans('Kategorie Optionen')}</legend>
+                            <label for="cancomment">
+                                <input type="checkbox" name="cancomment" id="cancomment" value="1" cp:on="checked:$cancomment == 1 || !isset($cancomment)" parse:checked="checked"/> 
+                                {trans('Kommentare für diese Kategorie erlauben')}
+                            </label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>{trans('Passwort')}</legend>
+                            <input class="input" type="text"  name="password" value="{$password}" size="45" />
+                            <br/><small>{trans('Eingabe Optional. Hiermit ist es möglich die gesamte Kategorie und dessen Inhalt zu schützen.')}</small>
+                        </fieldset>
+                    </div> 
+
+                    <div class="fieldsetrows right">
+                        
+                        <fieldset>
+                            <legend>{trans('Kategorie CSS-Class (Body)')}</legend>
+                            <input class="input" type="text" name="cssclass" value="{$cssclass}" size="45" />
+                        </fieldset>
+                        
+                        <fieldset>
+                            <legend>{trans('Übergeordnete Kategorie')}</legend>
+                            <select name="parentid">
+                                <cp:set var="dataselect" value="$cat_options"/>
+                                <cp:include template="../select_option"/>
+                            </select>
+                        </fieldset>
+
+
+                        <fieldset>
+                            <legend>{trans('Zugriffsrechte')}</legend>
+                            <select name="access[]" class="select" size="6" multiple="multiple" style="width:99%">
+                                <cp:set var="dataselect" value="$access_options"/>
+                                <cp:include template="../select_option"/>
+                            </select>
+                        </fieldset>
+                    </div> 
+                </div>
+
+                <div class="fieldsetwrapper">
+                
+                        <fieldset>
+                            <legend>{trans('Teasertext')}</legend>
+                            <cp:editor baseurl="$cfg.portalurl" name="cat_description" value="$description" height="150" width="400px"/>
+
+                        </fieldset>
+                        <!--
+                                            <fieldset>
+                                                <legend>{trans('Teaserbild')}</legend>
+                                                <div>
+                                                <input class="input" type="text" name="teaserimage[src]" id="teaserimage" value="{$teaserimage.src}" size="45" style="width:70%" /> 
+                                                <button class="action-button" id="browse-media" type="button"><img src="images/buttons/filefind.png" width="16" height="16" alt="" border="0"/> {trans('Mediabrowser')}</button>
+                                                </div>
+                                                <div style="float:left!important;display:inline-block;width:98%">
+                                                    <fieldset style="float:left!important;clear:both;display:inline-block;width:98%">
+                                                        <legend>{trans('Bildausrichtung')}</legend>
+                                                            <label for="pos-above" style="margin-right: 10px;">
+                                                                <input cp:on="checked:$teaserimage.position == 'above'" parse:checked="checked" type="radio" name="teaserimage[position]" value="above" id="pos-above" /> 
+                                                                <img src="images/elements/above.png" width="24" height="24" title="oberhalb" alt="oberhalb" border="0"/>
+                                                            </label>
+                                                            <label for="pos-left" style="margin-right: 10px;">
+                                                                <input cp:on="checked:$teaserimage.position == 'left'" parse:checked="checked" type="radio" name="teaserimage[position]" value="left" id="pos-left" /> 
+                                                                <img src="images/elements/left.png" width="24" height="24" title="linksbündig" alt="linksbündig" border="0"/></label>
+                                                            <label for="pos-right" style="margin-right: 10px;">
+                                                                <input cp:on="checked:$teaserimage.position == 'right'" parse:checked="checked" type="radio" name="teaserimage[position]" value="right" id="pos-right" /> 
+                                                                <img src="images/elements/right.png" width="24" height="24" title="rechtsbündig" alt="rechtsbündig" border="0"/></label>
+                                                            <label for="pos-below">
+                                                                <input cp:on="checked:$teaserimage.position == 'below'" parse:checked="checked" type="radio" name="teaserimage[position]" value="below" id="pos-below" /> 
+                                                                <img src="images/elements/below.png" width="24" height="24" title="unterhalb" alt="unterhalb" border="0"/></label>
+                            
+                                                    </fieldset>
+                                                    <fieldset style="float:left!important;display:inline-block;width:98%">
+                                                        <legend>{trans('Bildunterschrift')}</legend>
+                                                        <div class="p3">
+                                                            <input class="input" type="text" name="teaserheader" id="teaserimage-alt" value="{$teaserheader}" size="70" style="width:95%" /> 
+                                                        </div>
+                                                    </fieldset>
+                                                    
+                                                </div>
+                                                
+                                            </fieldset>
+                                            
+                        -->
+
+
+
+                </div>
+
+
+            </div>
+        </div>            
+
+
+    </form>
+
+
+    <script type="text/javascript">
+
+        Form.registerForm('pagesCatForm{$catid}', {
+            contentIdentifierID: 'catid{$catid}',
+            exiturl: 'admin.php?adm=page&action=pagecats',
+            identifierType: 'pagecategorie{$catid}',
+            baseField: 'pagecategorie{$catid}'
+        });
+        
+        Core.addEvent('onBeforeClose', function(content, opener, rollback, hash) {
+            hash = $('#'+ Win.windowID).attr('opener');
+            Win.refreshOpenerWindow(hash);
+        });
+        
+        Core.addEvent('onBeforeShow', function(content, opener, rollback, hash) {
+            content.find('legend:first').append('<span>Test</span>');
+        });
+
+
+    </script>
+
+</cp:block>

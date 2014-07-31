@@ -1,0 +1,114 @@
+<?php
+
+function __container($list, $type, $skins, $plugins){
+global $cp;
+
+
+	if (HTTP::input('skin_id', 'empty') )
+	{
+		$list = '<tr class="firstrow"><td colspan="2"><b>'.$cp->lang['c_msg_1'].'</b></td></tr>';
+	}
+
+
+	if (!$list && HTTP::input('skin_id', '!empty') )
+	{
+		$list = '<tr class="firstrow"><td colspan="2"><i>'.$cp->lang['c_msg_2'].'</i></td></tr>';
+	}
+
+
+	if ( HTTP::input('typ', '!empty')  )
+	{
+
+        if(HTTP::input('typ')== "c")
+        {
+			$container_type = "Content Container";
+		}
+		else $container_type = "Page Container";
+	}
+
+
+
+return <<<EOF
+<script type="text/javascript" language="javascript">
+<!--
+
+function goto_edit( id )
+{
+	var skin_id    = document.container.skin_id.value;
+	var selobj     = my_getbyid(id);
+
+	var selindex   = selobj.selectedIndex;
+	var templateid = selobj.options[selindex].value;
+
+	var templateid = templateid.split(';');
+
+	if ( skin_id>0 && templateid[1]>0)
+	{
+	location.href='admin.php?adm=templates&sid='+session_id+'&action=edit_bit&id='+skin_id+'&type=single&expand=page_container&template_id='+templateid[1];
+	}
+}
+
+//-->
+</script>
+
+<form  action="admin.php"  method="post"><input type="hidden" name="adm" value="container" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="typ" value="{$type}" />
+
+<table border="0" cellpadding="3" cellspacing="0" width="100%" class="tblborder">
+<tr class="tableheader">
+	<td nowrap="nowrap"><b>$container_type</b></td>
+    <td width="100%" align="right">
+    <select name="plugin" class="select">
+{$plugins}
+	</select>&nbsp;
+
+    <select name="skin_id" class="select">
+{$skins}
+	</select>&nbsp;
+
+	</td><td align="center"><input type="submit" name="skin" value="{$cp->lang['c_select_skin']}" class="button" /></td></tr>
+</table>
+</form>
+<br />
+
+<form action="admin.php" name="container" id="container" method="post">
+<input type="hidden" name="adm" value="container" />
+<input type="hidden" name="sid" value="{$cp->session_id}" />
+<input type="hidden" name="skin_id" value="HTTP::input('skin_id')" />
+<input type="hidden" name="typ" value="{$type}" />
+<input type="hidden" name="plugin" value="HTTP::input('plugin')" />
+<input type="hidden" name="send" value="1" />
+
+
+<table border="0" cellpadding="3" cellspacing="1" width="100%" class="tblborder">
+	<tr class="tableheader">
+	  <td>{$cp->lang['c_section']}</td>
+	  <td width="20%" align="center">{$cp->lang['c_container']}</td>
+	</tr>
+
+	{$list}
+	<tr>
+	  <td class="secondrow" colspan="2" align="center">
+<btn>
+	  [save:container] [save_exit:container] 
+	  <input type="reset" value="{$cp->lang['reset']}" class="button" />
+</btn>
+	  </td>
+	</tr>
+</table>
+
+</form>
+
+<script type="text/javascript">
+    //<![CDATA[
+        add_dirty_flag('pform');
+        register_form_handler('savethis');
+        exiturl = 'admin.php?adm=container&typ=p';        
+    //]]>
+</script>
+
+EOF;
+}
+
+?>

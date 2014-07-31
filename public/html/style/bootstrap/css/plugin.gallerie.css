@@ -1,0 +1,94 @@
+/*
+	Gallerie
+*/
+
+#upload-container-gal {
+    overflow : hidden;
+    max-height : 156px;
+}
+#upload-container-gal .swfupload {
+    margin : 0;
+}
+#upload-container-gal .upload-panel {
+    padding : 10px;
+    margin : 4px;
+    font-size : 11px;
+    background : #e8f6fd url(../img/bg/bg-file-hover.png) repeat-x 0% bottom;
+    border : 1px solid #b6e6fb;
+    min-height : 40px;
+    overflow : hidden;
+    float : left;
+    width : 300px;
+}
+#upload-container-gal .upload-error {
+    background : #ffebeb!important;
+    border : 1px solid #b50000;
+    color : #b50000;
+}
+#upload-container-gal .upload-done {
+    background : #e8f6fd url(../img/bg/bg-file-selected.png) repeat-x 0% bottom!important;
+    border : 1px solid #b6e6fb;
+}
+#upload-container-gal .progress {
+    color : #999;
+    font-size : 90%;
+}
+#upload-container-gal .progress-uploading {
+    background : blue;
+    height : 9px;
+    width : 0;
+}
+
+.thumb_container {
+    padding : 0;
+    margin : 3px;
+    width : 120px;
+    float : left;
+    border : 1px solid #d1dceb;
+    margin-right : 5px;
+    margin-bottom : 5px;
+    padding : 3px;
+    display:inline-block;
+}
+div.thumb_container div.thumb_container_inner {
+    float : left;
+    height : 90px;
+    margin : 0;
+    border : 0;
+    display:inline-block;
+}
+.thumb_container_image {
+    float : left;
+    width : 120px;
+    height : 90px;
+    border : 0;
+    position : relative;
+    text-align : center;
+    display:inline-block;
+}
+.thumb_container_image img {
+    margin : 0 auto 0 0;
+}
+.thumb_container_option {
+    background-color : #fff;
+    border : 1px solid #d1dceb;
+    width : 120px;
+    height : 20px;
+    margin-top : 70px;
+    position : absolute;
+    float : left;
+    overflow : hidden;
+    display : none;
+    z-index : 2000;
+}
+.thumb_container_option a {
+    margin-bottom : 5px;
+    float : left;
+    width : 20px;
+    vertical-align : middle;
+}
+div.flash {
+    width : 375px;
+    margin : 10px 5px;
+    border-color : #d9e4ff;
+}

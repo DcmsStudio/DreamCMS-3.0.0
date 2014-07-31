@@ -1,0 +1,50 @@
+    <fieldset>
+        <legend>{trans("Margin Colour")}</legend>
+        # <input type="text" class="textbox" name="params[bgcolor]" id="bgcolor" value="{iif($values.bgcolor, $values.bgcolor, 'ff0000')}" readonly="readonly" style="width: 60px;" maxlength="6" />
+        <br/>
+        <label for="transparent"><input type="checkbox" class="checkbox" id="transparent" name="params[transparent]" value="1"{iif($values.transparent, ' checked="checked"', '')} /> {trans("Use transparent margin")}</label>
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Global Margin")}</legend>
+        <input type="text" class="textbox" name="params[global]" id="global" value="{iif($values.global, $values.global, '')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Top Margin")}</legend>
+        <input type="text" class="textbox" name="params[top]" id="top" value="{iif($values.top, $values.top, '')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Right Margin")}</legend>
+        <input type="text" class="textbox" name="params[right]" id="right" value="{iif($values.right, $values.right, '')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Bottom Margin")}</legend>
+        <input type="text" class="textbox" name="params[bottom]" id="bottom" value="{iif($values.bottom, $values.bottom, '')}" style="width: 100px;" />
+    </fieldset>
+
+    <fieldset>
+        <legend>{trans("Left Margin")}</legend>
+        <input type="text" class="textbox" name="params[left]" id="left" value="{iif($values.left, $values.left, '')}" style="width: 100px;" />
+    </fieldset>
+
+
+
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+    $('#bgcolor').ColorPicker({
+        livePreview: true,
+        color: '{iif($values.color, $values.color, "ff0000")}',
+        onChange: function(hsb, hex, rgb) {
+            $('#bgcolor').val(hex);
+        }
+    });
+
+</script>
+
+

@@ -1,0 +1,51 @@
+<fieldset>
+    <legend for="distance">{trans("Path to Overlay")}:</legend>
+    <div class="form-item-wrapper">
+        <input type="text" size="80" name="params[overlay]" id="overlay" value="{iif($values.overlay, $values.overlay, '')}" />
+        <br/><small>Base Path is Root. Eg: /srv/www/</small>
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>{trans("Overlay Alignment (Horizontal)")}:</legend>
+    <div class="form-item-wrapper checkbox-set">
+        <label for="align_left"><input type="radio" class="checkbox" name="params[align]" id="align_left" value="left" {iif(( $values.align=='left' || !$values.align), 'checked="checked"', '')} />{trans("Left")}</label>
+        <label for="align_center"><input type="radio" class="checkbox" name="params[align]" id="align_center" value="center" {iif($values.align=='center', 'checked="checked"', '')} />{trans("Center")}</label>
+        <label for="align_right"><input type="radio" class="checkbox" name="params[align]" id="align_right" value="right" {iif($values.align=='right', 'checked="checked"', '')} />{trans("Right")}</label>
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>{trans("Overlay Alignment (Vertical)")}:</legend>
+    
+    <div class="form-item-wrapper checkbox-set">
+        <label for="valign_top">
+        <input type="radio" class="checkbox" name="params[valign]" id="valign_top" value="top" {iif(($values.valign == 'top' || !$values.valign), 'checked="checked"', '')} />{trans("Top")}</label>
+        <label for="valign_middle"><input type="radio" class="checkbox" name="params[valign]" id="valign_middle" value="middle" {iif($values.valign == 'middle', 'checked="checked"', '')} />{trans("Middle")}</label>
+        <label for="valign_bottom"><input type="radio" class="checkbox" name="params[valign]" id="valign_bottom" value="bottom" {iif($values.valign == 'bottom', 'checked="checked"', '')} />{trans("Bottom")}</label>
+    </div>
+</fieldset>
+
+
+<fieldset>
+    <legend for="x">{trans("`x` Offset")}:</legend>
+    <div class="form-item-wrapper">
+        <input type="text" class="textbox" name="params[x]" id="x" value="{iif($values.x, $values.x, '0')}" style="width: 100px;" />
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend for="y">{trans("`y` Offset")}:</legend>
+    <div class="form-item-wrapper">
+        <input type="text" class="textbox" name="params[y]" id="y" value="{iif($values.y, $values.y, '0')}" style="width: 100px;" />
+    </div>
+</fieldset>
+
+
+
+
+<script type="text/javascript">
+
+    setStepDescription('{escape($description)}');
+
+</script>

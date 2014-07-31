@@ -1,0 +1,40 @@
+<cp:include template="generic/skin_header"/>
+            <!-- end header include -->
+
+            <div id="content">
+                <div class="container">
+                    <div id="breadcrumbs">                   
+                        <cp:if condition="$NAVIGATION">
+                            <a href="{cfg('portalurl')}/" class="first">{trans('Startseite')}</a> &gt; {$NAVIGATION}
+                        </cp:if>
+                        <cp:else>
+                            <span class="first">{trans('Startseite')}</span>
+                        </cp:else>   
+                    </div>
+
+
+                    <div class="clear">
+                        <!--  -->
+                    </div>
+
+                        <div class="error404">
+                                <div class="balloon-message">
+                                    hmmmm ...<br/>
+                                    Irgend etwas ist schief<br/>gelaufen. Versuch es nochmal<br/>
+                                    oder wende dich an den Admin der Seite!
+                                </div>
+                        </div>
+
+                    <div class="containerdiv error">
+                                <h1>HTTP 404</h1>
+                                {$message}
+                    </div>
+                    <div class="clear">
+                        <!--  -->
+                    </div>
+                </div>
+            </div>
+            
+<cp:include template="generic/skin_footer"/>
+
+

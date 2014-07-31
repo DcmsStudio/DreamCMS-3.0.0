@@ -1,0 +1,20 @@
+<?php
+
+function __database_query_done($sqldb=''){
+global $cp, $cfg, $fct, $cp, $cp;
+
+return <<<EOF
+<div class="description">
+	<div class="tip_icon"><img src="images/tip.gif" border="0" alt="Tip" hspace="4" vspace="4" /></div>
+    SQL-Abfrage(n) erfolgreich ausgeführt in Datenbank $sqldb.
+</div>
+
+<table cellpadding="4" cellspacing="1" width="99%" class="tblborder" align="center">
+    <tr class="tableheader">
+    	<td>Meldung</td>
+    </tr>
+</table>
+EOF;
+}
+
+?>

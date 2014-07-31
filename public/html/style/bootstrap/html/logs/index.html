@@ -1,0 +1,312 @@
+<cp:extends template="../main"/>
+
+<cp:block name="inline-css">
+    <link rel="stylesheet" type="text/css" href="html/style/default/css/grid.css"/>
+</cp:block>
+
+<cp:block name="toolbar">
+    <button type="button" class="action-button" id="delete-all"><img src="images/cross.png" width="16" height="16"
+                                                                     alt=""/> {trans('Logs Leeren')}
+    </button>
+</cp:block>
+
+<cp:block name="content">
+    <div id="log-grid">&nbsp;</div>
+
+    <script type="text/javascript" language="javascript">
+
+
+        if ( $( '#' + Win.windowID ).find( 'input[name="cols"]:checked' ).length === 0 ) {
+            $( '#' + Win.windowID ).find( 'input#col-3' ).attr( 'checked', true );
+        }
+
+        var winOpt = {
+            title: 'Erweiterte Log Infos...',
+            Resizable: true,
+            resizeable: true,
+            WindowToolbar: false,
+            WindowMaximize: true,
+            Minimize: false,
+            minWidth: 400,
+            minHeight: 180,
+            Height: 450,
+            Width: 600,
+            Controller: 'logs',
+            app: 'logs',
+            Action: 'index',
+            WindowID: 'logs-advanced-window',
+            enableContentScrollbar: true,
+            nopadding: false,
+            onAfterClose: function ( e, wm, callback )
+            {
+                if ( Tools.isFunction( callback ) ) {
+                    callback();
+                }
+            },
+            onResizeStart: function ( e, e2, wm, size )
+            {
+                $( wm.win ).addClass( 'popup-logs' );
+            },
+            onBeforeShow: function ( e, wm, callback )
+            {
+                wm.settings.enableContentScrollbar = true;
+                if ( Tools.isFunction( callback ) ) {
+                    callback();
+                    setTimeout( function () { $( wm.win ).addClass( 'popup-logs' ); }, 150 );
+                }
+            }
+        };
+
+        if ( typeof getAdvanced !== 'function' ) {
+            function getAdvanced( d, windowid )
+            {
+                winOpt.opener = windowid;
+
+                var genid = new Date().getTime();
+                winOpt.WindowID += '-' +genid;
+
+                var container = $( '<div class="advancedlog"/>' );
+                if ( d.allow_add_ip ) {
+                    container.append( '<button class="addbadip">{trans("Als Black-IP markieren")}</button>' );
+                }
+                container.append( '<div><span>Date</span>' + d.date + '</div>' );
+                container.append( '<div><span>IP</span>' + d.ip + ' (' + d.host + ')</div>' );
+                container.append( '<div><span>User Agent</span>' + d.browser + '</div>' );
+                container.append( '<div><span>Country</span>' + d.country + '</div>' );
+                container.append( '<div class="map" id="dcmsgmap-'+ genid +'"></div>' );
+
+
+                container.append( '<div><span>Message</span>' + d.message + '</div>' );
+                if ( d.data ) {
+                    if ( d.data.log ) {
+                        container.append( $( '<div></div>' ).append( '<span>Log</span>' + d.data.log ) );
+                    }
+
+                    if ( d.data.requestMethod ) {
+                        container.append( $( '<div></div>' ).append( '<span>Request Method</span>' + d.data.requestMethod ) );
+                    }
+                    if ( d.data.REQUEST_URI ) {
+                        container.append( $( '<div></div>' ).append( '<span>Request URI</span>' + d.data.REQUEST_URI ) );
+                    }
+                    if ( d.data.request ) {
+                        container.append( $( '<div></div>' ).append( '<span id="requestdata" class="link">Request Data</span><div style="display: none" id="toggle_requestdata">' + d.data.request +'</div>' ) );
+                    }
+                }
+
+                if (d.backtrace && d.backtrace.snipped ) {
+
+                    var t = d.backtrace;
+                    container.append('<div><span>Backtrace</span></div>');
+
+
+                    container.append('<div><span id="debugparams" class="link">Params</span></div>');
+                    if (t.args) {
+                        container.append('<div id="toggle_debugparams" style="display: none"><pre class="source"><code>' + t.args + '</code></pre></div>');
+                    }
+
+                    if (t.class || t.function || t.file || t.snipped) {
+                        container.append('<div id="debugcall" class="link"><span>Call</span></div>');
+
+
+                        var out = $('<div style="display: none" id="toggle_debugcall"/>');
+                        if (t.class) {
+                            out.append('<div><span>Class</span>' + t.class + '</div>');
+                        }
+                        if (t.function) {
+                            out.append('<div><span>Function</span>' + t.function + '</div>');
+                        }
+                        if (t.file) {
+                            out.append('<div><span>File</span>' + t.file + '</div>');
+                        }
+                        if (t.line) {
+                            out.append('<div><span>Line</span>' + t.line + '</div>');
+                        }
+                        if (t.snipped) {
+                            out.append('<div><span>Code</span><div>' + t.snipped + '</div></div>');
+                        }
+
+
+                        container.append(out);
+
+                    }
+                }
+                var container2 = $( '<div class="advancedlog"/>' ).append(container);
+
+
+
+                winOpt.onAfterOpen = function(popup) {
+
+
+                    popup.find('#requestdata,#debugparams,#debugcall').click(function(e){
+
+                        e.preventDefault();
+
+                        var id = $(this).attr('id');
+                        var el = $('#toggle_' + id, popup);
+                        if (!el.is(':visible')) {
+                            el.show();
+                        }
+                        else {
+                            el.hide();
+                        }
+                        Tools.scrollBar(popup.find( '.advancedlog' ));
+
+                    });
+
+
+                    popup.find('button.addbadip' ).click(function(){
+                        $.post('admin.php', {
+                            adm: 'badips',
+                            action: 'add',
+                            send: true,
+                            ip: d.ip
+                        }, function(data) {
+                            if (Tools.responseIsOk(data)) {
+                                Notifier.info(data.msg);
+                            }
+                            else {
+                                if (data.msg) {
+                                    Notifier.error(data.msg);
+                                }
+                                else {
+                                    Notifier.error( '{trans("IP konnte nicht zur Blcklist hinzugefügt werden!")}');
+                                }
+                            }
+                        });
+                    });
+
+                    if ( typeof d.lat != 'undefined' && typeof d.lon != 'undefined' ) {
+                        $('#dcmsgmap-'+ genid, popup).show();
+
+                        var ipnote = '<div id="content" style="width: 200px;overflow:hidden"><div id="siteNotice"></div>'
+                                + '<h1 id="firstHeading" class="firstHeading" style="margin-bottom: 10px">Herkunft Infos</h1>'
+                                + '<div id="bodyContent" style="width: 200px;overflow:hidden"><p>IP: ' + d.ip + '<br/>Host: ' + d.host + '<br/>Land: ' + d.country + '</p></div>'
+                                + '</div>';
+
+                        initMap({
+                         //   mapType: 'TERRAIN',
+                            mapElement: '#dcmsgmap-'+ genid,
+                            lat: d.lat,
+                            lon: d.lon,
+                            useMarker: true,
+                            infoWindow: ipnote,
+                            markerTitle: 'IP'
+                        });
+
+                    }
+                    else {
+                        $('#dcmsgmap-'+ genid, popup).hide();
+                    }
+
+                    Tools.scrollBar(popup.find( '.advancedlog' ));
+                }
+
+
+                Tools.createPopup( container2.html(), winOpt );
+            }
+
+            function registerToggleLog()
+            {
+                $( '#log-grid' ).find( '.log' ).hide().each( function ()
+                {
+                    var self = this;
+                    $( this ).prev().attr( {title: 'Toggle Details'} ).css( 'cursor', 'pointer' ).click( function (e)
+                    {
+                        e.preventDefault();
+                        $( self ).toggle( 'fast', function ()
+                        {
+
+                            if ( $( '#' + Win.windowID ).data( 'windowGrid' ) ) {
+                                var gr = $( '#' + Win.windowID ).data( 'windowGrid');
+                                gr.disableDataScrollbar();
+                                gr.enableDataScrollbar( false, $( this ).parents( 'tr:first' ) );
+                            }
+
+                        } );
+
+                        return false;
+                    } );
+                } );
+            }
+
+
+            function logsGridOnAfterLoad() {
+                $( '#log-grid' ).find( '.log .advanced-infos' ).each( function ()
+                {
+                    $( this ).unbind().click( function ( e )
+                    {
+                        e.preventDefault();
+                        winOpt.WindowID = HashGen.md5( $( this ).attr( 'href' ) );
+                        $.get( $( this ).attr( 'href' ), function ( data )
+                        {
+                            if ( Tools.responseIsOk( data ) ) {
+                                getAdvanced( data, Win.windowID );
+                            }
+                            else {
+                                jAlert( data.msg, cmslang.error );
+                            }
+                        }, 'json' );
+
+                        return false;
+                    } )
+                } );
+
+
+                $( '#log-grid' ).find( '.log' ).hide().each( function ()
+                {
+                    var self = this;
+                    $( this ).prev().attr( {title: 'Toggle Details'} ).css( 'cursor', 'pointer' ).unbind().click( function (e)
+                    {
+                        e.preventDefault();
+                        $( self ).toggle( 'fast', function ()
+                        {
+
+                            if ( $( '#' + Win.windowID ).data( 'windowGrid' ) ) {
+
+                                var gr = $( '#' + Win.windowID ).data( 'windowGrid');
+                                gr.disableDataScrollbar();
+                                gr.enableDataScrollbar( false, $( this ).parents( 'tr:first' ) );
+                            }
+                        } );
+                        return false;
+                    } );
+                } );
+            }
+        }
+
+        Application.Grid( 'log-grid', {$gridJson});
+
+
+        $( '#delete-all' ).unbind().click( function (e)
+        {
+            e.preventDefault();
+
+            jConfirm( cmslang.confirm_removecomplete_logs, cmslang.alert, function ( e )
+            {
+                if ( e ) {
+
+                    $.get( 'admin.php?adm=logs&action=delete&all=1', function ( data )
+                    {
+                        if ( Tools.responseIsOk( data ) ) {
+
+                            Notifier.display( 'info', data.msg )
+
+                            if ( $( '#' + Win.windowID ).data( 'windowGrid' ) ) {
+                                var gr = $( '#' + Win.windowID ).data( 'windowGrid');
+                                gr.page = 1;
+                                gr.refresh();
+                            }
+
+                        }
+                        else {
+                            jAlert( data.msg, cmslang.error );
+                        }
+                    }, 'json' );
+                }
+            } );
+            return false;
+        } );
+
+
+    </script>
+</cp:block>

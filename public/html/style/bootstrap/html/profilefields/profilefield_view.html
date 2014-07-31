@@ -1,0 +1,153 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+	[save:admForm] 
+	<button onclick="document.location.href = 'admin.php?adm=forms&action=fields&formid=0';" class="action-button"/><img src="images/buttons/list.png" width="16" height="16" alt="" border="0"/> Profilfelder Verwalten</button>
+</cp:block>
+
+<cp:block name="content">
+
+<div style="display:inline-block;width:100%;">
+    
+    <form action="admin.php" metod="post" id="admForm">  
+        <input type="hidden" name="adm" value="profilefield"/>  
+        <input type="hidden" name="action" value="edit"/>
+        <input type="hidden" name="send" value="send"/>
+        
+        <div class="box fl" style="width:30%;margin-right:10px;">
+            <h2>bisherige Felder</h2>
+            <div class="box-inner">
+                <ul class="ui-sortable" id="assigned-fields">
+                    <cp:loop name="assigned" key="r">
+                        <li id="field-{$r.field_id}">
+                            <div style="display:inline-block;width:100%;">	
+							
+                                <div style="display:inline-block;float:right;">
+                                    <label for="f-{$r.field_id}"><input id="f-{$r.field_id}"{iif($r.required, ' checked="checked"', '')} type="checkbox" name="require[{$r.field_id}]" value="1" /> Erforderlich</label>
+                                </div>
+								
+								<strong>{iif($r.options.grouplabel != "", $r.options.grouplabel, $r.options.label)}</strong><br/>
+								<small>(Name: {$r.name}, Type: {$r.type})</small>
+
+                            </div>
+                            <br/><small>{$r.description}</small>
+                        </li>
+                    </cp:loop>
+                </ul>
+            </div>
+        </div>
+        
+
+    </form>
+    
+    
+    <div class="box fl" style="width:30%;">
+        <h2>Verfügbare Felder</h2>
+        <div class="box-inner">
+            <ul class="ui-sortable" id="available-fields">
+                <cp:loop name="available" key="r">
+                    <li id="field-{$r.field_id}">
+                        <div style="display:inline-block;width:100%">
+
+                            <div style="float:right;display:none">
+                                <label for="f-{$r.field_id}"><input id="f-{$r.field_id}" type="checkbox" name="require[{$r.field_id}]" value="1" /> Erforderlich</label>
+                            </div>
+							<strong>{iif($r.options.grouplabel != "", $r.options.grouplabel, $r.options.label)}</strong><br/>
+							<small>(Name: {$r.name}, Type: {$r.type})</small>
+							
+                        </div>
+                        <br/><small>{$r.description}</small>
+                    </li>
+                </cp:loop>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+        var sortString = '';
+        $(document).ready(function() {
+
+            $('#admForm').registerForm({
+                contentIdentifierID: 'fieldid',
+                exiturl: 'admin.php?adm=profilefield',
+                savehandler: function(exit)
+                {
+
+                    var post = $('#admForm').serialize()+'&' + sortString ;
+                    $('#maincontent').mask('speichern...');
+
+
+                    $.post('admin.php', post , function(data) {
+                        if(responseIsOk(data)) {
+                            set_not_dirty();
+                            $('#maincontent').unmask();
+                            notify(data.msg, true);
+                            setTimeout(function(){ unnotify(); set_footerbg(false);  $('#form-status').show(); }, 5000);
+                        } else {
+                            set_dirty();
+                            $('#maincontent').unmask();
+                            notify(data.msg, true);
+                            setTimeout("unnotify()", 5000);
+
+                        }
+                        
+                    }, 'json');
+                }
+            });
+
+            $('#assigned-fields').sortable({
+                containment: '#maincontent',
+                connectWith: ["#available-fields"],
+                forceHelperSize: true,
+                forcePlaceholderSize: true,
+                placeholder: 'ui-sortable-placeholder',
+                distance: 10,
+                revert: true,
+                tolerance: 'pointer',
+                update: updateFieldAssignment
+            });
+
+            $('#assigned-fields').css({minHeight: '250px'});
+
+            $('#available-fields').sortable({
+                containment: '#maincontent',
+                connectWith: ["#assigned-fields"],
+                forceHelperSize: true,
+                forcePlaceholderSize: true,
+                placeholder: 'ui-sortable-placeholder',
+                distance: 10,
+                revert: true,
+                tolerance: 'pointer'
+            });
+
+            $('#available-fields').css({minHeight: '250px'});
+
+            $('#toolbarfixed button.save').disableButton();
+
+            $('#assigned-fields').find('input[type="checkbox"]').change(function() { $('#toolbarfixed button.save').enableButton(); });
+
+            sortString = $('#assigned-fields').sortable("serialize");
+        });
+
+        function updateFieldAssignment(event, ui) {
+            if(sortString != $('#assigned-fields').sortable("serialize")) {
+                sortString = $('#assigned-fields').sortable("serialize");
+
+                //$('#fields').val(sortString );
+
+                set_dirty();
+                $('#toolbarfixed button.save').enableButton();
+                $('#assigned-fields li div div').fadeIn(300, function() { $(this).css({display: 'inline-block'}) } );
+                $('#available-fields li div div').fadeOut(300);
+            }
+        }
+
+</script>
+
+</cp:block>

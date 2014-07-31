@@ -1,0 +1,81 @@
+<cp:extends template="../main"/>
+
+
+<cp:block name="toolbar">
+    
+    [reset:admCats] [cancel:admCats]
+</cp:block>
+
+<cp:block name="content">
+    
+    <form action="admin.php" name="admCats" id="admCats" method="post">
+        <input type="hidden" name="adm" value="applicationcats"/>
+        <input type="hidden" name="action" value="export"/>
+        <input type="hidden" name="appid" value="{$app.appid}"/>
+        <input type="hidden" name="send" value="send"/>
+        
+        <div class="box description">
+            <div class="box-inner">
+                
+                <fieldset>
+                    <legend>{trans('Export Optionen')}</legend>
+                    
+                    <label for="export-app"><input type="checbox" name="export-app" id="export-app" value="1" /> Die gesamte Anwendung exportieren</label><br/>
+                    <label for="export-items"><input type="checbox" name="export-items" id="export-items" value="1" /> nur Inhalte exportieren (es werden zusätzlich Kategorien/Rechte/Kommentare sowie die Felder exportiert)</label><br/>
+                    <label for="export-cats"><input type="checbox" name="export-cats" id="export-cats" value="1" /> nur Kategorien exportieren</label><br/>                    
+                    <label for="export-fields"><input type="checbox" name="export-fields" id="export-fields" value="1" /> nur Anwendungs Felder exportieren</label><br/>
+                    
+                </fieldset>
+                
+            </div>
+        </div>            
+        
+        
+    </form>
+    
+    
+    <script type="text/javascript">
+        //<![CDATA[
+
+    $(document).ready(function()  {
+
+
+        $('#admCats').registerForm({
+            contentIdentifierID: 'cat-id',
+            exiturl: 'admin.php?adm=applicationcats&appid={$app.appid}',
+            savehandler: savethis,
+            identifierType: '{$app.apptype}-{$app.appid}-category',
+            baseField: 'title'
+            // runAfterSubmit: function() { menuObj.getMenu(); }
+        });
+
+        $('#export-app').change(function() {
+            if ($(this).is(':checked') )
+            {
+                $('#export-items,#export-cats,#export-fields').disable();
+            }
+            else {
+                $('#export-items,#export-cats,#export-fields').enable();
+            }
+        });
+
+        $('#export-items').change(function() {
+            if ($(this).is(':checked') )
+            {
+                $('#export-cats,#export-fields').disable();
+            }
+            else {
+                $('#export-cats,#export-fields').enable();
+            }
+        });
+
+    });
+
+
+
+//]]>
+    </script>
+    
+</cp:block>
+
+

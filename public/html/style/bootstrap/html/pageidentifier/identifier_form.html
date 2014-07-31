@@ -1,0 +1,26 @@
+
+    <!-- 
+    <fieldset>
+        <legend>{trans('Page Identifier')}</legend>
+        <input name="identifier" value="{$page_identifier}" type="text" size="50" class="input pageident" />
+    </fieldset>                               
+    -->
+    <fieldset>
+        <legend>{trans('Alias')}</legend>
+        <input name="identifier" value="{$page_identifier}" type="hidden" />
+        <input name="oldalias" value="{$page_alias}" type="hidden" />
+		<input name="oldsuffix" value="{$page_suffix}" type="hidden" />
+        <input name="alias" value="{$page_alias}" type="text" size="70" class="input pageident" /> .
+        <select name="suffix">
+            <option value=""{iif('empty( $page_suffix )', ' selected="selected"', '')}>-</option>
+            <option value="dcms"{iif($page_suffix=="dcms", ' selected="selected"', '')}>dcms</option>
+            <option value="html"{iif($page_suffix=="html", ' selected="selected"', '')}>html</option>
+            <option value="xhtml"{iif($page_suffix=="xhtml", ' selected="selected"', '')}>xhtml</option>
+            <option value="phtml"{iif($page_suffix=="phtml", ' selected="selected"', '')}>phtml</option>
+            <option value="php"{iif($page_suffix=="php", ' selected="selected"', '')}>php</option>
+            <option value="txt"{iif($page_suffix=="txt", ' selected="selected"', '')}>txt</option>
+            
+        </select>
+    </fieldset>
+    
+

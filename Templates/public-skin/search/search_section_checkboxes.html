@@ -1,0 +1,21 @@
+<block="checkbox">
+<loop="section_cols">
+   <td width="{section_cols.width}%">
+<label for="chk{section_cols.id}">
+<if var="section_cols.checked" op="==" val="1">
+     <input id="chk{section_cols.id}" type="checkbox" class="checkbox" name="si[]" value="{section_cols.id}" checked="checked"/> 
+</if>
+<else>
+     <input id="chk{section_cols.id}" type="checkbox" class="checkbox" name="si[]" value="{section_cols.id}"/> 
+</else> {section_cols.langvar}</label>
+   </td>
+</loop="section_cols">
+</block="checkbox">
+
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<loop="section_rows">
+ <tr>
+{section_rows.table_row}
+ </tr>
+</loop="section_rows">
+</table>

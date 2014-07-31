@@ -1,0 +1,215 @@
+
+	.tabHeader {
+		position:relative;
+		padding: 0px;
+		height:25px;
+		
+	}
+	.tabs_bg {
+		position:relative;
+		overflow:hidden;
+		height:25px;
+		display:inline-block;
+	}
+	/*Sub Nav Tabs*/
+	.tabbedMenuWrap {
+		position:relative;
+	}	
+		
+	.tabbedScrollWrap {
+		position:relative;
+		top:1px;
+		display:block;
+		overflow:hidden; 
+		height:25px;
+	}
+	
+	.scrollArrows{
+		position:absolute;
+		bottom:-1px;
+		z-index:10;
+		background:url(images/tabOverflowArrows.gif) repeat-x -15px 0px ;
+		color:#FFFFFF;
+		text-align:center;
+		display:block;
+		width:15px;
+		height:25px;
+		text-decoration:none;
+	}
+	
+	.scrollArrows:hover{
+		background-position:-15px -25px;
+	}
+	
+	.menuScrollLeft{
+		left:0px;
+		border-left:none;
+		background-position:0px 0;
+	}
+	.menuScrollLeft:hover{
+		background-position:0px -25px;
+		}
+	
+	.menuScrollRight{
+		right:0px;
+		border-right:none;
+	}
+	
+	.tabbedMenu {
+		margin: 0;
+		height:25px;
+		border-left: 0px solid #cecece;
+		position: relative;
+		top: 1px;
+
+	}
+	
+	.tabbedMenu li {
+		list-style-type: none;
+		float: left!important;
+		border: 1px solid #c0c0c0;
+		position: relative!important;
+		top: 2px!important;
+		height:25px!important;
+		font-weight: normal;
+		white-space: nowrap;
+		clear:right;
+	}
+	.tabbedMenu li:first-child {
+		border-left:1px solid #CECECE;
+	}
+	
+	.tabbedMenu li.selected {
+		border-color: #999;
+		border-left: 1px solid #999;
+		border-right: 1px solid #999;
+		top: 1px;
+	}
+	
+	.tabbedMenu li a {
+		display:block;
+		float:left;
+		padding: 4px 15px;
+		color: #999;
+		background:url(images/navItemBg.gif) repeat-x  left 0px #FFFFFF;	
+		text-decoration: none;
+		text-shadow:0px 1px 0px  #fff;
+	}
+	.tabbedMenu li a:hover {
+		background-position:left 20px;
+		color: #666;
+		}
+	
+	.tabbedMenu li.selected a {
+		padding: 5px 15px;
+		color: #666;
+		font-weight:bold;
+		background: #fff;	
+	}
+	
+	.tabList{
+		position:absolute!important;
+		top:-3px!important;
+		right:-10px!important;
+		z-index:30!important;
+	
+	}
+	
+	.tabListLink{
+		position:absolute;
+		top:0;
+		right:0px;
+		width:15px;
+		height:10px;
+		background: url(images/tabListArrow.gif) no-repeat 0 0;
+		display:block;
+		text-decoration:none;
+	}
+	.tabListLink:hover{
+		background-color:#EAF0F6;
+	}
+	.tabListLink:focus{
+		background-position: -15px -10px;
+		background-color:#799FC5;
+	}
+	
+	.tabList ul {
+		display:none;
+		margin: 0!important;
+		height:auto!important;
+		width:200px!important;
+		position: relative!important;
+		top:10px!important;
+		border: 1px solid #799FC5;	
+		background:#EAF0F6;
+	}
+	
+	.tabList ul li {
+		position:static!important;
+		list-style-type: none!important;
+		float: none!important;
+		border: 0px solid #cecece;	
+		border-bottom: 1px dotted #FFF;
+		top:0!important;
+		height:25px!important;
+	}
+	
+	.tabList ul li a {
+		display:block;
+		float:none;
+		padding: 4px 15px;
+		color: #999;
+		text-decoration: none;
+	}
+	
+	.tabList li.selected a {
+		background:#FFFFFF url(images/navItemBg.gif) repeat-x  left 0px ;	
+	}
+	
+	.tabList li a:hover {
+		background:#FFFFFF url(images/navItemBg.gif) repeat-x left 10px;
+		color: #666;
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+.tabbedMenu li span{
+    padding:5px;
+    line-height:24px;
+    -moz-user-select:none;
+}
+li.actTab {
+    border-bottom: 1px solid #BDBDBD;
+	background: #E6E9F4 url(../img/bg/tab-activ.png) left bottom repeat-x;
+    overflow: hidden;
+    -moz-user-select:none;
+    -moz-box-shadow:  0 0 3px #ccc;
+    -webkit-box-shadow:  0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+}
+li.defTab {
+	
+	background: #BDBDBD url(../img/bg/tab.png) 0% 80% repeat-x;
+    color:#aaa;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #c0c0c0;
+    -moz-user-select:none;
+    -moz-box-shadow:  0 0 3px #ccc;
+    -webkit-box-shadow:  0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+}
+		
+		
+		
+		
+		
+		

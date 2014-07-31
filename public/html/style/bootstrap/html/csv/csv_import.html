@@ -1,0 +1,42 @@
+<?php
+
+function __csv_import($selects){
+global $cp, $fct, $adm_skin, $cfg;
+
+	return <<<EOF
+<form  action="admin.php"  method="post" name="admform" enctype="multipart/form-data"><input type="hidden" name="adm" value="csv_import" />
+	<input type="hidden" name="sid" value="{$cp->session_id}" />
+	<input type="hidden" name="action" value="import" />
+	<input type="hidden" name="table" value="HTTP::input('table')" />
+
+
+<table width="99%" border="0" cellpadding="3" cellspacing="1" class="tblborder">
+    <tr class="tableheader">
+        <td colspan="2">CSV Import: Step 1</td>
+    </tr>
+    <tr class="tableheader">
+        <td colspan="2">CSV Datei auswählen</td>
+    </tr>
+    <tr class="firstrow">
+        <td width="30%"><b>Date:</b></td>
+        <td width="70%">
+        <input type="file" name="csvfile" class="input" />
+        </td>
+    </tr>
+    <tr class="secondrow">
+        <td colspan="2" align="center">
+            <input type="submit" value="Importieren" class="button" /> <input type="reset" value="Zurücksetzen" class="button" />
+        </td>
+    </tr>
+</table>
+</form>
+EOF;;;}
+
+
+
+
+
+?>
+}
+
+?>

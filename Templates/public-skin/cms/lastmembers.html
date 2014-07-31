@@ -1,0 +1,10 @@
+<cp:if condition="count($lastmembers)">
+<ul>
+<cp:loop name="lastmembers" key="r">
+	<li>
+	<a href="profile/{$r.userid}/{suggest($r.username, true)}">{truncate($r.username, 50)}</a>
+	</li>
+</cp:loop>
+</ul>
+
+</cp:if>

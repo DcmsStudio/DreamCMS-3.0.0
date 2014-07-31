@@ -1,0 +1,145 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    [save:assetForm{$asset.id}] [save_exit:assetForm{$asset.id}]
+    [reset:assetForm{$asset.id}] [cancel:assetForm{$asset.id}]
+</cp:block>
+
+<cp:block name="content">
+    <form action="admin.php" id="assetForm{$asset.id}" name="assetForm{$asset.id}">
+        <input type="hidden" name="adm" value="asset"/>
+        <input type="hidden" name="id" id="asset-id{$asset.id}" value="{$asset.id}"/>
+        <input type="hidden" name="action" value="edit"/>
+        <input type="hidden" name="send" value="send"/>
+
+        <div>
+            <cp:jstabs tabs="trans('Allgemein'),trans('Code')" usetrans="true" default="Allgemein"/>
+        </div>
+
+
+        <div id="tc0">
+
+            <div class="m10">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>{trans('Name')}</label>
+                        <input class="form-control" type="text" name="name" size="50" maxLength="250" value="{escape($asset.name, 'quotes')}"/>
+                        <span class="note">{trans('Bezeichnung des Asset')}</span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>{trans('Url')}</label>
+                        <input class="form-control" type="text" name="url" size="50" maxLength="250" value="{escape($asset.url, 'quotes')}"/>
+                        <span class="note">{trans('Url oder Dateiname des Asset')}</span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>{trans('Typ')}</label>
+                        <select class="form-control select" id="editor-mode" name="type">
+                            <option value="stylesheet" cp:on="selected:$asset.type == 'stylesheet' || $asset.type == null" parse:selected="selected">{trans('Stylesheet')}</option>
+                            <option value="javascript" cp:on="selected:$asset.type == 'javascript'" parse:selected="selected">{trans('Javascript')}</option>
+                            <option value="text" cp:on="selected:$asset.type == 'text'" parse:selected="selected">{trans('Text')}</option>
+                        </select>
+                        <span class="note">{trans('Um was für einen Typ handelt es sich bei diesem Asset')}</span>
+
+                    </div>
+                    <div class="col-md-3">
+                        <label>{trans('Asset Aktiv?')}</label>
+
+                        <label for="published1"><input class="form-control radio" type="radio" name="published" value="1" id="published1" cp:on="checked:$asset.published || !$asset.id" parse:checked="checked"/> {trans('Aktiv')}</label>
+                        <label for="published0"><input class="form-control radio" type="radio" name="published" value="0" id="published0" cp:on="checked:!$asset.published && $asset.id > 0" parse:checked="checked"/> {trans('Deaktiviert')}</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{trans('Beschreibung')}</label>
+                        <input class="form-control" type="text" name="description" size="50" maxLength="250" value="{escape($asset.description, 'quotes')}"/>
+                        <span class="note">{trans('Zur besseren Übersicht können Sie hier eine kurze Beschreibung eintragen')}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="tc1" class="use-nopadding" style="display: none">
+            <textarea name="content" id="asset-content-{$asset.id}" style="width:99%" rows="10" cols="50" class="sourceEdit {iif($asset.type == 'javascript', ' mode-js', iif($asset.type == 'stylesheet', ' mode-css', ''))}">{$asset.content}</textarea>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+
+        setTimeout(function () {
+            var v = $('#editor-mode option:selected').val();
+            if ($('#asset-content-{$asset.id}').data('ace'))
+            {
+                $('#asset-content-{$asset.id}').data('ace').setEditorMode(v.toLowerCase());
+            }
+        }, 500);
+
+        $('#' + Win.windowID).find('#editor-mode').on('change', function () {
+            var value = $(this).val();
+
+            if ($('#asset-content-{$asset.id}').data('ace'))
+            {
+                $('#asset-content-{$asset.id}').data('ace').setEditorMode(value.toLowerCase());
+            }
+        });
+
+
+        Form.registerForm('assetForm{$asset.id}', {
+            contentIdentifierID: 'asset-id{$asset.id}',
+            exiturl: 'admin.php?adm=asset',
+            identifierType: '',
+            onBeforeSerialize: function (formObj, formCfg, winObj) {
+                /*
+                 if (winObj.data('templateEditor'))
+                 {
+                 winObj.data('templateEditor').focus();
+                 // winObj.find('textarea[name="content"]').val(winObj.data('templateEditor').getValue());
+                 } */
+            }
+        });
+
+
+
+
+
+        /*
+         var uploadBtn = new UploadControl({
+         control: 'upload-contain',
+         
+         field_name: 'content_upload',
+         value: 'Load file...',
+         delete_button: false,
+         adm: "fileupload",
+         action: "index",
+         url: "admin.php",
+         max_file_size: "1 MB",
+         file_type_mask: '*.txt;*.js;*.css',
+         file_type_text: '{trans('Asset Dateien')}',
+         customSettings: {
+         startUpload: prepareContent,
+         postTo: setContent
+         }
+         });
+         
+         });
+         
+         */
+        if (typeof prepareContent == 'undefined')
+        {
+            function prepareContent () {
+                $.pagemask.show(cmslang.loading);
+            }
+
+            function setContent (data) {
+                $('#asset-content').val(data.content);
+                $.pagemask.hide();
+            }
+        }
+
+    </script>
+
+</cp:block>

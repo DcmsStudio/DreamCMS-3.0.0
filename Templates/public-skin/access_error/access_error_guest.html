@@ -1,0 +1,35 @@
+<form action="{$cfg['portalurl']}/index.php" method="post">
+<input type="hidden" name="cp" value="login"/>
+<input type="hidden" name="url" value="{SERVER|request}"/>
+<input type="hidden" name="send" value="send"/>
+<input type="hidden" name="sid" value="{$cp->session_id}"/>
+
+    <table border="0" class="tc" cellpadding="4" cellspacing="1" width="80%">
+      <tr class="tablea tl">
+        <td class="b" width="20%">{trans('Benutzername')}</td>
+        <td><input type="text" class="input" name="logusername" size="20" maxlength="50" tabindex="1" style="width:250px"/> <a href="index.php?cp=register&amp;sid={$cp->session_id}">{trans('Registrieren')}</a></td>
+      </tr>
+      <tr class="tableb tl">
+        <td class="b">{trans('Kennwort')}</td>
+        <td><input type="password" class="input" name="logpassword" size="20" maxlength="30" tabindex="2" style="width:250px"/> <a href="index.php?cp=lostpw&amp;sid={$cp->session_id}">{trans('Paßwort vergessen')}</a></td>
+      </tr>
+      <tr class="tablea tl">
+        <td colspan="2" class="tc">
+
+<input type="submit" name="submit" value=" {trans('Login')}" class="button"/> 
+<input type="reset" value="{trans('Zurücksetzen')}" class="button"/>
+
+<!-- 
+
+<button type="submit" name="submit" title="{trans('Login')}" class="imgbutton">
+<img title="{trans('Login')}" src="<#IMG_DIR#>/button/login.png" alt="{trans('Login')}"/>
+</button>
+<button type="reset" title="{trans('Zurücksetzen')}" class="imgbutton">
+<img title="{trans('Zurücksetzen')}" src="<#IMG_DIR#>/button/reset.png" alt="{trans('Zurücksetzen')}"/>
+</button> -->
+
+        </td>
+      </tr>
+    </table>
+
+</form>

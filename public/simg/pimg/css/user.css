@@ -1,0 +1,303 @@
+/**
+ *	User Controllpanel & Profile Page
+ */
+
+header .user-bar {
+    text-align: right;
+    line-height: 26px;
+    height: 26px;
+}
+
+
+header .user-bar > div {
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #808080;
+    font-size: 13px;
+    height: 26px;
+
+}
+header .user-bar > div > ul > li > a {
+    color: #808080;
+}
+header .user-bar > div > ul > li:hover,
+header .user-bar > div > ul > li > a:hover {
+    color: #68A4C4;
+}
+
+
+
+header .user-bar > div > ul {
+    display: inline-block;
+    line-height: 25px;
+    height: 25px;
+    text-align: left;
+}
+
+header .user-bar > div > ul > li {
+    float: left;
+    display: inline-block;
+    margin-left: 20px;
+    line-height: 25px;
+    height: 25px;
+}
+
+
+
+header .user-bar .username:after {
+    content: '\25BE' !important;
+}
+
+
+#user-menu-container {
+    background: rgba(255, 255, 255, 0.9);
+    display: none;
+    position: absolute;
+    z-index: 2000;
+    min-height: 60px;
+    min-width: 300px;
+    max-width: 350px;
+    -webkit-box-shadow: 0px 3px 10px rgba(194, 194, 194, 0.6)!important;
+    -moz-box-shadow: 0px 3px 10px rgba(194, 194, 194, 0.6)!important;
+    box-shadow: 0px 3px 10px rgba(194, 194, 194, 0.6)!important;
+
+    -moz-border-radius: 0 0 6px 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    border-radius: 0 0 6px 6px;
+    padding: 10px;
+}
+
+
+
+#user-menu-container .left-side {
+    float: left;
+}
+#user-menu-container .left-side:hover {
+}
+
+#user-menu-container .left-side img {
+    border: 1px solid transparent;
+}
+
+#user-menu-container .left-side:hover img {
+    border: 1px solid #333;
+}
+
+#user-menu-container .right-side {
+    margin-left: 75px;
+    line-height: normal;
+    min-height: 15px;
+}
+
+#user-menu-container .right-side ul, #user-menu-container .right-side li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#user-menu-container .right-side a {
+    color: #333;
+}
+#user-menu-container .right-side li {
+    width: 50%;
+    float: left;
+    margin: 3px 0;
+    text-shadow: 0px 1px 0 #FFF;
+    white-space: nowrap;
+}
+
+#user-menu-container li {
+    line-height: 20px!important;
+    height: 20px!important;
+}
+
+
+
+.containerdiv.control-panel {
+    font-size: 10px;
+    display: table;
+    clear:both;
+    width: 100%;
+}
+
+.controlpanel-tabs {
+    display: inline-block;
+    height: 20px;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    border-bottom: 1px solid #ECECEC;
+}
+.controlpanel-tabs ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+    display:block!important;
+    height: 21px;
+    margin-left: 10px!important;
+}
+.controlpanel-tabs li {
+    background: #eee!important;
+    padding:0!important;
+    margin: 0!important;
+    margin-right: 10px!important;
+    line-height: 20px!important;
+    padding-right: 5px!important;
+    padding-left: 5px!important;
+    float: left!important;
+}
+.controlpanel-tabs li a {
+    color: #333!important;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.controlpanel-tabs li div {
+    margin:0;
+    padding:0;
+    cursor:pointer;
+    text-transform: uppercase;
+}
+
+.controlpanel-tabs li a #db-counter {
+    font-size: 10px!important;
+}
+
+
+
+.controlpanel-tabs li.tab_active {
+    border: 1px solid #EEE;
+    border-bottom: 1px solid #FFF;
+    background: #FFF!important;
+}
+
+.controlpanel-tabs li.tab_active,
+.controlpanel-tabs li.tab {
+
+}
+.controlpanel-tabs li.tab_active:first-child,
+.controlpanel-tabs li.tab:first-child {
+}
+.controlpanel-tabs li.tab:hover,
+.controlpanel-tabs li.tab_active {
+
+}
+.controlpanel-tabs li.tab div {
+
+}
+.controlpanel-tabs li.tab:hover div,
+.controlpanel-tabs li.tab_active div {
+
+}
+
+
+.controlpanel-tabs li.tab:hover a {
+    color: silver!important;
+}
+.controlpanel-tabs li.tab_active.pmtab,
+.controlpanel-tabs li.tab.pmtab {
+    float:right!important;
+    margin-right:10px!important;
+}
+
+
+.control-panel ul, 
+.control-panel li { 
+    list-style: none!important; 
+    margin:0;
+    padding:0!important; 
+    text-transform: uppercase;
+    font-size: 10px;
+    line-height:16px;
+    vertical-align:top;
+    background: none;
+
+}
+.control-panel h4.decorator, 
+.bio h4.decorator {
+    text-transform: uppercase;
+    padding-bottom:3px;
+    margin-top:3px;
+    margin-bottom:5px;
+    border-bottom: 1px dotted #999!important;
+    font-size:14px;
+    color:#222;
+}
+
+
+.control-panel li { padding: 0; margin: 0; margin-left:10px;clear:both; }
+.control-panel li span { 
+    font-size: 10px!important; vertical-align:middle; float:right; min-width: 240px; max-width: 240px;width: 240px;
+    margin-right:10px;
+
+}
+.control-panel li span img { vertical-align:middle; width: 16px; height: 16px; margin-right:3px; clear:right; }
+.control-panel div.fr li span { float:right; min-width:290px; max-width: 290px;width: 290px;}
+.control-panel div.fr ul { float:left; display:block!important; width:70%; }
+.control-panel div.user-photo { float:right;  display:inline-block!important; margin-right: 10px; }
+.bio .user-photo { float:right; display:block!important; margin-right: 10px; }
+
+.profile-blocked {
+    background: url(../common/backgrounds/blocked-user.png) -20px -0px;
+}
+
+.bio .inner-boundary .inner-border { display:block!important; }
+.bio p {
+    margin:0;
+    display:inline-block!important;
+    width:100%;
+}
+
+.bio .user-photo {
+    margin-left: 10px;
+    padding:3px;
+    float:right;
+    display:inline-block!important;
+}
+
+
+
+#avatar-container {
+    display: inline-block;
+    width: 100%;
+}
+
+.img-container {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+    border: 2px solid transparent;
+    padding: 3px;
+    border-radius: 4px;
+}
+.img-container.current {
+    border: 2px solid #999;
+    background: #EEE;
+    
+}
+.img-container label {
+    display: inline-block;
+    width: 100%;
+}
+
+.img-container img {
+    margin: 0 auto;
+    display: block;
+    max-width: 80px;
+    max-height: 80px;
+}
+
+
+
+
+/**
+    Userblog
+*/
+.list-items.userblog article.list-item.no-image .listview-image {
+    background-size: 920px 300px!important;
+}

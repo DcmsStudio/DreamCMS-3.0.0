@@ -1,0 +1,59 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    [run_exit:email] [reset:email] [cancel:email]
+</cp:block>
+
+<cp:block name="content">
+    <form method="post" action="admin.php" name="email" id="email">
+        <input type="hidden" name="adm" value="user" />
+        <input type="hidden" name="action" value="email"/>
+        <input type="hidden" name="ids" value="{$userids}"/>
+        <input type="hidden" name="send" value="1"/>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>{trans('eMail an folgende Benutzer senden')}</label>
+                <cp:loop name="users" key="r">
+                    {iif($r.__index > 0, ', ', '')}{$r.username}
+                </cp:loop>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <label>{trans('Betreff')}</label>
+                <input type="text" name="subject" maxlength="250" class="form-control"/>
+            </div>
+            <div class="col-md-2">
+                <label>{trans('Debug Mode')}</label>
+                <label for="test1"><input type="radio" name="test" id="test1" value="1" />{trans('Ja')}</label>
+                <label for="test0"><input type="radio" name="test" id="test0" value="0" checked="checked"/>{trans('Nein')}</label>
+            </div>
+            <div class="col-md-2">
+                <label>{trans('eMail verschicken als')}</label>
+                <label for="emailtype1"><input type="radio" name="emailtype" id="emailtype1" value="text" checked="checked"/>{trans('Text')}</label>
+                <label for="emailtype2"><input type="radio" name="emailtype" id="emailtype2" value="html"/>{trans('HTML')}</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>{trans('eMail Inhalt')}</label>
+                <textarea data-tooltip="{trans('Tipp: Benutzen Sie [username] um die Benutzer in der eMail persönlich anzusprechen. [username] wird durch den Benutzernamen eines Mitglieds ersetzt.')}" rows="10" cols="55" name="message" class="form-control"></textarea>
+            </div>
+        </div>
+
+
+    </form>
+    <script type="text/javascript">
+            <cp:literal type="cdata_comment">
+            Form.registerForm('email', {
+            contentIdentifierID: '-',
+            exiturl: 'admin.php?adm=users'
+        });
+            </cp:literal>    
+    </script>
+
+</cp:block>

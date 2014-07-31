@@ -1,0 +1,35 @@
+#main-content-buttons button {
+
+}
+
+#main-content-buttons button:hover {
+
+}
+
+#main-content-buttons button:focus {
+
+}
+
+
+
+
+.rootbuttons:empty {
+    line-height: 0px;
+}
+
+
+.singlewindow-buttons {
+
+}
+
+#content-container button {
+
+}
+
+#content-container button:hover {
+
+}
+
+#content-container button:focus {
+
+}

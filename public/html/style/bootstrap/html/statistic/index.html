@@ -1,0 +1,795 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+    <form id="stat-by-dateForm" name="stat-by-dateForm" style="width: auto;float: left;display:inline-block!important;margin:0!important;padding:0!important;">
+
+        <input type="hidden" name="adm" value="statistic"/>
+        <input type="hidden" name="action" value="index"/>
+        <input type="hidden" name="ajax" value="1"/>
+
+        <div style="float: left;display:inline-block;margin:0;margin-top: 3px;padding-left:10px!important;">
+
+
+            <span style="margin-right:5px!important;">Statistik für:</span>
+
+            <select name="month" id="select-month" style="height:20px;line-height:12px!important;margin:0!important;padding:1!important;float:left">
+                <option value="" cp:on="selected:!$input.month" parse:selected="selected"> --- Monat ---</option>
+                <cp:for name="month" from="1" to="12" step="1">
+                    <option value="{$month.index}" cp:on="selected:$input.month == $month.index" parse:selected="selected">{date('monthname', $month.index, true)}</option>
+                </cp:for>
+            </select>
+
+            <select name="year" id="select-year" style="height:20px;line-height:12px!important;margin:0!important;padding:1!important;float:left">
+                <option value="" cp:on="selected:!$input.year" parse:selected="selected"> --- Jahr ---</option>
+                <cp:for name="y" from="2000" to="date('Y')" step="1">
+                    <option value="{$y.index}" cp:on="selected:$input.year == $y.index" parse:selected="selected">{$y.index}</option>
+                </cp:for>
+            </select>
+
+            <button type="button" id="stat-by-date" class="action-button" style="float:none!important"> Anzeigen</button>
+        </div>
+    </form>
+
+    <div id="advanced-options" class="toolbar-intab" style="float: left; display: none;max-width:420px">
+        <div style="margin-left:30px!important;margin-top: 3px;display: inline-block;">
+            <span style="margin-right:5px!important;">Erweiterte Optionen:</span>
+            <select name="advancedop" id="show-advanced">
+                <option value="country" selected="selected">Herkunft</option>
+                <option value="browser">Browser</option>
+                <option value="spiders">Suchmaschienen</option>
+                <option value="os">Betriebssyteme</option>
+                <option value="refferer">Refferer</option>
+                <option value="screensize">Bildschirm Auflösungen</option>
+            </select>
+
+            <button id="advanced-btn" style="float: none">{trans('Anzeigen')}</button>
+        </div>
+    </div>
+
+
+</cp:block>
+
+
+<cp:block name="statdata">
+
+
+    <!-- Basic -->
+    <div class="statistic-container basic">
+
+        <article id="widget-grid">
+
+            <div class="panel panel-default dcmswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                <!-- widget options:
+                usage: <div class="dcmswidget" id="wid-id-0" data-widget-editbutton="false">
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+                -->
+                <header class="panel-heading">
+                    <span class="widget-icon"> <i class="fa fa-bar-chart-o txt-color-darken"></i> </span>
+
+                    <h2>Chart</h2>
+
+
+                    <ul class="nav nav-tabs pull-right in" id="myTab">
+                        <li class="chart-view-type" id="hours">
+                            <a data-toggle="tab" href="#s1"><i class="fa fa-clock-o"></i> <span>Stundenansicht</span></a>
+                        </li>
+                        <li class="chart-view-type" id="weeks">
+                            <a data-toggle="tab" href="#s2"><i class="fa fa-crosshairs"></i> <span>Wochentage</span></a>
+                        </li>
+
+                        <li class="active chart-view-type" id="days">
+                            <a data-toggle="tab" href="#s3"><i class="fa fa-calendar"></i> <span>Tage</span></a>
+                        </li>
+
+                        <li class="chart-view-type" id="worldmap">
+                            <a data-toggle="tab" href="#s4"><i class="fa fa-globe"></i> <span>Weltkarte</span></a>
+                        </li>
+
+                    </ul>
+
+                    <div class="chart-mode pull-right" rel="base-chart" style="display:inline-block;line-height: 32px;">
+                        <span class="graph-type" id="line">
+                            <img src="images/buttons/chart_curve.png" width="16" height="16" title="Linien" alt="" border="0"/>
+                        </span>
+
+                        <span class="graph-type" id="bar">
+                            <img src="images/buttons/chart.png" width="16" height="16" title="Balken" alt="" border="0"/>
+                        </span>
+
+                        <span class="graph-type" id="pie">
+                            <img src="images/buttons/chart-pie.png" width="16" height="16" title="Pie" alt="" border="0"/>
+                        </span>
+                    </div>
+
+
+                </header>
+                <!-- widget div-->
+                <div class="panel-body">
+
+                    <!-- widget edit box -->
+                    <div class="dcmswidget-editbox">
+                        test
+                    </div>
+
+                    <!-- end widget edit box -->
+                    <div class="widget-body" id="base-chart">
+                        <!-- content -->
+                        <div id="myTabContent" class="tab-content">
+
+                            <div class="tab-pane" id="s1">
+                                <div id="hours-chart" class="base-jqplot-chart"></div>
+                            </div>
+
+                            <div class="tab-pane" id="s2">
+                                <div id="weeks-chart" class="base-jqplot-chart"></div>
+                            </div>
+
+                            <div class="active tab-pane" id="s3">
+                                <div id="days-chart" class="base-jqplot-chart"></div>
+                            </div>
+
+                            <div class="tab-pane" id="s4">
+                                <div id="worldmap-chart" class="base-jqplot-chart"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </article>
+
+        {*
+        <div class="box">
+            <h2 style="display: inline-block"> Chart </h2>
+
+
+            <div style="display:inline-block;float:right;line-height: 16px">
+
+                <span class="chart-view-type action-button" id="hours" style="max-height: 24px;line-height:24px!important;padding-left:3px!important;padding-right:3px!important;">
+                    Stundenansicht
+                </span>
+
+                <span class="chart-view-type action-button" id="weeks" style="max-height: 24px;line-height:24px!important;padding-left:3px!important;padding-right:3px!important;">
+                    Wochennsicht
+                </span>
+
+                <span class="chart-view-type action-button" id="days" style="max-height: 24px;line-height:24px!important;padding-left:3px!important;padding-right:3px!important;">
+                    Tage
+                </span>
+
+                <span class="chart-view-type action-button" id="worldmap" style="max-height: 24px;line-height:24px!important;padding-left:3px!important;padding-right:3px!important;">
+                    Welt Karte
+                </span>
+            </div>
+
+            <div class="chart-mode base-chart" rel="base-chart" style="display:inline-block;float:right;line-height: 16px">
+                <span class="chart-type" id="line">
+                    <img src="images/buttons/chart_curve.png" width="16" height="16" title="Linien" alt="" border="0"/>
+                </span>
+
+                <span class="chart-type" id="bar">
+                    <img src="images/buttons/chart.png" width="16" height="16" title="Balken" alt="" border="0"/>
+                </span>
+
+                <span class="chart-type" id="pie">
+                    <img src="images/buttons/chart-pie.png" width="16" height="16" title="Pie" alt="" border="0"/>
+                </span>
+            </div>
+
+
+            <div class="box-inner" id="base-chart" style="padding:0">
+                <div id="hours-chart" class="base-jqplot-chart"></div>
+                <div id="weeks-chart" class="base-jqplot-chart"></div>
+                <div id="days-chart" class="base-jqplot-chart"></div>
+            </div>
+        </div>
+
+        *}
+    </div>
+
+</cp:block>
+
+<cp:block name="advanced">
+
+
+<!-- Country -->
+<div class="statistic-container country" id="adv-country">
+    <div class="left-side">
+        <div class="box transparent">
+            <div class="box-inner" style="padding:0">
+
+
+                    <table class="table table-striped table-hover" border="0" cellpadding="3" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <td colspan="2">
+                                Land
+                            </td>
+                            <td width="15%" class="tr">
+                                Zugriffe
+                            </td>
+                            <td class="space"></td>
+
+                            <td colspan="2">
+                                Land
+                            </td>
+                            <td width="15%" class="tr">
+                                Zugriffe
+                            </td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <cp:set var="idx" value="1"/>
+
+
+                        <cp:loop name="countrys" key="r">
+
+                            <cp:if condition="$idx == 1">
+                                <cp:tag name="tr" />
+                                <cp:set var="tropen" value="1"/>
+                            </cp:if>
+
+                            <td width="20"><img cp:if="$r.icon" src="{$r.icon}" width="16" height="16" alt=""/></td>
+                            <td>{$r.title}</td>
+                            <td class="tr">
+                                {* (
+                                <small>{$r.percent} %</small>
+                                ) *} <strong>{$r.hits}</strong>
+
+                            </td>
+                            <cp:if condition="$idx == 1">
+                                <td class="space"></td>
+                            </cp:if>
+
+                            <cp:if condition="$idx == 2">
+                                <cp:tag name="tr" forceclose="true"/>
+                                <cp:set var="idx" value="0"/>
+                                <cp:set var="tropen" value="0"/>
+                            </cp:if>
+                            <cp:set var="idx" value="$idx + 1"/>
+
+                        </cp:loop>
+
+                        <cp:if condition="$tropen">
+
+                            <cp:if condition="$idx < 5">
+                                <td colspan="{math(5-$idx)}"></td>
+                            </cp:if>
+
+
+                            <cp:tag name="tr" forceclose="true"/>
+                        </cp:if>
+
+
+                        </tbody>
+                    </table>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="right-side">
+        <div class="box">
+            <h2><i class="fa fa-bar-chart-o txt-color-darken"></i> Chart
+                <div class="chart-mode countrys-chart" rel="countrys-chart">
+                        <span class="graph-type" id="line">
+                            <img src="images/buttons/chart_curve.png" width="16" height="16" title="Linien" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type" id="barup">
+                            <img src="images/buttons/chart.png" width="16" height="16" title="Balken" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type" id="pie">
+                            <img src="images/buttons/chart-pie.png" width="16" height="16" title="Pie" alt="" border="0"/>
+                        </span>
+                </div>
+            </h2>
+            <div class="box-inner" id="countrys-chart" style="padding:0">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Browsers -->
+<div class="statistic-container browser" id="adv-browser">
+    <div class="left-side">
+        <div class="box description">
+            <div class="box-inner" style="padding:0">
+
+                    <table class="table table-striped table-hover" border="0" cellpadding="3" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <td colspan="2">
+                                Browser
+                            </td>
+                            <td width="8%" class="tr">
+                                Zugriffe
+                            </td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <cp:loop name="browsers" key="r">
+                            <tr>
+                                <td width="20"><img src="{$r.icon}" width="16" height="16" alt=""/></td>
+                                <td>{$r.title}&nbsp; {iif($r.version, $r.version, '')}
+                                </td>
+                                <td class="tr">
+                                    <strong>{$r.hits}</strong><br/>
+                                    <small>{$r.percent} %</small>
+                                </td>
+                            </tr>
+                        </cp:loop>
+                        </tbody>
+                    </table>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="right-side">
+        <div class="box">
+            <h2><i class="fa fa-bar-chart-o txt-color-darken"></i> Chart
+                <div class="chart-mode browsers-chart" rel="browsers-chart">
+                        <span class="graph-type" id="line">
+                            <img src="images/buttons/chart_curve.png" width="16" height="16" title="Linien" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type" id="barup">
+                            <img src="images/buttons/chart.png" width="16" height="16" title="Balken" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type" id="pie">
+                            <img src="images/buttons/chart-pie.png" width="16" height="16" title="Pie" alt="" border="0"/>
+                        </span>
+                </div>
+            </h2>
+            <div class="box-inner adv-chart" id="browsers-chart" style="padding:0">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Robots -->
+<div class="statistic-container spiders" id="adv-spiders">
+    <div class="left-side">
+        <div class="box description">
+            <div class="box-inner" style="padding:0">
+
+
+                    <table class="table table-striped table-hover" border="0" cellpadding="3" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <td colspan="2">
+                                Robot/Suchmaschiene
+                            </td>
+                            <td width="8%" class="tr">
+                                Zugriffe
+                            </td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <cp:loop name="spiders" key="r">
+
+                            <tr>
+                                <td width="20"><img src="{$r.icon}" width="16" height="16" alt=""/></td>
+                                <td>{$r.title}</td>
+                                <td class="tr">
+                                    <strong>{$r.hits}</strong><br/>
+                                    <small>{$r.percent} %</small>
+                                </td>
+                            </tr>
+                        </cp:loop>
+                        </tbody>
+                    </table>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="right-side">
+        <div class="box">
+            <h2><i class="fa fa-bar-chart-o txt-color-darken"></i> Chart
+
+                <div class="chart-mode spiders-chart" rel="spiders-chart">
+                        <span class="graph-type" id="line">
+                            <img src="images/buttons/chart_curve.png" width="16" height="16" title="Linien" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type" id="barup">
+                            <img src="images/buttons/chart.png" width="16" height="16" title="Balken" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type" id="pie">
+                            <img src="images/buttons/chart-pie.png" width="16" height="16" title="Pie" alt="" border="0"/>
+                        </span>
+                </div>
+
+            </h2>
+            <div class="box-inner adv-chart" id="spiders-chart" style="padding:0">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- OS -->
+<div class="statistic-container os" id="adv-os">
+    <div class="left-side">
+        <div class="box description">
+            <div class="box-inner" style="padding:0">
+
+
+
+                    <table class="table table-striped table-hover" border="0" cellpadding="3" cellspacing="0">
+                        <thead>
+                        <tr class="grid-header">
+                            <td colspan="2">
+                                OS
+                            </td>
+                            <td width="8%" class="tr">
+                                Zugriffe
+                            </td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <cp:loop name="os" key="r">
+
+                            <tr>
+                                <td width="20"><img src="{$r.icon}" width="16" height="16" alt=""/></td>
+                                <td>{$r.title}</td>
+                                <td class="tr">
+                                    <strong>{$r.hits}</strong><br/>
+                                    <small>{$r.percent} %</small>
+                                </td>
+                            </tr>
+                        </cp:loop>
+                        </tbody>
+                    </table>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="right-side">
+        <div class="box">
+            <h2><i class="fa fa-bar-chart-o txt-color-darken"></i> Chart
+
+
+                <div class="chart-mode os-chart" rel="os-chart">
+                        <span class="graph-type line" id="line">
+                            <img src="images/buttons/chart_curve.png" width="16" height="16" title="Linien" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type barup" id="barup">
+                            <img src="images/buttons/chart.png" width="16" height="16" title="Balken" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type pie" id="pie">
+                            <img src="images/buttons/chart-pie.png" width="16" height="16" title="Pie" alt="" border="0"/>
+                        </span>
+                </div>
+            </h2>
+            <div class="box-inner adv-chart" id="os-chart" style="padding:0">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Screensize -->
+<div class="statistic-container screensize" id="adv-screensize">
+    <div class="left-side">
+        <div class="box description">
+            <div class="box-inner" style="padding:0">
+
+
+
+                    <table class="table table-striped table-hover" border="0" cellpadding="3" cellspacing="0">
+                        <thead>
+                        <tr class="grid-header">
+                            <td colspan="2">
+                                Auflösungen
+                            </td>
+                            <td width="8%" class="tr">
+                                Anzahl
+                            </td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <cp:loop name="screensize" key="r">
+
+                            <tr>
+                                <td width="20"><img src="{$r.icon}" width="16" height="16" alt=""/></td>
+                                <td>{$r.title}</td>
+                                <td class="tr">
+                                    <strong>{$r.hits}</strong><br/>
+                                    <small>{$r.percent} %</small>
+                                </td>
+                            </tr>
+                        </cp:loop>
+                        </tbody>
+                    </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="right-side">
+        <div class="box">
+            <h2><i class="fa fa-bar-chart-o txt-color-darken"></i> Chart
+
+
+                <div class="chart-mode screensize-chart" rel="screensize-chart">
+                        <span class="graph-type line" id="line">
+                            <img src="images/buttons/chart_curve.png" width="16" height="16" title="Linien" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type barup" id="barup">
+                            <img src="images/buttons/chart.png" width="16" height="16" title="Balken" alt="" border="0"/>
+                        </span>
+                        <span class="graph-type pie" id="pie">
+                            <img src="images/buttons/chart-pie.png" width="16" height="16" title="Pie" alt="" border="0"/>
+                        </span>
+                </div>
+            </h2>
+            <div class="box-inner adv-chart" id="screensize-chart" style="padding:0">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Screensize -->
+<div class="statistic-container refferer" id="adv-refferer">
+    <div class="box description">
+        <div class="box-inner" style="padding:0">
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" border="0" cellpadding="3" cellspacing="0">
+                    <thead>
+                    <tr class="grid-header">
+
+                        <td>
+                            Refferer
+                        </td>
+
+                        <td>
+                            Country
+                        </td>
+
+                        <td>
+                            Browser
+                        </td>
+
+                        <td>
+                            OS
+                        </td>
+
+                        <td width="8%" class="tr">
+                            Anzahl
+                        </td>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <cp:loop name="refferer" key="r">
+
+                        <tr>
+                            <td title="{escape($r.refferer, 'html')}">
+                                <a href="{$r.refferer}" target="_blank" class="refferer">{truncate($r.refferer, 50, null, ' ...')}</a>
+                            </td>
+
+                            <td width="15%">
+                                <cp:if condition="$r.countrytitle">
+                                    <img cp:if="$r.countryicon" src="{$r.countryicon}" width="16"/> {$r.countrytitle}
+                                </cp:if>
+                            </td>
+                            <td width="15%">
+                                <cp:if condition="$r.browsertitle">
+                                    <img cp:if="$r.browsericon" src="{$r.browsericon}" width="16"/> {$r.browsertitle} {$r.browserversion}
+                                </cp:if>
+                            </td>
+                            <td width="15%">
+                                <cp:if condition="$r.ostitle">
+                                    <img cp:if="$r.osicon" src="{$r.osicon}" width="16"/> {$r.ostitle}
+                                </cp:if>
+                            </td>
+
+                            <td class="tr" width="10%">
+                                <strong>{$r.hits}</strong> (
+                                <small>{$r.percent} %</small>
+                                )
+                            </td>
+                        </tr>
+                    </cp:loop>
+                    <cp:else>
+                        <tr>
+                            <td colspan="5">Keine Refferer vorhanden</td>
+                        </tr>
+                    </cp:else>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+
+    setJqPlotData( 'weeks', {$jqplot.weekdays});
+    setJqPlotData( 'hours', {$jqplot.hours});
+    setJqPlotData( 'days', {$jqplot.days});
+    setJqPlotData( 'countrys', {$jqplot.country});
+    setJqPlotData( 'browsers', {$jqplot.browsers});
+    setJqPlotData( 'os', {$jqplot.os});
+    setJqPlotData( 'screensize', {$jqplot.screensize});
+    setJqPlotData( 'spiders', {$jqplot.spiders});
+
+</script>
+
+
+</cp:block>
+
+
+<cp:block name="content">
+    <cp:jstabs usetrans="true" tabs="{trans('Standart Ansicht')},{trans('Erweiterte Ansicht')}"/>
+
+
+    <div id="tc0" class="statdata">
+        <div id="statdata">
+            <cp:block name="statdata"/>
+        </div>
+    </div>
+
+    <div id="tc1" style="display:none" class="advanced">
+        <div class="data">
+            <cp:block name="advanced"/>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+
+        if ( $.fn.dcmsWidgets ) {
+
+            $( '#widget-grid' ).dcmsWidgets( {
+
+                grid: 'article',
+                widgets: '.dcmswidget',
+                localStorage: true,
+                deleteSettingsKey: '#deletesettingskey-options',
+                settingsKeyLabel: 'Reset settings?',
+                deletePositionKey: '#deletepositionkey-options',
+                positionKeyLabel: 'Reset position?',
+                sortable: true,
+                buttonsHidden: false,
+                // toggle button
+                toggleButton: true,
+                toggleClass: 'fa fa-minus | fa fa-plus',
+                toggleSpeed: 200,
+                onToggle: function ()
+                {
+                    setTimeout(function() { $( window ).trigger( 'resize' );}, 1000);
+                },
+                // delete btn
+                deleteButton: true,
+                deleteClass: 'fa fa-times',
+                deleteSpeed: 200,
+                onDelete: function ()
+                {
+                },
+                // edit btn
+                editButton: true,
+                editPlaceholder: '.dcmswidget-editbox',
+                editClass: 'fa fa-cog | fa fa-save',
+                editSpeed: 200,
+                onEdit: function ()
+                {
+                },
+                // color button
+                colorButton: true,
+                // full screen
+                fullscreenButton: true,
+                fullscreenClass: 'fa fa-resize-full | fa fa-resize-small',
+                fullscreenDiff: 3,
+                onFullscreen: function ()
+                {
+                },
+                // custom btn
+                customButton: false,
+                customClass: 'folder-10 | next-10',
+                customStart: function ()
+                {
+                    alert( 'Hello you, this is a custom button...' )
+                },
+                customEnd: function ()
+                {
+                    alert( 'bye, till next time...' )
+                },
+                // order
+                buttonOrder: '%refresh% %custom% %edit% %toggle% %fullscreen% %delete%',
+                opacity: 1.0,
+                dragHandle: '> header',
+                placeholderClass: 'dcmswidget-placeholder',
+                indicator: true,
+                indicatorTime: 600,
+                ajax: false,
+                timestampPlaceholder: '.dcmswidget-timestamp',
+                timestampFormat: 'Last update: %m%/%d%/%y% %h%:%i%:%s%',
+                refreshButton: true,
+                refreshButtonClass: 'fa fa-refresh',
+                labelError: 'Sorry but there was a error:',
+                labelUpdated: 'Last Update:',
+                labelRefresh: 'Refresh',
+                labelDelete: 'Delete widget:',
+                afterLoad: function ()
+                {
+                    $(window).trigger('resize');
+                },
+                rtl: false, // best not to toggle this!
+                onChange: function ()
+                {
+
+                },
+                onSave: function ()
+                {
+
+                },
+                //     ajaxnav : $.navAsAjax // declears how the localstorage should be saved
+
+            } );
+
+        }
+
+        setTimeout( function ()
+        {
+
+            setJqPlotData( 'weeks', {$jqplot.weekdays});
+            setJqPlotData( 'hours', {$jqplot.hours});
+            setJqPlotData( 'days', {$jqplot.days});
+            setJqPlotData( 'countrys', {$jqplot.country});
+            setJqPlotData( 'browsers', {$jqplot.browsers});
+            setJqPlotData( 'os', {$jqplot.os});
+            setJqPlotData( 'screensize', {$jqplot.screensize});
+            setJqPlotData( 'spiders', {$jqplot.spiders});
+
+            registerStatistic();
+            generateJqplot ('days', 'bar');
+            setTimeout( function (){
+                $(window).trigger('resize');
+                Win.redrawWindowHeight(false, true);
+            }, 1500 );
+        }, 100 );
+
+
+    </script>
+</cp:block>

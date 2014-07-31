@@ -1,0 +1,61 @@
+.ui-rating-container {
+
+}
+
+
+div.rating-msg {
+    padding: 0px;
+    margin: 0px;
+	display:block;
+	background-repeat: no-repeat;
+	background-color:transparent;
+	font-size: 75%;
+
+}
+div.rating-msg span.votes {
+	font-size: 75%;
+
+}
+
+div.rating-msg span.result {
+	font-size: 75%;
+	color:brown;
+
+}
+div.rating-msg div.msg {
+	font-size: 75%;
+	width:100%;
+
+}
+
+
+ul.rating {
+	list-style: none;
+	background-color:transparent;
+	background-repeat: no-repeat;
+    padding: 0px;
+    margin: 0px;
+}
+ul.rating li {
+    line-height: 0px;
+    width: 25px;
+    height: 25px;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 2px;
+    list-style: none;
+    float: left;
+    cursor: pointer;
+	background-repeat: no-repeat;
+	
+}
+
+ul.rating li span{
+    display: none;
+	background-color:transparent;
+	background-repeat: no-repeat;
+    padding: 0px;
+    margin: 0px;
+}
+
+

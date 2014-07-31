@@ -1,0 +1,353 @@
+#gui-console {
+    width: 100% !important;
+    padding: 0px !important;
+    margin: 0;
+    display: none;
+    min-height: 34px;
+    max-height: 400px;
+    position: absolute;
+    left: 0px !important;
+    bottom: 0px !important;
+    z-index: 100;
+    overflow: hidden;
+    display: none;
+}
+
+#gui-console.noshadow {
+    -webkit-box-shadow: 0 0 0 0;
+    box-shadow: 0 0 0 0;
+}
+
+#gui-console-base .pane {
+    right: 1px;
+
+}
+
+#gui-console-base .pane > div,
+#gui-console-base .pane {
+    width: 18px;
+}
+
+#gui-console-base .pane > div {
+    background: transparent !important;
+    background-image: url("../img/console/grabber.png") !important;
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    width: 18px;
+    border-bottom: 1px solid #3D3D3D;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+#gui-console-base {
+    width: 100%;
+    height: auto;
+    max-height: 342px;
+    min-height: 152px;
+    position: relative;
+    top: 0 !important;
+    margin: 0 auto;
+
+    background: -moz-linear-gradient(center bottom, #2E3034 0%, #1F1F1F 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #2E3034), color-stop(100%, #1F1F1F)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(bottom, #2E3034 0%, #1F1F1F 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #2E3034 0%, #1F1F1F 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #2E3034 0%, #1F1F1F 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2E3034', endColorstr='#1F1F1F', GradientType=0); /* IE6-9 */
+    background: linear-gradient(top, #2E3034 0%, #1F1F1F 100%); /* W3C */
+
+}
+
+.gui-console-buttons {
+    width: 100%;
+    -moz-user-select: -moz-none;
+    height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #aaaaaa;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 0px;
+    font-size: 12px;
+
+    border-top: 1px solid #404040;
+    border-bottom: 1px solid #000000;
+
+    background: #000;
+    background: -moz-linear-gradient(center bottom, #2E3034 0%, #1F1F1F 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #2E3034), color-stop(100%, #1F1F1F)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(bottom, #2E3034 0%, #1F1F1F 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #2E3034 0%, #1F1F1F 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #2E3034 0%, #1F1F1F 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2E3034', endColorstr='#1F1F1F', GradientType=0); /* IE6-9 */
+    background: linear-gradient(top, #2E3034 0%, #1F1F1F 100%); /* W3C */
+
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.gui-console-buttons .left-btn {
+    float: left;
+    display: inline-block;
+    width: 80%;
+    color: #D2D3D4 !important;
+    margin-left: 35px;
+
+}
+
+.gui-console-buttons .left-btn div {
+    cursor: pointer;
+}
+
+.gui-console-buttons .console, .gui-console-buttons .debuginfo, .gui-console-buttons .errors {
+    padding: 2px 27px 2px 27px;
+    border-top: 1px solid transparent;
+    display: inline;
+    float: left;
+    margin-right: 1px;
+    line-height: 16px;
+}
+
+.gui-console-buttons .left-btn > div.act {
+    padding: 2px 27px 2px 27px;
+    border-top: 1px solid #3E20B9;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 1px;
+    background: rgba(0, 0, 0, 0.5);
+    color: graytext
+}
+
+.gui-console-buttons .right-btn {
+    float: right;
+    display: inline-block;
+    width: 60px;
+    height: 22px;
+}
+
+.gui-console-buttons .right-btn .clear {
+    height: 22px;
+    width: 22px;
+    background: transparent url("../img/console/console_clear.png");
+    display: inline;
+    float: left;
+    margin-right: 5px;
+    cursor: pointer;
+
+}
+
+.gui-console-buttons .right-btn .close {
+    height: 22px;
+    width: 22px;
+    background: url("../img/console/console_close_btn.png") 0 -23px no-repeat;
+    display: inline;
+    float: right;
+    margin-right: 5px;
+    border-left: 1px solid #333333;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    cursor: pointer;
+}
+
+.gui-console-buttons .right-btn .close:hover {
+    background-position: 0 -1px;
+}
+.gui-console-buttons .right-btn .clear:hover {
+    background-position: 0 -23px;
+}
+
+#matrix_form {
+    color: #fff;
+}
+
+
+#gui-console-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    border-top: 1px solid #333333;
+    background-image: url(../img/console/console.png);
+    background-position: 50% 51%;
+    background-repeat: no-repeat;
+}
+
+
+#gui-console-matrix {
+
+    position: absolute;
+    z-index: 4;
+    top: 22px !important;
+    bottom: 0;
+    width: 99.5%;
+    min-height: 121px;
+    clear: both;
+    font-size: 12px !important;
+    font-family: menlo, courier new, fixed, swiss, sans-serif !important;
+    line-height: 18px;
+    border-top: 1px solid #333333;
+
+    overflow: hidden;
+    overflow-x: hidden;
+    margin: 0 auto;
+    padding-left: 5px;
+}
+
+#gui-console-errors,
+#gui-console-debug,
+#gui-console-text {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    clear: both;
+    font-size: 12px !important;
+    font-family: menlo, courier new, fixed, swiss, sans-serif !important;
+    line-height: 18px;
+    color: #eee;
+}
+
+#gui-console-errors .scroll-content {
+    padding-left: 5px;
+}
+#gui-console pre {
+    color: #FFF;
+    font-size: 13px;
+}
+#gui-console-errors pre,
+#gui-console-debug pre,
+#gui-console-text pre {
+    padding-left: 5px;
+    text-overflow: ellipsis;
+    padding-right: 40px;
+}
+
+#gui-console-text .item, #gui-console-text #gui-console-debug {
+    color: rgb(238, 238, 238);
+    clear: both;
+}
+
+#gui-console-text .item.prompt {
+    color: rgb(134, 194, 246);
+}
+
+.gui-console {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 34px;
+    min-height: 34px;
+    max-height: 34px;
+    -moz-user-select: -moz-none;
+    bottom: 0px !important;
+
+    background: #000;
+    background: -moz-linear-gradient(center bottom, #2E3034 0%, #1F1F1F 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #2E3034), color-stop(100%, #1F1F1F)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(bottom, #2E3034 0%, #1F1F1F 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #2E3034 0%, #1F1F1F 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #2E3034 0%, #1F1F1F 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2E3034', endColorstr='#1F1F1F', GradientType=0); /* IE6-9 */
+    background: linear-gradient(top, #2E3034 0%, #1F1F1F 100%); /* W3C */
+
+}
+
+.gui-console .left {
+    float: left;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 98%;
+    height: 32px;
+    margin-right: 20px;
+    line-height: 32px;
+}
+
+.gui-console .left .icon {
+    background: transparent url("../img/console/console_arrow.png") no-repeat 50% 50%;
+    width: 20px;
+    height: 26px;
+    display: inline-block;
+    float: left;
+    margin: 0;
+    position: relative;
+    top: 5px;
+    left: 5px;
+}
+
+.gui-console .left .text {
+    position: relative;
+    height: 24px;
+    line-height: 30px;
+    padding: 0;
+    border-radius: 4px;
+    vertical-align: middle;
+    -moz-user-select: -moz-none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-box-shadow: 0 1px 0 rgba(255,255,255,1) inset;
+    -webkit-box-shadow: 0 1px 0 #FFF inset;
+    box-shadow: 0 1px 0 #FFF inset;
+    background: #CAFFCA;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0.5,#F7F7F7),color-stop(1,#DADADA));
+    background: -moz-linear-gradient(center bottom,#f7f7f7 50%,#dadada 100%);
+    margin-left: 30px;
+    top: 5px;
+}
+.gui-console .left .text input {
+    width: 100%;
+}
+
+.gui-console .left .text #console-exec {
+    margin: 0 !important;
+    color: #303030;
+    font-size: 14px !important;
+    font-family: "corier new", fixed, sans-serif;
+    border: 0;
+    background: transparent;
+
+    line-height: 20px !important;
+    position: absolute;
+    top: 0 !important;
+    width: 100% !important;
+    left: 0;
+    height: 26px !important;
+}
+
+.gui-console .right {
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    float: right;
+    width: 20px;
+    height: 30px;
+    display: inline-block;
+}
+
+.gui-console .right #toggle {
+    display: inline-block;
+    background: transparent url("../img/console/console-btn.png") no-repeat 0 -3px;
+    width: 18px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#gui-console.open .right #toggle {
+    background-position: 0 -38px;
+}
+
+#gui-console-base .scrolltrack, #gui-console-base .scrollbar {
+    width: 16px;
+}
+
+#gui-console-base .scrollthumb, #gui-console-base .scrollthumb .scrollend {
+    width: 14px;
+}
+
+#gui-console-base .ui-resizable-handle.n-sizer {
+    top: 0;
+    z-index: 1000 !important;
+    height: 5px;
+    width: 100%;
+    cursor: row-resize;
+    position: absolute;
+    background: transparent;
+}

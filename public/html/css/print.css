@@ -1,0 +1,134 @@
+/*
+    Document   : print
+    Created on : 13.06.2011, 00:27:40
+    Author     : Marcel
+    Description:
+    Purpose of the stylesheet follows.
+*/
+
+
+body {
+
+    padding:0!important;
+    line-height: 14px!important;
+    font-size: 12px!important;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-style: normal;
+    background-color: white;
+    background: none!important;
+
+}
+#main,#header,
+#footer,
+#wrapper,
+#wrapper-border,
+#container {
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    min-height: auto!important;
+    max-height: auto!important;
+    min-width: auto!important;
+    max-width: auto!important;
+    position: relative;
+    box-shadow: none!important;
+
+}
+#wrapper{ width: 950px!important; display:inline-block!important; margin: 0 auto!important; }
+#wrapper-border { width: 950px!important; display:block!important; margin: 0 auto!important; 
+                  box-shadow: none!important;
+                  display: block!important;
+                  margin: 0 auto!important;
+                  border: 1px solid #DEDEDE!important;
+                  padding: 0;
+                  margin-bottom: 10px!important;
+}
+#main {
+    width: 95%;
+}
+#header {
+    margin:0!important;
+    padding:0!important;
+    height: 120px!important;
+    display:inline-block!important;
+    width:100%!important;
+    margin-bottom: 10px!important;
+    background: none!important;
+    clear:both;
+}
+#header .inside {
+    width: 100%;
+}
+#container {
+    display:inline-block!important;
+    width:98%!important;
+    min-height:auto!important;
+    height:auto!important;
+    background: none!important;
+    padding: 5px!important;
+}
+#footer {
+    margin:0!important;
+    padding:0!important;
+    height: 40px!important;
+    width:100%!important;
+    display:inline-block!important;
+    margin-top: 10px!important;
+    background: none!important;
+    padding: 5px!important;
+    margin-bottom: 10px!important;
+}
+#footer>div {
+    box-shadow: none!important;
+}
+
+.print-logo {
+    height: 120px!important;
+    float:left!important;
+    width: 80%!important;
+    display:inline-block!important;
+    padding:10px!important;
+}
+.print-btn {
+    height: 120px!important;
+    float: right!important;
+    width: 10%!important;
+    display: inline-block!important;
+    vertical-align: bottom!important;
+    text-align: right!important;
+    position: absolute;
+    padding: 10px!important;
+    right: 0;
+}
+.print-btn button {
+    float:none!important;
+    position: absolute!important;
+    top: 12px!important;
+}
+
+
+.fullwidth {
+    width: auto!important;
+    display: block;
+}
+
+#main div.comments-bubble {
+    right: 0;
+    left: 750px;
+    margin: 0;
+}
+
+.columnSet3 article {
+    width: 300px;
+    float: left;
+    margin-right: 10px;
+}
+.columnSet3 article:last-child {
+    margin: 0;
+}
+
+#container .columnSet3 .column {
+    width: 300px;
+    float: left;
+    margin-right: 10px;
+}

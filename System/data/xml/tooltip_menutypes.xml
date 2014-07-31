@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tooltip>
+  <domainname title="Domainname"><![CDATA[Hier können Sie den Zugriff auf die Webseite auf einen bestimmten Domainnamen beschränken.]]></domainname>
+  <language title="Sprache"><![CDATA[Bitte geben Sie die Sprache der Seite gemäß des ISO-639-1 Standards ein (z.B. "de" für Deutsch).]]></language>
+  <indexfollow title="Robots-Tag"><![CDATA[Hier legen Sie fest, wie Suchmaschinen die Seite behandeln.]]></indexfollow>
+  <langfallback title="Sprachen-Fallback"><![CDATA[Diese Seite anzeigen, wenn es keine in der Sprache des Besuchers gibt.]]></langfallback>
+  <url title="Link-Adresse"><![CDATA[Geben Sie eine Web-Adresse (http://…), eine E-Mail-Adresse (mailto:…) oder ein Insert-Tag ein.]]></url>
+  <target title="In neuem Fenster öffnen"><![CDATA[Den Link in einem neuen Browserfenster öffnen.]]></target>
+  <module title=""><![CDATA[]]></module>
+  <description title="Beschreibung der Seite"><![CDATA[Hier können Sie eine kurze Beschreibung der Seite eingeben, die von Suchmaschinen wie Google oder Yahoo ausgewertet wird. Suchmaschinen indizieren normalerweise zwischen 150 und 300 Zeichen.]]></description>
+  <page title=""><![CDATA[]]></page>
+  <newscat title=""><![CDATA[]]></newscat>
+  <articlecat title=""><![CDATA[]]></articlecat>
+  <appcats title=""><![CDATA[]]></appcats>
+</tooltip>

@@ -1,0 +1,89 @@
+<?php
+
+function __skin_export_form($row){
+global $cp, $cfg, $fct;
+
+
+$c = gzuncompress( base64_decode('eJyzsa/IzVEoSy0qzszPs1Uy1DNQUkjNS85PycxLt1XyDPbXtbAwtdQ1VLK3sykuqcxJRag11jPQM1BISi1JVDBUUgBL5iXmptoqhbsoKRTklKZn5mWnVtoqFWfkF8AEkC0Cag5yBmq14+K0Sc7PK0nMzEstAnH0kXg2+mCD7bgAsLk1MQ=='));
+
+return <<<EOF
+Code:$c
+   <form method="post" action="admin.php" id="export">
+   <input type="hidden" name="adm" value="skin_import_export" />
+    <input type="hidden" name="action" value="do_export">
+    <input type="hidden" name="sid" value="{$cp->session_id}">
+
+    <table cellpadding="4" cellspacing="1" width="99%" class="tblborder" align="center">
+        <tr class="tableheader">
+            <td colspan="2"><b>Skin Exportieren</b></td>
+        </tr>
+
+        <tr class="firstrow">
+        	<td width="50%"><b>Skin:</b></td>
+        	<td width="50%">
+        	<select name="skin_id" class="select">
+
+        		{$row[skin_select_options]}
+        	</select>
+        	</td>
+        </tr>
+
+        <tr class="secondrow">
+        	<td valign="top"><b>Skin Images Only:</b><br />Wenn diese Option gewähl wird werden nur die Skin Images zum ausgewählten Skin exportiert.</td>
+        	<td>
+        		<input type="radio" name="image_only" value="0" checked="checked" /> Nein<br />
+        		<input type="radio" name="image_only" value="1" /> Ja
+        	</td>
+        </tr>
+
+        <tr class="firstrow">
+        	<td valign="top"><b>Skin Images Exportieren:</b><br />Diese Option ist nur wichtig, wenn Sie bei "Skin Images Only" Nein gewählt haben.</td>
+        	<td>
+        		<input type="radio" name="add_skin_images" value="0" checked="checked" /> Nein<br />
+        		<input type="radio" name="add_skin_images" value="1" /> Ja
+        	</td>
+        </tr>
+
+        <!-- <input type="hidden" name="skin_type" value="0" /> -->
+
+        <tr class="secondrow">
+        	<td valign="top"><b>Skin Type:</b></td>
+        	<td>
+        		<input type="radio" name="skin_type" value="0" checked="checked" /> CMS Skin<br />
+        		<input type="radio" name="skin_type" value="1" /> Plugin Skin
+        	</td>
+        </tr>
+
+
+        <tr class="firstrow">
+        	<td><b>Plugin:</b><br />Wenn Sie Skin Typ "Plugin Skin" gewählt haben wählen Sie hier das Plugin aus, für welches der Skin exportiert werden soll.</td>
+        	<td valign="top">
+        	<select name="pluginid" class="select">
+        		<option value="0">----------------</option>
+        		{$row[modul_select_options]}
+        	</select>
+        	</td>
+        </tr>
+
+        <tr class="secondrow">
+        	<td valign="top"><b>Optionen:</b></td>
+        	<td>
+        		<input type="radio" name="load" value="1" /> Herunter laden<br />
+        		<input type="radio" name="load" value="0" checked="checked" /> auf Server belassen
+        	</td>
+        </tr>
+
+
+	</table>
+	
+<btn>
+[run:export]
+            	<input type="reset" value="Zurücksetzen" class="button" /> 
+				<input type="button" value="Abbrechen" onclick="history.back();" class="button" />
+</btn>
+	
+   </form>
+EOF;
+}
+
+?>

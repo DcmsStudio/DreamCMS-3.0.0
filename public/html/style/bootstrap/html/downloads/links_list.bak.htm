@@ -1,0 +1,63 @@
+<form action="modules.php" method="post">
+<input type="hidden" name="file" value="links" />
+<input type="hidden" name="action" value="list_links" />
+<input type="hidden" name="sid" value="$cp->session_id" />
+
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+
+    <tr class="tableheader">
+       <td>Downloads Sortieren</td>
+    </tr>
+
+    <tr class="secondrow">
+        <td valign="top" colspan="3">Sortieren nach: 
+            <select name="order_by" class="select">
+            	<option value="title"$o_title>Titel</option>
+            	<option value="date"$o_date>Datum</option>
+            	<option value="hits"$o_hits>Hits</option>
+            	<option value="votes"$o_votes>Votes</option>
+            	<option value="rating"$o_rating>Rating</option>
+            	<option value="lastdownload"$o_lastdownload>Letzter Download</option>
+            </select> in Reihenfolge 
+            <select name="sort" class="select">
+            	<option value="asc"$sel_sort_1>Aufsteigend</option>
+            	<option value="desc"$sel_sort_2>Absteigend</option>
+            </select>
+        </td>
+    </tr>
+    <tr class="firstrow">
+        <td valign="top">
+        	Suche <input type="text" name="do_search" value="$do_search" size="30" maxlength="30" class="input" />
+            in/im 
+            <select name="search_in" class="select">
+            	<option value="">Suchen in</option>
+            	<option value="all">Titel & Beschreibung</option>
+            	<option value="title">Titel</option>
+            	<option value="description">Beschreibung</option>
+            </select> 
+            in Kategorie $catsel
+        </td>
+	</tr>
+    <tr class="secondrow">
+        <td align="center">
+        	<input type="submit" value="Suchen / Sortieren" class="button" />
+        </td>
+    </tr>
+</table>
+
+</form>
+
+<br />
+<table cellpadding="4" cellspacing="1" border="0" class="tblborder" width="99%" align="center">
+<tr class="tableheader">
+	<td>Titel</td>
+	<td align="center" width="8%">Hits</td>
+	<td align="center" width="15%">Datum</td>
+	<td align="center" width="5%">Status</td>
+	<td width="15%" align="center">Optionen</td>
+</tr>
+$link_rows	
+</table>
+
+<br />
+<div class="description"><div align="right"$pagelink</div>

@@ -1,0 +1,159 @@
+<cp:extends template="../main"/>
+
+<cp:block name="toolbar">
+
+</cp:block>
+
+<cp:block name="content">
+
+
+
+    <div class="row">
+
+            <div id="help-index" style="width: 200px;float: left">
+
+                <h2>DreamCMS Hilfe</h2>
+                <div>
+                    <ul>
+                        <cp:loop name="menu" key="r">
+                            <li>
+                                <div class="root-label" title="{$r.label}">
+                                    <span class="item-label-icon fa {$r.icon}"></span>
+                                    <span>{$r.label}</span>
+                                </div>
+                                <ul>
+                                    <cp:set var="prev_is_sub" value="0"/>
+                                    <cp:loop name="r.items" key="i">
+                                        <li class="{iif($i.type === 'separator', 'separator', 'item')}{iif(!$prev_is_sub && isArray($i.items), ' firstsub', '')}{iif(!isArray($i.next_i.items) && isArray($i.items), ' lastsub', '')}">
+
+
+                                            <cp:if condition="$i.label">
+                                                <cp:if condition="$i.url">
+                                                    <a href="{$i.url}" class="item-label{iif($i.ajax, ' ajax', '')}">{$i.label}</a>
+                                                </cp:if>
+                                                <cp:else>
+                                                    <span class="item-label">{$i.label}</span>
+                                                </cp:else>
+                                            </cp:if>
+                                            <cp:elseif condition="$i.type == 'separator' ">
+                                                <span class="item-separator"></span>
+                                            </cp:elseif>
+
+
+                                            <cp:if condition="isArray($i.items)">
+                                                <cp:set var="prev_is_sub" value="1"/>
+                                                <ul class="submenu">
+                                                    <cp:loop name="i.items" key="it">
+                                                        <cp:if condition="$it.url">
+                                                            <li>
+                                                                <a href="{$it.url}" class="{iif($it.ajax, 'ajax', '')}">{$it.label}</a>
+                                                            </li>
+                                                        </cp:if>
+                                                    </cp:loop>
+                                                </ul>
+                                            </cp:if>
+                                            <cp:else>
+                                                <cp:set var="prev_is_sub" value="0"/>
+                                            </cp:else>
+                                        </li>
+
+
+                                    </cp:loop>
+                                </ul>
+                            </li>
+
+                        </cp:loop>
+
+                    </ul>
+                </div>
+            </div>
+
+
+            <div id="help-content" style="margin-left: 220px">
+                <h3 id="help-title"></h3>
+                <div id="help-con">
+                    <div class="scroll">
+                        {trans('Zur Zeit ist noch keine Hilfe vorhanden.')}
+                    </div>
+
+                </div>
+            </div>
+
+    </div>
+
+
+    <script>
+        $('#help-index').resizable({
+            maxWidth: 400,
+            minWidth: 200,
+            handles: 'e',
+            resize: function( event, ui ) {
+                $('#help-content').css({
+                    marginLeft: ui.size.width + 20
+                });
+            }
+        });
+
+        var links = $('#help-index').find('a'), linksl = links.length;
+        for (var y = 0; y < linksl; ++y) {
+
+            var link = $(links[y]);
+
+
+            link.unbind().click(function(e) {
+                e.preventDefault();
+                var href = $(this).attr('href');
+                var info = Tools.extractAppInfoFromUrl(href);
+
+                if (info.controller) {
+                    var d = {
+                        gethelp: 1,
+                        adm: 'help',
+                        c: info.controller
+                    };
+
+                    if (info.action) {
+                        d['a'] = info.action;
+                    }
+
+
+                    $.post('admin.php', d, function(data) {
+                        if (Tools.responseIsOk(data)) {
+
+                            $('#help-con div.scroll').html( data.content );
+                            $('#help-title').html( data.title );
+                            Tools.scrollBar( $('#help-con div.scroll') );
+                        }
+                    });
+
+
+
+
+                }
+
+
+                console.log('Help for: ', info.controller, info.action);
+
+            });
+        }
+
+
+
+        $('#help-index,#help-content').height( $('#help-index').parent().parent().height() );
+        $('#help-index > div,#help-con div.scroll').height( $('#help-index').parent().parent().height() - 30);
+
+
+
+        Tools.scrollBar( $('#help-index > div > ul') );
+        Tools.scrollBar( $('#help-con div.scroll') );
+
+
+        $(window).resize(function() {
+            $('#help-index,#help-content').height( $('#help-index').parent().parent().height() );
+            $('#help-index > div,#help-con div.scroll').height( $('#help-index').parent().parent().height() - 30);
+        });
+    </script>
+
+
+
+</cp:block>

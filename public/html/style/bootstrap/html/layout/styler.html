@@ -1,0 +1,117 @@
+<cp:extends template="../main"/>
+
+<cp:block name="inlinecss">
+    
+</cp:block>
+
+<cp:block name="toolbar">
+    [save:layout] [save_exit:layout] [reset:layout] [cancel:layout]
+</cp:block>
+
+<cp:block name="content">
+    
+    
+    
+    <form action="admin.php" name="layout" id="styler-form" method="post">
+        <input type="hidden" name="adm" value="layouter" />
+        <input type="hidden" name="send" value="send" />
+        <input type="hidden" name="action" value="styler" />
+        <input type="hidden" name="skinid" id="skinid-id" value="{$request.skinid}" />
+        <input type="hidden" name="id" id="layout-id" value="{$id}" />
+        
+        
+        <div class="box description" id="tc0">
+            <div class="box-inner">
+                
+                <div id="layouts">
+                    
+                    <div class="layoutBox" id="layoutsContainer">
+                        <div class="layoutBoxTop">
+                            <ul class="layoutBox layoutBoxTop connectedSortable" id="layoutBoxTop"></ul>
+                            <div class="useMasterTemplateSmall topWidth lockbtn" id="topUseMaster" href="javascript:SiteLayout.ToggleMasterLock('layoutBoxTop');"></div>
+                        </div>
+                        <div class="layoutBox-inner" style="display:block">
+                            
+                            <div class="leftWidth leftColumns">
+                                <ul class="layoutBox layoutBoxLeft connectedSortable" id="layoutBoxLeft"></ul>
+                                <div class="useMasterTemplate lockbtn" id="leftUseMaster" href="javascript:SiteLayout.ToggleMasterLock('layoutBoxLeft');"><span>Unlocked</span></div>                        
+                            </div>
+                            
+                            <div class="middleWidth middleColumns">
+                                <ul class="layoutBox layoutBoxMiddle connectedSortable" id="layoutBoxMiddle"></ul>
+                                <div class="useMasterTemplate lockbtn" id="middleUseMaster" href="javascript:SiteLayout.ToggleMasterLock('layoutBoxMiddle');"><span>Unlocked</span></div>
+                            </div>
+                            
+                            <div class="rightWidth rightColumns">
+                                <ul class="layoutBox layoutBoxRight connectedSortable" id="layoutBoxRight"></ul>
+                                <div class="useMasterTemplate lockbtn" id="rightUseMaster" href="javascript:SiteLayout.ToggleMasterLock('layoutBoxRight');"><span>Unlocked</span></div>
+                            </div>
+                            
+                        </div>
+                        <div class="layoutBoxBottom">
+                            <ul class="layoutBox layoutBoxBottom connectedSortable" id="layoutBoxBottom"></ul>
+                            <div class="useMasterTemplateSmall bottomWidth lockbtn" id="bottomUseMaster" href="javascript:SiteLayout.ToggleMasterLock('layoutBoxBottom');"></div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="layoutModules">
+                        <div id="layout-accordion" class="AccordionList">
+                            <h3><a href="#">Section 1</a></h3>
+                            <div class="accordion-body">
+                                <ul id="content-modules" class="connectedSortable">                                    
+                                    <li>Item 1</li>
+                                    <li>Item 2</li>
+                                    <li>Item 3</li>
+                                    <li>Item 4</li>
+                                </ul>
+
+                            </div>
+                            <h3><a href="#">Section 2</a></h3>
+                            <div class="accordion-body">
+                                <p>
+                                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+    </form>
+    
+    
+    
+    <script type="text/javascript">
+
+var targetLists = ['layoutBoxLeft','layoutBoxTop','layoutBoxMiddle','layoutBoxRight','layoutBoxBottom'];
+var layoutSections = ['layoutBoxLeft','layoutBoxTop','layoutBoxMiddle','layoutBoxRight','layoutBoxBottom'];
+$(document).ready( function() {
+
+        setTimeout(function(){
+        var innerwidth = $('.layoutBox-inner').width();
+        var boxwidth = $('.leftColumns').width();
+        $('.middleColumns').css({'width': (innerwidth - (2 * boxwidth) - 27) });
+        }, 200);
+
+        $( "#layout-accordion" ).accordion({ autoHeight: false });
+
+
+
+        $( "#layoutBoxLeft,#layoutBoxTop,#layoutBoxMiddle,#layoutBoxRight,#layoutBoxBottom,#content-modules").sortable({
+            connectWith: ".connectedSortable", 
+            placeholder: "ui-sortable-placeholder"
+        });
+
+
+
+});
+
+    </script>
+</cp:block>

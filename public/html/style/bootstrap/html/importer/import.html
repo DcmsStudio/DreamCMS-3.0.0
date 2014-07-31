@@ -1,0 +1,278 @@
+<cp:extends template="../main"/>
+<cp:block name="toolbar">
+
+    <div id="toolbar-step1">
+        <button id="get-preview" type="button">{trans('Vorschau')}</button>
+        <button id="get-next" type="button">{trans('Weiter')}</button>
+    </div>
+    <div id="toolbar-step2" style="display: none">
+        <button id="execute-import" type="button">{trans('Importieren')}</button>
+    </div>
+
+</cp:block>
+
+
+<cp:block name="content">
+
+    <cp:if condition="$input.step == 'preview'">
+        <cp:block name="preview-content"/>
+    </cp:if>
+    <cp:else>
+        <cp:if condition="$input.step == 1">
+            <cp:block name="step1-content"/>
+        </cp:if>
+        <cp:elseif condition="$input.step == 2">
+            <cp:block name="step2-content"/>
+        </cp:elseif>
+        <cp:else>
+            <cp:block name="step0-content"/>
+        </cp:else>
+    </cp:else>
+</cp:block>
+
+
+
+<cp:block name="step0-content">
+    <form action="admin.php" id="import-upload" enctype="multipart/form-data">
+        <input type="hidden" name="adm" value="importer" />
+        <input type="hidden" name="action" value="import" />
+        <input type="hidden" name="step" value="1" />
+
+
+        <div class="box description">
+            <div class="box-inner">
+                <fieldset>
+                    <legend>
+                        <label for="importFrom-url">
+                            <input type="radio" name="importFrom" clsss="importFrom" id="importFrom-url" value="url" checked="checked"/> {trans('Importieren aus Url')}
+                        </label>
+                    </legend>
+                    <div id="from-url" class="view-toggle" style="margin-left: 25px">
+                        <span style="float:left;line-height: 22px;">Url:</span>
+                        <input style="margin-left: 10px; width: 94%;" type="text" id="file-url" name="url" value="" placeholder="http://www.demo.de/path/text.xml" />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>
+                        <label for="importFrom-upload">
+                            <input type="radio" name="importFrom" clsss="importFrom" id="importFrom-upload" value="upload"/> {trans('Importieren aus Upload')}
+                        </label>
+                    </legend>
+                    <div id="from-upload" class="view-toggle" style="margin-left: 25px;display:none">
+                        <div id="upload-container">
+
+                            <span class="allowed-info">
+                                <!-- <span class="allowed-extensions"></span> -->
+                                <span class="allowed-filesize"></span>
+                            </span>
+
+                            <span class="drop-here">Drop Image Files here...</span>
+                            <span class="browse">Browse</span>
+                            <input type="file" name="Filedata"/>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+                <fieldset>
+                    <legend>
+                        <label for="importFrom-server">
+                            <input type="radio" name="importFrom" clsss="importFrom" id="importFrom-server" value="server"/> {trans('Importieren aus einer Datei vom Server')}
+                        </label>
+                    </legend>
+                    <div id="from-server" class="view-toggle" style="margin-left: 25px;display:none">
+
+                        <span style="float:left;line-height: 22px;">Path:</span>
+                        <input id="server-file-path" style="margin-left: 10px; width: 85%;" type="text" name="file" value="" placeholder="/path/to/text.xml" />
+                        <button id="browse-files" type="button" style="margin-left: 10px;">
+                            {trans('Datei')}
+                        </button>
+                    </div>
+                </fieldset>
+
+                <button id="run-step" type="button" class="btn-run">
+                    {trans('Weiter')}
+                </button>
+
+                <button id="next-step" type="button" class="btn-next" style="display:none">
+                    {trans('Nächster Schritt')}
+                </button>
+
+
+            </div>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+
+        //var wi = $('#' + Win.windowID);
+
+        if (typeof initImporter == 'function') {
+            initImporter(Win.windowID, 0);
+        }
+
+    </script>
+</cp:block>
+
+<cp:block name="step1-content">
+
+
+    <cp:jstabs tabs="{trans('Inhalt')},{trans('Rechte &amp; Einstellungen')}" usetrans="true" default="{trans('Inhalt')}"/>
+
+    <form action="admin.php" id="import-form">
+        <input type="hidden" name="adm" value="importer" />
+        <input type="hidden" name="action" value="import" />
+
+
+        <div style="display: inline-block;width: 100%">
+            <div style="display: inline-block;width: 60%; float: left;margin: 0;padding:0">
+
+
+                <div class="box description" id="tc0">
+                    <div class="box-inner">
+                        <fieldset>
+                            <legend>{trans('Titel')}</legend>
+                            <input class="required widefat-input" type="text" name="title" id="title" value="" size="70" /> 
+                        </fieldset>
+                        
+                        <fieldset>
+                            <legend>{trans('Kategorie')}</legend>
+                            <input class="widefat-input" type="text" name="categories" id="categories" value="" size="70" /> <br/>
+                            <small>{trans('durch komma "," getrennt')}</small>
+                        </fieldset>
+                        
+                        <fieldset class="legend-top">
+                            <legend>{trans('Teaser')}</legend>                    
+                            <cp:editor baseurl="$cfg.portalurl" name="teaser" value="" height="100px" width="400px"/>
+                        </fieldset>
+
+                        <fieldset class="legend-top">
+                            <legend>{trans('Inhalt')}</legend>                    
+                            <cp:editor baseurl="$cfg.portalurl" name="content" value="" height="350px" width="400px"/>
+                        </fieldset>
+                    </div>
+                </div>
+
+
+
+
+                <div class="box description" id="tc1">
+                    <div class="box-inner">
+                        
+                        
+                        <fieldset>
+                            <legend>{trans('Tags')}</legend>
+                            <input class="widefat-input" type="text" name="tags" id="" value="" size="70"/> 
+                            <br/>
+                            <small>{trans('durch komma "," getrennt')}</small>
+                        </fieldset>
+                        
+                        
+                        <fieldset>
+                            <legend>{trans('Bilder')}</legend>
+                            <input class="widefat-input" type="text" name="images" id="images" value="" size="70"/> 
+                            <br/>
+                            <small>{trans('durch komma "," getrennt')}</small>
+                            <br/>
+                            <label for="draft-if-downloading-images">
+                                <input type="checkbox" name="draft_downloading_images" id="draft-if-downloading-images" value="1"/> 
+                                <small>{trans('Solange die Bilder herunter geladen weden, den Inhalt in den Draft-Modus setzen.')}</small>
+                            </label>
+                            <br/>
+                            <label for="inline-gallery-images">
+                                <input type="checkbox" name="inline_gallery" id="inline-gallery-images" value="1"/> 
+                                {trans('Bilder als Inline-Gallerie anzeigen')}
+                            </label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>{trans('Dateien')}</legend>                    
+                            <input class="widefat-input" type="text" name="files" id="files" value="" size="70" maxlength="1000" /> 
+                            <br/>
+                            <small>{trans('durch komma "," getrennt')}</small>
+                            <br/>
+                            <label for="draft-if-downloading-files">
+                                <input type="checkbox" name="draft_downloading_files" id="draft-if-downloading-files" value="1"/> 
+                                <small>{trans('Solange die Bilder herunter geladen weden, den Inhalt in den Draft-Modus setzen.')}</small>
+                            </label>
+                        </fieldset>
+                        
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <div style="position: relative;display: inline-block;width: 39.5%;margin: 0;padding:0">
+
+                <div class="box description" id="tree-repos" style="display: inline-block;width: 100%">
+                    <div class="box-inner">
+                        <h3>
+                            <div style="display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">XML Tree (<span class="current-record">1</span> of {$totalrecords} Records)</div>
+                            <div style="display: inline-block;position: absolute;top: 19px;right: 10px;">
+                                <button id="prev-record" type="button">back</button> 
+                                <button id="next-record" type="button">next</button>
+                            </div>
+                        </h3>
+                        <div id="xml-tree-scroll" style="height: 95%; width: 99%; display: inline-block">
+                            <div class="xml-tree">
+                                <cp:loop name="xmlnodes" key="rs">
+                                    {$rs.node}
+                                </cp:loop>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </form>
+    <script type="text/javascript">
+        if (typeof initImporter == 'function') {
+            initImporter(Win.windowID, 1, {
+                currentRecord: 1,
+                totalrecords: '{$totalrecords}'
+            });
+        }
+    </script>
+</cp:block>
+<cp:block name="step2-content">
+    <form action="admin.php" id="import-execute">
+        <input type="hidden" name="adm" value="importer" />
+        <input type="hidden" name="action" value="import" />
+        <input type="hidden" name="step" value="2" />
+    </form>
+</cp:block>
+
+
+
+<cp:block name="preview-content">
+
+    <div class="box description">
+        <h3>{$preview.title}</h3>
+        <div class="box-inner">
+
+
+
+            <div style="margin: 20px 0;">
+                {$preview.teaser}
+            </div>
+
+            <div style="margin: 20px 0;">
+                {$preview.content}
+            </div>
+        </div>
+    </div>
+
+</cp:block>

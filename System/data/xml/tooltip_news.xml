@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tooltip>
+  <categorie title=""><![CDATA[]]></categorie>
+  <subtitle_alias title=""><![CDATA[----]]></subtitle_alias>
+  <product title=""><![CDATA[----]]></product>
+  <company title=""><![CDATA[----]]></company>
+  <external_links title="Externe Links zur News"><![CDATA[Beispiel:
+http://www.dcms-studio.de|DreamDesign Studio
+http://www.google.de|Google
+http://www.web.de|Web.de
+      
+Bitte einen Eintrag pro Zeile.
+]]></external_links>
+  <show_on_frontpage title=""><![CDATA[----]]></show_on_frontpage>
+  <publish title=""><![CDATA[----]]></publish>
+  <access title=""><![CDATA[----]]></access>
+  <createdate title=""><![CDATA[----]]></createdate>
+  <startdate title=""><![CDATA[----]]></startdate>
+  <enddate title=""><![CDATA[----]]></enddate>
+  <can_comment title=""><![CDATA[----]]></can_comment>
+  <reset_the_hitcounter title=""><![CDATA[----]]></reset_the_hitcounter>
+  <tags title=""><![CDATA[]]></tags>
+  <password title=""><![CDATA[]]></password>
+</tooltip>

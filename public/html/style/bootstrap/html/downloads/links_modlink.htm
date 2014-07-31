@@ -1,0 +1,34 @@
+<form action="downloads.php" method="post">
+
+
+Link eintragen
+
+<table width="80%"><tr>
+<td align="right">Titel</td><td>
+<input type=text name=title size=50 maxlength=100>
+</td></tr><tr><td align="right" nowrap>Url</td><td>
+<input type=text name=url size=50 maxlength=100 value="http://">
+</td></tr>
+<tr><td align="right" nowrap>Kategorie</td><td>
+ $catsel
+</td></tr><tr><td></td><td></td></tr>
+<tr><td align="right" nowrap>Email</td><td>
+<input type=text name=email size=50 maxlength=60></td></tr>
+<tr><td align="right" valign="top" nowrap>Beschreibung</td><td>
+<textarea name=description cols=60 rows=5></textarea>
+</td></tr>
+<tr><td align="right"nowrap>Keywords</td><td>
+<input type="text" name="keywords" size="50" maxlength="60"></td></tr>
+</table><br>
+<input type="hidden" name="action" value="addLink">
+<input type="hidden" name="sid" value="$cp->session_id">
+<input type="submit" class="button" value="Link speichern">
+</form>
+
+
+<form method=get action="links.php">
+<input type="hidden" name="sid" value="$cp->session_id">
+Link Bearbeiten<br>
+ID des Links <input type=text name=lid size=12 maxlength=11>
+<input type=hidden name=action value=editLink><br><br>
+<input type=submit value="Bearbeiten"></form>
