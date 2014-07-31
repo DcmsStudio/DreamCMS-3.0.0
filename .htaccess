@@ -1,18 +1,3 @@
-php_flag eaccelerator.enable 1
-php_flag eaccelerator.optimizer 1
-php_flag eaccelerator.compress_level 0
-php_flag eaccelerator.compress 0
-php_flag eaccelerator.shm_only 0
-php_flag eaccelerator.cache_dir /Daten/Web/eaccelerator
-php_flag eaccelerator.content shm_and_disk
-php_flag eaccelerator.sessions shm_and_disk
-php_flag eaccelerator.keys shm_and_disk
-php_flag eaccelerator.log_file /Daten/Web/eaccelerator/eaccelerator_log
-php_flag eaccelerator.shm_size 32
-php_flag eaccelerator.shm_max 32M
-php_flag eaccelerator.shm_ttl 43200
-php_flag eaccelerator.shm_prune_period 3600
-
 <FilesMatch \.php$>
     SetHandler application/x-httpd-php
 </FilesMatch>
@@ -22,10 +7,9 @@ AddType application/x-httpd-php5 .php
 AddType application/x-httpd-php53 .php
 AddType application/x-httpd-php54 .php
 
-
 php_value session.auto_start 0
-php_value upload_max_filesize 300M
-php_value post_max_size 300M
+#php_value upload_max_filesize 300M
+#php_value post_max_size 300M
 
 Options SymLinksIfOwnerMatch
 
@@ -47,7 +31,6 @@ AddDefaultCharset UTF-8
 ### Set the default handler.
 DirectoryIndex public/index.php public/index.html index.php index.html
 
-#Header append X-FRAME-OPTIONS "GOFORIT"
 
 <IfModule mod_mem_cache.c>
     # Enable memory caching
@@ -61,7 +44,6 @@ DirectoryIndex public/index.php public/index.html index.php index.html
     SetEnv HTTP_EXPIRES On
     ExpiresActive On
 
-
     ExpiresByType image/gif A5184000
     ExpiresByType image/png A5184000
     ExpiresByType image/jpeg A5184000
@@ -69,7 +51,6 @@ DirectoryIndex public/index.php public/index.html index.php index.html
     ExpiresByType application/javascript A5184000
     ExpiresByType text/javascript A5184000
     ExpiresByType text/css A5184000
-
     
     # Webfonts
     ExpiresByType font/truetype             "access plus 1 month 1 hour"
@@ -79,7 +60,6 @@ DirectoryIndex public/index.php public/index.html index.php index.html
     ExpiresByType image/svg+xml             "access plus 1 month 1 hour"
     ExpiresByType application/vnd.ms-fontobject "access plus 1 month 1 hour"
     
-
 </IfModule>
 
 
@@ -111,9 +91,9 @@ DirectoryIndex public/index.php public/index.html index.php index.html
   <FilesMatch "\.(ttf|otf|eot|woff)$">
 	Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
-  #Header set X-Content-Type-Options "nosniff"
-  #Header set X-XSS-Protection "1; mode=block"
-  #Header set X-Permitted-Cross-Domain-Policies "master-only"
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set X-Permitted-Cross-Domain-Policies "master-only"
 </IfModule>
 
 <IfModule mod_gzip.c>
@@ -168,18 +148,6 @@ DirectoryIndex public/index.php public/index.html index.php index.html
     RewriteCond %{REQUEST_URI} ^/(admin|index)\.php.*$
     RewriteRule ^(admin|index)\.php(.*)$ public/$1\.php [QSA,L]
 
-
-
-
-    #RewriteRule ^public/(.*\.(js|css))$ public/$1 [L]
-    #RewriteRule ^public/(.*\.(js|css))\?(.*)$ public/$1 [L]
-
-
-
-    #RewriteCond %{REQUEST_FILENAME} !-f
-  #  RewriteCond %{REQUEST_FILENAME} !-d
-  #  RewriteRule ^(.*\.(js|css))$ public/index.php?_call=asset/$2/$1 [QSA,L]
-   # RewriteRule ^(.*\.(js|css))\?(.*)$ public/index.php?_call=asset/$2/$1&$3 [QSA,L]
 
     ### css patch
     RewriteCond %{REQUEST_URI} ^/?(img|flash|js|style|simg|pages|html)/.*$
