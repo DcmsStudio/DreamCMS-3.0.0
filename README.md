@@ -11,6 +11,8 @@ Requires:
 - MySql 5
 
 
-Web:                http://www.dcms-studio.de
-Author:             Marcel Domke
-Project started at: Juny 2008
+Author & Project Infos:
+
+- Web:                http://www.dcms-studio.de
+- Author:             Marcel Domke
+- Project started at: Juny 2008
